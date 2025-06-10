@@ -250,7 +250,7 @@ const CursoGeoPage = () => {
                       className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
                       asChild
                     >
-                      <Link to={`/metodologia/${module.id.toLowerCase()}`}>
+                      <Link to={`/curso/${module.id.toLowerCase()}`}>
                         Explorar módulo
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
