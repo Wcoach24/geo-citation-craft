@@ -1,19 +1,13 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import HighlightSnippet from "@/components/HighlightSnippet";
-
 const HeroSection = () => {
-  return (
-    <section id="inicio" className="section-anchor py-20 lg:py-32 bg-gradient-to-br from-background to-muted/30">
+  return <section id="inicio" className="section-anchor lg:py-32 bg-gradient-to-br from-background to-muted/30 py-[80px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           {/* Section Header with Share Button */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex-1"></div>
-            <ShareSectionButton sectionId="inicio" title="página principal" />
-          </div>
+          
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-accent/10 text-accent border border-accent/20 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in">
@@ -43,20 +37,15 @@ const HeroSection = () => {
 
           {/* Call to Action */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in mb-16">
-            <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-4 h-auto text-lg group"
-              onClick={() => document.getElementById('metodologia')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-4 h-auto text-lg group" onClick={() => document.getElementById('metodologia')?.scrollIntoView({
+            behavior: 'smooth'
+          })}>
               Empieza con el módulo F1
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="px-8 py-4 h-auto text-lg border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              onClick={() => document.getElementById('casos')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+            <Button variant="outline" size="lg" className="px-8 py-4 h-auto text-lg border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={() => document.getElementById('casos')?.scrollIntoView({
+            behavior: 'smooth'
+          })}>
               Ver casos reales
             </Button>
           </div>
@@ -87,33 +76,25 @@ const HeroSection = () => {
           <div className="mt-16 p-6 bg-muted/30 rounded-lg">
             <h3 className="text-lg font-semibold text-primary mb-4">Contenido relacionado</h3>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => document.getElementById('que-es-geo')?.scrollIntoView({ behavior: 'smooth' })}
-              >
+              <Button variant="ghost" size="sm" onClick={() => document.getElementById('que-es-geo')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
                 ¿Qué es GEO?
               </Button>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => document.getElementById('metodologia')?.scrollIntoView({ behavior: 'smooth' })}
-              >
+              <Button variant="ghost" size="sm" onClick={() => document.getElementById('metodologia')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
                 Metodología F1-F6
               </Button>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => document.getElementById('coach')?.scrollIntoView({ behavior: 'smooth' })}
-              >
+              <Button variant="ghost" size="sm" onClick={() => document.getElementById('coach')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
                 Coach GEO
               </Button>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
