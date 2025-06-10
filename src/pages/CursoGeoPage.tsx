@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
@@ -245,63 +244,18 @@ const CursoGeoPage = () => {
                       <span>Duración: {module.duration}</span>
                     </div>
                   </CardContent>
-                  <CardFooter className="pt-0 space-y-2">
+                  <CardFooter className="pt-0">
                     <Button 
                       variant="outline" 
                       className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
                       asChild
                     >
-                      <Link to="/metodologia">
+                      <Link to={`/metodologia/${module.id.toLowerCase()}`}>
                         Explorar módulo
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
-                    <div className="flex gap-2 w-full">
-                      <Button size="sm" variant="ghost" className="flex-1" asChild>
-                        <Link to="/coach">
-                          <Bot className="h-4 w-4 mr-1" />
-                          Coach
-                        </Link>
-                      </Button>
-                      <Button size="sm" variant="ghost" className="flex-1">
-                        <Download className="h-4 w-4 mr-1" />
-                        PDF
-                      </Button>
-                    </div>
                   </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* Download Section */}
-          <section id="documentacion-descargable" className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary">Documentación Descargable</h2>
-              <ShareSectionButton sectionId="documentacion-descargable" title="recursos descargables" />
-            </div>
-            
-            <HighlightSnippet variant="insight" className="mb-6">
-              <p className="text-center">
-                <strong>Acceso completo:</strong> Descarga cada módulo en formato PDF para estudiar offline y tener como referencia permanente.
-              </p>
-            </HighlightSnippet>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {modules.map((module) => (
-                <Card key={`download-${module.id}`} className="text-center">
-                  <CardHeader className="pb-3">
-                    <div className={`w-12 h-12 rounded-lg ${module.color} text-white flex items-center justify-center mx-auto mb-2`}>
-                      <FileText className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="text-lg">Módulo {module.id}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <Button variant="outline" className="w-full">
-                      <Download className="h-4 w-4 mr-2" />
-                      Descargar módulo {module.id}
-                    </Button>
-                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -348,7 +302,7 @@ const CursoGeoPage = () => {
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link to="/#casos">
+                <Link to="/casos">
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Casos reales
                 </Link>

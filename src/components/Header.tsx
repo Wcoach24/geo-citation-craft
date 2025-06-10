@@ -1,124 +1,93 @@
 
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu, BookOpen, Target, Users, FileText, Radar, Info } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { label: "¿Qué es GEO?", href: "#que-es-geo", isAnchor: true },
-    { label: "Metodología", href: "/metodologia", isAnchor: false },
-    { label: "Coach GEO", href: "/coach", isAnchor: false },
-    { label: "Curso", href: "/curso", isAnchor: false },
-    { label: "Casos reales", href: "/casos", isAnchor: false },
-    { label: "Radar IA", href: "/radar-ia", isAnchor: false },
-    { label: "Glosario", href: "/glosario", isAnchor: false },
+    { name: "Metodología", href: "/metodologia", icon: <BookOpen className="h-4 w-4" /> },
+    { name: "Coach GEO", href: "/coach", icon: <Target className="h-4 w-4" /> },
+    { name: "Curso", href: "/curso", icon: <Users className="h-4 w-4" /> },
+    { name: "Casos", href: "/casos", icon: <FileText className="h-4 w-4" /> },
+    { name: "Radar IA", href: "/radar-ia", icon: <Radar className="h-4 w-4" /> },
+    { name: "Glosario", href: "/glosario", icon: <Info className="h-4 w-4" /> },
   ];
 
-  const isCurrentPage = (href: string) => {
-    if (href.startsWith("#")) return location.pathname === "/";
-    return location.pathname === href;
-  };
-
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-primary">
-              es<span className="text-accent">GEO</span>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+            <span className="text-primary font-bold text-lg">G</span>
+          </div>
+          <span className="font-bold text-xl text-primary">esGEO</span>
+        </Link>
+        
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              className="flex items-center space-x-1 text-muted-foreground hover:text-primary transition-colors"
+            >
+              {item.icon}
+              <span>{item.name}</span>
             </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            <ul className="flex space-x-8">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  {item.isAnchor ? (
-                    <a
-                      href={item.href}
-                      className={`text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
-                        isCurrentPage(item.href) ? "text-primary font-semibold" : ""
-                      }`}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className={`text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
-                        isCurrentPage(item.href) ? "text-primary font-semibold" : ""
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="bg-accent hover:bg-accent/90 text-primary font-semibold">
-              Empieza con F1
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+          ))}
+        </nav>
+        
+        {/* CTA Button */}
+        <div className="hidden md:block">
+          <Button 
+            size="sm" 
+            className="bg-accent hover:bg-accent/90 text-primary"
+            asChild
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            <Link to="/metodologia#modulo-f1">
+              Empieza con F1
+            </Link>
+          </Button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
-            <nav>
-              <ul className="space-y-4">
-                {navItems.map((item) => (
-                  <li key={item.label}>
-                    {item.isAnchor ? (
-                      <a
-                        href={item.href}
-                        className={`block text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
-                          isCurrentPage(item.href) ? "text-primary font-semibold" : ""
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className={`block text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
-                          isCurrentPage(item.href) ? "text-primary font-semibold" : ""
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-                <li className="pt-4">
-                  <Button className="w-full bg-accent hover:bg-accent/90 text-primary font-semibold">
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-80">
+            <div className="flex flex-col space-y-4 mt-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="flex items-center space-x-3 text-muted-foreground hover:text-primary transition-colors p-2 rounded-lg hover:bg-muted"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.icon}
+                  <span>{item.name}</span>
+                </Link>
+              ))}
+              <div className="pt-4 border-t">
+                <Button 
+                  className="w-full bg-accent hover:bg-accent/90 text-primary"
+                  asChild
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link to="/metodologia#modulo-f1">
                     Empieza con F1
-                  </Button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        )}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );

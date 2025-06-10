@@ -7,6 +7,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MetodologiaGeoPage from "./pages/MetodologiaGeoPage";
+import ModuloF1Page from "./pages/modules/ModuloF1Page";
+import ModuloF2Page from "./pages/modules/ModuloF2Page";
+import ModuloF3Page from "./pages/modules/ModuloF3Page";
+import ModuloF4Page from "./pages/modules/ModuloF4Page";
+import ModuloF5Page from "./pages/modules/ModuloF5Page";
+import ModuloF6Page from "./pages/modules/ModuloF6Page";
 import CoachGeoPage from "./pages/CoachGeoPage";
 import CursoGeoPage from "./pages/CursoGeoPage";
 import CasosRealesPage from "./pages/CasosRealesPage";
@@ -31,6 +37,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/metodologia" element={<MetodologiaGeoPage />} />
+          <Route path="/metodologia/f1" element={<ModuloF1Page />} />
+          <Route path="/metodologia/f2" element={<ModuloF2Page />} />
+          <Route path="/metodologia/f3" element={<ModuloF3Page />} />
+          <Route path="/metodologia/f4" element={<ModuloF4Page />} />
+          <Route path="/metodologia/f5" element={<ModuloF5Page />} />
+          <Route path="/metodologia/f6" element={<ModuloF6Page />} />
           <Route path="/coach" element={<CoachGeoPage />} />
           <Route path="/curso" element={<CursoGeoPage />} />
           <Route path="/casos" element={<CasosRealesPage />} />
