@@ -33,7 +33,7 @@ const HeroSection = () => {
               className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8"
               asChild
             >
-              <Link to="/metodologia#modulo-f1">
+              <Link to="/curso/f1">
                 Empieza con F1
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

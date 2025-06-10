@@ -21,7 +21,7 @@ const ModuloF5Page = () => {
       <Helmet>
         <title>Módulo F5: Medición y Análisis GEO | esGEO</title>
         <meta name="description" content="Métricas específicas para evaluar el rendimiento en citaciones por IA: KPIs de citabilidad, herramientas de monitoreo y análisis de rendimiento." />
-        <link rel="canonical" href="https://esgeo.es/metodologia/f5" />
+        <link rel="canonical" href="https://esgeo.es/curso/f5" />
         
         <meta name="citation_title" content="Módulo F5: Medición y Análisis GEO" />
         <meta name="citation_author" content="esGEO" />
@@ -50,7 +50,7 @@ const ModuloF5Page = () => {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/metodologia">Metodología</Link>
+                  <Link to="/curso">Curso</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -63,7 +63,7 @@ const ModuloF5Page = () => {
           </Breadcrumb>
 
           {/* Module Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" id="modulo-f5">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-4 rounded-lg bg-red-500 text-white">
                 <BarChart className="h-8 w-8" />
@@ -200,13 +200,13 @@ const ModuloF5Page = () => {
           {/* Navigation */}
           <div className="flex items-center justify-between">
             <Button variant="outline" asChild>
-              <Link to="/metodologia/f4">
+              <Link to="/curso/f4">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Módulo F4: Optimización Técnica
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/metodologia/f6">
+              <Link to="/curso/f6">
                 Módulo F6: Estrategia Avanzada
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
@@ -223,7 +223,7 @@ const ModuloF5Page = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": window.location.origin
+                "url": "https://esgeo.es"
               },
               "courseCode": "GEO-F5",
               "educationalLevel": "Intermediate",
@@ -237,8 +237,8 @@ const ModuloF5Page = () => {
               "duration": "PT2H",
               "isPartOf": {
                 "@type": "Course",
-                "name": "Metodología GEO Completa",
-                "url": `${window.location.origin}/metodologia`
+                "name": "Curso GEO Completo",
+                "url": "https://esgeo.es/curso"
               }
             })}
           </script>

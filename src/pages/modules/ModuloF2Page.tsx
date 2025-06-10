@@ -21,7 +21,7 @@ const ModuloF2Page = () => {
       <Helmet>
         <title>Módulo F2: Estructura Semántica para LLMs | esGEO</title>
         <meta name="description" content="Aprende a organizar y estructurar contenido para máxima comprensión por IA: jerarquía de contenido, datos estructurados y fragmentación semántica." />
-        <link rel="canonical" href="https://esgeo.es/metodologia/f2" />
+        <link rel="canonical" href="https://esgeo.es/curso/f2" />
         
         <meta name="citation_title" content="Módulo F2: Estructura Semántica para LLMs" />
         <meta name="citation_author" content="esGEO" />
@@ -50,7 +50,7 @@ const ModuloF2Page = () => {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/metodologia">Metodología</Link>
+                  <Link to="/curso">Curso</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -63,7 +63,7 @@ const ModuloF2Page = () => {
           </Breadcrumb>
 
           {/* Module Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" id="modulo-f2">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-4 rounded-lg bg-green-500 text-white">
                 <Search className="h-8 w-8" />
@@ -190,13 +190,13 @@ const ModuloF2Page = () => {
           {/* Navigation */}
           <div className="flex items-center justify-between">
             <Button variant="outline" asChild>
-              <Link to="/metodologia/f1">
+              <Link to="/curso/f1">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Módulo F1: Fundamentos
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/metodologia/f3">
+              <Link to="/curso/f3">
                 Módulo F3: Redacción Citeable
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
@@ -213,7 +213,7 @@ const ModuloF2Page = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": window.location.origin
+                "url": "https://esgeo.es"
               },
               "courseCode": "GEO-F2",
               "educationalLevel": "Beginner",
@@ -227,8 +227,8 @@ const ModuloF2Page = () => {
               "duration": "PT3H",
               "isPartOf": {
                 "@type": "Course",
-                "name": "Metodología GEO Completa",
-                "url": `${window.location.origin}/metodologia`
+                "name": "Curso GEO Completo",
+                "url": "https://esgeo.es/curso"
               }
             })}
           </script>

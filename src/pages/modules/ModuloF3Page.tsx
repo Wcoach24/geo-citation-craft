@@ -21,7 +21,7 @@ const ModuloF3Page = () => {
       <Helmet>
         <title>Módulo F3: Redacción Citeable y Autoridad | esGEO</title>
         <meta name="description" content="Técnicas de escritura que favorecen la citación por modelos de lenguaje: snippets destacados, formato Q&A y estilo enciclopédico." />
-        <link rel="canonical" href="https://esgeo.es/metodologia/f3" />
+        <link rel="canonical" href="https://esgeo.es/curso/f3" />
         
         <meta name="citation_title" content="Módulo F3: Redacción Citeable y Autoridad" />
         <meta name="citation_author" content="esGEO" />
@@ -50,7 +50,7 @@ const ModuloF3Page = () => {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/metodologia">Metodología</Link>
+                  <Link to="/curso">Curso</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -63,7 +63,7 @@ const ModuloF3Page = () => {
           </Breadcrumb>
 
           {/* Module Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" id="modulo-f3">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-4 rounded-lg bg-purple-500 text-white">
                 <Users className="h-8 w-8" />
@@ -195,13 +195,13 @@ const ModuloF3Page = () => {
           {/* Navigation */}
           <div className="flex items-center justify-between">
             <Button variant="outline" asChild>
-              <Link to="/metodologia/f2">
+              <Link to="/curso/f2">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Módulo F2: Estructura Semántica
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/metodologia/f4">
+              <Link to="/curso/f4">
                 Módulo F4: Optimización Técnica
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
@@ -218,7 +218,7 @@ const ModuloF3Page = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": window.location.origin
+                "url": "https://esgeo.es"
               },
               "courseCode": "GEO-F3",
               "educationalLevel": "Intermediate",
@@ -232,8 +232,8 @@ const ModuloF3Page = () => {
               "duration": "PT4H",
               "isPartOf": {
                 "@type": "Course",
-                "name": "Metodología GEO Completa",
-                "url": `${window.location.origin}/metodologia`
+                "name": "Curso GEO Completo",
+                "url": "https://esgeo.es/curso"
               }
             })}
           </script>

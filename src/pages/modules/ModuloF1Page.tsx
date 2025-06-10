@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Home, ChevronRight, FileText, BookOpen, Target, ArrowRight, ArrowLeft } from "lucide-react";
+import { Home, ChevronRight, FileText, ArrowRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ModuloF1Page = () => {
@@ -21,7 +21,7 @@ const ModuloF1Page = () => {
       <Helmet>
         <title>Módulo F1: Fundamentos GEO | Generative Engine Optimization | esGEO</title>
         <meta name="description" content="Aprende los fundamentos de GEO: qué es la optimización para IA generativa, diferencias con SEO tradicional y principios básicos para ser citado por modelos de lenguaje." />
-        <link rel="canonical" href="https://esgeo.es/metodologia/f1" />
+        <link rel="canonical" href="https://esgeo.es/curso/f1" />
         
         <meta name="citation_title" content="Módulo F1: Fundamentos de Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
@@ -50,7 +50,7 @@ const ModuloF1Page = () => {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/metodologia">Metodología</Link>
+                  <Link to="/curso">Curso</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -63,7 +63,7 @@ const ModuloF1Page = () => {
           </Breadcrumb>
 
           {/* Module Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" id="modulo-f1">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-4 rounded-lg bg-blue-500 text-white">
                 <FileText className="h-8 w-8" />
@@ -175,13 +175,13 @@ const ModuloF1Page = () => {
           {/* Navigation */}
           <div className="flex items-center justify-between">
             <Button variant="outline" asChild>
-              <Link to="/metodologia">
+              <Link to="/curso">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Volver a Metodología
+                Volver al Curso
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/metodologia/f2">
+              <Link to="/curso/f2">
                 Módulo F2: Estructura Semántica
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
@@ -198,7 +198,7 @@ const ModuloF1Page = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": window.location.origin
+                "url": "https://esgeo.es"
               },
               "courseCode": "GEO-F1",
               "educationalLevel": "Beginner",
@@ -212,8 +212,8 @@ const ModuloF1Page = () => {
               "duration": "PT2H",
               "isPartOf": {
                 "@type": "Course",
-                "name": "Metodología GEO Completa",
-                "url": `${window.location.origin}/metodologia`
+                "name": "Curso GEO Completo",
+                "url": "https://esgeo.es/curso"
               }
             })}
           </script>

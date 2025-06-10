@@ -37,14 +37,14 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/metodologia" element={<MetodologiaGeoPage />} />
-          <Route path="/metodologia/f1" element={<ModuloF1Page />} />
-          <Route path="/metodologia/f2" element={<ModuloF2Page />} />
-          <Route path="/metodologia/f3" element={<ModuloF3Page />} />
-          <Route path="/metodologia/f4" element={<ModuloF4Page />} />
-          <Route path="/metodologia/f5" element={<ModuloF5Page />} />
-          <Route path="/metodologia/f6" element={<ModuloF6Page />} />
-          <Route path="/coach" element={<CoachGeoPage />} />
           <Route path="/curso" element={<CursoGeoPage />} />
+          <Route path="/curso/f1" element={<ModuloF1Page />} />
+          <Route path="/curso/f2" element={<ModuloF2Page />} />
+          <Route path="/curso/f3" element={<ModuloF3Page />} />
+          <Route path="/curso/f4" element={<ModuloF4Page />} />
+          <Route path="/curso/f5" element={<ModuloF5Page />} />
+          <Route path="/curso/f6" element={<ModuloF6Page />} />
+          <Route path="/coach" element={<CoachGeoPage />} />
           <Route path="/casos" element={<CasosRealesPage />} />
           <Route path="/glosario" element={<GlosarioPage />} />
           <Route path="/acerca-de" element={<AcercaDePage />} />

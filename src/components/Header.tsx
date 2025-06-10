@@ -48,7 +48,7 @@ const Header = () => {
             className="bg-accent hover:bg-accent/90 text-primary"
             asChild
           >
-            <Link to="/metodologia#modulo-f1">
+            <Link to="/curso/f1">
               Empieza con F1
             </Link>
           </Button>
@@ -80,7 +80,7 @@ const Header = () => {
                   asChild
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link to="/metodologia#modulo-f1">
+                  <Link to="/curso/f1">
                     Empieza con F1
                   </Link>
                 </Button>

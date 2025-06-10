@@ -21,7 +21,7 @@ const ModuloF6Page = () => {
       <Helmet>
         <title>Módulo F6: Estrategia Avanzada y Escalabilidad | esGEO</title>
         <meta name="description" content="Tácticas avanzadas para dominar en ecosistemas de IA generativa: link building para IA, contenido viral citeable y escalabilidad técnica." />
-        <link rel="canonical" href="https://esgeo.es/metodologia/f6" />
+        <link rel="canonical" href="https://esgeo.es/curso/f6" />
         
         <meta name="citation_title" content="Módulo F6: Estrategia Avanzada y Escalabilidad" />
         <meta name="citation_author" content="esGEO" />
@@ -50,7 +50,7 @@ const ModuloF6Page = () => {
               </BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/metodologia">Metodología</Link>
+                  <Link to="/curso">Curso</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -63,7 +63,7 @@ const ModuloF6Page = () => {
           </Breadcrumb>
 
           {/* Module Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" id="modulo-f6">
             <div className="flex items-center justify-center gap-4 mb-4">
               <div className="p-4 rounded-lg bg-indigo-500 text-white">
                 <Zap className="h-8 w-8" />
@@ -208,15 +208,15 @@ const ModuloF6Page = () => {
           {/* Navigation */}
           <div className="flex items-center justify-between">
             <Button variant="outline" asChild>
-              <Link to="/metodologia/f5">
+              <Link to="/curso/f5">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Módulo F5: Medición y Análisis
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/metodologia">
+              <Link to="/curso">
                 <BookOpen className="h-4 w-4 mr-2" />
-                Volver a Metodología
+                Volver al Curso
               </Link>
             </Button>
           </div>
@@ -225,7 +225,7 @@ const ModuloF6Page = () => {
           <div className="mt-16 text-center p-8 bg-accent/10 rounded-lg border-2 border-accent">
             <h3 className="text-2xl font-bold text-primary mb-4">¡Felicidades!</h3>
             <p className="text-lg text-muted-foreground mb-6">
-              Has completado todos los módulos de la metodología GEO F1-F6. 
+              Has completado todos los módulos del curso GEO F1-F6. 
               Ahora tienes las herramientas para optimizar tu contenido para IA generativa.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
@@ -252,7 +252,7 @@ const ModuloF6Page = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": window.location.origin
+                "url": "https://esgeo.es"
               },
               "courseCode": "GEO-F6",
               "educationalLevel": "Advanced",
@@ -266,8 +266,8 @@ const ModuloF6Page = () => {
               "duration": "PT5H",
               "isPartOf": {
                 "@type": "Course",
-                "name": "Metodología GEO Completa",
-                "url": `${window.location.origin}/metodologia`
+                "name": "Curso GEO Completo",
+                "url": "https://esgeo.es/curso"
               }
             })}
           </script>
