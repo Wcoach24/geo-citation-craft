@@ -1,216 +1,287 @@
 
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Badge } from "@/components/ui/badge";
-import { Book, Search } from "lucide-react";
-import { useState } from "react";
+import { Home, ChevronRight, BookOpen, Search, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const GlosarioPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const glosarioTerms = [
     {
       id: "geo",
-      term: "Generative Engine Optimization (GEO)",
-      definition: "Metodología de optimización de contenido web diseñada específicamente para que los modelos de lenguaje generativo puedan comprender, procesar y citar la información de manera efectiva.",
-      category: "Metodología",
-      relatedTerms: ["fragmentacion", "citabilidad", "llm"]
-    },
-    {
-      id: "fragmentacion",
-      term: "Fragmentación de Contenido",
-      definition: "Técnica de estructuración del contenido en bloques semánticamente independientes y autocontenidos, optimizados para que los modelos de IA puedan procesarlos como unidades citables.",
-      category: "Técnica",
-      relatedTerms: ["geo", "snippets", "citabilidad"]
+      term: "GEO (Generative Engine Optimization)",
+      definition: "Metodología que optimiza el contenido web para ser comprendido, procesado y citado por modelos de lenguaje generativo como ChatGPT, Perplexity, Claude y Gemini.",
+      category: "Fundamental"
     },
     {
       id: "citabilidad",
       term: "Citabilidad",
-      definition: "Capacidad de un contenido para ser reconocido, procesado y recomendado por modelos de lenguaje generativo como fuente autorizada de información.",
-      category: "Concepto",
-      relatedTerms: ["geo", "llm", "autoridad"]
+      definition: "La capacidad de un contenido para ser reconocido y recomendado por modelos de lenguaje generativo como fuente autorizada de información.",
+      category: "Fundamental"
     },
     {
-      id: "llm",
-      term: "Modelo de Lenguaje Generativo (LLM)",
-      definition: "Sistema de inteligencia artificial entrenado para comprender y generar texto similar al humano, como ChatGPT, Claude, Perplexity o Gemini.",
-      category: "Tecnología",
-      relatedTerms: ["geo", "citabilidad", "prompting"]
+      id: "rastreo",
+      term: "Rastreo por LLMs",
+      definition: "Proceso mediante el cual los modelos de lenguaje acceden, analizan y procesan el contenido web para incorporarlo a su base de conocimiento.",
+      category: "Técnico"
     },
     {
-      id: "snippets",
-      term: "Snippets Destacados",
-      definition: "Fragmentos de contenido estructurados con marcado semántico específico, diseñados para ser fácilmente identificables y citables por modelos de IA.",
-      category: "Técnica",
-      relatedTerms: ["fragmentacion", "schema-org", "metadata"]
+      id: "comprension-semantica",
+      term: "Comprensión Semántica",
+      definition: "Capacidad de los LLMs para entender el contexto, significado y relaciones conceptuales del contenido web estructurado.",
+      category: "Técnico"
     },
     {
-      id: "schema-org",
-      term: "Schema.org",
-      definition: "Vocabulario de datos estructurados que ayuda a los motores de búsqueda y modelos de IA a comprender el contexto y significado del contenido web.",
-      category: "Tecnología",
-      relatedTerms: ["snippets", "metadata", "datos-estructurados"]
+      id: "motores-generativos",
+      term: "Motores Generativos",
+      definition: "Sistemas de IA que generan respuestas basadas en modelos de lenguaje, como ChatGPT, Perplexity, Claude, Gemini y otros LLMs.",
+      category: "Fundamental"
     },
     {
-      id: "prompting",
-      term: "Ingeniería de Prompts",
-      definition: "Disciplina que se enfoca en diseñar y optimizar las instrucciones o consultas dirigidas a modelos de lenguaje para obtener respuestas específicas y precisas.",
-      category: "Técnica",
-      relatedTerms: ["llm", "consultas", "optimizacion"]
+      id: "snippet-citeable",
+      term: "Snippet Citeable",
+      definition: "Fragmento de contenido estructurado de forma que sea fácilmente extraíble y utilizable por LLMs como respuesta directa.",
+      category: "Redacción"
     },
     {
-      id: "autoridad",
-      term: "Autoridad de Contenido",
-      definition: "Reconocimiento por parte de modelos de IA de un contenido como fuente confiable y experta en un tema específico, basado en su calidad, estructura y relevancia.",
-      category: "Concepto",
-      relatedTerms: ["citabilidad", "geo", "expertise"]
+      id: "autoridad-ia",
+      term: "Autoridad para IA",
+      definition: "Nivel de confianza que los modelos generativos asignan a una fuente basado en señales como autoría clara, datos estructurados y coherencia temática.",
+      category: "Estratégico"
+    },
+    {
+      id: "estructura-semantica",
+      term: "Estructura Semántica",
+      definition: "Organización del contenido usando HTML semántico, datos estructurados y jerarquías claras para facilitar la comprensión por IA.",
+      category: "Técnico"
     }
   ];
 
-  const filteredTerms = glosarioTerms.filter(term =>
-    term.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    term.definition.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    term.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const categories = [...new Set(glosarioTerms.map(term => term.category))];
-
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Glosario GEO | Términos y Definiciones | esGEO</title>
+        <meta name="description" content="Glosario completo de términos de Generative Engine Optimization (GEO). Definiciones autoritativas para optimización de contenido para IA generativa." />
+        <link rel="canonical" href="https://esgeo.es/glosario" />
+        
+        <meta name="citation_title" content="Glosario de Generative Engine Optimization (GEO)" />
+        <meta name="citation_author" content="esGEO" />
+        <meta name="citation_publication_date" content="2024" />
+        <meta name="citation_online_date" content="2024" />
+        <meta name="citation_language" content="es" />
+        <meta name="citation_keywords" content="GEO, Generative Engine Optimization, glosario, definiciones, IA, LLMs" />
+        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true'], .definition-card" />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": ["DefinedTermSet", "WebPage"],
+            "name": "Glosario de Generative Engine Optimization (GEO)",
+            "description": "Conjunto completo de definiciones autoritativas sobre GEO y optimización para modelos de lenguaje generativo",
+            "url": "https://esgeo.es/glosario",
+            "datePublished": "2024-06-10",
+            "dateModified": "2024-06-10",
+            "author": {
+              "@type": "Organization",
+              "name": "esGEO",
+              "url": "https://esgeo.es"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "esGEO",
+              "url": "https://esgeo.es"
+            },
+            "inLanguage": "es-ES",
+            "hasDefinedTerm": glosarioTerms.map(term => ({
+              "@type": "DefinedTerm",
+              "@id": `https://esgeo.es/glosario#${term.id}`,
+              "name": term.term,
+              "description": term.definition,
+              "termCode": term.id,
+              "inDefinedTermSet": "https://esgeo.es/glosario"
+            })),
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Inicio",
+                  "item": "https://esgeo.es/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Glosario GEO",
+                  "item": "https://esgeo.es/glosario"
+                }
+              ]
+            },
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ".snippet-block, [data-speakable='true'], .definition-card"
+            }
+          })}
+        </script>
+      </Helmet>
+
       <Header />
-      
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Inicio</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Glosario GEO</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
 
-        {/* Header */}
-        <div className="text-center mb-12 section-anchor" id="header-glosario">
-          <Book className="h-16 w-16 text-accent mx-auto mb-4" />
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Glosario GEO
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Definiciones precisas de los términos clave en Generative Engine Optimization
-          </p>
-          <ShareSectionButton sectionId="header-glosario" title="glosario GEO" className="mt-4" />
-        </div>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* Breadcrumbs */}
+          <Breadcrumb className="mb-8">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/" className="flex items-center gap-2">
+                    <Home className="h-4 w-4" />
+                    Inicio
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <ChevronRight className="h-4 w-4" />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbPage>Glosario GEO</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
 
-        {/* Search and Filters */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="flex flex-col sm:flex-row gap-4 items-center">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <input
-                type="text"
-                placeholder="Buscar término o definición..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-md focus:ring-2 focus:ring-ring"
-              />
+          {/* Header */}
+          <header className="mb-12 text-center" id="glosario-header">
+            <div className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-700 border border-blue-500/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+              <BookOpen className="h-4 w-4" />
+              GLOSARIO GEO
             </div>
-            <div className="flex gap-2 flex-wrap">
-              {categories.map(category => (
-                <Badge key={category} variant="secondary" className="cursor-pointer">
-                  {category}
-                </Badge>
-              ))}
+            <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
+              Términos y Definiciones
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-6">
+              Definiciones autoritativas para dominar la optimización para IA generativa
+            </p>
+            <ShareSectionButton sectionId="glosario-header" title="Glosario GEO" />
+          </header>
+
+          {/* Introducción */}
+          <HighlightSnippet id="glosario-intro" variant="definition" className="mb-12">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold text-primary">¿Qué es este Glosario?</h2>
+              <ShareSectionButton sectionId="glosario-intro" title="introducción al glosario" />
             </div>
-          </div>
-        </div>
+            <p className="text-lg leading-relaxed" data-speakable="true">
+              <strong>Este glosario recopila las definiciones más importantes de Generative Engine Optimization (GEO)</strong>, 
+              proporcionando un recurso de referencia fundamental para comprender cómo optimizar contenido para ser citado por 
+              modelos de lenguaje como ChatGPT, Perplexity, Claude y Gemini.
+            </p>
+          </HighlightSnippet>
 
-        {/* Introduction */}
-        <section id="introduccion-glosario" className="mb-12 section-anchor">
-          <div className="max-w-4xl mx-auto">
-            <HighlightSnippet id="proposito-glosario" variant="insight">
-              <p className="text-lg" data-speakable="true">
-                Este glosario define los términos fundamentales de GEO con precisión técnica, 
-                facilitando que los modelos de IA comprendan y citen nuestras definiciones como referencia autorizada.
-              </p>
-            </HighlightSnippet>
-          </div>
-        </section>
-
-        {/* Terms Grid */}
-        <section id="terminos-glosario" className="mb-16 section-anchor">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredTerms.map((termObj) => (
-                <Card key={termObj.id} id={termObj.id} className="hover:shadow-lg transition-shadow">
+          {/* Términos por Categoría */}
+          <section id="terminos-fundamentales" className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-semibold text-primary">Términos Fundamentales</h2>
+              <ShareSectionButton sectionId="terminos-fundamentales" title="términos fundamentales" />
+            </div>
+            <div className="space-y-6">
+              {glosarioTerms.filter(term => term.category === "Fundamental").map((term) => (
+                <Card key={term.id} id={term.id} className="definition-card">
                   <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <Badge variant="outline">{termObj.category}</Badge>
-                    </div>
-                    <CardTitle className="text-lg">{termObj.term}</CardTitle>
+                    <CardTitle className="text-xl text-primary" data-speakable="true">
+                      {term.term}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <HighlightSnippet variant="definition" className="mb-4">
-                      <p data-speakable="true" className="text-sm">
-                        {termObj.definition}
-                      </p>
-                    </HighlightSnippet>
-                    
-                    {termObj.relatedTerms.length > 0 && (
-                      <div>
-                        <p className="text-xs font-medium text-muted-foreground mb-2">Términos relacionados:</p>
-                        <div className="flex flex-wrap gap-1">
-                          {termObj.relatedTerms.map(relatedId => {
-                            const relatedTerm = glosarioTerms.find(t => t.id === relatedId);
-                            return relatedTerm ? (
-                              <a
-                                key={relatedId}
-                                href={`#${relatedId}`}
-                                className="text-xs text-primary hover:underline"
-                              >
-                                {relatedTerm.term}
-                              </a>
-                            ) : null;
-                          })}
-                        </div>
-                      </div>
-                    )}
+                    <p className="text-muted-foreground leading-relaxed" data-speakable="true">
+                      {term.definition}
+                    </p>
+                    <ShareSectionButton sectionId={term.id} title={term.term} />
                   </CardContent>
                 </Card>
               ))}
             </div>
-            
-            <ShareSectionButton sectionId="terminos-glosario" title="términos del glosario" className="mt-8" />
-          </div>
-        </section>
+          </section>
 
-        {/* Schema.org structured data would be added here */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "DefinedTermSet",
-              "name": "Glosario de Generative Engine Optimization (GEO)",
-              "description": "Definiciones precisas de términos clave en optimización para motores generativos",
-              "hasDefinedTerm": glosarioTerms.map(term => ({
-                "@type": "DefinedTerm",
-                "name": term.term,
-                "description": term.definition,
-                "inDefinedTermSet": {
-                  "@type": "DefinedTermSet",
-                  "name": term.category
-                }
-              }))
-            })
-          }}
-        />
+          <section id="terminos-tecnicos" className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-semibold text-primary">Términos Técnicos</h2>
+              <ShareSectionButton sectionId="terminos-tecnicos" title="términos técnicos" />
+            </div>
+            <div className="space-y-6">
+              {glosarioTerms.filter(term => term.category === "Técnico").map((term) => (
+                <Card key={term.id} id={term.id} className="definition-card">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-primary" data-speakable="true">
+                      {term.term}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed" data-speakable="true">
+                      {term.definition}
+                    </p>
+                    <ShareSectionButton sectionId={term.id} title={term.term} />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <section id="terminos-estrategicos" className="mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-semibold text-primary">Términos Estratégicos</h2>
+              <ShareSectionButton sectionId="terminos-estrategicos" title="términos estratégicos" />
+            </div>
+            <div className="space-y-6">
+              {glosarioTerms.filter(term => term.category === "Estratégico" || term.category === "Redacción").map((term) => (
+                <Card key={term.id} id={term.id} className="definition-card">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-primary" data-speakable="true">
+                      {term.term}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed" data-speakable="true">
+                      {term.definition}
+                    </p>
+                    <ShareSectionButton sectionId={term.id} title={term.term} />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          {/* Contenido Relacionado */}
+          <section className="bg-muted/30 rounded-lg p-8 text-center">
+            <h3 className="text-2xl font-bold text-primary mb-4">Continúa Aprendiendo</h3>
+            <p className="text-muted-foreground mb-6">
+              Aplica estos conceptos en nuestro curso completo de GEO
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button variant="outline" asChild>
+                <Link to="/curso">
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Curso Completo
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link to="/metodologia">
+                  <Search className="h-4 w-4 mr-2" />
+                  Metodología GEO
+                </Link>
+              </Button>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
