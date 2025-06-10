@@ -1,8 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, CheckCircle, Download, ArrowRight, Bot } from "lucide-react";
+import ShareSectionButton from "@/components/ShareSectionButton";
+import HighlightSnippet from "@/components/HighlightSnippet";
 
 const CoachSection = () => {
   const steps = [
@@ -37,71 +38,88 @@ const CoachSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 text-accent border-accent">
-              Asistente IA
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-              Coach GEO
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div className="text-center flex-1">
+              <Badge variant="outline" className="mb-4 text-accent border-accent">
+                Asistente IA
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
+                Coach GEO
+              </h2>
+            </div>
+            <ShareSectionButton sectionId="coach" title="Coach GEO" />
+          </div>
+
+          {/* Overview Snippet */}
+          <HighlightSnippet id="overview-coach" variant="definition" className="mb-16">
+            <p className="text-xl text-muted-foreground text-center">
               Tu asistente conversacional especializado en optimización para IA generativa. 
               Recibe análisis personalizados y recomendaciones específicas para tu contenido.
             </p>
-          </div>
+          </HighlightSnippet>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Process */}
             <div>
-              <h3 className="text-2xl font-bold text-primary mb-8">
-                ¿Cómo funciona el Coach GEO?
-              </h3>
-              
-              <div className="space-y-6">
-                {steps.map((step, index) => (
-                  <div key={step.step} className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-primary font-bold">
-                        {step.step}
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="text-accent">
-                          {step.icon}
+              <div id="como-funciona-coach" className="mb-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-primary">
+                    ¿Cómo funciona el Coach GEO?
+                  </h3>
+                  <ShareSectionButton sectionId="como-funciona-coach" title="proceso del Coach" />
+                </div>
+                
+                <div className="space-y-6">
+                  {steps.map((step, index) => (
+                    <div key={step.step} className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-primary font-bold">
+                          {step.step}
                         </div>
-                        <h4 className="text-lg font-semibold text-primary">
-                          {step.title}
-                        </h4>
                       </div>
-                      <p className="text-muted-foreground">
-                        {step.description}
-                      </p>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="text-accent">
+                            {step.icon}
+                          </div>
+                          <h4 className="text-lg font-semibold text-primary">
+                            {step.title}
+                          </h4>
+                        </div>
+                        <p className="text-muted-foreground">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              <div className="mt-8 p-6 bg-accent/10 rounded-lg border border-accent/20">
-                <h4 className="font-semibold text-primary mb-3">🎯 ¿Qué obtienes con Coach GEO?</h4>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-accent" />
-                    Análisis automático de tu estructura de contenido
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-accent" />
-                    Sugerencias de mejora específicas por módulo
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-accent" />
-                    Templates de snippet y formatos citeables
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-accent" />
-                    Informe PDF descargable con plan de acción
-                  </li>
-                </ul>
+              <div id="beneficios-coach">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-semibold text-primary">🎯 ¿Qué obtienes con Coach GEO?</h4>
+                  <ShareSectionButton sectionId="beneficios-coach" title="beneficios del Coach" />
+                </div>
+                <HighlightSnippet variant="insight">
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-accent" />
+                      Análisis automático de tu estructura de contenido
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-accent" />
+                      Sugerencias de mejora específicas por módulo
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-accent" />
+                      Templates de snippet y formatos citeables
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-accent" />
+                      Informe PDF descargable con plan de acción
+                    </li>
+                  </ul>
+                </HighlightSnippet>
               </div>
             </div>
 
@@ -173,16 +191,46 @@ const CoachSection = () => {
             </div>
           </div>
 
+          {/* Related Content Links */}
+          <div className="mt-16 p-6 bg-muted/20 rounded-lg">
+            <h4 className="font-semibold text-primary mb-4 text-center">Contenido relacionado</h4>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => document.getElementById('metodologia')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Metodología F1-F6
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => document.getElementById('que-es-geo')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                ¿Qué es GEO?
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => document.getElementById('casos')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Casos reales
+              </Button>
+            </div>
+          </div>
+
           {/* CTA Section */}
           <div className="text-center mt-16">
             <div className="max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold text-primary mb-4">
                 ¿Listo para optimizar tu contenido con IA?
               </h3>
-              <p className="text-muted-foreground mb-6">
-                El Coach GEO está disponible 24/7 para analizar tu web y generar recomendaciones personalizadas. 
-                Comienza ahora y obtén tu primer informe GEO en menos de 10 minutos.
-              </p>
+              <HighlightSnippet variant="insight" className="mb-6">
+                <p className="text-muted-foreground">
+                  El Coach GEO está disponible 24/7 para analizar tu web y generar recomendaciones personalizadas. 
+                  Comienza ahora y obtén tu primer informe GEO en menos de 10 minutos.
+                </p>
+              </HighlightSnippet>
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8">
                 Lanzar Coach GEO ahora
                 <ArrowRight className="ml-2 h-5 w-5" />

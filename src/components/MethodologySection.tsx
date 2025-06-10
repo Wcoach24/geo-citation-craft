@@ -1,17 +1,17 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, FileText, Search, Users, Target, BarChart, Zap, Home, ChevronRight } from "lucide-react";
 import {
   Breadcrumb,
-  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import ShareSectionButton from "@/components/ShareSectionButton";
+import HighlightSnippet from "@/components/HighlightSnippet";
 
 const MethodologySection = () => {
   const modules = [
@@ -85,7 +85,7 @@ const MethodologySection = () => {
           <Breadcrumb className="mb-8">
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/" className="flex items-center gap-2">
+                <BreadcrumbLink href="#inicio" className="flex items-center gap-2">
                   <Home className="h-4 w-4" />
                   Inicio
                 </BreadcrumbLink>
@@ -100,33 +100,41 @@ const MethodologySection = () => {
           </Breadcrumb>
 
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 text-accent border-accent">
-              Framework F1-F6
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-              Metodología GEO
-            </h2>
-            <div className="snippet-block max-w-3xl mx-auto">
-              <p className="text-xl text-muted-foreground">
-                <strong>Seis módulos progresivos</strong> que te llevan desde los fundamentos hasta estrategias avanzadas de optimización para IA generativa. 
-                Cada módulo incluye ejercicios prácticos, casos reales y validación automática con Coach GEO.
-              </p>
+          <div className="flex items-center justify-between mb-8">
+            <div className="text-center flex-1">
+              <Badge variant="outline" className="mb-4 text-accent border-accent">
+                Framework F1-F6
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
+                Metodología GEO
+              </h2>
             </div>
+            <ShareSectionButton sectionId="metodologia" title="metodología completa" />
           </div>
+
+          {/* Overview Snippet */}
+          <HighlightSnippet id="overview-metodologia" variant="definition" className="mb-16">
+            <p className="text-xl text-muted-foreground text-center">
+              <strong>Seis módulos progresivos</strong> que te llevan desde los fundamentos hasta estrategias avanzadas de optimización para IA generativa. 
+              Cada módulo incluye ejercicios prácticos, casos reales y validación automática con Coach GEO.
+            </p>
+          </HighlightSnippet>
 
           {/* Module Cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {modules.map((module, index) => (
-              <Card key={module.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className={`p-3 rounded-lg ${module.color} text-white`}>
                       {module.icon}
                     </div>
-                    <Badge variant="secondary" className="font-mono font-bold">
-                      {module.id}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary" className="font-mono font-bold">
+                        {module.id}
+                      </Badge>
+                      <ShareSectionButton sectionId={`modulo-${module.id.toLowerCase()}`} title={`módulo ${module.id}`} />
+                    </div>
                   </div>
                   <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors">
                     {module.title}
@@ -161,10 +169,21 @@ const MethodologySection = () => {
           </div>
 
           {/* SEO vs GEO Comparison */}
-          <div className="geo-card">
-            <h3 className="text-2xl font-bold text-primary mb-8 text-center">
-              Comparativa: SEO vs GEO
-            </h3>
+          <div id="comparativa-seo-geo" className="geo-card">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-2xl font-bold text-primary">
+                Comparativa: SEO vs GEO
+              </h3>
+              <ShareSectionButton sectionId="comparativa-seo-geo" title="comparativa detallada" />
+            </div>
+            
+            <HighlightSnippet variant="insight" className="mb-6">
+              <p className="text-center">
+                <strong>Insight clave:</strong> No se trata de reemplazar SEO, sino de complementarlo. 
+                GEO es la evolución natural para el ecosistema de búsqueda impulsado por IA.
+              </p>
+            </HighlightSnippet>
+
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h4 className="text-xl font-semibold mb-4 text-red-600">SEO Tradicional</h4>
@@ -217,11 +236,33 @@ const MethodologySection = () => {
                 </ul>
               </div>
             </div>
-            <div className="mt-8 p-4 bg-accent/10 rounded-lg border-l-4 border-accent">
-              <p className="text-sm">
-                <strong>Insight clave:</strong> No se trata de reemplazar SEO, sino de complementarlo. 
-                GEO es la evolución natural para el ecosistema de búsqueda impulsado por IA.
-              </p>
+          </div>
+
+          {/* Related Content Links */}
+          <div className="mt-12 p-6 bg-muted/30 rounded-lg">
+            <h4 className="font-semibold text-primary mb-4 text-center">Explora más contenido GEO</h4>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => document.getElementById('que-es-geo')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Definición de GEO
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => document.getElementById('coach')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Coach GEO
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => document.getElementById('casos')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Casos reales
+              </Button>
             </div>
           </div>
 

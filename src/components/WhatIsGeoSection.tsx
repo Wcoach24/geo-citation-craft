@@ -1,25 +1,8 @@
-
 import { Button } from "@/components/ui/button";
-import { Link, Copy } from "lucide-react";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import ShareSectionButton from "@/components/ShareSectionButton";
+import HighlightSnippet from "@/components/HighlightSnippet";
 
 const WhatIsGeoSection = () => {
-  const { toast } = useToast();
-  const [copied, setCopied] = useState(false);
-
-  const copyLink = () => {
-    const url = `${window.location.origin}#que-es-geo`;
-    navigator.clipboard.writeText(url).then(() => {
-      setCopied(true);
-      toast({
-        title: "Enlace copiado",
-        description: "Puedes compartir este fragmento específico",
-      });
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
   return (
     <section id="que-es-geo" className="section-anchor py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,31 +17,27 @@ const WhatIsGeoSection = () => {
                 Definición completa y aplicación práctica
               </p>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={copyLink}
-              className="flex items-center gap-2"
-            >
-              {copied ? <Copy className="h-4 w-4 text-accent" /> : <Link className="h-4 w-4" />}
-              {copied ? "¡Copiado!" : "Compartir"}
-            </Button>
+            <ShareSectionButton sectionId="que-es-geo" title="definición de GEO" />
           </div>
 
-          {/* Wikipedia-style content */}
+          {/* Main Definition */}
           <div className="geo-card">
-            <div className="snippet-block" data-speakable="true">
+            <HighlightSnippet id="definicion-geo" variant="definition" className="mb-8">
               <h3 className="text-xl font-semibold mb-3 text-primary">
                 Definición de GEO (Generative Engine Optimization)
               </h3>
-              <p className="text-lg leading-relaxed mb-4">
+              <p className="text-lg leading-relaxed">
                 <strong>GEO</strong> es una metodología de optimización de contenido web diseñada específicamente para que los <strong>modelos de lenguaje generativo</strong> (como ChatGPT, Claude, Perplexity, Gemini) puedan <strong>comprender, procesar y citar</strong> la información de manera efectiva.
               </p>
-            </div>
+            </HighlightSnippet>
 
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-primary">¿En qué se diferencia del SEO tradicional?</h4>
+            <div className="space-y-8">
+              {/* SEO vs GEO Comparison */}
+              <div id="diferencias-seo-geo">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-semibold text-primary">¿En qué se diferencia del SEO tradicional?</h4>
+                  <ShareSectionButton sectionId="diferencias-seo-geo" title="comparativa SEO vs GEO" />
+                </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
                     <h5 className="font-semibold text-red-800 mb-2">SEO Tradicional</h5>
@@ -81,51 +60,93 @@ const WhatIsGeoSection = () => {
                 </div>
               </div>
 
-              <div className="snippet-block" data-speakable="true">
-                <h4 className="text-lg font-semibold mb-3 text-primary">Principios fundamentales de GEO</h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">1</div>
-                    <div>
-                      <h5 className="font-semibold text-primary">Escaneabilidad</h5>
-                      <p className="text-sm text-muted-foreground">Contenido estructurado en bloques lógicos y jerárquicos</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">2</div>
-                    <div>
-                      <h5 className="font-semibold text-primary">Fragmentación</h5>
-                      <p className="text-sm text-muted-foreground">Información dividida en unidades autocontenidas</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">3</div>
-                    <div>
-                      <h5 className="font-semibold text-primary">Citabilidad</h5>
-                      <p className="text-sm text-muted-foreground">Snippets destacados fáciles de extraer y referenciar</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">4</div>
-                    <div>
-                      <h5 className="font-semibold text-primary">Datos estructurados</h5>
-                      <p className="text-sm text-muted-foreground">Metadatos ricos que facilitan la comprensión automática</p>
-                    </div>
-                  </div>
+              {/* Core Principles */}
+              <div id="principios-geo">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-semibold text-primary">Principios fundamentales de GEO</h4>
+                  <ShareSectionButton sectionId="principios-geo" title="principios GEO" />
                 </div>
+                <HighlightSnippet variant="default">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">1</div>
+                      <div>
+                        <h5 className="font-semibold text-primary">Escaneabilidad</h5>
+                        <p className="text-sm text-muted-foreground">Contenido estructurado en bloques lógicos y jerárquicos</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">2</div>
+                      <div>
+                        <h5 className="font-semibold text-primary">Fragmentación</h5>
+                        <p className="text-sm text-muted-foreground">Información dividida en unidades autocontenidas</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">3</div>
+                      <div>
+                        <h5 className="font-semibold text-primary">Citabilidad</h5>
+                        <p className="text-sm text-muted-foreground">Snippets destacados fáciles de extraer y referenciar</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">4</div>
+                      <div>
+                        <h5 className="font-semibold text-primary">Datos estructurados</h5>
+                        <p className="text-sm text-muted-foreground">Metadatos ricos que facilitan la comprensión automática</p>
+                      </div>
+                    </div>
+                  </div>
+                </HighlightSnippet>
               </div>
 
-              <div className="snippet-block" data-speakable="true">
-                <h4 className="text-lg font-semibold mb-3 text-primary">¿Por qué es importante GEO ahora?</h4>
-                <p className="leading-relaxed">
-                  El <strong>85% de las búsquedas informacionales</strong> ya se resuelven directamente en interfaces conversacionales. 
-                  Los usuarios prefieren obtener respuestas sintéticas de IA que navegar múltiples páginas web. 
-                  <strong>GEO asegura que tu contenido sea la fuente citada</strong> cuando la IA responde preguntas relacionadas con tu expertise.
-                </p>
+              {/* Why GEO Matters */}
+              <div id="importancia-geo">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-semibold text-primary">¿Por qué es importante GEO ahora?</h4>
+                  <ShareSectionButton sectionId="importancia-geo" title="importancia de GEO" />
+                </div>
+                <HighlightSnippet variant="insight">
+                  <p className="leading-relaxed">
+                    El <strong>85% de las búsquedas informacionales</strong> ya se resuelven directamente en interfaces conversacionales. 
+                    Los usuarios prefieren obtener respuestas sintéticas de IA que navegar múltiples páginas web. 
+                    <strong>GEO asegura que tu contenido sea la fuente citada</strong> cuando la IA responde preguntas relacionadas con tu expertise.
+                  </p>
+                </HighlightSnippet>
+              </div>
+            </div>
+
+            {/* Related Content Links */}
+            <div className="mt-8 p-6 bg-muted/20 rounded-lg">
+              <h4 className="font-semibold text-primary mb-4">Ver también</h4>
+              <div className="flex flex-wrap gap-3">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => document.getElementById('metodologia')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Metodología F1-F6
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => document.getElementById('coach')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Coach GEO
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => document.getElementById('casos')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Casos reales
+                </Button>
               </div>
             </div>
           </div>
 
+          {/* Keep existing structured data scripts */}
+          
           {/* Structured Data - FAQPage */}
           <script type="application/ld+json">
             {JSON.stringify({
