@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import HighlightSnippet from "@/components/HighlightSnippet";
+import { Link } from "react-router-dom";
 
 const MethodologySection = () => {
   const modules = [
@@ -266,11 +268,17 @@ const MethodologySection = () => {
             </div>
           </div>
 
-          {/* CTA */}
+          {/* CTA - UPDATED to link to the detailed page */}
           <div className="text-center mt-12">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8">
-              Comenzar con F1 - Fundamentos
-              <ArrowRight className="ml-2 h-5 w-5" />
+            <Button 
+              size="lg" 
+              className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8"
+              asChild
+            >
+              <Link to="/metodologia">
+                Ver metodología completa
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
           </div>
 
@@ -331,3 +339,4 @@ const MethodologySection = () => {
 };
 
 export default MethodologySection;
+
