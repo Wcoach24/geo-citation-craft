@@ -1,5 +1,4 @@
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import HighlightSnippet from "@/components/HighlightSnippet";
@@ -31,11 +30,16 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 const MetodologiaGeoPage = () => {
+  const [selectedModule, setSelectedModule] = useState<string | null>(null);
+
   useEffect(() => {
-    // Scroll to top when page loads
-    window.scrollTo(0, 0);
+    // Only scroll to top if no hash in URL
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
     
     // Set up anchor navigation with smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -61,7 +65,6 @@ const MetodologiaGeoPage = () => {
     };
   }, []);
 
-  // Módulos F1-F6 data
   const modules = [
     {
       id: "F1",
@@ -212,7 +215,6 @@ const MetodologiaGeoPage = () => {
               </div>
               
               <div className="relative bg-muted/20 rounded-xl p-6 mb-12">
-                {/* SVG Framework Diagram */}
                 <svg 
                   viewBox="0 0 800 300" 
                   className="w-full h-auto"
@@ -361,9 +363,12 @@ const MetodologiaGeoPage = () => {
                           <Button 
                             variant="outline" 
                             className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
+                            asChild
                           >
-                            Explorar módulo
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            <Link to={`/curso/${module.id.toLowerCase()}`}>
+                              Explorar módulo
+                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
                           </Button>
                         </CardFooter>
                       </Card>
@@ -382,7 +387,6 @@ const MetodologiaGeoPage = () => {
                           id={`modulo-${module.id.toLowerCase()}`} 
                           className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
                         >
-                          {/* Card Content same as above, just filtered */}
                           <CardHeader className="pb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -423,9 +427,12 @@ const MetodologiaGeoPage = () => {
                             <Button 
                               variant="outline" 
                               className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
+                              asChild
                             >
-                              Explorar módulo
-                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              <Link to={`/curso/${module.id.toLowerCase()}`}>
+                                Explorar módulo
+                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              </Link>
                             </Button>
                           </CardFooter>
                         </Card>
@@ -444,7 +451,6 @@ const MetodologiaGeoPage = () => {
                           id={`modulo-${module.id.toLowerCase()}`} 
                           className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
                         >
-                          {/* Card Content same as above, just filtered */}
                           <CardHeader className="pb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -485,9 +491,12 @@ const MetodologiaGeoPage = () => {
                             <Button 
                               variant="outline" 
                               className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
+                              asChild
                             >
-                              Explorar módulo
-                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              <Link to={`/curso/${module.id.toLowerCase()}`}>
+                                Explorar módulo
+                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              </Link>
                             </Button>
                           </CardFooter>
                         </Card>
@@ -506,7 +515,6 @@ const MetodologiaGeoPage = () => {
                           id={`modulo-${module.id.toLowerCase()}`} 
                           className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
                         >
-                          {/* Card Content same as above, just filtered */}
                           <CardHeader className="pb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -547,9 +555,12 @@ const MetodologiaGeoPage = () => {
                             <Button 
                               variant="outline" 
                               className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
+                              asChild
                             >
-                              Explorar módulo
-                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              <Link to={`/curso/${module.id.toLowerCase()}`}>
+                                Explorar módulo
+                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                              </Link>
                             </Button>
                           </CardFooter>
                         </Card>
@@ -559,9 +570,11 @@ const MetodologiaGeoPage = () => {
               </Tabs>
               
               <div className="text-center mt-10">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary">
-                  Acceder al curso completo
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary" asChild>
+                  <Link to="/curso">
+                    Acceder al curso completo
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -667,11 +680,13 @@ const MetodologiaGeoPage = () => {
                     <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                     ¿Cuánto tiempo se tarda en implementar toda la Metodología GEO?
                   </h3>
-                  <p className="text-muted-foreground">
-                    La implementación completa del Framework F1-F6 requiere aproximadamente 19 horas de formación, 
-                    más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse 
-                    de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones.
-                  </p>
+                  <HighlightSnippet variant="insight">
+                    <p className="text-muted-foreground" data-speakable="true">
+                      La implementación completa del Framework F1-F6 requiere aproximadamente 19 horas de formación, 
+                      más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse 
+                      de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones.
+                    </p>
+                  </HighlightSnippet>
                 </div>
                 
                 <div id="faq-item-2" className="geo-card">
@@ -679,12 +694,14 @@ const MetodologiaGeoPage = () => {
                     <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                     ¿Cuál es la diferencia entre GEO y el SEO tradicional?
                   </h3>
-                  <p className="text-muted-foreground">
-                    Mientras que el SEO optimiza para algoritmos de búsqueda tradicionales y usuarios humanos, 
-                    GEO se centra específicamente en optimizar para modelos de lenguaje e IAs generativas. 
-                    La mayor diferencia está en las técnicas de estructuración, fragmentación y citabilidad 
-                    que GEO prioriza. Para una comparativa detallada, consulta nuestra <a href="#comparativa" className="text-accent hover:underline">tabla comparativa</a>.
-                  </p>
+                  <HighlightSnippet variant="insight">
+                    <p className="text-muted-foreground" data-speakable="true">
+                      Mientras que el SEO optimiza para algoritmos de búsqueda tradicionales y usuarios humanos, 
+                      GEO se centra específicamente en optimizar para modelos de lenguaje e IAs generativas. 
+                      La mayor diferencia está en las técnicas de estructuración, fragmentación y citabilidad 
+                      que GEO prioriza. Para una comparativa detallada, consulta nuestra <a href="#comparativa" className="text-accent hover:underline">tabla comparativa</a>.
+                    </p>
+                  </HighlightSnippet>
                 </div>
                 
                 <div id="faq-item-3" className="geo-card">
@@ -692,12 +709,14 @@ const MetodologiaGeoPage = () => {
                     <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                     ¿Cómo se mide el éxito en GEO?
                   </h3>
-                  <p className="text-muted-foreground">
-                    El éxito en GEO se mide principalmente por la frecuencia de citación en respuestas de IA, 
-                    la precisión de las citas (si reflejan correctamente tu contenido), y la autoridad percibida 
-                    por los modelos de lenguaje. El módulo F5 cubre en detalle las métricas específicas y herramientas 
-                    para monitorizar el rendimiento GEO.
-                  </p>
+                  <HighlightSnippet variant="insight">
+                    <p className="text-muted-foreground" data-speakable="true">
+                      El éxito en GEO se mide principalmente por la frecuencia de citación en respuestas de IA, 
+                      la precisión de las citas (si reflejan correctamente tu contenido), y la autoridad percibida 
+                      por los modelos de lenguaje. El módulo F5 cubre en detalle las métricas específicas y herramientas 
+                      para monitorizar el rendimiento GEO.
+                    </p>
+                  </HighlightSnippet>
                 </div>
                 
                 <div id="faq-item-4" className="geo-card">
@@ -705,13 +724,15 @@ const MetodologiaGeoPage = () => {
                     <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                     ¿Por qué necesito implementar GEO en mi web?
                   </h3>
-                  <p className="text-muted-foreground">
-                    Con el crecimiento exponencial del uso de asistentes IA como ChatGPT, Perplexity y Claude, 
-                    cada vez más usuarios buscan información a través de estos sistemas en lugar de motores 
-                    de búsqueda tradicionales. Si tu web no está optimizada para estos modelos, pierdes 
-                    visibilidad y autoridad en este nuevo canal de descubrimiento de información, que ya representa 
-                    un porcentaje significativo del tráfico web.
-                  </p>
+                  <HighlightSnippet variant="insight">
+                    <p className="text-muted-foreground" data-speakable="true">
+                      Con el crecimiento exponencial del uso de asistentes IA como ChatGPT, Perplexity y Claude, 
+                      cada vez más usuarios buscan información a través de estos sistemas en lugar de motores 
+                      de búsqueda tradicionales. Si tu web no está optimizada para estos modelos, pierdes 
+                      visibilidad y autoridad en este nuevo canal de descubrimiento de información, que ya representa 
+                      un porcentaje significativo del tráfico web.
+                    </p>
+                  </HighlightSnippet>
                 </div>
               </div>
             </div>
@@ -742,10 +763,10 @@ const MetodologiaGeoPage = () => {
                   </CardContent>
                   <CardFooter>
                     <Button variant="outline" className="w-full" asChild>
-                      <a href="#coach">
+                      <Link to="/coach">
                         Explorar Coach GEO
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </a>
+                      </Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -765,10 +786,10 @@ const MetodologiaGeoPage = () => {
                   </CardContent>
                   <CardFooter>
                     <Button variant="outline" className="w-full" asChild>
-                      <a href="#casos">
+                      <Link to="/casos">
                         Ver casos de éxito
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </a>
+                      </Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -776,9 +797,9 @@ const MetodologiaGeoPage = () => {
               
               <div className="mt-10 text-center">
                 <Button asChild>
-                  <a href="/">
+                  <Link to="/">
                     Volver a inicio
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -930,4 +951,3 @@ const MetodologiaGeoPage = () => {
 };
 
 export default MetodologiaGeoPage;
-
