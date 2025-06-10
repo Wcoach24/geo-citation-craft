@@ -27,6 +27,19 @@
     <meta name="twitter:description" content="La primera plataforma en español centrada en enseñar cómo estructurar y redactar webs para que los modelos de lenguaje como ChatGPT, Perplexity o Claude las comprendan, recomienden y citen." />
     <meta name="twitter:image" content="https://esgeo.es/og-image.png" />
 
+    <!-- Additional AI-friendly meta tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Citation-friendly structured data -->
+    <meta property="article:author" content="esGEO" />
+    <meta property="article:publisher" content="esGEO" />
+    <meta name="citation_title" content="esGEO - Metodología de Optimización para IA Generativa" />
+    <meta name="citation_author" content="esGEO" />
+    <meta name="citation_publication_date" content="2024" />
+    <meta name="citation_online_date" content="2024" />
+
     <!-- Structured Data - Website -->
     <script type="application/ld+json">
     {
@@ -41,6 +54,16 @@
         "@type": "SearchAction",
         "target": "https://esgeo.es/buscar?q={search_term_string}",
         "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://esgeo.es#organization"
+      },
+      "mainEntity": {
+        "@type": "EducationalOrganization",
+        "@id": "https://esgeo.es#educational-org",
+        "name": "esGEO Academy",
+        "description": "Academia especializada en Generative Engine Optimization"
       }
     }
     </script>
@@ -50,6 +73,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://esgeo.es#organization",
       "name": "esGEO",
       "url": "https://esgeo.es",
       "logo": "https://esgeo.es/logo.png",
@@ -60,6 +84,88 @@
         "@type": "ContactPoint",
         "contactType": "customer service",
         "email": "hola@esgeo.es"
+      },
+      "areaServed": {
+        "@type": "Country", 
+        "name": "España"
+      },
+      "expertise": [
+        "Generative Engine Optimization",
+        "Optimización para IA",
+        "Marketing Digital",
+        "SEO Técnico"
+      ],
+      "teaches": [
+        "GEO Fundamentals",
+        "Estructura Semántica",
+        "Redacción Citeable", 
+        "Optimización Técnica"
+      ]
+    }
+    </script>
+
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://esgeo.es"
+        },
+        {
+          "@type": "ListItem", 
+          "position": 2,
+          "name": "¿Qué es GEO?",
+          "item": "https://esgeo.es#que-es-geo"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3, 
+          "name": "Metodología",
+          "item": "https://esgeo.es#metodologia"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Coach GEO",
+          "item": "https://esgeo.es#coach"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data - EducationalOrganization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "@id": "https://esgeo.es#educational-org", 
+      "name": "esGEO Academy",
+      "description": "Academia especializada en Generative Engine Optimization y optimización para modelos de lenguaje",
+      "url": "https://esgeo.es",
+      "sameAs": [
+        "https://twitter.com/esgeo_es",
+        "https://linkedin.com/company/esgeo"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cursos GEO",
+        "itemListElement": [
+          {
+            "@type": "Course",
+            "name": "Framework F1-F6",
+            "description": "Metodología completa de GEO en 6 módulos"
+          },
+          {
+            "@type": "Service",
+            "name": "Coach GEO",
+            "description": "Asistente IA especializado en optimización"
+          }
+        ]
       }
     }
     </script>

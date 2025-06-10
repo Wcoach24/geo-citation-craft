@@ -2,7 +2,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, FileText, Search, Users, Target, BarChart, Zap } from "lucide-react";
+import { ArrowRight, FileText, Search, Users, Target, BarChart, Zap, Home, ChevronRight } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const MethodologySection = () => {
   const modules = [
@@ -12,7 +21,9 @@ const MethodologySection = () => {
       description: "Comprende los principios básicos de optimización para IA generativa",
       icon: <FileText className="h-6 w-6" />,
       color: "bg-blue-500",
-      topics: ["Qué es GEO", "Diferencias con SEO", "Casos de uso"]
+      topics: ["Qué es GEO", "Diferencias con SEO", "Casos de uso"],
+      duration: "PT2H",
+      difficulty: "Beginner"
     },
     {
       id: "F2", 
@@ -20,7 +31,9 @@ const MethodologySection = () => {
       description: "Aprende a organizar contenido para máxima comprensión por IA",
       icon: <Search className="h-6 w-6" />,
       color: "bg-green-500",
-      topics: ["Jerarquía de contenido", "Datos estructurados", "Fragmentación"]
+      topics: ["Jerarquía de contenido", "Datos estructurados", "Fragmentación"],
+      duration: "PT3H",
+      difficulty: "Beginner"
     },
     {
       id: "F3",
@@ -28,7 +41,9 @@ const MethodologySection = () => {
       description: "Técnicas de escritura que favorecen la citación por modelos de lenguaje",
       icon: <Users className="h-6 w-6" />,
       color: "bg-purple-500",
-      topics: ["Snippets destacados", "Formato Q&A", "Estilo Wikipedia"]
+      topics: ["Snippets destacados", "Formato Q&A", "Estilo Wikipedia"],
+      duration: "PT4H",
+      difficulty: "Intermediate"
     },
     {
       id: "F4",
@@ -36,7 +51,9 @@ const MethodologySection = () => {
       description: "Implementación de elementos técnicos para máxima accesibilidad IA",
       icon: <Target className="h-6 w-6" />,
       color: "bg-orange-500", 
-      topics: ["Schema markup", "Metadatos", "Estructura HTML"]
+      topics: ["Schema markup", "Metadatos", "Estructura HTML"],
+      duration: "PT3H",
+      difficulty: "Intermediate"
     },
     {
       id: "F5",
@@ -44,7 +61,9 @@ const MethodologySection = () => {
       description: "Métricas específicas para evaluar el rendimiento GEO",
       icon: <BarChart className="h-6 w-6" />,
       color: "bg-red-500",
-      topics: ["KPIs GEO", "Herramientas", "Monitoreo"]
+      topics: ["KPIs GEO", "Herramientas", "Monitoreo"],
+      duration: "PT2H",
+      difficulty: "Intermediate"
     },
     {
       id: "F6",
@@ -52,7 +71,9 @@ const MethodologySection = () => {
       description: "Tácticas avanzadas para dominar en ecosistemas de IA",
       icon: <Zap className="h-6 w-6" />,
       color: "bg-indigo-500",
-      topics: ["Link building GEO", "Contenido viral", "Escalabilidad"]
+      topics: ["Link building GEO", "Contenido viral", "Escalabilidad"],
+      duration: "PT5H",
+      difficulty: "Advanced"
     }
   ];
 
@@ -60,6 +81,24 @@ const MethodologySection = () => {
     <section id="metodologia" className="section-anchor py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
+          {/* Breadcrumbs */}
+          <Breadcrumb className="mb-8">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="flex items-center gap-2">
+                  <Home className="h-4 w-4" />
+                  Inicio
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <ChevronRight className="h-4 w-4" />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbPage>Metodología GEO</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
           {/* Section Header */}
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 text-accent border-accent">
@@ -68,9 +107,12 @@ const MethodologySection = () => {
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
               Metodología GEO
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Seis módulos progresivos que te llevan desde los fundamentos hasta estrategias avanzadas de optimización para IA generativa
-            </p>
+            <div className="snippet-block max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground">
+                <strong>Seis módulos progresivos</strong> que te llevan desde los fundamentos hasta estrategias avanzadas de optimización para IA generativa. 
+                Cada módulo incluye ejercicios prácticos, casos reales y validación automática con Coach GEO.
+              </p>
+            </div>
           </div>
 
           {/* Module Cards */}
@@ -102,6 +144,10 @@ const MethodologySection = () => {
                       </li>
                     ))}
                   </ul>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
+                    <span>Nivel: {module.difficulty}</span>
+                    <span>Duración: {module.duration.replace('PT', '').replace('H', 'h')}</span>
+                  </div>
                   <Button 
                     variant="outline" 
                     className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
@@ -186,6 +232,57 @@ const MethodologySection = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
+
+          {/* Structured Data - Course */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Course",
+              "name": "Metodología GEO - Framework F1-F6",
+              "description": "Curso completo de Generative Engine Optimization: seis módulos progresivos desde fundamentos hasta estrategias avanzadas",
+              "provider": {
+                "@type": "Organization",
+                "name": "esGEO",
+                "url": window.location.origin
+              },
+              "courseCode": "GEO-F1-F6",
+              "educationalLevel": "Intermediate",
+              "inLanguage": "es-ES",
+              "teaches": [
+                "Optimización para IA generativa",
+                "Estructura semántica para LLMs", 
+                "Redacción citeable",
+                "Datos estructurados",
+                "Métricas GEO",
+                "Estrategias avanzadas"
+              ],
+              "coursePrerequisites": "Conocimientos básicos de marketing digital y desarrollo web",
+              "totalTime": "PT19H",
+              "numberOfCredits": 6,
+              "hasCourseInstance": modules.map((module, index) => ({
+                "@type": "CourseInstance",
+                "name": `${module.id} - ${module.title}`,
+                "description": module.description,
+                "courseMode": "online",
+                "duration": module.duration,
+                "educationalLevel": module.difficulty,
+                "position": index + 1,
+                "url": `${window.location.origin}/modulo/${module.id.toLowerCase()}`
+              }))
+            })}
+          </script>
+
+          {/* Structured Data - SpeakableSpecification for snippet */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [".snippet-block", ".geo-card"]
+              }
+            })}
+          </script>
         </div>
       </div>
     </section>

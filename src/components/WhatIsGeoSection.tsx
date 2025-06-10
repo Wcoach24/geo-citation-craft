@@ -47,7 +47,7 @@ const WhatIsGeoSection = () => {
 
           {/* Wikipedia-style content */}
           <div className="geo-card">
-            <div className="snippet-block">
+            <div className="snippet-block" data-speakable="true">
               <h3 className="text-xl font-semibold mb-3 text-primary">
                 Definición de GEO (Generative Engine Optimization)
               </h3>
@@ -81,7 +81,7 @@ const WhatIsGeoSection = () => {
                 </div>
               </div>
 
-              <div>
+              <div className="snippet-block" data-speakable="true">
                 <h4 className="text-lg font-semibold mb-3 text-primary">Principios fundamentales de GEO</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="flex items-start gap-3">
@@ -115,7 +115,7 @@ const WhatIsGeoSection = () => {
                 </div>
               </div>
 
-              <div className="snippet-block">
+              <div className="snippet-block" data-speakable="true">
                 <h4 className="text-lg font-semibold mb-3 text-primary">¿Por qué es importante GEO ahora?</h4>
                 <p className="leading-relaxed">
                   El <strong>85% de las búsquedas informacionales</strong> ya se resuelven directamente en interfaces conversacionales. 
@@ -126,7 +126,7 @@ const WhatIsGeoSection = () => {
             </div>
           </div>
 
-          {/* Structured Data - FAQ */}
+          {/* Structured Data - FAQPage */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
@@ -147,8 +147,54 @@ const WhatIsGeoSection = () => {
                     "@type": "Answer",
                     "text": "Mientras SEO optimiza para algoritmos de búsqueda y ranking, GEO optimiza para comprensión por IA y citabilidad. El objetivo de GEO es ser recomendado y citado por modelos de lenguaje, no solo aparecer en primeras posiciones."
                   }
+                },
+                {
+                  "@type": "Question",
+                  "name": "¿Cuáles son los principios fundamentales de GEO?",
+                  "acceptedAnswer": {
+                    "@type": "Answer", 
+                    "text": "Los cuatro principios fundamentales de GEO son: 1) Escaneabilidad - contenido estructurado en bloques lógicos, 2) Fragmentación - información dividida en unidades autocontenidas, 3) Citabilidad - snippets destacados fáciles de extraer, y 4) Datos estructurados - metadatos ricos para comprensión automática."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "¿Por qué es importante GEO ahora?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "El 85% de las búsquedas informacionales ya se resuelven directamente en interfaces conversacionales. Los usuarios prefieren respuestas sintéticas de IA que navegar múltiples páginas. GEO asegura que tu contenido sea la fuente citada cuando la IA responde preguntas relacionadas con tu expertise."
+                  }
                 }
               ]
+            })}
+          </script>
+
+          {/* Structured Data - SpeakableSpecification */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "url": `${window.location.origin}#que-es-geo`,
+              "name": "¿Qué es GEO? - Definición de Generative Engine Optimization",
+              "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [".snippet-block", "[data-speakable='true']"],
+                "xpath": [
+                  "//*[@class='snippet-block']",
+                  "//*[@data-speakable='true']"
+                ]
+              },
+              "mainEntity": {
+                "@type": "DefinedTerm",
+                "@id": `${window.location.origin}#geo-definition`,
+                "name": "GEO (Generative Engine Optimization)",
+                "alternateName": ["Optimización para Motores Generativos", "Generative Engine Optimization"],
+                "description": "Metodología de optimización de contenido web diseñada específicamente para que los modelos de lenguaje generativo puedan comprender, procesar y citar la información de manera efectiva",
+                "inDefinedTermSet": {
+                  "@type": "DefinedTermSet",
+                  "name": "Glosario GEO",
+                  "url": `${window.location.origin}/glosario`
+                }
+              }
             })}
           </script>
         </div>

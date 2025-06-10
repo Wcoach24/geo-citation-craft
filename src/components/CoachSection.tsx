@@ -189,6 +189,52 @@ const CoachSection = () => {
               </Button>
             </div>
           </div>
+
+          {/* Structured Data - HowTo */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "Cómo usar Coach GEO para optimizar contenido",
+              "description": "Proceso paso a paso para optimizar tu contenido web usando el asistente Coach GEO especializado en IA generativa",
+              "totalTime": "PT10M",
+              "estimatedCost": {
+                "@type": "MonetaryAmount",
+                "currency": "EUR",
+                "value": "0"
+              },
+              "step": [
+                {
+                  "@type": "HowToStep",
+                  "name": "Análisis inicial",
+                  "text": "El Coach evalúa tu contenido actual y identifica oportunidades GEO",
+                  "url": `${window.location.origin}#coach`,
+                  "image": `${window.location.origin}/coach-step1.png`
+                },
+                {
+                  "@type": "HowToStep", 
+                  "name": "Recomendaciones personalizadas",
+                  "text": "Recibe sugerencias específicas basadas en tu sector y objetivos",
+                  "url": `${window.location.origin}#coach`,
+                  "image": `${window.location.origin}/coach-step2.png`
+                },
+                {
+                  "@type": "HowToStep",
+                  "name": "Implementación guiada", 
+                  "text": "Sigue instrucciones paso a paso para optimizar tu contenido",
+                  "url": `${window.location.origin}#coach`,
+                  "image": `${window.location.origin}/coach-step3.png`
+                },
+                {
+                  "@type": "HowToStep",
+                  "name": "Informe descargable",
+                  "text": "Obtén un documento PDF con todas las mejoras implementadas",
+                  "url": `${window.location.origin}#coach`,
+                  "image": `${window.location.origin}/coach-step4.png`
+                }
+              ]
+            })}
+          </script>
         </div>
       </div>
     </section>
