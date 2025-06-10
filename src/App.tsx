@@ -10,6 +10,8 @@ import MetodologiaGeoPage from "./pages/MetodologiaGeoPage";
 import CoachGeoPage from "./pages/CoachGeoPage";
 import CursoGeoPage from "./pages/CursoGeoPage";
 import CasosRealesPage from "./pages/CasosRealesPage";
+import GlosarioPage from "./pages/GlosarioPage";
+import AcercaDePage from "./pages/AcercaDePage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/coach" element={<CoachGeoPage />} />
           <Route path="/curso" element={<CursoGeoPage />} />
           <Route path="/casos" element={<CasosRealesPage />} />
+          <Route path="/glosario" element={<GlosarioPage />} />
+          <Route path="/acerca-de" element={<AcercaDePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -2,18 +2,25 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navItems = [
-    { label: "¿Qué es GEO?", href: "#que-es-geo" },
-    { label: "Metodología", href: "#metodologia" },
-    { label: "Coach GEO", href: "#coach" },
-    { label: "Curso", href: "#curso" },
-    { label: "Casos reales", href: "#casos" },
-    { label: "Blog", href: "#blog" },
+    { label: "¿Qué es GEO?", href: "#que-es-geo", isAnchor: true },
+    { label: "Metodología", href: "/metodologia", isAnchor: false },
+    { label: "Coach GEO", href: "/coach", isAnchor: false },
+    { label: "Curso", href: "/curso", isAnchor: false },
+    { label: "Casos reales", href: "/casos", isAnchor: false },
+    { label: "Glosario", href: "/glosario", isAnchor: false },
   ];
+
+  const isCurrentPage = (href: string) => {
+    if (href.startsWith("#")) return location.pathname === "/";
+    return location.pathname === href;
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -21,9 +28,9 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#" className="text-2xl font-bold text-primary">
+            <Link to="/" className="text-2xl font-bold text-primary">
               es<span className="text-accent">GEO</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -31,12 +38,25 @@ const Header = () => {
             <ul className="flex space-x-8">
               {navItems.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
-                  >
-                    {item.label}
-                  </a>
+                  {item.isAnchor ? (
+                    <a
+                      href={item.href}
+                      className={`text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
+                        isCurrentPage(item.href) ? "text-primary font-semibold" : ""
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
+                        isCurrentPage(item.href) ? "text-primary font-semibold" : ""
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -66,13 +86,27 @@ const Header = () => {
               <ul className="space-y-4">
                 {navItems.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      className="block text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.label}
-                    </a>
+                    {item.isAnchor ? (
+                      <a
+                        href={item.href}
+                        className={`block text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
+                          isCurrentPage(item.href) ? "text-primary font-semibold" : ""
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        className={`block text-muted-foreground hover:text-primary transition-colors duration-200 font-medium ${
+                          isCurrentPage(item.href) ? "text-primary font-semibold" : ""
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
                 <li className="pt-4">
