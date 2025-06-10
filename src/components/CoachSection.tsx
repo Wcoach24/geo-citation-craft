@@ -1,288 +1,68 @@
+
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MessageCircle, CheckCircle, Download, ArrowRight, Bot } from "lucide-react";
-import ShareSectionButton from "@/components/ShareSectionButton";
-import HighlightSnippet from "@/components/HighlightSnippet";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MessageCircle, Target, FileDown, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CoachSection = () => {
-  const steps = [
-    {
-      step: 1,
-      title: "Análisis inicial",
-      description: "El Coach evalúa tu contenido actual y identifica oportunidades GEO",
-      icon: <Bot className="h-5 w-5" />
-    },
-    {
-      step: 2,
-      title: "Recomendaciones personalizadas",
-      description: "Recibe sugerencias específicas basadas en tu sector y objetivos",
-      icon: <MessageCircle className="h-5 w-5" />
-    },
-    {
-      step: 3,
-      title: "Implementación guiada",
-      description: "Sigue instrucciones paso a paso para optimizar tu contenido",
-      icon: <CheckCircle className="h-5 w-5" />
-    },
-    {
-      step: 4,
-      title: "Informe descargable",
-      description: "Obtén un documento PDF con todas las mejoras implementadas",
-      icon: <Download className="h-5 w-5" />
-    }
-  ];
-
   return (
-    <section id="coach" className="section-anchor py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="text-center flex-1">
-              <Badge variant="outline" className="mb-4 text-accent border-accent">
-                Asistente IA
-              </Badge>
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-6">
-                Coach GEO
-              </h2>
-            </div>
-            <ShareSectionButton sectionId="coach" title="Coach GEO" />
-          </div>
-
-          {/* Overview Snippet */}
-          <HighlightSnippet id="overview-coach" variant="definition" className="mb-16">
-            <p className="text-xl text-muted-foreground text-center">
-              Tu asistente conversacional especializado en optimización para IA generativa. 
-              Recibe análisis personalizados y recomendaciones específicas para tu contenido.
-            </p>
-          </HighlightSnippet>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Process */}
-            <div>
-              <div id="como-funciona-coach" className="mb-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-primary">
-                    ¿Cómo funciona el Coach GEO?
-                  </h3>
-                  <ShareSectionButton sectionId="como-funciona-coach" title="proceso del Coach" />
-                </div>
-                
-                <div className="space-y-6">
-                  {steps.map((step, index) => (
-                    <div key={step.step} className="flex items-start gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-primary font-bold">
-                          {step.step}
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="text-accent">
-                            {step.icon}
-                          </div>
-                          <h4 className="text-lg font-semibold text-primary">
-                            {step.title}
-                          </h4>
-                        </div>
-                        <p className="text-muted-foreground">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div id="beneficios-coach">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-lg font-semibold text-primary">🎯 ¿Qué obtienes con Coach GEO?</h4>
-                  <ShareSectionButton sectionId="beneficios-coach" title="beneficios del Coach" />
-                </div>
-                <HighlightSnippet variant="insight">
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                      Análisis automático de tu estructura de contenido
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                      Sugerencias de mejora específicas por módulo
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                      Templates de snippet y formatos citeables
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-accent" />
-                      Informe PDF descargable con plan de acción
-                    </li>
-                  </ul>
-                </HighlightSnippet>
-              </div>
-            </div>
-
-            {/* Right Column - Interface Preview */}
-            <div className="lg:order-2">
-              <Card className="shadow-lg border-0 bg-gradient-to-br from-card to-muted/30">
-                <CardHeader className="text-center pb-4">
-                  <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Bot className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl text-primary">
-                    Interfaz Coach GEO
-                  </CardTitle>
-                  <CardDescription>
-                    Conversación inteligente para optimización personalizada
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* Mock conversation */}
-                  <div className="space-y-4 bg-background rounded-lg p-4 border">
-                    <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                        <Bot className="h-4 w-4 text-primary" />
-                      </div>
-                      <div className="bg-muted p-3 rounded-lg flex-1">
-                        <p className="text-sm">
-                          ¡Hola! Soy tu Coach GEO. Analicemos tu web. ¿Podrías compartir la URL de la página que quieres optimizar?
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start gap-3 justify-end">
-                      <div className="bg-accent p-3 rounded-lg max-w-xs text-primary">
-                        <p className="text-sm">
-                          Hola, quiero optimizar mi blog sobre marketing digital
-                        </p>
-                      </div>
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary-foreground text-xs font-bold">TÚ</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                        <Bot className="h-4 w-4 text-primary" />
-                      </div>
-                      <div className="bg-muted p-3 rounded-lg flex-1">
-                        <p className="text-sm">
-                          Perfecto. He analizado tu estructura actual. Veo oportunidades en:
-                          <br />• Fragmentación de contenido
-                          <br />• Snippets destacados
-                          <br />• Datos estructurados
-                          <br /><br />¿Empezamos con F2 - Estructura Semántica?
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex gap-3">
-                    <Button className="flex-1 bg-accent hover:bg-accent/90 text-primary">
-                      Lanzar Coach
-                    </Button>
-                    <Button variant="outline" className="flex-1">
-                      Ver Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Related Content Links */}
-          <div className="mt-16 p-6 bg-muted/20 rounded-lg">
-            <h4 className="font-semibold text-primary mb-4 text-center">Contenido relacionado</h4>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => document.getElementById('metodologia')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Metodología F1-F6
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => document.getElementById('que-es-geo')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                ¿Qué es GEO?
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => document.getElementById('casos')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Casos reales
-              </Button>
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center mt-16">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-primary mb-4">
-                ¿Listo para optimizar tu contenido con IA?
-              </h3>
-              <HighlightSnippet variant="insight" className="mb-6">
-                <p className="text-muted-foreground">
-                  El Coach GEO está disponible 24/7 para analizar tu web y generar recomendaciones personalizadas. 
-                  Comienza ahora y obtén tu primer informe GEO en menos de 10 minutos.
-                </p>
-              </HighlightSnippet>
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8">
-                Lanzar Coach GEO ahora
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Structured Data - HowTo */}
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "HowTo",
-              "name": "Cómo usar Coach GEO para optimizar contenido",
-              "description": "Proceso paso a paso para optimizar tu contenido web usando el asistente Coach GEO especializado en IA generativa",
-              "totalTime": "PT10M",
-              "estimatedCost": {
-                "@type": "MonetaryAmount",
-                "currency": "EUR",
-                "value": "0"
-              },
-              "step": [
-                {
-                  "@type": "HowToStep",
-                  "name": "Análisis inicial",
-                  "text": "El Coach evalúa tu contenido actual y identifica oportunidades GEO",
-                  "url": `${window.location.origin}#coach`,
-                  "image": `${window.location.origin}/coach-step1.png`
-                },
-                {
-                  "@type": "HowToStep", 
-                  "name": "Recomendaciones personalizadas",
-                  "text": "Recibe sugerencias específicas basadas en tu sector y objetivos",
-                  "url": `${window.location.origin}#coach`,
-                  "image": `${window.location.origin}/coach-step2.png`
-                },
-                {
-                  "@type": "HowToStep",
-                  "name": "Implementación guiada", 
-                  "text": "Sigue instrucciones paso a paso para optimizar tu contenido",
-                  "url": `${window.location.origin}#coach`,
-                  "image": `${window.location.origin}/coach-step3.png`
-                },
-                {
-                  "@type": "HowToStep",
-                  "name": "Informe descargable",
-                  "text": "Obtén un documento PDF con todas las mejoras implementadas",
-                  "url": `${window.location.origin}#coach`,
-                  "image": `${window.location.origin}/coach-step4.png`
-                }
-              ]
-            })}
-          </script>
+    <section className="py-20 bg-muted/30" id="coach">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Coach GEO
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Tu asistente personal para aplicar GEO paso a paso. 
+            Recibe guidance personalizado y optimiza tu web para ser citado por IA.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <Card className="text-center">
+            <CardHeader>
+              <MessageCircle className="h-12 w-12 mx-auto text-accent mb-4" />
+              <CardTitle>Conversacional</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                El coach te hace preguntas específicas sobre tu web y objetivos para personalizar las recomendaciones.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center">
+            <CardHeader>
+              <Target className="h-12 w-12 mx-auto text-accent mb-4" />
+              <CardTitle>Personalizado</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Cada recomendación se adapta a tu sector, audiencia y nivel técnico para máxima efectividad.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center">
+            <CardHeader>
+              <FileDown className="h-12 w-12 mx-auto text-accent mb-4" />
+              <CardTitle>Accionable</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                Recibe un informe detallado con pasos específicos y prioritarios para implementar en tu web.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        
+        <div className="text-center">
+          <Link to="/coach">
+            <Button size="lg" className="bg-accent hover:bg-accent/90">
+              Empezar coaching GEO
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
