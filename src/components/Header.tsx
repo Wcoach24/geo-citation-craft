@@ -14,6 +14,7 @@ const Header = () => {
     { label: "Coach GEO", href: "/coach", isAnchor: false },
     { label: "Curso", href: "/curso", isAnchor: false },
     { label: "Casos reales", href: "/casos", isAnchor: false },
+    { label: "Radar IA", href: "/radar-ia", isAnchor: false },
     { label: "Glosario", href: "/glosario", isAnchor: false },
   ];
 

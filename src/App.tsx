@@ -12,6 +12,8 @@ import CursoGeoPage from "./pages/CursoGeoPage";
 import CasosRealesPage from "./pages/CasosRealesPage";
 import GlosarioPage from "./pages/GlosarioPage";
 import AcercaDePage from "./pages/AcercaDePage";
+import RadarIAPage from "./pages/RadarIAPage";
+import QueSIgnificaSerCitadoPorIA from "./pages/articles/QueSIgnificaSerCitadoPorIA";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
           <Route path="/casos" element={<CasosRealesPage />} />
           <Route path="/glosario" element={<GlosarioPage />} />
           <Route path="/acerca-de" element={<AcercaDePage />} />
+          <Route path="/radar-ia" element={<RadarIAPage />} />
+          <Route path="/radar-ia/que-significa-ser-citado-por-ia" element={<QueSIgnificaSerCitadoPorIA />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
