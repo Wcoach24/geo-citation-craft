@@ -1,105 +1,87 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const navItems = [
+    { label: "¿Qué es GEO?", href: "#que-es-geo" },
+    { label: "Metodología", href: "#metodologia" },
+    { label: "Coach GEO", href: "#coach" },
+    { label: "Curso", href: "#curso" },
+    { label: "Casos reales", href: "#casos" },
+    { label: "Blog", href: "#blog" },
+  ];
 
   return (
-    <header className="bg-background border-b border-border sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <a href="/" className="text-xl font-bold text-foreground hover:text-accent transition-colors">
-              GEO
+          <div className="flex-shrink-0">
+            <a href="#" className="text-2xl font-bold text-primary">
+              es<span className="text-accent">GEO</span>
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a 
-              href="/metodologia" 
-              className="text-foreground hover:text-accent transition-colors font-medium"
-            >
-              Metodología
-            </a>
-            <a 
-              href="/curso" 
-              className="text-foreground hover:text-accent transition-colors font-medium"
-            >
-              Curso
-            </a>
-            <a 
-              href="/coach" 
-              className="text-foreground hover:text-accent transition-colors font-medium"
-            >
-              Coach
-            </a>
-            <a 
-              href="/casos" 
-              className="text-foreground hover:text-accent transition-colors font-medium"
-            >
-              Casos Reales
-            </a>
+          <nav className="hidden md:block">
+            <ul className="flex space-x-8">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button asChild>
-              <a href="/coach">Usar Coach GEO</a>
+            <Button className="bg-accent hover:bg-accent/90 text-primary font-semibold">
+              Empieza con F1
             </Button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border">
-              <a
-                href="/metodologia"
-                className="block px-3 py-2 text-foreground hover:text-accent hover:bg-accent/10 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Metodología
-              </a>
-              <a
-                href="/curso"
-                className="block px-3 py-2 text-foreground hover:text-accent hover:bg-accent/10 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Curso
-              </a>
-              <a
-                href="/coach"
-                className="block px-3 py-2 text-foreground hover:text-accent hover:bg-accent/10 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Coach
-              </a>
-              <a
-                href="/casos"
-                className="block px-3 py-2 text-foreground hover:text-accent hover:bg-accent/10 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Casos Reales
-              </a>
-              <div className="pt-2">
-                <Button asChild className="w-full">
-                  <a href="/coach" onClick={() => setIsMenuOpen(false)}>Usar Coach GEO</a>
-                </Button>
-              </div>
-            </div>
+          <div className="md:hidden py-4 border-t border-border">
+            <nav>
+              <ul className="space-y-4">
+                {navItems.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="block text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+                <li className="pt-4">
+                  <Button className="w-full bg-accent hover:bg-accent/90 text-primary font-semibold">
+                    Empieza con F1
+                  </Button>
+                </li>
+              </ul>
+            </nav>
           </div>
         )}
       </div>
