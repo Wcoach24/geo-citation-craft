@@ -4,11 +4,12 @@ import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
+import GeoTerm from "@/components/GeoTerm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Home, ChevronRight, Zap, ArrowLeft, BookOpen } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Home, ChevronRight, Zap, ArrowLeft, BookOpen, ExternalLink, Bot, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ModuloF6Page = () => {
@@ -19,11 +20,11 @@ const ModuloF6Page = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Módulo F6: Estrategia Avanzada y Escalabilidad | esGEO</title>
-        <meta name="description" content="Tácticas avanzadas para dominar en ecosistemas de IA generativa: link building para IA, contenido viral citeable y escalabilidad técnica." />
+        <title>Módulo F6: Estándares Técnicos y Visibilidad Semántica | esGEO</title>
+        <meta name="description" content="Guía práctica para implementar estándares técnicos que aumenten la visibilidad de tu sitio en los modelos de lenguaje generativo (LLMs), enfocándose en Schema.org, JSON-LD y relaciones estructuradas." />
         <link rel="canonical" href="https://esgeo.es/curso/f6" />
         
-        <meta name="citation_title" content="Módulo F6: Estrategia Avanzada y Escalabilidad" />
+        <meta name="citation_title" content="Módulo F6: Estándares Técnicos y Visibilidad Semántica en LLMs" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
@@ -73,136 +74,239 @@ const ModuloF6Page = () => {
               </Badge>
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Estrategia Avanzada y Escalabilidad
+              Estándares Técnicos y Visibilidad Semántica
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Tácticas avanzadas para dominar en ecosistemas de IA generativa
+              Guía práctica para implementar estándares técnicos que aumenten la visibilidad en LLMs
             </p>
           </div>
 
           {/* Key Concept */}
-          <HighlightSnippet id="concepto-estrategia-avanzada" variant="definition" className="mb-16">
+          <HighlightSnippet id="concepto-visibilidad-semantica" variant="definition" className="mb-16">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-primary">Estrategia Avanzada GEO</h2>
-              <ShareSectionButton sectionId="concepto-estrategia-avanzada" title="estrategia avanzada" />
+              <h2 className="text-2xl font-bold text-primary">Visibilidad Semántica</h2>
+              <ShareSectionButton sectionId="concepto-visibilidad-semantica" title="visibilidad semántica" />
             </div>
             <p className="text-lg leading-relaxed" data-speakable="true">
-              <strong>La estrategia avanzada GEO combina técnicas de escalabilidad, distribución de contenido y construcción de autoridad específicamente diseñadas para ecosistemas de IA generativa.</strong> 
-              Incluye link building para IA, contenido viral citeable y sistemas automatizados de optimización.
+              <strong>Los <GeoTerm term="llm">LLMs</GeoTerm> no rastrean como un bot tradicional; entienden como un lector humano.</strong> 
+              Sin embargo, los elementos técnicos correctos potencian la <GeoTerm term="citabilidad">citabilidad</GeoTerm> si están correctamente estructurados. 
+              El objetivo de <GeoTerm term="geo">GEO</GeoTerm> es convertir cada bloque web en un fragmento inteligible, enlazable y citable.
             </p>
           </HighlightSnippet>
 
-          {/* Module Content */}
-          <section id="contenido-modulo" className="mb-16">
+          {/* Introduction */}
+          <section id="introduccion-ecosistema" className="mb-16">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary">Contenido del Módulo</h2>
-              <ShareSectionButton sectionId="contenido-modulo" title="contenido completo" />
+              <h2 className="text-3xl font-bold text-primary">Introducción al Ecosistema Técnico GEO</h2>
+              <ShareSectionButton sectionId="introduccion-ecosistema" title="ecosistema técnico" />
             </div>
             
-            <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="link-building-ia" id="link-building-ia" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary">1. Link building para IA</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    El link building GEO se enfoca en obtener referencias y enlaces desde fuentes que los modelos de IA valoran.
-                  </p>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-muted/30 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2">Fuentes prioritarias para IA:</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li>• <strong>Wikipedia y Wikimedia:</strong> Fuente principal de entrenamiento</li>
-                        <li>• <strong>Sitios educativos (.edu):</strong> Alta credibilidad académica</li>
-                        <li>• <strong>Publicaciones científicas:</strong> Autoridad técnica</li>
-                        <li>• <strong>Medios reconocidos:</strong> Validación editorial</li>
-                        <li>• <strong>Documentación oficial:</strong> Fuentes primarias</li>
-                      </ul>
-                    </div>
-                    <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-                      <h4 className="font-semibold text-blue-800 mb-2">Estrategias específicas:</h4>
-                      <ul className="text-blue-700 space-y-1 text-sm">
-                        <li>• Contribuciones a Wikipedia sobre tu área de expertise</li>
-                        <li>• Colaboraciones con instituciones académicas</li>
-                        <li>• Contenido citable para periodistas y bloggers</li>
-                        <li>• Participación en foros técnicos especializados</li>
-                      </ul>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Los <GeoTerm term="llm">modelos de lenguaje</GeoTerm> no rastrean como un bot tradicional; entienden como un lector humano. 
+              Sin embargo, los elementos técnicos correctos potencian la <GeoTerm term="citabilidad">citabilidad</GeoTerm> si están correctamente estructurados.
+            </p>
 
-              <AccordionItem value="contenido-viral" id="contenido-viral" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary">2. Contenido viral citeable</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Crear contenido que se disemine ampliamente y sea frecuentemente citado por modelos de IA.
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-semibold text-primary mb-3">Características del contenido viral:</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li>• <strong>Utilidad inmediata:</strong> Resuelve problemas comunes</li>
-                        <li>• <strong>Formato fragmentable:</strong> Fácil de citar parcialmente</li>
-                        <li>• <strong>Actualidad relevante:</strong> Temas del momento</li>
-                        <li>• <strong>Autoridad reconocida:</strong> Expertise demostrable</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-primary mb-3">Tipos de contenido efectivos:</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li>• <strong>Definiciones autoritativas:</strong> Glosarios especializados</li>
-                        <li>• <strong>Guías paso a paso:</strong> HowTo detallados</li>
-                        <li>• <strong>Datos y estadísticas:</strong> Investigación original</li>
-                        <li>• <strong>Comparativas:</strong> Análisis objetivos</li>
-                      </ul>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+            <HighlightSnippet variant="insight" className="mb-6">
+              <p className="text-lg leading-relaxed" data-speakable="true">
+                <strong>Objetivo <GeoTerm term="geo">GEO</GeoTerm>:</strong> Convertir cada bloque web en un fragmento inteligible, enlazable y citable.
+              </p>
+            </HighlightSnippet>
+          </section>
 
-              <AccordionItem value="escalabilidad-tecnica" id="escalabilidad-tecnica" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary">3. Escalabilidad técnica</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Sistemas y procesos para escalar la optimización GEO a gran volumen de contenido.
-                  </p>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded">
-                      <h4 className="font-semibold text-green-800 mb-2">Automatización de procesos:</h4>
-                      <ul className="text-green-700 space-y-1 text-sm">
-                        <li>• Generación automática de datos estructurados</li>
-                        <li>• Templates para contenido citeable</li>
-                        <li>• Sistemas de fragmentación automática</li>
-                        <li>• Monitoreo automatizado de citaciones</li>
-                      </ul>
-                    </div>
-                    <div className="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
-                      <h4 className="font-semibold text-yellow-800 mb-2">Arquitectura de contenido:</h4>
-                      <ul className="text-yellow-700 space-y-1 text-sm">
-                        <li>• Hub de contenido con estructura semántica</li>
-                        <li>• Red de contenido interconectado</li>
-                        <li>• Versionado y actualización sistemática</li>
-                        <li>• Distribución multi-canal optimizada</li>
-                      </ul>
-                    </div>
-                    <div className="p-4 bg-muted/30 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2">Herramientas y tecnologías:</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• CMS con capacidades GEO nativas</li>
-                        <li>• APIs para datos estructurados</li>
-                        <li>• Sistemas de análisis de citabilidad</li>
-                        <li>• Plataformas de distribución de contenido</li>
-                      </ul>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+          {/* Structured Data */}
+          <section id="datos-estructurados" className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-primary">Datos Estructurados Esenciales para LLMs</h2>
+              <ShareSectionButton sectionId="datos-estructurados" title="datos estructurados" />
+            </div>
+            
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Implementar <GeoTerm term="schema-org">Schema.org</GeoTerm> y estructuras como <GeoTerm term="faqpage">FAQPage</GeoTerm>, 
+              <GeoTerm term="article">Article</GeoTerm>, <GeoTerm term="howto">HowTo</GeoTerm> o <GeoTerm term="breadcrumbList">BreadcrumbList</GeoTerm> 
+              permite que los <GeoTerm term="llm">LLMs</GeoTerm> reconozcan la intención y el contexto del contenido.
+            </p>
+
+            <div className="overflow-x-auto mb-6">
+              <table className="w-full text-sm border-collapse border border-border">
+                <thead>
+                  <tr className="border-b bg-muted/30">
+                    <th className="text-left p-3 font-semibold border-r border-border">Tipo de contenido</th>
+                    <th className="text-left p-3 font-semibold">Marcado recomendado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="p-3 font-medium border-r border-border">Artículo informativo</td>
+                    <td className="p-3">Article + mainEntityOfPage</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="p-3 font-medium border-r border-border">Guía paso a paso</td>
+                    <td className="p-3">HowTo</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="p-3 font-medium border-r border-border">Preguntas y respuestas</td>
+                    <td className="p-3">FAQPage</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="p-3 font-medium border-r border-border">Glosario</td>
+                    <td className="p-3">DefinedTerm, WebPage</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-medium border-r border-border">Página principal</td>
+                    <td className="p-3">WebSite, Organization</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* Technical Implementation */}
+          <section id="implementacion-tecnica" className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-primary">Implementación Técnica</h2>
+              <ShareSectionButton sectionId="implementacion-tecnica" title="implementación técnica" />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card className="bg-blue-50/50 border-blue-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-blue-800">
+                    <Code className="h-5 w-5" />
+                    Schema.org y JSON-LD
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-blue-700">
+                  <ul className="space-y-2 text-sm">
+                    <li>• Implementación de tipos específicos según contenido</li>
+                    <li>• Uso de JSON-LD para máxima compatibilidad</li>
+                    <li>• Inclusión de propiedades relacionales</li>
+                    <li>• Validación con herramientas especializadas</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-green-50/50 border-green-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-green-800">
+                    <Zap className="h-5 w-5" />
+                    Microformatos y Etiquetas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-green-700">
+                  <ul className="space-y-2 text-sm">
+                    <li>• Etiquetas semánticas HTML5</li>
+                    <li>• Microformatos para datos específicos</li>
+                    <li>• Atributos aria para accesibilidad</li>
+                    <li>• Meta tags especializados</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-purple-50/50 border-purple-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-purple-800">
+                    <BookOpen className="h-5 w-5" />
+                    Relaciones Semánticas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-purple-700">
+                  <ul className="space-y-2 text-sm">
+                    <li>• Enlaces internos contextuales</li>
+                    <li>• Estructura jerárquica clara</li>
+                    <li>• Breadcrumbs semánticos</li>
+                    <li>• Agrupación temática de contenidos</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-orange-50/50 border-orange-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-orange-800">
+                    <Bot className="h-5 w-5" />
+                    Speakable Content
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-orange-700">
+                  <ul className="space-y-2 text-sm">
+                    <li>• Marcado speakable para IA de voz</li>
+                    <li>• Fragmentos optimizados para citas</li>
+                    <li>• Contenido estructurado para síntesis</li>
+                    <li>• Optimización para respuestas directas</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+
+          {/* Content Notice */}
+          <section className="mb-16">
+            <Card className="bg-yellow-50/50 border-yellow-300">
+              <CardContent className="p-6 text-center">
+                <p className="text-muted-foreground italic mb-2">
+                  El contenido técnico detallado de este módulo (ejemplos de código, 
+                  implementaciones específicas, sistema de testeo y dashboard de visibilidad) 
+                  está disponible en el curso completo.
+                </p>
+                <p className="text-muted-foreground text-sm">
+                  Para acceder a toda la información técnica práctica, consulta el material completo del módulo.
+                </p>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Implementation Checklist */}
+          <section id="checklist-implementacion" className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-primary">Checklist de Implementación</h2>
+              <ShareSectionButton sectionId="checklist-implementacion" title="checklist" />
+            </div>
+
+            <HighlightSnippet variant="insight" className="mb-6">
+              <ul className="list-disc list-inside space-y-2 text-lg leading-relaxed" data-speakable="true">
+                <li>Implementación de <GeoTerm term="schema-org">Schema.org</GeoTerm> para tipos de contenido principales</li>
+                <li>Uso de <GeoTerm term="json-ld">JSON-LD</GeoTerm> para incrustar datos estructurados</li>
+                <li>Definición de microformatos y etiquetas semánticas relevantes</li>
+                <li>Establecimiento de relaciones semánticas entre páginas</li>
+                <li>Implementación de speakable content para citabilidad vocal</li>
+                <li>Sistema de testeo y validación configurado</li>
+                <li>Dashboard de visibilidad para auditar citabilidad</li>
+                <li>Validación con herramientas especializadas</li>
+              </ul>
+            </HighlightSnippet>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Al implementar correctamente los estándares técnicos y la visibilidad semántica, aumentarás 
+              significativamente la capacidad de los <GeoTerm term="llm">LLMs</GeoTerm> para comprender, 
+              procesar y citar tu contenido con mayor precisión.
+            </p>
+          </section>
+
+          {/* LLM Prompt */}
+          <section id="prompt-implementacion" className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-primary">Prompt para Implementación con LLMs</h2>
+              <ShareSectionButton sectionId="prompt-implementacion" title="prompt de implementación" />
+            </div>
+
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Puedes utilizar este prompt para ayudarte a implementar los estándares técnicos esenciales:
+            </p>
+
+            <HighlightSnippet variant="stat" className="bg-gray-100 border border-gray-300 p-4 rounded-lg">
+              <code className="block whitespace-pre-wrap text-sm font-mono">
+{`Actúa como un experto en GEO (Generative Engine Optimization) especializado en estándares técnicos y visibilidad semántica para LLMs.
+
+Tengo una página web con [DESCRIBE TIPO DE CONTENIDO, EJ. ARTÍCULO INFORMATIVO SOBRE UN TEMA]. Quiero implementar datos estructurados para mejorar su comprensión por LLMs.
+
+Por favor:
+1. Sugiere el tipo de Schema.org más adecuado para mi contenido.
+2. Proporciona un ejemplo de código JSON-LD básico para este tipo de contenido.
+3. Explica cómo puedo verificar la implementación y qué propiedades son clave.
+4. Recomienda etiquetas semánticas adicionales para maximizar la citabilidad.
+
+Necesito código específico y pasos detallados para la implementación técnica.`}
+              </code>
+            </HighlightSnippet>
           </section>
 
           {/* Navigation */}
@@ -210,15 +314,45 @@ const ModuloF6Page = () => {
             <Button variant="outline" asChild>
               <Link to="/curso/f5">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Módulo F5: Medición y Análisis
+                Módulo F5: Mantenimiento Evolutivo
               </Link>
             </Button>
             <Button asChild>
               <Link to="/curso">
                 <BookOpen className="h-4 w-4 mr-2" />
-                Volver al Curso
+                Finalizar Curso GEO
               </Link>
             </Button>
+          </div>
+
+          {/* Tools and Resources */}
+          <div className="mt-16 p-6 bg-muted/30 rounded-lg">
+            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Herramientas Recomendadas</h3>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://validator.schema.org/" target="_blank" rel="noopener noreferrer">
+                  Validador de Schema.org
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://developers.google.com/search/docs/structured-data/search-gallery" target="_blank" rel="noopener noreferrer">
+                  Galería de Datos Estructurados
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer">
+                  Test de Resultados Enriquecidos
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/coach">
+                  Usar Coach GEO para F6
+                </Link>
+              </Button>
+            </div>
           </div>
 
           {/* Completion Message */}
@@ -247,8 +381,8 @@ const ModuloF6Page = () => {
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Course",
-              "name": "Módulo F6: Estrategia Avanzada y Escalabilidad",
-              "description": "Módulo avanzado de GEO que enseña tácticas para dominar en ecosistemas de IA generativa",
+              "name": "Módulo F6: Estándares Técnicos y Visibilidad Semántica",
+              "description": "Guía práctica para implementar estándares técnicos que aumenten la visibilidad en LLMs",
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
@@ -258,10 +392,14 @@ const ModuloF6Page = () => {
               "educationalLevel": "Advanced",
               "inLanguage": "es-ES",
               "teaches": [
-                "Link building para IA",
-                "Contenido viral citeable",
-                "Escalabilidad técnica",
-                "Estrategias avanzadas"
+                "Introducción al ecosistema técnico GEO",
+                "Datos estructurados esenciales para LLMs",
+                "Uso de Schema.org y JSON-LD",
+                "Microformatos y etiquetas semánticas útiles",
+                "Relaciones semánticas entre páginas",
+                "Speakable content y citabilidad vocal",
+                "Sistema de testeo y visibilidad GEO",
+                "Dashboard de visibilidad para auditar citabilidad"
               ],
               "duration": "PT5H",
               "isPartOf": {
