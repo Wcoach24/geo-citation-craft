@@ -1,8 +1,10 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from "@/components/Footer";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MetodologiaGeoPage from "./pages/MetodologiaGeoPage";
@@ -24,6 +26,9 @@ import EstructuraWebParaLenguaje from "./pages/articles/EstructuraWebParaLenguaj
 import FormatoWikipediaIA from "./pages/articles/FormatoWikipediaIA";
 import DatosEstructuradosModelosGenerativos from "./pages/articles/DatosEstructuradosModelosGenerativos";
 import GeoVsSeoGuiaRapida from "./pages/articles/GeoVsSeoGuiaRapida";
+import EquipoPage from "./pages/EquipoPage";
+import PrivacidadPage from "./pages/PrivacidadPage";
+import TerminosPage from "./pages/TerminosPage";
 
 const queryClient = new QueryClient();
 
@@ -33,30 +38,38 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/metodologia" element={<MetodologiaGeoPage />} />
-          <Route path="/curso" element={<CursoGeoPage />} />
-          <Route path="/curso/f1" element={<ModuloF1Page />} />
-          <Route path="/curso/f2" element={<ModuloF2Page />} />
-          <Route path="/curso/f3" element={<ModuloF3Page />} />
-          <Route path="/curso/f4" element={<ModuloF4Page />} />
-          <Route path="/curso/f5" element={<ModuloF5Page />} />
-          <Route path="/curso/f6" element={<ModuloF6Page />} />
-          <Route path="/coach" element={<CoachGeoPage />} />
-          <Route path="/casos" element={<CasosRealesPage />} />
-          <Route path="/glosario" element={<GlosarioPage />} />
-          <Route path="/acerca-de" element={<AcercaDePage />} />
-          <Route path="/radar-ia" element={<RadarIAPage />} />
-          <Route path="/radar-ia/que-significa-ser-citado-por-ia" element={<QueSIgnificaSerCitadoPorIA />} />
-          <Route path="/radar-ia/muerte-seo-tradicional" element={<MuerteSeoTradicional />} />
-          <Route path="/radar-ia/estructura-web-para-lenguaje" element={<EstructuraWebParaLenguaje />} />
-          <Route path="/radar-ia/formato-wikipedia-ia" element={<FormatoWikipediaIA />} />
-          <Route path="/radar-ia/datos-estructurados-modelos-generativos" element={<DatosEstructuradosModelosGenerativos />} />
-          <Route path="/radar-ia/geo-vs-seo-diferencias" element={<GeoVsSeoGuiaRapida />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="min-h-screen flex flex-col">
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/metodologia" element={<MetodologiaGeoPage />} />
+              <Route path="/curso" element={<CursoGeoPage />} />
+              <Route path="/curso/f1" element={<ModuloF1Page />} />
+              <Route path="/curso/f2" element={<ModuloF2Page />} />
+              <Route path="/curso/f3" element={<ModuloF3Page />} />
+              <Route path="/curso/f4" element={<ModuloF4Page />} />
+              <Route path="/curso/f5" element={<ModuloF5Page />} />
+              <Route path="/curso/f6" element={<ModuloF6Page />} />
+              <Route path="/coach" element={<CoachGeoPage />} />
+              <Route path="/casos" element={<CasosRealesPage />} />
+              <Route path="/glosario" element={<GlosarioPage />} />
+              <Route path="/acerca-de" element={<AcercaDePage />} />
+              <Route path="/acerca-de/equipo" element={<EquipoPage />} />
+              <Route path="/radar-ia" element={<RadarIAPage />} />
+              <Route path="/radar-ia/que-significa-ser-citado-por-ia" element={<QueSIgnificaSerCitadoPorIA />} />
+              <Route path="/radar-ia/muerte-seo-tradicional" element={<MuerteSeoTradicional />} />
+              <Route path="/radar-ia/estructura-web-para-lenguaje" element={<EstructuraWebParaLenguaje />} />
+              <Route path="/radar-ia/formato-wikipedia-ia" element={<FormatoWikipediaIA />} />
+              <Route path="/radar-ia/datos-estructurados-modelos-generativos" element={<DatosEstructuradosModelosGenerativos />} />
+              <Route path="/radar-ia/geo-vs-seo-diferencias" element={<GeoVsSeoGuiaRapida />} />
+              <Route path="/privacidad" element={<PrivacidadPage />} />
+              <Route path="/terminos" element={<TerminosPage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

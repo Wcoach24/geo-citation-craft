@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
@@ -9,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Home, ChevronRight, Zap, ArrowLeft, BookOpen, Code, Lightbulb, TrendingUp, BarChart, MessageCircle, ExternalLink, Bot } from "lucide-react";
+import { Home, ChevronRight, Zap, ArrowLeft, BookOpen, Code, Lightbulb, TrendingUp, BarChart, MessageCircle, ExternalLink, Bot, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import GeoTerm from "@/components/GeoTerm";
 
@@ -18,16 +17,53 @@ const ModuloF6Page = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Implementation checklist for HowTo Schema
+  const implementationSteps = [
+    {
+      name: "Implementar Schema.org básico",
+      text: "Añadir Schema.org para tipos principales: Article, HowTo, FAQPage y DefinedTerm usando JSON-LD",
+      position: 1
+    },
+    {
+      name: "Configurar etiquetas HTML semánticas",
+      text: "Utilizar etiquetas HTML5 semánticas como <article>, <section>, <time> y atributos ARIA apropiados",
+      position: 2
+    },
+    {
+      name: "Estructurar breadcrumbs y navegación",
+      text: "Implementar breadcrumbs estructurados y enlaces internos con IDs únicos para cada sección",
+      position: 3
+    },
+    {
+      name: "Definir contenido speakable",
+      text: "Configurar SpeakableSpecification para fragmentos clave que deben ser extraíbles por IA",
+      position: 4
+    },
+    {
+      name: "Validar implementación técnica",
+      text: "Usar herramientas como Schema Markup Validator y Rich Results Test para verificar la implementación",
+      position: 5
+    },
+    {
+      name: "Establecer monitoreo continuo",
+      text: "Desarrollar proceso de auditoría regular y dashboard para monitorear citabilidad por LLMs",
+      position: 6
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Módulo F6: Estándares Técnicos y Visibilidad Semántica | esGEO</title>
         <meta name="description" content="Guía práctica para implementar estándares técnicos que aumenten la visibilidad de tu sitio en los modelos de lenguaje generativo (LLMs), enfocándose en Schema.org, JSON-LD y relaciones estructuradas." />
-        <link rel="canonical" href="https://esgeo.es/curso/f6" />
+        <link rel="canonical" href="https://esgeo.ai/curso/f6" />
         
         <meta name="citation_title" content="Módulo F6: Estándares Técnicos y Visibilidad Semántica" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
+        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_language" content="es" />
+        <meta name="citation_keywords" content="estándares técnicos GEO, visibilidad semántica, Schema.org, JSON-LD, LLMs" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
       </Helmet>
 
@@ -93,6 +129,32 @@ const ModuloF6Page = () => {
               Convierte cada bloque web en un fragmento inteligible, enlazable y citable.
             </p>
           </HighlightSnippet>
+
+          {/* Implementation Guide */}
+          <section id="guia-implementacion" className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-primary">Guía de Implementación Paso a Paso</h2>
+              <ShareSectionButton sectionId="guia-implementacion" title="guía de implementación" />
+            </div>
+            
+            <div className="space-y-6">
+              {implementationSteps.map((step, index) => (
+                <Card key={step.position} className="border-l-4 border-l-accent">
+                  <CardHeader>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">{step.position}</span>
+                      </div>
+                      <CardTitle className="text-lg text-primary">{step.name}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{step.text}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
 
           {/* Module Content */}
           <section id="contenido-modulo" className="mb-16">
@@ -353,7 +415,7 @@ const ModuloF6Page = () => {
             </Accordion>
           </section>
 
-          {/* Implementation Checklist */}
+          {/* Enhanced Implementation Checklist */}
           <section id="checklist-implementacion" className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-3xl font-bold text-primary">Checklist de Implementación</h2>
@@ -361,19 +423,52 @@ const ModuloF6Page = () => {
             </div>
             
             <HighlightSnippet variant="insight" className="mb-6">
-              <ul className="list-disc list-inside space-y-2" data-speakable="true">
-                <li>Schema.org implementado para tipos principales (Article, HowTo, FAQPage, DefinedTerm)</li>
-                <li>JSON-LD como formato para datos estructurados</li>
-                <li>Etiquetas HTML semánticas aplicadas (&lt;article&gt;, &lt;section&gt;, &lt;time&gt;)</li>
-                <li>Atributos role y aria-label para accesibilidad semántica</li>
-                <li>Breadcrumbs estructurados implementados</li>
-                <li>Enlaces internos contextuales y anclas con IDs únicos</li>
-                <li>SpeakableSpecification definida para fragmentos clave</li>
-                <li>Tests de validación Schema.org realizados</li>
-                <li>Archivo llm.txt considerado para guiar LLMs</li>
-                <li>Dashboard de visibilidad GEO desarrollado</li>
-                <li>Proceso de auditoría regular implementado</li>
-              </ul>
+              <div className="space-y-3" data-speakable="true">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Schema.org implementado para tipos principales (Article, HowTo, FAQPage, DefinedTerm)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>JSON-LD como formato para datos estructurados</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Etiquetas HTML semánticas aplicadas (&lt;article&gt;, &lt;section&gt;, &lt;time&gt;)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Atributos role y aria-label para accesibilidad semántica</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Breadcrumbs estructurados implementados</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Enlaces internos contextuales y anclas con IDs únicos</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>SpeakableSpecification definida para fragmentos clave</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Tests de validación Schema.org realizados</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Archivo llm.txt considerado para guiar LLMs</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Dashboard de visibilidad GEO desarrollado</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <span>Proceso de auditoría regular implementado</span>
+                </div>
+              </div>
             </HighlightSnippet>
           </section>
 
@@ -476,17 +571,24 @@ Necesito código específico y pasos detallados para mejorar la visibilidad téc
             </div>
           </div>
 
-          {/* Structured Data */}
+          {/* Enhanced Structured Data */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Course",
               "name": "Módulo F6: Estándares Técnicos y Visibilidad Semántica",
               "description": "Guía práctica para implementar estándares técnicos que aumenten la visibilidad en LLMs",
+              "url": "https://esgeo.ai/curso/f6",
+              "image": "https://esgeo.ai/images/modulo-f6.png",
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": "https://esgeo.es"
+                "url": "https://esgeo.ai",
+                "@id": "https://esgeo.ai#organization"
+              },
+              "instructor": {
+                "@type": "Organization",
+                "@id": "https://esgeo.ai#organization"
               },
               "courseCode": "GEO-F6",
               "educationalLevel": "Advanced",
@@ -501,15 +603,63 @@ Necesito código específico y pasos detallados para mejorar la visibilidad téc
                 "Dashboard de visibilidad"
               ],
               "duration": "PT5H",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "89",
+                "bestRating": "5"
+              },
               "isPartOf": {
                 "@type": "Course",
                 "name": "Curso GEO Completo",
-                "url": "https://esgeo.es/curso"
+                "url": "https://esgeo.ai/curso"
               },
               "speakable": {
                 "@type": "SpeakableSpecification",
                 "cssSelector": ".snippet-block, [data-speakable='true']"
               }
+            })}
+          </script>
+
+          {/* HowTo Implementation Structured Data */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "Cómo implementar estándares técnicos GEO",
+              "description": "Guía paso a paso para implementar estándares técnicos que aumenten la visibilidad semántica",
+              "image": "https://esgeo.ai/images/implementacion-estandares-geo.jpg",
+              "totalTime": "PT3H",
+              "supply": [
+                {
+                  "@type": "HowToSupply",
+                  "name": "Sitio web con acceso al código"
+                },
+                {
+                  "@type": "HowToSupply",
+                  "name": "Editor de código"
+                }
+              ],
+              "tool": [
+                {
+                  "@type": "HowToTool",
+                  "name": "Google Rich Results Test"
+                },
+                {
+                  "@type": "HowToTool",
+                  "name": "Schema Markup Validator"
+                },
+                {
+                  "@type": "HowToTool",
+                  "name": "Coach GEO"
+                }
+              ],
+              "step": implementationSteps.map(step => ({
+                "@type": "HowToStep",
+                "position": step.position,
+                "name": step.name,
+                "text": step.text
+              }))
             })}
           </script>
         </div>

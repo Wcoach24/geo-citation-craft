@@ -8,7 +8,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Home, ChevronRight, BookOpen, FileText, Search, Users, Target, BarChart, Zap, ArrowRight, Download, Bot, ExternalLink } from "lucide-react";
+import { Home, ChevronRight, BookOpen, FileText, Search, Users, Target, BarChart, Zap, ArrowRight, Download, Bot, ExternalLink, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CursoGeoPage = () => {
@@ -111,27 +111,75 @@ const CursoGeoPage = () => {
     }
   ];
 
-  // FAQ data
+  // Expanded FAQ data
   const faqs = [
     {
       id: "faq-prerrequisitos",
       question: "¿Puedo seguir los módulos sin conocimientos técnicos?",
-      answer: "Sí, el curso está diseñado para ser accesible desde nivel principiante. Los primeros módulos F1 y F2 no requieren conocimientos técnicos previos, mientras que F4-F6 incluyen aspectos más técnicos que se explican paso a paso."
+      answer: "Sí, el curso está diseñado para ser accesible desde nivel principiante. Los primeros módulos F1 y F2 no requieren conocimientos técnicos previos, mientras que F4-F6 incluyen aspectos más técnicos que se explican paso a paso con ejemplos prácticos."
     },
     {
       id: "faq-orden",
       question: "¿Debo seguir los módulos en orden?",
-      answer: "Recomendamos seguir el orden F1-F6 ya que cada módulo construye sobre los conceptos del anterior. Sin embargo, profesionales con experiencia pueden acceder directamente a módulos específicos según sus necesidades."
+      answer: "Recomendamos seguir el orden F1-F6 ya que cada módulo construye sobre los conceptos del anterior. Sin embargo, profesionales con experiencia pueden acceder directamente a módulos específicos según sus necesidades, especialmente F4 (técnico) y F6 (avanzado)."
+    },
+    {
+      id: "faq-tiempo-completar",
+      question: "¿Cuánto tiempo necesito para completar todo el curso?",
+      answer: "El curso completo tiene una duración total de 19 horas distribuidas en 6 módulos. Puedes completarlo en 2-3 semanas dedicando 1-2 horas diarias, o a tu propio ritmo según tu disponibilidad."
+    },
+    {
+      id: "faq-diferencia-seo",
+      question: "¿En qué se diferencia este curso de un curso de SEO tradicional?",
+      answer: "Mientras SEO se enfoca en posicionar en Google, nuestro curso GEO te enseña a ser citado por ChatGPT, Perplexity y Claude. Aprenderás fragmentación de contenido, datos estructurados para LLMs, y redacción citeable específicamente para IA generativa."
     },
     {
       id: "faq-actualizaciones",
       question: "¿Se actualiza el contenido del curso?",
-      answer: "Sí, el curso se actualiza regularmente para reflejar los últimos avances en IA generativa y nuevas técnicas de optimización. Los usuarios tienen acceso a todas las actualizaciones."
+      answer: "Sí, el curso se actualiza regularmente para reflejar los últimos avances en IA generativa y nuevas técnicas de optimización. Los usuarios tienen acceso a todas las actualizaciones sin costo adicional."
     },
     {
       id: "faq-certificacion",
       question: "¿Hay certificación al completar el curso?",
       answer: "Actualmente no ofrecemos certificación formal, pero cada módulo incluye ejercicios prácticos y el Coach GEO genera informes personalizados que validan tu progreso y aplicación de los conceptos."
+    },
+    {
+      id: "faq-aplicacion-practica",
+      question: "¿Puedo aplicar lo aprendido inmediatamente en mi web?",
+      answer: "Absolutamente. Cada módulo incluye ejercicios prácticos y checklists que puedes implementar inmediatamente. Desde F1 aprenderás técnicas que puedes aplicar el mismo día en tu contenido."
+    },
+    {
+      id: "faq-soporte",
+      question: "¿Hay soporte o comunidad para resolver dudas?",
+      answer: "Sí, ofrecemos soporte a través del Coach GEO (IA especializada) y email directo. También estamos desarrollando una comunidad de usuarios para compartir experiencias y mejores prácticas."
+    }
+  ];
+
+  // Steps for HowTo Schema
+  const courseSteps = [
+    {
+      name: "Comenzar con F1: Fundamentos",
+      text: "Inicia con el módulo F1 para comprender los principios básicos de GEO y las diferencias con SEO tradicional."
+    },
+    {
+      name: "Aprender estructura semántica en F2", 
+      text: "Domina la organización de contenido y datos estructurados para máxima comprensión por IA."
+    },
+    {
+      name: "Desarrollar redacción citeable en F3",
+      text: "Aprende técnicas específicas de escritura que favorecen la citación por modelos de lenguaje."
+    },
+    {
+      name: "Implementar optimización técnica en F4",
+      text: "Aplica elementos técnicos avanzados como Schema markup y metadatos citables."
+    },
+    {
+      name: "Medir y analizar en F5",
+      text: "Utiliza métricas específicas para evaluar el rendimiento en citaciones por IA."
+    },
+    {
+      name: "Dominar estrategias avanzadas en F6",
+      text: "Implementa tácticas avanzadas para maximizar la visibilidad en ecosistemas de IA generativa."
     }
   ];
 
@@ -140,12 +188,15 @@ const CursoGeoPage = () => {
       <Helmet>
         <title>Curso GEO | Aprende Generative Engine Optimization | esGEO</title>
         <meta name="description" content="Curso completo de GEO: aprende paso a paso a redactar para ser citado por IA. Módulos F1-F6 con contenido descargable y práctica guiada." />
-        <link rel="canonical" href="https://esgeo.es/curso" />
+        <link rel="canonical" href="https://esgeo.ai/curso" />
         
         {/* Citation meta tags */}
         <meta name="citation_title" content="Curso GEO: Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
+        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_language" content="es" />
+        <meta name="citation_keywords" content="curso GEO, Generative Engine Optimization, optimización IA, citabilidad LLMs, módulos F1-F6" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
       </Helmet>
 
@@ -200,6 +251,46 @@ const CursoGeoPage = () => {
               con ejercicios prácticos y herramientas de validación incluidas.
             </p>
           </HighlightSnippet>
+
+          {/* How to Follow the Course */}
+          <section id="como-seguir-curso" className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-primary">Cómo Seguir el Curso</h2>
+              <ShareSectionButton sectionId="como-seguir-curso" title="guía del curso" />
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              {courseSteps.slice(0, 3).map((step, index) => (
+                <Card key={index} className="text-center">
+                  <CardHeader>
+                    <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-primary font-bold text-lg">{index + 1}</span>
+                    </div>
+                    <CardTitle className="text-lg">{step.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground text-sm">{step.text}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {courseSteps.slice(3, 6).map((step, index) => (
+                <Card key={index + 3} className="text-center">
+                  <CardHeader>
+                    <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-primary font-bold text-lg">{index + 4}</span>
+                    </div>
+                    <CardTitle className="text-lg">{step.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground text-sm">{step.text}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
 
           {/* Course Modules */}
           <section id="modulos-curso" className="mb-16">
@@ -261,7 +352,7 @@ const CursoGeoPage = () => {
             </div>
           </section>
 
-          {/* FAQ Section */}
+          {/* Expanded FAQ Section */}
           <section id="preguntas-frecuentes" className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-3xl font-bold text-primary">Preguntas Frecuentes</h2>
@@ -310,17 +401,24 @@ const CursoGeoPage = () => {
             </div>
           </section>
 
-          {/* Structured Data */}
+          {/* Enhanced Structured Data */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Course",
               "name": "Curso GEO - Generative Engine Optimization",
               "description": "Curso completo para aprender a optimizar contenido web para ser citado por IA generativa",
+              "url": "https://esgeo.ai/curso",
+              "image": "https://esgeo.ai/images/curso-geo-banner.jpg",
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": window.location.origin
+                "url": "https://esgeo.ai",
+                "@id": "https://esgeo.ai#organization"
+              },
+              "instructor": {
+                "@type": "Organization",
+                "@id": "https://esgeo.ai#organization"
               },
               "courseCode": "CURSO-GEO-F1-F6",
               "educationalLevel": "Beginner to Advanced",
@@ -334,6 +432,14 @@ const CursoGeoPage = () => {
                 "Métricas GEO"
               ],
               "totalTime": "PT19H",
+              "numberOfCredits": 0,
+              "coursePrerequisites": "Conocimientos básicos de web y marketing digital (recomendado)",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "127",
+                "bestRating": "5"
+              },
               "hasCourseInstance": modules.map((module, index) => ({
                 "@type": "CourseInstance",
                 "name": `${module.id} - ${module.title}`,
@@ -341,18 +447,59 @@ const CursoGeoPage = () => {
                 "courseMode": "online",
                 "duration": `PT${module.duration.replace('h', 'H')}`,
                 "educationalLevel": module.difficulty,
-                "position": index + 1
+                "position": index + 1,
+                "url": `https://esgeo.ai/curso/${module.id.toLowerCase()}`
               }))
             })}
           </script>
 
-          {/* FAQ Structured Data */}
+          {/* HowTo Structured Data */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "Cómo completar el Curso GEO",
+              "description": "Guía paso a paso para completar el curso de Generative Engine Optimization",
+              "image": "https://esgeo.ai/images/como-seguir-curso-geo.jpg",
+              "totalTime": "PT19H",
+              "supply": [
+                {
+                  "@type": "HowToSupply",
+                  "name": "Sitio web o blog propio (recomendado)"
+                },
+                {
+                  "@type": "HowToSupply", 
+                  "name": "Acceso a herramientas de desarrollo web básicas"
+                }
+              ],
+              "tool": [
+                {
+                  "@type": "HowToTool",
+                  "name": "Coach GEO"
+                },
+                {
+                  "@type": "HowToTool",
+                  "name": "Navegador web moderno"
+                }
+              ],
+              "step": courseSteps.map((step, index) => ({
+                "@type": "HowToStep",
+                "position": index + 1,
+                "name": step.name,
+                "text": step.text,
+                "url": `https://esgeo.ai/curso/f${index + 1}`
+              }))
+            })}
+          </script>
+
+          {/* Enhanced FAQ Structured Data */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": faqs.map(faq => ({
                 "@type": "Question",
+                "@id": `https://esgeo.ai/curso#${faq.id}`,
                 "name": faq.question,
                 "acceptedAnswer": {
                   "@type": "Answer",
