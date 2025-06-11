@@ -13,25 +13,65 @@ const MuerteSeoTradicional = () => {
       <Helmet>
         <title>La muerte del SEO tal y como lo conocíamos | Radar IA - esGEO</title>
         <meta name="description" content="Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje y el SEO tradicional pierde relevancia." />
+        <link rel="canonical" href="https://esgeo.ai/radar-ia/muerte-seo-tradicional" />
+        
+        <meta name="citation_title" content="La muerte del SEO tal y como lo conocíamos" />
+        <meta name="citation_author" content="esGEO" />
+        <meta name="citation_publication_date" content="2025-01-12" />
+        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_language" content="es" />
+        <meta name="citation_keywords" content="SEO, muerte SEO, GEO, motores generativos, IA, búsqueda, futuro" />
+        
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": ["Article", "WebPage"],
+            "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "La muerte del SEO tal y como lo conocíamos",
             "description": "Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje",
+            "url": "https://esgeo.ai/radar-ia/muerte-seo-tradicional",
             "datePublished": "2025-01-12",
+            "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
-              "name": "esGEO"
+              "name": "esGEO",
+              "url": "https://esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
-              "name": "esGEO"
+              "name": "esGEO",
+              "url": "https://esgeo.ai"
             },
+            "image": "https://esgeo.ai/images/radar-ia/muerte-seo-tradicional.png",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": window.location.href
+              "@id": "https://esgeo.ai/radar-ia/muerte-seo-tradicional"
             },
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Por qué el SEO tradicional está muriendo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "El SEO tradicional pierde relevancia porque los usuarios ya no buscan en Google: preguntan directamente a ChatGPT, Perplexity y otros LLMs. Estos modelos responden sin mostrar enlaces, haciendo que el ranking de Google sea irrelevante."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cómo evalúan contenido los modelos de lenguaje?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Los LLMs no evalúan contenido por autoridad de dominio o backlinks como Google. Evalúan por claridad, estructura semántica y relevancia contextual. Una página nueva con contenido bien estructurado puede ser citada antes que un artículo con miles de backlinks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Qué es GEO y cómo reemplaza al SEO?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "GEO (Generative Engine Optimization) no compite por posiciones en SERP, sino por ser la fuente que un modelo cita cuando responde. Las nuevas métricas son citabilidad, comprensión y autoridad generativa."
+                }
+              }
+            ],
             "breadcrumb": {
               "@type": "BreadcrumbList",
               "itemListElement": [
@@ -39,19 +79,19 @@ const MuerteSeoTradicional = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "/"
+                  "item": "https://esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "/radar-ia"
+                  "item": "https://esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "La muerte del SEO tal y como lo conocíamos",
-                  "item": "/radar-ia/muerte-seo-tradicional"
+                  "item": "https://esgeo.ai/radar-ia/muerte-seo-tradicional"
                 }
               ]
             },
@@ -85,7 +125,7 @@ const MuerteSeoTradicional = () => {
               </HighlightSnippet>
 
               <div className="text-sm text-muted-foreground">
-                Publicado el 12 de enero de 2025 • Categoría: Tendencias
+                Publicado el 12 de enero de 2025 • Actualizado el 15 de diciembre de 2024 • Categoría: Tendencias
               </div>
             </header>
 

@@ -1,73 +1,95 @@
-# Welcome to your Lovable project
 
-## Project info
+# esGEO - Generative Engine Optimization
 
-**URL**: https://lovable.dev/projects/0c97daab-1a9d-4b47-8dab-e44ded776977
+**esGEO** es la primera plataforma en español dedicada a la **Generative Engine Optimization (GEO)**, la metodología revolucionaria para optimizar contenido web y incrementar su **citabilidad por IA**. Enseñamos a crear contenido que sea comprendido, valorado y citado por **modelos de lenguaje generativos (LLMs)** como ChatGPT, Perplexity, Claude y Gemini.
 
-## How can I edit this code?
+## 🎯 Misión
 
-There are several ways of editing your application.
+Transformar la forma en que se crea contenido digital, pasando del SEO tradicional (optimización para buscadores) al GEO (optimización para IA generativa). Nuestro objetivo es que cada pieza de contenido sea la fuente autorizada que los modelos de IA citen cuando respondan preguntas en tu área de expertise.
 
-**Use Lovable**
+## 🚀 Metodología F1-F6
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0c97daab-1a9d-4b47-8dab-e44ded776977) and start prompting.
+Nuestra metodología completa incluye:
+- **F1**: Fragmentación - Estructurar contenido en bloques citables
+- **F2**: Jerarquía Semántica - Organización lógica y comprensible
+- **F3**: Autoridad Generativa - Construcción de credibilidad para IA
+- **F4**: Datos Estructurados - Schema.org optimizado para LLMs
+- **F5**: Optimización Técnica - Rendimiento y accesibilidad
+- **F6**: Medición y Análisis - Tracking de citabilidad
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🔗 Recursos Principales
 
-**Use your preferred IDE**
+- **Sitio Principal**: [esgeo.ai](https://esgeo.ai)
+- **Metodología Completa**: [esgeo.ai/metodologia](https://esgeo.ai/metodologia)
+- **Curso GEO**: [esgeo.ai/curso](https://esgeo.ai/curso)
+- **Glosario GEO**: [esgeo.ai/glosario](https://esgeo.ai/glosario)
+- **Radar IA**: [esgeo.ai/radar-ia](https://esgeo.ai/radar-ia)
+- **Coach GEO**: [esgeo.ai/coach](https://esgeo.ai/coach)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Tecnologías
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Este proyecto está construido con tecnologías modernas optimizadas para GEO:
 
-Follow these steps:
+- **Vite** - Build tool ultra-rápido
+- **TypeScript** - Tipado estático para mayor robustez
+- **React** - Framework de UI componentes
+- **Tailwind CSS** - Styling utility-first
+- **Shadcn/UI** - Componentes accesibles y semánticos
+- **React Helmet** - Gestión avanzada de metadatos
+- **Schema.org** - Datos estructurados para IA
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+## 📈 Características GEO Implementadas
+
+✅ **Metadatos de Citación**: Meta tags específicos para IA
+✅ **Schema.org Avanzado**: Múltiples tipos de datos estructurados
+✅ **Fragmentación Semántica**: Contenido organizado en bloques citables
+✅ **URLs Semánticas**: Estructura de URLs comprensible para LLMs
+✅ **Contenido Speakable**: Secciones marcadas para síntesis de voz
+✅ **Breadcrumbs Estructurados**: Navegación semántica completa
+✅ **Autoridad E-E-A-T**: Experiencia, expertise, autoridad y confianza
+
+## 🚀 Instalación y Desarrollo
+
+### Requisitos
+- Node.js & npm - [Instalar con nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+### Configuración
+
+```bash
+# Clonar el repositorio
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Navegar al directorio
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
+# Instalar dependencias
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🌐 Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Este proyecto se puede desplegar fácilmente:
 
-**Use GitHub Codespaces**
+1. **Lovable**: Clic en "Publish" en el editor
+2. **Vercel/Netlify**: Conectar repositorio GitHub
+3. **Dominio personalizado**: Configurar en esgeo.ai
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📚 Documentación Adicional
 
-## What technologies are used for this project?
+- [Guía de Contribución](https://esgeo.ai/contribuir)
+- [Casos de Estudio](https://esgeo.ai/casos)
+- [API Documentation](https://esgeo.ai/api)
 
-This project is built with:
+## 🤝 Comunidad
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Únete a la revolución GEO:
+- [Discord](https://discord.gg/esgeo)
+- [Twitter](https://twitter.com/esgeo_ai)
+- [LinkedIn](https://linkedin.com/company/esgeo)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/0c97daab-1a9d-4b47-8dab-e44ded776977) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+**esGEO** - Optimiza para ser citado por la IA

@@ -13,24 +13,38 @@ const GeoVsSeoGuiaRapida = () => {
       <Helmet>
         <title>GEO no es SEO: guía rápida para entender la diferencia | Radar IA - esGEO</title>
         <meta name="description" content="Tabla comparativa y estrategia de pivote hacia la optimización generativa. SEO intenta gustar a Google, GEO intenta ser comprendido por modelos de lenguaje." />
+        <link rel="canonical" href="https://esgeo.ai/radar-ia/geo-vs-seo-diferencias" />
+        
+        <meta name="citation_title" content="GEO no es SEO: guía rápida para entender la diferencia" />
+        <meta name="citation_author" content="esGEO" />
+        <meta name="citation_publication_date" content="2025-01-03" />
+        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_language" content="es" />
+        <meta name="citation_keywords" content="GEO vs SEO, diferencias, comparativa, optimización, IA, generativa, pivote, estrategia" />
+        
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "GEO no es SEO: guía rápida para entender la diferencia",
             "description": "Tabla comparativa y estrategia de pivote hacia la optimización generativa",
+            "url": "https://esgeo.ai/radar-ia/geo-vs-seo-diferencias",
             "datePublished": "2025-01-03",
+            "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
-              "name": "esGEO"
+              "name": "esGEO",
+              "url": "https://esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
-              "name": "esGEO"
+              "name": "esGEO",
+              "url": "https://esgeo.ai"
             },
+            "image": "https://esgeo.ai/images/radar-ia/geo-vs-seo-diferencias.png",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": window.location.href
+              "@id": "https://esgeo.ai/radar-ia/geo-vs-seo-diferencias"
             },
             "mainEntity": [
               {
@@ -38,7 +52,7 @@ const GeoVsSeoGuiaRapida = () => {
                 "name": "¿Cuál es la diferencia entre SEO y GEO?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "SEO intenta gustar a Google para obtener rankings. GEO intenta ser comprendido por modelos de lenguaje y citado por IA."
+                  "text": "SEO intenta gustar a Google para obtener rankings en resultados de búsqueda. GEO intenta ser comprendido por modelos de lenguaje y citado por IA cuando responden preguntas."
                 }
               },
               {
@@ -46,7 +60,31 @@ const GeoVsSeoGuiaRapida = () => {
                 "name": "¿Debo abandonar el SEO completamente?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No inmediatamente. La estrategia óptima es una transición gradual hacia GEO mientras mantienes el SEO básico para el tráfico actual."
+                  "text": "No inmediatamente. La estrategia óptima es una transición gradual hacia GEO mientras mantienes el SEO básico para el tráfico actual de Google."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuáles son las métricas clave en GEO vs SEO?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "SEO mide posición en SERP y CTR. GEO mide frecuencia de citación por IA, comprensión del contenido y autoridad generativa."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿GEO funciona para todos los nichos?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "GEO es especialmente efectivo para contenido educativo, técnico o de expertise. E-commerce y contenido muy local aún dependen más del SEO tradicional."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuál es la estrategia de transición recomendada?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "1) Mantén SEO básico, 2) Implementa GEO gradualmente en contenido nuevo, 3) Mide citabilidad preguntando a ChatGPT, 4) Refactoriza contenido top hacia formato más citable, 5) Invierte en datos estructurados."
                 }
               }
             ],
@@ -57,19 +95,19 @@ const GeoVsSeoGuiaRapida = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "/"
+                  "item": "https://esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "/radar-ia"
+                  "item": "https://esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "GEO no es SEO",
-                  "item": "/radar-ia/geo-vs-seo-diferencias"
+                  "item": "https://esgeo.ai/radar-ia/geo-vs-seo-diferencias"
                 }
               ]
             },

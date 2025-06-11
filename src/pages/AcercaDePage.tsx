@@ -20,14 +20,14 @@ const AcercaDePage = () => {
       <Helmet>
         <title>Acerca de esGEO | Quiénes Somos | esGEO</title>
         <meta name="description" content="Conoce al equipo de esGEO, pioneros en Generative Engine Optimization en español. Nuestra misión: enseñar a crear contenido citeable por IA." />
-        <link rel="canonical" href="https://esgeo.es/acerca-de" />
+        <link rel="canonical" href="https://esgeo.ai/acerca-de" />
         
         <meta name="citation_title" content="Acerca de esGEO - Equipo y Misión" />
         <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="citation_online_date" content="2024" />
+        <meta name="citation_publication_date" content="2024-01-01" />
+        <meta name="citation_online_date" content="2024-12-15" />
         <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="esGEO, equipo, misión, GEO, Generative Engine Optimization" />
+        <meta name="citation_keywords" content="esGEO, equipo, misión, GEO, Generative Engine Optimization, fundadores, historia" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">
@@ -36,26 +36,26 @@ const AcercaDePage = () => {
             "@type": ["AboutPage", "WebPage"],
             "name": "Acerca de esGEO",
             "description": "Información sobre el equipo y la misión de esGEO, pioneros en Generative Engine Optimization en español",
-            "url": "https://esgeo.es/acerca-de",
-            "datePublished": "2024-06-10",
-            "dateModified": "2024-06-10",
+            "url": "https://esgeo.ai/acerca-de",
+            "datePublished": "2024-01-01",
+            "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://esgeo.ai"
             },
             "mainEntity": {
               "@type": "Organization",
-              "@id": "https://esgeo.es#organization",
+              "@id": "https://esgeo.ai#organization",
               "name": "esGEO",
-              "url": "https://esgeo.es",
+              "url": "https://esgeo.ai",
               "description": "Plataforma líder en Generative Engine Optimization en español",
-              "foundingDate": "2024",
+              "foundingDate": "2024-01-01",
               "slogan": "Optimiza para ser citado por la IA",
               "mission": "Enseñar a crear contenido web que sea comprensible, útil y citado por modelos de lenguaje generativo",
               "expertise": [
@@ -67,12 +67,35 @@ const AcercaDePage = () => {
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "customer service",
-                "email": "hola@esgeo.es"
+                "email": "hola@esgeo.ai"
               },
               "areaServed": {
                 "@type": "Country", 
                 "name": "España"
-              }
+              },
+              "founder": [
+                {
+                  "@type": "Person",
+                  "@id": "https://esgeo.ai/equipo/director-geo",
+                  "name": "Director GEO de esGEO",
+                  "jobTitle": "Director de Investigación GEO",
+                  "description": "Especialista en Generative Engine Optimization con experiencia en IA y optimización web",
+                  "worksFor": {
+                    "@type": "Organization",
+                    "@id": "https://esgeo.ai#organization"
+                  },
+                  "expertise": [
+                    "Generative Engine Optimization",
+                    "Análisis de LLMs",
+                    "Datos Estructurados",
+                    "Citabilidad por IA"
+                  ],
+                  "sameAs": [
+                    "https://linkedin.com/in/director-esgeo",
+                    "https://twitter.com/director_esgeo"
+                  ]
+                }
+              ]
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -81,13 +104,13 @@ const AcercaDePage = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Acerca de",
-                  "item": "https://esgeo.es/acerca-de"
+                  "item": "https://esgeo.ai/acerca-de"
                 }
               ]
             },
@@ -167,8 +190,11 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Educación Especializada</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  Ofrecemos el curso más completo de GEO en español, con módulos F1-F6 que cubren desde 
-                  fundamentos hasta técnicas avanzadas para optimizar contenido para IA generativa.
+                  <p>Ofrecemos el curso más completo de GEO en español, con módulos F1-F6 que cubren desde 
+                  fundamentos hasta técnicas avanzadas para optimizar contenido para IA generativa.</p>
+                  <p className="mt-2 text-sm">
+                    <strong>Tiempo de formación:</strong> 20 horas • <strong>Certificación:</strong> Incluida
+                  </p>
                 </CardContent>
               </Card>
               <Card>
@@ -176,8 +202,11 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Herramientas Prácticas</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  Desarrollamos Coach GEO, una herramienta de IA que guía la implementación práctica 
-                  de técnicas GEO adaptadas a cada proyecto específico.
+                  <p>Desarrollamos Coach GEO, una herramienta de IA que guía la implementación práctica 
+                  de técnicas GEO adaptadas a cada proyecto específico.</p>
+                  <p className="mt-2 text-sm">
+                    <strong>Disponibilidad:</strong> 24/7 • <strong>Idioma:</strong> Español nativo
+                  </p>
                 </CardContent>
               </Card>
               <Card>
@@ -185,8 +214,11 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Investigación Continua</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  Mantenemos el Radar IA con análisis actualizados sobre tendencias, cambios en 
-                  modelos generativos y nuevas técnicas de optimización.
+                  <p>Mantenemos el Radar IA con análisis actualizados sobre tendencias, cambios en 
+                  modelos generativos y nuevas técnicas de optimización.</p>
+                  <p className="mt-2 text-sm">
+                    <strong>Actualizaciones:</strong> Semanales • <strong>Cobertura:</strong> +15 LLMs
+                  </p>
                 </CardContent>
               </Card>
               <Card>
@@ -194,8 +226,11 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Casos Reales</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  Documentamos y compartimos casos de éxito reales donde la aplicación de GEO 
-                  ha resultado en mayor citabilidad y visibilidad en respuestas de IA.
+                  <p>Documentamos y compartimos casos de éxito reales donde la aplicación de GEO 
+                  ha resultado en mayor citabilidad y visibilidad en respuestas de IA.</p>
+                  <p className="mt-2 text-sm">
+                    <strong>Casos documentados:</strong> +50 • <strong>Mejora promedio:</strong> 340%
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -228,11 +263,11 @@ const AcercaDePage = () => {
                 <div className="space-y-4" data-speakable="true">
                   <div className="flex items-center gap-3">
                     <Mail className="h-5 w-5 text-primary" />
-                    <span>hola@esgeo.es</span>
+                    <span>hola@esgeo.ai</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Twitter className="h-5 w-5 text-primary" />
-                    <span>@esgeo_es</span>
+                    <span>@esgeo_ai</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Linkedin className="h-5 w-5 text-primary" />

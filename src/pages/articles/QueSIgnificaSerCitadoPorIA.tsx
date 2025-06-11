@@ -13,25 +13,73 @@ const QueSIgnificaSerCitadoPorIA = () => {
       <Helmet>
         <title>¿Qué significa ser citado por una IA? | Radar IA - esGEO</title>
         <meta name="description" content="Entendiendo la citabilidad en modelos de lenguaje generativo y cómo optimizar tu contenido para ser citado por IA." />
+        <link rel="canonical" href="https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia" />
+        
+        <meta name="citation_title" content="¿Qué significa ser citado por una IA?" />
+        <meta name="citation_author" content="esGEO" />
+        <meta name="citation_publication_date" content="2025-01-15" />
+        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_language" content="es" />
+        <meta name="citation_keywords" content="citabilidad, IA, citación, modelos de lenguaje, ChatGPT, Perplexity, Claude, GEO" />
+        
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": ["Article", "WebPage"],
+            "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "¿Qué significa ser citado por una IA?",
             "description": "Entendiendo la citabilidad en modelos de lenguaje generativo",
+            "url": "https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia",
             "datePublished": "2025-01-15",
+            "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
-              "name": "esGEO"
+              "name": "esGEO",
+              "url": "https://esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
-              "name": "esGEO"
+              "name": "esGEO",
+              "url": "https://esgeo.ai"
             },
+            "image": "https://esgeo.ai/images/radar-ia/que-significa-ser-citado-por-ia.png",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": window.location.href
+              "@id": "https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia"
             },
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Qué significa ser citado por una IA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ser citado por una IA implica que tu contenido ha sido integrado en su memoria contextual o recuperado en tiempo real como fuente de autoridad. La IA menciona o reproduce tu información cuando responde preguntas relacionadas."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuáles son los tipos de citación por IA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Existen tres tipos: Citación directa (el modelo menciona explícitamente tu contenido), Citación implícita (reproduce tu información sin mencionar la fuente), y Recomendación (sugiere tu contenido como recurso adicional)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cómo puedo verificar si una IA me cita?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Para verificar citación: 1) Realiza preguntas específicas sobre tu expertise en diferentes modelos, 2) Busca menciones de tu marca o fragmentos únicos, 3) Documenta respuestas y analiza patrones, 4) Ajusta tu contenido basándote en resultados."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿En qué se diferencia ser citado por IA del SEO tradicional?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Mientras que el SEO busca atraer clics a tu sitio, GEO busca ser la respuesta definitiva que un modelo citará. El objetivo es la comprensión y citación, no el tráfico web."
+                }
+              }
+            ],
             "breadcrumb": {
               "@type": "BreadcrumbList",
               "itemListElement": [
@@ -39,19 +87,19 @@ const QueSIgnificaSerCitadoPorIA = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "/"
+                  "item": "https://esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "/radar-ia"
+                  "item": "https://esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "¿Qué significa ser citado por una IA?",
-                  "item": "/radar-ia/que-significa-ser-citado-por-ia"
+                  "item": "https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia"
                 }
               ]
             },
@@ -87,7 +135,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
               </HighlightSnippet>
 
               <div className="text-sm text-muted-foreground">
-                Publicado el 15 de enero de 2025 • Categoría: Fundamentos
+                Publicado el 15 de enero de 2025 • Actualizado el 15 de diciembre de 2024 • Categoría: Fundamentos
               </div>
             </header>
 

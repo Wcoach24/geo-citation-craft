@@ -78,14 +78,14 @@ const RadarIAPage = () => {
       <Helmet>
         <title>Radar IA | Tendencias y Análisis GEO | esGEO</title>
         <meta name="description" content="Análisis actualizado sobre tendencias en IA generativa, cambios en LLMs y nuevas técnicas de Generative Engine Optimization (GEO)." />
-        <link rel="canonical" href="https://esgeo.es/radar-ia" />
+        <link rel="canonical" href="https://esgeo.ai/radar-ia" />
         
         <meta name="citation_title" content="Radar IA - Análisis de Tendencias en GEO" />
         <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="citation_online_date" content="2024" />
+        <meta name="citation_publication_date" content="2024-01-01" />
+        <meta name="citation_online_date" content="2024-12-15" />
         <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="Radar IA, tendencias, GEO, LLMs, inteligencia artificial, análisis" />
+        <meta name="citation_keywords" content="Radar IA, tendencias, GEO, LLMs, inteligencia artificial, análisis, ChatGPT, Perplexity, Claude" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">
@@ -94,26 +94,27 @@ const RadarIAPage = () => {
             "@type": ["Blog", "WebPage"],
             "name": "Radar IA - Análisis de Tendencias en GEO",
             "description": "Análisis actualizado sobre tendencias en IA generativa, cambios en LLMs y nuevas técnicas de Generative Engine Optimization",
-            "url": "https://esgeo.es/radar-ia",
-            "datePublished": "2024-06-10",
-            "dateModified": "2024-06-10",
+            "url": "https://esgeo.ai/radar-ia",
+            "datePublished": "2024-01-01",
+            "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://esgeo.ai"
             },
             "inLanguage": "es-ES",
             "blogPost": articles.map(article => ({
               "@type": "BlogPosting",
               "headline": article.title,
               "description": article.description,
-              "url": `https://esgeo.es/radar-ia/${article.id}`,
+              "url": `https://esgeo.ai/radar-ia/${article.id}`,
               "datePublished": article.date,
+              "dateModified": "2024-12-15",
               "author": {
                 "@type": "Organization",
                 "name": "esGEO"
@@ -123,7 +124,8 @@ const RadarIAPage = () => {
                 "name": "esGEO"
               },
               "articleSection": article.category,
-              "wordCount": parseInt(article.readTime) * 200
+              "wordCount": parseInt(article.readTime) * 200,
+              "image": `https://esgeo.ai/images/radar-ia/${article.id}.png`
             })),
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -132,13 +134,13 @@ const RadarIAPage = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.es/radar-ia"
+                  "item": "https://esgeo.ai/radar-ia"
                 }
               ]
             },
@@ -185,7 +187,7 @@ const RadarIAPage = () => {
               Tendencias y Análisis
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-6">
-              Mantente al día con los últimos cambios en IA generativa y GEO
+              Análisis actualizado sobre el ecosistema de IA generativa y técnicas GEO
             </p>
             <ShareSectionButton sectionId="radar-header" title="Radar IA" />
           </header>
