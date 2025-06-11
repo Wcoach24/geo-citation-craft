@@ -135,7 +135,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-accent/5 via-transparent to-primary/5"></div>
       
       {/* CSS for reduced motion accessibility */}
-      <style jsx>{`
+      <style>{`
         @media (prefers-reduced-motion: reduce) {
           * {
             animation-duration: 0.01ms !important;
