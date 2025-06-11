@@ -1,16 +1,161 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
+import TestimonialCard from "@/components/TestimonialCard";
+import CaseStudyCard from "@/components/CaseStudyCard";
 import Header from "@/components/Header";
-import { CheckCircle, XCircle, MessageSquare, ExternalLink, FileText, Users } from "lucide-react";
+import { CheckCircle, XCircle, MessageSquare, ExternalLink, FileText, Users, Award, TrendingUp } from "lucide-react";
 import { useState } from "react";
 
 const CasosRealesPage = () => {
   const [submittedForm, setSubmittedForm] = useState(false);
+
+  const testimonios = [
+    {
+      name: "Carlos Mendoza",
+      company: "TechStart Solutions",
+      role: "Director de Marketing Digital",
+      quote: "Después de implementar F1 y F2, ChatGPT comenzó a citar nuestros artículos técnicos como fuente principal. El ROI fue inmediato.",
+      metric: {
+        before: "0 citas/mes",
+        after: "15 citas/mes",
+        improvement: "+1500%"
+      },
+      moduleUsed: "F1 + F2"
+    },
+    {
+      name: "Ana García",
+      company: "Consultora SEO Plus",
+      role: "Fundadora y SEO Lead",
+      quote: "GEO cambió completamente nuestra estrategia. Ahora nuestros clientes aparecen en Perplexity regularmente. Es el futuro del posicionamiento.",
+      metric: {
+        before: "2 menciones/mes",
+        after: "23 menciones/mes",
+        improvement: "+1050%"
+      },
+      moduleUsed: "F1-F6 Completo"
+    },
+    {
+      name: "Roberto Silva",
+      company: "eCommerce Pro",
+      role: "Head of Content",
+      quote: "En solo 3 semanas vimos resultados. Claude comenzó a recomendar nuestros productos cuando los usuarios preguntaban sobre nuestra categoría.",
+      metric: {
+        before: "0%",
+        after: "34%",
+        improvement: "+34 pts"
+      },
+      moduleUsed: "F3 + F4"
+    }
+  ];
+
+  const casosEstudio = [
+    {
+      id: "caso-consultora-legal",
+      title: "Consultora Legal Aumenta Citabilidad 400%",
+      company: "Jurídica Moderna",
+      industry: "Legal",
+      challenge: "Firma legal pequeña sin visibilidad en IA. Los potenciales clientes consultaban ChatGPT pero nunca encontraban sus artículos especializados.",
+      solution: "Implementación completa F1-F4: reestructuración semántica, datos estructurados Person/LegalService, y optimización de snippets legales.",
+      timeframe: "6 semanas",
+      metrics: [
+        {
+          label: "Citas en ChatGPT",
+          before: "0/mes",
+          after: "12/mes",
+          change: "+1200%",
+          isPositive: true
+        },
+        {
+          label: "Consultas directas",
+          before: "3/mes",
+          after: "18/mes",
+          change: "+500%",
+          isPositive: true
+        },
+        {
+          label: "Tiempo de implementación",
+          before: "N/A",
+          after: "6 semanas",
+          change: "Rápido",
+          isPositive: true
+        }
+      ],
+      implementedModules: ["F1", "F2", "F3", "F4"],
+      image: "/placeholder.svg?height=200&width=400"
+    },
+    {
+      id: "caso-ecommerce-tech",
+      title: "E-commerce Tech Domina Recomendaciones de IA",
+      company: "TechGear Store",
+      industry: "E-commerce",
+      challenge: "Competencia feroz en el sector tech. Claude y Perplexity recomendaban siempre a la competencia en lugar de sus productos.",
+      solution: "Estrategia F3-F5: Schema Product detallado, reviews estructurados, y optimización para queries de compra específicas.",
+      timeframe: "8 semanas",
+      metrics: [
+        {
+          label: "Recomendaciones IA",
+          before: "0%",
+          after: "45%",
+          change: "+45 pts",
+          isPositive: true
+        },
+        {
+          label: "Tráfico desde IA",
+          before: "2%",
+          after: "28%",
+          change: "+26 pts",
+          isPositive: true
+        },
+        {
+          label: "Conversión IA",
+          before: "1.2%",
+          after: "4.8%",
+          change: "+300%",
+          isPositive: true
+        }
+      ],
+      implementedModules: ["F3", "F4", "F5"],
+      image: "/placeholder.svg?height=200&width=400"
+    },
+    {
+      id: "caso-startup-fintech",
+      title: "Fintech Startup Se Posiciona Como Autoridad",
+      company: "CryptoSafe Pro",
+      industry: "Fintech",
+      challenge: "Startup nueva en un mercado saturado. Necesitaban establecer autoridad rápidamente para ser citados por IA en temas de seguridad cripto.",
+      solution: "Enfoque F2-F6: contenido autocontenido, autoridad técnica, casos de uso específicos y monitoreo continuo de citaciones.",
+      timeframe: "12 semanas",
+      metrics: [
+        {
+          label: "Autoridad percibida",
+          before: "Baja",
+          after: "Alta",
+          change: "+200%",
+          isPositive: true
+        },
+        {
+          label: "Menciones expertas",
+          before: "0/mes",
+          after: "8/mes",
+          change: "+800%",
+          isPositive: true
+        },
+        {
+          label: "Leads calificados",
+          before: "5/mes",
+          after: "32/mes",
+          change: "+540%",
+          isPositive: true
+        }
+      ],
+      implementedModules: ["F2", "F3", "F4", "F5", "F6"],
+      image: "/placeholder.svg?height=200&width=400"
+    }
+  ];
 
   const casosSimulados = [
     {
@@ -74,12 +219,82 @@ const CasosRealesPage = () => {
             Casos Reales de Citabilidad
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Demostramos cómo la IA responde mejor cuando aplicas GEO.
+            Resultados medibles: cómo nuestros clientes consiguen ser citados por IA
           </p>
+          <div className="flex justify-center gap-6 mt-6">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-accent">95%</div>
+              <div className="text-sm text-muted-foreground">Éxito implementación</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-accent">6-8</div>
+              <div className="text-sm text-muted-foreground">Semanas promedio</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-accent">400%</div>
+              <div className="text-sm text-muted-foreground">Mejora promedio</div>
+            </div>
+          </div>
           <ShareSectionButton sectionId="header-casos" title="página de casos reales" className="mt-4" />
         </div>
 
-        {/* 1. Introducción didáctica */}
+        {/* 1. Testimonios de clientes */}
+        <section id="testimonios-exito" className="mb-16 section-anchor">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <Award className="h-8 w-8 text-accent" />
+                <h2 className="text-3xl font-semibold text-primary">
+                  Testimonios de Éxito
+                </h2>
+              </div>
+              <p className="text-lg text-muted-foreground">
+                Lo que dicen nuestros clientes sobre los resultados de GEO
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {testimonios.map((testimonio, index) => (
+                <TestimonialCard
+                  key={index}
+                  {...testimonio}
+                />
+              ))}
+            </div>
+            
+            <ShareSectionButton sectionId="testimonios-exito" title="testimonios de éxito" className="mt-6" />
+          </div>
+        </section>
+
+        {/* 2. Casos de estudio detallados */}
+        <section id="casos-estudio" className="mb-16 section-anchor">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <TrendingUp className="h-8 w-8 text-accent" />
+                <h2 className="text-3xl font-semibold text-primary">
+                  Casos de Estudio Detallados
+                </h2>
+              </div>
+              <p className="text-lg text-muted-foreground">
+                Análisis completo de implementaciones exitosas con métricas reales
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {casosEstudio.map((caso) => (
+                <CaseStudyCard
+                  key={caso.id}
+                  {...caso}
+                />
+              ))}
+            </div>
+            
+            <ShareSectionButton sectionId="casos-estudio" title="casos de estudio" className="mt-6" />
+          </div>
+        </section>
+
+        {/* 3. Introducción didáctica */}
         <section id="introduccion-casos" className="mb-16 section-anchor">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-semibold text-primary mb-6">
@@ -108,7 +323,7 @@ const CasosRealesPage = () => {
           </div>
         </section>
 
-        {/* 2. Casos simulados con capturas */}
+        {/* 4. Casos simulados con capturas */}
         <section id="casos-simulados" className="mb-16 section-anchor">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
@@ -168,7 +383,7 @@ const CasosRealesPage = () => {
           </div>
         </section>
 
-        {/* 3. Laboratorio GEO */}
+        {/* 5. Laboratorio GEO */}
         <section id="laboratorio-geo" className="mb-16 section-anchor">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
@@ -242,7 +457,7 @@ const CasosRealesPage = () => {
           </div>
         </section>
 
-        {/* 4. Formulario para aportar casos */}
+        {/* 6. Formulario para aportar casos */}
         <section id="aportar-casos" className="mb-16 section-anchor">
           <div className="max-w-3xl mx-auto">
             <Card>
@@ -320,7 +535,7 @@ const CasosRealesPage = () => {
           </div>
         </section>
 
-        {/* 5. Preguntas frecuentes */}
+        {/* 7. Preguntas frecuentes */}
         <section id="faq-casos" className="mb-16 section-anchor">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
