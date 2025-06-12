@@ -151,8 +151,9 @@
     <priority>0.5</priority>
   </url>
   
+  <!-- PÁGINA FALTANTE: Equipo -->
   <url>
-    <loc>https://esgeo.ai/equipo</loc>
+    <loc>https://esgeo.ai/acerca-de/equipo</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
