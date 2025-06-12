@@ -39,13 +39,13 @@ export default defineConfig(({ mode }) => ({
         '/articulo/datos-estructurados-modelos-generativos',
         '/articulo/formato-wikipedia-ia'
       ],
-      // Configuración básica sin opciones no soportadas
-      staticDir: path.resolve(__dirname, 'dist')
+      // Configuración básica usando directorio dist por defecto
+      staticDir: path.join(process.cwd(), 'dist')
     })
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(process.cwd(), "./src"),
     },
   },
   build: {
