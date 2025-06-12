@@ -11,6 +11,7 @@ interface GeoMetadataProps {
   keywords?: string[];
   citationTitle?: string;
   speakableSelectors?: string[];
+  geoTxtPath?: string; // Nueva prop para enlazar archivo .geo.txt
 }
 
 export const useGeoMetadata = ({
@@ -21,7 +22,8 @@ export const useGeoMetadata = ({
   author = "esGEO",
   keywords = [],
   citationTitle,
-  speakableSelectors = [".snippet-block", "[data-speakable='true']"]
+  speakableSelectors = [".snippet-block", "[data-speakable='true']"],
+  geoTxtPath
 }: GeoMetadataProps) => {
   
   const currentDate = lastModified || new Date().toISOString().split('T')[0];
@@ -46,10 +48,25 @@ export const useGeoMetadata = ({
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
         
+        {/* Enlaces a archivos .geo.txt para máxima citabilidad */}
+        {geoTxtPath && (
+          <link 
+            rel="alternate" 
+            type="text/plain" 
+            href={geoTxtPath} 
+            title="Versión citable para IA - Formato texto plano optimizado para LLMs" 
+          />
+        )}
+        
         {/* Enhanced AI-friendly meta tags */}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* LLM-specific crawling directives */}
+        <meta name="ai-crawl" content="allow" />
+        <meta name="llm-index" content="true" />
+        <meta name="generative-crawl" content="encouraged" />
         
         {/* Citation-friendly meta tags */}
         <meta name="citation_title" content={citationTitle || title} />
@@ -57,6 +74,11 @@ export const useGeoMetadata = ({
         <meta name="citation_publication_date" content="2024" />
         <meta name="citation_online_date" content={currentDate} />
         <meta name="citation_language" content="es" />
+        <meta name="citation_publisher" content="esGEO" />
+        <meta name="citation_format" content="text/html" />
+        {geoTxtPath && (
+          <meta name="citation_fulltext_world_readable" content={`https://esgeo.ai${geoTxtPath}`} />
+        )}
         {keywords.length > 0 && (
           <meta name="citation_keywords" content={keywords.join(', ')} />
         )}
@@ -113,7 +135,16 @@ export const useGeoMetadata = ({
       },
       "inLanguage": "es-ES",
       "isAccessibleForFree": true,
-      "keywords": keywords.join(', ')
+      "keywords": keywords.join(', '),
+      // Enlace a versión citable si existe
+      ...(geoTxtPath && {
+        "associatedMedia": {
+          "@type": "MediaObject",
+          "contentUrl": `https://esgeo.ai${geoTxtPath}`,
+          "encodingFormat": "text/plain",
+          "description": "Versión citable para modelos de lenguaje"
+        }
+      })
     }
   };
 };

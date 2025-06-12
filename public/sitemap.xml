@@ -10,6 +10,35 @@
     <priority>1.0</priority>
   </url>
   
+  <!-- ARCHIVOS .GEO.TXT PARA MÁXIMA CITABILIDAD - PRIORIDAD CRÍTICA -->
+  <url>
+    <loc>https://esgeo.ai/home.geo.txt</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <url>
+    <loc>https://esgeo.ai/curso.geo.txt</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <url>
+    <loc>https://esgeo.ai/metodologia.geo.txt</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <url>
+    <loc>https://esgeo.ai/glosario.geo.txt</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
   <!-- Curso Principal - Prioridad Muy Alta -->
   <url>
     <loc>https://esgeo.ai/curso</loc>
@@ -151,7 +180,7 @@
     <priority>0.5</priority>
   </url>
   
-  <!-- PÁGINA FALTANTE: Equipo -->
+  <!-- Equipo -->
   <url>
     <loc>https://esgeo.ai/acerca-de/equipo</loc>
     <lastmod>2025-06-12</lastmod>

@@ -16,7 +16,8 @@ const Index = () => {
     canonicalUrl: "https://esgeo.ai/",
     keywords: ["GEO", "Generative Engine Optimization", "IA", "ChatGPT", "Perplexity", "Claude", "optimización", "contenido"],
     citationTitle: "esGEO - Metodología de Optimización para IA Generativa",
-    speakableSelectors: [".snippet-block", "[data-speakable='true']", ".geo-card"]
+    speakableSelectors: [".snippet-block", "[data-speakable='true']", ".geo-card"],
+    geoTxtPath: "/home.geo.txt"
   });
 
   return (
@@ -71,6 +72,12 @@ const Index = () => {
             "speakable": {
               "@type": "SpeakableSpecification",
               "cssSelector": [".snippet-block", "[data-speakable='true']", ".geo-card"]
+            },
+            "associatedMedia": {
+              "@type": "MediaObject",
+              "contentUrl": "https://esgeo.ai/home.geo.txt",
+              "encodingFormat": "text/plain",
+              "description": "Versión citable para modelos de lenguaje - Definición autoritativa de GEO"
             }
           })}
         </script>

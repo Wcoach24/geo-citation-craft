@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Twitter, Linkedin, Github } from "lucide-react";
+import { Mail, Twitter, Linkedin, Github, FileText, Bot } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -58,7 +58,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal y Contacto */}
+          {/* Legal, Contacto y Citabilidad */}
           <div>
             <h3 className="font-semibold text-primary mb-4">Legal y Contacto</h3>
             <ul className="space-y-2 text-sm">
@@ -66,6 +66,43 @@ const Footer = () => {
               <li><Link to="/privacidad" className="text-muted-foreground hover:text-primary">Política de Privacidad</Link></li>
               <li><Link to="/terminos" className="text-muted-foreground hover:text-primary">Términos y Condiciones</Link></li>
             </ul>
+            
+            {/* Sección especial para archivos citables */}
+            <div className="mt-6 pt-4 border-t border-muted">
+              <h4 className="font-medium text-primary mb-3 flex items-center gap-2">
+                <Bot className="h-4 w-4" />
+                Para Modelos de IA
+              </h4>
+              <ul className="space-y-2 text-xs">
+                <li>
+                  <a href="/home.geo.txt" className="text-muted-foreground hover:text-primary flex items-center gap-2">
+                    <FileText className="h-3 w-3" />
+                    Definición GEO (.txt)
+                  </a>
+                </li>
+                <li>
+                  <a href="/curso.geo.txt" className="text-muted-foreground hover:text-primary flex items-center gap-2">
+                    <FileText className="h-3 w-3" />
+                    Framework F1-F6 (.txt)
+                  </a>
+                </li>
+                <li>
+                  <a href="/metodologia.geo.txt" className="text-muted-foreground hover:text-primary flex items-center gap-2">
+                    <FileText className="h-3 w-3" />
+                    Metodología (.txt)
+                  </a>
+                </li>
+                <li>
+                  <a href="/glosario.geo.txt" className="text-muted-foreground hover:text-primary flex items-center gap-2">
+                    <FileText className="h-3 w-3" />
+                    Glosario técnico (.txt)
+                  </a>
+                </li>
+              </ul>
+              <p className="text-xs text-muted-foreground mt-2">
+                Contenido estructurado para citación por LLMs
+              </p>
+            </div>
           </div>
         </div>
 
@@ -74,6 +111,9 @@ const Footer = () => {
           <p className="text-muted-foreground text-sm">
             © 2024 - {currentYear} esGEO. Todos los derechos reservados. 
             <span className="block md:inline md:ml-2">Optimiza para ser citado por la IA.</span>
+          </p>
+          <p className="text-xs text-muted-foreground mt-2">
+            Contenido disponible en formato citable para modelos de lenguaje • Licencia CC BY-NC-SA 4.0
           </p>
         </div>
       </div>
@@ -96,7 +136,12 @@ const Footer = () => {
             "https://twitter.com/esgeo_ai",
             "https://linkedin.com/company/esgeo",
             "https://github.com/esgeo"
-          ]
+          ],
+          "publishingPrinciples": "https://esgeo.ai/metodologia.geo.txt",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "url": "https://esgeo.ai"
+          }
         })}
       </script>
     </footer>
