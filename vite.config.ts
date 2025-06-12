@@ -39,8 +39,9 @@ export default defineConfig(({ mode }) => ({
         '/articulo/datos-estructurados-modelos-generativos',
         '/articulo/formato-wikipedia-ia'
       ],
-      // Configuración básica usando directorio dist por defecto
-      staticDir: path.join(process.cwd(), 'dist')
+      // Configuración simplificada y robusta
+      staticDir: path.join(process.cwd(), 'dist'),
+      renderAfterDocumentEvent: 'render-event'
     })
   ].filter(Boolean),
   resolve: {
