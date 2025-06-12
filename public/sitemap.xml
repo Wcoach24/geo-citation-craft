@@ -1,177 +1,176 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Página Principal - Máxima Prioridad -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <!-- Página principal -->
   <url>
     <loc>https://esgeo.ai/</loc>
     <lastmod>2025-06-12</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Curso Principal - Prioridad Muy Alta -->
+
+  <!-- Páginas principales -->
   <url>
     <loc>https://esgeo.ai/curso</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Módulos F1-F6 - Prioridad Muy Alta (Contenido Educativo Core) -->
-  <url>
-    <loc>https://esgeo.ai/curso/f1</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/curso/f2</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/curso/f3</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/curso/f4</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/curso/f5</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/curso/f6</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Glosario - Prioridad Muy Alta (Definiciones Autoritativas) -->
-  <url>
-    <loc>https://esgeo.ai/glosario</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Metodología - Prioridad Alta -->
+
   <url>
     <loc>https://esgeo.ai/metodologia</loc>
     <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Radar IA - Artículos de Análisis - Prioridad Alta -->
-  <url>
-    <loc>https://esgeo.ai/radar-ia</loc>
-    <lastmod>2025-06-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
-  
-  <url>
-    <loc>https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/radar-ia/muerte-seo-tradicional</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/radar-ia/estructura-web-para-lenguaje</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/radar-ia/formato-wikipedia-ia</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/radar-ia/datos-estructurados-modelos-generativos</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://esgeo.ai/radar-ia/geo-vs-seo-diferencias</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Coach GEO - Herramienta Interactiva - Prioridad Media-Alta -->
+
   <url>
     <loc>https://esgeo.ai/coach</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/glosario</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/casos-reales</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Casos Reales - Prioridad Media -->
+
   <url>
-    <loc>https://esgeo.ai/casos</loc>
+    <loc>https://esgeo.ai/radar-ia</loc>
     <lastmod>2025-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
   </url>
-  
-  <!-- Información Corporativa - Prioridad Media-Baja -->
+
   <url>
     <loc>https://esgeo.ai/acerca-de</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
-  
-  <!-- PÁGINA FALTANTE: Equipo -->
+
   <url>
     <loc>https://esgeo.ai/acerca-de/equipo</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
-  
-  <!-- Páginas Legales - Prioridad Baja -->
+
+  <!-- Módulos del curso -->
+  <url>
+    <loc>https://esgeo.ai/curso/f1</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/curso/f2</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/curso/f3</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/curso/f4</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/curso/f5</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/curso/f6</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Artículos -->
+  <url>
+    <loc>https://esgeo.ai/articulo/geo-vs-seo-guia-rapida</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/articulo/muerte-seo-tradicional</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/articulo/que-significa-ser-citado-por-ia</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/articulo/estructura-web-para-lenguaje</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/articulo/datos-estructurados-modelos-generativos</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/articulo/formato-wikipedia-ia</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Páginas legales -->
   <url>
     <loc>https://esgeo.ai/privacidad</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
+
   <url>
     <loc>https://esgeo.ai/terminos</loc>
     <lastmod>2025-06-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
+
 </urlset>
