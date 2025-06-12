@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
@@ -54,15 +53,20 @@ const AcercaDePage = () => {
               "@id": "https://esgeo.ai#organization",
               "name": "esGEO",
               "url": "https://esgeo.ai",
-              "description": "Plataforma líder en Generative Engine Optimization en español",
+              "description": "Plataforma líder en Generative Engine Optimization en español. Enseñamos a crear contenido web que sea comprensible, útil y citado por modelos de lenguaje generativo.",
               "foundingDate": "2024-01-01",
               "slogan": "Optimiza para ser citado por la IA",
-              "mission": "Enseñar a crear contenido web que sea comprensible, útil y citado por modelos de lenguaje generativo",
-              "expertise": [
+              "knowsAbout": [
                 "Generative Engine Optimization",
                 "Optimización para IA",
                 "Marketing Digital",
-                "SEO Técnico"
+                "SEO Técnico",
+                "Datos Estructurados",
+                "Citabilidad por LLMs",
+                "ChatGPT",
+                "Perplexity",
+                "Claude",
+                "Gemini"
               ],
               "contactPoint": {
                 "@type": "ContactPoint",
@@ -84,7 +88,7 @@ const AcercaDePage = () => {
                     "@type": "Organization",
                     "@id": "https://esgeo.ai#organization"
                   },
-                  "expertise": [
+                  "knowsAbout": [
                     "Generative Engine Optimization",
                     "Análisis de LLMs",
                     "Datos Estructurados",

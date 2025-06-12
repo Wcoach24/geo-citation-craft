@@ -21,7 +21,7 @@ const EquipoPage = () => {
       name: "Fundador esGEO",
       role: "CEO & GEO Strategist",
       description: "Pionero en Generative Engine Optimization en España. Experto en optimización para LLMs con más de 15 años de experiencia en SEO y marketing digital.",
-      expertise: ["Generative Engine Optimization", "SEO Técnico", "Datos Estructurados", "Optimización para LLMs", "Marketing Digital"],
+      knowsAbout: ["Generative Engine Optimization", "SEO Técnico", "Datos Estructurados", "Optimización para LLMs", "Marketing Digital"],
       image: "https://esgeo.ai/images/equipo/fundador.jpg",
       email: "fundador@esgeo.ai",
       twitter: "https://twitter.com/esgeo_founder",
@@ -32,7 +32,7 @@ const EquipoPage = () => {
       name: "Directora de Contenido GEO",
       role: "Content Strategy Director",
       description: "Especialista en redacción citeable y estructura semántica. Lidera la creación de contenido optimizado para ser comprendido por modelos de lenguaje generativos.",
-      expertise: ["Redacción Citeable", "Estructura Semántica", "Content Strategy", "Copywriting GEO", "Schema.org"],
+      knowsAbout: ["Redacción Citeable", "Estructura Semántica", "Content Strategy", "Copywriting GEO", "Schema.org"],
       image: "https://esgeo.ai/images/equipo/directora-contenido.jpg",
       email: "contenido@esgeo.ai",
       linkedin: "https://linkedin.com/in/directora-contenido-esgeo"
@@ -140,7 +140,7 @@ const EquipoPage = () => {
                     <div className="mb-4">
                       <h4 className="font-semibold text-primary mb-2">Áreas de Expertise:</h4>
                       <div className="flex flex-wrap gap-2">
-                        {member.expertise.map((skill, index) => (
+                        {member.knowsAbout.map((skill, index) => (
                           <Badge key={index} variant="outline" className="text-xs">
                             {skill}
                           </Badge>
@@ -189,9 +189,9 @@ const EquipoPage = () => {
                 "hasOccupation": {
                   "@type": "Occupation",
                   "name": member.role,
-                  "skills": member.expertise
+                  "skills": member.knowsAbout
                 },
-                "expertise": member.expertise,
+                "knowsAbout": member.knowsAbout,
                 "email": member.email,
                 "sameAs": [member.twitter, member.linkedin].filter(Boolean)
               })}
