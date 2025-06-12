@@ -39,11 +39,8 @@ export default defineConfig(({ mode }) => ({
         '/articulo/datos-estructurados-modelos-generativos',
         '/articulo/formato-wikipedia-ia'
       ],
-      // Configuración para mejorar la renderización
-      rendererOptions: {
-        headless: true,
-        renderAfterDocumentEvent: 'render-event'
-      }
+      // Configuración básica sin opciones no soportadas
+      staticDir: path.resolve(__dirname, 'dist')
     })
   ].filter(Boolean),
   resolve: {
