@@ -1,6 +1,7 @@
 
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection"; 
 import WhatIsGeoSection from "@/components/WhatIsGeoSection";
 import MethodologySection from "@/components/MethodologySection";
@@ -39,6 +40,8 @@ const Index = () => {
         <aside className="hidden xl:block fixed right-8 top-1/2 transform -translate-y-1/2 w-64 z-10">
           <TableOfContents />
         </aside>
+
+        <Footer />
 
         {/* Datos estructurados para la página principal */}
         <script type="application/ld+json">

@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -237,6 +238,8 @@ const EquipoPage = () => {
           </script>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };
