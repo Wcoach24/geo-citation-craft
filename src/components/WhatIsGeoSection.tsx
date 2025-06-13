@@ -57,40 +57,6 @@ const WhatIsGeoSection = () => {
             </HighlightSnippet>
           </article>
 
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12" aria-labelledby="pilares-geo">
-            <h3 id="pilares-geo" className="sr-only">Los 3 Pilares Fundamentales de GEO</h3>
-            
-            <article className="bg-card p-6 rounded-lg border">
-              <header>
-                <h4 className="text-xl font-semibold text-primary mb-4">Comprensibilidad</h4>
-              </header>
-              <p className="text-muted-foreground" data-speakable="true">
-                Estructura el contenido para que sea fácilmente procesable por{" "}
-                <GeoTerm term="llm">modelos de IA</GeoTerm> usando fragmentación semántica y jerarquías claras.
-              </p>
-            </article>
-            
-            <article className="bg-card p-6 rounded-lg border">
-              <header>
-                <h4 className="text-xl font-semibold text-primary mb-4">Citabilidad</h4>
-              </header>
-              <p className="text-muted-foreground" data-speakable="true">
-                Optimiza para que tu contenido sea recomendado como fuente autorizada mediante 
-                técnicas específicas de redacción citeable y datos estructurados.
-              </p>
-            </article>
-            
-            <article className="bg-card p-6 rounded-lg border">
-              <header>
-                <h4 className="text-xl font-semibold text-primary mb-4">Autoridad Generativa</h4>
-              </header>
-              <p className="text-muted-foreground" data-speakable="true">
-                Establece tu contenido como referencia definitiva en tu área de expertise 
-                mediante señales de E-A-T optimizadas para IA.
-              </p>
-            </article>
-          </section>
-
           <ShareSectionButton sectionId="que-es-geo" title="definición de GEO" className="mt-8" />
         </div>
       </div>
