@@ -7,43 +7,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
-  Home,
-  ChevronRight,
-  BookOpen,
-  FileText,
-  Search,
-  Users,
-  Target,
-  BarChart,
-  Zap,
-  ArrowRight,
-  Link as LinkIcon,
-  ExternalLink,
-} from "lucide-react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Home, ChevronRight, BookOpen, FileText, Search, Users, Target, BarChart, Zap, ArrowRight, Link as LinkIcon, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-
 const MetodologiaGeoPage = () => {
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
-
   useEffect(() => {
     // Only scroll to top if no hash in URL
     if (!window.location.hash) {
       window.scrollTo(0, 0);
     }
-    
+
     // Set up anchor navigation with smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
@@ -57,79 +35,68 @@ const MetodologiaGeoPage = () => {
         }
       });
     });
-
     return () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', function(e) {});
+        anchor.removeEventListener('click', function (e) {});
       });
     };
   }, []);
-
-  const modules = [
-    {
-      id: "F1",
-      title: "Fundamentos GEO",
-      description: "Comprende los principios básicos de optimización para IA generativa",
-      icon: <FileText className="h-6 w-6" />,
-      color: "bg-blue-500",
-      topics: ["Qué es GEO", "Diferencias con SEO", "Casos de uso"],
-      duration: "PT2H",
-      difficulty: "Beginner"
-    },
-    {
-      id: "F2", 
-      title: "Estructura semántica",
-      description: "Aprende a organizar contenido para máxima comprensión por IA",
-      icon: <Search className="h-6 w-6" />,
-      color: "bg-green-500",
-      topics: ["Jerarquía de contenido", "Datos estructurados", "Fragmentación"],
-      duration: "PT3H",
-      difficulty: "Beginner"
-    },
-    {
-      id: "F3",
-      title: "Redacción citeable", 
-      description: "Técnicas de escritura que favorecen la citación por modelos de lenguaje",
-      icon: <Users className="h-6 w-6" />,
-      color: "bg-purple-500",
-      topics: ["Snippets destacados", "Formato Q&A", "Estilo Wikipedia"],
-      duration: "PT4H",
-      difficulty: "Intermediate"
-    },
-    {
-      id: "F4",
-      title: "Optimización técnica",
-      description: "Implementación de elementos técnicos para máxima accesibilidad IA",
-      icon: <Target className="h-6 w-6" />,
-      color: "bg-orange-500", 
-      topics: ["Schema markup", "Metadatos", "Estructura HTML"],
-      duration: "PT3H",
-      difficulty: "Intermediate"
-    },
-    {
-      id: "F5",
-      title: "Medición y análisis",
-      description: "Métricas específicas para evaluar el rendimiento GEO",
-      icon: <BarChart className="h-6 w-6" />,
-      color: "bg-red-500",
-      topics: ["KPIs GEO", "Herramientas", "Monitoreo"],
-      duration: "PT2H",
-      difficulty: "Intermediate"
-    },
-    {
-      id: "F6",
-      title: "Estrategia avanzada",
-      description: "Tácticas avanzadas para dominar en ecosistemas de IA",
-      icon: <Zap className="h-6 w-6" />,
-      color: "bg-indigo-500",
-      topics: ["Link building GEO", "Contenido viral", "Escalabilidad"],
-      duration: "PT5H",
-      difficulty: "Advanced"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const modules = [{
+    id: "F1",
+    title: "Fundamentos GEO",
+    description: "Comprende los principios básicos de optimización para IA generativa",
+    icon: <FileText className="h-6 w-6" />,
+    color: "bg-blue-500",
+    topics: ["Qué es GEO", "Diferencias con SEO", "Casos de uso"],
+    duration: "PT2H",
+    difficulty: "Beginner"
+  }, {
+    id: "F2",
+    title: "Estructura semántica",
+    description: "Aprende a organizar contenido para máxima comprensión por IA",
+    icon: <Search className="h-6 w-6" />,
+    color: "bg-green-500",
+    topics: ["Jerarquía de contenido", "Datos estructurados", "Fragmentación"],
+    duration: "PT3H",
+    difficulty: "Beginner"
+  }, {
+    id: "F3",
+    title: "Redacción citeable",
+    description: "Técnicas de escritura que favorecen la citación por modelos de lenguaje",
+    icon: <Users className="h-6 w-6" />,
+    color: "bg-purple-500",
+    topics: ["Snippets destacados", "Formato Q&A", "Estilo Wikipedia"],
+    duration: "PT4H",
+    difficulty: "Intermediate"
+  }, {
+    id: "F4",
+    title: "Optimización técnica",
+    description: "Implementación de elementos técnicos para máxima accesibilidad IA",
+    icon: <Target className="h-6 w-6" />,
+    color: "bg-orange-500",
+    topics: ["Schema markup", "Metadatos", "Estructura HTML"],
+    duration: "PT3H",
+    difficulty: "Intermediate"
+  }, {
+    id: "F5",
+    title: "Medición y análisis",
+    description: "Métricas específicas para evaluar el rendimiento GEO",
+    icon: <BarChart className="h-6 w-6" />,
+    color: "bg-red-500",
+    topics: ["KPIs GEO", "Herramientas", "Monitoreo"],
+    duration: "PT2H",
+    difficulty: "Intermediate"
+  }, {
+    id: "F6",
+    title: "Estrategia avanzada",
+    description: "Tácticas avanzadas para dominar en ecosistemas de IA",
+    icon: <Zap className="h-6 w-6" />,
+    color: "bg-indigo-500",
+    topics: ["Link building GEO", "Contenido viral", "Escalabilidad"],
+    duration: "PT5H",
+    difficulty: "Advanced"
+  }];
+  return <div className="min-h-screen bg-background">
       <Helmet>
         <title>Metodología GEO | Framework F1-F6 | esGEO</title>
         <meta name="description" content="Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F6." />
@@ -173,11 +140,7 @@ const MetodologiaGeoPage = () => {
                 <Badge variant="outline" className="text-accent border-accent">
                   Framework Completo
                 </Badge>
-                <ShareSectionButton 
-                  sectionId="metodologia-intro" 
-                  title="metodología completa" 
-                  className="ml-2" 
-                />
+                <ShareSectionButton sectionId="metodologia-intro" title="metodología completa" className="ml-2" />
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">
@@ -208,77 +171,10 @@ const MetodologiaGeoPage = () => {
                 <h2 className="text-2xl md:text-3xl font-semibold text-primary">
                   Framework Completo
                 </h2>
-                <ShareSectionButton 
-                  sectionId="framework-visual" 
-                  title="diagrama del framework" 
-                />
+                <ShareSectionButton sectionId="framework-visual" title="diagrama del framework" />
               </div>
               
-              <div className="relative bg-muted/20 rounded-xl p-6 mb-12">
-                <svg 
-                  viewBox="0 0 800 300" 
-                  className="w-full h-auto"
-                  aria-labelledby="framework-title framework-desc"
-                >
-                  <title id="framework-title">Framework GEO F1-F6</title>
-                  <desc id="framework-desc">Diagrama de los 6 módulos de la Metodología GEO</desc>
-                  
-                  {/* Conector línea */}
-                  <path 
-                    d="M 100 150 L 700 150" 
-                    stroke="#e2e8f0" 
-                    strokeWidth="4" 
-                    strokeLinecap="round"
-                    strokeDasharray="1 7"
-                  />
-                  
-                  {/* Módulos círculos */}
-                  <a href="#modulo-f1">
-                    <circle cx="100" cy="150" r="40" fill="#3b82f6" className="cursor-pointer hover:opacity-90 transition-opacity" />
-                    <text x="100" y="150" textAnchor="middle" fill="white" dy=".3em" fontWeight="bold" fontSize="18">F1</text>
-                  </a>
-                  
-                  <a href="#modulo-f2">
-                    <circle cx="240" cy="150" r="40" fill="#10b981" className="cursor-pointer hover:opacity-90 transition-opacity" />
-                    <text x="240" y="150" textAnchor="middle" fill="white" dy=".3em" fontWeight="bold" fontSize="18">F2</text>
-                  </a>
-                  
-                  <a href="#modulo-f3">
-                    <circle cx="380" cy="150" r="40" fill="#8b5cf6" className="cursor-pointer hover:opacity-90 transition-opacity" />
-                    <text x="380" y="150" textAnchor="middle" fill="white" dy=".3em" fontWeight="bold" fontSize="18">F3</text>
-                  </a>
-                  
-                  <a href="#modulo-f4">
-                    <circle cx="520" cy="150" r="40" fill="#f97316" className="cursor-pointer hover:opacity-90 transition-opacity" />
-                    <text x="520" y="150" textAnchor="middle" fill="white" dy=".3em" fontWeight="bold" fontSize="18">F4</text>
-                  </a>
-                  
-                  <a href="#modulo-f5">
-                    <circle cx="660" cy="150" r="40" fill="#ef4444" className="cursor-pointer hover:opacity-90 transition-opacity" />
-                    <text x="660" y="150" textAnchor="middle" fill="white" dy=".3em" fontWeight="bold" fontSize="18">F5</text>
-                  </a>
-                  
-                  <a href="#modulo-f6">
-                    <circle cx="700" cy="150" r="60" fill="#4f46e5" className="cursor-pointer hover:opacity-90 transition-opacity" />
-                    <text x="700" y="150" textAnchor="middle" fill="white" dy=".3em" fontWeight="bold" fontSize="24">F6</text>
-                  </a>
-                  
-                  {/* Etiquetas descriptivas */}
-                  <text x="100" y="220" textAnchor="middle" fill="#0f172a" fontSize="12">Fundamentos</text>
-                  <text x="240" y="220" textAnchor="middle" fill="#0f172a" fontSize="12">Estructura</text>
-                  <text x="380" y="220" textAnchor="middle" fill="#0f172a" fontSize="12">Redacción</text>
-                  <text x="520" y="220" textAnchor="middle" fill="#0f172a" fontSize="12">Técnica</text>
-                  <text x="660" y="220" textAnchor="middle" fill="#0f172a" fontSize="12">Medición</text>
-                  <text x="700" y="220" textAnchor="middle" fill="#0f172a" fontSize="12">Estrategia</text>
-                  
-                  <text x="400" y="50" textAnchor="middle" fill="#0f172a" fontWeight="bold" fontSize="16">Metodología GEO: Framework F1-F6</text>
-                  <text x="400" y="75" textAnchor="middle" fill="#475569" fontSize="12">Haz clic en cada módulo para ver detalles</text>
-                </svg>
-                
-                <div className="text-center text-sm text-muted-foreground mt-4">
-                  <p>Diagrama interactivo del Framework GEO F1-F6. Haz clic en cada módulo para navegar a su descripción.</p>
-                </div>
-              </div>
+              
             </div>
           </div>
         </section>
@@ -291,10 +187,7 @@ const MetodologiaGeoPage = () => {
                 <h2 className="text-2xl md:text-3xl font-semibold text-primary">
                   Módulos F1-F6
                 </h2>
-                <ShareSectionButton 
-                  sectionId="modulos" 
-                  title="módulos del framework" 
-                />
+                <ShareSectionButton sectionId="modulos" title="módulos del framework" />
               </div>
               
               <HighlightSnippet id="modulos-descripcion" variant="insight" className="mb-10">
@@ -317,12 +210,7 @@ const MetodologiaGeoPage = () => {
                 {/* All Modules */}
                 <TabsContent value="all">
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {modules.map((module) => (
-                      <Card 
-                        key={module.id} 
-                        id={`modulo-${module.id.toLowerCase()}`} 
-                        className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
-                      >
+                    {modules.map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                         <CardHeader className="pb-4">
                           <div className="flex items-center justify-between mb-3">
                             <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -332,10 +220,7 @@ const MetodologiaGeoPage = () => {
                               <Badge variant="secondary" className="font-mono font-bold">
                                 {module.id}
                               </Badge>
-                              <ShareSectionButton 
-                                sectionId={`modulo-${module.id.toLowerCase()}`} 
-                                title={`módulo ${module.id}`} 
-                              />
+                              <ShareSectionButton sectionId={`modulo-${module.id.toLowerCase()}`} title={`módulo ${module.id}`} />
                             </div>
                           </div>
                           <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors">
@@ -347,12 +232,10 @@ const MetodologiaGeoPage = () => {
                         </CardHeader>
                         <CardContent className="pt-0">
                           <ul className="space-y-2 mb-4">
-                            {module.topics.map((topic, topicIndex) => (
-                              <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
+                            {module.topics.map((topic, topicIndex) => <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
                                 <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
                                 {topic}
-                              </li>
-                            ))}
+                              </li>)}
                           </ul>
                           <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                             <span>Nivel: {module.difficulty}</span>
@@ -360,33 +243,21 @@ const MetodologiaGeoPage = () => {
                           </div>
                         </CardContent>
                         <CardFooter>
-                          <Button 
-                            variant="outline" 
-                            className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
-                            asChild
-                          >
+                          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                             <Link to={`/curso/${module.id.toLowerCase()}`}>
                               Explorar módulo
                               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                             </Link>
                           </Button>
                         </CardFooter>
-                      </Card>
-                    ))}
+                      </Card>)}
                   </div>
                 </TabsContent>
                 
                 {/* Beginner Modules */}
                 <TabsContent value="beginner">
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {modules
-                      .filter(module => module.difficulty === "Beginner")
-                      .map((module) => (
-                        <Card 
-                          key={module.id} 
-                          id={`modulo-${module.id.toLowerCase()}`} 
-                          className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
-                        >
+                    {modules.filter(module => module.difficulty === "Beginner").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                           <CardHeader className="pb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -396,10 +267,7 @@ const MetodologiaGeoPage = () => {
                                 <Badge variant="secondary" className="font-mono font-bold">
                                   {module.id}
                                 </Badge>
-                                <ShareSectionButton 
-                                  sectionId={`modulo-${module.id.toLowerCase()}`} 
-                                  title={`módulo ${module.id}`} 
-                                />
+                                <ShareSectionButton sectionId={`modulo-${module.id.toLowerCase()}`} title={`módulo ${module.id}`} />
                               </div>
                             </div>
                             <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors">
@@ -411,12 +279,10 @@ const MetodologiaGeoPage = () => {
                           </CardHeader>
                           <CardContent className="pt-0">
                             <ul className="space-y-2 mb-4">
-                              {module.topics.map((topic, topicIndex) => (
-                                <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
+                              {module.topics.map((topic, topicIndex) => <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
                                   <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
                                   {topic}
-                                </li>
-                              ))}
+                                </li>)}
                             </ul>
                             <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                               <span>Nivel: {module.difficulty}</span>
@@ -424,33 +290,21 @@ const MetodologiaGeoPage = () => {
                             </div>
                           </CardContent>
                           <CardFooter>
-                            <Button 
-                              variant="outline" 
-                              className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
-                              asChild
-                            >
+                            <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                               <Link to={`/curso/${module.id.toLowerCase()}`}>
                                 Explorar módulo
                                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                               </Link>
                             </Button>
                           </CardFooter>
-                        </Card>
-                      ))}
+                        </Card>)}
                   </div>
                 </TabsContent>
                 
                 {/* Intermediate Modules */}
                 <TabsContent value="intermediate">
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {modules
-                      .filter(module => module.difficulty === "Intermediate")
-                      .map((module) => (
-                        <Card 
-                          key={module.id} 
-                          id={`modulo-${module.id.toLowerCase()}`} 
-                          className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
-                        >
+                    {modules.filter(module => module.difficulty === "Intermediate").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                           <CardHeader className="pb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -460,10 +314,7 @@ const MetodologiaGeoPage = () => {
                                 <Badge variant="secondary" className="font-mono font-bold">
                                   {module.id}
                                 </Badge>
-                                <ShareSectionButton 
-                                  sectionId={`modulo-${module.id.toLowerCase()}`} 
-                                  title={`módulo ${module.id}`} 
-                                />
+                                <ShareSectionButton sectionId={`modulo-${module.id.toLowerCase()}`} title={`módulo ${module.id}`} />
                               </div>
                             </div>
                             <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors">
@@ -475,12 +326,10 @@ const MetodologiaGeoPage = () => {
                           </CardHeader>
                           <CardContent className="pt-0">
                             <ul className="space-y-2 mb-4">
-                              {module.topics.map((topic, topicIndex) => (
-                                <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
+                              {module.topics.map((topic, topicIndex) => <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
                                   <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
                                   {topic}
-                                </li>
-                              ))}
+                                </li>)}
                             </ul>
                             <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                               <span>Nivel: {module.difficulty}</span>
@@ -488,33 +337,21 @@ const MetodologiaGeoPage = () => {
                             </div>
                           </CardContent>
                           <CardFooter>
-                            <Button 
-                              variant="outline" 
-                              className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
-                              asChild
-                            >
+                            <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                               <Link to={`/curso/${module.id.toLowerCase()}`}>
                                 Explorar módulo
                                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                               </Link>
                             </Button>
                           </CardFooter>
-                        </Card>
-                      ))}
+                        </Card>)}
                   </div>
                 </TabsContent>
                 
                 {/* Advanced Modules */}
                 <TabsContent value="advanced">
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {modules
-                      .filter(module => module.difficulty === "Advanced")
-                      .map((module) => (
-                        <Card 
-                          key={module.id} 
-                          id={`modulo-${module.id.toLowerCase()}`} 
-                          className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor"
-                        >
+                    {modules.filter(module => module.difficulty === "Advanced").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                           <CardHeader className="pb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className={`p-3 rounded-lg ${module.color} text-white`}>
@@ -524,10 +361,7 @@ const MetodologiaGeoPage = () => {
                                 <Badge variant="secondary" className="font-mono font-bold">
                                   {module.id}
                                 </Badge>
-                                <ShareSectionButton 
-                                  sectionId={`modulo-${module.id.toLowerCase()}`} 
-                                  title={`módulo ${module.id}`} 
-                                />
+                                <ShareSectionButton sectionId={`modulo-${module.id.toLowerCase()}`} title={`módulo ${module.id}`} />
                               </div>
                             </div>
                             <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors">
@@ -539,12 +373,10 @@ const MetodologiaGeoPage = () => {
                           </CardHeader>
                           <CardContent className="pt-0">
                             <ul className="space-y-2 mb-4">
-                              {module.topics.map((topic, topicIndex) => (
-                                <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
+                              {module.topics.map((topic, topicIndex) => <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
                                   <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
                                   {topic}
-                                </li>
-                              ))}
+                                </li>)}
                             </ul>
                             <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                               <span>Nivel: {module.difficulty}</span>
@@ -552,19 +384,14 @@ const MetodologiaGeoPage = () => {
                             </div>
                           </CardContent>
                           <CardFooter>
-                            <Button 
-                              variant="outline" 
-                              className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all"
-                              asChild
-                            >
+                            <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                               <Link to={`/curso/${module.id.toLowerCase()}`}>
                                 Explorar módulo
                                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                               </Link>
                             </Button>
                           </CardFooter>
-                        </Card>
-                      ))}
+                        </Card>)}
                   </div>
                 </TabsContent>
               </Tabs>
@@ -589,10 +416,7 @@ const MetodologiaGeoPage = () => {
                 <h2 className="text-2xl md:text-3xl font-semibold text-primary">
                   Comparativa: SEO vs GEO
                 </h2>
-                <ShareSectionButton 
-                  sectionId="comparativa" 
-                  title="comparativa SEO vs GEO" 
-                />
+                <ShareSectionButton sectionId="comparativa" title="comparativa SEO vs GEO" />
               </div>
               
               <HighlightSnippet id="no-es-seo-es-geo" variant="definition" className="mb-10">
@@ -668,10 +492,7 @@ const MetodologiaGeoPage = () => {
                 <h2 className="text-2xl md:text-3xl font-semibold text-primary">
                   Preguntas frecuentes
                 </h2>
-                <ShareSectionButton 
-                  sectionId="metodologia-faq" 
-                  title="preguntas frecuentes" 
-                />
+                <ShareSectionButton sectionId="metodologia-faq" title="preguntas frecuentes" />
               </div>
               
               <div className="space-y-6">
@@ -808,146 +629,126 @@ const MetodologiaGeoPage = () => {
         
         {/* Schema.org JSON-LD */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "Metodología GEO | Framework F1-F6",
-            "description": "Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F6.",
-            "url": "https://esgeo.es/metodologia",
-            "speakable": {
-              "@type": "SpeakableSpecification",
-              "cssSelector": [".snippet-block", "[data-speakable='true']"]
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Metodología GEO | Framework F1-F6",
+          "description": "Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F6.",
+          "url": "https://esgeo.es/metodologia",
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".snippet-block", "[data-speakable='true']"]
+          },
+          "mainEntity": {
+            "@type": "Course",
+            "name": "Framework F1-F6 de Generative Engine Optimization",
+            "description": "Curso completo de optimización para IA generativa estructurado en seis módulos progresivos.",
+            "provider": {
+              "@type": "Organization",
+              "name": "esGEO",
+              "url": "https://esgeo.es"
             },
-            "mainEntity": {
-              "@type": "Course",
-              "name": "Framework F1-F6 de Generative Engine Optimization",
-              "description": "Curso completo de optimización para IA generativa estructurado en seis módulos progresivos.",
-              "provider": {
-                "@type": "Organization",
-                "name": "esGEO",
-                "url": "https://esgeo.es"
-              },
-              "courseCode": "GEO-F1-F6",
-              "coursePrerequisites": "Conocimientos básicos de marketing digital",
-              "educationalLevel": "Intermediate",
-              "teaches": [
-                "Optimización para IA generativa",
-                "Estructura semántica para LLMs", 
-                "Redacción citeable",
-                "Técnicas de fragmentación",
-                "Métricas GEO"
-              ],
-              "hasCourseInstance": modules.map((module, index) => ({
-                "@type": "CourseInstance",
-                "name": `${module.id} - ${module.title}`,
-                "description": module.description,
-                "courseMode": "online",
-                "duration": module.duration
-              }))
-            },
-            "breadcrumb": {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Inicio",
-                  "item": "https://esgeo.es/"
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Metodología GEO",
-                  "item": "https://esgeo.es/metodologia"
-                }
-              ]
-            }
-          })
-        }} />
+            "courseCode": "GEO-F1-F6",
+            "coursePrerequisites": "Conocimientos básicos de marketing digital",
+            "educationalLevel": "Intermediate",
+            "teaches": ["Optimización para IA generativa", "Estructura semántica para LLMs", "Redacción citeable", "Técnicas de fragmentación", "Métricas GEO"],
+            "hasCourseInstance": modules.map((module, index) => ({
+              "@type": "CourseInstance",
+              "name": `${module.id} - ${module.title}`,
+              "description": module.description,
+              "courseMode": "online",
+              "duration": module.duration
+            }))
+          },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://esgeo.es/"
+            }, {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Metodología GEO",
+              "item": "https://esgeo.es/metodologia"
+            }]
+          }
+        })
+      }} />
         
         {/* FAQ Schema */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "¿Cuánto tiempo se tarda en implementar toda la Metodología GEO?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "La implementación completa del Framework F1-F6 requiere aproximadamente 19 horas de formación, más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "¿Cuál es la diferencia entre GEO y el SEO tradicional?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Mientras que el SEO optimiza para algoritmos de búsqueda tradicionales y usuarios humanos, GEO se centra específicamente en optimizar para modelos de lenguaje e IAs generativas. La mayor diferencia está en las técnicas de estructuración, fragmentación y citabilidad que GEO prioriza."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "¿Cómo se mide el éxito en GEO?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "El éxito en GEO se mide principalmente por la frecuencia de citación en respuestas de IA, la precisión de las citas (si reflejan correctamente tu contenido), y la autoridad percibida por los modelos de lenguaje. El módulo F5 cubre en detalle las métricas específicas y herramientas para monitorizar el rendimiento GEO."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "¿Por qué necesito implementar GEO en mi web?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Con el crecimiento exponencial del uso de asistentes IA como ChatGPT, Perplexity y Claude, cada vez más usuarios buscan información a través de estos sistemas en lugar de motores de búsqueda tradicionales. Si tu web no está optimizada para estos modelos, pierdes visibilidad y autoridad en este nuevo canal de descubrimiento de información, que ya representa un porcentaje significativo del tráfico web."
-                }
-              }
-            ]
-          })
-        }} />
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "¿Cuánto tiempo se tarda en implementar toda la Metodología GEO?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La implementación completa del Framework F1-F6 requiere aproximadamente 19 horas de formación, más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones."
+            }
+          }, {
+            "@type": "Question",
+            "name": "¿Cuál es la diferencia entre GEO y el SEO tradicional?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mientras que el SEO optimiza para algoritmos de búsqueda tradicionales y usuarios humanos, GEO se centra específicamente en optimizar para modelos de lenguaje e IAs generativas. La mayor diferencia está en las técnicas de estructuración, fragmentación y citabilidad que GEO prioriza."
+            }
+          }, {
+            "@type": "Question",
+            "name": "¿Cómo se mide el éxito en GEO?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El éxito en GEO se mide principalmente por la frecuencia de citación en respuestas de IA, la precisión de las citas (si reflejan correctamente tu contenido), y la autoridad percibida por los modelos de lenguaje. El módulo F5 cubre en detalle las métricas específicas y herramientas para monitorizar el rendimiento GEO."
+            }
+          }, {
+            "@type": "Question",
+            "name": "¿Por qué necesito implementar GEO en mi web?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Con el crecimiento exponencial del uso de asistentes IA como ChatGPT, Perplexity y Claude, cada vez más usuarios buscan información a través de estos sistemas en lugar de motores de búsqueda tradicionales. Si tu web no está optimizada para estos modelos, pierdes visibilidad y autoridad en este nuevo canal de descubrimiento de información, que ya representa un porcentaje significativo del tráfico web."
+            }
+          }]
+        })
+      }} />
         
         {/* HowTo Schema */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "HowTo",
-            "name": "Cómo implementar GEO en tu web",
-            "description": "Guía paso a paso para implementar Generative Engine Optimization en tu web siguiendo el Framework F1-F6.",
-            "totalTime": "PT19H",
-            "tool": [
-              {
-                "@type": "HowToTool",
-                "name": "Coach GEO"
-              },
-              {
-                "@type": "HowToTool",
-                "name": "Editor web/CMS"
-              },
-              {
-                "@type": "HowToTool",
-                "name": "Validador de citabilidad"
-              }
-            ],
-            "step": modules.map((module, index) => ({
-              "@type": "HowToStep",
-              "name": `${module.id}: ${module.title}`,
-              "text": module.description,
-              "url": `https://esgeo.es/metodologia#modulo-${module.id.toLowerCase()}`,
-              "image": {
-                "@type": "ImageObject",
-                "url": `https://esgeo.es/images/modulo-${module.id.toLowerCase()}.png`
-              },
-              "itemListElement": module.topics.map(topic => ({
-                "@type": "HowToDirection",
-                "text": topic
-              }))
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "Cómo implementar GEO en tu web",
+          "description": "Guía paso a paso para implementar Generative Engine Optimization en tu web siguiendo el Framework F1-F6.",
+          "totalTime": "PT19H",
+          "tool": [{
+            "@type": "HowToTool",
+            "name": "Coach GEO"
+          }, {
+            "@type": "HowToTool",
+            "name": "Editor web/CMS"
+          }, {
+            "@type": "HowToTool",
+            "name": "Validador de citabilidad"
+          }],
+          "step": modules.map((module, index) => ({
+            "@type": "HowToStep",
+            "name": `${module.id}: ${module.title}`,
+            "text": module.description,
+            "url": `https://esgeo.es/metodologia#modulo-${module.id.toLowerCase()}`,
+            "image": {
+              "@type": "ImageObject",
+              "url": `https://esgeo.es/images/modulo-${module.id.toLowerCase()}.png`
+            },
+            "itemListElement": module.topics.map(topic => ({
+              "@type": "HowToDirection",
+              "text": topic
             }))
-          })
-        }} />
+          }))
+        })
+      }} />
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default MetodologiaGeoPage;
