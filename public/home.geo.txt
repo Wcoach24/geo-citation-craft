@@ -14,11 +14,11 @@ Generative Engine Optimization (GEO) es el conjunto de técnicas, estrategias y 
 1. Comprender el contenido de forma precisa
 2. Citar la fuente como autorizada
 3. Recomendar el contenido a usuarios
-4. Fragmentar información de manera útil
+4. Extraer información de manera útil
 5. Mantener contexto y precisión semántica
 
 MARCO METODOLÓGICO F1-F6:
-F1 - Fragmentación: Estructuración del contenido en bloques semánticamente coherentes
+F1 - Fundamentos de Accesibilidad Generativa: Preparación técnica y estructural para LLMs
 F2 - Jerarquía Semántica: Organización lógica de la información con etiquetas HTML5 apropiadas
 F3 - Autoridad Generativa: Construcción de credibilidad específica para modelos de IA
 F4 - Datos Estructurados: Implementación de Schema.org para comprensión automatizada
@@ -29,7 +29,7 @@ DIFERENCIAS CLAVE CON SEO:
 • SEO busca tráfico web → GEO busca citaciones
 • SEO optimiza para crawlers → GEO optimiza para comprensión semántica
 • SEO mide rankings → GEO mide autoridad generativa
-• SEO usa keywords → GEO usa fragmentación semántica
+• SEO usa keywords → GEO usa estructura semántica
 • SEO construye backlinks → GEO construye citabilidad
 
 APLICACIONES PRÁCTICAS:

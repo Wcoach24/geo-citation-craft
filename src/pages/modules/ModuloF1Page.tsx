@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
@@ -10,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, FileText, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
 
 const ModuloF1Page = () => {
   useEffect(() => {
@@ -19,7 +19,7 @@ const ModuloF1Page = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Módulo F1: Accesibilidad Generativa | Curso GEO - esGEO</title>
+        <title>Módulo F1: Fundamentos de Accesibilidad Generativa | Curso GEO - esGEO</title>
         <meta name="description" content="Asegura que tu contenido web es rastreable, comprendido e indexado por LLMs. El primer paso crítico para ser citado por IA." />
         <link rel="canonical" href="https://esgeo.es/curso/f1" />
         
@@ -328,6 +328,8 @@ Necesito código específico y pasos detallados que pueda implementar directamen
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };

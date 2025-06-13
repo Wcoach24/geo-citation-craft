@@ -11,28 +11,28 @@ El curso completo de Generative Engine Optimization (GEO) implementa la metodolo
 
 METODOLOGÍA F1-F6 DETALLADA:
 
-=== MÓDULO F1: FRAGMENTACIÓN ===
-Objetivo: Estructurar contenido en bloques semánticamente coherentes y citables.
+=== MÓDULO F1: FUNDAMENTOS DE ACCESIBILIDAD GENERATIVA ===
+Objetivo: Asegurar que el contenido web está preparado técnica y estructuralmente para ser rastreado, comprendido e indexado por motores de generación de texto.
 
 Principios fundamentales:
-• Párrafos de 100-150 palabras máximo
-• Una idea principal por fragmento
-• Conectores semánticos explícitos
-• Uso de listas y enumeraciones
-• Separación visual clara entre conceptos
+• Indexabilidad y acceso técnico
+• Estructura para comprensión semántica
+• Metadatos claros y actualizados
+• Autoría y autoridad básica
+• Compatibilidad con crawlers de IA
 
 Técnicas específicas:
-1. Fragmentación por subtemas
-2. Uso de headers H2-H6 descriptivos
-3. Implementación de <section> y <article>
-4. Bloques de código con contexto
-5. Fragmentos destacados (snippets)
+1. Configuración óptima de robots.txt para bots de IA
+2. HTML semántico implementado correctamente
+3. Schema.org añadido para el tipo de contenido principal
+4. Fechas de publicación y actualización visibles
+5. Información de autor completa y enlazada
 
 Métricas F1:
-- Longitud promedio de párrafos
-- Coherencia temática por fragmento
-- Facilidad de extracción de información
-- Comprensibilidad fuera de contexto
+- Accesibilidad técnica para LLMs
+- Comprensibilidad del contenido
+- Validación de datos estructurados
+- Autoridad básica establecida
 
 === MÓDULO F2: JERARQUÍA SEMÁNTICA ===
 Objetivo: Organizar información con estructura lógica comprensible para LLMs.

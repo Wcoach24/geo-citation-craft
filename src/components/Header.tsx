@@ -37,7 +37,7 @@ const Header = () => {
                 <Link to="/curso">Curso Completo</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/curso/f1">Módulo F1 - Fragmentación</Link>
+                <Link to="/curso/f1">Módulo F1 - Fundamentos</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/curso/f2">Módulo F2 - Jerarquía</Link>

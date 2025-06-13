@@ -36,7 +36,7 @@ Autoridad del contenido (40%):
 
 Estructura semántica (30%):
 - Jerarquía lógica de información
-- Fragmentación apropiada
+- Accesibilidad técnica apropiada
 - Uso de HTML5 semántico
 - Datos estructurados
 
@@ -54,11 +54,11 @@ Precisión informacional (10%):
 
 === PRINCIPIOS DE IMPLEMENTACIÓN ===
 
-Principio 1: Fragmentación Inteligente
-• Dividir contenido en unidades semánticamente cohesivas
-• Cada fragmento debe ser comprensible independientemente
-• Longitud óptima: 100-150 palabras por párrafo
-• Uso de conectores semánticos explícitos
+Principio 1: Fundamentos de Accesibilidad Generativa
+• Asegurar que el contenido es técnicamente accesible
+• Implementar estructura semántica básica
+• Establecer autoridad y autoría clara
+• Configurar metadatos apropiados
 
 Principio 2: Jerarquía Semántica Explícita
 • Estructura H1-H6 consistente y descriptiva
@@ -96,7 +96,7 @@ GEO vs SEO Tradicional:
 • Objetivo: Citación vs Tráfico
 • Audiencia: LLMs vs Humanos
 • Métricas: Autoridad generativa vs Rankings
-• Técnicas: Fragmentación semántica vs Keywords
+• Técnicas: Estructura semántica vs Keywords
 • Timeline: Largo plazo vs Corto plazo
 
 GEO vs Marketing de Contenidos:
@@ -134,7 +134,7 @@ Fase 1: Auditoría de contenido actual
 - Baseline de citabilidad
 
 Fase 2: Reestructuración semántica
-- Aplicación de fragmentación F1
+- Aplicación de fundamentos F1
 - Implementación de jerarquía F2
 - Construcción de autoridad F3
 - Adición de datos estructurados F4
