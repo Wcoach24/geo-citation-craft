@@ -1,9 +1,11 @@
 
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Twitterbot
 Allow: /
@@ -14,6 +16,20 @@ Allow: /
 User-agent: *
 Allow: /
 
+# ESTRATEGIA HÍBRIDA: Contenido específico para LLMs
+# Archivos .geo.txt con máxima prioridad para citabilidad
+User-agent: *
+Allow: /home.geo.txt
+Allow: /curso.geo.txt
+Allow: /metodologia.geo.txt
+Allow: /glosario.geo.txt
+
+# Página dedicada para modelos de IA
+Allow: /contenido-ia
+
 # Sitemap para LLMs y motores de búsqueda
 Sitemap: https://esgeo.ai/sitemap.xml
 
+# Directivas específicas para crawlers de IA generativa
+# Contenido optimizado para citabilidad disponible en:
+# https://esgeo.ai/contenido-ia
