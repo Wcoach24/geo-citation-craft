@@ -407,12 +407,12 @@ const CursoGeoPage = () => {
               "@context": "https://schema.org",
               "@type": "Course",
               "name": "Curso GEO - Generative Engine Optimization",
-              "description": "Curso completo para aprender a optimizar contenido web para ser citado por IA generativa",
+              "description": "Curso completo para aprender a optimizar contenido web para ser citado por IA generativa. Metodología F1-F6 con 6 módulos progresivos que enseñan desde fundamentos hasta técnicas avanzadas de optimización para modelos de lenguaje como ChatGPT, Perplexity y Claude.",
               "url": "https://esgeo.ai/curso",
               "image": "https://esgeo.ai/images/curso-geo-banner.jpg",
               "provider": {
-                "@type": "Organization",
-                "name": "esGEO",
+                "@type": "EducationalOrganization",
+                "name": "esGEO Academy",
                 "url": "https://esgeo.ai",
                 "@id": "https://esgeo.ai#organization"
               },
@@ -432,6 +432,7 @@ const CursoGeoPage = () => {
                 "Métricas GEO"
               ],
               "totalTime": "PT19H",
+              "courseWorkload": "PT19H",
               "numberOfCredits": 0,
               "coursePrerequisites": "Conocimientos básicos de web y marketing digital (recomendado)",
               "aggregateRating": {
@@ -440,16 +441,27 @@ const CursoGeoPage = () => {
                 "reviewCount": "127",
                 "bestRating": "5"
               },
-              "hasCourseInstance": modules.map((module, index) => ({
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "url": "https://esgeo.ai/curso",
+                "category": "Educación Digital"
+              },
+              "hasCourseInstance": {
                 "@type": "CourseInstance",
-                "name": `${module.id} - ${module.title}`,
-                "description": module.description,
                 "courseMode": "online",
-                "duration": `PT${module.duration.replace('h', 'H')}`,
-                "educationalLevel": module.difficulty,
-                "position": index + 1,
-                "url": `https://esgeo.ai/curso/${module.id.toLowerCase()}`
-              }))
+                "startDate": "2024-01-01",
+                "location": {
+                  "@type": "VirtualLocation",
+                  "url": "https://esgeo.ai/curso"
+                },
+                "instructor": {
+                  "@type": "Organization",
+                  "@id": "https://esgeo.ai#organization"
+                }
+              }
             })}
           </script>
 

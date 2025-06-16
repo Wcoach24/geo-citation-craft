@@ -106,7 +106,7 @@ const MetodologiaGeoPage = () => {
       <Helmet>
         <title>Metodología GEO | Framework F1-F6 | esGEO</title>
         <meta name="description" content="Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F6." />
-        <link rel="canonical" href="https://esgeo.es/metodologia" />
+        <link rel="canonical" href="https://esgeo.ai/metodologia" />
         
         {/* Speakable / Citation meta */}
         <meta name="citation_title" content="Metodología GEO: Framework F1-F6" />
@@ -639,7 +639,7 @@ const MetodologiaGeoPage = () => {
         "@type": "WebPage",
         "name": "Metodología GEO | Framework F1-F6",
         "description": "Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F6.",
-        "url": "https://esgeo.es/metodologia",
+        "url": "https://esgeo.ai/metodologia",
         "speakable": {
           "@type": "SpeakableSpecification",
           "cssSelector": [".snippet-block", "[data-speakable='true']"]
@@ -647,23 +647,38 @@ const MetodologiaGeoPage = () => {
         "mainEntity": {
           "@type": "Course",
           "name": "Framework F1-F6 de Generative Engine Optimization",
-          "description": "Curso completo de optimización para IA generativa estructurado en seis módulos progresivos.",
+          "description": "Curso completo de optimización para IA generativa estructurado en seis módulos progresivos para enseñar técnicas de GEO y citabilidad por modelos de lenguaje.",
           "provider": {
-            "@type": "Organization",
-            "name": "esGEO",
-            "url": "https://esgeo.es"
+            "@type": "EducationalOrganization",
+            "name": "esGEO Academy",
+            "url": "https://esgeo.ai",
+            "@id": "https://esgeo.ai#organization"
           },
           "courseCode": "GEO-F1-F6",
           "coursePrerequisites": "Conocimientos básicos de marketing digital",
           "educationalLevel": "Intermediate",
+          "courseWorkload": "PT19H",
           "teaches": ["Optimización para IA generativa", "Estructura semántica para LLMs", "Redacción citeable", "Técnicas de fragmentación", "Métricas GEO"],
-          "hasCourseInstance": modules.map((module, index) => ({
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR", 
+            "availability": "https://schema.org/InStock",
+            "url": "https://esgeo.ai/metodologia"
+          },
+          "hasCourseInstance": {
             "@type": "CourseInstance",
-            "name": `${module.id} - ${module.title}`,
-            "description": module.description,
             "courseMode": "online",
-            "duration": module.duration
-          }))
+            "startDate": "2024-01-01",
+            "location": {
+              "@type": "VirtualLocation",
+              "url": "https://esgeo.ai/metodologia"
+            },
+            "instructor": {
+              "@type": "Organization",
+              "@id": "https://esgeo.ai#organization"
+            }
+          }
         },
         "breadcrumb": {
           "@type": "BreadcrumbList",
@@ -671,12 +686,12 @@ const MetodologiaGeoPage = () => {
             "@type": "ListItem",
             "position": 1,
             "name": "Inicio",
-            "item": "https://esgeo.es/"
+            "item": "https://esgeo.ai/"
           }, {
             "@type": "ListItem",
             "position": 2,
             "name": "Metodología GEO",
-            "item": "https://esgeo.es/metodologia"
+            "item": "https://esgeo.ai/metodologia"
           }]
         }
       })
@@ -741,10 +756,10 @@ const MetodologiaGeoPage = () => {
           "@type": "HowToStep",
           "name": `${module.id}: ${module.title}`,
           "text": module.description,
-          "url": `https://esgeo.es/metodologia#modulo-${module.id.toLowerCase()}`,
+          "url": `https://esgeo.ai/metodologia#modulo-${module.id.toLowerCase()}`,
           "image": {
             "@type": "ImageObject",
-            "url": `https://esgeo.es/images/modulo-${module.id.toLowerCase()}.png`
+            "url": `https://esgeo.ai/images/modulo-${module.id.toLowerCase()}.png`
           },
           "itemListElement": module.topics.map(topic => ({
             "@type": "HowToDirection",
