@@ -5,8 +5,12 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection"; 
 import WhatIsGeoSection from "@/components/WhatIsGeoSection";
 import MethodologySection from "@/components/MethodologySection";
+import SocialProofSection from "@/components/SocialProofSection";
+import PricingSection from "@/components/PricingSection";
 import CasosDestacadosSection from "@/components/CasosDestacadosSection";
 import CoachSection from "@/components/CoachSection";
+import CtaSection from "@/components/CtaSection";
+import InlineEmailCapture from "@/components/InlineEmailCapture";
 import TableOfContents from "@/components/TableOfContents";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
@@ -30,10 +34,42 @@ const Index = () => {
         
         <main role="main">
           <HeroSection />
+          
+          {/* Lead Capture después del Hero */}
+          <section className="py-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <InlineEmailCapture
+                title="Guía Gratuita: Los 10 Errores que Impiden ser Citado por IA"
+                description="Descarga nuestra checklist exclusiva y evita los errores más comunes en GEO"
+                leadMagnet="Guía de Errores GEO"
+                className="max-w-2xl mx-auto"
+              />
+            </div>
+          </section>
+
           <WhatIsGeoSection />
+          
+          {/* Social Proof después de explicar qué es GEO */}
+          <SocialProofSection />
+          
           <MethodologySection />
+          
+          {/* Lead Capture después de metodología */}
+          <section className="py-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <InlineEmailCapture
+                title="Plantilla de Auditoría GEO Gratuita"
+                description="Evalúa tu web con nuestra plantilla profesional de 50+ puntos"
+                leadMagnet="Plantilla de Auditoría"
+                className="max-w-2xl mx-auto"
+              />
+            </div>
+          </section>
+          
+          <PricingSection />
           <CasosDestacadosSection />
           <CoachSection />
+          <CtaSection />
         </main>
 
         {/* Tabla de contenidos flotante para páginas largas */}

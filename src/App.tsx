@@ -16,6 +16,7 @@ import EquipoPage from "./pages/EquipoPage";
 import PrivacidadPage from "./pages/PrivacidadPage";
 import TerminosPage from "./pages/TerminosPage";
 import ContenidoIAPage from "./pages/ContenidoIAPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import NotFound from "./pages/NotFound";
 
 // Módulos del curso
@@ -54,6 +55,7 @@ function App() {
             <Route path="/glosario" element={<GlosarioPage />} />
             <Route path="/radar-ia" element={<RadarIAPage />} />
             <Route path="/contenido-ia" element={<ContenidoIAPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             
             {/* Información corporativa */}
             <Route path="/acerca-de" element={<AcercaDePage />} />
