@@ -48,7 +48,7 @@ const HeroSection = () => {
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-bold px-12 py-4 text-lg" asChild>
                 <Link to="/curso/f1">
                   <ArrowRight className="mr-2 h-6 w-6" />
-                  Empezar Curso Gratis
+                  Empezar con F1 Gratis
                 </Link>
               </Button>
               
@@ -91,24 +91,20 @@ const HeroSection = () => {
             </div>
           </section>
           
-          {/* Related Content Section */}
+          {/* Navegación simplificada */}
           <section className="p-6 bg-muted/30 rounded-lg">
             <h2 className="font-semibold text-primary mb-4">Explora el ecosistema GEO</h2>
             <div className="flex flex-wrap gap-3 justify-center">
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/#que-es-geo">
+                <Link to="/acerca-de">
                   <Brain className="mr-2 h-4 w-4" />
                   ¿Qué es GEO?
                 </Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/#precios">
-                  Ver Precios
-                </Link>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">
-                  Coach GEO
+                <Link to="/metodologia">
+                  <Target className="mr-2 h-4 w-4" />
+                  Ver Metodología
                 </Link>
               </Button>
             </div>

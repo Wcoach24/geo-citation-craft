@@ -6,29 +6,14 @@ import { TrendingUp, Star, ArrowRight, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CasosDestacadosSection = () => {
-  const casosDestacados = [
-    {
-      titulo: "Consultora Legal +400% citaciones",
-      empresa: "Jurídica Moderna",
-      mejora: "+1200% citas ChatGPT",
-      tiempo: "6 semanas",
-      modulos: ["F1", "F2", "F3"]
-    },
-    {
-      titulo: "E-commerce +45% recomendaciones IA",
-      empresa: "TechGear Store", 
-      mejora: "+300% conversión IA",
-      tiempo: "8 semanas",
-      modulos: ["F3", "F4", "F5"]
-    },
-    {
-      titulo: "Startup Fintech autoridad cripto",
-      empresa: "CryptoSafe Pro",
-      mejora: "+540% leads calificados", 
-      tiempo: "12 semanas",
-      modulos: ["F2", "F3", "F4", "F5", "F6"]
-    }
-  ];
+  const casoDestacado = {
+    titulo: "Consultora Legal +400% citaciones",
+    empresa: "Jurídica Moderna",
+    mejora: "+1200% citas ChatGPT",
+    tiempo: "6 semanas",
+    modulos: ["F1", "F2", "F3"],
+    testimonio: "Implementamos GEO paso a paso y los resultados fueron inmediatos. ChatGPT ahora nos cita como autoridad en derecho digital."
+  };
 
   return (
     <section id="casos-destacados" className="section-anchor py-20 bg-muted/30">
@@ -46,51 +31,59 @@ const CasosDestacadosSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {casosDestacados.map((caso, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow relative overflow-hidden">
-              <div className="absolute top-4 right-4">
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
-                  Verificado
-                </Badge>
-              </div>
-              <CardHeader>
-                <CardTitle className="text-lg text-primary pr-20">
-                  {caso.titulo}
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">{caso.empresa}</p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <Quote className="h-4 w-4 text-accent" />
-                  <span className="font-semibold text-accent">{caso.mejora}</span>
-                </div>
-                
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Tiempo:</span>
-                  <span className="font-medium">{caso.tiempo}</span>
-                </div>
-                
-                <div className="space-y-2">
-                  <span className="text-sm text-muted-foreground">Módulos utilizados:</span>
-                  <div className="flex flex-wrap gap-1">
-                    {caso.modulos.map((modulo, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs">
-                        {modulo}
-                      </Badge>
-                    ))}
+        <div className="max-w-4xl mx-auto mb-12">
+          <Card className="hover:shadow-lg transition-shadow relative overflow-hidden">
+            <div className="absolute top-4 right-4">
+              <Badge variant="secondary" className="bg-green-100 text-green-800">
+                Verificado
+              </Badge>
+            </div>
+            <CardHeader>
+              <CardTitle className="text-2xl text-primary pr-20">
+                {casoDestacado.titulo}
+              </CardTitle>
+              <p className="text-lg text-muted-foreground">{casoDestacado.empresa}</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Quote className="h-5 w-5 text-accent" />
+                    <span className="font-semibold text-accent text-lg">{casoDestacado.mejora}</span>
+                  </div>
+                  
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Tiempo de implementación:</span>
+                    <span className="font-medium">{casoDestacado.tiempo}</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <span className="text-sm text-muted-foreground">Módulos utilizados:</span>
+                    <div className="flex flex-wrap gap-2">
+                      {casoDestacado.modulos.map((modulo, idx) => (
+                        <Badge key={idx} variant="outline" className="text-sm">
+                          {modulo}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-1 pt-2">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                  <span className="text-sm text-muted-foreground ml-2">Resultado excelente</span>
+                <div className="space-y-4">
+                  <blockquote className="text-muted-foreground italic border-l-4 border-accent pl-4">
+                    "{casoDestacado.testimonio}"
+                  </blockquote>
+                  
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                    <span className="text-sm text-muted-foreground ml-2">Resultado excelente</span>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="text-center">

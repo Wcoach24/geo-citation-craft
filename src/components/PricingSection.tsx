@@ -7,60 +7,40 @@ import { Check, Star, Zap, Crown, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const PricingSection = () => {
-  const plans = [
+  const modules = [
     {
-      name: "Gratis",
+      name: "F1 Gratis",
       price: "0",
-      period: "siempre",
-      description: "Perfecto para empezar con GEO",
+      description: "Fundamentos de GEO - Completamente gratis",
       icon: Users,
       features: [
-        "Módulo F1 - Fundamentos completo",
-        "Glosario GEO autorizado",
-        "Coach GEO básico",
-        "Acceso a la comunidad",
-        "Recursos descargables"
+        "Comprende qué es GEO y por qué es crucial",
+        "Aprende los principios básicos de citabilidad",
+        "Estructura tu contenido para LLMs",
+        "Primeras optimizaciones prácticas"
       ],
-      cta: "Empezar Gratis",
-      ctaVariant: "outline" as const,
-      popular: false
-    },
-    {
-      name: "Starter",
-      price: "29",
-      period: "mes",
-      description: "Para profesionales que quieren dominar GEO",
-      icon: Zap,
-      features: [
-        "Módulos F1, F2 y F3 completos",
-        "Coach GEO avanzado con IA",
-        "Email support prioritario",
-        "Plantillas y checklists premium",
-        "Webinars mensuales exclusivos",
-        "Certificado de progreso"
-      ],
-      cta: "Prueba 7 días gratis",
+      cta: "Empezar F1 Gratis",
       ctaVariant: "default" as const,
-      popular: true
+      popular: true,
+      link: "/curso/f1"
     },
     {
-      name: "Pro",
-      price: "79",
-      period: "mes",
-      description: "Framework completo + implementación",
+      name: "F2-F6",
+      price: "39",
+      period: "módulo",
+      description: "Framework completo de optimización GEO",
       icon: Crown,
       features: [
-        "Framework F1-F6 completo",
-        "Auditorías GEO automatizadas",
-        "Sesiones 1-on-1 mensuales",
-        "Implementación paso a paso",
-        "Análisis de competencia",
-        "Soporte técnico directo",
-        "Certificación oficial GEO"
+        "F2: Estructura semántica avanzada",
+        "F3: Contenido citable y autoritativo", 
+        "F4: Datos estructurados y metadatos",
+        "F5: Optimización técnica para LLMs",
+        "F6: Medición y análisis de citabilidad"
       ],
-      cta: "Upgrade a Pro",
-      ctaVariant: "default" as const,
-      popular: false
+      cta: "Ver Módulos Avanzados",
+      ctaVariant: "outline" as const,
+      popular: false,
+      link: "/curso"
     }
   ];
 
@@ -81,41 +61,41 @@ const PricingSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {modules.map((module, index) => (
             <Card 
               key={index} 
               className={`relative hover:shadow-xl transition-all duration-300 ${
-                plan.popular ? 'border-accent shadow-lg scale-105' : ''
+                module.popular ? 'border-accent shadow-lg scale-105' : ''
               }`}
             >
-              {plan.popular && (
+              {module.popular && (
                 <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-primary">
-                  Más Popular
+                  Empieza Aquí
                 </Badge>
               )}
               
               <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4">
-                  <div className={`p-3 rounded-full ${plan.popular ? 'bg-accent' : 'bg-muted'}`}>
-                    <plan.icon className={`h-6 w-6 ${plan.popular ? 'text-primary' : 'text-muted-foreground'}`} />
+                  <div className={`p-3 rounded-full ${module.popular ? 'bg-accent' : 'bg-muted'}`}>
+                    <module.icon className={`h-6 w-6 ${module.popular ? 'text-primary' : 'text-muted-foreground'}`} />
                   </div>
                 </div>
                 
-                <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                <p className="text-muted-foreground text-sm">{plan.description}</p>
+                <CardTitle className="text-2xl font-bold">{module.name}</CardTitle>
+                <p className="text-muted-foreground text-sm">{module.description}</p>
                 
                 <div className="mt-4">
                   <div className="flex items-baseline justify-center">
-                    <span className="text-4xl font-bold text-primary">€{plan.price}</span>
-                    <span className="text-muted-foreground ml-1">/{plan.period}</span>
+                    <span className="text-4xl font-bold text-primary">€{module.price}</span>
+                    {module.period && <span className="text-muted-foreground ml-1">/{module.period}</span>}
                   </div>
                 </div>
               </CardHeader>
 
               <CardContent className="space-y-6">
                 <ul className="space-y-3">
-                  {plan.features.map((feature, featureIndex) => (
+                  {module.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
                       <span className="text-sm">{feature}</span>
@@ -124,19 +104,19 @@ const PricingSection = () => {
                 </ul>
 
                 <Button 
-                  variant={plan.ctaVariant} 
+                  variant={module.ctaVariant} 
                   className="w-full" 
                   size="lg"
                   asChild
                 >
-                  <Link to={plan.name === "Gratis" ? "/curso/f1" : "/checkout"}>
-                    {plan.cta}
+                  <Link to={module.link}>
+                    {module.cta}
                   </Link>
                 </Button>
 
-                {plan.name !== "Gratis" && (
+                {module.name !== "F1 Gratis" && (
                   <p className="text-xs text-center text-muted-foreground">
-                    Cancela en cualquier momento • Garantía 30 días
+                    Acceso inmediato • Garantía 30 días
                   </p>
                 )}
               </CardContent>
@@ -144,19 +124,11 @@ const PricingSection = () => {
           ))}
         </div>
 
-        {/* Additional CTA Section */}
-        <div className="text-center mt-12 p-8 bg-muted/30 rounded-lg">
-          <h3 className="text-2xl font-bold text-primary mb-4">
-            ¿Necesitas algo más personalizado?
-          </h3>
-          <p className="text-muted-foreground mb-6">
-            Ofrecemos implementación completa y consultoría estratégica para empresas
+        {/* Simplified call to action */}
+        <div className="text-center mt-12">
+          <p className="text-muted-foreground">
+            Aprende paso a paso • Implementa a tu ritmo • Resultados garantizados
           </p>
-          <Button variant="outline" size="lg" asChild>
-            <Link to="/contacto">
-              Hablar con un Experto
-            </Link>
-          </Button>
         </div>
       </div>
     </section>

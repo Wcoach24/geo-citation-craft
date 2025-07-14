@@ -40,24 +40,11 @@ const Index = () => {
           {/* Social Proof temprano para generar confianza */}
           <SocialProofSection />
           
-          {/* Lead Capture estratégico después de social proof */}
-          <section className="py-8">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <InlineEmailCapture
-                title="Guía Gratuita: Los 10 Errores que Impiden ser Citado por IA"
-                description="Descarga nuestra checklist exclusiva y evita los errores más comunes en GEO"
-                leadMagnet="Guía de Errores GEO"
-                className="max-w-2xl mx-auto"
-              />
-            </div>
-          </section>
-          
-          {/* Precios más arriba para mejor conversión */}
+          {/* Pricing simplificado por módulos */}
           <PricingSection />
           
           <MethodologySection />
           <CasosDestacadosSection />
-          <CoachSection />
           <CtaSection />
         </main>
 
