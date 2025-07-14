@@ -121,7 +121,7 @@ const MethodologySection = () => {
                 <Link to="/curso/f1">Empezar con F1</Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">Coach personalizado</Link>
+                <Link to="/casos">Ver casos reales</Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/casos">Casos de éxito</Link>

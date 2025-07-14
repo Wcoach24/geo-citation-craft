@@ -422,9 +422,9 @@ Necesito un sistema práctico y sostenible que pueda implementar con mis recurso
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">
-                  <Bot className="mr-2 h-4 w-4" />
-                  Usar Coach GEO para F5
+                <Link to="/curso/f6">
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  Continuar con F6
                 </Link>
               </Button>
             </div>

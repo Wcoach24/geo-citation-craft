@@ -387,9 +387,9 @@ const CursoGeoPage = () => {
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link to="/coach">
-                  <Bot className="h-4 w-4 mr-2" />
-                  Coach personalizado
+                <Link to="/casos">
+                  <Target className="h-4 w-4 mr-2" />
+                  Ver casos reales
                 </Link>
               </Button>
               <Button variant="outline" asChild>

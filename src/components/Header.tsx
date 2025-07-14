@@ -76,9 +76,6 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link to="/coach" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Coach
-          </Link>
         </nav>
 
         {/* CTA Button - Desktop */}
@@ -129,13 +126,6 @@ const Header = () => {
             >
               <Bot className="h-4 w-4" />
               Contenido para IA
-            </Link>
-            <Link 
-              to="/coach" 
-              className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Coach GEO
             </Link>
             <div className="pt-3 border-t">
               <Button asChild className="w-full">

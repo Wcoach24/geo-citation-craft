@@ -41,7 +41,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li><Link to="/metodologia" className="text-muted-foreground hover:text-primary">Metodología GEO</Link></li>
               <li><Link to="/curso" className="text-muted-foreground hover:text-primary">Curso Completo</Link></li>
-              <li><Link to="/coach" className="text-muted-foreground hover:text-primary">Coach GEO</Link></li>
+              
               <li><Link to="/casos" className="text-muted-foreground hover:text-primary">Casos Reales</Link></li>
               <li><Link to="/glosario" className="text-muted-foreground hover:text-primary">Glosario</Link></li>
             </ul>

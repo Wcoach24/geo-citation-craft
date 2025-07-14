@@ -389,9 +389,9 @@ Necesito acciones prácticas y ejemplos que pueda implementar.`}
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">
-                  <Bot className="mr-2 h-4 w-4" />
-                  Usar Coach GEO para F3
+                <Link to="/curso/f4">
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  Continuar con F4
                 </Link>
               </Button>
             </div>

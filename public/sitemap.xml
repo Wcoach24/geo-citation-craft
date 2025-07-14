@@ -163,13 +163,6 @@
     <priority>0.8</priority>
   </url>
   
-  <!-- Coach GEO - Herramienta Interactiva - Prioridad Media-Alta -->
-  <url>
-    <loc>https://esgeo.ai/coach</loc>
-    <lastmod>2025-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
   
   <!-- Casos Reales - Prioridad Media -->
   <url>

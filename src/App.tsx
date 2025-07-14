@@ -3,10 +3,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import CursoGeoPage from "./pages/CursoGeoPage";
-import CoachGeoPage from "./pages/CoachGeoPage";
+
 import MetodologiaGeoPage from "./pages/MetodologiaGeoPage";
 import CasosRealesPage from "./pages/CasosRealesPage";
 import GlosarioPage from "./pages/GlosarioPage";
@@ -49,7 +49,8 @@ function App() {
             
             {/* Páginas principales */}
             <Route path="/curso" element={<CursoGeoPage />} />
-            <Route path="/coach" element={<CoachGeoPage />} />
+            {/* Coach redirige a metodología */}
+            <Route path="/coach" element={<Navigate to="/metodologia" replace />} />
             <Route path="/metodologia" element={<MetodologiaGeoPage />} />
             <Route path="/casos" element={<CasosRealesPage />} />
             <Route path="/glosario" element={<GlosarioPage />} />

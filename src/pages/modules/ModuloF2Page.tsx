@@ -345,9 +345,9 @@ Necesito que el contenido mantenga toda la información original pero optimizada
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">
-                  <Bot className="mr-2 h-4 w-4" />
-                  Usar Coach GEO para F2
+                <Link to="/curso/f3">
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  Continuar con F3
                 </Link>
               </Button>
             </div>

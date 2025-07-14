@@ -522,8 +522,8 @@ Necesito código específico y pasos detallados para mejorar la visibilidad téc
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild>
-                <Link to="/coach">
-                  Practicar con Coach GEO
+                <Link to="/casos">
+                  Ver casos reales
                 </Link>
               </Button>
               <Button variant="outline" asChild>
@@ -563,9 +563,9 @@ Necesito código específico y pasos detallados para mejorar la visibilidad téc
                 </Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">
-                  <Bot className="mr-2 h-4 w-4" />
-                  Coach GEO
+                <Link to="/metodologia">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  Metodología
                 </Link>
               </Button>
             </div>

@@ -393,9 +393,9 @@ Necesito un sistema práctico que pueda implementar inmediatamente y mantener a 
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/coach">
-                  <Bot className="mr-2 h-4 w-4" />
-                  Usar Coach GEO para F4
+                <Link to="/curso/f5">
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  Continuar con F5
                 </Link>
               </Button>
             </div>

@@ -8,7 +8,7 @@ import MethodologySection from "@/components/MethodologySection";
 import SocialProofSection from "@/components/SocialProofSection";
 import PricingSection from "@/components/PricingSection";
 import CasosDestacadosSection from "@/components/CasosDestacadosSection";
-import CoachSection from "@/components/CoachSection";
+
 import CtaSection from "@/components/CtaSection";
 import InlineEmailCapture from "@/components/InlineEmailCapture";
 import TableOfContents from "@/components/TableOfContents";

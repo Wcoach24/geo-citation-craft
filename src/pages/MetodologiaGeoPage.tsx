@@ -589,8 +589,8 @@ const MetodologiaGeoPage = () => {
                 </CardContent>
                 <CardFooter>
                   <Button variant="outline" className="w-full" asChild>
-                    <Link to="/coach">
-                      Explorar Coach GEO
+                    <Link to="/curso/f1">
+                      Empezar con F1
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
