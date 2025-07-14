@@ -48,27 +48,14 @@ const CtaSection = () => {
             No esperes a que tu competencia se adelante. Empieza a ser citado por IA desde hoy mismo.
           </p>
 
-          {/* Dual CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          {/* CTA Principal */}
+          <div className="flex justify-center mb-8">
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8" asChild>
               <Link to="/curso/f1">
                 <ArrowRight className="mr-2 h-5 w-5" />
                 Empezar con F1 Gratis
               </Link>
             </Button>
-            
-            <LeadMagnetModal
-              trigger={
-                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-background px-8">
-                  <Gift className="mr-2 h-5 w-5" />
-                  Descargar Checklist GEO
-                </Button>
-              }
-              title="Checklist GEO Completo"
-              description="La guía definitiva de 15 puntos para optimizar tu web y ser citado por IA"
-              leadMagnet="Checklist GEO"
-              benefits={leadMagnetBenefits}
-            />
           </div>
 
 

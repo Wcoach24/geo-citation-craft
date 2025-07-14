@@ -37,6 +37,9 @@ const Index = () => {
 
           <WhatIsGeoSection />
           
+          {/* Nuestro caso como evidencia de autoridad temprana */}
+          <CasosDestacadosSection />
+          
           {/* Social Proof temprano para generar confianza */}
           <SocialProofSection />
           
@@ -44,7 +47,6 @@ const Index = () => {
           <PricingSection />
           
           <MethodologySection />
-          <CasosDestacadosSection />
           <CtaSection />
         </main>
 
