@@ -2,9 +2,11 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import GeoTerm from "@/components/GeoTerm";
+import PremiumContentGate from "@/components/PremiumContentGate";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -228,83 +230,15 @@ const ModuloF2Page = () => {
             </div>
           </section>
 
-          {/* Pruebas y Ajustes */}
-          <section id="f2-pruebas-ajustes" className="mb-12 section-anchor">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Pruebas y Ajustes Iterativos</h2>
-              <ShareSectionButton sectionId="f2-pruebas-ajustes" title="pruebas y ajustes" />
-            </div>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              Para validar la efectividad de tu contenido semántico, es fundamental realizar pruebas directas con LLMs y analizar sus respuestas para ajustar y mejorar.
-            </p>
-            <HighlightSnippet variant="stat" className="mb-6">
-              <h3 className="text-lg font-medium mb-3">Prompts de Prueba Recomendados:</h3>
-              <ul className="space-y-2 text-base" data-speakable="true">
-                <li>"Resume esta URL: [tu-pagina-web]"</li>
-                <li>"¿Qué artículos explican claramente qué es [tu tema principal]?"</li>
-                <li>"¿Qué dice Perplexity sobre el concepto de [tu concepto clave]?"</li>
-                <li>"Compara las diferentes aproximaciones a [tu tema] según [tu marca] y [competidor principal]"</li>
-              </ul>
-            </HighlightSnippet>
-            <p className="text-muted-foreground leading-relaxed">
-              Después de cada prueba, evalúa si tu sitio aparece citado, si tu contenido es parafraseado o citado literalmente, si la IA entiende bien tus conceptos, y qué competidores aparecen junto a ti. Utiliza esta información para refinar tu contenido, reforzando las secciones bien citadas y clarificando las malinterpretadas.
-            </p>
-          </section>
+          {/* Premium Content Gate - F2 */}
+          <PremiumContentGate
+            moduleNumber="Módulo F2"
+            moduleName="Contexto Semántico y Formato Óptimo"
+            previewSections={["Objetivo del Módulo", "Principios Clave del Módulo"]}
+            fullContentSections={6}
+            className="mb-12"
+          />
 
-          {/* Checklist de Implementación */}
-          <section id="f2-checklist" className="mb-12 section-anchor">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Checklist de Implementación del Módulo F2</h2>
-              <ShareSectionButton sectionId="f2-checklist" title="checklist de implementación" />
-            </div>
-            <HighlightSnippet variant="insight" className="mb-6">
-              <ul className="list-disc list-inside space-y-2 text-lg leading-relaxed" data-speakable="true">
-                <li>Títulos y subtítulos reformulados como preguntas naturales</li>
-                <li>Sección de FAQ con preguntas reales y respuestas completas</li>
-                <li>Definiciones claras de todos los conceptos técnicos o específicos</li>
-                <li>Estructura jerárquica con H1, H2, H3 correctamente implementada</li>
-                <li>Listas, tablas y elementos visuales para facilitar la extracción</li>
-                <li>Ejemplos concretos y aplicables para cada concepto importante</li>
-                <li>Comparaciones claras con alternativas o conceptos relacionados</li>
-                <li>Beneficios específicos y cuantificables cuando sea posible</li>
-                <li>Lenguaje conversacional y explicativo en todo el contenido</li>
-                <li>Pruebas realizadas con <GeoTerm term="llm">LLMs</GeoTerm> para validar comprensión</li>
-              </ul>
-            </HighlightSnippet>
-            <p className="text-muted-foreground leading-relaxed">
-              Al implementar correctamente este módulo, tu contenido estará adaptado al lenguaje de LLMs, no al SEO tradicional, con un enfoque conversacional y explicativo, lo que aumentará la probabilidad de ser referenciado como fuente útil.
-            </p>
-          </section>
-
-          {/* Prompt para LLMs */}
-          <section id="f2-prompt" className="mb-12 section-anchor">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Prompt para Implementación con LLMs</h2>
-              <ShareSectionButton sectionId="f2-prompt" title="prompt para implementación" />
-            </div>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              Utiliza el siguiente prompt con ChatGPT, Claude u otro LLM para ayudarte a optimizar el contexto semántico y formato de tu contenido:
-            </p>
-            <HighlightSnippet variant="stat" className="bg-gray-100 border border-gray-300 p-4 rounded-lg">
-              <code className="block whitespace-pre-wrap text-sm font-mono">
-{`Actúa como un experto en GEO (Generative Engine Optimization) especializado en optimizar el formato y contexto semántico de contenidos web para LLMs.
-
-Tengo el siguiente contenido que quiero optimizar para que sea mejor comprendido y citado por modelos como ChatGPT, Claude o Perplexity:
-
-[PEGA TU CONTENIDO ACTUAL]
-
-Por favor:
-1. Reformula los títulos y subtítulos como preguntas conversacionales naturales.
-2. Mejora la claridad semántica definiendo todos los conceptos técnicos.
-3. Reestructura el contenido en bloques semánticos bien definidos.
-4. Añade ejemplos concretos y comparaciones para cada concepto importante.
-5. Transforma el lenguaje a un tono más conversacional y explicativo.
-6. Sugiere elementos visuales (listas, tablas, casillas) para mejorar la extracción.
-
-Necesito que el contenido mantenga toda la información original pero optimizada para ser mejor comprendida por LLMs.`}
-              </code>
-            </HighlightSnippet>
-          </section>
 
           {/* Navegación de Módulos */}
           <div className="mt-16 flex justify-between items-center">
@@ -315,45 +249,30 @@ Necesito que el contenido mantenga toda la información original pero optimizada
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/curso/f3">
-                Siguiente Módulo: F3 Redacción Citeable
+              <Link to="/checkout">
+                Desbloquear Contenido Completo
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
           </div>
 
-          {/* Contenido Relacionado */}
+          {/* Contenido Relacionado - Preview */}
           <div className="mt-16 p-6 bg-muted/30 rounded-lg">
-            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Herramientas Útiles</h3>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer">
-                  Perplexity.ai
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://answerthepublic.com/" target="_blank" rel="noopener noreferrer">
-                  AnswerThePublic
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://alsoasked.com/" target="_blank" rel="noopener noreferrer">
-                  AlsoAsked
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/curso/f3">
-                  <ArrowRight className="mr-2 h-4 w-4" />
-                  Continuar con F3
-                </Link>
+            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Vista Previa del Contenido Premium</h3>
+            <div className="text-center space-y-2 text-muted-foreground">
+              <p>✓ Checklist completo de implementación F2</p>
+              <p>✓ Prompts avanzados para LLMs</p>
+              <p>✓ Herramientas especializadas de análisis</p>
+              <p>✓ Casos prácticos paso a paso</p>
+              <Button variant="outline" size="sm" asChild className="mt-4">
+                <Link to="/checkout">Ver Todo el Contenido</Link>
               </Button>
             </div>
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };

@@ -2,9 +2,11 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import GeoTerm from "@/components/GeoTerm";
+import PremiumContentGate from "@/components/PremiumContentGate";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -221,80 +223,14 @@ const ModuloF3Page = () => {
             </div>
           </section>
 
-          {/* Componentes Clave del Módulo */}
-          <section id="f3-componentes" className="mb-12 section-anchor">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Componentes Clave del Módulo</h2>
-              <ShareSectionButton sectionId="f3-componentes" title="componentes clave" />
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Señales de Identidad Confiable</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Página "<Link to="/acerca-de" className="underline hover:text-primary">Sobre nosotros</Link>" transparente y profesional.</li>
-                    <li>• Información de contacto visible y operativa.</li>
-                    <li>• Perfiles de autor completos y verificables.</li>
-                    <li>• Dominio corporativo verificado.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Menciones y Ecosistema Digital</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Obtención de menciones (con o sin enlace) mediante guest blogging, entrevistas, notas de prensa.</li>
-                    <li>• Participación activa en comunidades relevantes.</li>
-                    <li>• Publicación en plataformas de autoridad.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Producción de Contenido con E-E-A-T + Aplicabilidad</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <p className="mb-2">Integración de:</p>
-                  <ul className="space-y-2">
-                    <li>• <strong>Experience:</strong> Anécdotas, estudios de caso propios.</li>
-                    <li>• <strong>Expertise:</strong> Conocimiento profundo, análisis detallados.</li>
-                    <li>• <strong>Authoritativeness:</strong> Reconocimientos, certificaciones.</li>
-                    <li>• <strong>Trustworthiness:</strong> Transparencia, citas de fuentes.</li>
-                    <li>• <strong>Aplicabilidad (GEO):</strong> Pasos prácticos, checklists, prompts.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Datos, Estudios y Pruebas Originales</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Publicar casos de estudio detallados.</li>
-                    <li>• Realizar encuestas o investigaciones propias.</li>
-                    <li>• Compartir datos internos (agregados y anonimizados).</li>
-                    <li>• Crear herramientas o calculadoras gratuitas.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20 md:col-span-2">
-                <CardHeader>
-                  <CardTitle className="text-xl">Reputación y Enlaces Cruzados Internos</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Interlinking estratégico con anchor text descriptivos.</li>
-                    <li>• Consolidar autoridad en páginas pilares.</li>
-                    <li>• Obtener enlaces de calidad desde sitios relevantes (aunque menos crucial).</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
+          {/* Premium Content Gate - F3 */}
+          <PremiumContentGate
+            moduleNumber="Módulo F3"
+            moduleName="Autoridad Generativa"
+            previewSections={["Objetivo del Módulo", "¿Cómo entiende un LLM la Autoridad?"]}
+            fullContentSections={7}
+            className="mb-12"
+          />
 
           {/* Checklist de Implementación */}
           <section id="f3-checklist" className="mb-12 section-anchor">
