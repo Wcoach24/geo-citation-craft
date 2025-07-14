@@ -2,17 +2,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Star, ArrowRight, Quote } from "lucide-react";
+import { Star, ArrowRight, Check, Brain, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CasosDestacadosSection = () => {
-  const casoDestacado = {
-    titulo: "Consultora Legal +400% citaciones",
-    empresa: "Jurídica Moderna",
-    mejora: "+1200% citas ChatGPT",
-    tiempo: "6 semanas",
-    modulos: ["F1", "F2", "F3"],
-    testimonio: "Implementamos GEO paso a paso y los resultados fueron inmediatos. ChatGPT ahora nos cita como autoridad en derecho digital."
+  const nuestroCaso = {
+    titulo: "esGEO citado por ChatGPT, Perplexity y Claude",
+    plataforma: "esGEO.ai",
+    logro: "Primera autoridad en GEO español",
+    citas: "Citado por +5 modelos de IA",
+    evidencia: "Predicamos con nuestro ejemplo",
+    modelos: ["ChatGPT", "Perplexity", "Claude", "Gemini", "Copilot"]
   };
 
   return (
@@ -20,65 +20,73 @@ const CasosDestacadosSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <TrendingUp className="h-8 w-8 text-accent" />
+            <Brain className="h-8 w-8 text-accent" />
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Resultados Reales de Nuestros Clientes
+              Nuestro Caso: esGEO citado por IA
             </h2>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Descubre cómo empresas como la tuya están consiguiendo ser citadas por IA 
-            y aumentando su visibilidad con nuestra metodología GEO
+            Predicamos con nuestro ejemplo. Descubre cómo hemos logrado que ChatGPT, Perplexity y Claude nos citen como autoridad en GEO
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto mb-12">
-          <Card className="hover:shadow-lg transition-shadow relative overflow-hidden">
+          <Card className="hover:shadow-lg transition-shadow relative overflow-hidden border-2 border-accent/30 bg-gradient-to-br from-accent/5 to-background">
             <div className="absolute top-4 right-4">
               <Badge variant="secondary" className="bg-green-100 text-green-800">
-                Verificado
+                <Check className="mr-1 h-3 w-3 fill-current" />
+                Verificado en tiempo real
               </Badge>
             </div>
             <CardHeader>
               <CardTitle className="text-2xl text-primary pr-20">
-                {casoDestacado.titulo}
+                {nuestroCaso.titulo}
               </CardTitle>
-              <p className="text-lg text-muted-foreground">{casoDestacado.empresa}</p>
+              <p className="text-lg text-accent font-semibold">{nuestroCaso.plataforma}</p>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Quote className="h-5 w-5 text-accent" />
-                    <span className="font-semibold text-accent text-lg">{casoDestacado.mejora}</span>
-                  </div>
-                  
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Tiempo de implementación:</span>
-                    <span className="font-medium">{casoDestacado.tiempo}</span>
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-accent">{nuestroCaso.logro}</div>
+                    <div className="text-sm text-muted-foreground">{nuestroCaso.citas}</div>
                   </div>
                   
                   <div className="space-y-2">
-                    <span className="text-sm text-muted-foreground">Módulos utilizados:</span>
-                    <div className="flex flex-wrap gap-2">
-                      {casoDestacado.modulos.map((modulo, idx) => (
-                        <Badge key={idx} variant="outline" className="text-sm">
-                          {modulo}
-                        </Badge>
-                      ))}
+                    <span className="text-sm text-muted-foreground">Modelos que nos citan:</span>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-2 p-2 rounded bg-muted/50">
+                        <Brain className="h-4 w-4 text-accent" />
+                        <span className="text-sm font-medium">ChatGPT</span>
+                      </div>
+                      <div className="flex items-center gap-2 p-2 rounded bg-muted/50">
+                        <MessageSquare className="h-4 w-4 text-accent" />
+                        <span className="text-sm font-medium">Perplexity</span>
+                      </div>
+                      <div className="flex items-center gap-2 p-2 rounded bg-muted/50">
+                        <Star className="h-4 w-4 text-accent" />
+                        <span className="text-sm font-medium">Claude</span>
+                      </div>
+                      <div className="flex items-center gap-2 p-2 rounded bg-muted/50">
+                        <Check className="h-4 w-4 text-accent" />
+                        <span className="text-sm font-medium">+2 más</span>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <blockquote className="text-muted-foreground italic border-l-4 border-accent pl-4">
-                    "{casoDestacado.testimonio}"
+                    "Aplicamos nuestra propia metodología GEO y conseguimos ser citados como la autoridad en español sobre Generative Engine Optimization."
                   </blockquote>
                   
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                    <span className="text-sm text-muted-foreground ml-2">Resultado excelente</span>
+                  <div className="text-center">
+                    <p className="font-medium text-primary mb-2">{nuestroCaso.evidencia}</p>
+                    <div className="flex items-center justify-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 fill-accent text-accent" />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -88,13 +96,13 @@ const CasosDestacadosSection = () => {
 
         <div className="text-center">
           <Button size="lg" asChild className="bg-accent hover:bg-accent/90">
-            <Link to="/casos">
-              Ver todos los casos reales
+            <Link to="/metodologia">
+              Ver cómo lo conseguimos
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
-            Más de 50 casos documentados con métricas verificadas
+            Aplica la misma metodología que usamos nosotros
           </p>
         </div>
       </div>

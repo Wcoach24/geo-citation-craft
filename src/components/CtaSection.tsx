@@ -53,7 +53,7 @@ const CtaSection = () => {
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8" asChild>
               <Link to="/curso/f1">
                 <ArrowRight className="mr-2 h-5 w-5" />
-                Empezar Curso Gratis
+                Empezar con F1 Gratis
               </Link>
             </Button>
             
@@ -71,15 +71,6 @@ const CtaSection = () => {
             />
           </div>
 
-          {/* Risk Reversal */}
-          <div className="bg-background/50 backdrop-blur-sm rounded-lg p-6 border border-accent/20">
-            <h3 className="font-semibold text-primary mb-2">
-              ✅ Sin riesgo • Garantía 30 días
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Si no ves mejoras en tu citabilidad por IA en 30 días, te devolvemos tu dinero.
-            </p>
-          </div>
 
           {/* Social Proof Mini */}
           <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">

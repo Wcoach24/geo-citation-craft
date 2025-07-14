@@ -1,17 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Sparkles, Target, Brain, Gift, Users, Clock } from "lucide-react";
+import { ArrowRight, Sparkles, Target, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import LeadMagnetModal from "./LeadMagnetModal";
+
 
 const HeroSection = () => {
-  const leadMagnetBenefits = [
-    "15 puntos de verificación GEO",
-    "Plantilla de auditoría técnica",
-    "Ejemplos reales de optimización",
-    "Checklist pre-implementación"
-  ];
 
   return (
     <section id="inicio" className="section-anchor lg:py-32 relative overflow-hidden py-[35px]">
@@ -52,18 +46,6 @@ const HeroSection = () => {
                 </Link>
               </Button>
               
-              <LeadMagnetModal
-                trigger={
-                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                    <Gift className="mr-2 h-4 w-4" />
-                    O descargar checklist GEO gratis
-                  </Button>
-                }
-                title="Checklist GEO Completo"
-                description="La guía definitiva de 15 puntos para optimizar tu web y ser citado por IA"
-                leadMagnet="Checklist GEO"
-                benefits={leadMagnetBenefits}
-              />
             </div>
             
             {/* Guarantee más visible */}
@@ -93,18 +75,24 @@ const HeroSection = () => {
           
           {/* Navegación simplificada */}
           <section className="p-6 bg-muted/30 rounded-lg">
-            <h2 className="font-semibold text-primary mb-4">Explora el ecosistema GEO</h2>
+            <h2 className="font-semibold text-primary mb-4">Contenido relacionado</h2>
             <div className="flex flex-wrap gap-3 justify-center">
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/acerca-de">
-                  <Brain className="mr-2 h-4 w-4" />
-                  ¿Qué es GEO?
+                <Link to="/curso/f1">
+                  <ArrowRight className="mr-2 h-4 w-4" />
+                  Empezar con F1
                 </Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/metodologia">
                   <Target className="mr-2 h-4 w-4" />
                   Ver Metodología
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/casos-reales">
+                  <Users className="mr-2 h-4 w-4" />
+                  Ejemplos reales
                 </Link>
               </Button>
             </div>
