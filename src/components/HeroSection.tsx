@@ -23,44 +23,40 @@ const HeroSection = () => {
             Metodología GEO pionera en español
           </Badge>
           
-          {/* Main Headline - Optimizado para conversión */}
+          {/* Main Headline - Más directo y comercial */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
-            Optimiza tu Contenido para ser <span className="text-accent">Citado por IA</span>
+            Haz que <span className="text-accent">ChatGPT Recomiende</span> Tu Negocio
           </h1>
           
           {/* Subheadline con beneficio específico */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-4 leading-relaxed">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed">
             esGEO es la primera metodología en español para posicionar tu web como fuente autoritativa en ChatGPT, Perplexity, Claude y los principales LLMs.
           </p>
 
-          {/* Elementos de urgencia/escasez */}
+          {/* Social proof más directo */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Badge variant="secondary" className="text-sm">
               <Users className="mr-2 h-4 w-4" />
-              1,247 profesionales ya optimizan
-            </Badge>
-            <Badge variant="secondary" className="text-sm">
-              <Clock className="mr-2 h-4 w-4" />
-              Únete antes de que suba el precio
+              +1,200 profesionales optimizando
             </Badge>
           </div>
           
-          {/* CTA Section - Dual CTA optimizado */}
+          {/* CTA Section - Un CTA principal más prominente */}
           <section className="mb-12">
             <h2 className="sr-only">Acciones principales</h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8" asChild>
+            <div className="flex flex-col gap-4 justify-center items-center">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-bold px-12 py-4 text-lg" asChild>
                 <Link to="/curso/f1">
-                  <ArrowRight className="mr-2 h-5 w-5" />
-                  Empezar Gratis Ahora
+                  <ArrowRight className="mr-2 h-6 w-6" />
+                  Empezar Curso Gratis
                 </Link>
               </Button>
               
               <LeadMagnetModal
                 trigger={
-                  <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-background px-8">
-                    <Gift className="mr-2 h-5 w-5" />
-                    Descargar Checklist GEO
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+                    <Gift className="mr-2 h-4 w-4" />
+                    O descargar checklist GEO gratis
                   </Button>
                 }
                 title="Checklist GEO Completo"
@@ -70,9 +66,9 @@ const HeroSection = () => {
               />
             </div>
             
-            {/* Risk Reversal */}
-            <p className="text-sm text-muted-foreground mt-4">
-              ✅ Sin riesgo • Garantía 30 días • Cancela cuando quieras
+            {/* Guarantee más visible */}
+            <p className="text-center text-primary font-medium mt-6 px-4 py-2 bg-accent/10 rounded-lg max-w-md mx-auto">
+              ✅ 100% Gratuito • Sin tarjeta de crédito
             </p>
           </section>
           

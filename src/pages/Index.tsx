@@ -34,8 +34,13 @@ const Index = () => {
         
         <main role="main">
           <HeroSection />
+
+          <WhatIsGeoSection />
           
-          {/* Lead Capture después del Hero */}
+          {/* Social Proof temprano para generar confianza */}
+          <SocialProofSection />
+          
+          {/* Lead Capture estratégico después de social proof */}
           <section className="py-8">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <InlineEmailCapture
@@ -46,27 +51,11 @@ const Index = () => {
               />
             </div>
           </section>
-
-          <WhatIsGeoSection />
           
-          {/* Social Proof después de explicar qué es GEO */}
-          <SocialProofSection />
+          {/* Precios más arriba para mejor conversión */}
+          <PricingSection />
           
           <MethodologySection />
-          
-          {/* Lead Capture después de metodología */}
-          <section className="py-8">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <InlineEmailCapture
-                title="Plantilla de Auditoría GEO Gratuita"
-                description="Evalúa tu web con nuestra plantilla profesional de 50+ puntos"
-                leadMagnet="Plantilla de Auditoría"
-                className="max-w-2xl mx-auto"
-              />
-            </div>
-          </section>
-          
-          <PricingSection />
           <CasosDestacadosSection />
           <CoachSection />
           <CtaSection />
