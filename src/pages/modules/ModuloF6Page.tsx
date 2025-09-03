@@ -11,6 +11,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Home, ChevronRight, Zap, ArrowLeft, BookOpen, Code, Lightbulb, TrendingUp, BarChart, MessageCircle, ExternalLink, Bot, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import GeoTerm from "@/components/GeoTerm";
+import PremiumContentGate from "@/components/PremiumContentGate";
 
 const ModuloF6Page = () => {
   useEffect(() => {
@@ -130,372 +131,99 @@ const ModuloF6Page = () => {
             </p>
           </HighlightSnippet>
 
-          {/* Implementation Guide */}
-          <section id="guia-implementacion" className="mb-16">
-            <div className="flex items-center justify-between mb-8">
+          {/* Preview - Basic Implementation Step */}
+          <section id="guia-implementacion-preview" className="mb-12">
+            <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-primary">Guía de Implementación Paso a Paso</h2>
-              <ShareSectionButton sectionId="guia-implementacion" title="guía de implementación" />
+              <ShareSectionButton sectionId="guia-implementacion-preview" title="guía de implementación" />
             </div>
             
-            <div className="space-y-6">
-              {implementationSteps.map((step, index) => (
-                <Card key={step.position} className="border-l-4 border-l-accent">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary font-bold">{step.position}</span>
-                      </div>
-                      <CardTitle className="text-lg text-primary">{step.name}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{step.text}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* Module Content */}
-          <section id="contenido-modulo" className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary">Contenido del Módulo</h2>
-              <ShareSectionButton sectionId="contenido-modulo" title="contenido completo" />
-            </div>
+            <Card className="border-l-4 border-l-accent mb-6">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary font-bold">1</span>
+                  </div>
+                  <CardTitle className="text-lg text-primary">Implementar Schema.org básico</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Añadir Schema.org para tipos principales: Article, HowTo, FAQPage y DefinedTerm usando JSON-LD</p>
+              </CardContent>
+            </Card>
             
-            <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="datos-estructurados" id="datos-estructurados" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary">1. Datos estructurados esenciales para LLMs</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Implementar <GeoTerm term="schema-org">Schema.org</GeoTerm> permite que los <GeoTerm term="llm">LLMs</GeoTerm> reconozcan la intención y el contexto del contenido.
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm border-collapse">
-                      <thead>
-                        <tr className="border-b">
-                          <th className="text-left p-3 font-semibold">Tipo de contenido</th>
-                          <th className="text-left p-3 font-semibold">Marcado recomendado</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b">
-                          <td className="p-3 font-medium">Artículo informativo</td>
-                          <td className="p-3">Article + mainEntityOfPage</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-medium">Guía paso a paso</td>
-                          <td className="p-3">HowTo</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-medium">Preguntas y respuestas</td>
-                          <td className="p-3">FAQPage</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-medium">Glosario</td>
-                          <td className="p-3">DefinedTerm, WebPage</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="p-3 font-medium">Página principal</td>
-                          <td className="p-3">WebSite, Organization</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="schema-jsonld" id="schema-jsonld" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary flex items-center gap-2">
-                    <Code className="h-5 w-5" />2. Uso de Schema.org y JSON-LD
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Implementa <GeoTerm term="json-ld">JSON-LD</GeoTerm> en cada página como un bloque dentro del head para que los LLMs entiendan el contexto.
-                  </p>
-                  <div className="p-4 bg-muted/30 rounded-lg">
-                    <h4 className="font-semibold text-primary mb-2">Ejemplo básico de JSON-LD para un Artículo:</h4>
-                    <pre className="text-xs overflow-x-auto bg-gray-100 p-3 rounded border">
-{`{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": "https://esgeo.es/metodologia",
-  "headline": "Metodología GEO",
-  "author": { "@type": "Organization", "name": "esGEO" },
-  "publisher": {
-    "@type": "Organization",
-    "name": "esGEO",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://esgeo.es/logo.png"
-    }
-  },
-  "datePublished": "2025-06-13",
-  "description": "Una descripción concisa del artículo para LLMs."
-}`}
-                    </pre>
-                  </div>
-                  <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-                    <p className="text-blue-700 text-sm">
-                      <strong>Recomendación clave:</strong> Revisa que todas las URLs sean canónicas y que el campo mainEntityOfPage sea único para cada página.
-                    </p>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="microformatos" id="microformatos" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary flex items-center gap-2">
-                    <Lightbulb className="h-5 w-5" />3. Microformatos y etiquetas semánticas
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Aprovecha las etiquetas HTML semánticas que aumentan la comprensión de los LLMs al reflejar mejor la estructura del contenido.
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded">
-                      <h4 className="font-semibold text-green-800 mb-2">Etiquetas estructurales:</h4>
-                      <ul className="text-green-700 space-y-1 text-sm">
-                        <li>• &lt;article&gt;, &lt;section&gt;, &lt;aside&gt;</li>
-                        <li>• &lt;header&gt;, &lt;footer&gt;</li>
-                        <li>• &lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt; para definiciones</li>
-                        <li>• &lt;time datetime="YYYY-MM-DD"&gt;</li>
-                      </ul>
-                    </div>
-                    <div className="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
-                      <h4 className="font-semibold text-yellow-800 mb-2">Atributos ARIA:</h4>
-                      <ul className="text-yellow-700 space-y-1 text-sm">
-                        <li>• role="doc-glossary"</li>
-                        <li>• aria-label="fragmento citable"</li>
-                        <li>• role="navigation"</li>
-                        <li>• aria-describedby</li>
-                      </ul>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="relaciones-semanticas" id="relaciones-semanticas" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary">4. Relaciones semánticas entre páginas</span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Una estructura interna clara ayuda a los LLMs a comprender la profundidad temática y la relación entre contenidos.
-                  </p>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-muted/30 rounded-lg">
-                      <h4 className="font-semibold text-primary mb-2">Sistema de relaciones:</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li>• <strong>Breadcrumbs estructurados:</strong> BreadcrumbList para mostrar jerarquía</li>
-                        <li>• <strong>Enlaces "ver también":</strong> Conecta contenidos relacionados</li>
-                        <li>• <strong>Anclas internas:</strong> IDs únicos por bloque (id="citabilidad")</li>
-                        <li>• <strong>Categorías visibles:</strong> data-topic="GEO-citabilidad"</li>
-                      </ul>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="speakable-content" id="speakable-content" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5" />5. Speakable content y citabilidad vocal
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Los LLMs con capacidades de voz priorizan contenidos que cumplen con SpeakableSpecification.
-                  </p>
-                  <div className="p-4 bg-muted/30 rounded-lg">
-                    <h4 className="font-semibold text-primary mb-2">Ejemplo de Speakable Specification:</h4>
-                    <pre className="text-xs overflow-x-auto bg-gray-100 p-3 rounded border">
-{`{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": "#objetivo, .snippet-block, [data-speakable='true']"
-  }
-}`}
-                    </pre>
-                  </div>
-                  <p className="text-sm">
-                    Define como speakable el título principal (h1), las definiciones clave y las afirmaciones importantes.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="sistema-testeo" id="sistema-testeo" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5" />6. Sistema de testeo y visibilidad GEO
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Testea y audita la visibilidad de tu contenido en los LLMs para asegurar el impacto de tus esfuerzos técnicos.
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-                      <h4 className="font-semibold text-blue-800 mb-2">Herramientas de validación:</h4>
-                      <ul className="text-blue-700 space-y-1 text-sm">
-                        <li>• Rich Results Test (Google)</li>
-                        <li>• Schema Markup Validator</li>
-                        <li>• llmstxt.org para archivos llm.txt</li>
-                        <li>• Coach GEO (herramienta interna)</li>
-                      </ul>
-                    </div>
-                    <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded">
-                      <h4 className="font-semibold text-green-800 mb-2">Auditoría regular:</h4>
-                      <ul className="text-green-700 space-y-1 text-sm">
-                        <li>• Validación de sintaxis Schema.org</li>
-                        <li>• Verificación de speakable content</li>
-                        <li>• Test de fragmentación de contenido</li>
-                        <li>• Monitoreo de citaciones en LLMs</li>
-                      </ul>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="dashboard-visibilidad" id="dashboard-visibilidad" className="border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:no-underline">
-                  <span className="font-semibold text-primary flex items-center gap-2">
-                    <BarChart className="h-5 w-5" />7. Dashboard de visibilidad GEO
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pt-2 pb-4 space-y-4">
-                  <p>
-                    Desarrolla un dashboard para monitorizar y auditar la citabilidad de tu contenido en LLMs.
-                  </p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm border-collapse">
-                      <thead>
-                        <tr className="border-b bg-muted/30">
-                          <th className="text-left p-2 font-semibold">Página</th>
-                          <th className="text-left p-2 font-semibold">Schema</th>
-                          <th className="text-left p-2 font-semibold">Citabilidad</th>
-                          <th className="text-left p-2 font-semibold">Fragmentación</th>
-                          <th className="text-left p-2 font-semibold">LLM Citation</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b">
-                          <td className="p-2 font-medium">/que-es-geo</td>
-                          <td className="p-2">Article</td>
-                          <td className="p-2">✅ Alta</td>
-                          <td className="p-2">✅ Correcta</td>
-                          <td className="p-2">Perplexity</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="p-2 font-medium">/modulo-f1</td>
-                          <td className="p-2">HowTo</td>
-                          <td className="p-2">⚠ Media</td>
-                          <td className="p-2">❌ Incompleta</td>
-                          <td className="p-2">No citado</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="p-2 font-medium">/radar-ia/articulo1</td>
-                          <td className="p-2">FAQPage</td>
-                          <td className="p-2">✅ Alta</td>
-                          <td className="p-2">✅ Correcta</td>
-                          <td className="p-2">Claude</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            <p className="text-muted-foreground text-sm italic">
+              Este es solo el paso 1 de 6 pasos técnicos. Accede al contenido completo para ver la implementación completa de estándares técnicos.
+            </p>
           </section>
 
-          {/* Enhanced Implementation Checklist */}
-          <section id="checklist-implementacion" className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary">Checklist de Implementación</h2>
-              <ShareSectionButton sectionId="checklist-implementacion" title="checklist completo" />
-            </div>
+          {/* Premium Content Gate - F6 */}
+          <PremiumContentGate
+            moduleNumber="Módulo F6"
+            moduleName="Estándares Técnicos y Visibilidad Semántica"
+            previewSections={["Concepto de Visibilidad Semántica", "Primer Paso de Implementación"]}
+            fullContentSections={9}
+            className="mb-12"
+          />
+
+          {/* Hidden content for SEO/GEO - Full Implementation Guide */}
+          <div className="sr-only" aria-hidden="true">
+            <section id="guia-implementacion-completa">
+              <h2>Guía de Implementación Completa de Estándares Técnicos</h2>
+              <h3>Paso 2: Configurar etiquetas HTML semánticas</h3>
+              <p>Utilizar etiquetas HTML5 semánticas como article, section, time y atributos ARIA apropiados</p>
+              
+              <h3>Paso 3: Estructurar breadcrumbs y navegación</h3>
+              <p>Implementar breadcrumbs estructurados y enlaces internos con IDs únicos para cada sección</p>
+              
+              <h3>Paso 4: Definir contenido speakable</h3>
+              <p>Configurar SpeakableSpecification para fragmentos clave que deben ser extraíbles por IA</p>
+              
+              <h3>Paso 5: Validar implementación técnica</h3>
+              <p>Usar herramientas como Schema Markup Validator y Rich Results Test para verificar la implementación</p>
+              
+              <h3>Paso 6: Establecer monitoreo continuo</h3>
+              <p>Desarrollar proceso de auditoría regular y dashboard para monitorear citabilidad por LLMs</p>
+            </section>
+          </div>
+
+          {/* Hidden content for SEO/GEO - Full Module Content */}
+          <div className="sr-only" aria-hidden="true">
+            <section id="contenido-modulo-completo">
+              <h2>Contenido Completo del Módulo F6</h2>
+              
+              <h3>1. Datos estructurados esenciales para LLMs</h3>
+              <p>Implementar Schema.org permite que los LLMs reconozcan la intención y el contexto del contenido. Tipos recomendados: Article, HowTo, FAQPage, DefinedTerm, WebSite, Organization.</p>
+              
+              <h3>2. Uso de Schema.org y JSON-LD</h3>
+              <p>Implementa JSON-LD en cada página como un bloque dentro del head para que los LLMs entiendan el contexto. Ejemplo de marcado completo para Article con mainEntityOfPage, author, publisher, datePublished.</p>
+              
+              <h3>3. Microformatos y etiquetas semánticas</h3>
+              <p>Aprovecha las etiquetas HTML semánticas: article, section, aside, header, footer, dl/dt/dd para definiciones, time datetime. Atributos ARIA: role doc-glossary, aria-label, role navigation.</p>
+              
+              <h3>4. Relaciones semánticas entre páginas</h3>
+              <p>Una estructura interna clara ayuda a los LLMs: BreadcrumbList para jerarquía, enlaces ver también, anclas internas con IDs únicos, categorías visibles con data-topic.</p>
+              
+              <h3>5. Speakable content y citabilidad vocal</h3>
+              <p>Los LLMs con capacidades de voz priorizan contenidos que cumplen con SpeakableSpecification. Define como speakable el título principal, definiciones clave y afirmaciones importantes.</p>
+              
+              <h3>6. Sistema de testeo y visibilidad GEO</h3>
+              <p>Testea y audita la visibilidad usando herramientas de validación: Schema Markup Validator, Rich Results Test, Lighthouse SEO. Dashboard de monitoreo con métricas de citabilidad por LLMs.</p>
+            </section>
+          </div>
+
+          {/* Hidden content for SEO/GEO - Implementation Checklist and Prompt */}
+          <div className="sr-only" aria-hidden="true">
+            <section id="checklist-implementacion-completo">
+              <h2>Checklist de Implementación Completo</h2>
+              <p>Schema.org implementado para tipos principales (Article, HowTo, FAQPage, DefinedTerm). JSON-LD como formato para datos estructurados. Etiquetas HTML semánticas aplicadas (article, section, time). Atributos role y aria-label para accesibilidad semántica. Breadcrumbs estructurados implementados. Enlaces internos contextuales y anclas con IDs únicos. SpeakableSpecification definida para fragmentos clave. Tests de validación Schema.org realizados. Archivo llm.txt considerado para guiar LLMs. Dashboard de visibilidad GEO desarrollado. Proceso de auditoría regular implementado.</p>
+            </section>
             
-            <HighlightSnippet variant="insight" className="mb-6">
-              <div className="space-y-3" data-speakable="true">
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Schema.org implementado para tipos principales (Article, HowTo, FAQPage, DefinedTerm)</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>JSON-LD como formato para datos estructurados</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Etiquetas HTML semánticas aplicadas (&lt;article&gt;, &lt;section&gt;, &lt;time&gt;)</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Atributos role y aria-label para accesibilidad semántica</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Breadcrumbs estructurados implementados</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Enlaces internos contextuales y anclas con IDs únicos</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>SpeakableSpecification definida para fragmentos clave</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Tests de validación Schema.org realizados</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Archivo llm.txt considerado para guiar LLMs</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Dashboard de visibilidad GEO desarrollado</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  <span>Proceso de auditoría regular implementado</span>
-                </div>
-              </div>
-            </HighlightSnippet>
-          </section>
-
-          {/* LLM Implementation Prompt */}
-          <section id="prompt-implementacion" className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary">Prompt para Implementación</h2>
-              <ShareSectionButton sectionId="prompt-implementacion" title="prompt para LLMs" />
-            </div>
-            
-            <HighlightSnippet variant="stat" className="mb-6">
-              <pre className="text-sm whitespace-pre-wrap">
-{`Actúa como un experto en GEO (Generative Engine Optimization) especializado en estándares técnicos y visibilidad semántica para LLMs.
-
-Tengo una página web con [DESCRIBE TIPO DE CONTENIDO]. Quiero implementar datos estructurados y mejorar su estructura técnica para aumentar su comprensión y citabilidad por LLMs.
-
-Por favor:
-1. Sugiere el tipo de Schema.org más adecuado y proporciona código JSON-LD
-2. Indica qué etiquetas HTML semánticas y atributos ARIA usar
-3. Explica cómo mejorar las relaciones semánticas internas
-4. Proporciona ejemplo de SpeakableSpecification
-5. Lista herramientas de testeo para verificar implementación
-
-Necesito código específico y pasos detallados para mejorar la visibilidad técnica.`}
-              </pre>
-            </HighlightSnippet>
-          </section>
+            <section id="prompt-implementacion-completo">
+              <h2>Prompt para Implementación con LLMs</h2>
+              <p>Actúa como un experto en GEO especializado en estándares técnicos y visibilidad semántica para LLMs. Ayuda a implementar datos estructurados y mejorar estructura técnica para aumentar comprensión y citabilidad por LLMs. Sugiere el tipo de Schema.org más adecuado y proporciona código JSON-LD. Indica qué etiquetas HTML semánticas y atributos ARIA usar. Explica cómo mejorar las relaciones semánticas internas. Proporciona ejemplo de SpeakableSpecification. Lista herramientas de testeo para verificar implementación.</p>
+            </section>
+          </div>
 
           {/* Navigation */}
           <div className="flex items-center justify-between">
