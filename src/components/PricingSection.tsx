@@ -9,25 +9,25 @@ import { Link } from "react-router-dom";
 const PricingSection = () => {
 const modules = [
     {
-      name: "F1 Gratis",
+      name: "F0 Diagnóstico",
       price: "0",
-      description: "Fundamentos de GEO - Completamente gratis",
+      description: "Evaluación gratuita - ¿Necesitas GEO?",
       icon: Users,
       features: [
-        "Comprende qué es GEO y por qué es crucial",
-        "Aprende los principios básicos de citabilidad",
-        "Estructura tu contenido para LLMs",
-        "Primeras optimizaciones prácticas"
+        "Diagnóstico completo de tu sitio web",
+        "Identificación de problemas con IA",
+        "Introducción al framework GEO completo",
+        "Evaluación de necesidades específicas"
       ],
-      cta: "Empezar F1 Gratis",
+      cta: "Empezar Diagnóstico Gratis",
       ctaVariant: "default" as const,
       popular: true,
-      link: "/curso/f1"
+      link: "/curso/f0"
     },
     {
       name: "Módulos Individuales",
       price: "10",
-      description: "Cada módulo F2-F6 por separado",
+      description: "Cada módulo F1-F6 por separado",
       icon: Zap,
       features: [
         "Acceso a módulo específico elegido",
@@ -42,17 +42,18 @@ const modules = [
       link: "/checkout?type=module"
     },
     {
-      name: "Curso Completo F2-F6",
-      price: "40",
-      originalPrice: "50",
+      name: "Curso Completo F1-F6",
+      price: "50",
+      originalPrice: "60",
       description: "Framework completo de optimización GEO",
       icon: Crown,
       features: [
+        "F1: Accesibilidad generativa básica",
         "F2: Estructura semántica avanzada",
         "F3: Contenido citable y autoritativo",
-        "F4: Datos estructurados y metadatos", 
-        "F5: Optimización técnica para LLMs",
-        "F6: Medición y análisis de citabilidad",
+        "F4: Validación conversacional", 
+        "F5: Mantenimiento generativo",
+        "F6: Optimización técnica avanzada",
         "Ahorro de €10 vs módulos individuales"
       ],
       cta: "Comprar Curso Completo",

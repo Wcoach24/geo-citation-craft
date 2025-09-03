@@ -20,6 +20,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import NotFound from "./pages/NotFound";
 
 // Módulos del curso
+import ModuloF0Page from "./pages/modules/ModuloF0Page";
 import ModuloF1Page from "./pages/modules/ModuloF1Page";
 import ModuloF2Page from "./pages/modules/ModuloF2Page";
 import ModuloF3Page from "./pages/modules/ModuloF3Page";
@@ -67,6 +68,7 @@ function App() {
             <Route path="/terminos" element={<TerminosPage />} />
             
             {/* Módulos del curso */}
+            <Route path="/curso/f0" element={<ModuloF0Page />} />
             <Route path="/curso/f1" element={<ModuloF1Page />} />
             <Route path="/curso/f2" element={<ModuloF2Page />} />
             <Route path="/curso/f3" element={<ModuloF3Page />} />

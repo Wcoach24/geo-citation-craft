@@ -14,11 +14,15 @@ import { useToast } from "@/hooks/use-toast";
 
 const CheckoutPage = () => {
   const [selectedPlan, setSelectedPlan] = useState("complete");
-  const [selectedModule, setSelectedModule] = useState("f2");
+  const [selectedModule, setSelectedModule] = useState("f1");
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
 
   const modules = {
+    f1: {
+      name: "F1: Accesibilidad Generativa",
+      description: "Base técnica fundamental para LLMs"
+    },
     f2: {
       name: "F2: Contexto Semántico",
       description: "Estructura semántica y formato óptimo"
@@ -28,16 +32,16 @@ const CheckoutPage = () => {
       description: "Contenido citable y autoritativo"
     },
     f4: {
-      name: "F4: Metadatos Estructurados", 
-      description: "Datos estructurados y metadatos para LLMs"
+      name: "F4: Validación Conversacional", 
+      description: "Validación directa con modelos de IA"
     },
     f5: {
-      name: "F5: Optimización Técnica",
-      description: "Optimización técnica específica para LLMs"
+      name: "F5: Mantenimiento Generativo",
+      description: "Sistemas automáticos de mantenimiento GEO"
     },
     f6: {
-      name: "F6: Medición GEO",
-      description: "Medición y análisis de citabilidad"
+      name: "F6: Optimización Técnica",
+      description: "Configuraciones avanzadas para LLMs"
     }
   };
 
@@ -55,15 +59,16 @@ const CheckoutPage = () => {
       ]
     },
     complete: {
-      name: "Curso Completo F2-F6",
-      price: 40,
-      originalPrice: 50,
+      name: "Curso Completo F1-F6",
+      price: 50,
+      originalPrice: 60,
       features: [
+        "F1: Accesibilidad generativa básica",
         "F2: Estructura semántica avanzada",
         "F3: Contenido citable y autoritativo",
-        "F4: Datos estructurados y metadatos",
-        "F5: Optimización técnica para LLMs",
-        "F6: Medición y análisis de citabilidad",
+        "F4: Validación conversacional directa",
+        "F5: Mantenimiento generativo automático",
+        "F6: Optimización técnica avanzada",
         "Plantillas y checklists completos",
         "Implementación paso a paso autoguiada"
       ]

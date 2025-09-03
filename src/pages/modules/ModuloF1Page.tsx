@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import GeoTerm from "@/components/GeoTerm";
+import PremiumContentGate from "@/components/PremiumContentGate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -164,167 +165,71 @@ const ModuloF1Page = () => {
                 Es el primer filtro y el más crítico en <GeoTerm term="geo">GEO</GeoTerm>.
               </p>
             </HighlightSnippet>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed mb-6">
               Los modelos generativos acceden al contenido tanto durante su entrenamiento como en tiempo real a través de sistemas como RAG. 
               Si tu web no es accesible o no está estructurada correctamente, serás invisible para los usuarios que buscan información a través de estos sistemas.
             </p>
+            
+            <PremiumContentGate 
+              moduleNumber="F1"
+              moduleName="Fundamentos: Accesibilidad Generativa"
+              previewSections={[
+                "Objetivo del módulo",
+                "Visión general de los componentes clave"
+              ]}
+              fullContentSections={8}
+              className="mt-8"
+            />
           </section>
 
-          {/* Componentes Clave */}
-          <section id="f1-componentes" className="mb-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Componentes Clave</h2>
-              <ShareSectionButton sectionId="f1-componentes" title="componentes F1" />
+          {/* Preview de Contenido Premium */}
+          <div className="mb-12 p-6 bg-muted/30 rounded-lg">
+            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Vista Previa del Contenido Premium</h3>
+            <div className="grid md:grid-cols-2 gap-4 mb-6">
+              <div className="space-y-2">
+                <h4 className="font-medium">✅ Incluido en F1:</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>• Checklist completo de implementación</li>
+                  <li>• Configuración detallada de robots.txt</li>
+                  <li>• Plantillas de datos estructurados</li>
+                  <li>• Prompt listo para usar con LLMs</li>
+                </ul>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-medium">🎯 Resultados esperados:</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>• Contenido accesible para LLMs</li>
+                  <li>• Base técnica sólida para GEO</li>
+                  <li>• Preparación para módulos F2-F6</li>
+                  <li>• Implementación en 2-3 horas</li>
+                </ul>
+              </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-6" data-speakable="true">
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Indexabilidad y Acceso Técnico</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Configuración óptima de `robots.txt` para bots de IA</li>
-                    <li>• Registro en Bing Webmaster Tools y configuración de IndexNow</li>
-                    <li>• Resultado: Tu contenido es rastreable y considerado como fuente potencial</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Estructura para Comprensión Semántica</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Uso correcto de HTML semántico y jerarquía de encabezados</li>
-                    <li>• Implementación de datos estructurados (Schema.org) relevantes (FAQPage, HowTo, Article)</li>
-                    <li>• Resultado: Contenido claro y clasificable por LLMs</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Metadatos Claros y Actualizados</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Fechas de publicación y última revisión visibles y estandarizadas</li>
-                    <li>• Meta títulos y descripciones optimizados</li>
-                    <li>• Resultado: Señales claras de frescura y confiabilidad</li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card className="bg-muted/20">
-                <CardHeader>
-                  <CardTitle className="text-xl">Autoría y Autoridad Básica</CardTitle>
-                </CardHeader>
-                <CardContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Firma visible de autor y página "Sobre nosotros" completa</li>
-                    <li>• Información de contacto real y perfiles sociales activos</li>
-                    <li>• Resultado: La IA asocia tu sitio con una fuente confiable</li>
-                  </ul>
-                </CardContent>
-              </Card>
+            
+            <div className="text-center">
+              <Button asChild size="lg">
+                <Link to="/checkout?type=module&module=f1">
+                  Acceder al Módulo F1 - €10
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
             </div>
-          </section>
-
-          {/* Checklist de Implementación */}
-          <section id="f1-checklist" className="mb-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Checklist de Implementación del Módulo F1</h2>
-              <ShareSectionButton sectionId="f1-checklist" title="checklist F1" />
-            </div>
-            <HighlightSnippet variant="insight" className="mb-6">
-              <ul className="list-disc list-inside space-y-2 text-lg leading-relaxed" data-speakable="true">
-                <li>Archivo `robots.txt` configurado para permitir bots de IA relevantes</li>
-                <li>HTML semántico implementado en todas las páginas importantes</li>
-                <li>Schema.org añadido para el tipo de contenido principal</li>
-                <li>Fechas de publicación y actualización visibles</li>
-                <li>Información de autor completa y enlazada</li>
-                <li>Página "Sobre nosotros" detallada y profesional</li>
-                <li>Información de contacto visible y funcional</li>
-                <li>Sitio registrado en Bing Webmaster Tools</li>
-                <li>Sistema IndexNow configurado para notificaciones</li>
-                <li>Validación técnica completada sin errores</li>
-              </ul>
-            </HighlightSnippet>
-            <p className="text-muted-foreground leading-relaxed">
-              Al completar este módulo, tu contenido pasará de ser simplemente "visible en buscadores" a ser comprensible y usable por modelos generativos, 
-              el primer paso fundamental para aparecer en sus respuestas.
-            </p>
-          </section>
-
-          {/* Prompt para LLMs */}
-          <section id="f1-prompt" className="mb-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Prompt para Implementación con LLMs</h2>
-              <ShareSectionButton sectionId="f1-prompt" title="prompt F1" />
-            </div>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              Puedes utilizar este prompt con ChatGPT, Claude u otro LLM para ayudarte a implementar los aspectos técnicos de este módulo:
-            </p>
-            <HighlightSnippet variant="stat" className="bg-gray-100 border border-gray-300 p-4 rounded-lg">
-              <code className="block whitespace-pre-wrap text-sm font-mono" data-speakable="true">
-{`Actúa como un consultor experto en GEO (Generative Engine Optimization). Necesito implementar las bases técnicas para que mi sitio web sea accesible para modelos de IA generativa.
-
-Mi sitio web es: [DESCRIBE TU SITIO, TEMÁTICA Y PLATAFORMA]
-
-Por favor, ayúdame a:
-1. Crear un archivo robots.txt optimizado para permitir el acceso a bots de IA relevantes
-2. Generar el código JSON-LD de schema.org apropiado para mi tipo de contenido principal
-3. Revisar y mejorar la estructura HTML semántica de mis páginas
-4. Implementar correctamente los metadatos y la información de autor
-
-Necesito código específico y pasos detallados que pueda implementar directamente.`}
-              </code>
-            </HighlightSnippet>
-          </section>
+          </div>
 
           {/* Navegación de Módulos */}
           <div className="flex justify-between items-center mb-16">
             <Button variant="outline" asChild>
-              <Link to="/curso">
+              <Link to="/curso/f0">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Volver al Curso
+                Volver a F0
               </Link>
             </Button>
-            <Button asChild>
-              <Link to="/curso/f2">
-                Siguiente Módulo: F2
+            <Button variant="outline" asChild>
+              <Link to="/checkout?type=complete">
+                Ver Curso Completo F1-F6
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
-          </div>
-
-          {/* Contenido Relacionado */}
-          <div className="p-6 bg-muted/30 rounded-lg">
-            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Recursos Complementarios</h3>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank" rel="noopener noreferrer">
-                  Verificador de robots.txt (Google)
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://validator.schema.org/" target="_blank" rel="noopener noreferrer">
-                  Validador de Schema.org
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://www.indexnow.org/" target="_blank" rel="noopener noreferrer">
-                  Guía de IndexNow
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/curso/f2">
-                  <ArrowRight className="mr-2 h-4 w-4" />
-                  Continuar con F2
-                </Link>
-              </Button>
-            </div>
           </div>
         </div>
       </main>
