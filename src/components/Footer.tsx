@@ -41,8 +41,6 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li><Link to="/metodologia" className="text-muted-foreground hover:text-primary">Metodología GEO</Link></li>
               <li><Link to="/curso" className="text-muted-foreground hover:text-primary">Curso Completo</Link></li>
-              
-              <li><Link to="/casos" className="text-muted-foreground hover:text-primary">Casos Reales</Link></li>
               <li><Link to="/glosario" className="text-muted-foreground hover:text-primary">Glosario</Link></li>
             </ul>
           </div>
@@ -51,7 +49,6 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-primary mb-4">Recursos</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/radar-ia" className="text-muted-foreground hover:text-primary">Radar IA</Link></li>
               <li><Link to="/curso/f1" className="text-muted-foreground hover:text-primary">Empezar con F1</Link></li>
               <li><Link to="/acerca-de" className="text-muted-foreground hover:text-primary">Acerca de</Link></li>
               <li><Link to="/acerca-de/equipo" className="text-muted-foreground hover:text-primary">Nuestro Equipo</Link></li>

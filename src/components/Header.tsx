@@ -52,29 +52,9 @@ const Header = () => {
             Metodología
           </Link>
           
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              <span>Recursos</span>
-              <ChevronDown className="h-4 w-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <Link to="/glosario">Glosario</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/casos">Casos Reales</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/radar-ia">Radar IA</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/contenido-ia" className="flex items-center gap-2">
-                  <Bot className="h-4 w-4" />
-                  Contenido para IA
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Link to="/glosario" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            Glosario
+          </Link>
 
         </nav>
 
@@ -118,14 +98,6 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Glosario
-            </Link>
-            <Link 
-              to="/contenido-ia" 
-              className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Bot className="h-4 w-4" />
-              Contenido para IA
             </Link>
             <div className="pt-3 border-t">
               <Button asChild className="w-full">
