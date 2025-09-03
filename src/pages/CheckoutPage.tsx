@@ -14,8 +14,32 @@ import { useToast } from "@/hooks/use-toast";
 
 const CheckoutPage = () => {
   const [selectedPlan, setSelectedPlan] = useState("complete");
+  const [selectedModule, setSelectedModule] = useState("f2");
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
+
+  const modules = {
+    f2: {
+      name: "F2: Contexto Semántico",
+      description: "Estructura semántica y formato óptimo"
+    },
+    f3: {
+      name: "F3: Autoridad Generativa",
+      description: "Contenido citable y autoritativo"
+    },
+    f4: {
+      name: "F4: Metadatos Estructurados", 
+      description: "Datos estructurados y metadatos para LLMs"
+    },
+    f5: {
+      name: "F5: Optimización Técnica",
+      description: "Optimización técnica específica para LLMs"
+    },
+    f6: {
+      name: "F6: Medición GEO",
+      description: "Medición y análisis de citabilidad"
+    }
+  };
 
   const plans = {
     module: {
@@ -23,11 +47,11 @@ const CheckoutPage = () => {
       price: 10,
       originalPrice: undefined,
       features: [
-        "Acceso a módulo específico elegido",
-        "Contenido completo y detallado",
-        "Plantillas y checklists incluidos",
-        "Implementación paso a paso autoguiada",
-        "Recursos descargables"
+        `Acceso completo al ${modules[selectedModule as keyof typeof modules].name}`,
+        "Contenido detallado y explicaciones paso a paso",
+        "Plantillas y checklists específicos del módulo",
+        "Implementación práctica autoguiada",
+        "Recursos descargables incluidos"
       ]
     },
     complete: {
@@ -92,31 +116,58 @@ const CheckoutPage = () => {
                     {/* Plan Selection */}
                     <div className="space-y-3">
                       {Object.entries(plans).map(([key, plan]) => (
-                        <div
-                          key={key}
-                          className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                            selectedPlan === key ? 'border-accent bg-accent/5' : 'border-muted'
-                          }`}
-                          onClick={() => setSelectedPlan(key)}
-                        >
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h3 className="font-semibold">{plan.name}</h3>
-                              <div className="flex items-center gap-2 mt-1">
-                                <span className="text-2xl font-bold">€{plan.price}</span>
-                                {plan.originalPrice && (
-                                  <>
-                                    <span className="text-muted-foreground line-through">€{plan.originalPrice}</span>
-                                    <Badge variant="secondary">-€{plan.originalPrice - plan.price}</Badge>
-                                  </>
-                                )}
+                        <div key={key} className="space-y-3">
+                          <div
+                            className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                              selectedPlan === key ? 'border-accent bg-accent/5' : 'border-muted'
+                            }`}
+                            onClick={() => setSelectedPlan(key)}
+                          >
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <h3 className="font-semibold">{plan.name}</h3>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-2xl font-bold">€{plan.price}</span>
+                                  {plan.originalPrice && (
+                                    <>
+                                      <span className="text-muted-foreground line-through">€{plan.originalPrice}</span>
+                                      <Badge variant="secondary">-€{plan.originalPrice - plan.price}</Badge>
+                                    </>
+                                  )}
+                                </div>
+                                <p className="text-xs text-muted-foreground mt-1">Pago único</p>
                               </div>
-                              <p className="text-xs text-muted-foreground mt-1">Pago único</p>
+                              <div className={`w-4 h-4 rounded-full border-2 ${
+                                selectedPlan === key ? 'bg-accent border-accent' : 'border-muted'
+                              }`} />
                             </div>
-                            <div className={`w-4 h-4 rounded-full border-2 ${
-                              selectedPlan === key ? 'bg-accent border-accent' : 'border-muted'
-                            }`} />
                           </div>
+                          
+                          {/* Module Selection for Individual Module */}
+                          {selectedPlan === 'module' && key === 'module' && (
+                            <div className="ml-4 space-y-2">
+                              <h4 className="text-sm font-medium text-muted-foreground">Selecciona el módulo:</h4>
+                              {Object.entries(modules).map(([moduleKey, moduleInfo]) => (
+                                <div
+                                  key={moduleKey}
+                                  className={`p-3 border rounded cursor-pointer transition-colors ${
+                                    selectedModule === moduleKey ? 'border-accent bg-accent/5' : 'border-muted'
+                                  }`}
+                                  onClick={() => setSelectedModule(moduleKey)}
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <div>
+                                      <h5 className="font-medium text-sm">{moduleInfo.name}</h5>
+                                      <p className="text-xs text-muted-foreground">{moduleInfo.description}</p>
+                                    </div>
+                                    <div className={`w-3 h-3 rounded-full border ${
+                                      selectedModule === moduleKey ? 'bg-accent border-accent' : 'border-muted'
+                                    }`} />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
