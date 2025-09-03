@@ -13,35 +13,35 @@ import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const CheckoutPage = () => {
-  const [selectedPlan, setSelectedPlan] = useState("starter");
+  const [selectedPlan, setSelectedPlan] = useState("complete");
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
 
   const plans = {
-    starter: {
-      name: "Starter",
-      price: 29,
-      originalPrice: 49,
+    module: {
+      name: "Módulo Individual",
+      price: 10,
+      originalPrice: undefined,
       features: [
-        "Módulos F1, F2 y F3 completos",
-        "Coach GEO avanzado con IA",
-        "Email support prioritario",
-        "Plantillas y checklists premium",
-        "Webinars mensuales exclusivos"
+        "Acceso a módulo específico elegido",
+        "Contenido completo y detallado",
+        "Plantillas y checklists incluidos",
+        "Implementación paso a paso autoguiada",
+        "Recursos descargables"
       ]
     },
-    pro: {
-      name: "Pro",
-      price: 79,
-      originalPrice: 129,
+    complete: {
+      name: "Curso Completo F2-F6",
+      price: 40,
+      originalPrice: 50,
       features: [
-        "Framework F1-F6 completo",
-        "Auditorías GEO automatizadas",
-        "Sesiones 1-on-1 mensuales",
-        "Implementación paso a paso",
-        "Análisis de competencia",
-        "Soporte técnico directo",
-        "Certificación oficial GEO"
+        "F2: Estructura semántica avanzada",
+        "F3: Contenido citable y autoritativo",
+        "F4: Datos estructurados y metadatos",
+        "F5: Optimización técnica para LLMs",
+        "F6: Medición y análisis de citabilidad",
+        "Plantillas y checklists completos",
+        "Implementación paso a paso autoguiada"
       ]
     }
   };
@@ -65,8 +65,8 @@ const CheckoutPage = () => {
   return (
     <>
       <Helmet>
-        <title>Checkout - Únete a esGEO</title>
-        <meta name="description" content="Completa tu suscripción a esGEO y comienza a optimizar para IA hoy mismo." />
+        <title>Checkout - Curso GEO</title>
+        <meta name="description" content="Completa tu compra del curso GEO y comienza a optimizar para IA hoy mismo." />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -104,9 +104,14 @@ const CheckoutPage = () => {
                               <h3 className="font-semibold">{plan.name}</h3>
                               <div className="flex items-center gap-2 mt-1">
                                 <span className="text-2xl font-bold">€{plan.price}</span>
-                                <span className="text-muted-foreground line-through">€{plan.originalPrice}</span>
-                                <Badge variant="secondary">-{Math.round((1 - plan.price / plan.originalPrice) * 100)}%</Badge>
+                                {plan.originalPrice && (
+                                  <>
+                                    <span className="text-muted-foreground line-through">€{plan.originalPrice}</span>
+                                    <Badge variant="secondary">-€{plan.originalPrice - plan.price}</Badge>
+                                  </>
+                                )}
                               </div>
+                              <p className="text-xs text-muted-foreground mt-1">Pago único</p>
                             </div>
                             <div className={`w-4 h-4 rounded-full border-2 ${
                               selectedPlan === key ? 'bg-accent border-accent' : 'border-muted'
@@ -133,26 +138,29 @@ const CheckoutPage = () => {
                     <div className="border-t pt-4 space-y-2">
                       <div className="flex justify-between">
                         <span>Subtotal:</span>
-                        <span>€{currentPlan.price}</span>
+                        <span>€{currentPlan.originalPrice || currentPlan.price}</span>
                       </div>
-                      <div className="flex justify-between text-green-600">
-                        <span>Descuento:</span>
-                        <span>-€{currentPlan.originalPrice - currentPlan.price}</span>
-                      </div>
+                      {currentPlan.originalPrice && (
+                        <div className="flex justify-between text-green-600">
+                          <span>Descuento:</span>
+                          <span>-€{currentPlan.originalPrice - currentPlan.price}</span>
+                        </div>
+                      )}
                       <div className="flex justify-between font-bold text-lg border-t pt-2">
                         <span>Total:</span>
-                        <span>€{currentPlan.price}/mes</span>
+                        <span>€{currentPlan.price}</span>
                       </div>
+                      <p className="text-xs text-muted-foreground">Pago único • Producto digital</p>
                     </div>
 
-                    {/* Guarantee */}
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                      <div className="flex items-center gap-2 text-green-800">
+                    {/* Product Info */}
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2 text-blue-800">
                         <Shield className="h-4 w-4" />
-                        <span className="font-semibold">Garantía 30 días</span>
+                        <span className="font-semibold">Producto Digital</span>
                       </div>
-                      <p className="text-sm text-green-700 mt-1">
-                        Si no estás satisfecho, te devolvemos tu dinero.
+                      <p className="text-sm text-blue-700 mt-1">
+                        Acceso inmediato tras el pago. Contenido para aprendizaje autónomo.
                       </p>
                     </div>
                   </CardContent>
@@ -216,13 +224,13 @@ const CheckoutPage = () => {
                         {isProcessing ? (
                           "Procesando..."
                         ) : (
-                          `Pagar €${currentPlan.price}/mes`
+                          `Pagar €${currentPlan.price}`
                         )}
                       </Button>
 
                       <p className="text-xs text-muted-foreground text-center">
                         Al proceder, aceptas nuestros términos y condiciones. 
-                        Puedes cancelar en cualquier momento.
+                        Producto digital de pago único.
                       </p>
                     </form>
                   </CardContent>

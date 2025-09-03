@@ -7,7 +7,7 @@ import { Check, Star, Zap, Crown, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const PricingSection = () => {
-  const modules = [
+const modules = [
     {
       name: "F1 Gratis",
       price: "0",
@@ -25,22 +25,40 @@ const PricingSection = () => {
       link: "/curso/f1"
     },
     {
-      name: "F2-F6",
-      price: "39",
-      period: "módulo",
+      name: "Módulos Individuales",
+      price: "10",
+      description: "Cada módulo F2-F6 por separado",
+      icon: Zap,
+      features: [
+        "Acceso a módulo específico elegido",
+        "Contenido completo y detallado",
+        "Plantillas y checklists incluidos",
+        "Implementación paso a paso",
+        "Pago único, sin suscripciones"
+      ],
+      cta: "Elegir Módulo",
+      ctaVariant: "outline" as const,
+      popular: false,
+      link: "/checkout?type=module"
+    },
+    {
+      name: "Curso Completo F2-F6",
+      price: "40",
+      originalPrice: "50",
       description: "Framework completo de optimización GEO",
       icon: Crown,
       features: [
         "F2: Estructura semántica avanzada",
-        "F3: Contenido citable y autoritativo", 
-        "F4: Datos estructurados y metadatos",
+        "F3: Contenido citable y autoritativo",
+        "F4: Datos estructurados y metadatos", 
         "F5: Optimización técnica para LLMs",
-        "F6: Medición y análisis de citabilidad"
+        "F6: Medición y análisis de citabilidad",
+        "Ahorro de €10 vs módulos individuales"
       ],
-      cta: "Ver Módulos Avanzados",
-      ctaVariant: "outline" as const,
+      cta: "Comprar Curso Completo",
+      ctaVariant: "default" as const,
       popular: false,
-      link: "/curso"
+      link: "/checkout?type=complete"
     }
   ];
 
@@ -61,7 +79,7 @@ const PricingSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {modules.map((module, index) => (
             <Card 
               key={index} 
@@ -88,8 +106,11 @@ const PricingSection = () => {
                 <div className="mt-4">
                   <div className="flex items-baseline justify-center">
                     <span className="text-4xl font-bold text-primary">€{module.price}</span>
-                    {module.period && <span className="text-muted-foreground ml-1">/{module.period}</span>}
+                    {module.originalPrice && (
+                      <span className="text-lg text-muted-foreground line-through ml-2">€{module.originalPrice}</span>
+                    )}
                   </div>
+                  <p className="text-sm text-muted-foreground text-center mt-1">Pago único</p>
                 </div>
               </CardHeader>
 
@@ -116,7 +137,7 @@ const PricingSection = () => {
 
                 {module.name !== "F1 Gratis" && (
                   <p className="text-xs text-center text-muted-foreground">
-                    Acceso inmediato • Garantía 30 días
+                    Acceso inmediato • Producto digital
                   </p>
                 )}
               </CardContent>
@@ -127,7 +148,7 @@ const PricingSection = () => {
         {/* Simplified call to action */}
         <div className="text-center mt-12">
           <p className="text-muted-foreground">
-            Aprende paso a paso • Implementa a tu ritmo • Resultados garantizados
+            Aprende paso a paso • Implementa a tu ritmo • Aprendizaje autónomo
           </p>
         </div>
       </div>
