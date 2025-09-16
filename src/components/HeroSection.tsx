@@ -40,9 +40,9 @@ const HeroSection = () => {
             <h2 className="sr-only">Acciones principales</h2>
             <div className="flex flex-col gap-4 justify-center items-center">
               <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-bold px-12 py-4 text-lg" asChild>
-                <Link to="/curso/f1">
+                <Link to="/curso/f0">
                   <ArrowRight className="mr-2 h-6 w-6" />
-                  Empezar con F1 Gratis
+                  Empezar con F0 Gratis
                 </Link>
               </Button>
               
@@ -63,8 +63,8 @@ const HeroSection = () => {
                 <div className="text-sm text-muted-foreground">Mejora en citabilidad</div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-accent">127</div>
-                <div className="text-sm text-muted-foreground">LLMs activos citando</div>
+                <div className="text-3xl font-bold text-accent">15+</div>
+                <div className="text-sm text-muted-foreground">Modelos IA indexando</div>
               </div>
               <div className="space-y-2">
                 <div className="text-3xl font-bold text-accent">4.9★</div>
@@ -78,9 +78,9 @@ const HeroSection = () => {
             <h2 className="font-semibold text-primary mb-4">Contenido relacionado</h2>
             <div className="flex flex-wrap gap-3 justify-center">
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/curso/f1">
+                <Link to="/curso/f0">
                   <ArrowRight className="mr-2 h-4 w-4" />
-                  Empezar con F1
+                  Empezar con F0
                 </Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>

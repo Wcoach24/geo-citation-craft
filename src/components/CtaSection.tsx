@@ -51,9 +51,9 @@ const CtaSection = () => {
           {/* CTA Principal */}
           <div className="flex justify-center mb-8">
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8" asChild>
-              <Link to="/curso/f1">
+              <Link to="/curso/f0">
                 <ArrowRight className="mr-2 h-5 w-5" />
-                Empezar con F1 Gratis
+                Empezar con F0 Gratis
               </Link>
             </Button>
           </div>
@@ -69,7 +69,7 @@ const CtaSection = () => {
               </div>
               <span>+1,200 optimizadores activos</span>
             </div>
-            <div>⭐⭐⭐⭐⭐ 4.9/5 (127 reseñas)</div>
+            <div>⭐⭐⭐⭐⭐ 4.9/5 (47 reseñas)</div>
           </div>
         </div>
       </div>
