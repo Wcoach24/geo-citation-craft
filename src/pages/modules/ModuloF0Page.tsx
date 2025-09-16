@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import GeoTerm from "@/components/GeoTerm";
+import GeoAssessmentTest from "@/components/GeoAssessmentTest";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -141,6 +142,9 @@ const ModuloF0Page = () => {
             </Badge>
             <ShareSectionButton sectionId="modulo-f0" title="Módulo F0" />
           </header>
+
+          {/* Test Interactivo GEO */}
+          <GeoAssessmentTest />
 
           {/* Diagnóstico Rápido */}
           <section id="f0-diagnostico" className="mb-12">
