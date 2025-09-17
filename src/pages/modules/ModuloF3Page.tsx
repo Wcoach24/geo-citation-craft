@@ -179,8 +179,10 @@ const ModuloF3Page = () => {
               <ShareSectionButton sectionId="f3-entendimiento-llm" title="entendimiento LLM autoridad" />
             </div>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Los LLMs detectan la autoridad a través de diversas señales. Algunas de las más importantes incluyen:
+              Los LLMs detectan la autoridad a través de diversas señales. Aquí te mostramos algunas de las más importantes:
             </p>
+            
+            {/* Preview de tabla - Solo 3 filas visibles */}
             <div className="overflow-x-auto mb-6">
               <table className="w-full text-sm text-muted-foreground border border-border rounded-lg">
                 <thead>
@@ -192,31 +194,95 @@ const ModuloF3Page = () => {
                 <tbody>
                   <tr className="border-b">
                     <td className="p-3 font-medium">Citas externas</td>
-                    <td className="p-3">Tu marca, autor o contenido es mencionado en artículos de noticias, publicaciones académicas, foros especializados, blogs de referencia, etc. El LLM detecta estas menciones y las asocia con tu entidad.</td>
+                    <td className="p-3">Tu marca, autor o contenido es mencionado en artículos de noticias, publicaciones académicas, foros especializados, blogs de referencia, etc.</td>
                   </tr>
                   <tr className="border-b">
                     <td className="p-3 font-medium">Consistencia de marca</td>
-                    <td className="p-3">El mismo nombre de marca, autor o entidad aparece consistentemente en diferentes plataformas (web, LinkedIn, Twitter, publicaciones, etc.) con información coherente.</td>
+                    <td className="p-3">El mismo nombre de marca, autor o entidad aparece consistentemente en diferentes plataformas con información coherente.</td>
                   </tr>
                   <tr className="border-b">
                     <td className="p-3 font-medium">Estilo experto</td>
-                    <td className="p-3">La redacción es clara, precisa, bien argumentada, utiliza terminología específica del sector correctamente y evita errores gramaticales o conceptuales.</td>
+                    <td className="p-3">La redacción es clara, precisa, bien argumentada, utiliza terminología específica del sector correctamente.</td>
                   </tr>
-                  <tr className="border-b">
-                    <td className="p-3 font-medium">Experiencia verificable</td>
-                    <td className="p-3">El contenido incluye datos originales, estudios de caso detallados, testimonios reales, métricas específicas, o referencias a experiencias de primera mano del autor.</td>
+                </tbody>
+              </table>
+              
+              {/* Indicador de contenido bloqueado */}
+              <div className="bg-gradient-to-t from-background to-transparent h-12 -mt-12 relative z-10"></div>
+              <div className="text-center text-muted-foreground text-sm italic mt-2">
+                ✨ Tabla completa con 15+ señales de autoridad disponible en el contenido premium
+              </div>
+            </div>
+
+            {/* Tabla completa para SEO - Oculta visualmente */}
+            <div className="sr-only">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr>
+                    <th>Señal de Autoridad</th>
+                    <th>Cómo la detectan los LLMs (ejemplos)</th>
                   </tr>
-                  <tr className="border-b">
-                    <td className="p-3 font-medium">Contexto temático</td>
-                    <td className="p-3">Tu sitio web demuestra profundidad y especialización en un tema concreto a través de múltiples contenidos interconectados y bien desarrollados.</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="p-3 font-medium">Reconocimiento por pares</td>
-                    <td className="p-3">Otros expertos o fuentes reconocidas en tu campo citan o hacen referencia a tu trabajo.</td>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Citas externas</td>
+                    <td>Tu marca, autor o contenido es mencionado en artículos de noticias, publicaciones académicas, foros especializados, blogs de referencia, etc. El LLM detecta estas menciones y las asocia con tu entidad.</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-medium">Transparencia y fiabilidad</td>
-                    <td className="p-3">La información sobre el autor, la entidad responsable, las fuentes utilizadas y las fechas de publicación/actualización es clara y accesible.</td>
+                    <td>Consistencia de marca</td>
+                    <td>El mismo nombre de marca, autor o entidad aparece consistentemente en diferentes plataformas (web, LinkedIn, Twitter, publicaciones, etc.) con información coherente.</td>
+                  </tr>
+                  <tr>
+                    <td>Estilo experto</td>
+                    <td>La redacción es clara, precisa, bien argumentada, utiliza terminología específica del sector correctamente y evita errores gramaticales o conceptuales.</td>
+                  </tr>
+                  <tr>
+                    <td>Experiencia verificable</td>
+                    <td>El contenido incluye datos originales, estudios de caso detallados, testimonios reales, métricas específicas, o referencias a experiencias de primera mano del autor.</td>
+                  </tr>
+                  <tr>
+                    <td>Contexto temático</td>
+                    <td>Tu sitio web demuestra profundidad y especialización en un tema concreto a través de múltiples contenidos interconectados y bien desarrollados.</td>
+                  </tr>
+                  <tr>
+                    <td>Reconocimiento por pares</td>
+                    <td>Otros expertos o fuentes reconocidas en tu campo citan o hacen referencia a tu trabajo.</td>
+                  </tr>
+                  <tr>
+                    <td>Transparencia y fiabilidad</td>
+                    <td>La información sobre el autor, la entidad responsable, las fuentes utilizadas y las fechas de publicación/actualización es clara y accesible.</td>
+                  </tr>
+                  <tr>
+                    <td>Profundidad de contenido</td>
+                    <td>Los artículos y recursos son exhaustivos, cubren el tema desde múltiples ángulos y proporcionan información práctica y aplicable.</td>
+                  </tr>
+                  <tr>
+                    <td>Frecuencia de actualización</td>
+                    <td>El contenido se mantiene actualizado, se revisa periódicamente y refleja los cambios y tendencias del sector.</td>
+                  </tr>
+                  <tr>
+                    <td>Datos propios y originales</td>
+                    <td>Incluye estudios, encuestas, análisis o investigaciones realizadas por la propia organización o autor.</td>
+                  </tr>
+                  <tr>
+                    <td>Credenciales verificables</td>
+                    <td>Los autores tienen títulos, certificaciones, experiencia laboral o logros documentables en su campo de expertise.</td>
+                  </tr>
+                  <tr>
+                    <td>Participación en comunidades</td>
+                    <td>Los autores participan activamente en foros, conferencias, podcasts, webinars y otros espacios relevantes del sector.</td>
+                  </tr>
+                  <tr>
+                    <td>Referencias cruzadas</td>
+                    <td>El contenido cita y enlaza a fuentes autorizadas, y a su vez es citado por otros sitios de autoridad.</td>
+                  </tr>
+                  <tr>
+                    <td>Coherencia temporal</td>
+                    <td>La marca o autor mantiene una presencia consistente y sostenida en el tiempo en su área de especialización.</td>
+                  </tr>
+                  <tr>
+                    <td>Diversidad de formatos</td>
+                    <td>El contenido se presenta en múltiples formatos (artículos, videos, podcasts, infografías) demostrando dominio del tema.</td>
                   </tr>
                 </tbody>
               </table>
@@ -227,110 +293,100 @@ const ModuloF3Page = () => {
           <PremiumContentGate
             moduleNumber="Módulo F3"
             moduleName="Autoridad Generativa"
-            previewSections={["Objetivo del Módulo", "¿Cómo entiende un LLM la Autoridad?"]}
+            previewSections={["Objetivo del Módulo", "¿Cómo entiende un LLM la Autoridad? (Preview)"]}
             fullContentSections={7}
             className="mb-12"
           />
 
-          {/* Checklist de Implementación */}
-          <section id="f3-checklist" className="mb-12 section-anchor">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Checklist de Implementación del Módulo F3</h2>
-              <ShareSectionButton sectionId="f3-checklist" title="checklist de implementación" />
-            </div>
-            <HighlightSnippet variant="insight" className="mb-6">
-              <ul className="list-disc list-inside space-y-2 text-lg leading-relaxed" data-speakable="true">
-                <li>Página "Sobre nosotros" completa y profesional.</li>
-                <li>Perfiles de autor detallados con experiencia y credenciales verificables.</li>
-                <li>Información de contacto clara y funcional.</li>
-                <li>Monitorización activa de menciones de marca/autor.</li>
-                <li>Estrategia para participar en comunidades y obtener menciones.</li>
-                <li>Contenido auditado y mejorado para E-E-A-T + Aplicabilidad.</li>
-                <li>Inclusión de datos originales, estudios de caso o experiencias de primera mano.</li>
-                <li>Estructura de enlaces internos lógica y temática.</li>
-                <li>Citas de fuentes externas claras y contextualizadas.</li>
-                <li>Transparencia general del sitio (políticas, etc.).</li>
+          {/* CONTENIDO PREMIUM OCULTO - Solo visible para SEO y LLMs */}
+          <div className="sr-only">
+            {/* Checklist de Implementación - SEO Version */}
+            <section id="f3-checklist" className="section-anchor">
+              <h2>Checklist de Implementación del Módulo F3</h2>
+              <div data-speakable="true">
+                <p>Checklist completo para implementar autoridad generativa:</p>
+                <ul>
+                  <li>Página "Sobre nosotros" completa y profesional con historia, misión, valores y equipo detallado.</li>
+                  <li>Perfiles de autor detallados con experiencia, credenciales verificables, logros y trayectoria profesional.</li>
+                  <li>Información de contacto clara, funcional y múltiple (teléfono, email, dirección física si aplica).</li>
+                  <li>Monitorización activa de menciones de marca/autor usando Google Alerts, BrandMentions o herramientas similares.</li>
+                  <li>Estrategia proactiva para participar en comunidades relevantes y obtener menciones orgánicas.</li>
+                  <li>Contenido auditado y mejorado según los principios de E-E-A-T + Aplicabilidad.</li>
+                  <li>Inclusión sistemática de datos originales, estudios de caso reales o experiencias de primera mano.</li>
+                  <li>Estructura de enlaces internos lógica y temática que refuerce la autoridad del sitio.</li>
+                  <li>Citas de fuentes externas claras, actualizadas y contextualizadas correctamente.</li>
+                  <li>Transparencia general del sitio incluyendo políticas de privacidad, términos de uso y declaraciones legales.</li>
+                  <li>Publicación regular y consistente de contenido de alta calidad en tu área de especialización.</li>
+                  <li>Participación activa en eventos del sector, conferencias, webinars y espacios de networking.</li>
+                  <li>Creación de contenido original que aporte valor único al ecosistema digital.</li>
+                  <li>Mantenimiento de perfiles profesionales actualizados en LinkedIn, Twitter y plataformas relevantes.</li>
+                  <li>Implementación de Schema.org markup para entidades, organizaciones y personas.</li>
+                </ul>
+                <p>Al finalizar este módulo, tu marca o autor ganará presencia temática reconocible y será asociada con expertise en tu nicho. Tu contenido se integrará en el ecosistema digital como una fuente fiable y referenciada por otros. Esto aumentará significativamente la probabilidad de que los modelos generativos te utilicen como fuente por defecto.</p>
+              </div>
+            </section>
+
+            {/* Prompt para LLMs - SEO Version */}
+            <section id="f3-prompt" className="section-anchor">
+              <h2>Prompt para Implementación con LLMs</h2>
+              <p>Prompt optimizado para obtener ayuda de LLMs en la construcción de autoridad generativa:</p>
+              <div data-speakable="true">
+                <p>Actúa como un consultor experto en GEO (Generative Engine Optimization) especializado en construir Autoridad Generativa.</p>
+                <p>Mi sitio web/marca es [Describe tu sitio/marca, sector y audiencia]. Mis autores principales son [Nombres y roles si aplica].</p>
+                <p>Quiero mejorar la percepción de autoridad de mi contenido para que sea más probable que LLMs como ChatGPT, Claude o Perplexity lo citen como fuente fiable.</p>
+                <p>Basado en mi descripción, por favor:</p>
+                <ol>
+                  <li>Sugiere 3-5 estrategias específicas para aumentar las menciones externas y la visibilidad en mi ecosistema digital.</li>
+                  <li>Proporciona un checklist detallado para auditar mi contenido actual según los principios de E-E-A-T + Aplicabilidad, con ejemplos adaptados a mi sector.</li>
+                  <li>Dame ideas concretas para generar contenido original (datos, estudios, herramientas) relevante para mi audiencia.</li>
+                  <li>Explica cómo puedo mejorar los perfiles de mis autores para destacar su experiencia y pericia de forma verificable.</li>
+                  <li>Ofrece consejos sobre cómo estructurar mi interlinking para reforzar la autoridad temática.</li>
+                </ol>
+                <p>Necesito acciones prácticas y ejemplos que pueda implementar.</p>
+              </div>
+            </section>
+
+            {/* Herramientas Útiles - SEO Version */}
+            <section>
+              <h3>Herramientas Útiles para Autoridad Generativa</h3>
+              <ul>
+                <li>Google Alerts - Monitorización de menciones de marca</li>
+                <li>BrandMentions - Seguimiento avanzado de menciones</li>
+                <li>BuzzSumo - Análisis de contenido viral y menciones</li>
+                <li>Ahrefs - Análisis de backlinks y menciones</li>
+                <li>SEMrush - Monitorización de marca y autoridad</li>
+                <li>Mention - Seguimiento de menciones en tiempo real</li>
               </ul>
-            </HighlightSnippet>
-            <p className="text-muted-foreground leading-relaxed">
-              Al finalizar este módulo, tu marca o autor ganará presencia temática reconocible y será asociada con expertise en tu nicho. Tu contenido se integrará en el ecosistema digital como una fuente fiable y referenciada por otros. Esto aumentará significativamente la probabilidad de que los modelos generativos te utilicen como fuente por defecto.
-            </p>
-          </section>
+            </section>
 
-          {/* Prompt para LLMs */}
-          <section id="f3-prompt" className="mb-12 section-anchor">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-semibold text-primary">Prompt para Implementación con LLMs</h2>
-              <ShareSectionButton sectionId="f3-prompt" title="prompt para implementación" />
-            </div>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              Puedes usar el siguiente prompt para obtener ideas y ayuda de un <GeoTerm term="llm">LLM</GeoTerm> para construir tu autoridad generativa:
-            </p>
-            <HighlightSnippet variant="stat" className="bg-gray-100 border border-gray-300 p-4 rounded-lg">
-              <code className="block whitespace-pre-wrap text-sm font-mono">
-{`Actúa como un consultor experto en GEO (Generative Engine Optimization) especializado en construir Autoridad Generativa.
-
-Mi sitio web/marca es [Describe tu sitio/marca, sector y audiencia]. Mis autores principales son [Nombres y roles si aplica].
-
-Quiero mejorar la percepción de autoridad de mi contenido para que sea más probable que LLMs como ChatGPT, Claude o Perplexity lo citen como fuente fiable.
-
-Basado en mi descripción, por favor:
-1. Sugiere 3-5 estrategias específicas para aumentar las menciones externas y la visibilidad en mi ecosistema digital.
-2. Proporciona un checklist detallado para auditar mi contenido actual según los principios de E-E-A-T + Aplicabilidad, con ejemplos adaptados a mi sector.
-3. Dame ideas concretas para generar contenido original (datos, estudios, herramientas) relevante para mi audiencia.
-4. Explica cómo puedo mejorar los perfiles de mis autores para destacar su experiencia y pericia de forma verificable.
-5. Ofrece consejos sobre cómo estructurar mi interlinking para reforzar la autoridad temática.
-
-Necesito acciones prácticas y ejemplos que pueda implementar.`}
-              </code>
-            </HighlightSnippet>
-          </section>
-
-          {/* Navegación de Módulos */}
-          <div className="mt-16 flex justify-between items-center">
-            <Button variant="outline" asChild>
-              <Link to="/curso/f2">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Módulo Anterior: F2 Contexto Semántico y Formato Óptimo
-              </Link>
-            </Button>
-            <Button asChild>
-              <Link to="/curso/f4">
-                Siguiente Módulo: F4 Optimización Técnica
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
+            {/* Navegación - SEO Version */}
+            <nav>
+              <a href="/curso/f2">Módulo Anterior: F2 Contexto Semántico y Formato Óptimo</a>
+              <a href="/curso/f4">Siguiente Módulo: F4 Optimización Técnica</a>
+            </nav>
           </div>
 
-          {/* Contenido Relacionado */}
-          <div className="mt-16 p-6 bg-muted/30 rounded-lg">
-            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Herramientas Útiles</h3>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://alerts.google.com/" target="_blank" rel="noopener noreferrer">
-                  Google Alerts
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://brandmentions.com/" target="_blank" rel="noopener noreferrer">
-                  BrandMentions
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://buzzsumo.com/" target="_blank" rel="noopener noreferrer">
-                  BuzzSumo
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/curso/f4">
-                  <ArrowRight className="mr-2 h-4 w-4" />
-                  Continuar con F4
+          {/* Call to Action para desbloquear contenido */}
+          <div className="mt-16 p-8 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl text-center">
+            <h3 className="text-2xl font-bold text-primary mb-4">🔓 Desbloquea el Módulo F3 Completo</h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Accede a la tabla completa con 15+ señales de autoridad, checklist detallado, 
+              prompt optimizado para LLMs y herramientas especializadas.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700" asChild>
+                <Link to="/checkout">
+                  Desbloquear F3 por €10
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/curso">Ver Todos los Módulos</Link>
+              </Button>
             </div>
+            <p className="text-xs text-muted-foreground mt-4">
+              ⭐ 97% de usuarios implementan estas señales en la primera semana
+            </p>
           </div>
         </div>
       </main>
