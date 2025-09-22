@@ -27,11 +27,11 @@ const HeroSection = () => {
             esGEO es la primera metodología en español para posicionar tu web como fuente autoritativa en ChatGPT, Perplexity, Claude y los principales LLMs.
           </p>
 
-          {/* Social proof más directo */}
+          {/* Social proof más realista */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Badge variant="secondary" className="text-sm">
               <Users className="mr-2 h-4 w-4" />
-              +1,200 profesionales optimizando
+              Primera metodología GEO en español
             </Badge>
           </div>
           
@@ -59,16 +59,16 @@ const HeroSection = () => {
             <h2 className="sr-only">Estadísticas del framework</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-accent">+340%</div>
-                <div className="text-sm text-muted-foreground">Mejora en citabilidad</div>
+                <div className="text-3xl font-bold text-accent">F0-F6</div>
+                <div className="text-sm text-muted-foreground">Framework completo</div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-accent">15+</div>
-                <div className="text-sm text-muted-foreground">Modelos IA indexando</div>
+                <div className="text-3xl font-bold text-accent">5</div>
+                <div className="text-sm text-muted-foreground">LLMs principales</div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-accent">4.9★</div>
-                <div className="text-sm text-muted-foreground">Satisfacción estudiantes</div>
+                <div className="text-3xl font-bold text-accent">100%</div>
+                <div className="text-sm text-muted-foreground">Contenido gratuito</div>
               </div>
             </div>
           </section>

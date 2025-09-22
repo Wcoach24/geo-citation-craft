@@ -8,6 +8,7 @@ import MethodologySection from "@/components/MethodologySection";
 import SocialProofSection from "@/components/SocialProofSection";
 import PricingSection from "@/components/PricingSection";
 import CasosDestacadosSection from "@/components/CasosDestacadosSection";
+import LimitationsSection from "@/components/LimitationsSection";
 
 import CtaSection from "@/components/CtaSection";
 import InlineEmailCapture from "@/components/InlineEmailCapture";
@@ -42,6 +43,9 @@ const Index = () => {
           
           {/* Social Proof temprano para generar confianza */}
           <SocialProofSection />
+          
+          {/* Transparencia sobre limitaciones */}
+          <LimitationsSection />
           
           {/* Pricing simplificado por módulos */}
           <PricingSection />

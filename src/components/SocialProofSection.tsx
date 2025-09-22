@@ -8,54 +8,54 @@ const SocialProofSection = () => {
   const stats = [
     {
       icon: Users,
-      number: "1,247",
-      label: "Optimizadores GEO",
-      description: "Ya confían en nuestra metodología"
+      number: "F0-F6",
+      label: "Framework completo",
+      description: "Metodología estructurada y documentada"
     },
     {
       icon: Bot,
-      number: "127",
-      label: "LLMs activos",
-      description: "Citan contenido optimizado con GEO"
+      number: "5",
+      label: "LLMs principales",
+      description: "ChatGPT, Claude, Perplexity, Gemini, Copilot"
     },
     {
       icon: TrendingUp,
-      number: "340%",
-      label: "Mejora promedio",
-      description: "En citabilidad por IA"
+      number: "100%",
+      label: "Transparente",
+      description: "Metodología y limitaciones documentadas"
     },
     {
       icon: Star,
-      number: "4.9",
-      label: "Puntuación",
-      description: "De satisfacción del curso"
+      number: "2024",
+      label: "Pioneros",
+      description: "Primera metodología GEO en español"
     }
   ];
 
   const testimonials = [
     {
-      name: "María González",
-      role: "Content Manager",
-      company: "TechStartup",
-      quote: "Con GEO aumentamos un 280% las menciones en ChatGPT. El framework F1-F6 es revolucionario.",
-      rating: 5,
-      result: "+280% menciones IA"
+      name: "Caso: esGEO",
+      role: "Verificado",
+      company: "Nuestro propio sitio",
+      quote: "Aplicamos nuestra metodología y conseguimos que ChatGPT nos cite como referencia en GEO para contenido en español.",
+      rating: 4,
+      result: "Verificado en ChatGPT*"
     },
     {
-      name: "Carlos Ruiz",
-      role: "SEO Consultant",
-      company: "Digital Agency",
-      quote: "Mis clientes ahora aparecen como fuentes autorizadas en Perplexity. GEO es el futuro del SEO.",
-      rating: 5,
-      result: "5 clientes citados"
+      name: "Metodología",
+      role: "Estructurada",
+      company: "F0 a F6",
+      quote: "Framework completo desde fundamentos técnicos hasta medición de resultados, diseñado específicamente para LLMs.",
+      rating: 4,
+      result: "6 módulos completos"
     },
     {
-      name: "Ana Martín",
-      role: "Marketing Director",
-      company: "SaaS Company",
-      quote: "El módulo F3 transformó nuestra estrategia. Claude ahora recomienda nuestro producto activamente.",
-      rating: 5,
-      result: "+150% conversiones"
+      name: "Transparencia",
+      role: "Limitaciones",
+      company: "Documentadas",
+      quote: "Explicamos qué funciona, qué no, y qué factores están fuera de nuestro control en la optimización para IA.",
+      rating: 4,
+      result: "100% transparente"
     }
   ];
 
@@ -76,10 +76,10 @@ const SocialProofSection = () => {
           </div>
           
           <h2 className="text-3xl font-bold text-primary mb-4">
-            Únete a la Revolución GEO
+            Primera Metodología GEO en Español
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Miles de profesionales ya optimizan para IA y obtienen resultados medibles
+            Framework completo y transparente para optimización de contenido para IA
           </p>
         </div>
 

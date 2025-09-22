@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 
 const CasosDestacadosSection = () => {
   const nuestroCaso = {
-    titulo: "esGEO citado por ChatGPT, Perplexity y Claude",
+    titulo: "esGEO: Aplicamos nuestra propia metodología",
     plataforma: "esGEO.ai",
-    logro: "Primera autoridad en GEO español",
-    citas: "Citado por +5 modelos de IA",
+    logro: "Primera metodología GEO en español",
+    citas: "Verificado en modelos principales*",
     evidencia: "Predicamos con nuestro ejemplo",
-    modelos: ["ChatGPT", "Perplexity", "Claude", "Gemini", "Copilot"]
+    modelos: ["ChatGPT*", "Perplexity", "Claude", "Gemini", "Copilot"]
   };
 
   return (
@@ -21,13 +21,13 @@ const CasosDestacadosSection = () => {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Brain className="h-8 w-8 text-accent" />
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Nuestro Caso: esGEO citado por IA
-            </h2>
-          </div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Predicamos con nuestro ejemplo. Descubre cómo hemos logrado que ChatGPT, Perplexity y Claude nos citen como autoridad en GEO
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">
+            Nuestro Caso: Aplicamos GEO en esGEO
+          </h2>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          Predicamos con nuestro ejemplo. Aplicamos nuestra metodología F0-F6 en nuestro propio sitio web
+        </p>
         </div>
 
         <div className="max-w-4xl mx-auto mb-12">
@@ -97,12 +97,12 @@ const CasosDestacadosSection = () => {
         <div className="text-center">
           <Button size="lg" asChild className="bg-accent hover:bg-accent/90">
             <Link to="/metodologia">
-              Ver cómo lo conseguimos
+              Ver nuestra metodología
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
-            Aplica la misma metodología que usamos nosotros
+            Framework completo F0-F6 • *Resultados pueden variar
           </p>
         </div>
       </div>
