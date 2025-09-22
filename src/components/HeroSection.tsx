@@ -1,14 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Sparkles, Target, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-
-
 const HeroSection = () => {
-
-  return (
-    <section id="inicio" className="section-anchor lg:py-32 relative overflow-hidden py-[35px]">
+  return <section id="inicio" className="section-anchor lg:py-32 relative overflow-hidden py-[60px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <article className="max-w-4xl mx-auto text-center">
           {/* Badge con urgencia */}
@@ -102,8 +97,6 @@ const HeroSection = () => {
       
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-accent/5 via-transparent to-primary/5"></div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
