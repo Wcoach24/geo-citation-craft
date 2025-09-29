@@ -18,6 +18,8 @@ import PrivacidadPage from "./pages/PrivacidadPage";
 import TerminosPage from "./pages/TerminosPage";
 import ContenidoIAPage from "./pages/ContenidoIAPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import DashboardPage from "./pages/DashboardPage";
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
 
@@ -61,6 +63,8 @@ function App() {
             <Route path="/radar-ia" element={<RadarIAPage />} />
             <Route path="/contenido-ia" element={<ContenidoIAPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/success" element={<PurchaseSuccessPage />} />
             <Route path="/auth" element={<AuthPage />} />
             
             {/* Información corporativa */}

@@ -2,3 +2,6 @@ project_id = "hadnvvkflpjucqkwewto"
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.generate-download-url]
+verify_jwt = true

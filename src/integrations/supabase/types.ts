@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      content_downloads: {
+        Row: {
+          downloaded_at: string
+          file_name: string
+          file_path: string
+          id: string
+          module_id: string
+          user_id: string
+        }
+        Insert: {
+          downloaded_at?: string
+          file_name: string
+          file_path: string
+          id?: string
+          module_id: string
+          user_id: string
+        }
+        Update: {
+          downloaded_at?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          module_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
