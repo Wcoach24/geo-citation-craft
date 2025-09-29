@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.generate-download-url]
 verify_jwt = true
+
+[functions.upload-premium-content]
+verify_jwt = false

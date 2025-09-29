@@ -215,7 +215,7 @@ const DashboardPage = () => {
     userAccess.includes(content.moduleId)
   );
 
-  const totalModules = 6;
+  const totalModules = 5;
   const accessedModules = userAccess.length;
   const progressPercentage = (accessedModules / totalModules) * 100;
 
@@ -249,7 +249,7 @@ const DashboardPage = () => {
               </div>
               
               <div className="flex flex-wrap gap-2">
-                {['f1', 'f2', 'f3', 'f4', 'f5', 'f6'].map((moduleId) => (
+                {['f1', 'f2', 'f3', 'f4', 'f5'].map((moduleId) => (
                   <Badge 
                     key={moduleId}
                     variant={userAccess.includes(moduleId) ? "default" : "secondary"}
