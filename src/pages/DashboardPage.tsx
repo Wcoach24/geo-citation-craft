@@ -11,12 +11,15 @@ import { Link } from 'react-router-dom';
 
 interface PremiumContent {
   moduleId: string;
-  moduleName: string;
+  title: string;
+  description: string;
   files: {
     name: string;
-    path: string;
-    description: string;
+    fileName: string;
+    filePath: string;
     type: 'pdf' | 'excel' | 'template' | 'case-study';
+    size: string;
+    description: string;
   }[];
 }
 
@@ -30,56 +33,77 @@ interface DownloadHistory {
 const PREMIUM_CONTENT: PremiumContent[] = [
   {
     moduleId: 'f1',
-    moduleName: 'Fundamentos GEO',
+    title: 'Módulo F1: Fundamentos y Accesibilidad Generativa',
+    description: 'Conceptos fundamentales del GEO y principios de accesibilidad para IA. Aprende los fundamentos teóricos y prácticos.',
     files: [
-      { name: 'Guía Completa GEO.pdf', path: 'f1/guia-completa-geo.pdf', description: 'Guía detallada de 25 páginas sobre fundamentos GEO', type: 'pdf' },
-      { name: 'Plantilla Auditoría.xlsx', path: 'f1/plantilla-auditoria.xlsx', description: 'Plantilla Excel para auditorías GEO', type: 'excel' },
-      { name: 'Caso de Estudio: E-commerce.pdf', path: 'f1/caso-estudio-ecommerce.pdf', description: 'Implementación real en tienda online', type: 'case-study' }
+      {
+        name: 'Guía Completa - Fundamentos Accesibilidad Generativa',
+        fileName: 'guia-completa-modulo-f1.pdf',
+        filePath: 'f1/guia-completa-modulo-f1.pdf',
+        type: 'pdf',
+        size: '3.2 MB',
+        description: 'Manual completo con fundamentos del GEO, principios de accesibilidad generativa y estrategias de implementación inicial.'
+      }
     ]
   },
   {
     moduleId: 'f2',
-    moduleName: 'Estructura Web Optimizada',
+    title: 'Módulo F2: Contexto Semántico y Formato Óptimo',
+    description: 'Estructuración semántica avanzada y formatos optimizados para comprensión de IA. Domina el contexto y la estructura.',
     files: [
-      { name: 'Guía Arquitectura Web.pdf', path: 'f2/guia-arquitectura-web.pdf', description: 'Arquitectura web optimizada para IA', type: 'pdf' },
-      { name: 'Templates Schema.org.zip', path: 'f2/templates-schema.zip', description: 'Templates de Schema.org optimizados', type: 'template' },
-      { name: 'Checklist Estructura.pdf', path: 'f2/checklist-estructura.pdf', description: 'Checklist imprimible de optimización', type: 'pdf' }
+      {
+        name: 'Guía Completa - Contexto Semántico y Formato',
+        fileName: 'guia-completa-modulo-f2.pdf',
+        filePath: 'f2/guia-completa-modulo-f2.pdf',
+        type: 'pdf',
+        size: '4.1 MB',
+        description: 'Guía exhaustiva sobre estructuración semántica, formatos óptimos para IA y técnicas de contextualización avanzada.'
+      }
     ]
   },
   {
     moduleId: 'f3',
-    moduleName: 'Contenido para IA',
+    title: 'Módulo F3: Autoridad Generativa',
+    description: 'Construcción de autoridad digital reconocida por modelos de IA. Estrategias para establecer credibilidad y confianza.',
     files: [
-      { name: 'Manual Prompts GEO.pdf', path: 'f3/manual-prompts-geo.pdf', description: 'Biblioteca de prompts efectivos', type: 'pdf' },
-      { name: 'Generador de Prompts.xlsx', path: 'f3/generador-prompts.xlsx', description: 'Herramienta para generar prompts', type: 'excel' },
-      { name: 'Casos Wikipedia Format.pdf', path: 'f3/casos-wikipedia-format.pdf', description: 'Casos de éxito con formato Wikipedia', type: 'case-study' }
+      {
+        name: 'Guía Completa - Autoridad Generativa',
+        fileName: 'guia-completa-modulo-f3.pdf',
+        filePath: 'f3/guia-completa-modulo-f3.pdf',
+        type: 'pdf',
+        size: '2.8 MB',
+        description: 'Manual completo sobre construcción de autoridad digital, estrategias de credibilidad y reconocimiento por IA.'
+      }
     ]
   },
   {
     moduleId: 'f4',
-    moduleName: 'Datos Estructurados',
+    title: 'Módulo F4: Validación Conversacional',
+    description: 'Técnicas de validación y optimización para conversaciones de IA. Mejora tu presencia en diálogos generativos.',
     files: [
-      { name: 'Guía Schema.org Avanzada.pdf', path: 'f4/guia-schema-avanzada.pdf', description: 'Implementación avanzada de Schema.org', type: 'pdf' },
-      { name: 'Validador Schema.xlsx', path: 'f4/validador-schema.xlsx', description: 'Herramienta de validación Schema', type: 'excel' },
-      { name: 'Templates JSON-LD.zip', path: 'f4/templates-json-ld.zip', description: 'Templates JSON-LD listos para usar', type: 'template' }
+      {
+        name: 'Guía Completa - Validación Conversacional',
+        fileName: 'guia-completa-modulo-f4.pdf',
+        filePath: 'f4/guia-completa-modulo-f4.pdf',
+        type: 'pdf',
+        size: '3.5 MB',
+        description: 'Estrategias avanzadas de validación conversacional, optimización para diálogos de IA y técnicas de mejora continua.'
+      }
     ]
   },
   {
     moduleId: 'f5',
-    moduleName: 'E-A-T para IA',
+    title: 'Módulo F5: Mantenimiento Evolutivo',
+    description: 'Estrategias de mantenimiento y evolución continua. Mantén tu estrategia GEO actualizada con los avances de IA.',
     files: [
-      { name: 'Estrategia E-A-T.pdf', path: 'f5/estrategia-eat.pdf', description: 'Estrategia completa E-A-T para IA', type: 'pdf' },
-      { name: 'Calculadora Autoridad.xlsx', path: 'f5/calculadora-autoridad.xlsx', description: 'Calcula tu puntuación de autoridad', type: 'excel' },
-      { name: 'Casos de Autoridad.pdf', path: 'f5/casos-autoridad.pdf', description: 'Casos reales de construcción de autoridad', type: 'case-study' }
-    ]
-  },
-  {
-    moduleId: 'f6',
-    moduleName: 'Medición y Optimización',
-    files: [
-      { name: 'Dashboard de Métricas.pdf', path: 'f6/dashboard-metricas.pdf', description: 'Cómo crear dashboards GEO', type: 'pdf' },
-      { name: 'Plantilla Métricas.xlsx', path: 'f6/plantilla-metricas.xlsx', description: 'Plantilla para tracking GEO', type: 'excel' },
-      { name: 'ROI Calculator.xlsx', path: 'f6/roi-calculator.xlsx', description: 'Calculadora de ROI para GEO', type: 'excel' }
+      {
+        name: 'Guía Completa - Mantenimiento Evolutivo',
+        fileName: 'guia-completa-modulo-f5.pdf',
+        filePath: 'f5/guia-completa-modulo-f5.pdf',
+        type: 'pdf',
+        size: '2.9 MB',
+        description: 'Manual de mantenimiento evolutivo, estrategias de actualización continua y adaptación a nuevos modelos de IA.'
+      }
     ]
   }
 ];
@@ -253,30 +277,33 @@ const DashboardPage = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Badge variant="default">Módulo {content.moduleId.toUpperCase()}</Badge>
-                    {content.moduleName}
+                    {content.title}
                   </CardTitle>
                   <CardDescription>
-                    {content.files.length} recursos disponibles para descarga
+                    {content.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 md:grid-cols-1">
                     {content.files.map((file) => (
-                      <Card key={file.path} className="border border-border/50">
-                        <CardContent className="p-4">
-                          <div className="flex items-start gap-3">
+                      <Card key={file.filePath} className="border border-border/50">
+                        <CardContent className="p-6">
+                          <div className="flex items-start gap-4">
                             {getFileIcon(file.type)}
                             <div className="flex-1 min-w-0">
-                              <h4 className="font-medium text-sm mb-1 truncate">{file.name}</h4>
-                              <p className="text-xs text-muted-foreground mb-3">{file.description}</p>
+                              <div className="flex items-center justify-between mb-2">
+                                <h4 className="font-semibold text-base">{file.name}</h4>
+                                <Badge variant="secondary" className="text-xs">{file.size}</Badge>
+                              </div>
+                              <p className="text-sm text-muted-foreground mb-4">{file.description}</p>
                               <Button
-                                size="sm"
-                                onClick={() => handleDownload(file.path, file.name)}
-                                disabled={downloadingFiles.has(file.path)}
-                                className="w-full"
+                                size="default"
+                                onClick={() => handleDownload(file.filePath, file.fileName)}
+                                disabled={downloadingFiles.has(file.filePath)}
+                                className="w-full sm:w-auto"
                               >
-                                <Download className="h-3 w-3 mr-1" />
-                                {downloadingFiles.has(file.path) ? 'Descargando...' : 'Descargar'}
+                                <Download className="h-4 w-4 mr-2" />
+                                {downloadingFiles.has(file.filePath) ? 'Descargando...' : 'Descargar PDF'}
                               </Button>
                             </div>
                           </div>
