@@ -1,305 +1,440 @@
+import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle, CreditCard, Loader2, ArrowLeft } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
+import { Link } from 'react-router-dom';
 
-import React, { useState } from "react";
-import { Helmet } from "react-helmet";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Check, CreditCard, Shield, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+// Mapeo de productos
+const PRODUCT_MAPPING = {
+  'f1': { priceId: 'price_1SCi2ELVUGCJuFgUgUSq6Wsc', productId: 'prod_T902VySczFrzLF' },
+  'f2': { priceId: 'price_1SCi2ZLVUGCJuFgUkvbTtPGU', productId: 'prod_T9028jaGK3AZMt' },
+  'f3': { priceId: 'price_1SCi37LVUGCJuFgUr9yb84gV', productId: 'prod_T903d9YhVnqhLZ' },
+  'f4': { priceId: 'price_1SCi3JLVUGCJuFgUtrtOiSGR', productId: 'prod_T9032mbVGWxI0h' },
+  'f5': { priceId: 'price_1SCi3VLVUGCJuFgU2jobGw1L', productId: 'prod_T903yAjoh8vLi2' },
+  'f6': { priceId: 'price_1SCi3nLVUGCJuFgUAvV6GsUH', productId: 'prod_T9037l1XQzqr7h' },
+  'complete': { priceId: 'price_1SCi40LVUGCJuFgUZNIG5XwU', productId: 'prod_T904JmjRPrkyGQ' }
+};
 
-const CheckoutPage = () => {
-  const [selectedPlan, setSelectedPlan] = useState("complete");
-  const [selectedModule, setSelectedModule] = useState("f1");
+export default function CheckoutPage() {
+  const [selectedPlan, setSelectedPlan] = useState<string>('');
+  const [selectedModule, setSelectedModule] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
+  const { user, userAccess } = useAuth();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth', { state: { from: { pathname: '/checkout' } } });
+    }
+    
+    // Verificar parámetros de URL
+    const moduleParam = searchParams.get('module');
+    const planParam = searchParams.get('plan');
+    
+    if (planParam === 'complete') {
+      setSelectedPlan('complete');
+    } else if (moduleParam && ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'].includes(moduleParam)) {
+      setSelectedPlan('individual');
+      setSelectedModule(moduleParam);
+    }
+  }, [user, navigate, searchParams]);
 
   const modules = {
     f1: {
-      name: "F1: Accesibilidad Generativa",
-      description: "Base técnica fundamental para LLMs"
+      id: 'f1',
+      name: 'Módulo F1 - Fundamentos de Accesibilidad Generativa',
+      description: 'Aprende los fundamentos técnicos para hacer tu contenido accesible y comprensible para modelos de lenguaje AI.',
+      price: 10,
+      image: '/images/modulo-f1.png'
     },
     f2: {
-      name: "F2: Contexto Semántico",
-      description: "Estructura semántica y formato óptimo"
+      id: 'f2',
+      name: 'Módulo F2 - Contexto Semántico',
+      description: 'Domina la estructura semántica y el contexto optimal para modelos generativos.',
+      price: 10,
+      image: '/images/modulo-f2.png'
     },
     f3: {
-      name: "F3: Autoridad Generativa",
-      description: "Contenido citable y autoritativo"
+      id: 'f3',
+      name: 'Módulo F3 - Autoridad Generativa',
+      description: 'Construye autoridad y credibilidad para ser citado por modelos de AI.',
+      price: 10,
+      image: '/images/modulo-f3.png'
     },
     f4: {
-      name: "F4: Validación Conversacional", 
-      description: "Validación directa con modelos de IA"
+      id: 'f4',
+      name: 'Módulo F4 - Validación Conversacional',
+      description: 'Aprende validación conversacional y optimización de interacciones.',
+      price: 10,
+      image: '/images/modulo-f4.png'
     },
     f5: {
-      name: "F5: Mantenimiento Generativo",
-      description: "Sistemas automáticos de mantenimiento GEO"
+      id: 'f5',
+      name: 'Módulo F5 - Mantenimiento Evolutivo',
+      description: 'Diseña sistemas de mantenimiento evolutivo para la era de la AI.',
+      price: 10,
+      image: '/images/modulo-f5.png'
     },
     f6: {
-      name: "F6: Optimización Técnica",
-      description: "Configuraciones avanzadas para LLMs"
+      id: 'f6',
+      name: 'Módulo F6 - Métricas y Análisis',
+      description: 'Métricas y análisis avanzado para medir el impacto del GEO.',
+      price: 10,
+      image: '/images/modulo-f6.png'
     }
   };
 
   const plans = {
-    module: {
-      name: "Módulo Individual",
-      price: 10,
-      originalPrice: undefined,
-      features: [
-        `Acceso completo al ${modules[selectedModule as keyof typeof modules].name}`,
-        "Contenido detallado y explicaciones paso a paso",
-        "Plantillas y checklists específicos del módulo",
-        "Implementación práctica autoguiada",
-        "Recursos descargables incluidos"
-      ]
-    },
     complete: {
-      name: "Curso Completo F1-F6",
+      id: 'complete',
+      name: 'Curso GEO Completo',
+      description: 'Acceso completo a todos los módulos del curso GEO con metodología integral.',
       price: 50,
       originalPrice: 60,
       features: [
-        "F1: Accesibilidad generativa básica",
-        "F2: Estructura semántica avanzada",
-        "F3: Contenido citable y autoritativo",
-        "F4: Validación conversacional directa",
-        "F5: Mantenimiento generativo automático",
-        "F6: Optimización técnica avanzada",
-        "Plantillas y checklists completos",
-        "Implementación paso a paso autoguiada"
+        'Todos los 6 módulos incluidos',
+        'Contenido premium completo',
+        'Soporte prioritario',
+        'Actualizaciones gratuitas',
+        'Certificado de finalización'
+      ]
+    },
+    individual: {
+      id: 'individual',
+      name: 'Módulo Individual',
+      description: 'Acceso a un módulo específico del curso.',
+      price: 10,
+      features: [
+        'Acceso a módulo seleccionado',
+        'Contenido premium del módulo',
+        'Soporte estándar'
       ]
     }
   };
 
-  const currentPlan = plans[selectedPlan as keyof typeof plans];
+  const handleCheckout = async () => {
+    if (!user) {
+      navigate('/auth', { state: { from: { pathname: '/checkout' } } });
+      return;
+    }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    if (!selectedPlan) {
+      toast({
+        title: "Selecciona un plan",
+        description: "Debes seleccionar un plan antes de continuar.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (selectedPlan === 'individual' && !selectedModule) {
+      toast({
+        title: "Selecciona un módulo",
+        description: "Debes seleccionar un módulo específico.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Verificar si ya tiene acceso
+    if (selectedPlan === 'complete' && userAccess.length === 6) {
+      toast({
+        title: "Ya tienes acceso",
+        description: "Ya tienes acceso completo a todos los módulos.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (selectedPlan === 'individual' && selectedModule && userAccess.includes(selectedModule)) {
+      toast({
+        title: "Ya tienes acceso",
+        description: `Ya tienes acceso al ${modules[selectedModule as keyof typeof modules].name}.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsProcessing(true);
 
-    // Simulate payment processing
-    setTimeout(() => {
-      toast({
-        title: "¡Pago procesado exitosamente!",
-        description: "Te hemos enviado el acceso a tu email. Bienvenido a GEO.",
+    try {
+      const productKey = selectedPlan === 'complete' ? 'complete' : selectedModule;
+      const productInfo = PRODUCT_MAPPING[productKey as keyof typeof PRODUCT_MAPPING];
+
+      if (!productInfo) {
+        throw new Error('Producto no encontrado');
+      }
+
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: {
+          priceId: productInfo.priceId,
+          productType: selectedPlan,
+          moduleId: selectedModule || undefined
+        }
       });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      } else {
+        throw new Error('No se pudo crear la sesión de checkout');
+      }
+    } catch (error) {
+      console.error('Error en checkout:', error);
+      toast({
+        title: "Error al procesar el pago",
+        description: error instanceof Error ? error.message : "Ha ocurrido un error inesperado.",
+        variant: "destructive",
+      });
+    } finally {
       setIsProcessing(false);
-    }, 2000);
+    }
   };
 
+  const currentPlan = plans[selectedPlan as keyof typeof plans];
+  const currentModule = selectedModule ? modules[selectedModule as keyof typeof modules] : null;
+
+  if (!user) {
+    return null; // Se redirige automáticamente
+  }
+
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <Helmet>
         <title>Checkout - Curso GEO</title>
         <meta name="description" content="Completa tu compra del curso GEO y comienza a optimizar para IA hoy mismo." />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
-        <Header />
-        
-        <main className="py-16">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <div className="mb-8">
-              <Link to="/#precios" className="inline-flex items-center text-muted-foreground hover:text-primary">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Volver a planes
-              </Link>
+      <Header />
+
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="mb-8">
+            <Link to="/curso" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Volver al curso
+            </Link>
+            <h1 className="text-3xl font-bold">Finalizar compra</h1>
+            <p className="text-muted-foreground mt-2">
+              Completa tu compra para acceder al contenido premium del curso GEO
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Selección de plan */}
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Selecciona tu plan</CardTitle>
+                  <CardDescription>
+                    Elige entre el curso completo o módulos individuales
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Curso completo */}
+                  <div 
+                    className={`p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                      selectedPlan === 'complete' 
+                        ? 'border-primary bg-primary/5' 
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                    onClick={() => setSelectedPlan('complete')}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-semibold">Curso GEO Completo</h3>
+                        <p className="text-sm text-muted-foreground">Todos los módulos F1-F6</p>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground line-through">€60</span>
+                          <span className="font-bold text-lg">€50</span>
+                        </div>
+                        <Badge variant="secondary" className="text-xs">Ahorra €10</Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Módulo individual */}
+                  <div 
+                    className={`p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                      selectedPlan === 'individual' 
+                        ? 'border-primary bg-primary/5' 
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                    onClick={() => setSelectedPlan('individual')}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-semibold">Módulo Individual</h3>
+                        <p className="text-sm text-muted-foreground">Acceso a un módulo específico</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="font-bold text-lg">€10</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Selector de módulo */}
+                  {selectedPlan === 'individual' && (
+                    <div className="mt-4">
+                      <label className="text-sm font-medium mb-2 block">Selecciona el módulo:</label>
+                      <div className="space-y-2">
+                        {Object.entries(modules).map(([key, module]) => (
+                          <div 
+                            key={key}
+                            className={`p-3 rounded border cursor-pointer transition-colors ${
+                              selectedModule === key 
+                                ? 'border-primary bg-primary/5' 
+                                : 'border-border hover:border-primary/50'
+                            }`}
+                            onClick={() => setSelectedModule(key)}
+                          >
+                            <div className="font-medium text-sm">{module.name}</div>
+                            <div className="text-xs text-muted-foreground">{module.description}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-              {/* Order Summary */}
-              <div>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Resumen del Pedido</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Plan Selection */}
-                    <div className="space-y-3">
-                      {Object.entries(plans).map(([key, plan]) => (
-                        <div key={key} className="space-y-3">
-                          <div
-                            className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                              selectedPlan === key ? 'border-accent bg-accent/5' : 'border-muted'
-                            }`}
-                            onClick={() => setSelectedPlan(key)}
-                          >
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <h3 className="font-semibold">{plan.name}</h3>
-                                <div className="flex items-center gap-2 mt-1">
-                                  <span className="text-2xl font-bold">€{plan.price}</span>
-                                  {plan.originalPrice && (
-                                    <>
-                                      <span className="text-muted-foreground line-through">€{plan.originalPrice}</span>
-                                      <Badge variant="secondary">-€{plan.originalPrice - plan.price}</Badge>
-                                    </>
-                                  )}
-                                </div>
-                                <p className="text-xs text-muted-foreground mt-1">Pago único</p>
-                              </div>
-                              <div className={`w-4 h-4 rounded-full border-2 ${
-                                selectedPlan === key ? 'bg-accent border-accent' : 'border-muted'
-                              }`} />
-                            </div>
-                          </div>
-                          
-                          {/* Module Selection for Individual Module */}
-                          {selectedPlan === 'module' && key === 'module' && (
-                            <div className="ml-4 space-y-2">
-                              <h4 className="text-sm font-medium text-muted-foreground">Selecciona el módulo:</h4>
-                              {Object.entries(modules).map(([moduleKey, moduleInfo]) => (
-                                <div
-                                  key={moduleKey}
-                                  className={`p-3 border rounded cursor-pointer transition-colors ${
-                                    selectedModule === moduleKey ? 'border-accent bg-accent/5' : 'border-muted'
-                                  }`}
-                                  onClick={() => setSelectedModule(moduleKey)}
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <div>
-                                      <h5 className="font-medium text-sm">{moduleInfo.name}</h5>
-                                      <p className="text-xs text-muted-foreground">{moduleInfo.description}</p>
-                                    </div>
-                                    <div className={`w-3 h-3 rounded-full border ${
-                                      selectedModule === moduleKey ? 'bg-accent border-accent' : 'border-muted'
-                                    }`} />
-                                  </div>
-                                </div>
-                              ))}
+            {/* Resumen de compra */}
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Resumen de compra</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {selectedPlan && currentPlan && (
+                    <>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="font-medium">
+                            {selectedPlan === 'complete' 
+                              ? currentPlan.name 
+                              : currentModule?.name || 'Selecciona un módulo'
+                            }
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            {selectedPlan === 'complete' 
+                              ? currentPlan.description 
+                              : currentModule?.description || ''
+                            }
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          {selectedPlan === 'complete' && 'originalPrice' in currentPlan && currentPlan.originalPrice && (
+                            <div className="text-sm text-muted-foreground line-through">
+                              €{currentPlan.originalPrice}
                             </div>
                           )}
+                          <div className="font-bold">
+                            €{selectedPlan === 'complete' ? currentPlan.price : (currentModule?.price || 10)}
+                          </div>
                         </div>
-                      ))}
-                    </div>
-
-                    {/* Features */}
-                    <div>
-                      <h4 className="font-semibold mb-3">Incluye:</h4>
-                      <ul className="space-y-2">
-                        {currentPlan.features.map((feature, index) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Pricing Summary */}
-                    <div className="border-t pt-4 space-y-2">
-                      <div className="flex justify-between">
-                        <span>Subtotal:</span>
-                        <span>€{currentPlan.originalPrice || currentPlan.price}</span>
                       </div>
-                      {currentPlan.originalPrice && (
-                        <div className="flex justify-between text-green-600">
-                          <span>Descuento:</span>
-                          <span>-€{currentPlan.originalPrice - currentPlan.price}</span>
-                        </div>
-                      )}
-                      <div className="flex justify-between font-bold text-lg border-t pt-2">
+
+                      <Separator />
+
+                      <div className="space-y-2">
+                        <h4 className="font-medium text-sm">Incluye:</h4>
+                        <ul className="space-y-1">
+                          {(selectedPlan === 'complete' ? currentPlan.features : ['Acceso completo al módulo', 'Contenido premium', 'Soporte estándar']).map((feature, index) => (
+                            <li key={index} className="flex items-center text-sm">
+                              <CheckCircle className="mr-2 h-4 w-4 text-green-500 flex-shrink-0" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <Separator />
+
+                      <div className="flex justify-between items-center font-bold">
                         <span>Total:</span>
-                        <span>€{currentPlan.price}</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground">Pago único • Producto digital</p>
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <div className="flex items-center gap-2 text-blue-800">
-                        <Shield className="h-4 w-4" />
-                        <span className="font-semibold">Producto Digital</span>
-                      </div>
-                      <p className="text-sm text-blue-700 mt-1">
-                        Acceso inmediato tras el pago. Contenido para aprendizaje autónomo.
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Payment Form */}
-              <div>
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <CreditCard className="h-5 w-5" />
-                      Información de Pago
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="firstName">Nombre</Label>
-                          <Input id="firstName" required />
-                        </div>
-                        <div>
-                          <Label htmlFor="lastName">Apellido</Label>
-                          <Input id="lastName" required />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Label htmlFor="email">Email</Label>
-                        <Input id="email" type="email" required />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="cardNumber">Número de Tarjeta</Label>
-                        <Input id="cardNumber" placeholder="1234 5678 9012 3456" required />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="expiry">Vencimiento</Label>
-                          <Input id="expiry" placeholder="MM/YY" required />
-                        </div>
-                        <div>
-                          <Label htmlFor="cvc">CVC</Label>
-                          <Input id="cvc" placeholder="123" required />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Label htmlFor="country">País</Label>
-                        <Input id="country" defaultValue="España" required />
+                        <span>€{selectedPlan === 'complete' ? currentPlan.price : (currentModule?.price || 10)}</span>
                       </div>
 
                       <Button 
-                        type="submit" 
-                        className="w-full" 
+                        onClick={handleCheckout}
+                        disabled={isProcessing || !selectedPlan || (selectedPlan === 'individual' && !selectedModule)}
+                        className="w-full"
                         size="lg"
-                        disabled={isProcessing}
                       >
                         {isProcessing ? (
-                          "Procesando..."
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Procesando...
+                          </>
                         ) : (
-                          `Pagar €${currentPlan.price}`
+                          <>
+                            <CreditCard className="mr-2 h-4 w-4" />
+                            Proceder al pago
+                          </>
                         )}
                       </Button>
 
-                      <p className="text-xs text-muted-foreground text-center">
-                        Al proceder, aceptas nuestros términos y condiciones. 
-                        Producto digital de pago único.
+                      <p className="text-xs text-center text-muted-foreground">
+                        Pago seguro procesado por Stripe. Acceso inmediato tras la compra.
                       </p>
-                    </form>
+                    </>
+                  )}
+
+                  {!selectedPlan && (
+                    <div className="text-center py-8">
+                      <p className="text-muted-foreground">Selecciona un plan para continuar</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Información de usuario */}
+              {user && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Tu cuenta</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm">
+                      <strong>Email:</strong> {user.email}
+                    </p>
+                    {userAccess.length > 0 && (
+                      <div className="mt-2">
+                        <p className="text-sm font-medium">Acceso actual:</p>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {userAccess.map(moduleId => (
+                            <Badge key={moduleId} variant="secondary" className="text-xs">
+                              {modules[moduleId as keyof typeof modules]?.name || moduleId}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
-              </div>
+              )}
             </div>
           </div>
-        </main>
+        </div>
+      </main>
 
-        <Footer />
-      </div>
-    </>
+      <Footer />
+    </div>
   );
-};
-
-export default CheckoutPage;
+}

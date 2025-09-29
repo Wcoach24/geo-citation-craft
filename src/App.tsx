@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import CursoGeoPage from "./pages/CursoGeoPage";
 
@@ -17,6 +18,7 @@ import PrivacidadPage from "./pages/PrivacidadPage";
 import TerminosPage from "./pages/TerminosPage";
 import ContenidoIAPage from "./pages/ContenidoIAPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
 
 // Módulos del curso
@@ -41,10 +43,11 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             
@@ -58,6 +61,7 @@ function App() {
             <Route path="/radar-ia" element={<RadarIAPage />} />
             <Route path="/contenido-ia" element={<ContenidoIAPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/auth" element={<AuthPage />} />
             
             {/* Información corporativa */}
             <Route path="/acerca-de" element={<AcercaDePage />} />
@@ -89,6 +93,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

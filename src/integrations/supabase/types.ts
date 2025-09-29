@@ -14,7 +14,113 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      purchases: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          module_id: string | null
+          product_type: string
+          status: string
+          stripe_payment_intent_id: string | null
+          stripe_price_id: string
+          stripe_product_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          id?: string
+          module_id?: string | null
+          product_type: string
+          status?: string
+          stripe_payment_intent_id?: string | null
+          stripe_price_id: string
+          stripe_product_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          module_id?: string | null
+          product_type?: string
+          status?: string
+          stripe_payment_intent_id?: string | null
+          stripe_price_id?: string
+          stripe_product_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_access: {
+        Row: {
+          access_type: string
+          granted_at: string
+          id: string
+          module_id: string
+          purchase_id: string | null
+          user_id: string
+        }
+        Insert: {
+          access_type: string
+          granted_at?: string
+          id?: string
+          module_id: string
+          purchase_id?: string | null
+          user_id: string
+        }
+        Update: {
+          access_type?: string
+          granted_at?: string
+          id?: string
+          module_id?: string
+          purchase_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_access_purchase_id_fkey"
+            columns: ["purchase_id"]
+            isOneToOne: false
+            referencedRelation: "purchases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
