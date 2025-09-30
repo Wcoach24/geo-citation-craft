@@ -88,8 +88,8 @@ serve(async (req) => {
 
         // Otorgar acceso
         if (product_type === 'complete') {
-          // Acceso a todos los módulos
-          const modules = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'];
+          // Acceso a todos los módulos disponibles (F1-F5)
+          const modules = ['f1', 'f2', 'f3', 'f4', 'f5'];
           const accessRecords = modules.map(moduleId => ({
             user_id,
             module_id: moduleId,

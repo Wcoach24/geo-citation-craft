@@ -29,10 +29,10 @@ const PurchaseSuccessPage = () => {
 
   const getWelcomeMessage = () => {
     const accessCount = userAccess.length;
-    if (accessCount === 6) {
+    if (accessCount === 5) {
       return {
         title: "¡Felicidades! Tienes acceso completo",
-        description: "Ahora puedes acceder a todos los 6 módulos del Curso GEO y todo el contenido premium.",
+        description: "Ahora puedes acceder a todos los 5 módulos del Curso GEO y todo el contenido premium.",
         badge: "Acceso Completo"
       };
     } else if (accessCount > 0) {
@@ -103,7 +103,7 @@ const PurchaseSuccessPage = () => {
                   <div>
                     <h4 className="font-medium mb-1">Accede a tu Dashboard</h4>
                     <p className="text-sm text-muted-foreground mb-3">
-                      Descarga PDFs, plantillas Excel, casos de estudio y más.
+                      Descarga las guías PDF especializadas de tus módulos.
                     </p>
                     <Link to="/dashboard">
                       <Button size="sm">
@@ -141,12 +141,12 @@ const PurchaseSuccessPage = () => {
             <CardContent>
               <div className="space-y-3">
                 {[
-                  "📋 Guías PDF detalladas (20-30 páginas por módulo)",
-                  "📊 Plantillas Excel listas para usar",
-                  "🎯 Casos de estudio reales con resultados",
-                  "🛠️ Herramientas y calculadoras especializadas",
-                  "📖 Templates y checklists imprimibles",
-                  "🔄 Actualizaciones de contenido incluidas"
+                  "📋 Guías PDF profesionales (15-25 páginas por módulo)",
+                  "📚 Metodología práctica paso a paso",
+                  "🎯 Casos de estudio reales documentados",
+                  "💡 Estrategias de implementación probadas",
+                  "🔄 Actualizaciones de contenido incluidas",
+                  "⚡ Acceso permanente a todo el material"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
@@ -167,16 +167,16 @@ const PurchaseSuccessPage = () => {
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium">1</div>
                   <div>
-                    <h4 className="font-medium">Descarga la guía del primer módulo</h4>
-                    <p className="text-sm text-muted-foreground">Comienza con la guía PDF para establecer las bases.</p>
+                    <h4 className="font-medium">Descarga tus guías PDF</h4>
+                    <p className="text-sm text-muted-foreground">Accede a todas las guías profesionales desde tu dashboard.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium">2</div>
                   <div>
-                    <h4 className="font-medium">Utiliza las plantillas</h4>
-                    <p className="text-sm text-muted-foreground">Aplica las herramientas Excel a tu proyecto real.</p>
+                    <h4 className="font-medium">Aplica la metodología</h4>
+                    <p className="text-sm text-muted-foreground">Implementa paso a paso las estrategias en tu proyecto.</p>
                   </div>
                 </div>
                 
@@ -184,7 +184,7 @@ const PurchaseSuccessPage = () => {
                   <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium">3</div>
                   <div>
                     <h4 className="font-medium">Estudia los casos reales</h4>
-                    <p className="text-sm text-muted-foreground">Aprende de implementaciones exitosas documentadas.</p>
+                    <p className="text-sm text-muted-foreground">Aprende de implementaciones exitosas documentadas en cada guía.</p>
                   </div>
                 </div>
               </div>

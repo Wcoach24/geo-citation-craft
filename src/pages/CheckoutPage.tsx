@@ -44,7 +44,7 @@ export default function CheckoutPage() {
     
     if (planParam === 'complete') {
       setSelectedPlan('complete');
-    } else if (moduleParam && ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'].includes(moduleParam)) {
+    } else if (moduleParam && ['f1', 'f2', 'f3', 'f4', 'f5'].includes(moduleParam)) {
       setSelectedPlan('individual');
       setSelectedModule(moduleParam);
     }
@@ -89,9 +89,10 @@ export default function CheckoutPage() {
     f6: {
       id: 'f6',
       name: 'Módulo F6 - Métricas y Análisis',
-      description: 'Métricas y análisis avanzado para medir el impacto del GEO.',
+      description: 'Próximamente - Métricas y análisis avanzado para medir el impacto del GEO.',
       price: 10,
-      image: '/images/modulo-f6.png'
+      image: '/images/modulo-f6.png',
+      comingSoon: true
     }
   };
 
@@ -103,11 +104,11 @@ export default function CheckoutPage() {
       price: 50,
       originalPrice: 60,
       features: [
-        'Todos los 6 módulos incluidos',
-        'Contenido premium completo',
-        'Soporte prioritario',
-        'Actualizaciones gratuitas',
-        'Certificado de finalización'
+        '5 módulos fundamentales (F1-F5)',
+        '5 guías PDF profesionales (15-25 páginas)',
+        'Metodología práctica paso a paso',
+        'Casos de estudio reales incluidos',
+        'Actualizaciones de contenido gratuitas'
       ]
     },
     individual: {
@@ -116,9 +117,9 @@ export default function CheckoutPage() {
       description: 'Acceso a un módulo específico del curso.',
       price: 10,
       features: [
-        'Acceso a módulo seleccionado',
-        'Contenido premium del módulo',
-        'Soporte estándar'
+        'Guía PDF especializada del módulo',
+        'Metodología práctica detallada',
+        'Acceso permanente al contenido'
       ]
     }
   };
@@ -148,10 +149,10 @@ export default function CheckoutPage() {
     }
 
     // Verificar si ya tiene acceso
-    if (selectedPlan === 'complete' && userAccess.length === 6) {
+    if (selectedPlan === 'complete' && userAccess.length === 5) {
       toast({
         title: "Ya tienes acceso",
-        description: "Ya tienes acceso completo a todos los módulos.",
+        description: "Ya tienes acceso completo a todos los módulos disponibles.",
         variant: "destructive",
       });
       return;
@@ -256,7 +257,7 @@ export default function CheckoutPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <h3 className="font-semibold">Curso GEO Completo</h3>
-                        <p className="text-sm text-muted-foreground">Todos los módulos F1-F6</p>
+                        <p className="text-sm text-muted-foreground">5 módulos fundamentales (F1-F5)</p>
                       </div>
                       <div className="text-right">
                         <div className="flex items-center gap-2">
@@ -293,20 +294,28 @@ export default function CheckoutPage() {
                     <div className="mt-4">
                       <label className="text-sm font-medium mb-2 block">Selecciona el módulo:</label>
                       <div className="space-y-2">
-                        {Object.entries(modules).map(([key, module]) => (
-                          <div 
-                            key={key}
-                            className={`p-3 rounded border cursor-pointer transition-colors ${
-                              selectedModule === key 
-                                ? 'border-primary bg-primary/5' 
-                                : 'border-border hover:border-primary/50'
-                            }`}
-                            onClick={() => setSelectedModule(key)}
-                          >
-                            <div className="font-medium text-sm">{module.name}</div>
-                            <div className="text-xs text-muted-foreground">{module.description}</div>
-                          </div>
-                        ))}
+                        {Object.entries(modules).map(([key, module]) => {
+                          const isComingSoon = 'comingSoon' in module && module.comingSoon;
+                          return (
+                            <div 
+                              key={key}
+                              className={`p-3 rounded border transition-colors ${
+                                isComingSoon 
+                                  ? 'opacity-50 cursor-not-allowed border-border' 
+                                  : selectedModule === key 
+                                    ? 'border-primary bg-primary/5 cursor-pointer' 
+                                    : 'border-border hover:border-primary/50 cursor-pointer'
+                              }`}
+                              onClick={() => !isComingSoon && setSelectedModule(key)}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="font-medium text-sm">{module.name}</div>
+                                {isComingSoon && <Badge variant="secondary" className="text-xs">Próximamente</Badge>}
+                              </div>
+                              <div className="text-xs text-muted-foreground">{module.description}</div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
