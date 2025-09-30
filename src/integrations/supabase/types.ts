@@ -122,7 +122,7 @@ export type Database = {
           stripe_price_id: string
           stripe_product_id: string
           updated_at: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           amount: number
@@ -136,7 +136,7 @@ export type Database = {
           stripe_price_id: string
           stripe_product_id: string
           updated_at?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           amount?: number
@@ -150,7 +150,7 @@ export type Database = {
           stripe_price_id?: string
           stripe_product_id?: string
           updated_at?: string
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: []
       }
