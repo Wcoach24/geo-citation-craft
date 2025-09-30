@@ -11,6 +11,7 @@ interface CheckoutRequest {
   priceId: string;
   productType: 'module' | 'complete';
   moduleId?: string;
+  guestEmail?: string;
 }
 
 // Mapeo de productos y precios
@@ -35,24 +36,27 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_ANON_KEY") ?? ""
     );
 
-    // Verificar autenticación
+    const { priceId, productType, moduleId, guestEmail }: CheckoutRequest = await req.json();
+
+    // Get user info (optional for guest checkout)
+    let user = null;
+    let email = guestEmail;
+
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) {
-      throw new Error("No authorization header provided");
+    if (authHeader) {
+      const token = authHeader.replace("Bearer ", "");
+      const { data: userData } = await supabaseClient.auth.getUser(token);
+      if (userData?.user) {
+        user = userData.user;
+        email = user.email;
+      }
     }
 
-    const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
-    
-    const user = userData.user;
-    if (!user?.email) {
-      throw new Error("User not authenticated or email not available");
+    if (!email) {
+      throw new Error("Email is required for checkout");
     }
 
-    console.log(`Creating checkout for user: ${user.email}`);
-
-    const { priceId, productType, moduleId }: CheckoutRequest = await req.json();
+    console.log(`Creating checkout for ${user ? 'user' : 'guest'}: ${email}`);
 
     if (!priceId) {
       throw new Error("Price ID is required");
@@ -73,17 +77,18 @@ serve(async (req) => {
     });
 
     // Buscar o crear cliente en Stripe
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
+    const customers = await stripe.customers.list({ email, limit: 1 });
     let customerId;
     
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
       console.log(`Existing customer found: ${customerId}`);
     } else {
-      const customer = await stripe.customers.create({
-        email: user.email,
-        metadata: { supabase_user_id: user.id }
-      });
+      const customerData: any = { email };
+      if (user) {
+        customerData.metadata = { supabase_user_id: user.id };
+      }
+      const customer = await stripe.customers.create(customerData);
       customerId = customer.id;
       console.log(`New customer created: ${customerId}`);
     }
@@ -101,7 +106,8 @@ serve(async (req) => {
       success_url: `${req.headers.get("origin")}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/checkout`,
       metadata: {
-        user_id: user.id,
+        user_id: user?.id || '',
+        guest_email: user ? '' : email,
         product_type: productType,
         module_id: moduleId || '',
         stripe_product_id: productInfo.productId,

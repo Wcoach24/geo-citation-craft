@@ -51,31 +51,40 @@ serve(async (req) => {
 
         const {
           user_id,
+          guest_email,
           product_type,
           module_id,
           stripe_product_id,
           stripe_price_id
         } = session.metadata || {};
 
-        if (!user_id || !product_type || !stripe_product_id || !stripe_price_id) {
+        const isGuest = !user_id && guest_email;
+
+        if (!product_type || !stripe_product_id || !stripe_price_id) {
           console.error("Missing required metadata in checkout session");
           return new Response("Missing metadata", { status: 400 });
         }
 
+        console.log(`Processing ${isGuest ? 'guest' : 'user'} purchase`);
+
         // Registrar la compra
+        const purchaseData: any = {
+          stripe_payment_intent_id: session.payment_intent,
+          stripe_product_id,
+          stripe_price_id,
+          product_type,
+          module_id: module_id || null,
+          amount: session.amount_total || 0,
+          currency: session.currency || 'eur',
+          status: 'completed'
+        };
+
+        // Set user_id to null for guest purchases (required by schema)
+        purchaseData.user_id = isGuest ? null : user_id;
+
         const { data: purchase, error: purchaseError } = await supabaseClient
           .from("purchases")
-          .insert({
-            user_id,
-            stripe_payment_intent_id: session.payment_intent,
-            stripe_product_id,
-            stripe_price_id,
-            product_type,
-            module_id: module_id || null,
-            amount: session.amount_total || 0,
-            currency: session.currency || 'eur',
-            status: 'completed'
-          })
+          .insert(purchaseData)
           .select()
           .single();
 
@@ -87,8 +96,38 @@ serve(async (req) => {
         console.log(`Purchase recorded: ${purchase.id}`);
 
         // Otorgar acceso
-        if (product_type === 'complete') {
-          // Acceso a todos los módulos disponibles (F1-F5)
+        if (isGuest) {
+          // Generate guest access
+          console.log('Creating guest access for:', guest_email);
+          
+          const { data: guestAccessData, error: guestError } = await supabaseClient.functions.invoke(
+            'generate-guest-access',
+            {
+              body: {
+                email: guest_email,
+                purchaseId: purchase.id,
+                productType: product_type,
+                moduleId: module_id
+              }
+            }
+          );
+
+          if (guestError) {
+            console.error('Error creating guest access:', guestError);
+          } else {
+            // Send email with access links
+            await supabaseClient.functions.invoke('send-purchase-email', {
+              body: {
+                email: guest_email,
+                accessToken: guestAccessData.accessToken,
+                downloadUrls: guestAccessData.downloadUrls,
+                productType: product_type
+              }
+            });
+            console.log('Guest access created and email sent');
+          }
+        } else if (product_type === 'complete') {
+          // Acceso a todos los módulos disponibles (F1-F5) para usuarios registrados
           const modules = ['f1', 'f2', 'f3', 'f4', 'f5'];
           const accessRecords = modules.map(moduleId => ({
             user_id,
@@ -110,7 +149,7 @@ serve(async (req) => {
             console.log("Complete course access granted");
           }
         } else if (product_type === 'module' && module_id) {
-          // Acceso a módulo individual
+          // Acceso a módulo individual para usuarios registrados
           const { error: accessError } = await supabaseClient
             .from("user_access")
             .upsert({

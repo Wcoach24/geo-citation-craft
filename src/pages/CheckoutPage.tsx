@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { CheckCircle, CreditCard, Loader2, ArrowLeft } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -28,15 +30,14 @@ export default function CheckoutPage() {
   const [selectedPlan, setSelectedPlan] = useState<string>('');
   const [selectedModule, setSelectedModule] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [guestEmail, setGuestEmail] = useState('');
   const { toast } = useToast();
   const { user, userAccess } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth', { state: { from: { pathname: '/checkout' } } });
-    }
+    // No auth required - guests can checkout
     
     // Verificar parámetros de URL
     const moduleParam = searchParams.get('module');
@@ -48,7 +49,7 @@ export default function CheckoutPage() {
       setSelectedPlan('individual');
       setSelectedModule(moduleParam);
     }
-  }, [user, navigate, searchParams]);
+  }, [searchParams]);
 
   const modules = {
     f1: {
@@ -125,8 +126,13 @@ export default function CheckoutPage() {
   };
 
   const handleCheckout = async () => {
-    if (!user) {
-      navigate('/auth', { state: { from: { pathname: '/checkout' } } });
+    // Validate email for guest checkout
+    if (!user && !guestEmail.trim()) {
+      toast({
+        title: "Email requerido",
+        description: "Por favor ingresa tu email para continuar",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -148,23 +154,25 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Verificar si ya tiene acceso
-    if (selectedPlan === 'complete' && userAccess.length === 5) {
-      toast({
-        title: "Ya tienes acceso",
-        description: "Ya tienes acceso completo a todos los módulos disponibles.",
-        variant: "destructive",
-      });
-      return;
-    }
+    // Verificar si ya tiene acceso (solo para usuarios registrados)
+    if (user) {
+      if (selectedPlan === 'complete' && userAccess.length === 5) {
+        toast({
+          title: "Ya tienes acceso",
+          description: "Ya tienes acceso completo a todos los módulos disponibles.",
+          variant: "destructive",
+        });
+        return;
+      }
 
-    if (selectedPlan === 'individual' && selectedModule && userAccess.includes(selectedModule)) {
-      toast({
-        title: "Ya tienes acceso",
-        description: `Ya tienes acceso al ${modules[selectedModule as keyof typeof modules].name}.`,
-        variant: "destructive",
-      });
-      return;
+      if (selectedPlan === 'individual' && selectedModule && userAccess.includes(selectedModule)) {
+        toast({
+          title: "Ya tienes acceso",
+          description: `Ya tienes acceso al ${modules[selectedModule as keyof typeof modules].name}.`,
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     setIsProcessing(true);
@@ -181,7 +189,8 @@ export default function CheckoutPage() {
         body: {
           priceId: productInfo.priceId,
           productType: selectedPlan,
-          moduleId: selectedModule || undefined
+          moduleId: selectedModule || undefined,
+          guestEmail: !user ? guestEmail.trim() : undefined
         }
       });
 
@@ -207,10 +216,6 @@ export default function CheckoutPage() {
   const currentPlan = plans[selectedPlan as keyof typeof plans];
   const currentModule = selectedModule ? modules[selectedModule as keyof typeof modules] : null;
 
-  if (!user) {
-    return null; // Se redirige automáticamente
-  }
-
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -230,7 +235,7 @@ export default function CheckoutPage() {
             </Link>
             <h1 className="text-3xl font-bold">Finalizar compra</h1>
             <p className="text-muted-foreground mt-2">
-              Completa tu compra para acceder al contenido premium del curso GEO
+              {!user ? 'Ingresa tu email y completa el pago para recibir acceso directo' : 'Completa tu compra para acceder al contenido premium'}
             </p>
           </div>
 
@@ -372,6 +377,29 @@ export default function CheckoutPage() {
                           ))}
                         </ul>
                       </div>
+
+                      {!user && (
+                        <>
+                          <Separator />
+                          <div className="space-y-3">
+                            <div>
+                              <Label htmlFor="guest-email">Email *</Label>
+                              <Input
+                                id="guest-email"
+                                type="email"
+                                placeholder="tu@email.com"
+                                value={guestEmail}
+                                onChange={(e) => setGuestEmail(e.target.value)}
+                                required
+                                className="mt-1"
+                              />
+                            </div>
+                            <p className="text-xs text-muted-foreground">
+                              Recibirás los enlaces de descarga en este email
+                            </p>
+                          </div>
+                        </>
+                      )}
 
                       <Separator />
 

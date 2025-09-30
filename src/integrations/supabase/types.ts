@@ -41,6 +41,47 @@ export type Database = {
         }
         Relationships: []
       }
+      guest_access: {
+        Row: {
+          access_token: string
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          module_id: string | null
+          product_type: string
+          purchase_id: string | null
+        }
+        Insert: {
+          access_token: string
+          created_at?: string
+          email: string
+          expires_at: string
+          id?: string
+          module_id?: string | null
+          product_type: string
+          purchase_id?: string | null
+        }
+        Update: {
+          access_token?: string
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          module_id?: string | null
+          product_type?: string
+          purchase_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_access_purchase_id_fkey"
+            columns: ["purchase_id"]
+            isOneToOne: false
+            referencedRelation: "purchases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string

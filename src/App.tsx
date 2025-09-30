@@ -20,6 +20,7 @@ import ContenidoIAPage from "./pages/ContenidoIAPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import DashboardPage from "./pages/DashboardPage";
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
+import GuestAccessPage from "./pages/GuestAccessPage";
 import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
 
@@ -65,6 +66,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/success" element={<PurchaseSuccessPage />} />
+            <Route path="/guest-access" element={<GuestAccessPage />} />
             <Route path="/auth" element={<AuthPage />} />
             
             {/* Información corporativa */}

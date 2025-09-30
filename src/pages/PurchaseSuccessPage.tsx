@@ -4,15 +4,19 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Download, FileText, Star, ArrowRight } from 'lucide-react';
+import { CheckCircle, Download, FileText, Star, ArrowRight, Mail } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const PurchaseSuccessPage = () => {
   const [searchParams] = useSearchParams();
   const { user, userAccess, refreshUserAccess } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const sessionId = searchParams.get('session_id');
+  const isGuest = !user;
 
   useEffect(() => {
+    // Only refresh for registered users
     if (user && sessionId) {
       // Refresh user access after successful payment
       const refreshAccess = async () => {
@@ -50,6 +54,79 @@ const PurchaseSuccessPage = () => {
     }
   };
 
+  // Guest checkout success message
+  if (isGuest) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        
+        <main className="flex-1 container mx-auto px-4 py-12">
+          <div className="max-w-3xl mx-auto space-y-8">
+            <Card className="border-green-200 bg-gradient-to-br from-green-50 to-white">
+              <CardHeader className="text-center space-y-4 pb-8">
+                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <CheckCircle className="w-10 h-10 text-green-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-3xl mb-2">¡Compra Completada!</CardTitle>
+                  <CardDescription className="text-lg">
+                    Revisa tu email para acceder a tus guías PDF
+                  </CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="bg-white rounded-lg p-6 border">
+                  <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                    <Mail className="w-5 h-5 text-primary" />
+                    Próximos pasos:
+                  </h3>
+                  <ol className="space-y-3 text-muted-foreground">
+                    <li className="flex gap-3">
+                      <span className="font-semibold text-primary">1.</span>
+                      <span>Recibirás un email con los enlaces directos de descarga</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="font-semibold text-primary">2.</span>
+                      <span>Haz clic en los enlaces para descargar tus guías PDF</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="font-semibold text-primary">3.</span>
+                      <span>Guarda el enlace de acceso para futuras descargas</span>
+                    </li>
+                  </ol>
+                </div>
+
+                <Card className="bg-blue-50 border-blue-200">
+                  <CardContent className="pt-6">
+                    <h4 className="font-semibold mb-2">💡 ¿Quieres más control?</h4>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Crea una cuenta gratuita para gestionar todos tus contenidos en un solo lugar
+                    </p>
+                    <Link to="/auth">
+                      <Button variant="outline" size="sm">Crear Cuenta</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    ¿No recibiste el email? Revisa tu carpeta de spam o contáctanos
+                  </p>
+                  <Button variant="outline" onClick={() => window.location.href = 'mailto:soporte@esgeo.ai'}>
+                    Contactar Soporte
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    );
+  }
+
+  // Registered user success message
   if (!user) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
