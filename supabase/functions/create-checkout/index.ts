@@ -52,11 +52,7 @@ serve(async (req) => {
       }
     }
 
-    if (!email) {
-      throw new Error("Email is required for checkout");
-    }
-
-    console.log(`Creating checkout for ${user ? 'user' : 'guest'}: ${email}`);
+    console.log(`Creating checkout for ${user ? 'authenticated user' : 'guest'}${email ? ': ' + email : ''}`);
 
     if (!priceId) {
       throw new Error("Price ID is required");
@@ -76,26 +72,28 @@ serve(async (req) => {
       apiVersion: "2025-08-27.basil",
     });
 
-    // Buscar o crear cliente en Stripe
-    const customers = await stripe.customers.list({ email, limit: 1 });
+    // Buscar o crear cliente en Stripe (solo si tenemos email)
     let customerId;
     
-    if (customers.data.length > 0) {
-      customerId = customers.data[0].id;
-      console.log(`Existing customer found: ${customerId}`);
-    } else {
-      const customerData: any = { email };
-      if (user) {
-        customerData.metadata = { supabase_user_id: user.id };
+    if (email) {
+      const customers = await stripe.customers.list({ email, limit: 1 });
+      
+      if (customers.data.length > 0) {
+        customerId = customers.data[0].id;
+        console.log(`Existing customer found: ${customerId}`);
+      } else {
+        const customerData: any = { email };
+        if (user) {
+          customerData.metadata = { supabase_user_id: user.id };
+        }
+        const customer = await stripe.customers.create(customerData);
+        customerId = customer.id;
+        console.log(`New customer created: ${customerId}`);
       }
-      const customer = await stripe.customers.create(customerData);
-      customerId = customer.id;
-      console.log(`New customer created: ${customerId}`);
     }
 
     // Crear sesión de checkout
-    const session = await stripe.checkout.sessions.create({
-      customer: customerId,
+    const sessionConfig: any = {
       line_items: [
         {
           price: priceId,
@@ -107,13 +105,23 @@ serve(async (req) => {
       cancel_url: `${req.headers.get("origin")}/checkout`,
       metadata: {
         user_id: user?.id || '',
-        guest_email: user ? '' : email,
+        guest_email: user ? '' : (email || ''),
         product_type: productType,
         module_id: moduleId || '',
         stripe_product_id: productInfo.productId,
         stripe_price_id: priceId
       }
-    });
+    };
+
+    // Solo agregar customer/customer_email si tenemos email
+    if (customerId) {
+      sessionConfig.customer = customerId;
+    } else if (email) {
+      sessionConfig.customer_email = email;
+    }
+    // Si no hay email, Stripe pedirá el email en su checkout page
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     console.log(`Checkout session created: ${session.id}`);
 
