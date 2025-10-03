@@ -30,7 +30,6 @@ export default function CheckoutPage() {
   const [selectedPlan, setSelectedPlan] = useState<string>('');
   const [selectedModule, setSelectedModule] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [guestEmail, setGuestEmail] = useState('');
   const { toast } = useToast();
   const { user, userAccess } = useAuth();
   const navigate = useNavigate();
@@ -126,16 +125,6 @@ export default function CheckoutPage() {
   };
 
   const handleCheckout = async () => {
-    // Validate email for guest checkout
-    if (!user && !guestEmail.trim()) {
-      toast({
-        title: "Email requerido",
-        description: "Por favor ingresa tu email para continuar",
-        variant: "destructive",
-      });
-      return;
-    }
-
     if (!selectedPlan) {
       toast({
         title: "Selecciona un plan",
@@ -189,8 +178,7 @@ export default function CheckoutPage() {
         body: {
           priceId: productInfo.priceId,
           productType: selectedPlan,
-          moduleId: selectedModule || undefined,
-          guestEmail: !user ? guestEmail.trim() : undefined
+          moduleId: selectedModule || undefined
         }
       });
 
@@ -235,7 +223,7 @@ export default function CheckoutPage() {
             </Link>
             <h1 className="text-3xl font-bold">Finalizar compra</h1>
             <p className="text-muted-foreground mt-2">
-              {!user ? 'Ingresa tu email y completa el pago para recibir acceso directo' : 'Completa tu compra para acceder al contenido premium'}
+              Completa el pago y descarga tu contenido inmediatamente
             </p>
           </div>
 
@@ -377,29 +365,6 @@ export default function CheckoutPage() {
                           ))}
                         </ul>
                       </div>
-
-                      {!user && (
-                        <>
-                          <Separator />
-                          <div className="space-y-3">
-                            <div>
-                              <Label htmlFor="guest-email">Email *</Label>
-                              <Input
-                                id="guest-email"
-                                type="email"
-                                placeholder="tu@email.com"
-                                value={guestEmail}
-                                onChange={(e) => setGuestEmail(e.target.value)}
-                                required
-                                className="mt-1"
-                              />
-                            </div>
-                            <p className="text-xs text-muted-foreground">
-                              Recibirás los enlaces de descarga en este email
-                            </p>
-                          </div>
-                        </>
-                      )}
 
                       <Separator />
 
