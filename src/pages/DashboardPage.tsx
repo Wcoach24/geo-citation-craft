@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Download, FileText, CheckCircle, Clock, Trophy } from 'lucide-react';
+import { Download, FileText, CheckCircle, Clock, Trophy, Loader2, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 
@@ -119,10 +119,11 @@ const getFileIcon = (type: string) => {
 };
 
 const DashboardPage = () => {
-  const { user, userAccess } = useAuth();
+  const { user, userAccess, refreshUserAccess } = useAuth();
   const { toast } = useToast();
   const [downloadHistory, setDownloadHistory] = useState<DownloadHistory[]>([]);
   const [downloadingFiles, setDownloadingFiles] = useState<Set<string>>(new Set());
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -143,6 +144,25 @@ const DashboardPage = () => {
       setDownloadHistory(data || []);
     } catch (error) {
       console.error('Error fetching download history:', error);
+    }
+  };
+
+  const handleRefreshAccess = async () => {
+    setIsRefreshing(true);
+    try {
+      await refreshUserAccess();
+      toast({
+        title: "Acceso actualizado",
+        description: "Tu información de acceso se ha actualizado correctamente"
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo actualizar el acceso. Inténtalo de nuevo.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -223,11 +243,27 @@ const DashboardPage = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Dashboard Premium</h1>
-          <p className="text-muted-foreground">
-            Bienvenido/a, {user.email}. Aquí puedes acceder a todo tu contenido premium.
-          </p>
+        <div className="mb-8 flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Dashboard Premium</h1>
+            <p className="text-muted-foreground">
+              Bienvenido/a, {user.email}. Aquí puedes acceder a todo tu contenido premium.
+            </p>
+          </div>
+          <Button 
+            onClick={handleRefreshAccess} 
+            disabled={isRefreshing}
+            variant="outline"
+          >
+            {isRefreshing ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Actualizando...
+              </>
+            ) : (
+              'Actualizar acceso'
+            )}
+          </Button>
         </div>
 
         {/* Progress Overview */}
@@ -316,17 +352,38 @@ const DashboardPage = () => {
             ))}
           </div>
         ) : (
-          <Card>
-            <CardHeader>
-              <CardTitle>No hay contenido premium disponible</CardTitle>
+          <Card className="border-2 border-dashed">
+            <CardHeader className="text-center">
+              <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+                <FileText className="h-8 w-8 text-muted-foreground" />
+              </div>
+              <CardTitle>Aún no tienes contenido premium</CardTitle>
               <CardDescription>
-                Aún no tienes acceso a ningún módulo premium. Compra el acceso para desbloquear contenido exclusivo.
+                Desbloquea acceso a guías PDF profesionales, metodología paso a paso y casos de estudio reales.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="text-center space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <div className="p-4 bg-muted/50 rounded-lg">
+                  <h4 className="font-semibold mb-2">🎯 Curso Completo</h4>
+                  <p className="text-sm text-muted-foreground">5 módulos + contenido premium</p>
+                  <p className="text-lg font-bold mt-2">€497</p>
+                </div>
+                <div className="p-4 bg-muted/50 rounded-lg">
+                  <h4 className="font-semibold mb-2">📚 Módulos Individuales</h4>
+                  <p className="text-sm text-muted-foreground">Compra solo lo que necesites</p>
+                  <p className="text-lg font-bold mt-2">Desde €147</p>
+                </div>
+              </div>
               <Link to="/checkout">
-                <Button>Ver Planes</Button>
+                <Button size="lg" className="w-full">
+                  Ver Planes y Precios
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
               </Link>
+              <p className="text-xs text-muted-foreground">
+                ¿Acabas de comprar? <button onClick={handleRefreshAccess} className="text-primary underline">Actualiza tu acceso aquí</button>
+              </p>
             </CardContent>
           </Card>
         )}

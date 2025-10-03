@@ -1,35 +1,82 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Download, FileText, Star, ArrowRight, Mail } from 'lucide-react';
+import { CheckCircle, Download, FileText, Star, ArrowRight, Mail, Loader2, Copy } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const PurchaseSuccessPage = () => {
   const [searchParams] = useSearchParams();
   const { user, userAccess, refreshUserAccess } = useAuth();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
+  const [processingStatus, setProcessingStatus] = useState<'processing' | 'success' | 'error'>('processing');
+  const [guestAccessToken, setGuestAccessToken] = useState<string | null>(null);
+  const [guestEmail, setGuestEmail] = useState<string | null>(null);
+  const [moduleIds, setModuleIds] = useState<string[]>([]);
   const sessionId = searchParams.get('session_id');
-  const isGuest = !user;
 
   useEffect(() => {
-    // Only refresh for registered users
-    if (user && sessionId) {
-      // Refresh user access after successful payment
-      const refreshAccess = async () => {
-        await refreshUserAccess();
-        setIsLoading(false);
-      };
-      
-      // Add a small delay to ensure Stripe webhook has processed
-      setTimeout(refreshAccess, 2000);
+    if (sessionId) {
+      processPayment();
     } else {
       setIsLoading(false);
+      setProcessingStatus('error');
     }
-  }, [user, sessionId, refreshUserAccess]);
+  }, [sessionId]);
+
+  const processPayment = async () => {
+    try {
+      setProcessingStatus('processing');
+      
+      const { data, error } = await supabase.functions.invoke('process-payment-success', {
+        body: { sessionId }
+      });
+
+      if (error) throw error;
+
+      if (data.success) {
+        setProcessingStatus('success');
+        setModuleIds(data.moduleIds || []);
+        
+        if (data.isGuest) {
+          setGuestAccessToken(data.accessToken);
+          setGuestEmail(data.email);
+        } else {
+          // Refresh user access for registered users
+          await refreshUserAccess();
+        }
+      } else {
+        throw new Error(data.error || 'Error processing payment');
+      }
+    } catch (error) {
+      console.error('Error processing payment:', error);
+      setProcessingStatus('error');
+      toast({
+        title: "Error",
+        description: "Hubo un problema al procesar tu compra. Por favor contacta a soporte.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const copyAccessLink = () => {
+    if (guestAccessToken) {
+      const accessLink = `${window.location.origin}/guest-access?token=${guestAccessToken}`;
+      navigator.clipboard.writeText(accessLink);
+      toast({
+        title: "¡Copiado!",
+        description: "El enlace de acceso se ha copiado al portapapeles"
+      });
+    }
+  };
 
   const getWelcomeMessage = () => {
     const accessCount = userAccess.length;
@@ -54,8 +101,65 @@ const PurchaseSuccessPage = () => {
     }
   };
 
+  // Loading state
+  if (isLoading && processingStatus === 'processing') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 container mx-auto px-4 py-12 flex items-center justify-center">
+          <Card className="max-w-md w-full">
+            <CardContent className="pt-6 text-center space-y-4">
+              <Loader2 className="h-12 w-12 animate-spin mx-auto text-primary" />
+              <h2 className="text-xl font-semibold">Procesando tu compra...</h2>
+              <p className="text-muted-foreground">Estamos verificando el pago y otorgando acceso. Esto tomará solo unos segundos.</p>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Error state
+  if (processingStatus === 'error') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 container mx-auto px-4 py-12">
+          <Card className="max-w-2xl mx-auto border-destructive">
+            <CardHeader className="text-center">
+              <CardTitle className="text-destructive">Hubo un problema</CardTitle>
+              <CardDescription>
+                No pudimos procesar tu compra automáticamente, pero no te preocupes.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-center">
+                Tu pago puede haberse procesado correctamente. Por favor:
+              </p>
+              <ul className="space-y-2 text-sm">
+                <li>• Revisa tu email para el enlace de acceso</li>
+                <li>• Verifica tu dashboard si tienes cuenta</li>
+                <li>• Contacta a soporte si necesitas ayuda</li>
+              </ul>
+              <div className="flex gap-4 justify-center pt-4">
+                <Link to="/dashboard">
+                  <Button>Ir al Dashboard</Button>
+                </Link>
+                <Link to="/ayuda-compra">
+                  <Button variant="outline">Obtener Ayuda</Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   // Guest checkout success message
-  if (isGuest) {
+  if (!user && guestAccessToken) {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
@@ -75,25 +179,55 @@ const PurchaseSuccessPage = () => {
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-6 border-2 border-primary/20">
+                  <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-primary" />
+                    Tu enlace de acceso directo
+                  </h3>
+                  <div className="bg-white rounded p-4 mb-4 border">
+                    <code className="text-sm break-all text-muted-foreground">
+                      {window.location.origin}/guest-access?token={guestAccessToken}
+                    </code>
+                  </div>
+                  <Button onClick={copyAccessLink} variant="outline" className="w-full">
+                    <Copy className="h-4 w-4 mr-2" />
+                    Copiar enlace de acceso
+                  </Button>
+                  <p className="text-sm text-muted-foreground mt-4">
+                    💡 Guarda este enlace. Te permitirá descargar tus PDFs en cualquier momento durante los próximos 90 días.
+                  </p>
+                </div>
+
                 <div className="bg-white rounded-lg p-6 border">
                   <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
                     <Mail className="w-5 h-5 text-primary" />
-                    Próximos pasos:
+                    También recibirás un email
                   </h3>
                   <ol className="space-y-3 text-muted-foreground">
                     <li className="flex gap-3">
                       <span className="font-semibold text-primary">1.</span>
-                      <span>Recibirás un email con los enlaces directos de descarga</span>
+                      <span>Hemos enviado un email a <strong>{guestEmail}</strong></span>
                     </li>
                     <li className="flex gap-3">
                       <span className="font-semibold text-primary">2.</span>
-                      <span>Haz clic en los enlaces para descargar tus guías PDF</span>
+                      <span>El email contiene el mismo enlace de acceso</span>
                     </li>
                     <li className="flex gap-3">
                       <span className="font-semibold text-primary">3.</span>
-                      <span>Guarda el enlace de acceso para futuras descargas</span>
+                      <span>Si no lo recibes, revisa tu carpeta de spam</span>
                     </li>
                   </ol>
+                </div>
+
+                <div className="bg-white rounded-lg p-6 border">
+                  <h3 className="font-semibold text-lg mb-4">📚 Módulos adquiridos</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {moduleIds.map(moduleId => (
+                      <Badge key={moduleId} variant="default" className="text-sm">
+                        Módulo {moduleId.toUpperCase()}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
 
                 <Card className="bg-blue-50 border-blue-200">
@@ -108,13 +242,18 @@ const PurchaseSuccessPage = () => {
                   </CardContent>
                 </Card>
 
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-4">
-                    ¿No recibiste el email? Revisa tu carpeta de spam o contáctanos
+                <div className="text-center space-y-4">
+                  <Link to={`/guest-access?token=${guestAccessToken}`}>
+                    <Button className="w-full" size="lg">
+                      <Download className="h-5 w-5 mr-2" />
+                      Acceder a mis descargas ahora
+                    </Button>
+                  </Link>
+                  
+                  <p className="text-sm text-muted-foreground">
+                    ¿Problemas? <Link to="/ayuda-compra" className="text-primary underline">Centro de ayuda</Link> o{' '}
+                    <a href="mailto:soporte@esgeo.ai" className="text-primary underline">contactar soporte</a>
                   </p>
-                  <Button variant="outline" onClick={() => window.location.href = 'mailto:soporte@esgeo.ai'}>
-                    Contactar Soporte
-                  </Button>
                 </div>
               </CardContent>
             </Card>
