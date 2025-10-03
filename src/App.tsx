@@ -22,6 +22,7 @@ import DashboardPage from "./pages/DashboardPage";
 import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 import GuestAccessPage from "./pages/GuestAccessPage";
 import AuthPage from "./pages/AuthPage";
+import UploadContentPage from "./pages/UploadContentPage";
 import NotFound from "./pages/NotFound";
 
 // Módulos del curso
@@ -68,6 +69,7 @@ function App() {
             <Route path="/success" element={<PurchaseSuccessPage />} />
             <Route path="/guest-access" element={<GuestAccessPage />} />
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/admin/upload-content" element={<UploadContentPage />} />
             
             
             {/* Información corporativa */}

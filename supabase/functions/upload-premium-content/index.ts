@@ -18,32 +18,35 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
+    // Get the origin from request headers to build URLs
+    const origin = req.headers.get('origin') || 'https://hadnvvkflpjucqkwewto.supabase.co';
+    
     // Define the files to upload with their metadata
     const filesToUpload = [
       {
         moduleId: 'f1',
         fileName: 'guia-completa-modulo-f1.pdf',
-        sourcePath: '/home/project/public/premium-content/f1/guia-completa-modulo-f1.pdf'
+        sourceUrl: `${origin}/premium-content/f1/guia-completa-modulo-f1.pdf`
       },
       {
         moduleId: 'f2',
         fileName: 'guia-completa-modulo-f2.pdf',
-        sourcePath: '/home/project/public/premium-content/f2/guia-completa-modulo-f2.pdf'
+        sourceUrl: `${origin}/premium-content/f2/guia-completa-modulo-f2.pdf`
       },
       {
         moduleId: 'f3',
         fileName: 'guia-completa-modulo-f3.pdf',
-        sourcePath: '/home/project/public/premium-content/f3/guia-completa-modulo-f3.pdf'
+        sourceUrl: `${origin}/premium-content/f3/guia-completa-modulo-f3.pdf`
       },
       {
         moduleId: 'f4',
         fileName: 'guia-completa-modulo-f4.pdf',
-        sourcePath: '/home/project/public/premium-content/f4/guia-completa-modulo-f4.pdf'
+        sourceUrl: `${origin}/premium-content/f4/guia-completa-modulo-f4.pdf`
       },
       {
         moduleId: 'f5',
         fileName: 'guia-completa-modulo-f5.pdf',
-        sourcePath: '/home/project/public/premium-content/f5/guia-completa-modulo-f5.pdf'
+        sourceUrl: `${origin}/premium-content/f5/guia-completa-modulo-f5.pdf`
       }
     ];
 
@@ -51,8 +54,15 @@ Deno.serve(async (req) => {
 
     for (const file of filesToUpload) {
       try {
-        // Read the file from the local file system
-        const fileData = await Deno.readFile(file.sourcePath);
+        // Download the file from the public URL
+        console.log(`Downloading ${file.fileName} from ${file.sourceUrl}`);
+        const response = await fetch(file.sourceUrl);
+        
+        if (!response.ok) {
+          throw new Error(`Failed to download file: ${response.statusText}`);
+        }
+        
+        const fileData = await response.arrayBuffer();
         
         // Upload to Supabase Storage
         const { data, error } = await supabaseClient.storage
