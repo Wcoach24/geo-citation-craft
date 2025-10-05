@@ -70,16 +70,23 @@ export default function PurchaseSuccessPage() {
       // Get current session for authenticated users
       const { data: { session } } = await supabase.auth.getSession();
       
+      // Build headers conditionally
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+      };
+      
+      // Only add Authorization header if we have a valid session
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+      
       // Use fetch directly to handle binary response properly
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/download-premium-content`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-          },
+          headers,
           body: JSON.stringify({ 
             moduleId,
             accessToken: accessToken || undefined
