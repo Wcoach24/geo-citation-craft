@@ -26,7 +26,7 @@ export default function PurchaseSuccessPage() {
   const [error, setError] = useState<string | null>(null);
   const [moduleIds, setModuleIds] = useState<string[]>([]);
   const [productType, setProductType] = useState<string>('');
-  const [downloadUrls, setDownloadUrls] = useState<Record<string, string>>({});
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
     if (sessionId) {
@@ -48,7 +48,7 @@ export default function PurchaseSuccessPage() {
       if (data?.success) {
         setModuleIds(data.moduleIds || []);
         setProductType(data.productType || '');
-        setDownloadUrls(data.downloadUrls || {});
+        setAccessToken(data.accessToken || null);
       } else {
         throw new Error(data?.error || 'Error al procesar el pago');
       }
@@ -68,7 +68,10 @@ export default function PurchaseSuccessPage() {
       });
 
       const { data, error } = await supabase.functions.invoke('download-premium-content', {
-        body: { moduleId }
+        body: { 
+          moduleId,
+          accessToken: accessToken || undefined // Include access token if available (for guests)
+        }
       });
 
       if (error) throw error;

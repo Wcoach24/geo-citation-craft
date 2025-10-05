@@ -48,40 +48,48 @@ serve(async (req) => {
     const metadata = session.metadata || {};
     const productType = metadata.product_type;
     const moduleId = metadata.module_id;
+    const customerEmail = session.customer_details?.email || session.customer_email;
 
-    logStep("Payment verified", { productType, moduleId });
+    logStep("Payment verified", { productType, moduleId, email: customerEmail });
 
     // Determine which modules to grant access to
     const modulesToGrant = productType === 'complete' 
       ? ['f1', 'f2', 'f3', 'f4', 'f5'] 
       : [moduleId];
 
-    // Initialize Supabase client for generating signed URLs
-    const supabaseClient = createClient(
+    // Initialize Supabase admin client
+    const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    // Generate signed URLs for each module
-    const downloadUrls: Record<string, string> = {};
-    
-    for (const mod of modulesToGrant) {
-      const filePath = `${mod}/guia-completa-modulo-${mod}.pdf`;
-      
-      try {
-        const { data: signedUrlData, error: urlError } = await supabaseClient
-          .storage
-          .from('premium-content')
-          .createSignedUrl(filePath, 3600); // 1 hour expiry
+    let accessToken: string | null = null;
 
-        if (urlError) {
-          logStep("Error generating signed URL", { module: mod, error: urlError });
-        } else if (signedUrlData?.signedUrl) {
-          downloadUrls[mod] = signedUrlData.signedUrl;
-          logStep("Signed URL generated", { module: mod });
+    // Check if this is a guest purchase (no customer ID or authenticated user)
+    const isGuest = !session.customer;
+    
+    if (isGuest && customerEmail) {
+      // Generate access token for guest
+      accessToken = crypto.randomUUID();
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 90); // 90 days expiry
+
+      logStep("Creating guest access", { email: customerEmail, modulesCount: modulesToGrant.length });
+
+      // Create guest access records for each module
+      for (const mod of modulesToGrant) {
+        try {
+          await supabaseAdmin.from('guest_access').insert({
+            email: customerEmail,
+            access_token: accessToken,
+            product_type: productType,
+            module_id: mod,
+            expires_at: expiresAt.toISOString()
+          });
+          logStep("Guest access created", { module: mod });
+        } catch (error) {
+          logStep("Error creating guest access", { module: mod, error });
         }
-      } catch (error) {
-        logStep("Exception generating signed URL", { module: mod, error });
       }
     }
 
@@ -89,7 +97,7 @@ serve(async (req) => {
       success: true,
       moduleIds: modulesToGrant,
       productType,
-      downloadUrls
+      accessToken: accessToken // Include token for guest purchases
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
