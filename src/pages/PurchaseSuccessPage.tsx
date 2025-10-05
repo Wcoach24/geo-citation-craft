@@ -67,17 +67,33 @@ export default function PurchaseSuccessPage() {
         description: "Por favor espera mientras se descarga tu guía.",
       });
 
-      const { data, error } = await supabase.functions.invoke('download-premium-content', {
-        body: { 
-          moduleId,
-          accessToken: accessToken || undefined // Include access token if available (for guests)
+      // Get current session for authenticated users
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      // Use fetch directly to handle binary response properly
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/download-premium-content`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+          },
+          body: JSON.stringify({ 
+            moduleId,
+            accessToken: accessToken || undefined
+          })
         }
-      });
+      );
 
-      if (error) throw error;
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Error al descargar el archivo');
+      }
 
-      // Create blob from response
-      const blob = new Blob([data], { type: 'application/pdf' });
+      // Get blob directly from response
+      const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       
       // Create temporary link and trigger download
