@@ -20,3 +20,6 @@ verify_jwt = false
 
 [functions.generate-guest-access]
 verify_jwt = false
+
+[functions.download-premium-content]
+verify_jwt = true

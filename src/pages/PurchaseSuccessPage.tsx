@@ -60,26 +60,43 @@ export default function PurchaseSuccessPage() {
     }
   };
 
-  const handleDownload = (moduleId: string) => {
-    const url = downloadUrls[moduleId];
-    if (url) {
-      // Create a temporary link and click it to trigger download
+  const handleDownload = async (moduleId: string) => {
+    try {
+      toast({
+        title: "Descargando...",
+        description: "Por favor espera mientras se descarga tu guía.",
+      });
+
+      const { data, error } = await supabase.functions.invoke('download-premium-content', {
+        body: { moduleId }
+      });
+
+      if (error) throw error;
+
+      // Create blob from response
+      const blob = new Blob([data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      
+      // Create temporary link and trigger download
       const link = document.createElement('a');
       link.href = url;
-      link.download = `guia-${moduleId}.pdf`;
-      link.target = '_blank';
+      link.download = `guia-completa-modulo-${moduleId}.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      
+      // Clean up the URL object
+      window.URL.revokeObjectURL(url);
 
       toast({
-        title: "Descarga iniciada",
-        description: `La guía del ${MODULE_NAMES[moduleId]} se está descargando.`,
+        title: "Descarga completada",
+        description: `La guía del ${MODULE_NAMES[moduleId]} se ha descargado correctamente.`,
       });
-    } else {
+    } catch (error) {
+      console.error('Download error:', error);
       toast({
-        title: "Error",
-        description: "No se pudo obtener el enlace de descarga",
+        title: "Error al descargar",
+        description: error instanceof Error ? error.message : "No se pudo descargar el archivo",
         variant: "destructive",
       });
     }
@@ -171,7 +188,6 @@ export default function PurchaseSuccessPage() {
                   <Button
                     key={moduleId}
                     onClick={() => handleDownload(moduleId)}
-                    disabled={!downloadUrls[moduleId]}
                     size="lg"
                     className="w-full"
                   >
