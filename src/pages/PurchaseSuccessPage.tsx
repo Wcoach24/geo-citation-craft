@@ -45,10 +45,13 @@ export default function PurchaseSuccessPage() {
 
       if (error) throw error;
 
+      console.log('[PURCHASE-SUCCESS] Response from process-payment:', data);
+      
       if (data?.success) {
         setModuleIds(data.moduleIds || []);
         setProductType(data.productType || '');
         setAccessToken(data.accessToken || null);
+        console.log('[PURCHASE-SUCCESS] Access token received:', data.accessToken);
       } else {
         throw new Error(data?.error || 'Error al procesar el pago');
       }
@@ -62,6 +65,9 @@ export default function PurchaseSuccessPage() {
 
   const handleDownload = async (moduleId: string) => {
     try {
+      console.log('[DOWNLOAD] Starting download for module:', moduleId);
+      console.log('[DOWNLOAD] Using access token:', accessToken);
+      
       toast({
         title: "Descargando...",
         description: "Por favor espera mientras se descarga tu guía.",
@@ -69,6 +75,7 @@ export default function PurchaseSuccessPage() {
 
       // Get current session for authenticated users
       const { data: { session } } = await supabase.auth.getSession();
+      console.log('[DOWNLOAD] Session exists:', !!session);
       
       // Build headers conditionally
       const headers: HeadersInit = {

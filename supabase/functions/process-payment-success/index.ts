@@ -78,17 +78,23 @@ serve(async (req) => {
 
       // Create guest access records for each module
       for (const mod of modulesToGrant) {
-        try {
-          await supabaseAdmin.from('guest_access').insert({
-            email: customerEmail,
-            access_token: accessToken,
-            product_type: productType,
-            module_id: mod,
-            expires_at: expiresAt.toISOString()
+        const { data, error } = await supabaseAdmin.from('guest_access').insert({
+          email: customerEmail,
+          access_token: accessToken,
+          product_type: productType,
+          module_id: mod,
+          expires_at: expiresAt.toISOString()
+        });
+        
+        if (error) {
+          logStep("ERROR creating guest access", { 
+            module: mod, 
+            error: error.message,
+            code: error.code,
+            details: error.details 
           });
-          logStep("Guest access created", { module: mod });
-        } catch (error) {
-          logStep("Error creating guest access", { module: mod, error });
+        } else {
+          logStep("Guest access created successfully", { module: mod, data });
         }
       }
     }
