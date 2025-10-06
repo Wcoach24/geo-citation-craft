@@ -76,27 +76,39 @@ serve(async (req) => {
 
       logStep("Creating guest access", { email: customerEmail, modulesCount: modulesToGrant.length });
 
-      // Create guest access records for each module
-      for (const mod of modulesToGrant) {
-        const { data, error } = await supabaseAdmin.from('guest_access').insert({
-          email: customerEmail,
-          access_token: accessToken,
-          product_type: productType,
-          module_id: mod,
-          expires_at: expiresAt.toISOString()
+      // Create guest access records for each module using upsert to avoid conflicts
+      const guestAccessRecords = modulesToGrant.map(mod => ({
+        email: customerEmail,
+        access_token: accessToken,
+        product_type: productType,
+        module_id: mod,
+        expires_at: expiresAt.toISOString()
+      }));
+
+      logStep("Attempting to create guest access records", { 
+        recordsCount: guestAccessRecords.length,
+        modules: modulesToGrant 
+      });
+
+      const { data: insertedData, error: insertError } = await supabaseAdmin
+        .from('guest_access')
+        .insert(guestAccessRecords)
+        .select();
+
+      if (insertError) {
+        logStep("ERROR: Failed to insert guest access records", {
+          error: insertError.message,
+          code: insertError.code,
+          details: insertError.details,
+          hint: insertError.hint
         });
-        
-        if (error) {
-          logStep("ERROR creating guest access", { 
-            module: mod, 
-            error: error.message,
-            code: error.code,
-            details: error.details 
-          });
-        } else {
-          logStep("Guest access created successfully", { module: mod, data });
-        }
+        throw insertError;
       }
+
+      logStep("Guest access records created successfully", { 
+        count: insertedData?.length || 0,
+        modules: insertedData?.map(r => r.module_id)
+      });
     }
 
     return new Response(JSON.stringify({

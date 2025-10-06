@@ -11,16 +11,26 @@ const logStep = (step: string, details?: any) => {
 };
 
 serve(async (req) => {
+  logStep('DOWNLOAD FUNCTION INVOKED', { 
+    method: req.method,
+    url: req.url,
+    hasAuth: !!req.headers.get('Authorization')
+  });
+
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    logStep('Function started');
+    const body = await req.json();
+    logStep('Request body parsed', { 
+      moduleId: body.moduleId, 
+      hasAccessToken: !!body.accessToken,
+      accessTokenPrefix: body.accessToken?.substring(0, 10)
+    });
 
-    const { moduleId, accessToken } = await req.json();
-    logStep('Request received', { moduleId, hasAccessToken: !!accessToken });
+    const { moduleId, accessToken } = body;
 
     if (!moduleId) {
       throw new Error('Module ID is required');
@@ -43,12 +53,18 @@ serve(async (req) => {
     // Try to authenticate user with JWT
     const authHeader = req.headers.get('Authorization');
     if (authHeader) {
+      logStep('JWT authentication header present');
       const token = authHeader.replace('Bearer ', '');
       const { data: { user }, error: authError } = await supabaseClient.auth.getUser(token);
       
-      if (!authError && user) {
+      if (authError) {
+        logStep('JWT authentication error', { 
+          error: authError.message,
+          code: authError.code
+        });
+      } else if (user) {
         userId = user.id;
-        logStep('Authenticated user', { userId });
+        logStep('JWT authentication SUCCESS', { userId });
         
         // Verify user has access to this module
         const { data: accessData, error: accessError } = await supabaseClient
@@ -59,23 +75,31 @@ serve(async (req) => {
           .maybeSingle();
 
         if (accessError) {
-          logStep('Error checking user access', { error: accessError });
+          logStep('Error checking user access', { 
+            error: accessError.message,
+            code: accessError.code 
+          });
           throw new Error('Error verifying access');
         }
 
         if (!accessData) {
-          logStep('Access denied for user', { userId, moduleId });
+          logStep('Access DENIED - no user_access record', { userId, moduleId });
           throw new Error('No tienes acceso a este módulo');
         }
 
-        logStep('User access verified', { moduleId });
+        logStep('User access VERIFIED', { moduleId, accessType: accessData.access_type });
       }
+    } else {
+      logStep('No JWT authentication header');
     }
 
     // If not authenticated with JWT, check for guest access token
     if (!userId && accessToken) {
       isGuest = true;
-      logStep('Verifying guest access token');
+      logStep('Attempting GUEST ACCESS verification', {
+        accessTokenPrefix: accessToken.substring(0, 10),
+        moduleId
+      });
 
       const { data: guestData, error: guestError } = await supabaseAdmin
         .from('guest_access')
@@ -85,23 +109,40 @@ serve(async (req) => {
         .maybeSingle();
 
       if (guestError) {
-        logStep('Error checking guest access', { error: guestError });
+        logStep('Guest access query ERROR', { 
+          error: guestError.message,
+          code: guestError.code,
+          details: guestError.details
+        });
         throw new Error('Error verifying guest access');
       }
 
       if (!guestData) {
-        logStep('Invalid guest access token', { moduleId });
+        logStep('Guest access NOT FOUND', { 
+          accessToken: accessToken.substring(0, 10) + '...',
+          moduleId 
+        });
         throw new Error('Token de acceso inválido');
       }
 
+      logStep('Guest access record FOUND', {
+        email: guestData.email,
+        moduleId: guestData.module_id,
+        productType: guestData.product_type,
+        expiresAt: guestData.expires_at
+      });
+
       // Check if token has expired
       const expiresAt = new Date(guestData.expires_at);
-      if (expiresAt < new Date()) {
-        logStep('Guest access token expired', { expiresAt });
+      const now = new Date();
+      if (expiresAt < now) {
+        logStep('Guest access EXPIRED', { expiresAt, now });
         throw new Error('El token de acceso ha expirado');
       }
 
-      logStep('Guest access verified', { moduleId, expiresAt });
+      logStep('Guest access VERIFIED and VALID', { moduleId, expiresAt });
+    } else if (!userId && !accessToken) {
+      logStep('No authentication: neither JWT nor accessToken provided');
     }
 
     // If neither authenticated user nor valid guest token
