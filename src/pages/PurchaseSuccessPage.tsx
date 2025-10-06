@@ -87,47 +87,32 @@ export default function PurchaseSuccessPage() {
         description: "Por favor espera mientras se descarga tu guía.",
       });
 
-      // Using direct fetch with blob response type
-      const response = await fetch(
-        `https://hadnvvkflpjucqkwewto.supabase.co/functions/v1/download-premium-content`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 
-            moduleId,
-            accessToken
-          })
+      // Call edge function to get signed URL
+      const { data, error: functionError } = await supabase.functions.invoke('download-premium-content', {
+        body: { 
+          moduleId,
+          accessToken
         }
-      );
-
-      console.log('[DOWNLOAD] Response received', { 
-        status: response.status,
-        ok: response.ok,
-        contentType: response.headers.get('content-type')
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('[DOWNLOAD] Error response', errorText);
-        throw new Error(errorText || 'Error al descargar el archivo');
+      console.log('[DOWNLOAD] Function response received', { 
+        hasData: !!data,
+        hasUrl: !!(data?.url),
+        error: functionError
+      });
+
+      if (functionError || !data?.url) {
+        const errorMsg = functionError?.message || 'No se recibió URL de descarga';
+        console.error('[DOWNLOAD] Error response', errorMsg);
+        throw new Error(errorMsg);
       }
 
-      console.log('[DOWNLOAD] Creating download blob');
+      console.log('[DOWNLOAD] Opening signed URL');
       
-      // Get the blob directly from the response
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `guia-completa-modulo-${moduleId}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      // Open the signed URL directly - browser will download the PDF
+      window.open(data.url, '_blank');
       
-      console.log('[DOWNLOAD] Download completed successfully');
+      console.log('[DOWNLOAD] Download initiated successfully');
       toast({
         title: "Descarga completada",
         description: `La guía del ${MODULE_NAMES[moduleId]} se ha descargado correctamente.`,

@@ -88,45 +88,38 @@ serve(async (req) => {
       expiresAt: guestData.expires_at
     });
 
-    // Download the file from storage
+    // Generate a signed URL for direct download from storage
     const filePath = `${moduleId}/guia-completa-modulo-${moduleId}.pdf`;
-    logStep('Attempting to download file from storage', { filePath });
+    logStep('Generating signed URL for file', { filePath });
     
-    const { data: fileData, error: downloadError } = await supabaseAdmin.storage
+    // Create a signed URL valid for 60 seconds
+    const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin.storage
       .from('premium-content')
-      .download(filePath);
+      .createSignedUrl(filePath, 60);
 
-    if (downloadError) {
-      logStep('Storage download error', { 
+    if (signedUrlError || !signedUrlData?.signedUrl) {
+      logStep('Error generating signed URL', { 
         filePath, 
-        error: downloadError.message,
-        code: downloadError.name
+        error: signedUrlError?.message
       });
-      throw new Error('Error al obtener el archivo del almacenamiento');
+      throw new Error('Error al generar el enlace de descarga');
     }
 
-    logStep('File retrieved successfully from storage', { 
+    logStep('Signed URL generated successfully', { 
       filePath,
-      fileSize: fileData.size,
-      fileType: fileData.type
+      expiresIn: '60 seconds'
     });
 
-    // Convert Blob to ArrayBuffer for proper binary transmission
-    const arrayBuffer = await fileData.arrayBuffer();
-    
-    logStep('File converted to ArrayBuffer', { 
-      arrayBufferSize: arrayBuffer.byteLength
-    });
-
-    // Return the PDF file as ArrayBuffer
-    return new Response(arrayBuffer, {
-      headers: {
-        ...corsHeaders,
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="guia-completa-modulo-${moduleId}.pdf"`,
-        'Content-Length': arrayBuffer.byteLength.toString(),
-      },
-    });
+    // Return the signed URL
+    return new Response(
+      JSON.stringify({ url: signedUrlData.signedUrl }),
+      {
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
