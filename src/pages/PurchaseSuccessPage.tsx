@@ -65,52 +65,58 @@ export default function PurchaseSuccessPage() {
 
   const handleDownload = async (moduleId: string) => {
     if (!accessToken) {
+      console.error('[DOWNLOAD] No access token available');
       toast({
         title: "Error",
-        description: "No se encontró el token de acceso. Por favor contacta con soporte.",
+        description: "No se encontró el token de acceso",
         variant: "destructive",
       });
       return;
     }
 
+    console.log('[DOWNLOAD] Starting download', { moduleId, hasToken: !!accessToken });
+    
     try {
-      console.log('[DOWNLOAD] Starting download for module:', moduleId);
-      console.log('[DOWNLOAD] Using access token:', accessToken?.substring(0, 10) + '...');
-      
+      console.log('[DOWNLOAD] Calling supabase function with:', { 
+        moduleId, 
+        tokenPreview: accessToken.substring(0, 8) + '...' 
+      });
+
       toast({
         title: "Descargando...",
         description: "Por favor espera mientras se descarga tu guía.",
       });
 
-      // Call edge function to get the file
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/download-premium-content`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-          },
-          body: JSON.stringify({ 
-            moduleId,
-            accessToken
-          })
+      // Using supabase.functions.invoke for proper CORS handling
+      const { data, error } = await supabase.functions.invoke('download-premium-content', {
+        body: { 
+          moduleId,
+          accessToken
         }
-      );
+      });
 
-      console.log('[DOWNLOAD] Response status:', response.status);
+      console.log('[DOWNLOAD] Response received', { 
+        hasData: !!data,
+        hasError: !!error,
+        errorDetails: error
+      });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('[DOWNLOAD] Error response:', errorText);
-        throw new Error('Error al descargar el archivo');
+      if (error) {
+        console.error('[DOWNLOAD] Supabase function error', error);
+        throw new Error(error.message || 'Error al descargar el archivo');
       }
 
-      // Get blob from response
-      const blob = await response.blob();
-      console.log('[DOWNLOAD] Blob size:', blob.size, 'bytes');
+      if (!data) {
+        throw new Error('No se recibió el archivo');
+      }
+
+      console.log('[DOWNLOAD] Creating download blob', { 
+        dataType: typeof data,
+        isBlob: data instanceof Blob
+      });
       
-      // Create download link
+      // Convert to blob if needed and download
+      const blob = data instanceof Blob ? data : new Blob([data], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -119,16 +125,18 @@ export default function PurchaseSuccessPage() {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-
+      
+      console.log('[DOWNLOAD] Download completed successfully');
       toast({
         title: "Descarga completada",
         description: `La guía del ${MODULE_NAMES[moduleId]} se ha descargado correctamente.`,
       });
     } catch (error) {
       console.error('[DOWNLOAD] Error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
       toast({
         title: "Error al descargar",
-        description: error instanceof Error ? error.message : "No se pudo descargar el archivo",
+        description: `${errorMessage}. Contacta con soporte si persiste.`,
         variant: "destructive",
       });
     }

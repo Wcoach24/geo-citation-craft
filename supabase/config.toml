@@ -22,4 +22,4 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.download-premium-content]
-verify_jwt = true
+verify_jwt = false

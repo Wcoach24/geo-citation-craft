@@ -13,22 +13,26 @@ const logStep = (step: string, details?: any) => {
 serve(async (req) => {
   logStep('FUNCTION INVOKED', { 
     method: req.method,
-    url: req.url
+    url: req.url,
+    hasAuthHeader: !!req.headers.get('Authorization')
   });
 
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
+    logStep('OPTIONS request - returning CORS headers');
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    logStep('Parsing request body');
     const body = await req.json();
     const { moduleId, accessToken } = body;
     
-    logStep('Request received', { 
-      moduleId, 
+    logStep('Request body parsed', {
+      hasModuleId: !!moduleId,
       hasAccessToken: !!accessToken,
-      accessTokenPreview: accessToken?.substring(0, 8) + '...'
+      moduleId,
+      tokenPreview: accessToken ? accessToken.substring(0, 8) + '...' : 'none'
     });
 
     if (!moduleId || !accessToken) {
@@ -43,7 +47,7 @@ serve(async (req) => {
     );
 
     // Verify guest access token
-    logStep('Verifying guest access', { moduleId });
+    logStep('Verifying guest access', { moduleId, tokenPreview: accessToken.substring(0, 8) + '...' });
     
     const { data: guestData, error: guestError } = await supabaseAdmin
       .from('guest_access')
@@ -53,7 +57,7 @@ serve(async (req) => {
       .maybeSingle();
 
     if (guestError) {
-      logStep('Database error', { 
+      logStep('Database error during guest verification', { 
         error: guestError.message,
         code: guestError.code
       });
@@ -61,7 +65,7 @@ serve(async (req) => {
     }
 
     if (!guestData) {
-      logStep('Access token not found', { 
+      logStep('Access token not found in database', { 
         tokenPreview: accessToken.substring(0, 8) + '...',
         moduleId 
       });
@@ -73,39 +77,41 @@ serve(async (req) => {
     const now = new Date();
     
     if (expiresAt < now) {
-      logStep('Access expired', { expiresAt, now });
+      logStep('Access token expired', { expiresAt, now });
       throw new Error('El token de acceso ha expirado');
     }
 
-    logStep('Access verified', {
+    logStep('Access verified successfully', {
       email: guestData.email,
       moduleId: guestData.module_id,
+      productType: guestData.product_type,
       expiresAt: guestData.expires_at
     });
 
     // Download the file from storage
     const filePath = `${moduleId}/guia-completa-modulo-${moduleId}.pdf`;
-    logStep('Downloading file', { filePath });
+    logStep('Attempting to download file from storage', { filePath });
     
     const { data: fileData, error: downloadError } = await supabaseAdmin.storage
       .from('premium-content')
       .download(filePath);
 
     if (downloadError) {
-      logStep('Storage error', { 
+      logStep('Storage download error', { 
         filePath, 
         error: downloadError.message,
         code: downloadError.name
       });
-      throw new Error('Error al obtener el archivo');
+      throw new Error('Error al obtener el archivo del almacenamiento');
     }
 
-    logStep('File retrieved successfully', { 
+    logStep('File retrieved successfully from storage', { 
       filePath,
-      fileSize: fileData.size 
+      fileSize: fileData.size,
+      fileType: fileData.type
     });
 
-    // Return the PDF file
+    // Return the PDF file as blob
     return new Response(fileData, {
       headers: {
         ...corsHeaders,
@@ -116,7 +122,7 @@ serve(async (req) => {
 
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
-    logStep('ERROR', { error: errorMessage });
+    logStep('ERROR in download function', { error: errorMessage });
     
     return new Response(
       JSON.stringify({ error: errorMessage }),
