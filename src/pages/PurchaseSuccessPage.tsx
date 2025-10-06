@@ -87,36 +87,37 @@ export default function PurchaseSuccessPage() {
         description: "Por favor espera mientras se descarga tu guía.",
       });
 
-      // Using supabase.functions.invoke for proper CORS handling
-      const { data, error } = await supabase.functions.invoke('download-premium-content', {
-        body: { 
-          moduleId,
-          accessToken
+      // Using direct fetch with blob response type
+      const response = await fetch(
+        `https://hadnvvkflpjucqkwewto.supabase.co/functions/v1/download-premium-content`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            moduleId,
+            accessToken
+          })
         }
-      });
+      );
 
       console.log('[DOWNLOAD] Response received', { 
-        hasData: !!data,
-        hasError: !!error,
-        errorDetails: error
+        status: response.status,
+        ok: response.ok,
+        contentType: response.headers.get('content-type')
       });
 
-      if (error) {
-        console.error('[DOWNLOAD] Supabase function error', error);
-        throw new Error(error.message || 'Error al descargar el archivo');
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[DOWNLOAD] Error response', errorText);
+        throw new Error(errorText || 'Error al descargar el archivo');
       }
 
-      if (!data) {
-        throw new Error('No se recibió el archivo');
-      }
-
-      console.log('[DOWNLOAD] Creating download blob', { 
-        dataType: typeof data,
-        isBlob: data instanceof Blob
-      });
+      console.log('[DOWNLOAD] Creating download blob');
       
-      // Convert to blob if needed and download
-      const blob = data instanceof Blob ? data : new Blob([data], { type: 'application/pdf' });
+      // Get the blob directly from the response
+      const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
