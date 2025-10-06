@@ -111,12 +111,20 @@ serve(async (req) => {
       fileType: fileData.type
     });
 
-    // Return the PDF file as blob
-    return new Response(fileData, {
+    // Convert Blob to ArrayBuffer for proper binary transmission
+    const arrayBuffer = await fileData.arrayBuffer();
+    
+    logStep('File converted to ArrayBuffer', { 
+      arrayBufferSize: arrayBuffer.byteLength
+    });
+
+    // Return the PDF file as ArrayBuffer
+    return new Response(arrayBuffer, {
       headers: {
         ...corsHeaders,
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="guia-completa-modulo-${moduleId}.pdf"`,
+        'Content-Length': arrayBuffer.byteLength.toString(),
       },
     });
 
