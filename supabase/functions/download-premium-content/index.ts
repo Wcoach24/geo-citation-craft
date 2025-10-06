@@ -11,10 +11,9 @@ const logStep = (step: string, details?: any) => {
 };
 
 serve(async (req) => {
-  logStep('DOWNLOAD FUNCTION INVOKED', { 
+  logStep('FUNCTION INVOKED', { 
     method: req.method,
-    url: req.url,
-    hasAuth: !!req.headers.get('Authorization')
+    url: req.url
   });
 
   // Handle CORS preflight requests
@@ -24,165 +23,89 @@ serve(async (req) => {
 
   try {
     const body = await req.json();
-    logStep('Request body parsed', { 
-      moduleId: body.moduleId, 
-      hasAccessToken: !!body.accessToken,
-      accessTokenPrefix: body.accessToken?.substring(0, 10)
+    const { moduleId, accessToken } = body;
+    
+    logStep('Request received', { 
+      moduleId, 
+      hasAccessToken: !!accessToken,
+      accessTokenPreview: accessToken?.substring(0, 8) + '...'
     });
 
-    const { moduleId, accessToken } = body;
-
-    if (!moduleId) {
-      throw new Error('Module ID is required');
+    if (!moduleId || !accessToken) {
+      logStep('Missing required fields', { moduleId, hasAccessToken: !!accessToken });
+      throw new Error('Module ID y token de acceso son requeridos');
     }
 
-    // Initialize Supabase clients
+    // Initialize Supabase admin client
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? ''
-    );
+    // Verify guest access token
+    logStep('Verifying guest access', { moduleId });
+    
+    const { data: guestData, error: guestError } = await supabaseAdmin
+      .from('guest_access')
+      .select('*')
+      .eq('access_token', accessToken)
+      .eq('module_id', moduleId)
+      .maybeSingle();
 
-    let userId: string | null = null;
-    let isGuest = false;
-
-    // Try to authenticate user with JWT
-    const authHeader = req.headers.get('Authorization');
-    if (authHeader) {
-      logStep('JWT authentication header present');
-      const token = authHeader.replace('Bearer ', '');
-      const { data: { user }, error: authError } = await supabaseClient.auth.getUser(token);
-      
-      if (authError) {
-        logStep('JWT authentication error', { 
-          error: authError.message,
-          code: authError.code
-        });
-      } else if (user) {
-        userId = user.id;
-        logStep('JWT authentication SUCCESS', { userId });
-        
-        // Verify user has access to this module
-        const { data: accessData, error: accessError } = await supabaseClient
-          .from('user_access')
-          .select('*')
-          .eq('user_id', userId)
-          .eq('module_id', moduleId)
-          .maybeSingle();
-
-        if (accessError) {
-          logStep('Error checking user access', { 
-            error: accessError.message,
-            code: accessError.code 
-          });
-          throw new Error('Error verifying access');
-        }
-
-        if (!accessData) {
-          logStep('Access DENIED - no user_access record', { userId, moduleId });
-          throw new Error('No tienes acceso a este módulo');
-        }
-
-        logStep('User access VERIFIED', { moduleId, accessType: accessData.access_type });
-      }
-    } else {
-      logStep('No JWT authentication header');
-    }
-
-    // If not authenticated with JWT, check for guest access token
-    if (!userId && accessToken) {
-      isGuest = true;
-      logStep('Attempting GUEST ACCESS verification', {
-        accessTokenPrefix: accessToken.substring(0, 10),
-        moduleId
+    if (guestError) {
+      logStep('Database error', { 
+        error: guestError.message,
+        code: guestError.code
       });
+      throw new Error('Error al verificar el acceso');
+    }
 
-      const { data: guestData, error: guestError } = await supabaseAdmin
-        .from('guest_access')
-        .select('*')
-        .eq('access_token', accessToken)
-        .eq('module_id', moduleId)
-        .maybeSingle();
-
-      if (guestError) {
-        logStep('Guest access query ERROR', { 
-          error: guestError.message,
-          code: guestError.code,
-          details: guestError.details
-        });
-        throw new Error('Error verifying guest access');
-      }
-
-      if (!guestData) {
-        logStep('Guest access NOT FOUND', { 
-          accessToken: accessToken.substring(0, 10) + '...',
-          moduleId 
-        });
-        throw new Error('Token de acceso inválido');
-      }
-
-      logStep('Guest access record FOUND', {
-        email: guestData.email,
-        moduleId: guestData.module_id,
-        productType: guestData.product_type,
-        expiresAt: guestData.expires_at
+    if (!guestData) {
+      logStep('Access token not found', { 
+        tokenPreview: accessToken.substring(0, 8) + '...',
+        moduleId 
       });
-
-      // Check if token has expired
-      const expiresAt = new Date(guestData.expires_at);
-      const now = new Date();
-      if (expiresAt < now) {
-        logStep('Guest access EXPIRED', { expiresAt, now });
-        throw new Error('El token de acceso ha expirado');
-      }
-
-      logStep('Guest access VERIFIED and VALID', { moduleId, expiresAt });
-    } else if (!userId && !accessToken) {
-      logStep('No authentication: neither JWT nor accessToken provided');
+      throw new Error('Token de acceso inválido o expirado');
     }
 
-    // If neither authenticated user nor valid guest token
-    if (!userId && !isGuest) {
-      logStep('No valid authentication method');
-      throw new Error('Autenticación requerida');
+    // Check expiration
+    const expiresAt = new Date(guestData.expires_at);
+    const now = new Date();
+    
+    if (expiresAt < now) {
+      logStep('Access expired', { expiresAt, now });
+      throw new Error('El token de acceso ha expirado');
     }
 
-    // Download the file from storage using service role
+    logStep('Access verified', {
+      email: guestData.email,
+      moduleId: guestData.module_id,
+      expiresAt: guestData.expires_at
+    });
+
+    // Download the file from storage
     const filePath = `${moduleId}/guia-completa-modulo-${moduleId}.pdf`;
+    logStep('Downloading file', { filePath });
+    
     const { data: fileData, error: downloadError } = await supabaseAdmin.storage
       .from('premium-content')
       .download(filePath);
 
     if (downloadError) {
-      logStep('Error downloading file', { filePath, error: downloadError });
-      throw new Error('Error al descargar el archivo');
+      logStep('Storage error', { 
+        filePath, 
+        error: downloadError.message,
+        code: downloadError.name
+      });
+      throw new Error('Error al obtener el archivo');
     }
 
-    logStep('File downloaded successfully', { filePath });
+    logStep('File retrieved successfully', { 
+      filePath,
+      fileSize: fileData.size 
+    });
 
-    // Track download (only for authenticated users)
-    if (userId) {
-      try {
-        await supabaseClient.from('content_downloads').insert({
-          user_id: userId,
-          module_id: moduleId,
-          file_path: filePath,
-          file_name: `guia-completa-modulo-${moduleId}.pdf`
-        });
-        logStep('Download tracked for user', { userId });
-      } catch (trackError) {
-        // Non-critical error, just log it
-        logStep('Error tracking download', { error: trackError });
-      }
-    } else {
-      logStep('Download tracking skipped for guest');
-    }
-
-    // Return the file with proper headers
+    // Return the PDF file
     return new Response(fileData, {
       headers: {
         ...corsHeaders,
@@ -192,9 +115,11 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    logStep('Error', { error: error.message });
+    const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+    logStep('ERROR', { error: errorMessage });
+    
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: errorMessage }),
       {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

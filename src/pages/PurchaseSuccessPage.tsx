@@ -64,61 +64,60 @@ export default function PurchaseSuccessPage() {
   };
 
   const handleDownload = async (moduleId: string) => {
+    if (!accessToken) {
+      toast({
+        title: "Error",
+        description: "No se encontró el token de acceso. Por favor contacta con soporte.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       console.log('[DOWNLOAD] Starting download for module:', moduleId);
-      console.log('[DOWNLOAD] Using access token:', accessToken);
+      console.log('[DOWNLOAD] Using access token:', accessToken?.substring(0, 10) + '...');
       
       toast({
         title: "Descargando...",
         description: "Por favor espera mientras se descarga tu guía.",
       });
 
-      // Get current session for authenticated users
-      const { data: { session } } = await supabase.auth.getSession();
-      console.log('[DOWNLOAD] Session exists:', !!session);
-      
-      // Build headers conditionally
-      const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-        'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-      };
-      
-      // Only add Authorization header if we have a valid session
-      if (session?.access_token) {
-        headers['Authorization'] = `Bearer ${session.access_token}`;
-      }
-      
-      // Use fetch directly to handle binary response properly
+      // Call edge function to get the file
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/download-premium-content`,
         {
           method: 'POST',
-          headers,
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+          },
           body: JSON.stringify({ 
             moduleId,
-            accessToken: accessToken || undefined
+            accessToken
           })
         }
       );
 
+      console.log('[DOWNLOAD] Response status:', response.status);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Error al descargar el archivo');
+        const errorText = await response.text();
+        console.error('[DOWNLOAD] Error response:', errorText);
+        throw new Error('Error al descargar el archivo');
       }
 
-      // Get blob directly from response
+      // Get blob from response
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      console.log('[DOWNLOAD] Blob size:', blob.size, 'bytes');
       
-      // Create temporary link and trigger download
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.download = `guia-completa-modulo-${moduleId}.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
-      // Clean up the URL object
       window.URL.revokeObjectURL(url);
 
       toast({
@@ -126,7 +125,7 @@ export default function PurchaseSuccessPage() {
         description: `La guía del ${MODULE_NAMES[moduleId]} se ha descargado correctamente.`,
       });
     } catch (error) {
-      console.error('Download error:', error);
+      console.error('[DOWNLOAD] Error:', error);
       toast({
         title: "Error al descargar",
         description: error instanceof Error ? error.message : "No se pudo descargar el archivo",
