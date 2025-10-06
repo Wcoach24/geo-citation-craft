@@ -107,10 +107,16 @@ export default function PurchaseSuccessPage() {
         throw new Error(errorMsg);
       }
 
-      console.log('[DOWNLOAD] Opening signed URL');
+      console.log('[DOWNLOAD] Creating download link');
       
-      // Open the signed URL directly - browser will download the PDF
-      window.open(data.url, '_blank');
+      // Create a temporary link element and trigger download
+      const link = document.createElement('a');
+      link.href = data.url;
+      link.download = `guia-completa-modulo-${moduleId}.pdf`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       
       console.log('[DOWNLOAD] Download initiated successfully');
       toast({
