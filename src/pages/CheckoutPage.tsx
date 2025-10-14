@@ -17,13 +17,13 @@ import { Link } from 'react-router-dom';
 
 // Mapeo de productos
 const PRODUCT_MAPPING = {
-  'f1': { priceId: 'price_1SCi2ELVUGCJuFgUgUSq6Wsc', productId: 'prod_T902VySczFrzLF' },
-  'f2': { priceId: 'price_1SCi2ZLVUGCJuFgUkvbTtPGU', productId: 'prod_T9028jaGK3AZMt' },
-  'f3': { priceId: 'price_1SCi37LVUGCJuFgUr9yb84gV', productId: 'prod_T903d9YhVnqhLZ' },
-  'f4': { priceId: 'price_1SCi3JLVUGCJuFgUtrtOiSGR', productId: 'prod_T9032mbVGWxI0h' },
-  'f5': { priceId: 'price_1SCi3VLVUGCJuFgU2jobGw1L', productId: 'prod_T903yAjoh8vLi2' },
-  'f6': { priceId: 'price_1SCi3nLVUGCJuFgUAvV6GsUH', productId: 'prod_T9037l1XQzqr7h' },
-  'complete': { priceId: 'price_1SCi40LVUGCJuFgUZNIG5XwU', productId: 'prod_T904JmjRPrkyGQ' }
+  'f1': { priceId: 'price_1SIElCLYFGrlrWdkg6xDfNK4', productId: 'prod_TEiBWaHzwUlXA5' },
+  'f2': { priceId: 'price_1SIEr4LYFGrlrWdkKnenQc0o', productId: 'prod_TEiHYoMQxn8CW4' },
+  'f3': { priceId: 'price_1SIEvqLYFGrlrWdkKyiOQhsz', productId: 'prod_TEiMYkaDdZNpHK' },
+  'f4': { priceId: 'price_1SIEySLYFGrlrWdkPpmf0HrO', productId: 'prod_TEiPPFHp6tqbVK' },
+  'f5': { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
+  'f6': { priceId: 'price_1SIF4xLYFGrlrWdkDBACLaKe', productId: 'prod_TEiV7zVpP97KSz' },
+  'complete': { priceId: 'price_1SIF8XLVUGCJuFgUUw9HecxS', productId: 'prod_TEiZ89IqYeQynO' }
 };
 
 export default function CheckoutPage() {
