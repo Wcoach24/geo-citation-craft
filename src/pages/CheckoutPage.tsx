@@ -23,7 +23,7 @@ const PRODUCT_MAPPING = {
   'f4': { priceId: 'price_1SIEySLYFGrlrWdkPpmf0HrO', productId: 'prod_TEiPPFHp6tqbVK' },
   'f5': { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
   'f6': { priceId: 'price_1SIF4xLYFGrlrWdkDBACLaKe', productId: 'prod_TEiV7zVpP97KSz' },
-  'complete': { priceId: 'price_1SIF8XLVUGCJuFgUUw9HecxS', productId: 'prod_TEiZ89IqYeQynO' }
+  'complete': { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' }
 };
 
 export default function CheckoutPage() {
