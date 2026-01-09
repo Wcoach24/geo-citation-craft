@@ -1,178 +1,199 @@
-# 🚀 Guía Completa de Buenas Prácticas SEO + GEO
+# 🤖 Guía de Auditoría y Optimización SEO/GEO para LLMs
 
-> **Versión:** 2.0 | **Última actualización:** Enero 2025  
-> **Autor:** Consultor Senior SEO/GEO  
+> **Versión:** 3.0 | **Formato:** Instrucciones para Agentes IA  
+> **Propósito:** Auditar y optimizar proyectos web para SEO tradicional y GEO (Generative Engine Optimization)  
 > **Licencia:** CC BY-NC-SA 4.0
 
 ---
 
-## 📋 Índice
+## 🎯 INSTRUCCIONES PARA EL AGENTE
 
-1. [Introducción: SEO + GEO en 2025](#1-introducción-seo--geo-en-2025)
-2. [Arquitectura del `index.html`](#2-arquitectura-del-indexhtml)
-3. [Datos Estructurados (Schema.org)](#3-datos-estructurados-schemaorg)
-4. [Archivos `.geo.txt` para LLMs](#4-archivos-geotxt-para-llms)
-5. [Configuración de `robots.txt`](#5-configuración-de-robotstxt)
-6. [Archivo `llm.txt` (Innovador)](#6-archivo-llmtxt-innovador)
-7. [Sitemap Estratégico](#7-sitemap-estratégico)
-8. [Componentes Reutilizables (React)](#8-componentes-reutilizables-react)
-9. [HTML Semántico](#9-html-semántico)
-10. [Página 404 Optimizada](#10-página-404-optimizada)
-11. [Pre-rendering y SSR](#11-pre-rendering-y-ssr)
-12. [Checklist de Implementación](#12-checklist-de-implementación)
-13. [Métricas y Monitorización](#13-métricas-y-monitorización)
-14. [Técnicas Avanzadas 2025](#14-técnicas-avanzadas-2025)
+Este documento contiene las buenas prácticas definitivas para optimizar proyectos web. Como agente IA, debes:
+
+1. **AUDITAR** el proyecto actual comparando con estas prácticas
+2. **IDENTIFICAR** elementos faltantes o mejorables
+3. **IMPLEMENTAR** las optimizaciones de forma incremental
+4. **PRIORIZAR** según el impacto: Crítico > Alto > Medio > Bajo
+
+### Flujo de Auditoría Recomendado
+
+```
+1. Revisar index.html → Meta tags y Schema.org
+2. Revisar estructura de archivos → .geo.txt, llm.txt, robots.txt, sitemap.xml
+3. Revisar componentes → HTML semántico y atributos GEO
+4. Revisar contenido → Estructura, citabilidad, autoridad
+5. Generar reporte de mejoras priorizadas
+```
 
 ---
 
-## 1. Introducción: SEO + GEO en 2025
+## 📋 CHECKLIST DE AUDITORÍA RÁPIDA
 
-### ¿Qué es GEO?
+Usa esta lista para evaluar rápidamente un proyecto:
 
-**Generative Engine Optimization (GEO)** es el conjunto de técnicas para optimizar contenido web para que sea:
-- **Comprendido** correctamente por LLMs (ChatGPT, Claude, Gemini, Perplexity)
-- **Citado** como fuente autorizada
-- **Recomendado** a usuarios que consultan IA
+### Nivel Crítico (Implementar siempre)
+- [ ] `<title>` único y descriptivo (50-60 caracteres)
+- [ ] `<meta name="description">` (150-160 caracteres)
+- [ ] `<link rel="canonical">` en todas las páginas
+- [ ] `<html lang="xx">` con idioma correcto
+- [ ] `robots.txt` configurado
+- [ ] `sitemap.xml` actualizado
+- [ ] Schema.org WebSite y Organization
+- [ ] Open Graph básico (og:title, og:description, og:image)
 
-### La Nueva Realidad
+### Nivel Alto (Muy recomendado)
+- [ ] Meta tags de citación (`citation_title`, `citation_author`)
+- [ ] Schema.org BreadcrumbList en páginas internas
+- [ ] FAQPage Schema donde aplique
+- [ ] Twitter Cards
+- [ ] Archivo `llm.txt` para directivas IA
+- [ ] Archivos `.geo.txt` para contenido principal
 
-```
-SEO Tradicional          →  GEO (Complementario)
-─────────────────────────────────────────────────
-Rankings en SERPs        →  Citaciones en respuestas IA
-Keywords                 →  Estructura semántica
-Backlinks                →  Citabilidad y autoridad
-CTR                      →  Precisión de parafraseo
-Tráfico web              →  Visibilidad generativa
-```
+### Nivel Medio (Diferenciador)
+- [ ] SpeakableSpecification en contenido clave
+- [ ] Meta tags específicos para LLMs (`ai-content-files`, `llm-content-summary`)
+- [ ] DefinedTermSet para glosarios
+- [ ] Article Schema para blog posts
+- [ ] HowTo Schema para tutoriales
 
-### Principio Fundamental
-
-> **"El contenido optimizado para LLMs también es excelente para SEO tradicional, pero no viceversa."**
+### Nivel Bajo (Avanzado)
+- [ ] Pre-rendering configurado
+- [ ] Entity SEO implementado
+- [ ] Topical Authority mapeado
+- [ ] Métricas de citabilidad
 
 ---
 
-## 2. Arquitectura del `index.html`
+## 1. ARQUITECTURA DEL `index.html`
 
-### 2.1 Meta Tags Básicos (Obligatorios)
+### 1.1 Meta Tags Básicos (CRÍTICO)
+
+**Auditar:** Verifica que existan estos meta tags en `index.html` o en el `<head>` de cada página.
 
 ```html
 <!DOCTYPE html>
-<html lang="es">
+<html lang="[IDIOMA: es|en|fr|de|pt|it]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- SEO Básico -->
-  <title>[Título] - [Marca] | [Propuesta de valor]</title>
-  <meta name="description" content="[Descripción 150-160 caracteres con keyword principal]" />
+  <!-- SEO Básico - OBLIGATORIO -->
+  <title>[Título 50-60 chars] - [Marca] | [Propuesta de valor]</title>
+  <meta name="description" content="[Descripción 150-160 chars con keyword principal]" />
   <meta name="keywords" content="[keyword1], [keyword2], [keyword3]" />
   <meta name="author" content="[Nombre o Empresa]" />
-  <link rel="canonical" href="https://tudominio.com/" />
+  <link rel="canonical" href="https://[DOMINIO]/" />
   
   <!-- Idioma y región -->
-  <meta name="language" content="es" />
-  <meta name="geo.region" content="ES" />
-  <meta http-equiv="content-language" content="es-ES" />
+  <meta name="language" content="[IDIOMA]" />
+  <meta name="geo.region" content="[CÓDIGO-PAÍS: ES|US|MX|AR]" />
+  <meta http-equiv="content-language" content="[IDIOMA-REGIÓN: es-ES|en-US]" />
 ```
 
-### 2.2 Meta Tags para Robots (Crítico)
+**Acción si falta:** Crear o actualizar con valores específicos del proyecto.
+
+### 1.2 Meta Tags para Robots (CRÍTICO)
 
 ```html
-  <!-- Directivas para crawlers -->
+  <!-- Directivas para crawlers - OBLIGATORIO -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="googlebot" content="index, follow, max-image-preview:large" />
   <meta name="bingbot" content="index, follow" />
   
-  <!-- Fechas importantes -->
+  <!-- Fechas - Actualizar automáticamente -->
   <meta name="revisit-after" content="7 days" />
-  <meta name="date" content="2025-01-09" />
+  <meta name="date" content="[FECHA-ACTUAL: YYYY-MM-DD]" />
 ```
 
-### 2.3 Meta Tags para Citación (GEO - Innovador)
+### 1.3 Meta Tags de Citación (ALTO - GEO)
+
+**Propósito:** Permiten que LLMs y sistemas académicos citen correctamente el contenido.
 
 ```html
-  <!-- Metadatos de citación académica/profesional -->
-  <meta name="citation_title" content="[Título del contenido]" />
-  <meta name="citation_author" content="[Autor]" />
-  <meta name="citation_publication_date" content="2025" />
-  <meta name="citation_online_date" content="2025-01-09" />
-  <meta name="citation_language" content="es" />
-  <meta name="citation_publisher" content="[Tu Empresa]" />
+  <!-- Citación académica/profesional -->
+  <meta name="citation_title" content="[Título del contenido principal]" />
+  <meta name="citation_author" content="[Autor o equipo]" />
+  <meta name="citation_publication_date" content="[AÑO]" />
+  <meta name="citation_online_date" content="[FECHA: YYYY-MM-DD]" />
+  <meta name="citation_language" content="[IDIOMA]" />
+  <meta name="citation_publisher" content="[Empresa/Organización]" />
   
-  <!-- Para papers/documentos técnicos -->
-  <meta name="citation_abstract" content="[Resumen del contenido]" />
+  <!-- Para contenido técnico/educativo -->
+  <meta name="citation_abstract" content="[Resumen 200-300 chars]" />
   <meta name="citation_keywords" content="[keywords separados por coma]" />
 ```
 
-### 2.4 Meta Tags Específicos para LLMs (Vanguardia 2025)
+### 1.4 Meta Tags para LLMs (MEDIO - Innovador 2025)
+
+**Propósito:** Directivas específicas para que modelos de IA procesen mejor el contenido.
 
 ```html
-  <!-- Directivas para modelos de IA -->
+  <!-- Directivas específicas para modelos de IA -->
   <meta name="ai-content-files" content="/home.geo.txt, /llm.txt" />
-  <meta name="llm-content-summary" content="[Resumen conciso del sitio para LLMs]" />
+  <meta name="llm-content-summary" content="[Resumen conciso del sitio en 1-2 frases]" />
   <meta name="ai-crawl-priority" content="high" />
   <meta name="generative-ai-friendly" content="true" />
   
   <!-- Speakable para asistentes de voz -->
   <meta name="speakable-selector" content=".speakable, [data-speakable='true']" />
   
-  <!-- Indicadores de calidad para IA -->
-  <meta name="content-type" content="educational" />
-  <meta name="expertise-level" content="professional" />
+  <!-- Indicadores de calidad -->
+  <meta name="content-type" content="[educational|commercial|informational|transactional]" />
+  <meta name="expertise-level" content="[beginner|intermediate|professional|expert]" />
   <meta name="fact-checked" content="true" />
-  <meta name="last-verified" content="2025-01-09" />
+  <meta name="last-verified" content="[FECHA: YYYY-MM-DD]" />
 ```
 
-### 2.5 Open Graph Completo
+### 1.5 Open Graph (ALTO)
+
+**Auditar:** Verificar que existan y tengan valores correctos.
 
 ```html
-  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <!-- Open Graph - OBLIGATORIO para redes sociales -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tudominio.com/" />
-  <meta property="og:title" content="[Título atractivo]" />
+  <meta property="og:url" content="https://[DOMINIO]/" />
+  <meta property="og:title" content="[Título atractivo - puede diferir del title]" />
   <meta property="og:description" content="[Descripción compelling]" />
-  <meta property="og:image" content="https://tudominio.com/og-image.png" />
+  <meta property="og:image" content="https://[DOMINIO]/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="[Descripción de la imagen]" />
-  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image:alt" content="[Descripción accesible de la imagen]" />
+  <meta property="og:locale" content="[LOCALE: es_ES|en_US]" />
   <meta property="og:site_name" content="[Nombre del sitio]" />
   
-  <!-- Artículos (si aplica) -->
-  <meta property="article:published_time" content="2025-01-09T10:00:00Z" />
-  <meta property="article:modified_time" content="2025-01-09T10:00:00Z" />
+  <!-- Para artículos/blog -->
+  <meta property="article:published_time" content="[FECHA-ISO]" />
+  <meta property="article:modified_time" content="[FECHA-ISO]" />
   <meta property="article:author" content="[URL del autor]" />
   <meta property="article:section" content="[Categoría]" />
-  <meta property="article:tag" content="[tag1]" />
 ```
 
-### 2.6 Twitter Cards
+### 1.6 Twitter Cards (ALTO)
 
 ```html
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@tuhandle" />
-  <meta name="twitter:creator" content="@tuhandle" />
+  <meta name="twitter:site" content="@[HANDLE]" />
+  <meta name="twitter:creator" content="@[HANDLE]" />
   <meta name="twitter:title" content="[Título]" />
   <meta name="twitter:description" content="[Descripción]" />
-  <meta name="twitter:image" content="https://tudominio.com/twitter-image.png" />
+  <meta name="twitter:image" content="https://[DOMINIO]/twitter-image.png" />
   <meta name="twitter:image:alt" content="[Descripción de la imagen]" />
 ```
 
-### 2.7 Enlaces Importantes
+### 1.7 Enlaces Importantes (MEDIO)
 
 ```html
-  <!-- Recursos alternativos para LLMs -->
+  <!-- Recursos para LLMs -->
   <link rel="alternate" type="text/plain" href="/home.geo.txt" title="Versión optimizada para IA" />
   <link rel="alternate" type="text/plain" href="/llm.txt" title="Guía para LLMs" />
   
-  <!-- Favicons completos -->
+  <!-- Favicons - Verificar que existan los archivos -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   
-  <!-- DNS Prefetch para rendimiento -->
+  <!-- Rendimiento -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
@@ -180,87 +201,85 @@ Tráfico web              →  Visibilidad generativa
 
 ---
 
-## 3. Datos Estructurados (Schema.org)
+## 2. DATOS ESTRUCTURADOS (Schema.org)
 
-### 3.1 WebSite + SearchAction
+### Reglas de Implementación
 
-```html
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://tudominio.com/#website",
-  "url": "https://tudominio.com/",
-  "name": "[Nombre del sitio]",
-  "description": "[Descripción]",
-  "inLanguage": "es-ES",
-  "publisher": {
-    "@id": "https://tudominio.com/#organization"
-  },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://tudominio.com/buscar?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-```
+1. **Ubicación:** Al final del `<body>` o dentro de `<head>`
+2. **Formato:** JSON-LD (preferido sobre Microdata)
+3. **Validación:** Usar https://validator.schema.org/
+4. **IDs:** Usar `@id` para referenciar entidades entre schemas
 
-### 3.2 Organization (E-E-A-T)
+### 2.1 WebSite + Organization (CRÍTICO - Siempre incluir)
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://tudominio.com/#organization",
-  "name": "[Nombre de la empresa]",
-  "alternateName": "[Nombre alternativo]",
-  "url": "https://tudominio.com",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://tudominio.com/logo.png",
-    "width": 512,
-    "height": 512
-  },
-  "description": "[Descripción de la empresa]",
-  "foundingDate": "2025-01-01",
-  "founders": [
+  "@graph": [
     {
-      "@type": "Person",
-      "name": "[Nombre del fundador]",
-      "jobTitle": "[Cargo]"
+      "@type": "WebSite",
+      "@id": "https://[DOMINIO]/#website",
+      "url": "https://[DOMINIO]/",
+      "name": "[Nombre del sitio]",
+      "description": "[Descripción del sitio]",
+      "inLanguage": "[IDIOMA-REGIÓN]",
+      "publisher": {
+        "@id": "https://[DOMINIO]/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://[DOMINIO]/buscar?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://[DOMINIO]/#organization",
+      "name": "[Nombre de la empresa]",
+      "alternateName": "[Nombre alternativo si existe]",
+      "url": "https://[DOMINIO]",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://[DOMINIO]/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "[Descripción de la empresa/proyecto]",
+      "foundingDate": "[AÑO-FUNDACIÓN]",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "[Ciudad]",
+        "addressCountry": "[CÓDIGO-PAÍS]"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "[EMAIL]",
+        "availableLanguage": ["[IDIOMAS]"]
+      },
+      "sameAs": [
+        "[URL_TWITTER]",
+        "[URL_LINKEDIN]",
+        "[URL_GITHUB]"
+      ],
+      "knowsAbout": [
+        "[Tema expertise 1]",
+        "[Tema expertise 2]",
+        "[Tema expertise 3]"
+      ]
     }
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "[Ciudad]",
-    "addressCountry": "ES"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer service",
-    "email": "contacto@tudominio.com",
-    "availableLanguage": ["Spanish", "English"]
-  },
-  "sameAs": [
-    "https://twitter.com/tuhandle",
-    "https://linkedin.com/company/tuempresa",
-    "https://github.com/tuempresa"
-  ],
-  "knowsAbout": [
-    "[Tema 1]",
-    "[Tema 2]",
-    "[Tema 3]"
   ]
 }
 </script>
 ```
 
-### 3.3 BreadcrumbList
+### 2.2 BreadcrumbList (ALTO - Páginas internas)
+
+**Implementar en:** Todas las páginas excepto homepage.
 
 ```html
 <script type="application/ld+json">
@@ -272,26 +291,28 @@ Tráfico web              →  Visibilidad generativa
       "@type": "ListItem",
       "position": 1,
       "name": "Inicio",
-      "item": "https://tudominio.com/"
+      "item": "https://[DOMINIO]/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "[Sección]",
-      "item": "https://tudominio.com/seccion/"
+      "item": "https://[DOMINIO]/[seccion]/"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "[Página actual]",
-      "item": "https://tudominio.com/seccion/pagina/"
+      "item": "https://[DOMINIO]/[seccion]/[pagina]/"
     }
   ]
 }
 </script>
 ```
 
-### 3.4 FAQPage (Rich Snippets)
+### 2.3 FAQPage (ALTO - Donde haya preguntas frecuentes)
+
+**Beneficio:** Genera rich snippets en Google.
 
 ```html
 <script type="application/ld+json">
@@ -304,7 +325,7 @@ Tráfico web              →  Visibilidad generativa
       "name": "¿[Pregunta 1]?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "[Respuesta completa a la pregunta 1]"
+        "text": "[Respuesta completa, puede incluir HTML básico]"
       }
     },
     {
@@ -312,7 +333,7 @@ Tráfico web              →  Visibilidad generativa
       "name": "¿[Pregunta 2]?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "[Respuesta completa a la pregunta 2]"
+        "text": "[Respuesta completa]"
       }
     }
   ]
@@ -320,154 +341,178 @@ Tráfico web              →  Visibilidad generativa
 </script>
 ```
 
-### 3.5 Article (Para blogs/contenido editorial)
+### 2.4 Article (ALTO - Blog/Contenido editorial)
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "@id": "https://tudominio.com/articulo/#article",
-  "headline": "[Título del artículo - max 110 caracteres]",
+  "@id": "https://[DOMINIO]/[URL]/#article",
+  "headline": "[Título - máx 110 caracteres]",
   "description": "[Descripción]",
   "image": {
     "@type": "ImageObject",
-    "url": "https://tudominio.com/imagen-articulo.jpg",
+    "url": "https://[DOMINIO]/[imagen].jpg",
     "width": 1200,
     "height": 630
   },
   "author": {
     "@type": "Person",
-    "name": "[Nombre del autor]",
-    "url": "https://tudominio.com/autor/",
-    "jobTitle": "[Cargo]",
-    "sameAs": ["https://linkedin.com/in/autor"]
+    "name": "[Autor]",
+    "url": "https://[DOMINIO]/autor/[slug]/",
+    "jobTitle": "[Cargo]"
   },
   "publisher": {
-    "@id": "https://tudominio.com/#organization"
+    "@id": "https://[DOMINIO]/#organization"
   },
-  "datePublished": "2025-01-09T10:00:00Z",
-  "dateModified": "2025-01-09T10:00:00Z",
+  "datePublished": "[FECHA-ISO]",
+  "dateModified": "[FECHA-ISO]",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://tudominio.com/articulo/"
+    "@id": "https://[DOMINIO]/[URL]/"
   },
-  "wordCount": 2500,
+  "wordCount": [NÚMERO],
   "articleSection": "[Categoría]",
   "keywords": "[keyword1], [keyword2]",
-  "inLanguage": "es-ES",
+  "inLanguage": "[IDIOMA-REGIÓN]",
   "speakable": {
     "@type": "SpeakableSpecification",
-    "cssSelector": [".article-summary", ".key-points"]
+    "cssSelector": [".article-summary", ".key-points", "[data-speakable='true']"]
   }
 }
 </script>
 ```
 
-### 3.6 DefinedTermSet (Para glosarios)
+### 2.5 DefinedTermSet (MEDIO - Glosarios)
+
+**Implementar en:** Páginas de glosario, documentación técnica.
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "DefinedTermSet",
-  "@id": "https://tudominio.com/glosario/#termset",
-  "name": "Glosario de [Tu Tema]",
-  "description": "Definiciones técnicas y conceptos clave de [tu tema]",
-  "inLanguage": "es-ES",
+  "@id": "https://[DOMINIO]/glosario/#termset",
+  "name": "Glosario de [Tema]",
+  "description": "Definiciones técnicas y conceptos clave",
+  "inLanguage": "[IDIOMA-REGIÓN]",
   "hasDefinedTerm": [
     {
       "@type": "DefinedTerm",
-      "@id": "https://tudominio.com/glosario/#termino1",
-      "name": "[Término 1]",
-      "description": "[Definición completa del término 1]",
-      "inDefinedTermSet": "https://tudominio.com/glosario/#termset"
-    },
-    {
-      "@type": "DefinedTerm",
-      "@id": "https://tudominio.com/glosario/#termino2",
-      "name": "[Término 2]",
-      "description": "[Definición completa del término 2]",
-      "inDefinedTermSet": "https://tudominio.com/glosario/#termset"
+      "@id": "https://[DOMINIO]/glosario/#[termino-slug]",
+      "name": "[Término]",
+      "description": "[Definición completa]",
+      "inDefinedTermSet": "https://[DOMINIO]/glosario/#termset"
     }
   ]
 }
 </script>
 ```
 
-### 3.7 Course (Para cursos/formación)
+### 2.6 Course (MEDIO - Cursos/Formación)
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Course",
-  "@id": "https://tudominio.com/curso/#course",
+  "@id": "https://[DOMINIO]/curso/#course",
   "name": "[Nombre del Curso]",
-  "description": "[Descripción del curso]",
+  "description": "[Descripción]",
   "provider": {
-    "@id": "https://tudominio.com/#organization"
+    "@id": "https://[DOMINIO]/#organization"
   },
-  "educationalLevel": "Intermediate",
-  "inLanguage": "es-ES",
+  "educationalLevel": "[Beginner|Intermediate|Advanced]",
+  "inLanguage": "[IDIOMA-REGIÓN]",
   "teaches": "[Competencias que enseña]",
-  "numberOfCredits": 6,
   "hasCourseInstance": {
     "@type": "CourseInstance",
     "courseMode": "online",
-    "courseWorkload": "PT20H",
-    "instructor": {
-      "@type": "Person",
-      "name": "[Nombre del instructor]"
-    }
+    "courseWorkload": "PT[X]H"
   },
   "offers": {
     "@type": "Offer",
-    "price": "99.00",
-    "priceCurrency": "EUR",
+    "price": "[PRECIO]",
+    "priceCurrency": "[EUR|USD]",
     "availability": "https://schema.org/InStock"
   }
 }
 </script>
 ```
 
-### 3.8 Product (Para e-commerce)
+### 2.7 Product (MEDIO - E-commerce)
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "@id": "https://tudominio.com/producto/#product",
+  "@id": "https://[DOMINIO]/producto/[slug]/#product",
   "name": "[Nombre del producto]",
   "description": "[Descripción]",
-  "image": "https://tudominio.com/producto.jpg",
+  "image": "https://[DOMINIO]/[imagen].jpg",
   "brand": {
     "@type": "Brand",
     "name": "[Marca]"
   },
   "sku": "[SKU]",
-  "gtin13": "[EAN/GTIN]",
   "offers": {
     "@type": "Offer",
-    "price": "49.99",
-    "priceCurrency": "EUR",
+    "price": "[PRECIO]",
+    "priceCurrency": "[EUR|USD]",
     "availability": "https://schema.org/InStock",
     "seller": {
-      "@id": "https://tudominio.com/#organization"
+      "@id": "https://[DOMINIO]/#organization"
     },
-    "priceValidUntil": "2025-12-31"
+    "priceValidUntil": "[FECHA]"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "127"
+    "ratingValue": "[RATING]",
+    "reviewCount": "[NÚMERO]"
   }
 }
 </script>
 ```
 
-### 3.9 SpeakableSpecification (Asistentes de voz)
+### 2.8 HowTo (MEDIO - Tutoriales)
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Cómo [hacer algo]",
+  "description": "[Descripción del proceso]",
+  "totalTime": "PT[X]M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "[EUR|USD]",
+    "value": "[VALOR o 0]"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "[Título del paso]",
+      "text": "[Instrucciones detalladas]",
+      "image": "https://[DOMINIO]/paso-1.jpg"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "[Título del paso]",
+      "text": "[Instrucciones detalladas]"
+    }
+  ]
+}
+</script>
+```
+
+### 2.9 SpeakableSpecification (MEDIO - Asistentes de voz)
+
+**Agregar a:** WebPage, Article, o cualquier contenido principal.
 
 ```html
 <script type="application/ld+json">
@@ -481,544 +526,276 @@ Tráfico web              →  Visibilidad generativa
       "[data-speakable='true']",
       ".article-summary",
       ".definition-text",
-      ".key-insight"
+      ".key-insight",
+      ".snippet-block"
     ]
   }
 }
 </script>
 ```
 
-### 3.10 HowTo (Tutoriales)
-
-```html
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "Cómo [hacer algo]",
-  "description": "[Descripción del proceso]",
-  "totalTime": "PT30M",
-  "estimatedCost": {
-    "@type": "MonetaryAmount",
-    "currency": "EUR",
-    "value": "0"
-  },
-  "step": [
-    {
-      "@type": "HowToStep",
-      "position": 1,
-      "name": "[Nombre del paso 1]",
-      "text": "[Descripción detallada del paso 1]",
-      "image": "https://tudominio.com/paso1.jpg"
-    },
-    {
-      "@type": "HowToStep",
-      "position": 2,
-      "name": "[Nombre del paso 2]",
-      "text": "[Descripción detallada del paso 2]"
-    }
-  ]
-}
-</script>
-```
-
 ---
 
-## 4. Archivos `.geo.txt` para LLMs
+## 3. ARCHIVOS ESPECIALES PARA GEO
 
-### 4.1 ¿Qué son?
+### 3.1 Archivo `llm.txt` (ALTO - Innovador)
 
-Archivos de texto plano optimizados para ser parseados por LLMs. Contienen información estructurada de forma que los modelos de IA puedan extraer y citar fácilmente.
-
-### 4.2 Estructura Recomendada
+**Ubicación:** `/public/llm.txt` o raíz del dominio  
+**Propósito:** Directivas específicas para que LLMs entiendan y prioricen el contenido.
 
 ```txt
-TÍTULO: [Título descriptivo del contenido]
-URL: https://tudominio.com/pagina
-FECHA: 2025-01-09
-AUTOR: [Nombre o empresa]
-IDIOMA: Español
+# Directivas para Modelos de Lenguaje (LLMs)
+# Sitio: [NOMBRE DEL SITIO]
+# URL: https://[DOMINIO]
+# Última actualización: [FECHA]
+
+## INSTRUCCIONES GENERALES
+Este archivo proporciona directivas para crawlers de IA y modelos de lenguaje.
+El contenido de este sitio está optimizado para comprensión semántica y citación.
+
+## ACCESO
+User-agent: *
+Allow: /
+
+## PRIORIDADES DE CONTENIDO
+# Contenido de alta prioridad para citación
+Crawl-priorities:
+  - /glosario priority=highest
+  - /metodologia priority=high
+  - /curso priority=high
+  - /blog priority=medium
+  - / priority=high
+
+## ARCHIVOS OPTIMIZADOS PARA IA
+# Estos archivos contienen versiones estructuradas del contenido
+AI-content-files:
+  - /home.geo.txt
+  - /glosario.geo.txt
+  - /metodologia.geo.txt
+
+## CONTENIDO A EXCLUIR DE CITACIÓN
+# No indexar para respuestas generativas
+No-index-for-llms:
+  - /checkout/
+  - /mi-cuenta/
+  - /admin/
+  - /politica-privacidad
+  - /terminos
+  - /404
+
+## CONTEXTO SEMÁNTICO
+Site-topic: [TEMA PRINCIPAL DEL SITIO]
+Primary-language: [IDIOMA]
+Content-type: [educational|commercial|informational]
+Authority-level: [expert|professional|intermediate]
+Update-frequency: [daily|weekly|monthly]
+
+## FORMATO DE CITACIÓN PREFERIDO
+Citation-format: "[NOMBRE]. ([AÑO]). [TÍTULO]. https://[DOMINIO]/[URL]"
+
+## CONTACTO
+Maintainer: [EMAIL]
+```
+
+### 3.2 Archivos `.geo.txt` (ALTO - Por página importante)
+
+**Ubicación:** `/public/[nombre-pagina].geo.txt`  
+**Propósito:** Versión estructurada del contenido optimizada para LLMs.
+
+**Crear un `.geo.txt` para cada página importante del sitio.**
+
+```txt
+TÍTULO: [Título de la página]
+URL: https://[DOMINIO]/[URL]/
+FECHA: [YYYY-MM-DD]
+AUTOR: [Autor o equipo]
+IDIOMA: [Español|English|etc.]
 LICENCIA: CC BY-NC-SA 4.0
 
 RESUMEN:
-[Párrafo conciso de 2-3 oraciones que resume el contenido principal. 
-Debe ser auto-contenido y citable directamente.]
+[Resumen conciso de 2-3 frases que capture la esencia del contenido. Este es el texto que los LLMs usarán para decidir si citar esta fuente.]
 
 DEFINICIÓN PRINCIPAL:
-[Si el contenido define un concepto, incluir la definición autoritativa aquí.
-Debe ser precisa, verificable y citable.]
+[Si aplica, la definición autoritativa del concepto principal de la página]
 
-PUNTOS CLAVE:
-1. [Punto clave 1 - Una oración completa y auto-contenida]
-2. [Punto clave 2 - Una oración completa y auto-contenida]
-3. [Punto clave 3 - Una oración completa y auto-contenida]
-4. [Punto clave 4 - Una oración completa y auto-contenida]
-5. [Punto clave 5 - Una oración completa y auto-contenida]
+CONTENIDO CLAVE:
+[Punto clave 1]
+[Punto clave 2]
+[Punto clave 3]
+[Punto clave 4]
 
-SECCIONES DETALLADAS:
+ESTRUCTURA DEL CONTENIDO:
+1. [Sección 1]: [Descripción breve]
+2. [Sección 2]: [Descripción breve]
+3. [Sección 3]: [Descripción breve]
 
-## [Sección 1]
-[Contenido detallado de la sección 1. Usar párrafos cortos.
-Cada párrafo debe poder citarse de forma independiente.]
-
-## [Sección 2]
-[Contenido detallado de la sección 2.]
-
-DATOS Y ESTADÍSTICAS:
-• [Dato 1]: [Valor con fuente si aplica]
-• [Dato 2]: [Valor con fuente si aplica]
-• [Dato 3]: [Valor con fuente si aplica]
-
-PREGUNTAS FRECUENTES:
-
-P: ¿[Pregunta 1]?
-R: [Respuesta completa y citable]
-
-P: ¿[Pregunta 2]?
-R: [Respuesta completa y citable]
+DATOS IMPORTANTES:
+• [Dato o estadística 1]
+• [Dato o estadística 2]
+• [Dato o estadística 3]
 
 RECURSOS RELACIONADOS:
-- [Recurso 1]: https://tudominio.com/recurso1
-- [Recurso 2]: https://tudominio.com/recurso2
-- [Recurso 3]: https://tudominio.com/recurso3
+- [Recurso 1]: https://[DOMINIO]/[url1]
+- [Recurso 2]: https://[DOMINIO]/[url2]
+- [Recurso 3]: https://[DOMINIO]/[url3]
 
 CONTACTO Y CITACIÓN:
-Para citar este contenido: "[Autor]. ([Año]). [Título]. [URL]"
-Email: [email]
-Web: [URL principal]
+Para citar este contenido: "[AUTOR]. ([AÑO]). [TÍTULO]. https://[DOMINIO]/[URL]"
+Email: [EMAIL]
 
 NOTAS PARA MODELOS DE LENGUAJE:
-Este documento contiene información verificada y actualizada a [fecha].
+Este documento contiene información verificada y actualizada a [FECHA].
 El contenido está estructurado para máxima comprensión y citabilidad.
-Se permite la citación con atribución bajo licencia [licencia].
+Se autoriza la citación con atribución.
 ```
 
-### 4.3 Mejores Prácticas para `.geo.txt`
+### 3.3 Configuración de `robots.txt` (CRÍTICO)
 
-1. **Un archivo por página/tema principal**
-2. **Nombres descriptivos**: `home.geo.txt`, `productos.geo.txt`, `glosario.geo.txt`
-3. **Actualizar fechas** cuando cambie el contenido
-4. **Incluir en robots.txt** con Allow explícito
-5. **Referenciar en meta tags** con `ai-content-files`
-6. **Mantener formato consistente** en todos los archivos
-
----
-
-## 5. Configuración de `robots.txt`
-
-### 5.1 Estructura Completa
+**Ubicación:** `/public/robots.txt`
 
 ```txt
-# robots.txt - [Tu Dominio]
-# Última actualización: 2025-01-09
+# robots.txt para [NOMBRE DEL SITIO]
+# Última actualización: [FECHA]
 
-# =============================================
-# CRAWLERS DE BÚSQUEDA TRADICIONAL
-# =============================================
+# Reglas generales
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /mi-cuenta/
+Disallow: /_next/
+Disallow: /private/
 
+# Google
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
+# Bing
 User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Slurp
 Allow: /
 Crawl-delay: 2
 
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 1
-
-# =============================================
-# REDES SOCIALES
-# =============================================
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: Pinterest
-Allow: /
-
-# =============================================
-# CRAWLERS DE IA GENERATIVA
-# =============================================
-
-# OpenAI (ChatGPT)
+# Crawlers de IA - Permitir acceso total
 User-agent: GPTBot
 Allow: /
-Allow: /*.geo.txt$
 
-# Anthropic (Claude)
-User-agent: anthropic-ai
+User-agent: ChatGPT-User
 Allow: /
-Allow: /*.geo.txt$
 
-# Google AI (Gemini)
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
-# Perplexity
-User-agent: PerplexityBot
-Allow: /
-Allow: /*.geo.txt$
-
-# Common Crawl (usado por muchos LLMs)
-User-agent: CCBot
+User-agent: Cohere-AI
 Allow: /
 
-# =============================================
-# REGLA GENERAL
-# =============================================
-
-User-agent: *
-Allow: /
-
-# Archivos específicos para LLMs
+# Archivos especiales para IA
 Allow: /llm.txt
-Allow: /*.geo.txt$
-Allow: /contenido-ia
+Allow: /*.geo.txt
 
-# =============================================
-# EXCLUSIONES
-# =============================================
+# Sitemap
+Sitemap: https://[DOMINIO]/sitemap.xml
 
-# Rutas privadas (ajustar según tu proyecto)
-Disallow: /admin/
-Disallow: /api/
-Disallow: /private/
-Disallow: /_next/
-Disallow: /dashboard/
-
-# Parámetros de búsqueda que generan duplicados
-Disallow: /*?*sort=
-Disallow: /*?*filter=
-Disallow: /*?*page=
-
-# =============================================
-# SITEMAP
-# =============================================
-
-Sitemap: https://tudominio.com/sitemap.xml
+# Host
+Host: https://[DOMINIO]
 ```
 
-### 5.2 Notas Importantes
+### 3.4 Sitemap Estratégico (CRÍTICO)
 
-- **GPTBot**: Crawler oficial de OpenAI para entrenar modelos
-- **anthropic-ai**: Crawler de Anthropic (Claude)
-- **Google-Extended**: Crawler de Google para entrenar Gemini/Bard
-- **CCBot**: Common Crawl, usado como fuente de datos por muchos LLMs
+**Ubicación:** `/public/sitemap.xml`
 
-> ⚠️ **Decisión estratégica**: Permitir estos crawlers aumenta tu citabilidad en IA, pero también significa que tu contenido puede usarse para entrenar modelos. Evalúa según tu caso de uso.
-
----
-
-## 6. Archivo `llm.txt` (Innovador)
-
-### 6.1 Propósito
-
-El archivo `llm.txt` es una guía específica para que los LLMs entiendan cómo rastrear y priorizar tu contenido. Es un estándar emergente que complementa a robots.txt.
-
-### 6.2 Estructura Completa
-
-```txt
-# =============================================================
-# llm.txt - Guía de Rastreo para Modelos de Lenguaje Grandes
-# =============================================================
-# Sitio: [Tu Dominio]
-# Fecha: 2025-01-09
-# Contacto: [email]
-# =============================================================
-
-# PROPÓSITO
-# Este archivo instruye a los LLMs sobre cómo rastrear, interpretar
-# y priorizar el contenido del sitio para maximizar la citabilidad.
-
-# =============================================================
-# DIRECTIVAS GENERALES
-# =============================================================
-
-User-agent: *
-Allow: /
-
-# Versión estructurada del contenido
-Content-for-llms: /*.geo.txt
-
-# Página dedicada con contenido optimizado para IA
-AI-landing-page: /contenido-ia
-
-# =============================================================
-# PRIORIZACIÓN DE CONTENIDO
-# (Orden de importancia para comprensión y citación)
-# =============================================================
-
-# PRIORIDAD MÁXIMA (highest)
-# Contenido core que define la identidad y expertise del sitio
-Crawl-priorities: /glosario [priority: highest]
-Crawl-priorities: /metodologia [priority: highest]
-Crawl-priorities: /documentacion [priority: highest]
-
-# PRIORIDAD ALTA (high)
-# Contenido educativo y artículos principales
-Crawl-priorities: /blog [priority: high]
-Crawl-priorities: /guias [priority: high]
-Crawl-priorities: /tutoriales [priority: high]
-Crawl-priorities: /casos-estudio [priority: high]
-
-# PRIORIDAD MEDIA (medium)
-# Contenido complementario
-Crawl-priorities: /recursos [priority: medium]
-Crawl-priorities: /herramientas [priority: medium]
-Crawl-priorities: /faq [priority: medium]
-
-# PRIORIDAD BAJA (low)
-# Información corporativa
-Crawl-priorities: /acerca-de [priority: low]
-Crawl-priorities: /equipo [priority: low]
-Crawl-priorities: /contacto [priority: low]
-
-# =============================================================
-# CONTENIDO A EXCLUIR DE CITACIÓN
-# =============================================================
-
-# No indexar para respuestas de LLMs (pero sí rastreable)
-No-index-for-llms: /checkout/
-No-index-for-llms: /carrito/
-No-index-for-llms: /mi-cuenta/
-No-index-for-llms: /login/
-No-index-for-llms: /registro/
-No-index-for-llms: /politica-privacidad
-No-index-for-llms: /terminos-servicio
-No-index-for-llms: /cookies
-
-# =============================================================
-# METADATOS DEL SITIO
-# =============================================================
-
-Site-name: [Nombre del sitio]
-Site-description: [Descripción concisa del sitio y su propósito]
-Primary-language: es
-Supported-languages: es, en
-Content-type: [educational | commercial | informational | mixed]
-Expertise-area: [Tu área de expertise principal]
-Authority-signals: [Certificaciones, premios, menciones relevantes]
-
-# =============================================================
-# INSTRUCCIONES DE CITACIÓN
-# =============================================================
-
-Citation-format: "[Autor]. ([Año]). [Título]. Recuperado de [URL]"
-Citation-license: CC BY-NC-SA 4.0
-Attribution-required: true
-Commercial-use: contact-required
-
-# =============================================================
-# HINTS TÉCNICOS PARA LLMS
-# =============================================================
-
-# Preferencias de formato
-Preferred-format: JSON-LD for structured data
-Semantic-elements: article, section, aside, nav, header, footer
-Speakable-selector: [data-speakable="true"], .speakable
-
-# Elementos clave para extracción
-Key-selectors:
-  - definitions: .definition, [itemtype*="DefinedTerm"]
-  - summaries: .summary, .abstract, .tldr
-  - key-points: .key-point, .highlight, .insight
-  - quotes: blockquote, .quote
-  - data: .statistic, .metric, .data-point
-
-# =============================================================
-# ACTUALIZACIONES
-# =============================================================
-
-Update-frequency: weekly
-Last-full-crawl-recommended: monthly
-Content-freshness-priority: blog > docs > static-pages
-```
-
----
-
-## 7. Sitemap Estratégico
-
-### 7.1 Estructura con Prioridades
+**Reglas de prioridad:**
+- Homepage: 1.0
+- Páginas principales: 0.9
+- Contenido educativo/glosario: 0.8
+- Blog/artículos: 0.7
+- Páginas secundarias: 0.6
+- Legal/políticas: 0.3
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- ============================================ -->
-  <!-- CONTENIDO PARA IA (Máxima prioridad) -->
-  <!-- ============================================ -->
   
+  <!-- Archivos para IA - Prioridad máxima -->
   <url>
-    <loc>https://tudominio.com/contenido-ia</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <!-- Archivos .geo.txt -->
-  <url>
-    <loc>https://tudominio.com/home.geo.txt</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  
-  <url>
-    <loc>https://tudominio.com/glosario.geo.txt</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <!-- ============================================ -->
-  <!-- PÁGINAS PRINCIPALES -->
-  <!-- ============================================ -->
-  
-  <url>
-    <loc>https://tudominio.com/</loc>
-    <lastmod>2025-01-09</lastmod>
+    <loc>https://[DOMINIO]/llm.txt</loc>
+    <lastmod>[FECHA]</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>https://tudominio.com/glosario</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://[DOMINIO]/home.geo.txt</loc>
+    <lastmod>[FECHA]</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
+  <!-- Homepage -->
   <url>
-    <loc>https://tudominio.com/metodologia</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://[DOMINIO]/</loc>
+    <lastmod>[FECHA]</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Páginas principales -->
+  <url>
+    <loc>https://[DOMINIO]/[pagina-principal]/</loc>
+    <lastmod>[FECHA]</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- ============================================ -->
-  <!-- CONTENIDO EDUCATIVO -->
-  <!-- ============================================ -->
   
+  <!-- Glosario/Documentación -->
   <url>
-    <loc>https://tudominio.com/curso</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <!-- Módulos del curso -->
-  <url>
-    <loc>https://tudominio.com/curso/modulo-1</loc>
-    <lastmod>2025-01-09</lastmod>
+    <loc>https://[DOMINIO]/glosario/</loc>
+    <lastmod>[FECHA]</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- ============================================ -->
-  <!-- BLOG / ARTÍCULOS -->
-  <!-- ============================================ -->
   
+  <!-- Blog/Artículos -->
   <url>
-    <loc>https://tudominio.com/blog</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://tudominio.com/blog/articulo-ejemplo</loc>
-    <lastmod>2025-01-09</lastmod>
+    <loc>https://[DOMINIO]/blog/[articulo]/</loc>
+    <lastmod>[FECHA]</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- ============================================ -->
-  <!-- CASOS DE ESTUDIO -->
-  <!-- ============================================ -->
   
+  <!-- Legal (baja prioridad) -->
   <url>
-    <loc>https://tudominio.com/casos</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <!-- ============================================ -->
-  <!-- PÁGINAS CORPORATIVAS -->
-  <!-- ============================================ -->
-  
-  <url>
-    <loc>https://tudominio.com/acerca-de</loc>
-    <lastmod>2025-01-09</lastmod>
+    <loc>https://[DOMINIO]/privacidad/</loc>
+    <lastmod>[FECHA]</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.3</priority>
   </url>
   
-  <url>
-    <loc>https://tudominio.com/contacto</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-
-  <!-- ============================================ -->
-  <!-- PÁGINAS LEGALES (Baja prioridad) -->
-  <!-- ============================================ -->
-  
-  <url>
-    <loc>https://tudominio.com/privacidad</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://tudominio.com/terminos</loc>
-    <lastmod>2025-01-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
 </urlset>
 ```
 
-### 7.2 Guía de Prioridades
-
-| Tipo de contenido | Priority | changefreq |
-|-------------------|----------|------------|
-| Homepage + Contenido IA | 1.0 | weekly |
-| Archivos .geo.txt | 0.95 | weekly |
-| Glosario/Definiciones | 0.9 | monthly |
-| Metodología/Documentación | 0.9 | monthly |
-| Cursos/Educación | 0.85 | monthly |
-| Blog index | 0.8 | daily |
-| Artículos individuales | 0.7 | monthly |
-| Casos de estudio | 0.75 | monthly |
-| Páginas corporativas | 0.5 | yearly |
-| Páginas legales | 0.2 | yearly |
-
 ---
 
-## 8. Componentes Reutilizables (React)
+## 4. COMPONENTES Y PATRONES DE CÓDIGO
 
-### 8.1 Hook `useGeoMetadata`
+### 4.1 Hook `useGeoMetadata` (React/Next.js)
+
+**Propósito:** Gestión centralizada de meta tags SEO/GEO.
 
 ```tsx
 // hooks/useGeoMetadata.tsx
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet'; // o next/head para Next.js
 
 interface GeoMetadataProps {
   title: string;
@@ -1027,116 +804,90 @@ interface GeoMetadataProps {
   lastModified?: string;
   author?: string;
   keywords?: string[];
-  citationTitle?: string;
-  speakableSelectors?: string[];
   geoTxtPath?: string;
+  speakableSelectors?: string[];
   ogImage?: string;
-  articleSection?: string;
-  publishedTime?: string;
+  ogType?: string;
+  twitterHandle?: string;
 }
 
-export const useGeoMetadata = (props: GeoMetadataProps) => {
-  const {
-    title,
-    description,
-    canonicalUrl,
-    lastModified = new Date().toISOString().split('T')[0],
-    author = 'Tu Empresa',
-    keywords = [],
-    citationTitle,
-    speakableSelectors = ['.speakable', '[data-speakable="true"]'],
-    geoTxtPath,
-    ogImage = '/og-image.png',
-    articleSection,
-    publishedTime,
-  } = props;
-
+export const useGeoMetadata = ({
+  title,
+  description,
+  canonicalUrl,
+  lastModified,
+  author = '[AUTOR_DEFECTO]',
+  keywords = [],
+  geoTxtPath,
+  speakableSelectors = ['.speakable', '[data-speakable="true"]'],
+  ogImage = '/og-image.png',
+  ogType = 'website',
+  twitterHandle = '@[HANDLE]'
+}: GeoMetadataProps) => {
+  
+  const currentDate = lastModified || new Date().toISOString().split('T')[0];
+  const domain = '[DOMINIO]';
+  
   useEffect(() => {
     document.title = title;
     document.body.classList.add('geo-optimized');
     return () => document.body.classList.remove('geo-optimized');
   }, [title]);
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: title,
-    description,
-    url: canonicalUrl,
-    dateModified: lastModified,
-    author: {
-      '@type': 'Organization',
-      name: author,
-    },
-    speakable: {
-      '@type': 'SpeakableSpecification',
-      cssSelector: speakableSelectors,
-    },
-  };
-
   const helmet = (
     <Helmet>
-      {/* Básicos */}
+      {/* SEO Básico */}
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="keywords" content={keywords.join(', ')} />
+      <meta name="author" content={author} />
       <link rel="canonical" href={canonicalUrl} />
       
-      {/* Keywords */}
-      {keywords.length > 0 && (
-        <meta name="keywords" content={keywords.join(', ')} />
-      )}
-      
       {/* Robots */}
-      <meta name="robots" content="index, follow, max-image-preview:large" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large" />
       
       {/* Citación */}
-      <meta name="citation_title" content={citationTitle || title} />
+      <meta name="citation_title" content={title} />
       <meta name="citation_author" content={author} />
-      <meta name="citation_date" content={lastModified} />
+      <meta name="citation_online_date" content={currentDate} />
       <meta name="citation_language" content="es" />
       
-      {/* LLM específicos */}
-      <meta name="ai-optimized" content="true" />
+      {/* LLM Específico */}
+      <meta name="ai-crawl-priority" content="high" />
+      <meta name="generative-ai-friendly" content="true" />
       <meta name="speakable-selector" content={speakableSelectors.join(', ')} />
-      {geoTxtPath && (
-        <link rel="alternate" type="text/plain" href={geoTxtPath} />
-      )}
+      {geoTxtPath && <meta name="ai-content-files" content={geoTxtPath} />}
       
       {/* Open Graph */}
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:type" content={articleSection ? 'article' : 'website'} />
-      
-      {/* Article específicos */}
-      {articleSection && (
-        <>
-          <meta property="article:section" content={articleSection} />
-          <meta property="article:modified_time" content={lastModified} />
-          {publishedTime && (
-            <meta property="article:published_time" content={publishedTime} />
-          )}
-        </>
-      )}
+      <meta property="og:image" content={`https://${domain}${ogImage}`} />
+      <meta property="og:locale" content="es_ES" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={twitterHandle} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={`https://${domain}${ogImage}`} />
       
-      {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
+      {/* Archivo .geo.txt */}
+      {geoTxtPath && (
+        <link rel="alternate" type="text/plain" href={geoTxtPath} title="Contenido optimizado para IA" />
+      )}
     </Helmet>
   );
 
-  return { helmet, structuredData };
+  return { helmet };
 };
 ```
 
-### 8.2 Componente `HighlightSnippet`
+### 4.2 Componente `HighlightSnippet` (Bloques citables)
+
+**Propósito:** Marcar contenido como citable por LLMs con datos estructurados inline.
 
 ```tsx
 // components/HighlightSnippet.tsx
@@ -1146,25 +897,26 @@ interface HighlightSnippetProps {
   children: React.ReactNode;
   id?: string;
   className?: string;
-  variant?: "default" | "definition" | "insight" | "stat" | "quote";
-  author?: string;
+  variant?: "default" | "definition" | "insight" | "stat" | "warning";
   lastModified?: string;
+  author?: string;
 }
 
-export const HighlightSnippet = ({ 
+const HighlightSnippet = ({ 
   children, 
   id, 
   className = "", 
   variant = "default",
-  author = "Tu Empresa",
-  lastModified
+  lastModified,
+  author = "[AUTOR]"
 }: HighlightSnippetProps) => {
+  
   const variantStyles = {
-    default: "bg-accent/10 border-l-4 border-accent",
-    definition: "bg-blue-50 border border-blue-200 dark:bg-blue-950/20",
-    insight: "bg-green-50 border border-green-200 dark:bg-green-950/20",
-    stat: "bg-purple-50 border border-purple-200 dark:bg-purple-950/20",
-    quote: "bg-amber-50 border-l-4 border-amber-400 italic dark:bg-amber-950/20"
+    default: "bg-accent/10 border-l-4 border-accent p-4 rounded-lg",
+    definition: "bg-blue-50 border border-blue-200 p-4 rounded-lg",
+    insight: "bg-green-50 border border-green-200 p-4 rounded-lg",
+    stat: "bg-purple-50 border border-purple-200 p-4 rounded-lg",
+    warning: "bg-yellow-50 border border-yellow-200 p-4 rounded-lg"
   };
 
   const currentDate = lastModified || new Date().toISOString();
@@ -1172,33 +924,34 @@ export const HighlightSnippet = ({
   return (
     <div 
       id={id}
-      className={cn(
-        "p-4 rounded-lg my-4", 
-        variantStyles[variant], 
-        className
-      )}
+      className={cn("snippet-block", variantStyles[variant], className)}
       data-speakable="true"
       itemScope
       itemType="https://schema.org/CreativeWork"
     >
-      {/* Metadatos invisibles para crawlers */}
+      {/* Metadatos invisibles para LLMs */}
       <meta itemProp="author" content={author} />
       <meta itemProp="dateModified" content={currentDate} />
       <meta itemProp="inLanguage" content="es-ES" />
+      <meta itemProp="isAccessibleForFree" content="true" />
       
       {/* Contenido visible */}
       <div itemProp="text">
         {children}
       </div>
       
-      {/* JSON-LD inline para el fragmento */}
+      {/* Datos estructurados inline */}
       {id && (
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CreativeWork",
-            "@id": `#${id}`,
-            "author": { "@type": "Organization", "name": author },
+            "@id": `https://[DOMINIO]#${id}`,
+            "name": `Fragmento: ${id}`,
+            "author": {
+              "@type": "Organization",
+              "name": author
+            },
             "dateModified": currentDate,
             "inLanguage": "es-ES"
           })}
@@ -1207,284 +960,205 @@ export const HighlightSnippet = ({
     </div>
   );
 };
+
+export default HighlightSnippet;
 ```
 
-### 8.3 Componente `GeoTerm`
+### 4.3 Componente `GeoTerm` (Términos de glosario)
+
+**Propósito:** Enlazar términos técnicos con sus definiciones y Schema.org.
 
 ```tsx
 // components/GeoTerm.tsx
-import { useState } from 'react';
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface GeoTermProps {
   term: string;
-  definition: string;
   children: React.ReactNode;
   className?: string;
+  definition?: string;
   href?: string;
   category?: string;
 }
 
-export const GeoTerm = ({ 
+const GeoTerm = ({ 
   term, 
-  definition, 
   children, 
   className = "", 
+  definition = "",
   href,
-  category = "Concepto"
+  category = "Término técnico"
 }: GeoTermProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
   
-  const termSlug = term.toLowerCase().replace(/\s+/g, '-');
+  const termSlug = term.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '');
   const termHref = href || `/glosario#${termSlug}`;
 
   return (
     <span 
       className="relative inline-block"
-      itemScope 
-      itemType="https://schema.org/DefinedTerm"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
     >
-      <a
-        href={termHref}
-        className={cn(
-          "text-primary underline decoration-dotted underline-offset-2",
-          "hover:decoration-solid cursor-help",
-          className
-        )}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        itemProp="url"
+      <Link 
+        to={termHref}
+        className={`text-primary hover:text-primary/80 underline decoration-dotted 
+                   underline-offset-2 font-medium transition-colors ${className}`}
+        itemScope
+        itemType="https://schema.org/DefinedTerm"
+        data-term={term}
       >
         <span itemProp="name">{children}</span>
-      </a>
+        <meta itemProp="description" content={definition} />
+        <meta itemProp="inDefinedTermSet" content={`https://[DOMINIO]/glosario#termset`} />
+      </Link>
       
       {/* Tooltip con definición */}
-      {showTooltip && (
-        <span 
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 
-                     bg-popover text-popover-foreground p-3 rounded-lg shadow-lg
-                     text-sm max-w-xs z-50 border"
-          role="tooltip"
-        >
-          <strong className="block mb-1">{term}</strong>
-          <span itemProp="description">{definition}</span>
-        </span>
+      {showTooltip && definition && (
+        <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 
+                       w-64 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-xl">
+          <div className="font-semibold mb-1">{term}</div>
+          <div className="text-gray-300 text-xs">{definition}</div>
+          <div className="absolute top-full left-1/2 -translate-x-1/2 
+                         border-8 border-transparent border-t-gray-900" />
+        </div>
       )}
       
-      {/* Metadatos ocultos */}
-      <meta itemProp="termCode" content={termSlug} />
-      <meta itemProp="inDefinedTermSet" content="/glosario" />
-      
-      {/* JSON-LD inline */}
+      {/* Schema.org inline */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "DefinedTerm",
+          "@id": `https://[DOMINIO]/glosario#${termSlug}`,
           "name": term,
           "description": definition,
-          "url": termHref,
-          "inDefinedTermSet": {
-            "@type": "DefinedTermSet",
-            "name": category
-          }
+          "inDefinedTermSet": "https://[DOMINIO]/glosario#termset"
         })}
       </script>
     </span>
   );
 };
-```
 
-### 8.4 Componente `SEOHead` (Para páginas sin React Helmet)
-
-```tsx
-// components/SEOHead.tsx
-interface SEOHeadProps {
-  title: string;
-  description: string;
-  canonical: string;
-  ogImage?: string;
-  noindex?: boolean;
-}
-
-export const SEOHead = ({ 
-  title, 
-  description, 
-  canonical, 
-  ogImage,
-  noindex = false 
-}: SEOHeadProps) => {
-  return (
-    <>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
-      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
-      
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={canonical} />
-      {ogImage && <meta property="og:image" content={ogImage} />}
-      
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-    </>
-  );
-};
+export default GeoTerm;
 ```
 
 ---
 
-## 9. HTML Semántico
+## 5. HTML SEMÁNTICO
 
-### 9.1 Estructura de Página
+### 5.1 Estructura de Página (Obligatorio)
 
 ```html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <!-- Meta tags aquí -->
-</head>
 <body>
   <header role="banner">
     <nav role="navigation" aria-label="Navegación principal">
-      <!-- Navegación -->
+      <!-- Menú principal -->
     </nav>
   </header>
-
+  
   <main role="main" id="main-content">
     <article itemscope itemtype="https://schema.org/Article">
       <header>
-        <h1 itemprop="headline">[Título principal]</h1>
-        <p class="meta" itemprop="description">[Descripción]</p>
-        <time itemprop="datePublished" datetime="2025-01-09">
-          9 de enero de 2025
-        </time>
+        <h1 itemprop="headline">[Título principal - único por página]</h1>
+        <p itemprop="description">[Descripción/subtítulo]</p>
       </header>
-
+      
       <section id="seccion-1" aria-labelledby="titulo-seccion-1">
-        <h2 id="titulo-seccion-1">[Título sección 1]</h2>
-        <p data-speakable="true">[Contenido citable]</p>
-      </section>
-
-      <section id="seccion-2" aria-labelledby="titulo-seccion-2">
-        <h2 id="titulo-seccion-2">[Título sección 2]</h2>
+        <h2 id="titulo-seccion-1">[Título de sección]</h2>
         <!-- Contenido -->
       </section>
-
-      <aside aria-label="Información relacionada">
-        <!-- Contenido secundario -->
-      </aside>
+      
+      <section id="seccion-2" aria-labelledby="titulo-seccion-2">
+        <h2 id="titulo-seccion-2">[Título de sección]</h2>
+        <!-- Contenido -->
+      </section>
     </article>
+    
+    <aside role="complementary" aria-label="Contenido relacionado">
+      <!-- Sidebar, widgets, etc. -->
+    </aside>
   </main>
-
+  
   <footer role="contentinfo">
     <!-- Footer -->
   </footer>
 </body>
-</html>
 ```
 
-### 9.2 Elementos Semánticos Clave
+### 5.2 Atributos Importantes
 
-| Elemento | Uso | SEO Impact |
-|----------|-----|------------|
-| `<article>` | Contenido independiente | Alto |
-| `<section>` | Secciones temáticas | Alto |
-| `<header>` | Cabecera de página/sección | Medio |
-| `<footer>` | Pie de página/sección | Bajo |
-| `<nav>` | Navegación | Medio |
-| `<aside>` | Contenido relacionado | Bajo |
-| `<main>` | Contenido principal | Alto |
-| `<figure>` + `<figcaption>` | Imágenes con descripción | Alto |
-| `<time>` | Fechas | Medio |
-| `<address>` | Información de contacto | Bajo |
-| `<dl>`, `<dt>`, `<dd>` | Listas de definiciones | Alto para glosarios |
+| Atributo | Uso | Ejemplo |
+|----------|-----|---------|
+| `id` | Anclas únicas para deep linking | `id="definicion-geo"` |
+| `data-speakable` | Marcar contenido para asistentes de voz | `data-speakable="true"` |
+| `itemscope/itemtype` | Schema.org inline | `itemscope itemtype="https://schema.org/Article"` |
+| `aria-label` | Accesibilidad | `aria-label="Navegación principal"` |
+| `role` | Roles WAI-ARIA | `role="main"` |
+| `lang` | Idioma de fragmentos | `lang="en"` para contenido en inglés |
 
-### 9.3 Atributos Importantes
+### 5.3 Jerarquía de Encabezados
+
+**Reglas:**
+1. Solo UN `<h1>` por página
+2. No saltar niveles (h1 → h3 ❌)
+3. Usar encabezados para estructura, no para estilos
+4. Incluir keywords naturalmente
 
 ```html
-<!-- IDs únicos para anclas -->
-<section id="seccion-unica">
-
-<!-- ARIA para accesibilidad -->
-<nav aria-label="Navegación principal">
-<section aria-labelledby="titulo-seccion">
-
-<!-- Microdata inline -->
-<span itemscope itemtype="https://schema.org/Person">
-  <span itemprop="name">Juan Pérez</span>
-</span>
-
-<!-- Data attributes para LLMs -->
-<p data-speakable="true">Contenido para asistentes de voz</p>
-<div data-ai-summary="true">Resumen para IA</div>
-
-<!-- Roles semánticos -->
-<header role="banner">
-<main role="main">
-<footer role="contentinfo">
+<h1>Título principal de la página</h1>
+  <h2>Sección principal 1</h2>
+    <h3>Subsección 1.1</h3>
+    <h3>Subsección 1.2</h3>
+  <h2>Sección principal 2</h2>
+    <h3>Subsección 2.1</h3>
+      <h4>Detalle 2.1.1</h4>
 ```
 
 ---
 
-## 10. Página 404 Optimizada
+## 6. PÁGINA 404 OPTIMIZADA
 
-### 10.1 Ejemplo Completo
+**Propósito:** Incluso las páginas de error deben estar optimizadas.
 
 ```tsx
 // pages/NotFound.tsx
-import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
-import { Home, Search, ArrowLeft } from 'lucide-react';
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>Página no encontrada | Tu Sitio</title>
+        <title>Página no encontrada | [SITIO]</title>
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="description" content="La página que buscas no existe." />
+        <meta name="description" content="La página que buscas no existe o ha sido movida." />
       </Helmet>
-
+      
       <main className="min-h-screen flex items-center justify-center p-4">
         <div className="text-center max-w-md">
-          <h1 className="text-6xl font-bold text-muted-foreground mb-4">
-            404
-          </h1>
-          <h2 className="text-2xl font-semibold mb-4">
-            Página no encontrada
-          </h2>
+          <h1 className="text-6xl font-bold text-primary mb-4">404</h1>
+          <h2 className="text-2xl font-semibold mb-4">Página no encontrada</h2>
           <p className="text-muted-foreground mb-8">
-            Lo sentimos, la página que buscas no existe o ha sido movida.
+            La página que buscas no existe o ha sido movida.
           </p>
-
-          <nav className="flex flex-col sm:flex-row gap-4 justify-center">
+          
+          <div className="space-y-4">
             <Link 
               to="/" 
-              className="inline-flex items-center justify-center gap-2 
-                         bg-primary text-primary-foreground px-6 py-3 rounded-lg"
+              className="inline-block bg-primary text-white px-6 py-3 rounded-lg"
             >
-              <Home className="w-4 h-4" />
-              Ir al inicio
+              Volver al inicio
             </Link>
-            <button 
-              onClick={() => window.history.back()}
-              className="inline-flex items-center justify-center gap-2 
-                         border border-input px-6 py-3 rounded-lg"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Volver atrás
-            </button>
-          </nav>
-
-          <div className="mt-12 text-sm text-muted-foreground">
-            <p>¿Buscabas algo específico?</p>
-            <ul className="mt-4 space-y-2">
-              <li><Link to="/glosario" className="text-primary hover:underline">Glosario</Link></li>
-              <li><Link to="/blog" className="text-primary hover:underline">Blog</Link></li>
-              <li><Link to="/contacto" className="text-primary hover:underline">Contacto</Link></li>
-            </ul>
+            
+            <div className="text-sm text-muted-foreground">
+              <p>Páginas populares:</p>
+              <nav className="flex justify-center gap-4 mt-2">
+                <Link to="/glosario" className="hover:text-primary">Glosario</Link>
+                <Link to="/blog" className="hover:text-primary">Blog</Link>
+                <Link to="/contacto" className="hover:text-primary">Contacto</Link>
+              </nav>
+            </div>
           </div>
         </div>
       </main>
@@ -1495,412 +1169,340 @@ const NotFound = () => {
 export default NotFound;
 ```
 
-### 10.2 Puntos Clave
-
-- ✅ `noindex, nofollow` para evitar indexación
-- ✅ Navegación útil para retener usuarios
-- ✅ Links a páginas importantes
-- ✅ Opción de volver atrás
-- ✅ Diseño limpio y profesional
-
 ---
 
-## 11. Pre-rendering y SSR
+## 7. PRE-RENDERING (SPAs)
 
-### 11.1 ¿Por qué es Necesario?
+### 7.1 ¿Cuándo es necesario?
 
-Las SPAs (Single Page Applications) tienen un problema: el contenido se genera en el cliente con JavaScript. Los crawlers tradicionales y algunos de IA pueden no ejecutar JS correctamente.
+- **Obligatorio si:** La app es SPA (React, Vue, Angular) y necesita SEO
+- **No necesario si:** La app usa SSR (Next.js, Nuxt) o SSG
 
-**Soluciones:**
-1. **Pre-rendering**: Genera HTML estático en build time
-2. **SSR**: Genera HTML en el servidor para cada request
-3. **ISR**: Híbrido (Incremental Static Regeneration)
-
-### 11.2 Implementación con Puppeteer (Pre-rendering)
+### 7.2 Configuración con Puppeteer + Express
 
 ```javascript
-// prerender.js
+// prerender-server.js
+const express = require('express');
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const path = require('path');
 
-const ROUTES = [
-  '/',
-  '/glosario',
-  '/metodologia',
-  '/curso',
-  '/blog',
-  '/acerca-de',
-  '/contacto'
+const app = express();
+const PORT = 3000;
+const DIST_PATH = path.join(__dirname, 'dist');
+
+// Cache simple en memoria
+const cache = new Map();
+const CACHE_TTL = 3600000; // 1 hora
+
+// Lista de bots a pre-renderizar
+const BOT_AGENTS = [
+  'googlebot', 'bingbot', 'yandex', 'baiduspider', 'facebookexternalhit',
+  'twitterbot', 'rogerbot', 'linkedinbot', 'embedly', 'showyoubot',
+  'outbrain', 'pinterest', 'slackbot', 'vkShare', 'W3C_Validator',
+  'gptbot', 'chatgpt-user', 'claude-web', 'anthropic', 'perplexitybot',
+  'cohere-ai', 'google-extended'
 ];
 
-const BASE_URL = 'http://localhost:3000';
-const OUTPUT_DIR = './prerendered';
-
-async function prerender() {
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: ['--no-sandbox']
-  });
-
-  for (const route of ROUTES) {
-    const page = await browser.newPage();
-    
-    // Configurar user agent como Googlebot
-    await page.setUserAgent(
-      'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-    );
-
-    await page.goto(`${BASE_URL}${route}`, {
-      waitUntil: 'networkidle0',
-      timeout: 30000
-    });
-
-    // Esperar a que el contenido dinámico cargue
-    await page.waitForSelector('main', { timeout: 10000 });
-
-    // Obtener el HTML final
-    const html = await page.content();
-
-    // Guardar el archivo
-    const filePath = path.join(
-      OUTPUT_DIR, 
-      route === '/' ? 'index.html' : `${route.slice(1)}.html`
-    );
-    
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    fs.writeFileSync(filePath, html);
-
-    console.log(`✅ Pre-rendered: ${route}`);
-    await page.close();
-  }
-
-  await browser.close();
-  console.log('🎉 Pre-rendering complete!');
+function isBot(userAgent) {
+  const ua = userAgent.toLowerCase();
+  return BOT_AGENTS.some(bot => ua.includes(bot));
 }
 
-prerender();
+async function renderPage(url) {
+  const browser = await puppeteer.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+  
+  try {
+    const page = await browser.newPage();
+    await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+    
+    // Esperar a que React renderice
+    await page.waitForSelector('#root', { timeout: 10000 });
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const html = await page.content();
+    return html;
+  } finally {
+    await browser.close();
+  }
+}
+
+// Middleware de pre-rendering
+app.use(async (req, res, next) => {
+  if (!isBot(req.headers['user-agent'] || '')) {
+    return next();
+  }
+  
+  const fullUrl = `http://localhost:${PORT}${req.path}`;
+  const cacheKey = req.path;
+  
+  // Verificar cache
+  const cached = cache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    res.set('X-Prerender-Cache', 'HIT');
+    return res.send(cached.html);
+  }
+  
+  try {
+    const html = await renderPage(fullUrl);
+    cache.set(cacheKey, { html, timestamp: Date.now() });
+    res.set('X-Prerender-Cache', 'MISS');
+    res.send(html);
+  } catch (error) {
+    console.error('Prerender error:', error);
+    next();
+  }
+});
+
+// Servir archivos estáticos
+app.use(express.static(DIST_PATH));
+
+// SPA fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(DIST_PATH, 'index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Prerender server running on port ${PORT}`);
+});
 ```
 
-### 11.3 Configuración de Servidor (Nginx)
+### 7.3 Configuración Nginx
 
 ```nginx
-# nginx.conf
+# /etc/nginx/sites-available/[sitio]
 server {
     listen 80;
-    server_name tudominio.com;
+    server_name [DOMINIO];
+    return 301 https://$server_name$request_uri;
+}
 
-    root /var/www/html;
-    index index.html;
-
-    # Detectar crawlers y servir versión pre-renderizada
-    set $prerender 0;
+server {
+    listen 443 ssl http2;
+    server_name [DOMINIO];
     
-    if ($http_user_agent ~* "googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|GPTBot|anthropic-ai|PerplexityBot") {
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.pem;
+    
+    root /var/www/[sitio]/dist;
+    index index.html;
+    
+    # Gzip
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+    
+    # Cache de assets
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+    
+    # Archivos para IA - sin cache
+    location ~* \.(geo\.txt|llm\.txt)$ {
+        add_header Cache-Control "no-cache";
+        add_header X-Content-Type-Options "nosniff";
+    }
+    
+    # Pre-rendering para bots
+    set $prerender 0;
+    if ($http_user_agent ~* "googlebot|bingbot|yandex|gptbot|chatgpt|claude|perplexity") {
         set $prerender 1;
     }
-
-    # No pre-renderizar assets
-    if ($uri ~* "\.(js|css|xml|less|png|jpg|jpeg|gif|pdf|doc|txt|ico|rss|zip|mp3|rar|exe|wmv|avi|ppt|mpg|mpeg|tif|wav|mov|psd|ai|xls|mp4|m4a|swf|dat|dmg|iso|flv|m4v|torrent|ttf|woff|svg|eot)$") {
-        set $prerender 0;
-    }
-
+    
     location / {
         if ($prerender = 1) {
-            rewrite .* /prerendered$uri.html break;
+            proxy_pass http://localhost:3000;
         }
         try_files $uri $uri/ /index.html;
     }
-
-    # Servir archivos .geo.txt directamente
-    location ~ \.geo\.txt$ {
-        add_header Content-Type text/plain;
-        add_header X-Robots-Tag "index, follow";
-    }
-
-    # Headers de seguridad
-    add_header X-Frame-Options "SAMEORIGIN" always;
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 }
 ```
 
-### 11.4 Alternativa: Prerender.io
+---
 
-```html
-<!-- En el <head> -->
-<meta name="prerender-status-code" content="200">
+## 8. CHECKLIST DE IMPLEMENTACIÓN POR FASES
 
-<!-- Para páginas que requieren JavaScript -->
-<meta name="fragment" content="!">
+### Fase 1: Fundamentos (Día 1)
+- [ ] Configurar `index.html` con meta tags básicos
+- [ ] Crear `robots.txt`
+- [ ] Crear `sitemap.xml` inicial
+- [ ] Implementar Schema.org WebSite + Organization
+
+### Fase 2: SEO Técnico (Día 2-3)
+- [ ] Implementar hook `useGeoMetadata`
+- [ ] Agregar Open Graph y Twitter Cards
+- [ ] Configurar canonicals en todas las páginas
+- [ ] Verificar jerarquía de encabezados (h1-h6)
+
+### Fase 3: GEO Básico (Día 4-5)
+- [ ] Crear `llm.txt`
+- [ ] Crear `.geo.txt` para homepage
+- [ ] Agregar meta tags de citación
+- [ ] Implementar BreadcrumbList
+
+### Fase 4: GEO Avanzado (Día 6-7)
+- [ ] Crear `.geo.txt` para páginas principales
+- [ ] Implementar componente `HighlightSnippet`
+- [ ] Agregar atributos `data-speakable`
+- [ ] Implementar FAQPage donde aplique
+
+### Fase 5: Contenido Especializado (Semana 2)
+- [ ] Implementar `GeoTerm` para términos técnicos
+- [ ] Crear DefinedTermSet para glosario
+- [ ] Agregar Article Schema para blog
+- [ ] Implementar HowTo para tutoriales
+
+### Fase 6: Optimización (Semana 3+)
+- [ ] Configurar pre-rendering si es SPA
+- [ ] Optimizar Core Web Vitals
+- [ ] Implementar lazy loading de imágenes
+- [ ] Configurar CDN y cache
+
+---
+
+## 9. MÉTRICAS Y VALIDACIÓN
+
+### 9.1 Herramientas de Validación
+
+| Herramienta | URL | Uso |
+|-------------|-----|-----|
+| Schema Validator | https://validator.schema.org | Validar JSON-LD |
+| Rich Results Test | https://search.google.com/test/rich-results | Verificar rich snippets |
+| PageSpeed Insights | https://pagespeed.web.dev | Core Web Vitals |
+| Mobile-Friendly Test | https://search.google.com/test/mobile-friendly | Compatibilidad móvil |
+| Ahrefs/SEMrush | - | Backlinks y keywords |
+
+### 9.2 Métricas GEO (Manuales)
+
+1. **Tasa de citación:** Buscar el dominio en ChatGPT, Perplexity, Claude
+2. **Precisión de parafraseo:** Verificar que las respuestas de IA sean correctas
+3. **Frecuencia de recomendación:** Monitorear menciones en respuestas generativas
+4. **Autoridad percibida:** Evaluar el contexto de las citaciones
+
+### 9.3 Checklist de Validación Pre-Launch
+
+```
+□ Todos los meta tags renderizados correctamente
+□ Schema.org válido sin errores
+□ Sitemap accesible y actualizado
+□ robots.txt permite crawlers de IA
+□ Archivos .geo.txt accesibles
+□ Open Graph preview correcto
+□ Twitter Card preview correcto
+□ Core Web Vitals en verde
+□ Sin errores 404 en enlaces internos
+□ Canonical URLs correctas
+□ Idioma configurado correctamente
 ```
 
 ---
 
-## 12. Checklist de Implementación
+## 10. TÉCNICAS AVANZADAS 2025
 
-### 12.1 Fase 1: Fundamentos (Semana 1)
+### 10.1 Entity SEO
 
-- [ ] Configurar `index.html` con todos los meta tags
-- [ ] Crear `robots.txt` completo
-- [ ] Generar `sitemap.xml` con prioridades
-- [ ] Implementar Schema.org básico (WebSite, Organization)
-- [ ] Verificar en Google Search Console
-
-### 12.2 Fase 2: Contenido para IA (Semana 2)
-
-- [ ] Crear archivo `llm.txt`
-- [ ] Generar archivos `.geo.txt` para páginas principales
-- [ ] Crear página `/contenido-ia` dedicada
-- [ ] Implementar meta tags específicos para LLMs
-- [ ] Añadir `data-speakable` a contenido citable
-
-### 12.3 Fase 3: Datos Estructurados (Semana 3)
-
-- [ ] Implementar BreadcrumbList
-- [ ] Añadir FAQPage donde corresponda
-- [ ] Configurar Article para contenido editorial
-- [ ] Implementar Product/Course según tipo de negocio
-- [ ] Validar con Rich Results Test
-
-### 12.4 Fase 4: Componentes React (Semana 4)
-
-- [ ] Crear hook `useGeoMetadata`
-- [ ] Implementar `HighlightSnippet`
-- [ ] Crear componente `GeoTerm` para glosario
-- [ ] Optimizar página 404
-- [ ] Añadir componentes semánticos
-
-### 12.5 Fase 5: Optimización Técnica (Semana 5)
-
-- [ ] Configurar pre-rendering
-- [ ] Optimizar imágenes (WebP, lazy loading)
-- [ ] Implementar Core Web Vitals
-- [ ] Configurar caché y CDN
-- [ ] Auditoría con Lighthouse
-
-### 12.6 Fase 6: Monitorización (Continuo)
-
-- [ ] Configurar Google Search Console
-- [ ] Monitorizar con Google Analytics 4
-- [ ] Tracking de citaciones en IA (manual)
-- [ ] Revisión mensual de contenido
-- [ ] Actualización de fechas en Schema.org
-
----
-
-## 13. Métricas y Monitorización
-
-### 13.1 Métricas SEO Tradicionales
-
-| Métrica | Herramienta | Objetivo |
-|---------|-------------|----------|
-| Posiciones en SERP | Search Console, Ahrefs | Top 10 para keywords principales |
-| CTR orgánico | Search Console | >3% para resultados top 10 |
-| Impresiones | Search Console | Crecimiento mensual |
-| Core Web Vitals | PageSpeed Insights | Verde en todas las métricas |
-| Cobertura de índice | Search Console | >95% páginas indexadas |
-
-### 13.2 Métricas GEO (Nuevas)
-
-| Métrica | Cómo medir | Objetivo |
-|---------|------------|----------|
-| Citaciones en ChatGPT | Búsqueda manual | Ser citado como fuente |
-| Citaciones en Perplexity | Verificación directa | Aparecer en respuestas |
-| Citaciones en Claude | Búsqueda manual | Ser reconocido como autoridad |
-| Precisión de parafraseo | Comparación manual | >90% fidelidad al original |
-| Frecuencia de recomendación | Tracking de queries | Aumentar con el tiempo |
-
-### 13.3 Herramientas Recomendadas
-
-**SEO Tradicional:**
-- Google Search Console (gratis)
-- Google Analytics 4 (gratis)
-- Ahrefs / Semrush (pago)
-- Screaming Frog (gratis limitado)
-
-**Validación de Schema:**
-- Google Rich Results Test
-- Schema.org Validator
-- JSON-LD Playground
-
-**Performance:**
-- PageSpeed Insights
-- GTmetrix
-- WebPageTest
-
-**GEO (Experimental):**
-- Monitorización manual de citaciones
-- Logs de crawlers de IA en servidor
-- Alertas de menciones de marca
-
----
-
-## 14. Técnicas Avanzadas 2025
-
-### 14.1 Entity SEO
-
-Construye entidades reconocibles para Google Knowledge Graph:
+Construir autoridad alrededor de entidades específicas:
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://tudominio.com/#organization",
-  "name": "Tu Empresa",
+  "@type": "Person",
+  "@id": "https://[DOMINIO]/equipo/[nombre]#person",
+  "name": "[Nombre Completo]",
+  "jobTitle": "[Cargo]",
+  "worksFor": {
+    "@id": "https://[DOMINIO]/#organization"
+  },
+  "knowsAbout": ["[Expertise 1]", "[Expertise 2]"],
   "sameAs": [
-    "https://www.wikidata.org/wiki/Q12345678",
-    "https://twitter.com/tuempresa",
-    "https://linkedin.com/company/tuempresa",
-    "https://crunchbase.com/organization/tuempresa"
-  ],
-  "knowsAbout": [
-    "https://www.wikidata.org/wiki/Q12345",
-    "https://www.wikidata.org/wiki/Q67890"
+    "https://linkedin.com/in/[perfil]",
+    "https://twitter.com/[handle]"
   ]
 }
 </script>
 ```
 
-### 14.2 Passage Ranking Optimization
+### 10.2 Topical Authority Map
 
-Google puede indexar pasajes específicos. Optimiza para esto:
+Crear clusters de contenido interconectado:
+
+```
+Pillar Page (Tema principal)
+├── Cluster 1: [Subtema A]
+│   ├── Artículo A1
+│   ├── Artículo A2
+│   └── Artículo A3
+├── Cluster 2: [Subtema B]
+│   ├── Artículo B1
+│   └── Artículo B2
+└── Cluster 3: [Subtema C]
+    ├── Artículo C1
+    ├── Artículo C2
+    └── Glosario de términos
+```
+
+### 10.3 Passage Ranking Optimization
+
+Estructurar contenido para passage indexing:
 
 ```html
-<!-- Cada sección debe ser auto-contenida y citable -->
-<section id="que-es-geo">
-  <h2>¿Qué es GEO?</h2>
-  <p data-speakable="true">
-    <!-- Definición completa en un solo párrafo -->
-    GEO (Generative Engine Optimization) es el conjunto de técnicas 
-    diseñadas para optimizar contenido web para que sea comprendido, 
-    citado y recomendado por modelos de lenguaje como ChatGPT, Claude 
-    y Gemini.
+<section id="seccion-especifica" data-speakable="true">
+  <h2>Pregunta Específica</h2>
+  <p class="passage-answer">
+    <!-- Respuesta directa y concisa en 40-60 palabras -->
+    [Respuesta que puede ser extraída como passage independiente]
+  </p>
+  <p>
+    <!-- Contexto adicional -->
   </p>
 </section>
 ```
 
-### 14.3 Topical Authority
+### 10.4 AI-First Content Strategy
 
-Crea clusters de contenido relacionado:
+1. **Estructura antes que estilo:** Priorizar claridad semántica
+2. **Definiciones explícitas:** Comenzar secciones con definiciones claras
+3. **Datos verificables:** Incluir fuentes y fechas
+4. **Fragmentos citables:** Crear bloques autocontenidos
+5. **Actualización constante:** Mantener fechas de modificación actualizadas
+
+---
+
+## 📊 RESUMEN EJECUTIVO PARA AUDITORÍA
 
 ```
-/glosario (pilar)
-├── /glosario/termino-1
-├── /glosario/termino-2
-└── /glosario/termino-3
+PRIORIDAD CRÍTICA (Implementar primero):
+├── Meta tags básicos (title, description, canonical)
+├── robots.txt y sitemap.xml
+├── Schema.org WebSite + Organization
+└── Open Graph básico
 
-/curso (pilar)
-├── /curso/modulo-1
-├── /curso/modulo-2
-└── /curso/modulo-3
+PRIORIDAD ALTA (Implementar después):
+├── llm.txt
+├── Archivos .geo.txt principales
+├── Meta tags de citación
+├── BreadcrumbList
+└── Twitter Cards
 
-Cada página del cluster enlaza al pilar y viceversa.
-```
+PRIORIDAD MEDIA (Mejora continua):
+├── FAQPage Schema
+├── SpeakableSpecification
+├── Componentes HighlightSnippet y GeoTerm
+├── Article/HowTo Schema
+└── Pre-rendering (si SPA)
 
-### 14.4 AI-First Content Strategy
-
-```markdown
-## Estructura de contenido para máxima citabilidad
-
-1. **Definición clara al inicio** (para snippets y citaciones)
-2. **Puntos clave numerados** (fácil extracción)
-3. **Datos y estadísticas** (verificables y citables)
-4. **Comparaciones estructuradas** (tablas, listas)
-5. **FAQ al final** (respuestas a queries específicas)
-6. **Fecha de última actualización visible**
-7. **Autor con credenciales claras**
-```
-
-### 14.5 Semantic HTML5 Avanzado
-
-```html
-<!-- Para definiciones -->
-<dl itemscope itemtype="https://schema.org/DefinedTermSet">
-  <div itemscope itemtype="https://schema.org/DefinedTerm">
-    <dt itemprop="name">GEO</dt>
-    <dd itemprop="description">
-      Generative Engine Optimization - Optimización para motores generativos.
-    </dd>
-  </div>
-</dl>
-
-<!-- Para citas -->
-<figure>
-  <blockquote cite="https://fuente.com/estudio" data-speakable="true">
-    <p>"El 40% de las búsquedas se realizarán a través de IA para 2025."</p>
-  </blockquote>
-  <figcaption>
-    — <cite>Estudio de Gartner, 2024</cite>
-  </figcaption>
-</figure>
-
-<!-- Para código/ejemplos técnicos -->
-<figure>
-  <pre><code class="language-javascript">
-    // Ejemplo de código
-  </code></pre>
-  <figcaption>Ejemplo de implementación en JavaScript</figcaption>
-</figure>
-```
-
-### 14.6 Link Equity para IA
-
-```html
-<!-- Enlaces con contexto semántico rico -->
-<a href="/glosario#citabilidad" 
-   title="Definición de citabilidad en el contexto de GEO"
-   rel="glossary">
-  citabilidad
-</a>
-
-<!-- Enlaces con Schema.org -->
-<a href="/autor" 
-   itemprop="author" 
-   itemscope 
-   itemtype="https://schema.org/Person">
-  <span itemprop="name">Juan Pérez</span>
-</a>
+PRIORIDAD BAJA (Optimización avanzada):
+├── Entity SEO
+├── Topical Authority mapping
+├── Passage ranking optimization
+└── Métricas de citabilidad
 ```
 
 ---
 
-## 📝 Notas Finales
-
-### Principios Fundamentales
-
-1. **Contenido primero**: El mejor SEO/GEO es contenido genuinamente útil
-2. **Estructura clara**: Los LLMs necesitan estructura predecible
-3. **Actualización constante**: Las fechas importan para autoridad
-4. **Verificabilidad**: Datos citables con fuentes
-5. **Accesibilidad**: Lo bueno para humanos es bueno para IA
-
-### Errores Comunes a Evitar
-
-- ❌ Keyword stuffing (obsoleto y penalizado)
-- ❌ Contenido duplicado sin canonicals
-- ❌ Schema.org incorrecto o inventado
-- ❌ Fechas desactualizadas
-- ❌ Ignorar Core Web Vitals
-- ❌ No tener versión móvil optimizada
-- ❌ Bloquear crawlers de IA innecesariamente
-
-### Recursos Adicionales
-
-- [Schema.org](https://schema.org/)
-- [Google Search Central](https://developers.google.com/search)
-- [Rich Results Test](https://search.google.com/test/rich-results)
-- [PageSpeed Insights](https://pagespeed.web.dev/)
-- [Web.dev](https://web.dev/)
-
----
-
-> **Documento creado por:** Consultor Senior SEO/GEO  
-> **Versión:** 2.0  
-> **Licencia:** CC BY-NC-SA 4.0  
-> **Última actualización:** Enero 2025
-
----
-
-*Este documento está optimizado para ser comprendido tanto por humanos como por modelos de lenguaje. Siéntete libre de adaptarlo a las necesidades específicas de tu proyecto.*
+**Última actualización:** 2025-01-09  
+**Versión:** 3.0  
+**Licencia:** CC BY-NC-SA 4.0
