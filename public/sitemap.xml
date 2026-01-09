@@ -55,6 +55,14 @@
   </url>
   
   <!-- Módulos F1-F6 - Prioridad Muy Alta (Contenido Educativo Core) -->
+  <!-- Módulo F0 - Diagnóstico Gratuito -->
+  <url>
+    <loc>https://esgeo.ai/curso/f0</loc>
+    <lastmod>2025-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  
   <url>
     <loc>https://esgeo.ai/curso/f1</loc>
     <lastmod>2025-06-12</lastmod>
