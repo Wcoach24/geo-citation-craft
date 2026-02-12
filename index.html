@@ -73,291 +73,101 @@
     <!-- Speakable content indicators -->
     <meta name="speakable-selector" content=".snippet-block, [data-speakable='true'], .geo-card, .hidden-content" />
 
-    <!-- Structured Data - Website -->
+    <!-- Structured Data - Consolidated (single @graph block) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "esGEO",
-      "alternateName": "Generative Engine Optimization España",
-      "url": "https://esgeo.ai",
-      "description": "La primera plataforma en español centrada en enseñar cómo estructurar y redactar webs para que los modelos de lenguaje como ChatGPT, Perplexity o Claude las comprendan, recomienden y citen.",
-      "inLanguage": "es-ES",
-      "datePublished": "2025-01-01",
-      "dateModified": "2025-06-12",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://esgeo.ai#organization"
-      },
-      "mainEntity": {
-        "@type": "EducationalOrganization",
-        "@id": "https://esgeo.ai#educational-org",
-        "name": "esGEO Academy",
-        "description": "Academia especializada en Generative Engine Optimization"
-      }
-    }
-    </script>
-
-    <!-- Structured Data - Organization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://esgeo.ai#organization",
-      "name": "esGEO",
-      "url": "https://esgeo.ai",
-      "logo": "https://esgeo.ai/logo.png",
-      "image": "https://esgeo.ai/images/esgeo-banner.png",
-      "description": "Plataforma líder en Generative Engine Optimization en español. Enseñamos a crear contenido web que sea comprensible, útil y citado por modelos de lenguaje generativo como ChatGPT, Perplexity, Claude y Gemini.",
-      "foundingDate": "2025-01-01",
-      "slogan": "Optimiza para ser citado por la IA",
-      "knowsAbout": [
-        "Generative Engine Optimization",
-        "Optimización para IA",
-        "Marketing Digital",
-        "SEO Técnico",
-        "Datos Estructurados",
-        "Citabilidad por LLMs",
-        "ChatGPT",
-        "Perplexity",
-        "Claude",
-        "Gemini",
-        "Modelos de Lenguaje",
-        "Inteligencia Artificial"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "email": "hola@esgeo.ai",
-        "url": "https://esgeo.ai/contacto"
-      },
-      "areaServed": [
+      "@graph": [
         {
-          "@type": "Country", 
-          "name": "España"
+          "@type": "WebSite",
+          "@id": "https://esgeo.ai#website",
+          "name": "esGEO",
+          "alternateName": "Generative Engine Optimization España",
+          "url": "https://esgeo.ai",
+          "description": "La primera plataforma en español centrada en enseñar cómo estructurar y redactar webs para que los modelos de lenguaje como ChatGPT, Perplexity o Claude las comprendan, recomienden y citen.",
+          "inLanguage": "es-ES",
+          "datePublished": "2025-01-01",
+          "dateModified": "2025-06-12",
+          "publisher": { "@id": "https://esgeo.ai#organization" }
         },
         {
-          "@type": "Country",
-          "name": "México"
+          "@type": ["Organization", "EducationalOrganization"],
+          "@id": "https://esgeo.ai#organization",
+          "name": "esGEO",
+          "url": "https://esgeo.ai",
+          "logo": "https://esgeo.ai/logo.png",
+          "description": "Plataforma líder en Generative Engine Optimization en español.",
+          "foundingDate": "2025-01-01",
+          "slogan": "Optimiza para ser citado por la IA",
+          "knowsAbout": ["Generative Engine Optimization", "Optimización para IA", "SEO Técnico", "Datos Estructurados", "Citabilidad por LLMs"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "hola@esgeo.ai"
+          },
+          "sameAs": ["https://twitter.com/esgeo_ai", "https://linkedin.com/company/esgeo"]
         },
         {
-          "@type": "Country",
-          "name": "Argentina"
-        }
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Cursos y Servicios GEO",
-        "itemListElement": [
-          {
-            "@type": "Course",
-            "name": "Framework F1-F6 de GEO",
-            "description": "Metodología completa de Generative Engine Optimization en 6 módulos progresivos para optimizar contenido web y ser citado por modelos de lenguaje como ChatGPT, Perplexity y Claude.",
-            "url": "https://esgeo.ai/curso",
-            "provider": {
-              "@type": "EducationalOrganization",
-              "@id": "https://esgeo.ai#educational-org",
-              "name": "esGEO Academy",
-              "url": "https://esgeo.ai"
+          "@type": "Course",
+          "@id": "https://esgeo.ai#course",
+          "name": "Framework F1-F6 de GEO",
+          "description": "Metodología completa de Generative Engine Optimization en 6 módulos progresivos.",
+          "url": "https://esgeo.ai/curso",
+          "provider": { "@id": "https://esgeo.ai#organization" },
+          "courseCode": "GEO-F1F6",
+          "educationalLevel": "Intermedio",
+          "inLanguage": "es-ES",
+          "timeRequired": "PT20H",
+          "offers": {
+            "@type": "Offer",
+            "price": "50",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://esgeo.ai/checkout"
+          },
+          "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "online",
+            "location": { "@type": "VirtualLocation", "url": "https://esgeo.ai/curso" }
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://esgeo.ai" },
+            { "@type": "ListItem", "position": 2, "name": "Curso GEO", "item": "https://esgeo.ai/curso" },
+            { "@type": "ListItem", "position": 3, "name": "Metodología", "item": "https://esgeo.ai/metodologia" },
+            { "@type": "ListItem", "position": 4, "name": "Glosario", "item": "https://esgeo.ai/glosario" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es GEO (Generative Engine Optimization)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "GEO es la optimización para motores generativos, una metodología que enseña a estructurar y redactar contenido web para que los modelos de lenguaje como ChatGPT, Perplexity o Claude lo comprendan, valoren y citen como fuente autorizada."
+              }
             },
-            "courseCode": "GEO-F1F6",
-            "educationalLevel": "Intermedio",
-            "timeRequired": "PT20H",
-            "inLanguage": "es-ES",
-            "courseWorkload": "PT20H",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "EUR",
-              "availability": "https://schema.org/InStock",
-              "url": "https://esgeo.ai/curso",
-              "category": "Educación"
+            {
+              "@type": "Question",
+              "name": "¿En qué se diferencia GEO del SEO tradicional?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mientras el SEO busca posicionarse en motores de búsqueda como Google, GEO busca ser citado por modelos de IA. GEO se enfoca en fragmentación, claridad semántica y autoridad generativa en lugar de keywords y backlinks."
+              }
             },
-            "hasCourseInstance": {
-              "@type": "CourseInstance",
-              "courseMode": "online",
-              "startDate": "2025-01-01",
-              "location": {
-                "@type": "VirtualLocation",
-                "url": "https://esgeo.ai/curso"
-              },
-              "instructor": {
-                "@type": "Organization",
-                "@id": "https://esgeo.ai#organization"
+            {
+              "@type": "Question",
+              "name": "¿Qué incluye la metodología F1-F6 de esGEO?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La metodología F1-F6 incluye: F1 (Fundamentos), F2 (Jerarquía Semántica), F3 (Autoridad Generativa), F4 (Datos Estructurados), F5 (Optimización Técnica) y F6 (Medición y Análisis)."
               }
             }
-          },
-          {
-            "@type": "Service",
-            "name": "Coach GEO",
-            "description": "Asistente IA especializado en optimización para modelos generativos",
-            "url": "https://esgeo.ai/coach",
-            "serviceType": "Consultoría de IA"
-          },
-          {
-            "@type": "Course",
-            "name": "Glosario GEO",
-            "description": "Definiciones autoritativas de términos de Generative Engine Optimization y metodología para optimización de contenido web para IA.",
-            "url": "https://esgeo.ai/glosario",
-            "provider": {
-              "@type": "EducationalOrganization",
-              "@id": "https://esgeo.ai#educational-org",
-              "name": "esGEO Academy",
-              "url": "https://esgeo.ai"
-            },
-            "courseWorkload": "PT2H",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "EUR",
-              "availability": "https://schema.org/InStock",
-              "url": "https://esgeo.ai/glosario"
-            },
-            "hasCourseInstance": {
-              "@type": "CourseInstance",
-              "courseMode": "online",
-              "startDate": "2025-01-01",
-              "location": {
-                "@type": "VirtualLocation",
-                "url": "https://esgeo.ai/glosario"
-              }
-            }
-          }
-        ]
-      },
-      "sameAs": [
-        "https://twitter.com/esgeo_ai",
-        "https://linkedin.com/company/esgeo",
-        "https://github.com/esgeo"
-      ]
-    }
-    </script>
-
-    <!-- Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Inicio",
-          "item": "https://esgeo.ai"
-        },
-        {
-          "@type": "ListItem", 
-          "position": 2,
-          "name": "¿Qué es GEO?",
-          "item": "https://esgeo.ai#que-es-geo"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3, 
-          "name": "Metodología",
-          "item": "https://esgeo.ai#metodologia"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "Coach GEO",
-          "item": "https://esgeo.ai#coach"
-        }
-      ]
-    }
-    </script>
-
-    <!-- Structured Data - EducationalOrganization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "@id": "https://esgeo.ai#educational-org", 
-      "name": "esGEO Academy",
-      "description": "Academia especializada en Generative Engine Optimization y optimización para modelos de lenguaje",
-      "url": "https://esgeo.ai",
-      "foundingDate": "2025-01-01",
-      "sameAs": [
-        "https://twitter.com/esgeo_ai",
-        "https://linkedin.com/company/esgeo"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Cursos GEO",
-        "itemListElement": [
-          {
-            "@type": "Course",
-            "name": "Framework F1-F6",
-            "description": "Metodología completa de GEO en 6 módulos para optimizar contenido web y ser citado por modelos de lenguaje generativo.",
-            "url": "https://esgeo.ai/curso",
-            "provider": {
-              "@type": "EducationalOrganization",
-              "@id": "https://esgeo.ai#educational-org"
-            },
-            "courseWorkload": "PT19H",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "EUR",
-              "availability": "https://schema.org/InStock",
-              "url": "https://esgeo.ai/curso"
-            },
-            "hasCourseInstance": {
-              "@type": "CourseInstance",
-              "courseMode": "online",
-              "startDate": "2025-01-01",
-              "location": {
-                "@type": "VirtualLocation",
-                "url": "https://esgeo.ai/curso"
-              }
-            }
-          },
-          {
-            "@type": "Service",
-            "name": "Coach GEO",
-            "description": "Asistente IA especializado en optimización",
-            "url": "https://esgeo.ai/coach"
-          }
-        ]
-      },
-      "alumni": [
-        {
-          "@type": "Person",
-          "name": "Profesionales GEO certificados"
-        }
-      ]
-    }
-    </script>
-
-    <!-- Structured Data - FAQPage for common GEO questions -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Qué es GEO (Generative Engine Optimization)?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "GEO es la optimización para motores generativos, una metodología que enseña a estructurar y redactar contenido web para que los modelos de lenguaje como ChatGPT, Perplexity o Claude lo comprendan, valoren y citen como fuente autorizada."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿En qué se diferencia GEO del SEO tradicional?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mientras el SEO busca posicionarse en motores de búsqueda como Google, GEO busca ser citado por modelos de IA. GEO se enfoca en fragmentación, claridad semántica y autoridad generativa en lugar de keywords y backlinks."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué incluye la metodología F1-F6 de esGEO?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La metodología F1-F6 incluye: F1 (Fundamentos), F2 (Jerarquía Semántica), F3 (Autoridad Generativa), F4 (Datos Estructurados), F5 (Optimización Técnica) y F6 (Medición y Análisis)."
-          }
+          ]
         }
       ]
     }
