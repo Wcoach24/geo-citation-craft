@@ -470,7 +470,7 @@ const MetodologiaGeoPage = () => {
                   <TableRow>
                     <TableCell className="font-medium">Herramientas</TableCell>
                     <TableCell>Google Search Console, Ahrefs, SEMrush</TableCell>
-                    <TableCell>Coach GEO, validadores IA, analizadores de citabilidad</TableCell>
+                    <TableCell>Validadores IA, analizadores de citabilidad, Schema Validator</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium">Datos estructurados</TableCell>
@@ -578,13 +578,13 @@ const MetodologiaGeoPage = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <BookOpen className="h-5 w-5 text-accent" />
-                    Coach GEO
+                    Curso GEO
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    Descubre cómo nuestro asistente IA especializado puede ayudarte 
-                    a implementar todas las técnicas GEO en tu web.
+                    Aprende paso a paso a implementar todas las técnicas GEO 
+                    en tu web con nuestro curso completo F1-F6.
                   </p>
                 </CardContent>
                 <CardFooter>

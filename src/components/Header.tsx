@@ -39,13 +39,19 @@ const Header = () => {
                 <Link to="/curso">Curso Completo</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/curso/f1">Módulo F1 - Fundamentos</Link>
+                <Link to="/curso/f1">F1 - Fundamentos</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/curso/f2">Módulo F2 - Jerarquía</Link>
+                <Link to="/curso/f2">F2 - Contexto Semántico</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/curso/f3">Módulo F3 - Autoridad</Link>
+                <Link to="/curso/f3">F3 - Autoridad Generativa</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/curso/f4">F4 - Validación Conversacional</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/curso/f5">F5 - Mantenimiento Evolutivo</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

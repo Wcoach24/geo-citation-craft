@@ -1,13 +1,13 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, Zap, Crown, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { MODULES, COMPLETE_COURSE } from "@/data/modules";
 
 const PricingSection = () => {
-const modules = [
+  const modules = [
     {
       name: "F0 Diagnóstico",
       price: "0",
@@ -26,7 +26,7 @@ const modules = [
     },
     {
       name: "Módulos Individuales",
-      price: "10",
+      price: String(MODULES.f1.price),
       description: "Cada módulo F1-F6 por separado",
       icon: Zap,
       features: [
@@ -42,20 +42,14 @@ const modules = [
       link: "/checkout?type=module"
     },
     {
-      name: "Curso Completo F1-F6",
-      price: "50",
-      originalPrice: "60",
+      name: COMPLETE_COURSE.name,
+      price: String(COMPLETE_COURSE.price),
+      originalPrice: String(COMPLETE_COURSE.originalPrice),
       description: "Framework completo de optimización GEO",
       icon: Crown,
-      features: [
-        "F1: Accesibilidad generativa básica",
-        "F2: Estructura semántica avanzada",
-        "F3: Contenido citable y autoritativo",
-        "F4: Validación conversacional", 
-        "F5: Mantenimiento generativo",
-        "F6: Optimización técnica avanzada",
-        "Ahorro de €10 vs módulos individuales"
-      ],
+      features: COMPLETE_COURSE.features.concat([
+        `Ahorro de €${COMPLETE_COURSE.originalPrice - COMPLETE_COURSE.price} vs módulos individuales`
+      ]),
       cta: "Comprar Curso Completo",
       ctaVariant: "default" as const,
       popular: false,

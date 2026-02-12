@@ -254,11 +254,6 @@ const ModuloF6Page = () => {
                   Ver casos reales
                 </Link>
               </Button>
-              <Button variant="outline" asChild>
-                <Link to="/casos">
-                  Ver casos reales
-                </Link>
-              </Button>
             </div>
           </div>
 
@@ -331,12 +326,6 @@ const ModuloF6Page = () => {
                 "Dashboard de visibilidad"
               ],
               "duration": "PT5H",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "89",
-                "bestRating": "5"
-              },
               "isPartOf": {
                 "@type": "Course",
                 "name": "Curso GEO Completo",

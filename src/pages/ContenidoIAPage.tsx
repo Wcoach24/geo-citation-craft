@@ -193,7 +193,7 @@ const ContenidoIAPage = () => {
                 <a href="/metodologia">Metodología</a>
               </Button>
               <Button asChild variant="outline">
-                <a href="/coach">Coach GEO</a>
+                <a href="/glosario">Glosario GEO</a>
               </Button>
               <Button asChild variant="outline">
                 <a href="mailto:hola@esgeo.ai">Contactar</a>

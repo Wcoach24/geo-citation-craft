@@ -9,6 +9,8 @@ import { Download, FileText, CheckCircle, Clock, Trophy, Loader2, ArrowRight } f
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { MODULES, COMPLETE_COURSE, AVAILABLE_MODULE_IDS, SUPPORT_EMAIL } from '@/data/modules';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 interface PremiumContent {
   moduleId: string;
@@ -180,6 +182,7 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8 flex justify-between items-start">
@@ -354,6 +357,7 @@ const DashboardPage = () => {
           </Card>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

@@ -73,7 +73,7 @@ export default function PurchaseSuccessPage() {
             <CardContent className="space-y-6">
               <div className="bg-muted rounded-lg p-4 text-center">
                 <p className="text-sm text-muted-foreground mb-2">
-                  Recibirás un email con el enlace de acceso a tu contenido premium.
+                  Si compraste como invitado, recibirás un email con el enlace de acceso (revisa también la carpeta de spam).
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Si ya tienes cuenta, tu contenido estará disponible en el Dashboard.

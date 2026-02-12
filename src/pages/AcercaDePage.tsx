@@ -203,13 +203,13 @@ const AcercaDePage = () => {
               </Card>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl">Herramientas Prácticas</CardTitle>
+                  <CardTitle className="text-xl">Soporte Especializado</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  <p>Desarrollamos Coach GEO, una herramienta de IA que guía la implementación práctica 
+                  <p>Ofrecemos soporte directo por email para guiar la implementación práctica 
                   de técnicas GEO adaptadas a cada proyecto específico.</p>
                   <p className="mt-2 text-sm">
-                    <strong>Disponibilidad:</strong> 24/7 • <strong>Idioma:</strong> Español nativo
+                    <strong>Contacto:</strong> hola@esgeo.ai • <strong>Idioma:</strong> Español nativo
                   </p>
                 </CardContent>
               </Card>
