@@ -63,10 +63,7 @@ export const useGeoMetadata = ({
         <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         
-        {/* LLM-specific crawling directives */}
-        <meta name="ai-crawl" content="allow" />
-        <meta name="llm-index" content="true" />
-        <meta name="generative-crawl" content="encouraged" />
+        {/* Standard crawling directives - non-standard tags removed */}
         
         {/* Citation-friendly meta tags */}
         <meta name="citation_title" content={citationTitle || title} />

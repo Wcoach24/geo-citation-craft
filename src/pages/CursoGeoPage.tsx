@@ -136,7 +136,7 @@ const CursoGeoPage = () => {
     {
       id: "faq-certificacion",
       question: "¿Hay certificación al completar el curso?",
-      answer: "Actualmente no ofrecemos certificación formal, pero cada módulo incluye ejercicios prácticos y el Coach GEO genera informes personalizados que validan tu progreso y aplicación de los conceptos."
+      answer: "Actualmente no ofrecemos certificación formal, pero cada módulo incluye ejercicios prácticos que validan tu progreso y aplicación de los conceptos."
     },
     {
       id: "faq-aplicacion-practica",
@@ -146,7 +146,7 @@ const CursoGeoPage = () => {
     {
       id: "faq-soporte",
       question: "¿Hay soporte o comunidad para resolver dudas?",
-      answer: "Sí, ofrecemos soporte a través del Coach GEO (IA especializada) y email directo. También estamos desarrollando una comunidad de usuarios para compartir experiencias y mejores prácticas."
+      answer: "Sí, ofrecemos soporte por email directo en hola@esgeo.ai. También estamos desarrollando una comunidad de usuarios para compartir experiencias y mejores prácticas."
     }
   ];
 

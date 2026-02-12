@@ -12,18 +12,30 @@ serve(async (req) => {
   }
 
   try {
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
-      { auth: { persistSession: false } }
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      { global: { headers: { Authorization: authHeader } } }
     );
 
-    const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header");
-
     const token = authHeader.replace("Bearer ", "");
-    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError || !userData.user) throw new Error("User not authenticated");
+    const { data: claimsData, error: claimsError } = await supabaseClient.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims) {
+      return new Response(JSON.stringify({ error: "User not authenticated" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const userId = claimsData.claims.sub;
 
     const { filePath } = await req.json();
     if (!filePath) throw new Error("File path is required");
@@ -31,11 +43,11 @@ serve(async (req) => {
     // Extract module ID from file path (e.g., "f1/guide.pdf" -> "f1")
     const moduleId = filePath.split('/')[0];
 
-    // Check if user has access to this module
+    // Check if user has access to this module (RLS scoped by user)
     const { data: accessData, error: accessError } = await supabaseClient
       .from('user_access')
       .select('*')
-      .eq('user_id', userData.user.id)
+      .eq('user_id', userId)
       .eq('module_id', moduleId)
       .single();
 
@@ -43,8 +55,14 @@ serve(async (req) => {
       throw new Error("User does not have access to this content");
     }
 
-    // Generate signed URL (valid for 1 hour)
-    const { data: signedUrlData, error: urlError } = await supabaseClient.storage
+    // Generate signed URL using service role client (valid for 1 hour)
+    const serviceClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    );
+
+    const { data: signedUrlData, error: urlError } = await serviceClient.storage
       .from('premium-content')
       .createSignedUrl(filePath, 3600);
 
@@ -54,7 +72,7 @@ serve(async (req) => {
     await supabaseClient
       .from('content_downloads')
       .insert({
-        user_id: userData.user.id,
+        user_id: userId,
         module_id: moduleId,
         file_name: filePath.split('/').pop(),
         file_path: filePath

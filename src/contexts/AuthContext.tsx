@@ -84,12 +84,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  // Refrescar acceso cuando cambia el usuario
-  useEffect(() => {
-    if (user) {
-      refreshUserAccess();
-    }
-  }, [user]);
+  // Note: refreshUserAccess is already called via onAuthStateChange above.
+  // Removed duplicate useEffect that also called refreshUserAccess on user change.
 
   const signUp = async (email: string, password: string, displayName?: string) => {
     const redirectUrl = `${window.location.origin}/`;
