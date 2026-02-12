@@ -6,43 +6,51 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import React, { Suspense } from "react";
 import Index from "./pages/Index";
-import CursoGeoPage from "./pages/CursoGeoPage";
 
-import MetodologiaGeoPage from "./pages/MetodologiaGeoPage";
-import CasosRealesPage from "./pages/CasosRealesPage";
-import GlosarioPage from "./pages/GlosarioPage";
-import RadarIAPage from "./pages/RadarIAPage";
-import AcercaDePage from "./pages/AcercaDePage";
-import EquipoPage from "./pages/EquipoPage";
-import PrivacidadPage from "./pages/PrivacidadPage";
-import TerminosPage from "./pages/TerminosPage";
-import ContenidoIAPage from "./pages/ContenidoIAPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import DashboardPage from "./pages/DashboardPage";
-import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
-import GuestAccessPage from "./pages/GuestAccessPage";
-import AuthPage from "./pages/AuthPage";
-import NotFound from "./pages/NotFound";
+// Lazy-loaded pages
+const CursoGeoPage = React.lazy(() => import("./pages/CursoGeoPage"));
+const MetodologiaGeoPage = React.lazy(() => import("./pages/MetodologiaGeoPage"));
+const CasosRealesPage = React.lazy(() => import("./pages/CasosRealesPage"));
+const GlosarioPage = React.lazy(() => import("./pages/GlosarioPage"));
+const RadarIAPage = React.lazy(() => import("./pages/RadarIAPage"));
+const AcercaDePage = React.lazy(() => import("./pages/AcercaDePage"));
+const EquipoPage = React.lazy(() => import("./pages/EquipoPage"));
+const PrivacidadPage = React.lazy(() => import("./pages/PrivacidadPage"));
+const TerminosPage = React.lazy(() => import("./pages/TerminosPage"));
+const ContenidoIAPage = React.lazy(() => import("./pages/ContenidoIAPage"));
+const CheckoutPage = React.lazy(() => import("./pages/CheckoutPage"));
+const DashboardPage = React.lazy(() => import("./pages/DashboardPage"));
+const PurchaseSuccessPage = React.lazy(() => import("./pages/PurchaseSuccessPage"));
+const GuestAccessPage = React.lazy(() => import("./pages/GuestAccessPage"));
+const AuthPage = React.lazy(() => import("./pages/AuthPage"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 // Módulos del curso
-import ModuloF0Page from "./pages/modules/ModuloF0Page";
-import ModuloF1Page from "./pages/modules/ModuloF1Page";
-import ModuloF2Page from "./pages/modules/ModuloF2Page";
-import ModuloF3Page from "./pages/modules/ModuloF3Page";
-import ModuloF4Page from "./pages/modules/ModuloF4Page";
-import ModuloF5Page from "./pages/modules/ModuloF5Page";
-import ModuloF6Page from "./pages/modules/ModuloF6Page";
+const ModuloF0Page = React.lazy(() => import("./pages/modules/ModuloF0Page"));
+const ModuloF1Page = React.lazy(() => import("./pages/modules/ModuloF1Page"));
+const ModuloF2Page = React.lazy(() => import("./pages/modules/ModuloF2Page"));
+const ModuloF3Page = React.lazy(() => import("./pages/modules/ModuloF3Page"));
+const ModuloF4Page = React.lazy(() => import("./pages/modules/ModuloF4Page"));
+const ModuloF5Page = React.lazy(() => import("./pages/modules/ModuloF5Page"));
+const ModuloF6Page = React.lazy(() => import("./pages/modules/ModuloF6Page"));
 
 // Artículos del Radar IA
-import QueSIgnificaSerCitadoPorIA from "./pages/articles/QueSIgnificaSerCitadoPorIA";
-import MuerteSeoTradicional from "./pages/articles/MuerteSeoTradicional";
-import EstructuraWebParaLenguaje from "./pages/articles/EstructuraWebParaLenguaje";
-import FormatoWikipediaIA from "./pages/articles/FormatoWikipediaIA";
-import DatosEstructuradosModelosGenerativos from "./pages/articles/DatosEstructuradosModelosGenerativos";
-import GeoVsSeoGuiaRapida from "./pages/articles/GeoVsSeoGuiaRapida";
+const QueSIgnificaSerCitadoPorIA = React.lazy(() => import("./pages/articles/QueSIgnificaSerCitadoPorIA"));
+const MuerteSeoTradicional = React.lazy(() => import("./pages/articles/MuerteSeoTradicional"));
+const EstructuraWebParaLenguaje = React.lazy(() => import("./pages/articles/EstructuraWebParaLenguaje"));
+const FormatoWikipediaIA = React.lazy(() => import("./pages/articles/FormatoWikipediaIA"));
+const DatosEstructuradosModelosGenerativos = React.lazy(() => import("./pages/articles/DatosEstructuradosModelosGenerativos"));
+const GeoVsSeoGuiaRapida = React.lazy(() => import("./pages/articles/GeoVsSeoGuiaRapida"));
 
 const queryClient = new QueryClient();
+
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+  </div>
+);
 
 function App() {
   return (
@@ -53,6 +61,7 @@ function App() {
             <Toaster />
             <Sonner />
             <BrowserRouter>
+            <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
               
@@ -99,6 +108,7 @@ function App() {
               {/* 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
         </AuthProvider>

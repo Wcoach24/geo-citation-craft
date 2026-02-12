@@ -61,47 +61,7 @@ const Index = () => {
 
         <Footer />
 
-        {/* Datos estructurados para la página principal */}
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-
-        {/* Datos estructurados adicionales para HomePage */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "@id": "https://esgeo.ai#webpage",
-            "url": "https://esgeo.ai",
-            "name": "esGEO - Optimiza para ser citado por la IA",
-            "description": "La primera plataforma en español centrada en enseñar cómo estructurar y redactar webs para que los modelos de lenguaje como ChatGPT, Perplexity o Claude las comprendan, recomienden y citen.",
-            "inLanguage": "es-ES",
-            "isPartOf": {
-              "@type": "WebSite",
-              "@id": "https://esgeo.ai#website"
-            },
-            "about": {
-              "@type": "Thing",
-              "name": "Generative Engine Optimization",
-              "description": "Metodología de optimización para modelos de lenguaje generativo"
-            },
-            "lastReviewed": "2025-06-12T10:00:00Z",
-            "reviewedBy": {
-              "@type": "Organization",
-              "@id": "https://esgeo.ai#organization"
-            },
-            "speakable": {
-              "@type": "SpeakableSpecification",
-              "cssSelector": [".snippet-block", "[data-speakable='true']", ".geo-card"]
-            },
-            "associatedMedia": {
-              "@type": "MediaObject",
-              "contentUrl": "https://esgeo.ai/home.geo.txt",
-              "encodingFormat": "text/plain",
-              "description": "Versión citable para modelos de lenguaje - Definición autoritativa de GEO"
-            }
-          })}
-        </script>
+        {/* Structured data consolidated in index.html @graph - no duplicates */}
       </div>
     </>
   );

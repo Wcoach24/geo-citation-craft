@@ -68,9 +68,7 @@ serve(async (req) => {
 
     console.log(`Product info: ${JSON.stringify(productInfo)}`);
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
-      apiVersion: "2025-08-27.basil",
-    });
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "");
 
     // Buscar o crear cliente en Stripe (solo si tenemos email)
     let customerId;

@@ -49,7 +49,6 @@ MÉTRICAS DE ÉXITO EN GEO:
 RECURSOS ADICIONALES:
 - Curso completo: https://esgeo.ai/curso
 - Metodología detallada: https://esgeo.ai/metodologia
-- Coach GEO (asistente IA): https://esgeo.ai/coach
 - Glosario técnico: https://esgeo.ai/glosario
 - Casos reales: https://esgeo.ai/casos
 - Análisis de tendencias: https://esgeo.ai/radar-ia
