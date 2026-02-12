@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { Download, Mail, CheckCircle2, Clock } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import { toast } from 'sonner';
+import { MODULES, getModuleName, SUPPORT_EMAIL } from '@/data/modules';
 
 const GuestAccessPage = () => {
   const [searchParams] = useSearchParams();
@@ -23,32 +24,24 @@ const GuestAccessPage = () => {
       navigate('/');
       return;
     }
-
     verifyAccess();
   }, [token]);
 
   const verifyAccess = async () => {
     try {
-      const { data, error } = await supabase
-        .from('guest_access')
-        .select('*')
-        .eq('access_token', token)
-        .single();
+      // Use security definer function instead of direct table access
+      const { data, error } = await supabase.rpc('get_guest_access_by_token', {
+        p_token: token!,
+      });
 
-      if (error || !data) {
+      if (error || !data || data.length === 0) {
         toast.error('Token de acceso inválido o expirado');
         navigate('/');
         return;
       }
 
-      // Check if expired
-      if (new Date(data.expires_at) < new Date()) {
-        toast.error('Este enlace de acceso ha expirado');
-        navigate('/');
-        return;
-      }
-
-      setAccessData(data);
+      // Function already filters expired tokens, use first record
+      setAccessData(data[0]);
     } catch (error) {
       console.error('Error verifying access:', error);
       toast.error('Error al verificar el acceso');
@@ -59,12 +52,9 @@ const GuestAccessPage = () => {
 
   const handleDownload = async (moduleId: string) => {
     setDownloading(moduleId);
-    
     try {
-      const filePath = `premium-content/${moduleId}/guia-completa-modulo-${moduleId}.pdf`;
-      
-      const { data: urlData, error } = await supabase.functions.invoke('generate-download-url', {
-        body: { filePath, skipAccessCheck: true }
+      const { data: urlData, error } = await supabase.functions.invoke('download-premium-content', {
+        body: { moduleId, accessToken: token }
       });
 
       if (error) throw error;
@@ -85,14 +75,6 @@ const GuestAccessPage = () => {
     ? ['f1', 'f2', 'f3', 'f4', 'f5']
     : [accessData?.module_id];
 
-  const moduleNames: Record<string, string> = {
-    f1: 'F1 - Fundamentos de GEO',
-    f2: 'F2 - Optimización de Contenido',
-    f3: 'F3 - Estructura y Datos',
-    f4: 'F4 - Autoridad y Enlaces',
-    f5: 'F5 - Experiencia del Usuario'
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -107,7 +89,7 @@ const GuestAccessPage = () => {
   return (
     <>
       <Helmet>
-        <title>Acceso a Contenido Premium - GEO Mastery</title>
+        <title>Acceso a Contenido Premium - esGEO</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -116,7 +98,6 @@ const GuestAccessPage = () => {
 
         <main className="flex-1 container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* Success Banner */}
             <Card className="border-green-200 bg-green-50">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-4">
@@ -133,7 +114,6 @@ const GuestAccessPage = () => {
               </CardContent>
             </Card>
 
-            {/* Access Info */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -149,9 +129,7 @@ const GuestAccessPage = () => {
                   <Clock className="w-4 h-4" />
                   <span>
                     Acceso válido hasta: {new Date(accessData?.expires_at).toLocaleDateString('es-ES', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
+                      year: 'numeric', month: 'long', day: 'numeric'
                     })}
                   </span>
                 </div>
@@ -161,7 +139,6 @@ const GuestAccessPage = () => {
               </CardContent>
             </Card>
 
-            {/* Download Cards */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold">Tus Guías PDF</h3>
               <div className="grid gap-4">
@@ -171,7 +148,7 @@ const GuestAccessPage = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <h4 className="font-semibold text-lg mb-2">
-                            {moduleNames[moduleId]}
+                            {getModuleName(moduleId)}
                           </h4>
                           <p className="text-sm text-muted-foreground">
                             Guía PDF completa • 15-25 páginas
@@ -192,7 +169,6 @@ const GuestAccessPage = () => {
               </div>
             </div>
 
-            {/* Help Section */}
             <Card className="bg-muted">
               <CardContent className="pt-6">
                 <h4 className="font-semibold mb-2">¿Necesitas ayuda?</h4>
@@ -200,10 +176,10 @@ const GuestAccessPage = () => {
                   Si tienes problemas para acceder a tu contenido, contáctanos:
                 </p>
                 <a 
-                  href="mailto:soporte@geomastery.es"
+                  href={`mailto:${SUPPORT_EMAIL}`}
                   className="text-primary hover:underline text-sm font-medium"
                 >
-                  soporte@geomastery.es
+                  {SUPPORT_EMAIL}
                 </a>
               </CardContent>
             </Card>

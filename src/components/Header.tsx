@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Bot } from "lucide-react";
+import { Menu, X, ChevronDown, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,9 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -56,13 +58,34 @@ const Header = () => {
             Glosario
           </Link>
 
+          <Link to="/radar-ia" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            Radar IA
+          </Link>
+
+          <Link to="/casos-reales" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            Casos Reales
+          </Link>
         </nav>
 
-        {/* CTA Button - Desktop */}
-        <div className="hidden md:block">
-          <Button asChild>
-            <Link to="/curso">Empezar Curso</Link>
-          </Button>
+        {/* CTA / Auth Button - Desktop */}
+        <div className="hidden md:flex items-center gap-3">
+          {user ? (
+            <Button asChild variant="outline" size="sm">
+              <Link to="/dashboard">
+                <User className="h-4 w-4 mr-2" />
+                Dashboard
+              </Link>
+            </Button>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/auth">Iniciar sesión</Link>
+              </Button>
+              <Button asChild size="sm">
+                <Link to="/checkout">Comprar Curso</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -78,33 +101,36 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden border-t bg-background">
           <nav className="container mx-auto px-4 py-4 space-y-3">
-            <Link 
-              to="/curso" 
-              className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/curso" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Curso Completo
             </Link>
-            <Link 
-              to="/metodologia" 
-              className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/metodologia" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Metodología
             </Link>
-            <Link 
-              to="/glosario" 
-              className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link to="/glosario" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Glosario
             </Link>
-            <div className="pt-3 border-t">
-              <Button asChild className="w-full">
-                <Link to="/curso" onClick={() => setIsMenuOpen(false)}>
-                  Empezar Curso
-                </Link>
-              </Button>
+            <Link to="/radar-ia" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Radar IA
+            </Link>
+            <Link to="/casos-reales" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Casos Reales
+            </Link>
+            <div className="pt-3 border-t space-y-2">
+              {user ? (
+                <Button asChild className="w-full" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/dashboard">Dashboard</Link>
+                </Button>
+              ) : (
+                <>
+                  <Button asChild variant="outline" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/auth">Iniciar sesión</Link>
+                  </Button>
+                  <Button asChild className="w-full" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/checkout">Comprar Curso</Link>
+                  </Button>
+                </>
+              )}
             </div>
           </nav>
         </div>
