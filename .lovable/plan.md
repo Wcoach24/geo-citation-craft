@@ -1,157 +1,213 @@
 
+# Plan de Mejora Absoluta - Auditoria Completa esGEO
 
-# AUDITORIA TECNICA Y ESTRATEGICA - esGEO
+## Resumen Ejecutivo
 
----
-
-## A) DIAGNOSTICO TECNICO
-
-### 1. ARQUITECTURA TECNICA
-
-**Coherencia: PARCIAL**
-- SPA React sin SSR/SSG vendiendo un producto que depende del SEO/GEO. La ironia es brutal: una plataforma que ensena optimizacion para crawlers esta construida con una tecnologia que los crawlers no pueden leer sin prerendering. Se menciona Puppeteer en conversaciones pero no hay evidencia de implementacion real.
-
-**Dependencias innecesarias:**
-- `next-themes` instalado pero no se usa (no hay dark mode implementado).
-- `react-day-picker`, `calendar`, `date-fns` instalados sin uso evidente en el producto.
-- `react-resizable-panels`, `input-otp`, `cmdk` sin uso visible.
-- `recharts` importado pero sin dashboards de datos reales.
-- Mas de 40 componentes UI de Radix instalados cuando se usan menos de 15.
-
-**Sobreingenieria:**
-- 418 lineas de JSON-LD en `index.html` con datos duplicados (Organization se define 2 veces, Course se define 3 veces con datos inconsistentes).
-- Sistema de archivos `.geo.txt` elaborado cuando no hay evidencia de que ningun LLM los consuma preferentemente.
-- `hidden-content` div con texto oculto para crawlers es una tecnica de riesgo que Google puede penalizar como cloaking.
-
-**Fragilidad estructural:**
-- IDs de precio Stripe hardcodeados en 2 lugares (CheckoutPage.tsx linea 19-27 y create-checkout/index.ts linea 18-26). Si cambia un precio, hay que actualizar ambos manualmente.
-- Sin tests. Cero. Ni unitarios, ni de integracion, ni e2e.
-- Sin manejo de errores global (no hay ErrorBoundary).
-
-**Que se rompe primero:**
-- El flujo de pago. Tiene doble procesamiento: webhook + process-payment-success llamado desde el cliente. Race condition garantizada.
-
-### 2. MODELO DE DATOS
-
-**Normalizacion: DEFICIENTE**
-- `product_type` y `module_id` son strings libres sin enums ni constraints. Nada impide insertar `product_type: "xyz"` o `module_id: "f99"`.
-- `status` en purchases es texto libre. Sin enum. Sin constraint.
-- `access_type` en user_access es texto libre.
-
-**Duplicidades:**
-- Informacion de modulos hardcodeada en al menos 5 lugares: CheckoutPage, DashboardPage, CursoGeoPage, PurchaseSuccessPage, GuestAccessPage. Cada uno con nombres DIFERENTES para los mismos modulos.
-  - CheckoutPage: "Fundamentos de Accesibilidad Generativa"  
-  - CursoGeoPage: "Fundamentos de accesibilidad generativa"
-  - GuestAccessPage: "F1 - Fundamentos de GEO"
-  - PurchaseSuccessPage: "Fundamentos de Accesibilidad Generativa"
-
-**Inconsistencias graves:**
-- DashboardPage muestra precio "€497" para curso completo y "Desde €147" por modulo. CheckoutPage dice €50 completo y €10 por modulo. PricingSection dice €50 y €10. Tres versiones de precios en el mismo sitio.
-
-**Escalabilidad:**
-- `user_access` no tiene unique constraint visible en el schema (el webhook hace upsert con `onConflict: 'user_id,module_id'` pero no esta claro que exista el constraint en DB).
-- Sin indice explicito en `guest_access.access_token` - las queries por token seran lentas a escala.
-
-### 3. SEGURIDAD
-
-**VULNERABILIDAD CRITICA CONFIRMADA:**
-- `guest_access` tiene RLS policy `USING (true)` para SELECT. Cualquier persona con la anon key puede leer TODOS los tokens de acceso, emails y datos de compra de todos los guests. Esto es una **brecha de datos personales** activa.
-
-**Vectores de ataque:**
-- `download-premium-content` tiene `verify_jwt = false`. Cualquiera puede llamarlo con un token robado (facil de obtener por la vulnerabilidad anterior).
-- `GuestAccessPage.tsx` linea 66-67: llama a `generate-download-url` con `skipAccessCheck: true`. Bypass explicito de verificacion de acceso.
-- `create-checkout` tiene `verify_jwt = false` y CORS `*`. Permite crear sesiones de Stripe sin autenticacion.
-- Stripe API version `2025-08-27.basil` - version futura/ficticia que podria causar incompatibilidades.
-- Email de soporte inconsistente: "soporte@cursogeo.com" en PurchaseSuccessPage, "soporte@geomastery.es" en GuestAccessPage, "hola@esgeo.ai" en Schema.org. Ningun dominio verificado.
-- Leaked password protection deshabilitada en auth.
+Tras auditar todos los ficheros proporcionados y el estado actual del proyecto, he identificado **23 problemas** organizados en 3 niveles de prioridad. Este plan aborda desde vulnerabilidades de seguridad residuales hasta inconsistencias de datos, duplicacion de Schema.org, funciones sin implementar, y dependencias innecesarias.
 
 ---
 
-## B) DIAGNOSTICO UX
+## FASE 1: CRITICO (Seguridad y Datos Rotos)
 
-### Friccion innecesaria:
-- No hay enlace a login/dashboard en el Header. El usuario que compro no sabe como acceder a su contenido.
-- El Header solo muestra 3 links de navegacion (Curso, Metodologia, Glosario). Faltan: Radar IA, Casos Reales, Checkout, Dashboard, Auth. El 60% del sitio es inaccesible desde la navegacion principal.
-- El flujo de compra abre Stripe en una **nueva pestana** (`window.open`). El usuario pierde contexto. Luego debe volver a la pestana original manualmente.
+### 1.1 - download-premium-content accede directamente a guest_access (bypassa RLS)
 
-### Confusion en propuesta de valor:
-- En la misma pagina, F0 es "Gratis", modulos son "€10", curso completo "€50". Pero el Dashboard dice "€497" y "Desde €147". El usuario no sabe el precio real.
-- Modulo F6 aparece como "Proximamente" en checkout pero tiene pagina completa, precio en Stripe, y link en navegacion. Puedes pagar por algo que no existe.
+**Problema:** `download-premium-content/index.ts` usa service_role_key para hacer SELECT directo a `guest_access` (linea 52-57), bypassando la RLS y la funcion `get_guest_access_by_token`. Ademas, `verify_jwt = false` en config.toml significa que CUALQUIERA puede llamar esta funcion con un moduleId y accessToken inventado hasta hacer fuerza bruta.
 
-### Puntos de abandono:
-- Checkout sin email de guest. Si no estas logueado y no proporcionas email, Stripe lo pide, pero no hay flujo claro de vuelta al contenido.
-- Dashboard requiere login pero no hay link visible a /auth ni /dashboard.
-- PurchaseSuccessPage depende de `session_id` en URL. Si el usuario cierra la pestana de Stripe antes del redirect, pierde acceso a sus descargas inmediatas.
+**Solucion:** Reescribir `download-premium-content` para usar `supabase.rpc('get_guest_access_by_token')` y validar que el `product_type` del guest permite acceso al modulo solicitado.
 
----
+### 1.2 - generate-guest-access sin autenticacion (verify_jwt = false)
 
-## C) DIAGNOSTICO ESTRATEGICO
+**Problema:** Cualquiera puede llamar `generate-guest-access` con un email y purchaseId arbitrarios para generar tokens de acceso sin verificacion. Deberia ser invocable SOLO desde el webhook (server-to-server).
 
-### Producto:
-- El concepto de GEO es real y tiene traccion, pero esGEO vende un framework (F1-F6) que es contenido estatico en PDFs. No hay diferenciacion tecnologica. Es un infoproducto empaquetado como plataforma.
+**Solucion:** Cambiar `verify_jwt = true` o validar internamente que la llamada proviene del webhook via un secret compartido. Lo mismo aplica a `upload-premium-content` y `send-purchase-email`.
 
-### Hipotesis no validadas:
-1. Que los archivos `.geo.txt` son realmente leidos/priorizados por LLMs (no hay evidencia publica).
-2. Que el contenido oculto en `hidden-content` div no sera penalizado por Google.
-3. Que el mercado hispanohablante pagara por contenido GEO cuando el concepto aun no esta establecido.
-4. Que 5 PDFs de 15-25 paginas a €10 cada uno constituyen un producto viable.
+### 1.3 - send-purchase-email NO envia emails
 
-### Modelo de monetizacion:
-- Precio maximo de €50 por todo el curso. Con costes de Stripe (~3.4%), hosting, y tiempo de creacion, el margen es minimo.
-- No hay recurrencia (pago unico). No hay upsell real. No hay comunidad. No hay coaching 1:1.
-- El modulo F0 es gratuito y es un test de 5 preguntas sin valor de conversion real.
+**Problema:** La funcion `send-purchase-email` es un stub: tiene todo el codigo de envio comentado con `// TODO: Integrate with Resend`. El webhook la llama pero no envia nada. Los compradores guest **nunca reciben su enlace de acceso**.
 
-### Defendibilidad:
-- Cero barreras de entrada. Cualquiera puede crear contenido similar en dias.
-- No hay datos propietarios, algoritmo unico, ni comunidad activa.
-- Los archivos `.geo.txt` y la metodologia F1-F6 son facilmente replicables.
+**Solucion:** Implementar el envio real via Resend o similar, o al menos documentar claramente que es un stub y deshabilitar la promesa al usuario de "recibiras un email".
+
+### 1.4 - Email inconsistente en send-purchase-email
+
+**Problema:** `send-purchase-email` todavia referencia `soporte@geomastery.es` y "GEO Mastery" (lineas 43-45) en lugar de `hola@esgeo.ai` y "esGEO".
+
+**Solucion:** Usar `SUPPORT_EMAIL` importado desde modules.ts (requiere adaptacion para Deno).
+
+### 1.5 - Stripe API version ficticia
+
+**Problema:** Tanto `create-checkout` como `stripe-webhook` usan `apiVersion: "2025-08-27.basil"` que es una version inexistente. Esto puede causar comportamiento impredecible.
+
+**Solucion:** Eliminar la linea `apiVersion` para usar la version por defecto del SDK, o fijar una version real conocida.
 
 ---
 
-## D) TOP 5 FALLOS CRITICOS
+## FASE 2: IMPORTANTE (Inconsistencias de Datos y Duplicacion)
 
-1. **BRECHA DE SEGURIDAD: guest_access con RLS `true`** - Todos los tokens, emails y datos de acceso guest son publicamente legibles. Cualquiera puede robar acceso a contenido pagado y obtener emails de clientes. GDPR violation.
+### 2.1 - CursoGeoPage NO usa modules.ts
 
-2. **PRECIOS INCONSISTENTES** - Dashboard muestra €497/€147, Checkout muestra €50/€10, PricingSection muestra €50/€10. Destruye confianza del comprador y puede constituir publicidad enganosa.
+**Problema:** `CursoGeoPage.tsx` tiene sus propios datos de modulos hardcodeados (lineas 46-112) con nombres y descripciones **diferentes** a `modules.ts`:
+- modules.ts: "Contexto Semantico" para F2
+- CursoGeoPage: "Estructura semantica para LLMs" para F2
+- modules.ts: "Validacion Conversacional" para F4
+- CursoGeoPage: "Optimizacion tecnica avanzada" para F4
 
-3. **DOBLE PROCESAMIENTO DE PAGO** - El webhook de Stripe Y la pagina de success procesan el pago. Race conditions, duplicacion de registros, accesos duplicados. El webhook es el unico path confiable; `process-payment-success` desde el cliente es redundante e inseguro.
+**Solucion:** Refactorizar CursoGeoPage para importar datos desde `modules.ts`, extendiendo el tipo `ModuleInfo` con campos adicionales como `topics`, `duration`, `difficulty`, `icon`, `color`.
 
-4. **DATOS DE MODULOS HARDCODEADOS EN 5+ ARCHIVOS** - Nombres, descripciones y precios de modulos copiados manualmente en multiples archivos sin fuente unica de verdad. Ya estan desincronizados (nombres diferentes, precios diferentes).
+### 2.2 - CursoGeoPage muestra precio €0 en Schema.org
 
-5. **CONTENIDO OCULTO PARA CRAWLERS (CLOAKING)** - El div `hidden-content` con `position: absolute; left: -10000px` es la definicion textual de cloaking segun Google. Riesgo de penalizacion manual.
+**Problema:** Linea 447 del Schema.org en CursoGeoPage dice `"price": "0"`. El curso no es gratis, cuesta €50. Esto contradice el Schema.org de index.html que dice €50.
+
+**Solucion:** Corregir a `"price": "50"`.
+
+### 2.3 - Fake AggregateRating en Schema.org
+
+**Problema:** `CursoGeoPage` declara `"ratingValue": "4.9", "reviewCount": "127"` (lineas 439-442). No hay sistema de reviews implementado. Esto es **datos estructurados falsos** que Google puede penalizar.
+
+**Solucion:** Eliminar `aggregateRating` hasta tener reviews reales.
+
+### 2.4 - Footer duplica Schema.org Organization
+
+**Problema:** `Footer.tsx` renderiza un bloque JSON-LD de Organization (lineas 117-141) que ya existe en el `@graph` consolidado de `index.html`. Duplicacion que confunde a crawlers.
+
+**Solucion:** Eliminar el JSON-LD del Footer.
+
+### 2.5 - Index.tsx duplica Schema.org con doble bloque
+
+**Problema:** `Index.tsx` renderiza dos bloques JSON-LD separados (lineas 65-104): uno de `useGeoMetadata` y otro WebPage manual. Ambos definen datos parcialmente superpuestos.
+
+**Solucion:** Consolidar en un solo bloque o eliminar el duplicado ya que index.html tiene el `@graph` completo.
+
+### 2.6 - CursoGeoPage tiene 5 bloques JSON-LD separados
+
+**Problema:** CursoGeoPage renderiza 5 scripts JSON-LD independientes (Course, HowTo, FAQ, Breadcrumb, Speakable). Deberian consolidarse en un `@graph`.
+
+**Solucion:** Unificar en un solo `@graph` como ya se hizo en index.html.
+
+### 2.7 - Enlace "Casos reales" duplicado en CursoGeoPage
+
+**Problema:** Lineas 382-401 muestran dos botones que llevan al mismo lugar (`/casos`) con textos diferentes ("Ver casos reales" y "Casos reales").
+
+**Solucion:** Eliminar el duplicado.
 
 ---
 
-## E) 3 RIESGOS EXISTENCIALES
+## FASE 3: MEJORAS ESTRUCTURALES
 
-1. **La brecha de seguridad en guest_access genera una denuncia GDPR o robo masivo de contenido.** Emails expuestos + tokens de descarga publicos = cualquiera puede descargar todo el contenido premium sin pagar. Si esto llega a un foro, el producto muere en horas.
+### 3.1 - Eliminar dependencias no usadas restantes
 
-2. **El mercado no paga por GEO como concepto independiente.** GEO es un subconjunto de SEO tecnico. La mayoria de agencias SEO ya cubren datos estructurados y contenido semantico. El nicho "optimizacion para ser citado por IA" puede no tener suficiente demanda para un producto independiente a €50.
+**Problema:** Aun quedan instaladas:
+- `react-day-picker` y `date-fns` (calendar.tsx aun existe en el proyecto)
+- `recharts` (sin dashboards de datos)
+- `embla-carousel-react` (verificar si se usa)
 
-3. **Penalizacion por Google por cloaking mata el trafico organico.** El `hidden-content` div es detectable en una revision manual. Si Google lo penaliza, el sitio pierde visibilidad en busqueda tradicional, que es ironicamente el principal canal de descubrimiento para un producto de SEO/GEO.
+**Solucion:** Eliminar `calendar.tsx`, verificar uso de carousel y recharts, limpiar package.json.
+
+### 3.2 - upload-premium-content es una vulnerabilidad administrativa
+
+**Problema:** `upload-premium-content` con `verify_jwt = false` permite a cualquiera sobreescribir los PDFs premium (usa `upsert: true`). Cualquier atacante puede reemplazar los PDFs con contenido malicioso.
+
+**Solucion:** Cambiar a `verify_jwt = true` y validar que el usuario es admin, o eliminar la funcion si los PDFs ya estan subidos.
+
+### 3.3 - Lazy loading para paginas
+
+**Problema:** App.tsx importa todas las paginas de forma sincrona (30+ imports). Esto carga todo el bundle en la primera visita.
+
+**Solucion:** Usar `React.lazy()` + `Suspense` para todas las rutas excepto Index.
+
+### 3.4 - Leaked password protection
+
+**Problema:** El linter confirma que sigue deshabilitada.
+
+**Solucion:** Habilitar desde la configuracion del backend.
+
+### 3.5 - ModuleF2Page.tsx duplicado
+
+**Problema:** Existen dos archivos para F2: `ModuleF2Page.tsx` y `ModuloF2Page.tsx`. Solo se usa `ModuloF2Page`.
+
+**Solucion:** Eliminar `ModuleF2Page.tsx`.
+
+### 3.6 - Speakable selector referencia clase eliminada
+
+**Problema:** `index.html` linea 74 tiene `speakable-selector` que incluye `.hidden-content` - clase del div eliminado anteriormente.
+
+**Solucion:** Quitar `.hidden-content` del selector.
+
+### 3.7 - llm.txt usa directivas no estandar
+
+**Problema:** `llm.txt` usa `Crawl-priorities` y `No-index-for-llms` que no son directivas reconocidas por ningun estandar. El archivo parece un robots.txt mal formateado.
+
+**Solucion:** Reestructurar como texto plano informativo siguiendo el formato emergente de llm.txt (llmstxt.org), sin directivas inventadas.
+
+### 3.8 - PDFs premium en /public accesibles directamente
+
+**Problema:** Los archivos en `public/premium-content/` son accesibles directamente via URL sin autenticacion (ej: `/premium-content/f1/guia-completa-modulo-f1.pdf`). Todo el sistema de pago se puede bypasear.
+
+**Solucion:** Eliminar los PDFs de `/public/` ya que estan en Supabase Storage (bucket `premium-content`). Los archivos en `/public` son solo para el upload initial.
+
+### 3.9 - home.geo.txt referencia "Coach GEO" no existente
+
+**Problema:** `home.geo.txt` linea de recursos incluye `Coach GEO (asistente IA): https://esgeo.ai/coach` pero `/coach` redirige a `/metodologia`. No existe Coach GEO.
+
+**Solucion:** Eliminar la referencia o actualizarla.
 
 ---
 
-## F) PLAN DE MITIGACION PRIORIZADO
+## FASE 4: SEGURIDAD EDGE FUNCTIONS (config.toml)
 
-### URGENTE (esta semana)
+### 4.1 - Revisar verify_jwt en todas las funciones
 
-1. **Corregir RLS de guest_access** - Cambiar policy de `USING (true)` a validacion por token. Esto es critico e inmediato.
-2. **Eliminar process-payment-success** - Solo el webhook debe procesar pagos. La pagina de success debe consultar estado, no procesar.
-3. **Unificar precios** - Corregir DashboardPage para mostrar €50/€10 consistentes. Crear constantes centralizadas.
+Estado actual y recomendado:
 
-### IMPORTANTE (proximas 2 semanas)
+| Funcion | Actual | Recomendado | Razon |
+|---|---|---|---|
+| create-checkout | false | false | Guests necesitan crear checkouts |
+| stripe-webhook | false | false | Stripe no envia JWT |
+| generate-download-url | true | true | OK |
+| download-premium-content | false | **true** o validacion interna | Expuesto sin JWT |
+| generate-guest-access | false | **true** o validacion interna | Solo webhook debe llamarlo |
+| upload-premium-content | false | **true** | Admin-only |
+| send-purchase-email | false | **true** o validacion interna | Solo webhook debe llamarlo |
 
-4. **Crear archivo centralizado de modulos** - Un unico `src/data/modules.ts` con nombres, descripciones, precios. Importar en todos los componentes.
-5. **Eliminar hidden-content div** - Reemplazar con contenido visible real o `<noscript>` tags como alternativa menos riesgosa.
-6. **Anadir ErrorBoundary global** y paginas de error apropiadas.
-7. **Limpiar dependencias no usadas** - Eliminar next-themes, react-day-picker, cmdk, react-resizable-panels, input-otp.
-8. **Habilitar leaked password protection** en auth.
+---
 
-### ESTRATEGICO (proximo mes)
+## Orden de Implementacion
 
-9. **Implementar prerendering real** - Sin SSR/SSG, todo el esfuerzo SEO/GEO en React es parcialmente inutil.
-10. **Validar modelo de negocio** - Considerar suscripcion, comunidad, o servicios de consultoria como revenue streams adicionales.
-11. **Anadir tests minimos** - Al menos para el flujo de pago completo.
-12. **Deduplicar Schema.org** - Consolidar los 6 bloques JSON-LD en index.html, eliminar duplicados de Organization y Course.
+```text
+PASO 1 (seguridad critica):
+  - Corregir download-premium-content (usar RPC, validar acceso)
+  - Eliminar PDFs de /public/premium-content/
+  - Asegurar upload-premium-content
 
+PASO 2 (datos rotos):
+  - Actualizar CursoGeoPage para usar modules.ts
+  - Corregir Schema.org (precio €0, rating falso, duplicados)
+  - Eliminar JSON-LD duplicado de Footer.tsx
+  - Corregir send-purchase-email (branding + stub)
+
+PASO 3 (limpieza):
+  - Eliminar ModuleF2Page.tsx duplicado
+  - Eliminar boton duplicado CursoGeoPage
+  - Limpiar speakable selector
+  - Reestructurar llm.txt
+  - Actualizar home.geo.txt
+
+PASO 4 (rendimiento):
+  - Lazy loading en App.tsx
+  - Eliminar dependencias no usadas
+  - Eliminar calendar.tsx
+
+PASO 5 (configuracion):
+  - Habilitar leaked password protection
+  - Actualizar verify_jwt en config.toml
+```
+
+---
+
+## Resumen de Impacto
+
+- **8 vulnerabilidades de seguridad** corregidas (PDFs publicos, edge functions expuestas, token bypass)
+- **6 inconsistencias de datos** unificadas (nombres, precios, Schema.org)
+- **5 duplicaciones** eliminadas (Schema.org, archivos, botones)
+- **4 mejoras de rendimiento** (lazy loading, dependencias, bundle)
+
+Total estimado: ~2-3 sesiones de implementacion.
