@@ -194,7 +194,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_guest_access_by_token: {
+        Args: { p_token: string }
+        Returns: {
+          access_token: string
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          module_id: string | null
+          product_type: string
+          purchase_id: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "guest_access"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
     }
     Enums: {
       [_ in never]: never

@@ -14,17 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
-
-// Mapeo de productos
-const PRODUCT_MAPPING = {
-  'f1': { priceId: 'price_1SIElCLYFGrlrWdkg6xDfNK4', productId: 'prod_TEiBWaHzwUlXA5' },
-  'f2': { priceId: 'price_1SIEr4LYFGrlrWdkKnenQc0o', productId: 'prod_TEiHYoMQxn8CW4' },
-  'f3': { priceId: 'price_1SIEvqLYFGrlrWdkKyiOQhsz', productId: 'prod_TEiMYkaDdZNpHK' },
-  'f4': { priceId: 'price_1SIEySLYFGrlrWdkPpmf0HrO', productId: 'prod_TEiPPFHp6tqbVK' },
-  'f5': { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
-  'f6': { priceId: 'price_1SIF4xLYFGrlrWdkDBACLaKe', productId: 'prod_TEiV7zVpP97KSz' },
-  'complete': { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' }
-};
+import { MODULES, COMPLETE_COURSE, getStripeIds } from '@/data/modules';
 
 export default function CheckoutPage() {
   const [selectedPlan, setSelectedPlan] = useState<string>('');
@@ -50,66 +40,16 @@ export default function CheckoutPage() {
     }
   }, [searchParams]);
 
-  const modules = {
-    f1: {
-      id: 'f1',
-      name: 'Módulo F1 - Fundamentos de Accesibilidad Generativa',
-      description: 'Aprende los fundamentos técnicos para hacer tu contenido accesible y comprensible para modelos de lenguaje AI.',
-      price: 10,
-      image: '/images/modulo-f1.png'
-    },
-    f2: {
-      id: 'f2',
-      name: 'Módulo F2 - Contexto Semántico',
-      description: 'Domina la estructura semántica y el contexto optimal para modelos generativos.',
-      price: 10,
-      image: '/images/modulo-f2.png'
-    },
-    f3: {
-      id: 'f3',
-      name: 'Módulo F3 - Autoridad Generativa',
-      description: 'Construye autoridad y credibilidad para ser citado por modelos de AI.',
-      price: 10,
-      image: '/images/modulo-f3.png'
-    },
-    f4: {
-      id: 'f4',
-      name: 'Módulo F4 - Validación Conversacional',
-      description: 'Aprende validación conversacional y optimización de interacciones.',
-      price: 10,
-      image: '/images/modulo-f4.png'
-    },
-    f5: {
-      id: 'f5',
-      name: 'Módulo F5 - Mantenimiento Evolutivo',
-      description: 'Diseña sistemas de mantenimiento evolutivo para la era de la AI.',
-      price: 10,
-      image: '/images/modulo-f5.png'
-    },
-    f6: {
-      id: 'f6',
-      name: 'Módulo F6 - Métricas y Análisis',
-      description: 'Próximamente - Métricas y análisis avanzado para medir el impacto del GEO.',
-      price: 10,
-      image: '/images/modulo-f6.png',
-      comingSoon: true
-    }
-  };
+  const modules = MODULES;
 
   const plans = {
     complete: {
       id: 'complete',
-      name: 'Curso GEO Completo',
-      description: 'Acceso completo a todos los módulos del curso GEO con metodología integral.',
-      price: 50,
-      originalPrice: 60,
-      features: [
-        '5 módulos fundamentales (F1-F5)',
-        '5 guías PDF profesionales (15-25 páginas)',
-        'Metodología práctica paso a paso',
-        'Casos de estudio reales incluidos',
-        'Actualizaciones de contenido gratuitas'
-      ]
+      name: COMPLETE_COURSE.name,
+      description: COMPLETE_COURSE.description,
+      price: COMPLETE_COURSE.price,
+      originalPrice: COMPLETE_COURSE.originalPrice,
+      features: COMPLETE_COURSE.features,
     },
     individual: {
       id: 'individual',
@@ -168,15 +108,15 @@ export default function CheckoutPage() {
 
     try {
       const productKey = selectedPlan === 'complete' ? 'complete' : selectedModule;
-      const productInfo = PRODUCT_MAPPING[productKey as keyof typeof PRODUCT_MAPPING];
+      const stripeIds = getStripeIds(productKey);
 
-      if (!productInfo) {
+      if (!stripeIds) {
         throw new Error('Producto no encontrado');
       }
 
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
-          priceId: productInfo.priceId,
+          priceId: stripeIds.priceId,
           productType: selectedPlan,
           moduleId: selectedModule || undefined
         }
@@ -185,7 +125,8 @@ export default function CheckoutPage() {
       if (error) throw error;
 
       if (data?.url) {
-        window.open(data.url, '_blank');
+        // Redirect in same tab to avoid losing context
+        window.location.href = data.url;
       } else {
         throw new Error('No se pudo crear la sesión de checkout');
       }

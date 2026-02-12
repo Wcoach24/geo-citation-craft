@@ -363,16 +363,16 @@ const DashboardPage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                 <div className="p-4 bg-muted/50 rounded-lg">
                   <h4 className="font-semibold mb-2">🎯 Curso Completo</h4>
                   <p className="text-sm text-muted-foreground">5 módulos + contenido premium</p>
-                  <p className="text-lg font-bold mt-2">€497</p>
+                  <p className="text-lg font-bold mt-2">€50</p>
                 </div>
                 <div className="p-4 bg-muted/50 rounded-lg">
                   <h4 className="font-semibold mb-2">📚 Módulos Individuales</h4>
                   <p className="text-sm text-muted-foreground">Compra solo lo que necesites</p>
-                  <p className="text-lg font-bold mt-2">Desde €147</p>
+                  <p className="text-lg font-bold mt-2">€10 / módulo</p>
                 </div>
               </div>
               <Link to="/checkout">
