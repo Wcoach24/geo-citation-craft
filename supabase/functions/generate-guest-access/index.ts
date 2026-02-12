@@ -18,6 +18,16 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Internal auth: only allow calls from other edge functions using service_role_key
+  const authHeader = req.headers.get("Authorization");
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  if (!authHeader || authHeader !== `Bearer ${serviceRoleKey}`) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   try {
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -26,17 +36,18 @@ serve(async (req) => {
 
     const { email, purchaseId, productType, moduleId }: GenerateAccessRequest = await req.json();
 
+    if (!email || !purchaseId || !productType) {
+      throw new Error("Missing required fields: email, purchaseId, productType");
+    }
+
     console.log(`Generating guest access for: ${email}`);
 
-    // Generate unique access token
     const accessToken = crypto.randomUUID();
     
-    // Set expiration to 90 days from now
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 90);
 
-    // Store guest access
-    const { data: accessData, error: accessError } = await supabaseClient
+    const { error: accessError } = await supabaseClient
       .from('guest_access')
       .insert({
         email,
@@ -45,18 +56,14 @@ serve(async (req) => {
         product_type: productType,
         module_id: moduleId || null,
         expires_at: expiresAt.toISOString()
-      })
-      .select()
-      .single();
+      });
 
     if (accessError) {
       console.error("Error creating guest access:", accessError);
       throw accessError;
     }
 
-    console.log(`Guest access created with token: ${accessToken}`);
-
-    // Generate download URLs for modules
+    // Generate download URLs
     const modules = productType === 'complete' 
       ? ['f1', 'f2', 'f3', 'f4', 'f5']
       : [moduleId];
@@ -65,8 +72,7 @@ serve(async (req) => {
     
     for (const mod of modules) {
       if (mod) {
-        const accessUrl = `${req.headers.get("origin")}/guest-access?token=${accessToken}&module=${mod}`;
-        downloadUrls[mod] = accessUrl;
+        downloadUrls[mod] = `https://esgeo.ai/guest-access?token=${accessToken}&module=${mod}`;
       }
     }
 

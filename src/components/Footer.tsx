@@ -113,32 +113,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Schema.org Organization Footer */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "@id": "https://esgeo.ai#organization",
-          "name": "esGEO",
-          "url": "https://esgeo.ai",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer service",
-            "email": "hola@esgeo.ai",
-            "availableLanguage": "Spanish"
-          },
-          "sameAs": [
-            "https://twitter.com/esgeo_ai",
-            "https://linkedin.com/company/esgeo",
-            "https://github.com/esgeo"
-          ],
-          "publishingPrinciples": "https://esgeo.ai/metodologia.geo.txt",
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "url": "https://esgeo.ai"
-          }
-        })}
-      </script>
+      {/* Organization Schema.org removed - already in index.html @graph */}
     </footer>
   );
 };

@@ -3,23 +3,17 @@ project_id = "hadnvvkflpjucqkwewto"
 [functions.create-checkout]
 verify_jwt = false
 
-[functions.process-payment-success]
-verify_jwt = false
-
 [functions.stripe-webhook]
 verify_jwt = false
 
 [functions.generate-download-url]
-verify_jwt = true
-
-[functions.upload-premium-content]
 verify_jwt = false
 
-[functions.send-purchase-email]
+[functions.download-premium-content]
 verify_jwt = false
 
 [functions.generate-guest-access]
 verify_jwt = false
 
-[functions.download-premium-content]
+[functions.send-purchase-email]
 verify_jwt = false
