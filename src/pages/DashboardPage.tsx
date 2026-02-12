@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Download, FileText, CheckCircle, Clock, Trophy, Loader2, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { MODULES, COMPLETE_COURSE, AVAILABLE_MODULE_IDS, SUPPORT_EMAIL } from '@/data/modules';
 
 interface PremiumContent {
   moduleId: string;
@@ -30,83 +31,21 @@ interface DownloadHistory {
   downloaded_at: string;
 }
 
-const PREMIUM_CONTENT: PremiumContent[] = [
-  {
-    moduleId: 'f1',
-    title: 'Módulo F1: Fundamentos y Accesibilidad Generativa',
-    description: 'Conceptos fundamentales del GEO y principios de accesibilidad para IA. Aprende los fundamentos teóricos y prácticos.',
-    files: [
-      {
-        name: 'Guía Completa - Fundamentos Accesibilidad Generativa',
-        fileName: 'guia-completa-modulo-f1.pdf',
-        filePath: 'f1/guia-completa-modulo-f1.pdf',
-        type: 'pdf',
-        size: '3.2 MB',
-        description: 'Manual completo con fundamentos del GEO, principios de accesibilidad generativa y estrategias de implementación inicial.'
-      }
-    ]
-  },
-  {
-    moduleId: 'f2',
-    title: 'Módulo F2: Contexto Semántico y Formato Óptimo',
-    description: 'Estructuración semántica avanzada y formatos optimizados para comprensión de IA. Domina el contexto y la estructura.',
-    files: [
-      {
-        name: 'Guía Completa - Contexto Semántico y Formato',
-        fileName: 'guia-completa-modulo-f2.pdf',
-        filePath: 'f2/guia-completa-modulo-f2.pdf',
-        type: 'pdf',
-        size: '4.1 MB',
-        description: 'Guía exhaustiva sobre estructuración semántica, formatos óptimos para IA y técnicas de contextualización avanzada.'
-      }
-    ]
-  },
-  {
-    moduleId: 'f3',
-    title: 'Módulo F3: Autoridad Generativa',
-    description: 'Construcción de autoridad digital reconocida por modelos de IA. Estrategias para establecer credibilidad y confianza.',
-    files: [
-      {
-        name: 'Guía Completa - Autoridad Generativa',
-        fileName: 'guia-completa-modulo-f3.pdf',
-        filePath: 'f3/guia-completa-modulo-f3.pdf',
-        type: 'pdf',
-        size: '2.8 MB',
-        description: 'Manual completo sobre construcción de autoridad digital, estrategias de credibilidad y reconocimiento por IA.'
-      }
-    ]
-  },
-  {
-    moduleId: 'f4',
-    title: 'Módulo F4: Validación Conversacional',
-    description: 'Técnicas de validación y optimización para conversaciones de IA. Mejora tu presencia en diálogos generativos.',
-    files: [
-      {
-        name: 'Guía Completa - Validación Conversacional',
-        fileName: 'guia-completa-modulo-f4.pdf',
-        filePath: 'f4/guia-completa-modulo-f4.pdf',
-        type: 'pdf',
-        size: '3.5 MB',
-        description: 'Estrategias avanzadas de validación conversacional, optimización para diálogos de IA y técnicas de mejora continua.'
-      }
-    ]
-  },
-  {
-    moduleId: 'f5',
-    title: 'Módulo F5: Mantenimiento Evolutivo',
-    description: 'Estrategias de mantenimiento y evolución continua. Mantén tu estrategia GEO actualizada con los avances de IA.',
-    files: [
-      {
-        name: 'Guía Completa - Mantenimiento Evolutivo',
-        fileName: 'guia-completa-modulo-f5.pdf',
-        filePath: 'f5/guia-completa-modulo-f5.pdf',
-        type: 'pdf',
-        size: '2.9 MB',
-        description: 'Manual de mantenimiento evolutivo, estrategias de actualización continua y adaptación a nuevos modelos de IA.'
-      }
-    ]
-  }
-];
+const PREMIUM_CONTENT: PremiumContent[] = AVAILABLE_MODULE_IDS.map(id => ({
+  moduleId: id,
+  title: MODULES[id].name,
+  description: MODULES[id].description,
+  files: [
+    {
+      name: `Guía Completa - ${MODULES[id].shortName}`,
+      fileName: `guia-completa-modulo-${id}.pdf`,
+      filePath: `${id}/guia-completa-modulo-${id}.pdf`,
+      type: 'pdf' as const,
+      size: '3 MB',
+      description: `Manual completo del ${MODULES[id].name}.`,
+    }
+  ]
+}));
 
 const getFileIcon = (type: string) => {
   switch (type) {
