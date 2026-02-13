@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, Zap, Crown, Users } from "lucide-react";
@@ -7,145 +6,129 @@ import { Link } from "react-router-dom";
 import { MODULES, COMPLETE_COURSE } from "@/data/modules";
 
 const PricingSection = () => {
-  const modules = [
+  const plans = [
     {
       name: "F0 Diagnóstico",
       price: "0",
-      description: "Evaluación gratuita - ¿Necesitas GEO?",
+      description: "¿Necesitas GEO? Averígualo gratis.",
       icon: Users,
       features: [
-        "Diagnóstico completo de tu sitio web",
+        "Diagnóstico completo de tu sitio",
         "Identificación de problemas con IA",
-        "Introducción al framework GEO completo",
-        "Evaluación de necesidades específicas"
+        "Introducción al framework GEO",
+        "Sin registro necesario",
       ],
-      cta: "Empezar Diagnóstico Gratis",
-      ctaVariant: "default" as const,
-      popular: true,
-      link: "/curso/f0"
+      cta: "Empezar Gratis",
+      variant: "outline" as const,
+      link: "/curso/f0",
+      highlight: false,
     },
     {
-      name: "Módulos Individuales",
-      price: String(MODULES.f1.price),
-      description: "Cada módulo F1-F6 por separado",
-      icon: Zap,
-      features: [
-        "Acceso a módulo específico elegido",
-        "Contenido completo y detallado",
-        "Plantillas y checklists incluidos",
-        "Implementación paso a paso",
-        "Pago único, sin suscripciones"
-      ],
-      cta: "Elegir Módulo",
-      ctaVariant: "outline" as const,
-      popular: false,
-      link: "/checkout?type=module"
-    },
-    {
-      name: COMPLETE_COURSE.name,
+      name: "Curso Completo",
       price: String(COMPLETE_COURSE.price),
       originalPrice: String(COMPLETE_COURSE.originalPrice),
-      description: "Framework completo de optimización GEO",
+      description: "Todo el framework GEO en un pack.",
       icon: Crown,
-      features: COMPLETE_COURSE.features.concat([
-        `Ahorro de €${COMPLETE_COURSE.originalPrice - COMPLETE_COURSE.price} vs módulos individuales`
-      ]),
+      features: [
+        ...COMPLETE_COURSE.features,
+        `Ahorra €${(COMPLETE_COURSE.originalPrice ?? 0) - COMPLETE_COURSE.price} vs individual`,
+      ],
       cta: "Comprar Curso Completo",
-      ctaVariant: "default" as const,
-      popular: false,
-      link: "/checkout?type=complete"
-    }
+      variant: "default" as const,
+      link: "/checkout?plan=complete",
+      highlight: true,
+    },
+    {
+      name: "Módulo Individual",
+      price: String(MODULES.f1.price),
+      description: "Elige un módulo F1-F5.",
+      icon: Zap,
+      features: [
+        "Acceso a módulo específico",
+        "Guía PDF (15-25 páginas)",
+        "Checklist de implementación",
+        "Pago único",
+      ],
+      cta: "Elegir Módulo",
+      variant: "outline" as const,
+      link: "/checkout?type=module",
+      highlight: false,
+    },
   ];
 
   return (
-    <section id="precios" className="py-16">
+    <section id="precios" className="py-20 bg-muted/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-14">
           <Badge variant="outline" className="mb-4">
             <Star className="mr-2 h-4 w-4" />
-            Planes flexibles para cada necesidad
+            Precios transparentes
           </Badge>
-          
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
             Elige tu Plan GEO
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Empieza gratis y escala según tus resultados. Sin compromisos.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Empieza gratis. Sin suscripciones. Pago único.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {modules.map((module, index) => (
-            <Card 
-              key={index} 
-              className={`relative hover:shadow-xl transition-all duration-300 ${
-                module.popular ? 'border-accent shadow-lg scale-105' : ''
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`relative rounded-2xl bg-background p-6 card-elevated transition-all ${
+                plan.highlight
+                  ? 'border-2 border-accent ring-1 ring-accent/20 scale-[1.03] z-10'
+                  : 'border'
               }`}
             >
-              {module.popular && (
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-primary">
-                  Empieza Aquí
+              {plan.highlight && (
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-primary font-bold px-4">
+                  Más popular
                 </Badge>
               )}
-              
-              <CardHeader className="text-center pb-4">
-                <div className="flex justify-center mb-4">
-                  <div className={`p-3 rounded-full ${module.popular ? 'bg-accent' : 'bg-muted'}`}>
-                    <module.icon className={`h-6 w-6 ${module.popular ? 'text-primary' : 'text-muted-foreground'}`} />
-                  </div>
+
+              <div className="text-center mb-6 pt-2">
+                <div className={`inline-flex p-3 rounded-xl mb-4 ${plan.highlight ? 'bg-accent/15' : 'bg-muted'}`}>
+                  <plan.icon className={`h-6 w-6 ${plan.highlight ? 'text-accent' : 'text-muted-foreground'}`} />
                 </div>
-                
-                <CardTitle className="text-2xl font-bold">{module.name}</CardTitle>
-                <p className="text-muted-foreground text-sm">{module.description}</p>
-                
-                <div className="mt-4">
-                  <div className="flex items-baseline justify-center">
-                    <span className="text-4xl font-bold text-primary">€{module.price}</span>
-                    {module.originalPrice && (
-                      <span className="text-lg text-muted-foreground line-through ml-2">€{module.originalPrice}</span>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground text-center mt-1">Pago único</p>
+                <h3 className="text-xl font-bold text-primary">{plan.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
+                <div className="mt-4 flex items-baseline justify-center gap-2">
+                  {plan.originalPrice && (
+                    <span className="text-lg text-muted-foreground line-through">€{plan.originalPrice}</span>
+                  )}
+                  <span className="text-4xl font-bold text-primary">€{plan.price}</span>
                 </div>
-              </CardHeader>
+                <p className="text-xs text-muted-foreground mt-1">Pago único</p>
+              </div>
 
-              <CardContent className="space-y-6">
-                <ul className="space-y-3">
-                  {module.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+              <ul className="space-y-3 mb-6">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm">
+                    <Check className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
 
-                <Button 
-                  variant={module.ctaVariant} 
-                  className="w-full" 
-                  size="lg"
-                  asChild
-                >
-                  <Link to={module.link}>
-                    {module.cta}
-                  </Link>
-                </Button>
-
-                {module.name !== "F1 Gratis" && (
-                  <p className="text-xs text-center text-muted-foreground">
-                    Acceso inmediato • Producto digital
-                  </p>
-                )}
-              </CardContent>
-            </Card>
+              <Button
+                variant={plan.variant}
+                className={`w-full rounded-xl py-5 font-semibold ${
+                  plan.highlight ? 'btn-glow bg-accent hover:bg-accent/90 text-primary' : ''
+                }`}
+                size="lg"
+                asChild
+              >
+                <Link to={plan.link}>{plan.cta}</Link>
+              </Button>
+            </div>
           ))}
         </div>
 
-        {/* Simplified call to action */}
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground">
-            Aprende paso a paso • Implementa a tu ritmo • Aprendizaje autónomo
-          </p>
-        </div>
+        <p className="text-center text-sm text-muted-foreground mt-10">
+          Aprende paso a paso · Implementa a tu ritmo · Acceso inmediato
+        </p>
       </div>
     </section>
   );
