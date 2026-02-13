@@ -5,6 +5,7 @@ import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import GeoTerm from "@/components/GeoTerm";
 import PremiumContentGate from "@/components/PremiumContentGate";
+import ModuleCTA from "@/components/ModuleCTA";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -182,39 +183,8 @@ const ModuloF1Page = () => {
             />
           </section>
 
-          {/* Preview de Contenido Premium */}
-          <div className="mb-12 p-6 bg-muted/30 rounded-lg">
-            <h3 className="text-lg font-semibold text-primary mb-4 text-center">Vista Previa del Contenido Premium</h3>
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
-              <div className="space-y-2">
-                <h4 className="font-medium">✅ Incluido en F1:</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Checklist completo de implementación</li>
-                  <li>• Configuración detallada de robots.txt</li>
-                  <li>• Plantillas de datos estructurados</li>
-                  <li>• Prompt listo para usar con LLMs</li>
-                </ul>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-medium">🎯 Resultados esperados:</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Contenido accesible para LLMs</li>
-                  <li>• Base técnica sólida para GEO</li>
-                  <li>• Preparación para módulos F2-F6</li>
-                  <li>• Implementación en 2-3 horas</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <Button asChild size="lg">
-                <Link to="/checkout?type=module&module=f1">
-                  Acceder al Módulo F1 - €10
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+          {/* CTA de compra */}
+          <ModuleCTA moduleId="f1" className="mb-12" />
 
           {/* Navegación de Módulos */}
           <div className="flex justify-between items-center mb-16">
@@ -225,8 +195,8 @@ const ModuloF1Page = () => {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link to="/checkout?type=complete">
-                Ver Curso Completo F1-F6
+              <Link to="/curso/f2">
+                Siguiente: F2
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>

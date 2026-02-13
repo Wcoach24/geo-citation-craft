@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { CheckCircle, CreditCard, Loader2, ArrowLeft } from 'lucide-react';
+import { CheckCircle, CreditCard, Loader2, ArrowLeft, Shield, Zap, Clock, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useToast } from '@/hooks/use-toast';
@@ -26,9 +24,6 @@ export default function CheckoutPage() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    // No auth required - guests can checkout
-    
-    // Verificar parámetros de URL
     const moduleParam = searchParams.get('module');
     const planParam = searchParams.get('plan');
     
@@ -57,8 +52,8 @@ export default function CheckoutPage() {
       description: 'Acceso a un módulo específico del curso.',
       price: 10,
       features: [
-        'Guía PDF especializada del módulo',
-        'Metodología práctica detallada',
+        'Guía PDF especializada (15-25 páginas)',
+        'Checklist de implementación',
         'Acceso permanente al contenido'
       ]
     }
@@ -66,77 +61,40 @@ export default function CheckoutPage() {
 
   const handleCheckout = async () => {
     if (!selectedPlan) {
-      toast({
-        title: "Selecciona un plan",
-        description: "Debes seleccionar un plan antes de continuar.",
-        variant: "destructive",
-      });
+      toast({ title: "Selecciona un plan", description: "Debes seleccionar un plan antes de continuar.", variant: "destructive" });
       return;
     }
-
     if (selectedPlan === 'individual' && !selectedModule) {
-      toast({
-        title: "Selecciona un módulo",
-        description: "Debes seleccionar un módulo específico.",
-        variant: "destructive",
-      });
+      toast({ title: "Selecciona un módulo", description: "Debes seleccionar un módulo específico.", variant: "destructive" });
       return;
     }
 
-    // Verificar si ya tiene acceso (solo para usuarios registrados)
     if (user) {
       if (selectedPlan === 'complete' && userAccess.length === 5) {
-        toast({
-          title: "Ya tienes acceso",
-          description: "Ya tienes acceso completo a todos los módulos disponibles.",
-          variant: "destructive",
-        });
+        toast({ title: "Ya tienes acceso", description: "Ya tienes acceso completo a todos los módulos.", variant: "destructive" });
         return;
       }
-
       if (selectedPlan === 'individual' && selectedModule && userAccess.includes(selectedModule)) {
-        toast({
-          title: "Ya tienes acceso",
-          description: `Ya tienes acceso al ${modules[selectedModule as keyof typeof modules].name}.`,
-          variant: "destructive",
-        });
+        toast({ title: "Ya tienes acceso", description: `Ya tienes acceso al ${modules[selectedModule as keyof typeof modules].name}.`, variant: "destructive" });
         return;
       }
     }
 
     setIsProcessing(true);
-
     try {
       const productKey = selectedPlan === 'complete' ? 'complete' : selectedModule;
       const stripeIds = getStripeIds(productKey);
-
-      if (!stripeIds) {
-        throw new Error('Producto no encontrado');
-      }
+      if (!stripeIds) throw new Error('Producto no encontrado');
 
       const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: {
-          priceId: stripeIds.priceId,
-          productType: selectedPlan,
-          moduleId: selectedModule || undefined
-        }
+        body: { priceId: stripeIds.priceId, productType: selectedPlan, moduleId: selectedModule || undefined }
       });
-
       if (error) throw error;
-
-      if (data?.url) {
-        // Redirect in same tab to avoid losing context
-        window.location.href = data.url;
-      } else {
-        throw new Error('No se pudo crear la sesión de checkout');
-      }
+      if (data?.url) { window.location.href = data.url; } 
+      else { throw new Error('No se pudo crear la sesión de checkout'); }
     } catch (error) {
       console.error('Error en checkout:', error);
-      toast({
-        title: "Error al procesar el pago",
-        description: error instanceof Error ? error.message : "Ha ocurrido un error inesperado.",
-        variant: "destructive",
-      });
+      toast({ title: "Error al procesar el pago", description: error instanceof Error ? error.message : "Ha ocurrido un error inesperado.", variant: "destructive" });
     } finally {
       setIsProcessing(false);
     }
@@ -144,236 +102,195 @@ export default function CheckoutPage() {
 
   const currentPlan = plans[selectedPlan as keyof typeof plans];
   const currentModule = selectedModule ? modules[selectedModule as keyof typeof modules] : null;
+  const displayPrice = selectedPlan === 'complete' ? currentPlan?.price : (currentModule?.price || 10);
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Checkout - Curso GEO</title>
-        <meta name="description" content="Completa tu compra del curso GEO y comienza a optimizar para IA hoy mismo." />
+        <title>Checkout - Curso GEO | esGEO</title>
+        <meta name="description" content="Completa tu compra del curso GEO y comienza a optimizar para IA." />
       </Helmet>
 
       <Header />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
           <div className="mb-8">
             <Link to="/curso" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Volver al curso
             </Link>
             <h1 className="text-3xl font-bold">Finalizar compra</h1>
-            <p className="text-muted-foreground mt-2">
-              Completa el pago y descarga tu contenido inmediatamente
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Selección de plan */}
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Selecciona tu plan</CardTitle>
-                  <CardDescription>
-                    Elige entre el curso completo o módulos individuales
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {/* Curso completo */}
-                  <div 
-                    className={`p-4 rounded-lg border-2 cursor-pointer transition-colors ${
-                      selectedPlan === 'complete' 
-                        ? 'border-primary bg-primary/5' 
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                    onClick={() => setSelectedPlan('complete')}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="font-semibold">Curso GEO Completo</h3>
-                        <p className="text-sm text-muted-foreground">5 módulos fundamentales (F1-F5)</p>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm text-muted-foreground line-through">€60</span>
-                          <span className="font-bold text-lg">€50</span>
+          <div className="grid md:grid-cols-5 gap-8">
+            {/* Selección de plan - 3 cols */}
+            <div className="md:col-span-3 space-y-4">
+              {/* Curso Completo - Destacado */}
+              <div
+                className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${
+                  selectedPlan === 'complete' 
+                    ? 'border-accent bg-accent/5 shadow-md' 
+                    : 'border-border hover:border-accent/50'
+                }`}
+                onClick={() => setSelectedPlan('complete')}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-lg">Curso GEO Completo</h3>
+                      <Badge className="bg-accent text-primary text-xs">Mejor valor</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">5 módulos fundamentales (F1-F5) + guías PDF</p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <span className="text-sm text-muted-foreground line-through">€60</span>
+                    <span className="font-bold text-2xl text-primary ml-2">€50</span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {COMPLETE_COURSE.features.slice(0, 4).map((f, i) => (
+                    <span key={i} className="text-xs text-muted-foreground flex items-center gap-1">
+                      <CheckCircle className="h-3 w-3 text-accent flex-shrink-0" />
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Módulo Individual */}
+              <div
+                className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${
+                  selectedPlan === 'individual' 
+                    ? 'border-accent bg-accent/5 shadow-md' 
+                    : 'border-border hover:border-accent/50'
+                }`}
+                onClick={() => setSelectedPlan('individual')}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-bold text-lg">Módulo Individual</h3>
+                    <p className="text-sm text-muted-foreground">Elige un módulo específico</p>
+                  </div>
+                  <span className="font-bold text-2xl text-primary">€10</span>
+                </div>
+              </div>
+
+              {/* Selector de módulos */}
+              {selectedPlan === 'individual' && (
+                <div className="space-y-2 pl-4 border-l-2 border-accent/30">
+                  {Object.entries(modules).map(([key, module]) => {
+                    const isComingSoon = module.comingSoon;
+                    return (
+                      <div 
+                        key={key}
+                        className={`p-3 rounded-lg border cursor-pointer transition-all text-sm ${
+                          isComingSoon ? 'opacity-40 cursor-not-allowed' 
+                          : selectedModule === key ? 'border-accent bg-accent/5' 
+                          : 'border-border hover:border-accent/50'
+                        }`}
+                        onClick={() => !isComingSoon && setSelectedModule(key)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">{module.shortName}</span>
+                          {isComingSoon && <Badge variant="secondary" className="text-xs">Próximamente</Badge>}
                         </div>
-                        <Badge variant="secondary" className="text-xs">Ahorra €10</Badge>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Módulo individual */}
-                  <div 
-                    className={`p-4 rounded-lg border-2 cursor-pointer transition-colors ${
-                      selectedPlan === 'individual' 
-                        ? 'border-primary bg-primary/5' 
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                    onClick={() => setSelectedPlan('individual')}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="font-semibold">Módulo Individual</h3>
-                        <p className="text-sm text-muted-foreground">Acceso a un módulo específico</p>
-                      </div>
-                      <div className="text-right">
-                        <span className="font-bold text-lg">€10</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Selector de módulo */}
-                  {selectedPlan === 'individual' && (
-                    <div className="mt-4">
-                      <label className="text-sm font-medium mb-2 block">Selecciona el módulo:</label>
-                      <div className="space-y-2">
-                        {Object.entries(modules).map(([key, module]) => {
-                          const isComingSoon = 'comingSoon' in module && module.comingSoon;
-                          return (
-                            <div 
-                              key={key}
-                              className={`p-3 rounded border transition-colors ${
-                                isComingSoon 
-                                  ? 'opacity-50 cursor-not-allowed border-border' 
-                                  : selectedModule === key 
-                                    ? 'border-primary bg-primary/5 cursor-pointer' 
-                                    : 'border-border hover:border-primary/50 cursor-pointer'
-                              }`}
-                              onClick={() => !isComingSoon && setSelectedModule(key)}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="font-medium text-sm">{module.name}</div>
-                                {isComingSoon && <Badge variant="secondary" className="text-xs">Próximamente</Badge>}
-                              </div>
-                              <div className="text-xs text-muted-foreground">{module.description}</div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
-            {/* Resumen de compra */}
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Resumen de compra</CardTitle>
+            {/* Resumen - 2 cols */}
+            <div className="md:col-span-2">
+              <Card className="sticky top-24 shadow-lg border-accent/20">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg">Resumen</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {selectedPlan && currentPlan && (
+                  {selectedPlan && currentPlan ? (
                     <>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-medium">
-                            {selectedPlan === 'complete' 
-                              ? currentPlan.name 
-                              : currentModule?.name || 'Selecciona un módulo'
-                            }
-                          </h3>
-                          <p className="text-sm text-muted-foreground">
-                            {selectedPlan === 'complete' 
-                              ? currentPlan.description 
-                              : currentModule?.description || ''
-                            }
-                          </p>
-                        </div>
+                      <div>
+                        <h3 className="font-semibold">
+                          {selectedPlan === 'complete' ? currentPlan.name : currentModule?.shortName || 'Selecciona un módulo'}
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {selectedPlan === 'complete' ? currentPlan.description : currentModule?.description || ''}
+                        </p>
+                      </div>
+
+                      <Separator />
+
+                      <ul className="space-y-2">
+                        {(selectedPlan === 'complete' ? currentPlan.features : plans.individual.features).map((feature, i) => (
+                          <li key={i} className="flex items-start text-sm gap-2">
+                            <CheckCircle className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Separator />
+
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold text-lg">Total:</span>
                         <div className="text-right">
-                          {selectedPlan === 'complete' && 'originalPrice' in currentPlan && currentPlan.originalPrice && (
-                            <div className="text-sm text-muted-foreground line-through">
-                              €{currentPlan.originalPrice}
-                            </div>
+                          {selectedPlan === 'complete' && (
+                            <span className="text-sm text-muted-foreground line-through mr-2">€60</span>
                           )}
-                          <div className="font-bold">
-                            €{selectedPlan === 'complete' ? currentPlan.price : (currentModule?.price || 10)}
-                          </div>
+                          <span className="font-bold text-2xl text-primary">€{displayPrice}</span>
                         </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="space-y-2">
-                        <h4 className="font-medium text-sm">Incluye:</h4>
-                        <ul className="space-y-1">
-                          {(selectedPlan === 'complete' ? currentPlan.features : ['Acceso completo al módulo', 'Contenido premium', 'Soporte estándar']).map((feature, index) => (
-                            <li key={index} className="flex items-center text-sm">
-                              <CheckCircle className="mr-2 h-4 w-4 text-green-500 flex-shrink-0" />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <Separator />
-
-                      <div className="flex justify-between items-center font-bold">
-                        <span>Total:</span>
-                        <span>€{selectedPlan === 'complete' ? currentPlan.price : (currentModule?.price || 10)}</span>
                       </div>
 
                       <Button 
                         onClick={handleCheckout}
                         disabled={isProcessing || !selectedPlan || (selectedPlan === 'individual' && !selectedModule)}
-                        className="w-full"
+                        className="w-full bg-accent hover:bg-accent/90 text-primary font-bold py-6 text-base"
                         size="lg"
                       >
                         {isProcessing ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Procesando...
-                          </>
+                          <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Procesando...</>
                         ) : (
-                          <>
-                            <CreditCard className="mr-2 h-4 w-4" />
-                            Proceder al pago
-                          </>
+                          <><CreditCard className="mr-2 h-5 w-5" /> Pagar €{displayPrice}</>
                         )}
                       </Button>
 
-                      <p className="text-xs text-center text-muted-foreground">
-                        Pago seguro procesado por Stripe. Acceso inmediato tras la compra.
-                      </p>
+                      {/* Trust signals */}
+                      <div className="space-y-2 pt-2">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Shield className="h-3.5 w-3.5 flex-shrink-0" />
+                          Pago seguro cifrado con Stripe
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+                          Acceso inmediato tras el pago
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <FileText className="h-3.5 w-3.5 flex-shrink-0" />
+                          Descarga tu PDF al instante
+                        </div>
+                      </div>
                     </>
-                  )}
-
-                  {!selectedPlan && (
-                    <div className="text-center py-8">
-                      <p className="text-muted-foreground">Selecciona un plan para continuar</p>
+                  ) : (
+                    <div className="text-center py-6">
+                      <FileText className="h-10 w-10 text-muted-foreground/30 mx-auto mb-3" />
+                      <p className="text-muted-foreground text-sm">Selecciona un plan para ver el resumen</p>
                     </div>
                   )}
                 </CardContent>
               </Card>
-
-              {/* Información de usuario */}
-              {user && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Tu cuenta</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm">
-                      <strong>Email:</strong> {user.email}
-                    </p>
-                    {userAccess.length > 0 && (
-                      <div className="mt-2">
-                        <p className="text-sm font-medium">Acceso actual:</p>
-                        <div className="flex flex-wrap gap-1 mt-1">
-                          {userAccess.map(moduleId => (
-                            <Badge key={moduleId} variant="secondary" className="text-xs">
-                              {modules[moduleId as keyof typeof modules]?.name || moduleId}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              )}
             </div>
           </div>
+
+          {/* User access info */}
+          {user && userAccess.length > 0 && (
+            <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+              <p className="text-sm text-muted-foreground">
+                <strong>Tu cuenta:</strong> {user.email} · Ya tienes acceso a: {userAccess.map(id => modules[id as keyof typeof modules]?.shortName || id).join(', ')}
+              </p>
+            </div>
+          )}
         </div>
       </main>
 

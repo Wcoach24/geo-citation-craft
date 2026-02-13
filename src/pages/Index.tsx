@@ -36,21 +36,20 @@ const Index = () => {
         <main role="main">
           <HeroSection />
 
-          <WhatIsGeoSection />
-          
-          {/* Nuestro caso como evidencia de autoridad temprana */}
-          <CasosDestacadosSection />
-          
-          {/* Social Proof temprano para generar confianza */}
           <SocialProofSection />
           
-          {/* Transparencia sobre limitaciones */}
-          <LimitationsSection />
-          
-          {/* Pricing simplificado por módulos */}
-          <PricingSection />
-          
+          {/* Metodología con módulos */}
           <MethodologySection />
+          
+          {/* Pricing */}
+          <PricingSection />
+
+          {/* Casos reales como evidencia */}
+          <CasosDestacadosSection />
+          
+          {/* Transparencia después del pitch */}
+          <LimitationsSection />
+
           <CtaSection />
         </main>
 

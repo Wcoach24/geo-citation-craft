@@ -1,75 +1,50 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Clock, Users, Gift } from "lucide-react";
+import { ArrowRight, Shield, Zap, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
-import LeadMagnetModal from "./LeadMagnetModal";
 
 const CtaSection = () => {
-  const urgencyElements = [
-    {
-      icon: Users,
-      text: "1,247 profesionales ya están optimizando"
-    },
-    {
-      icon: Clock,
-      text: "Únete antes de que suba el precio"
-    }
-  ];
-
-  const leadMagnetBenefits = [
-    "15 puntos de verificación GEO",
-    "Plantilla de auditoría técnica",
-    "Ejemplos reales de optimización",
-    "Checklist pre-implementación"
-  ];
-
   return (
-    <section className="py-16 bg-gradient-to-br from-accent/10 via-primary/5 to-accent/10">
+    <section className="py-20 bg-gradient-to-br from-primary to-primary/90 text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Urgency Indicators */}
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            {urgencyElements.map((element, index) => (
-              <Badge key={index} variant="secondary" className="text-sm">
-                <element.icon className="mr-2 h-4 w-4" />
-                {element.text}
-              </Badge>
-            ))}
-          </div>
-
-          {/* Main CTA */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-            Comienza tu Transformación GEO Hoy
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Empieza a Optimizar para IA Hoy
           </h2>
           
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            No esperes a que tu competencia se adelante. Empieza a ser citado por IA desde hoy mismo.
+          <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
+            Cada día que pasa, tu competencia avanza en posicionarse ante los modelos de IA. 
+            Empieza con el diagnóstico gratuito F0 o accede al framework completo.
           </p>
 
-          {/* CTA Principal */}
-          <div className="flex justify-center mb-8">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-semibold px-8" asChild>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary font-bold px-8 py-6 text-lg" asChild>
+              <Link to="/checkout?plan=complete">
+                <Zap className="mr-2 h-5 w-5" />
+                Curso Completo — €50
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 py-6 text-lg" asChild>
               <Link to="/curso/f0">
-                <ArrowRight className="mr-2 h-5 w-5" />
-                Empezar con F0 Gratis
+                Empezar Gratis con F0
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
 
-
-          {/* Social Proof Mini */}
-          <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-r from-accent to-primary"></div>
-                ))}
-              </div>
-              <span>+1,200 optimizadores activos</span>
-            </div>
-            <div>⭐⭐⭐⭐⭐ 4.9/5 (47 reseñas)</div>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-primary-foreground/70">
+            <span className="flex items-center gap-1.5">
+              <Shield className="h-4 w-4" />
+              Pago seguro con Stripe
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-4 w-4" />
+              Acceso inmediato
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Zap className="h-4 w-4" />
+              Pago único, sin suscripción
+            </span>
           </div>
         </div>
       </div>
