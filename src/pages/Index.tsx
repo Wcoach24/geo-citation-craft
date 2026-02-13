@@ -11,7 +11,6 @@ import CasosDestacadosSection from "@/components/CasosDestacadosSection";
 import LimitationsSection from "@/components/LimitationsSection";
 
 import CtaSection from "@/components/CtaSection";
-import InlineEmailCapture from "@/components/InlineEmailCapture";
 import TableOfContents from "@/components/TableOfContents";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 

@@ -43,6 +43,14 @@
     --geo-gray: 0 0% 91.8%;
     --geo-gray-text: 0 0% 64%;
 
+    /* Rich design tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(213 65% 12%) 0%, hsl(213 65% 20%) 50%, hsl(220 60% 18%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(170 65% 52%) 0%, hsl(170 75% 42%) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    --shadow-glow: 0 0 40px -10px hsl(170 65% 52% / 0.4);
+    --shadow-card: 0 4px 24px -4px hsl(213 65% 12% / 0.08);
+    --shadow-card-hover: 0 12px 40px -8px hsl(213 65% 12% / 0.15);
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -107,5 +115,70 @@
   
   .section-anchor {
     @apply scroll-mt-20;
+  }
+
+  .btn-glow {
+    @apply relative;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 50px -8px hsl(170 65% 52% / 0.5);
+  }
+
+  .card-elevated {
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Animated gradient background for hero */
+  .hero-gradient {
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, hsl(170 65% 52% / 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Pulse animation for CTAs */
+  @keyframes subtle-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(170 65% 52% / 0.3); }
+    50% { box-shadow: 0 0 0 8px hsl(170 65% 52% / 0); }
+  }
+
+  .cta-pulse {
+    animation: subtle-pulse 3s ease-in-out infinite;
+  }
+
+  /* Fade-in animation */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation: fade-up 0.6s ease-out 0.1s both;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: fade-up 0.6s ease-out 0.2s both;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation: fade-up 0.6s ease-out 0.3s both;
   }
 }
