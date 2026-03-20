@@ -140,13 +140,22 @@
   }
 
   .btn-cta {
-    @apply bg-accent text-white font-bold px-8 py-4 rounded-xl cursor-pointer transition-all duration-200;
+    @apply bg-accent text-white font-bold px-8 py-4 rounded-xl cursor-pointer transition-all duration-200 inline-flex items-center justify-center;
     box-shadow: var(--cta-glow);
+    pointer-events: auto;
   }
 
-  .btn-cta:hover {
+  .btn-cta:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: var(--cta-glow-hover);
+  }
+
+  .btn-cta:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-cta:focus-visible {
+    outline: none;
   }
 
   .card-elevated {

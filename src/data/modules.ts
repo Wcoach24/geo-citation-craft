@@ -24,7 +24,6 @@ export interface CompleteCourseInfo {
   price: number;
   originalPrice: number;
   launchPrice?: boolean;
-  guarantee?: string;
   stripeIds: {
     priceId: string;
     productId: string;
@@ -97,7 +96,6 @@ export const COMPLETE_COURSE = {
   price: 47,
   originalPrice: 197,
   launchPrice: true,
-  guarantee: '14 días de garantía — si no te convence, te devolvemos el dinero',
   stripeIds: { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' },
   features: [
     '5 módulos fundamentales (F1-F5)',
@@ -105,7 +103,6 @@ export const COMPLETE_COURSE = {
     'Metodología práctica paso a paso',
     'Casos de estudio reales incluidos',
     'Actualizaciones de contenido gratuitas',
-    'Garantía de 14 días',
   ],
 };
 

@@ -23,6 +23,7 @@ import {
 import { MODULES, COMPLETE_COURSE } from '@/data/modules';
 import { useAuth } from '@/contexts/AuthContext';
 import { useVisitorState } from '@/hooks/useVisitorState';
+import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import EmailCapture from '@/components/EmailCapture';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
@@ -31,6 +32,7 @@ const CursoGeoPage = () => {
   const navigate = useNavigate();
   const { user, userAccess } = useAuth();
   const { visitorState, visitCount, isFromAI } = useVisitorState();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [showMobileCTA, setShowMobileCTA] = useState(false);
 
@@ -106,11 +108,6 @@ const CursoGeoPage = () => {
       answer: 'No, GEO complementa al SEO. Mientras SEO te posiciona en Google, GEO te hace citado por ChatGPT, Gemini y Perplexity. El 2024 ha demostrado que necesitas ambos: posicionamiento en buscadores tradicionales + presencia en respuestas de IA.',
     },
     {
-      id: 'faq-garantia',
-      question: '¿Hay garantía de devolución?',
-      answer: 'Sí, ofrecemos garantía de 14 días. Si después de acceder al curso no estás satisfecho, te devolvemos el dinero sin preguntas.',
-    },
-    {
       id: 'faq-prerrequisitos',
       question: '¿Puedo seguir el curso sin conocimientos técnicos?',
       answer: 'Completamente. El curso comienza desde cero en F1 y progresa gradualmente. No necesitas saber HTML, CSS o SQL. Los módulos técnicos incluyen explicaciones paso a paso.',
@@ -157,6 +154,11 @@ const CursoGeoPage = () => {
     } catch (err) {
       console.error('Checkout error:', err);
       setIsLoading(false);
+      toast({
+        title: "Error",
+        description: "No se pudo iniciar el pago. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -192,7 +194,7 @@ const CursoGeoPage = () => {
         <title>Curso GEO | Aprende Generative Engine Optimization | esGEO</title>
         <meta
           name="description"
-          content="Curso completo de GEO: aprende a ser citado por ChatGPT, Gemini y Perplexity. 5 módulos (F1-F5), garantía de 14 días, acceso de por vida."
+          content="Curso completo de GEO: aprende a ser citado por ChatGPT, Gemini y Perplexity. 5 módulos (F1-F5), acceso de por vida."
         />
         <link rel="canonical" href="https://esgeo.ai/curso" />
         <meta name="citation_title" content="Curso GEO: Generative Engine Optimization" />
@@ -495,7 +497,7 @@ const CursoGeoPage = () => {
                   <button
                     onClick={handleCheckout}
                     disabled={isLoading}
-                    className="btn-cta w-full md:w-auto text-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent flex items-center justify-center gap-2"
+                    className="btn-cta w-full md:w-auto text-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent inline-flex items-center justify-center gap-2"
                   >
                     {isLoading ? (
                       <>
@@ -507,11 +509,11 @@ const CursoGeoPage = () => {
                     )}
                   </button>
 
-                  {/* Guarantee */}
+                  {/* Trust Message */}
                   <div className="mt-8 p-4 bg-background rounded-lg border border-border">
                     <div className="flex items-start gap-3 justify-center">
                       <Shield className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-muted-foreground">{COMPLETE_COURSE.guarantee}</p>
+                      <p className="text-sm text-muted-foreground">Acceso inmediato tras el pago. Descarga tus PDFs al instante.</p>
                     </div>
                   </div>
 
