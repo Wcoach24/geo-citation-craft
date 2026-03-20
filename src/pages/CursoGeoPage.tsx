@@ -162,7 +162,7 @@ const CursoGeoPage = () => {
   };
 
   const handleFAQInteraction = (faqId: string) => {
-    window.clarity?.('event', 'faq_interaction', { faq: faqId });
+    (window as any).clarity?.('event', 'faq_interaction', { faq: faqId });
   };
 
   // Determine hero content based on visitor state
