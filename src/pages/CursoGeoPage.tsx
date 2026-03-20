@@ -398,21 +398,24 @@ const CursoGeoPage = () => {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-accent mb-2">Visitantes</div>
-                <p className="text-muted-foreground">
-                  Llegan directamente desde Gemini (dato real de Clarity)
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-2">1º</div>
+                <p className="font-semibold text-foreground mb-1">Primer curso de GEO en español</p>
+                <p className="text-sm text-muted-foreground">
+                  Pioneros en formación de Generative Engine Optimization
                 </p>
               </div>
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-accent mb-2">131</div>
-                <p className="text-muted-foreground">
-                  Consultas de búsqueda posicionadas en Google (GSC)
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-2">5</div>
+                <p className="font-semibold text-foreground mb-1">Modelos de IA cubiertos</p>
+                <p className="text-sm text-muted-foreground">
+                  ChatGPT · Gemini · Perplexity · Claude · Copilot
                 </p>
               </div>
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-accent mb-2">9.4</div>
-                <p className="text-muted-foreground">
-                  Posición media en consultas de GEO (GSC)
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-2">F1→F5</div>
+                <p className="font-semibold text-foreground mb-1">Metodología progresiva</p>
+                <p className="text-sm text-muted-foreground">
+                  De fundamentos a implementación avanzada
                 </p>
               </div>
             </div>

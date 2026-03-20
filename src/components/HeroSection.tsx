@@ -38,7 +38,7 @@ const HeroSection = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="px-10 py-7 text-lg border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" asChild>
+            <Button size="lg" className="btn-glow bg-accent hover:bg-accent/90 text-white font-bold px-10 py-7 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" asChild>
               <Link to="/checkout?plan=complete">
                 <Zap className="mr-2 h-5 w-5" />
                 Curso Completo — €{COMPLETE_COURSE.price}

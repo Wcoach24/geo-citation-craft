@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +12,7 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 174 43% 31%;
 
-    --accent: 21 90% 48%;
+    --accent: 160 96% 30%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -46,14 +45,14 @@
     /* Clay-inspired shadow tokens */
     --shadow-clay: 8px 8px 16px rgba(13, 148, 136, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.8);
     --shadow-clay-hover: 12px 12px 24px rgba(13, 148, 136, 0.15), -6px -6px 16px rgba(255, 255, 255, 0.9);
-    --cta-glow: 0 4px 14px rgba(234, 88, 12, 0.4);
-    --cta-glow-hover: 0 6px 20px rgba(234, 88, 12, 0.6);
+    --cta-glow: 0 4px 14px rgba(5, 150, 105, 0.4);
+    --cta-glow-hover: 0 6px 20px rgba(5, 150, 105, 0.6);
 
     /* Rich design tokens */
     --gradient-hero: linear-gradient(135deg, hsl(174 43% 31%) 0%, hsl(174 43% 25%) 50%, hsl(173 58% 19%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(21 90% 48%) 0%, hsl(21 90% 42%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(160 96% 30%) 0%, hsl(160 96% 25%) 100%);
     --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    --shadow-glow: 0 0 40px -10px hsl(21 90% 48% / 0.4);
+    --shadow-glow: 0 0 40px -10px hsl(160 96% 30% / 0.4);
     --shadow-card: 0 4px 24px -4px hsl(174 43% 31% / 0.08);
     --shadow-card-hover: 0 12px 40px -8px hsl(174 43% 31% / 0.15);
 
@@ -74,7 +73,7 @@
     --secondary: 174 43% 20%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 21 90% 58%;
+    --accent: 160 80% 40%;
     --accent-foreground: 0 0% 10%;
 
     --destructive: 0 62.8% 30.6%;
@@ -137,7 +136,7 @@
   }
 
   .btn-glow:hover {
-    box-shadow: 0 0 50px -8px hsl(21 90% 48% / 0.5);
+    box-shadow: 0 0 50px -8px hsl(160 96% 30% / 0.5);
   }
 
   .btn-cta {
@@ -186,8 +185,8 @@
 
   /* Pulse animation for CTAs */
   @keyframes subtle-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 hsl(21 90% 48% / 0.3); }
-    50% { box-shadow: 0 0 0 8px hsl(21 90% 48% / 0); }
+    0%, 100% { box-shadow: 0 0 0 0 hsl(160 96% 30% / 0.3); }
+    50% { box-shadow: 0 0 0 8px hsl(160 96% 30% / 0); }
   }
 
   .cta-pulse {
