@@ -80,7 +80,7 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const filePath = `${moduleId}/guia-completa-modulo-${moduleId}.pdf`;
+    const filePath = FILE_PATHS[moduleId];
 
     const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin.storage
       .from('premium-content')
