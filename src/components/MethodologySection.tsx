@@ -14,7 +14,7 @@ const MethodologySection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
-            <Badge variant="outline" className="mb-4 text-accent border-accent">
+            <Badge variant="outline" className="mb-4 text-accent border-accent cursor-default">
               Framework F1-F6
             </Badge>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
@@ -39,7 +39,7 @@ const MethodologySection = () => {
                     <div className="p-2.5 rounded-xl bg-accent/10 text-accent">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <Badge variant="outline" className="font-mono font-bold text-xs">
+                    <Badge variant="outline" className="font-mono font-bold text-xs cursor-default">
                       {key.toUpperCase()}
                     </Badge>
                   </div>
@@ -59,7 +59,7 @@ const MethodologySection = () => {
                   ) : (
                     <Link
                       to={`/curso/${key}`}
-                      className="inline-flex items-center text-sm font-medium text-accent hover:underline"
+                      className="inline-flex items-center text-sm font-medium text-accent hover:underline transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent rounded px-1 py-0.5"
                     >
                       Ver módulo
                       <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
@@ -73,7 +73,7 @@ const MethodologySection = () => {
           {/* CTA pack completo */}
           <div className="text-center rounded-2xl bg-muted/40 border border-accent/20 p-8">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <Badge className="bg-accent/15 text-accent border-accent/30">Ahorra €10</Badge>
+              <Badge className="bg-accent/15 text-accent border-accent/30 cursor-default">Ahorra €10</Badge>
             </div>
             <h3 className="text-2xl font-bold text-primary mb-2">
               Pack Completo F1-F5
@@ -86,7 +86,7 @@ const MethodologySection = () => {
               <span className="text-4xl font-bold text-primary">€{COMPLETE_COURSE.price}</span>
               <span className="text-sm text-muted-foreground">pago único</span>
             </div>
-            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-6 text-lg rounded-xl" asChild>
+            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-6 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" asChild>
               <Link to="/checkout?plan=complete">
                 <Zap className="mr-2 h-5 w-5" />
                 Comprar Curso Completo
@@ -95,7 +95,7 @@ const MethodologySection = () => {
             </Button>
             <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs text-muted-foreground">
               {COMPLETE_COURSE.features.slice(0, 3).map((f, i) => (
-                <span key={i} className="flex items-center gap-1">
+                <span key={i} className="flex items-center gap-1 cursor-default">
                   <CheckCircle className="h-3 w-3 text-accent" />
                   {f}
                 </span>

@@ -76,6 +76,8 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
 				mono: ['Roboto Mono', 'monospace'],
+				heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+				body: ['Inter', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {

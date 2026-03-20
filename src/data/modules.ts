@@ -17,6 +17,21 @@ export interface ModuleInfo {
   };
 }
 
+export interface CompleteCourseInfo {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  originalPrice: number;
+  launchPrice?: boolean;
+  guarantee?: string;
+  stripeIds: {
+    priceId: string;
+    productId: string;
+  };
+  features: string[];
+}
+
 export const MODULES: Record<string, ModuleInfo> = {
   f1: {
     id: 'f1',
@@ -79,8 +94,10 @@ export const COMPLETE_COURSE = {
   id: 'complete',
   name: 'Curso GEO Completo',
   description: 'Acceso completo a todos los módulos del curso GEO con metodología integral.',
-  price: 50,
-  originalPrice: 60,
+  price: 47,
+  originalPrice: 197,
+  launchPrice: true,
+  guarantee: '14 días de garantía — si no te convence, te devolvemos el dinero',
   stripeIds: { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' },
   features: [
     '5 módulos fundamentales (F1-F5)',
@@ -88,6 +105,7 @@ export const COMPLETE_COURSE = {
     'Metodología práctica paso a paso',
     'Casos de estudio reales incluidos',
     'Actualizaciones de contenido gratuitas',
+    'Garantía de 14 días',
   ],
 };
 

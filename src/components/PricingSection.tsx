@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Star, Zap, Crown, Users } from "lucide-react";
+import { Check, Star, Crown, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import { MODULES, COMPLETE_COURSE } from "@/data/modules";
+import { COMPLETE_COURSE } from "@/data/modules";
 
 const PricingSection = () => {
   const plans = [
@@ -38,29 +38,13 @@ const PricingSection = () => {
       link: "/checkout?plan=complete",
       highlight: true,
     },
-    {
-      name: "Módulo Individual",
-      price: String(MODULES.f1.price),
-      description: "Elige un módulo F1-F5.",
-      icon: Zap,
-      features: [
-        "Acceso a módulo específico",
-        "Guía PDF (15-25 páginas)",
-        "Checklist de implementación",
-        "Pago único",
-      ],
-      cta: "Elegir Módulo",
-      variant: "outline" as const,
-      link: "/checkout?type=module",
-      highlight: false,
-    },
   ];
 
   return (
     <section id="precios" className="py-20 bg-muted/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <Badge variant="outline" className="mb-4">
+          <Badge variant="outline" className="mb-4 cursor-default">
             <Star className="mr-2 h-4 w-4" />
             Precios transparentes
           </Badge>
@@ -83,7 +67,7 @@ const PricingSection = () => {
               }`}
             >
               {plan.highlight && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-primary font-bold px-4">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-primary font-bold px-4 cursor-default">
                   Más popular
                 </Badge>
               )}
@@ -114,7 +98,7 @@ const PricingSection = () => {
 
               <Button
                 variant={plan.variant}
-                className={`w-full rounded-xl py-5 font-semibold ${
+                className={`w-full rounded-xl py-5 font-semibold cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent ${
                   plan.highlight ? 'btn-glow bg-accent hover:bg-accent/90 text-primary' : ''
                 }`}
                 size="lg"
