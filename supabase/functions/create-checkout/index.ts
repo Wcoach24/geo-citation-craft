@@ -18,21 +18,19 @@ function getCorsHeaders(req: Request) {
 }
 
 interface CheckoutRequest {
-  priceId: string;
+  priceId?: string;
   productType: 'module' | 'complete';
   moduleId?: string;
   guestEmail?: string;
 }
 
-// Mapeo de productos y precios
-const PRODUCT_MAPPING = {
+// Mapeo de productos con precios que funcionan en Stripe
+const PRODUCT_MAPPING: Record<string, { priceId: string; productId: string }> = {
   'f1': { priceId: 'price_1SIElCLYFGrlrWdkg6xDfNK4', productId: 'prod_TEiBWaHzwUlXA5' },
   'f2': { priceId: 'price_1SIEr4LYFGrlrWdkKnenQc0o', productId: 'prod_TEiHYoMQxn8CW4' },
   'f3': { priceId: 'price_1SIEvqLYFGrlrWdkKyiOQhsz', productId: 'prod_TEiMYkaDdZNpHK' },
   'f4': { priceId: 'price_1SIEySLYFGrlrWdkPpmf0HrO', productId: 'prod_TEiPPFHp6tqbVK' },
-  'f5': { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
   'f6': { priceId: 'price_1SIF4xLYFGrlrWdkDBACLaKe', productId: 'prod_TEiV7zVpP97KSz' },
-  'complete': { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' }
 };
 
 serve(async (req) => {
@@ -63,23 +61,25 @@ serve(async (req) => {
       }
     }
 
-    console.log(`Creating checkout for ${user ? 'authenticated user' : 'guest'}${email ? ': ' + email : ''}`);
-
-    if (!priceId) {
-      throw new Error("Price ID is required");
-    }
-
-    // Verificar que el producto existe en nuestro mapeo
-    const productKey = productType === 'complete' ? 'complete' : moduleId;
-    const productInfo = PRODUCT_MAPPING[productKey as keyof typeof PRODUCT_MAPPING];
-    
-    if (!productInfo || productInfo.priceId !== priceId) {
-      throw new Error("Invalid product or price ID");
-    }
-
-    console.log(`Product info: ${JSON.stringify(productInfo)}`);
+    console.log(`Creating checkout for ${user ? 'authenticated user' : 'guest'}${email ? ': ' + email : ''}, type: ${productType}`);
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "");
+
+    // Determine product info based on type
+    let productInfo: { priceId?: string; productId?: string } | null = null;
+
+    if (productType === 'complete') {
+      // Curso completo: use inline price_data (no pre-existing price needed)
+      productInfo = { productId: 'complete' };
+    } else if (moduleId && PRODUCT_MAPPING[moduleId]) {
+      productInfo = PRODUCT_MAPPING[moduleId];
+    }
+
+    if (!productInfo) {
+      throw new Error("Invalid product type or module ID");
+    }
+
+    console.log(`Product: ${productType}, module: ${moduleId || 'n/a'}`);
 
     // Buscar o crear cliente en Stripe (solo si tenemos email)
     let customerId;
@@ -101,24 +101,41 @@ serve(async (req) => {
       }
     }
 
+    // Build line items based on product type
+    let lineItems: any[];
+
+    if (productType === 'complete') {
+      // Curso completo: inline price (no pre-existing Stripe price needed)
+      lineItems = [{
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: 'Curso GEO Completo',
+            description: '5 módulos fundamentales (F1-F5) + guías PDF profesionales (15-25 páginas cada una)',
+          },
+          unit_amount: 4700, // €47.00 in cents
+        },
+        quantity: 1,
+      }];
+    } else {
+      // Módulo individual: use existing Stripe price
+      lineItems = [{
+        price: productInfo.priceId,
+        quantity: 1,
+      }];
+    }
+
     // Crear sesión de checkout
     const sessionConfig: any = {
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       mode: "payment",
       success_url: `${req.headers.get("origin")}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/checkout`,
+      cancel_url: `${req.headers.get("origin")}/curso`,
       metadata: {
         user_id: user?.id || '',
         guest_email: user ? '' : (email || ''),
         product_type: productType,
         module_id: moduleId || '',
-        stripe_product_id: productInfo.productId,
-        stripe_price_id: priceId
       }
     };
 

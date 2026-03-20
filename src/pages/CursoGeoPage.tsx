@@ -141,7 +141,6 @@ const CursoGeoPage = () => {
 
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
-          priceId: COMPLETE_COURSE.stripeIds.priceId,
           productType: 'complete',
         },
       });
@@ -497,7 +496,7 @@ const CursoGeoPage = () => {
                   <button
                     onClick={handleCheckout}
                     disabled={isLoading}
-                    className="btn-cta w-full md:w-auto text-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent inline-flex items-center justify-center gap-2"
+                    className="btn-cta w-full md:w-auto text-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent flex items-center justify-center gap-2"
                   >
                     {isLoading ? (
                       <>
