@@ -18,6 +18,14 @@ function getCorsHeaders(req: Request) {
 
 const VALID_MODULES = ['f1', 'f2', 'f3', 'f4', 'f5'];
 
+const FILE_PATHS: Record<string, string> = {
+  f1: 'F1-Fundamentos-Accesibilidad-Generativa-PREMIUM.pdf',
+  f2: 'F2-Contexto-Semantico-PREMIUM.pdf',
+  f3: 'F3-Autoridad-Generativa-PREMIUM.pdf',
+  f4: 'F4-Validacion-Conversacional-PREMIUM.pdf',
+  f5: 'F5-Mantenimiento-Evolutivo-PREMIUM.pdf',
+};
+
 serve(async (req) => {
   const corsHeaders = getCorsHeaders(req);
   if (req.method === 'OPTIONS') {
@@ -72,7 +80,7 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const filePath = `${moduleId}/guia-completa-modulo-${moduleId}.pdf`;
+    const filePath = FILE_PATHS[moduleId];
 
     const { data: signedUrlData, error: signedUrlError } = await supabaseAdmin.storage
       .from('premium-content')
