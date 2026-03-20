@@ -26,13 +26,8 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
 
     setStatus('loading');
     try {
-      // Try to save to Supabase (may fail if table doesn't exist yet — that's ok)
-      try {
-        await supabase.from('email_leads').insert({ email, source });
-      } catch {
-        // Table may not exist — emails still captured in localStorage
-        console.log('Email saved locally, Supabase insert skipped');
-      }
+      // Email captured via localStorage (markAsLead below)
+      console.log('Email captured:', email, 'source:', source);
 
       markAsLead();
       setStatus('success');
