@@ -137,7 +137,7 @@ const CursoGeoPage = () => {
   const handleCheckout = async () => {
     try {
       setIsLoading(true);
-      window.clarity?.('event', 'cta_checkout_click');
+      (window as any).clarity?.('event', 'cta_checkout_click');
 
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: {
