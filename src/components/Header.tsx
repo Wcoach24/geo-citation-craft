@@ -56,14 +56,14 @@ const Header = () => {
                 </Link>
               </Button>
             ) : (
-              <Button asChild size="sm" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-orange-500/50 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
+              <Button asChild size="sm" className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-accent/50 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
                 <Link to="/curso#comprar" className="cursor-pointer">
                   Curso GEO — €47
                 </Link>
               </Button>
             )
           ) : (
-            <Button asChild size="sm" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-orange-500/50 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
+            <Button asChild size="sm" className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-accent/50 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
               <Link to="/curso#comprar" className="cursor-pointer">
                 Curso GEO — €47
               </Link>
@@ -87,21 +87,21 @@ const Header = () => {
             <div className="pb-4 border-b">
               {user ? (
                 userAccess.length > 0 ? (
-                  <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
                     <Link to="/dashboard" className="cursor-pointer">
                       <User className="h-4 w-4 mr-2" />
                       Mi Dashboard
                     </Link>
                   </Button>
                 ) : (
-                  <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
+                  <Button asChild className="w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
                     <Link to="/curso#comprar" className="cursor-pointer">
                       Curso GEO — €47
                     </Link>
                   </Button>
                 )
               ) : (
-                <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
+                <Button asChild className="w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
                   <Link to="/curso#comprar" className="cursor-pointer">
                     Curso GEO — €47
                   </Link>

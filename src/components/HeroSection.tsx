@@ -32,14 +32,14 @@ const HeroSection = () => {
 
           {/* Dual CTA */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-up-delay-3">
-            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-7 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" asChild>
+            <Button size="lg" className="btn-glow cta-pulse bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white border border-white/30 font-bold px-10 py-7 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white" asChild>
               <Link to="/curso/f0">
                 Empezar Gratis con F0
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <Button size="lg" className="btn-glow bg-accent hover:bg-accent/90 text-white font-bold px-10 py-7 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" asChild>
-              <Link to="/checkout?plan=complete">
+              <Link to="/curso#comprar">
                 <Zap className="mr-2 h-5 w-5" />
                 Curso Completo — €{COMPLETE_COURSE.price}
               </Link>
