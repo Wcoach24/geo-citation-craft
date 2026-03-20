@@ -15,6 +15,7 @@ const MetodologiaGeoPage = React.lazy(() => import("./pages/MetodologiaGeoPage")
 const CasosRealesPage = React.lazy(() => import("./pages/CasosRealesPage"));
 const GlosarioPage = React.lazy(() => import("./pages/GlosarioPage"));
 const RadarIAPage = React.lazy(() => import("./pages/RadarIAPage"));
+const GeoScorePage = React.lazy(() => import("./pages/GeoScorePage"));
 const AcercaDePage = React.lazy(() => import("./pages/AcercaDePage"));
 const EquipoPage = React.lazy(() => import("./pages/EquipoPage"));
 const PrivacidadPage = React.lazy(() => import("./pages/PrivacidadPage"));
@@ -43,6 +44,9 @@ const EstructuraWebParaLenguaje = React.lazy(() => import("./pages/articles/Estr
 const FormatoWikipediaIA = React.lazy(() => import("./pages/articles/FormatoWikipediaIA"));
 const DatosEstructuradosModelosGenerativos = React.lazy(() => import("./pages/articles/DatosEstructuradosModelosGenerativos"));
 const GeoVsSeoGuiaRapida = React.lazy(() => import("./pages/articles/GeoVsSeoGuiaRapida"));
+const ComoHacerQueChatGPTCiteTuWeb = React.lazy(() => import("./pages/articles/ComoHacerQueChatGPTCiteTuWeb"));
+const OptimizarWebParaPerplexity = React.lazy(() => import("./pages/articles/OptimizarWebParaPerplexity"));
+const QueEsGeoGuiaCompleta = React.lazy(() => import("./pages/articles/QueEsGeoGuiaCompleta"));
 
 const queryClient = new QueryClient();
 
@@ -73,6 +77,7 @@ function App() {
               <Route path="/casos-reales" element={<CasosRealesPage />} />
               <Route path="/glosario" element={<GlosarioPage />} />
               <Route path="/radar-ia" element={<RadarIAPage />} />
+              <Route path="/geo-score" element={<GeoScorePage />} />
               <Route path="/contenido-ia" element={<ContenidoIAPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
@@ -104,6 +109,9 @@ function App() {
               <Route path="/radar-ia/formato-wikipedia-ia" element={<FormatoWikipediaIA />} />
               <Route path="/radar-ia/datos-estructurados-modelos-generativos" element={<DatosEstructuradosModelosGenerativos />} />
               <Route path="/radar-ia/geo-vs-seo-diferencias" element={<GeoVsSeoGuiaRapida />} />
+              <Route path="/radar-ia/como-hacer-que-chatgpt-cite-tu-web" element={<ComoHacerQueChatGPTCiteTuWeb />} />
+              <Route path="/radar-ia/optimizar-web-para-perplexity" element={<OptimizarWebParaPerplexity />} />
+              <Route path="/radar-ia/que-es-geo-guia-completa" element={<QueEsGeoGuiaCompleta />} />
               
               {/* 404 */}
               <Route path="*" element={<NotFound />} />
