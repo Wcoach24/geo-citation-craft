@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Sparkles, Shield, Zap, CheckCircle, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
+import { COMPLETE_COURSE } from "@/data/modules";
 
 const HeroSection = () => {
   return (
     <section id="inicio" className="section-anchor hero-gradient py-20 lg:py-32 text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <article className="max-w-4xl mx-auto text-center">
-          <Badge className="mb-6 bg-accent/15 text-accent border-accent/30 hover:bg-accent/20 transition-colors backdrop-blur-sm animate-fade-up">
+          <Badge className="mb-6 bg-accent/15 text-accent border-accent/30 hover:bg-accent/20 transition-colors duration-200 backdrop-blur-sm animate-fade-up cursor-default">
             <Sparkles className="mr-2 h-4 w-4" />
             Primera metodología GEO en español
           </Badge>
@@ -31,31 +32,31 @@ const HeroSection = () => {
 
           {/* Dual CTA */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 animate-fade-up-delay-3">
-            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-7 text-lg rounded-xl" asChild>
+            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-7 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" asChild>
               <Link to="/curso/f0">
                 Empezar Gratis con F0
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="px-10 py-7 text-lg border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 rounded-xl" asChild>
+            <Button size="lg" variant="outline" className="px-10 py-7 text-lg border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary" asChild>
               <Link to="/checkout?plan=complete">
                 <Zap className="mr-2 h-5 w-5" />
-                Curso Completo — €50
+                Curso Completo — €{COMPLETE_COURSE.price}
               </Link>
             </Button>
           </div>
 
           {/* Value props */}
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-primary-foreground/60 animate-fade-up-delay-3">
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1.5 cursor-default">
               <CheckCircle className="h-4 w-4 text-accent" />
               5 módulos + guías PDF
             </span>
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1.5 cursor-default">
               <Shield className="h-4 w-4 text-accent" />
               Pago único, sin suscripción
             </span>
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1.5 cursor-default">
               <Bot className="h-4 w-4 text-accent" />
               Optimizado para 5 LLMs
             </span>

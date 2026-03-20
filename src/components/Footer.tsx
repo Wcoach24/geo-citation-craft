@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Mail, Twitter, Linkedin, Github, FileText, Bot } from "lucide-react";
+import EmailCapture from "./EmailCapture";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,6 +9,11 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground mt-0">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="mb-12 pb-12 border-b border-primary-foreground/10">
+          <p className="text-sm text-primary-foreground/70 mb-3">Recibe tips de GEO cada semana</p>
+          <EmailCapture compact source="footer" />
+        </div>
+
         <div className="grid md:grid-cols-4 gap-10">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
