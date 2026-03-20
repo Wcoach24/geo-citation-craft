@@ -130,7 +130,7 @@ const CursoGeoPage = () => {
   ];
 
   const handleHeroCTA = () => {
-    window.clarity?.('event', 'cta_hero_click');
+    (window as any).clarity?.('event', 'cta_hero_click');
     document.querySelector('#comprar')?.scrollIntoView({ behavior: 'smooth' });
   };
 
