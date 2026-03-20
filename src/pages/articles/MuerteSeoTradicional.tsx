@@ -212,6 +212,17 @@ const MuerteSeoTradicional = () => {
                 </Link>
               </div>
             </div>
+
+            {/* Internal Link to Course */}
+            <div className="mt-12 p-6 bg-accent/5 border border-accent/20 rounded-2xl text-center">
+              <h3 className="text-xl font-bold mb-2">¿Quieres dominar GEO?</h3>
+              <p className="text-muted-foreground mb-4">
+                Aprende la metodología completa en nuestro curso de 5 módulos.
+              </p>
+              <Link to="/curso#comprar" className="btn-cta inline-block cursor-pointer">
+                Ver el curso GEO — €47
+              </Link>
+            </div>
           </div>
         </main>
       </div>
