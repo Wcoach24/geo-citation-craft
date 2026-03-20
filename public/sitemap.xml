@@ -170,8 +170,29 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  
+
+  <url>
+    <loc>https://esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/radar-ia/optimizar-web-para-perplexity</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://esgeo.ai/radar-ia/que-es-geo-guia-completa</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+
   <!-- Casos Reales - Prioridad Media -->
   <url>
     <loc>https://esgeo.ai/casos</loc>
