@@ -279,7 +279,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                   Ejemplo mínimo de Article Schema para máxima citabilidad:
                 </p>
                 <div className="bg-card rounded p-4 text-xs overflow-x-auto mb-6 border border-accent/20">
-                  <pre className="text-muted-foreground">{
+                  <pre className="text-muted-foreground">{`{
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Título claro",
@@ -289,7 +289,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
     "name": "Tu Web"
   },
   "description": "Resumen de 160 caracteres"
-}</pre>
+}`}</pre>
                 </div>
               </section>
 
