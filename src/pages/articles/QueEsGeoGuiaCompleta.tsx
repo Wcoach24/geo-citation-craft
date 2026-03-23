@@ -86,7 +86,7 @@ const QueEsGeoGuiaCompleta = () => {
 
               <HighlightSnippet id="geo-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
-                  <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimización de contenido
+                  <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimizaci····n de contenido
                   para ser comprendido, recuperado y citado por modelos de lenguaje e inteligencia artificial generativa.</strong>
                 </p>
               </HighlightSnippet>
@@ -329,7 +329,7 @@ const QueEsGeoGuiaCompleta = () => {
                 </p>
                 <ul className="space-y-2 text-muted-foreground leading-relaxed mb-6">
                   <li>• ¿Tiene definiciones claras al inicio? (F2)</li>
-                  <li>• ¿Es fragmentado o tiene párrafos densos? (F1)</li>
+                  <li>����� ¿Es fragmentado o tiene párrafos densos? (F1)</li>
                   <li>• ¿Tiene Schema.org? (F3)</li>
                   <li>• ¿Tiene sección FAQ? (F4)</li>
                   <li>• ¿Cuándo fue la última actualización? (F5)</li>
@@ -500,7 +500,7 @@ const QueEsGeoGuiaCompleta = () => {
                 herramientas para medir citabilidad en ChatGPT, Perplexity y más.
               </p>
               <Link to="/curso#comprar" className="btn-cta inline-block cursor-pointer">
-                Ver el curso GEO — €97
+                Ver el curso GEO — €47
               </Link>
             </div>
           </div>
