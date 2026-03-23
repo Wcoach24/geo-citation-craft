@@ -86,7 +86,7 @@ const QueEsGeoGuiaCompleta = () => {
 
               <HighlightSnippet id="geo-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
-                  <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimizaci����n de contenido
+                  <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimización de contenido
                   para ser comprendido, recuperado y citado por modelos de lenguaje e inteligencia artificial generativa.</strong>
                 </p>
               </HighlightSnippet>
@@ -500,7 +500,7 @@ const QueEsGeoGuiaCompleta = () => {
                 herramientas para medir citabilidad en ChatGPT, Perplexity y más.
               </p>
               <Link to="/curso#comprar" className="btn-cta inline-block cursor-pointer">
-                Ver el curso GEO — €47
+                Ver el curso GEO — €97
               </Link>
             </div>
           </div>
