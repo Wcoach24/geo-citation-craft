@@ -104,25 +104,44 @@ serve(async (req) => {
     // Build line items based on product type
     let lineItems: any[];
 
+    // Module display names for Stripe checkout
+    const MODULE_NAMES: Record<string, string> = {
+      f1: 'F1 — Fundamentos de Accesibilidad Generativa',
+      f2: 'F2 — Contexto Semántico',
+      f3: 'F3 — Autoridad Generativa',
+      f4: 'F4 — Validación Conversacional',
+      f5: 'F5 — Mantenimiento Evolutivo',
+      f6: 'F6 — Métricas y Análisis',
+    };
+
     if (productType === 'complete') {
-      // Curso completo: inline price (no pre-existing Stripe price needed)
+      // Curso completo: inline price
       lineItems = [{
         price_data: {
           currency: 'eur',
           product_data: {
             name: 'Curso GEO Completo',
-            description: '5 módulos fundamentales (F1-F5) + guías PDF profesionales (15-25 páginas cada una)',
+            description: '5 módulos (F1-F5) — 142 páginas de contenido premium',
           },
           unit_amount: 4700, // €47.00 in cents
         },
         quantity: 1,
       }];
-    } else {
-      // Módulo individual: use existing Stripe price
+    } else if (moduleId) {
+      // Módulo individual: inline price at €10
       lineItems = [{
-        price: productInfo.priceId,
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: `Módulo ${MODULE_NAMES[moduleId] || moduleId.toUpperCase()}`,
+            description: 'Guía PDF profesional — acceso inmediato',
+          },
+          unit_amount: 1000, // €10.00 in cents
+        },
         quantity: 1,
       }];
+    } else {
+      throw new Error("Module ID required for individual purchase");
     }
 
     // Crear sesión de checkout
@@ -136,6 +155,8 @@ serve(async (req) => {
         guest_email: user ? '' : (email || ''),
         product_type: productType,
         module_id: moduleId || '',
+        stripe_product_id: productType === 'complete' ? 'inline_complete' : `inline_${moduleId}`,
+        stripe_price_id: productType === 'complete' ? 'price_inline_4700' : 'price_inline_1000',
       }
     };
 

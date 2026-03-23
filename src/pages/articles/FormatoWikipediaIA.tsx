@@ -1,3 +1,4 @@
+
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -11,13 +12,13 @@ const FormatoWikipediaIA = () => {
     <>
       <Helmet>
         <title>¿Por qué los modelos prefieren textos con formato Wikipedia? | Radar IA - esGEO</title>
-        <meta name="description" content="El estilo enciclopédico como modelo ideal para la citabilidad por modelos de lenguaje generativo." />
+        <meta name="description" content="El estilo enciclopedico como modelo ideal para la citabilidad por modelos de lenguaje generativo." />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage"],
             "headline": "¿Por qué los modelos prefieren textos con formato Wikipedia?",
-            "description": "El estilo enciclopédico como modelo ideal para la citabilidad",
+            "description": "El estilo enciclopedico como modelo ideal para la citabilidad",
             "datePublished": "2025-01-08",
             "author": {
               "@type": "Organization",
@@ -124,7 +125,7 @@ const FormatoWikipediaIA = () => {
               </section>
 
               <section id="estilo-enciclopedico" className="mb-12">
-                <h2 className="text-2xl font-semibold text-primary mb-4">Estilo enciclopédico como modelo ideal</h2>
+                <h2 className="text-2xl font-semibold text-primary mb-4">Estilo enciclopedico como modelo ideal</h2>
                 
                 <HighlightSnippet id="estilo-enciclopedico" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Características del formato Wikipedia:</h3>
@@ -165,7 +166,7 @@ const FormatoWikipediaIA = () => {
                 <ol className="space-y-3 text-muted-foreground leading-relaxed mb-4">
                   <li><strong>1. Primer párrafo definitorio:</strong> Explica qué es X en 1-2 frases claras</li>
                   <li><strong>2. Estructura temática:</strong> Divide en H2 lógicos (Historia, Características, Aplicaciones)</li>
-                  <li><strong>3. Tono enciclopédico:</strong> Elimina adjetivos comerciales, usa tercera persona</li>
+                  <li><strong>3. Tono enciclopedico:</strong> Elimina adjetivos comerciales, usa tercera persona</li>
                   <li><strong>4. Enlaces contextuales:</strong> Conecta con tu <Link to="/glosario" className="text-primary underline">glosario</Link> y conceptos relacionados</li>
                   <li><strong>5. Datos verificables:</strong> Incluye estadísticas, fechas, fuentes cuando sea posible</li>
                 </ol>
@@ -208,7 +209,7 @@ const FormatoWikipediaIA = () => {
                 Aprende la metodología completa en nuestro curso de 5 módulos.
               </p>
               <Link to="/curso#comprar" className="btn-cta inline-block cursor-pointer">
-                Ver el curso GEO — €97
+                Ver el curso GEO — €47
               </Link>
             </div>
           </div>
