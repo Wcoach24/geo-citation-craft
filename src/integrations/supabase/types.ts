@@ -82,6 +82,42 @@ export type Database = {
           },
         ]
       }
+      leads: {
+        Row: {
+          converted: boolean | null
+          created_at: string | null
+          email: string
+          emails_sent: number | null
+          id: string
+          last_email_sent_at: string | null
+          name: string | null
+          source: string | null
+          unsubscribed: boolean | null
+        }
+        Insert: {
+          converted?: boolean | null
+          created_at?: string | null
+          email: string
+          emails_sent?: number | null
+          id?: string
+          last_email_sent_at?: string | null
+          name?: string | null
+          source?: string | null
+          unsubscribed?: boolean | null
+        }
+        Update: {
+          converted?: boolean | null
+          created_at?: string | null
+          email?: string
+          emails_sent?: number | null
+          id?: string
+          last_email_sent_at?: string | null
+          name?: string | null
+          source?: string | null
+          unsubscribed?: boolean | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
