@@ -59,7 +59,7 @@ const CursoGeoPage = () => {
         body: JSON.stringify({
           productType,
           moduleId,
-          guestEmail: !token ? (visitorState?.email || undefined) : undefined,
+          guestEmail: !token ? undefined : undefined,
         }),
       });
 
