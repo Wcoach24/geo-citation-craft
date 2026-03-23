@@ -22,7 +22,7 @@ const ModuloF0Page = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Módulo F0: ¿Necesitas GEO? Diagnóstico Gratuito | Curso GEO - esGEO</title>
-        <meta name="description" content="Descubre si tu sitio web necesita optimización para motores generativos. Diagnóstico gratuito y introducción al framework GEO." />
+        <meta name="description" content="Descubre si tu sitio web necesita optimización para motores generativos. Diagnóstico gratuito e introducción al framework GEO." />
         <link rel="canonical" href="https://esgeo.es/curso/f0" />
         
         <meta name="citation_title" content="Módulo F0: Diagnóstico GEO Gratuito" />

@@ -82,7 +82,7 @@ const CursoGeoPage = () => {
       title: 'Autoridad Generativa',
       description: MODULES.f3.description,
       icon: Users,
-      topics: ['Snippets destacados', 'Formato pregunta-respuesta', 'Estilo enciclopédico'],
+      topics: ['Snippets destacados', 'Formato pregunta-respuesta', 'Estilo enciclopedico'],
     },
     {
       id: 'F4',
