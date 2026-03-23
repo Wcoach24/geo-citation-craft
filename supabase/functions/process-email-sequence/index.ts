@@ -13,22 +13,22 @@ const FROM_EMAIL = "Álvaro de esGEO <hola@esgeo.ai>";
 const SEQUENCE: Record<number, { daysAfter: number; subject: string; html: (email: string) => string }> = {
   // E1 (emails_sent=0) is sent immediately on capture — handled by capture-lead
   1: {
-    daysAfter: 2,
+    daysAfter: 3,
     subject: "GEO vs SEO: por qué Google ya no es suficiente",
     html: buildE2,
   },
   2: {
-    daysAfter: 4,
+    daysAfter: 7,
     subject: "Dato: las estadísticas aumentan la citabilidad un +41%",
     html: buildE3,
   },
   3: {
-    daysAfter: 6,
+    daysAfter: 12,
     subject: "El error que comete el 90% al optimizar para IA",
     html: buildE4,
   },
   4: {
-    daysAfter: 8,
+    daysAfter: 18,
     subject: "¿Listo para que la IA recomiende tu web?",
     html: buildE5,
   },
@@ -107,11 +107,11 @@ function buildE3(email: string): string {
       Ejemplo práctico. En vez de:
     </p>
     <div style="background:#fef2f2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 12px;">
-      <p style="margin:0;font-size:14px;color:#7f1d1d;font-style:italic;">"El marketing de contenidos es muy importante hoy en día..."</p>
+      <p style="margin:0;font-size:14px;color:#7f1d1d;font-style:italic;">&quot;El marketing de contenidos es muy importante hoy en día...&quot;</p>
     </div>
     <p style="font-size:14px;color:#64748b;margin:0 0 12px;">Escribe:</p>
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 20px;">
-      <p style="margin:0;font-size:14px;color:#14532d;font-style:italic;">"Según el Content Marketing Institute (2025), el 73% de las empresas B2B que implementan marketing de contenidos reportan un ROI positivo en 12 meses..."</p>
+      <p style="margin:0;font-size:14px;color:#14532d;font-style:italic;">&quot;Según el Content Marketing Institute (2025), el 73% de las empresas B2B que implementan marketing de contenidos reportan un ROI positivo en 12 meses...&quot;</p>
     </div>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 24px;">
       La segunda versión tiene 3x más probabilidades de ser citada por una IA. ¿La diferencia? Datos, fuente, y especificidad.
@@ -130,7 +130,7 @@ function buildE4(email: string): string {
       Hay un error que veo constantemente en webs que intentan optimizar para IA:
     </p>
     <div style="background:#fef2f2;border-radius:12px;padding:20px;margin:0 0 20px;text-align:center;">
-      <p style="font-size:18px;font-weight:700;color:#dc2626;margin:0;">"Usar IA para escribir contenido genérico<br/>y esperar que la IA lo cite"</p>
+      <p style="font-size:18px;font-weight:700;color:#dc2626;margin:0;">&quot;Usar IA para escribir contenido genérico<br/>y esperar que la IA lo cite&quot;</p>
     </div>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
       La ironía: los modelos de IA están entrenados para detectar contenido genérico.
@@ -176,8 +176,8 @@ function buildE5(email: string): string {
 
     <!-- Pricing box -->
     <div style="background:linear-gradient(135deg,#0d9488,#059669);border-radius:16px;padding:32px 24px;text-align:center;margin:0 0 24px;">
-      <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:0 0 4px;text-decoration:line-through;">€197</p>
-      <p style="color:#fff;font-size:40px;font-weight:800;margin:0 0 8px;">€97</p>
+      <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:0 0 4px;text-decoration:line-through;">€97</p>
+      <p style="color:#fff;font-size:40px;font-weight:800;margin:0 0 8px;">€47</p>
       <p style="color:rgba(255,255,255,0.9);font-size:14px;margin:0 0 20px;">Precio de lanzamiento — 5 módulos, 142 páginas, acceso inmediato</p>
       <a href="https://esgeo.ai/curso#comprar" style="display:inline-block;background:#fff;color:#059669;font-weight:700;font-size:16px;padding:14px 36px;border-radius:10px;text-decoration:none;">
         Quiero el curso completo →
