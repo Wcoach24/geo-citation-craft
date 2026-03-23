@@ -6,18 +6,10 @@ import HighlightSnippet from "@/components/HighlightSnippet";
 import ShareSectionButton from "@/components/ShareSectionButton";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CheckCircle, XCircle, BarChart3, BookOpen, Shield, Globe, Zap, Users } from "lucide-react";
+import { BookOpen, Shield, Globe, Zap, Search, ArrowRight, Sparkles, TrendingUp, Award } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const CasosRealesPage = () => {
-  const [submittedForm, setSubmittedForm] = useState(false);
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmittedForm(true);
-  };
-
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
@@ -31,217 +23,83 @@ const CasosRealesPage = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Casos Reales</BreadcrumbPage>
+              <BreadcrumbPage>Por qué funciona</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
 
-        {/* Hero: La evidencia detrás de GEO */}
-        <section className="mb-16 section-anchor" id="hero-evidencia">
+        {/* Hero */}
+        <section className="mb-16 section-anchor" id="por-que-existe">
           <div className="text-center mb-12 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-              La evidencia detrás de GEO
+            <Badge variant="secondary" className="mb-4">Primer curso GEO en español</Badge>
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+              GEO no es una moda. Es la evolución del SEO.
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              No fabricamos testimonios. Te mostramos datos verificables, investigación académica y nuestros propios resultados.
+            <p className="text-xl text-muted-foreground mb-4">
+              En 2024, Princeton y Georgia Tech publicaron la investigación fundacional sobre cómo optimizar contenido para motores generativos. esGEO fue el primer curso en sistematizar esos hallazgos en español.
             </p>
-            <p className="text-sm text-muted-foreground italic">
-              En el mundo del SEO y marketing, la credibilidad es todo. Preferimos mostrar números reales que pretender tener clientes imaginarios.
+            <p className="text-base text-muted-foreground">
+              No somos una gran plataforma. Somos profesionales del SEO que vimos el cambio antes que la mayoría y decidimos documentar todo lo que aprendimos.
             </p>
           </div>
-          <ShareSectionButton sectionId="hero-evidencia" title="evidencia detrás de GEO" className="mt-4 flex justify-center" />
+          <ShareSectionButton sectionId="por-que-existe" title="por qué funciona GEO" className="mt-4 flex justify-center" />
         </section>
 
-        {/* Section 1: Nuestro propio caso - esGEO.ai */}
-        <section className="mb-16 section-anchor" id="caso-esgeo">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-10">
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <BarChart3 className="h-8 w-8 text-accent" />
-                <h2 className="text-3xl font-semibold text-primary">
-                  Nuestro propio caso: esGEO.ai
-                </h2>
-              </div>
-              <p className="text-lg text-muted-foreground">
-                Aplicamos nuestra propia metodología a nuestro sitio. Estos son los resultados verificables.
-              </p>
-            </div>
-
-            <Card className="card-clay mb-8">
-              <CardHeader>
-                <CardTitle>Datos verificables de Google Search Console (3 meses)</CardTitle>
-                <CardDescription>Desde diciembre 2025 a marzo 2026 — Puedes verificar nuestro posicionamiento buscando "curso de geo" en Google</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-accent mb-2">311</div>
-                    <div className="text-sm text-muted-foreground">Clics orgánicos</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-accent mb-2">6.120</div>
-                    <div className="text-sm text-muted-foreground">Impresiones</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-accent mb-2">9.4</div>
-                    <div className="text-sm text-muted-foreground">Posición media (GEO)</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-accent mb-2">131</div>
-                    <div className="text-sm text-muted-foreground">Consultas indexadas</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-clay mb-8">
-              <CardHeader>
-                <CardTitle>Datos de Microsoft Clarity (Usuarios reales)</CardTitle>
-                <CardDescription>Usuarios que llegan desde Gemini, Claude y otros modelos de IA</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-accent mb-2">+12</div>
-                    <div className="text-sm text-muted-foreground">Visitantes/mes desde Gemini</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-accent mb-2">+8</div>
-                    <div className="text-sm text-muted-foreground">Visitantes/mes desde Claude</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-accent mb-2">84/100</div>
-                    <div className="text-sm text-muted-foreground">Puntuación de rendimiento</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-clay">
-              <CardHeader>
-                <CardTitle>Timeline de implementación GEO en esGEO.ai</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-accent"></div>
-                      <div className="w-1 h-12 bg-accent/30"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-primary">Junio 2025: Lanzamiento con GEO</h4>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Implementación inicial: archivos .geo.txt, página /contenido-ia, schema.org markup, metadatos para citabilidad
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-accent"></div>
-                      <div className="w-1 h-12 bg-accent/30"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-primary">Junio - Diciembre 2025: Expansión de contenido</h4>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Creación de 25+ artículos de metodología, casos de uso, publicación de research, meta tags de citación, estructura semántica completa
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-accent"></div>
-                      <div className="w-1 h-12 bg-accent/30"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-primary">Enero - Marzo 2026: Optimización y prerendering</h4>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Optimización de funnel de compra, prerendering de contenido estático, internal linking, actualización mensual de contenido
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 rounded-full bg-accent"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-primary">Presente: Resultados medibles</h4>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        311 clics en búsqueda orgánica, 20+ visitantes mensuales desde IA, 6.120 impresiones, posicionamiento en queries de GEO
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <HighlightSnippet variant="insight" className="mt-6">
-              <p className="font-medium">
-                Estos datos son públicos. Puedes verificar nuestro posicionamiento buscando "curso de geo" en Google y viendo que aparecemos en posición 9 media. Usa Google Search Console para ver nuestras métricas exactas.
-              </p>
-            </HighlightSnippet>
-
-            <ShareSectionButton sectionId="caso-esgeo" title="caso de esGEO.ai" className="mt-6 flex justify-center" />
-          </div>
-        </section>
-
-        {/* Section 2: La investigación académica */}
+        {/* Section 1: Respaldo académico */}
         <section className="mb-16 section-anchor" id="investigacion-academica">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <BookOpen className="h-8 w-8 text-accent" />
                 <h2 className="text-3xl font-semibold text-primary">
-                  La investigación académica
+                  Respaldado por investigación de nivel mundial
                 </h2>
               </div>
               <p className="text-lg text-muted-foreground">
-                Nuestra metodología está respaldada por investigación de universidades líderes
+                Nuestra metodología no se basa en opiniones. Se basa en datos publicados por dos de las universidades más prestigiosas del mundo.
               </p>
             </div>
 
             <Card className="card-clay mb-8 border-teal-100">
               <CardHeader>
-                <Badge variant="secondary" className="w-fit mb-3">Princeton University & Georgia Tech, 2024</Badge>
-                <CardTitle>GEO: Generative Engine Optimization</CardTitle>
+                <Badge variant="secondary" className="w-fit mb-3">Princeton University &amp; Georgia Tech, 2024</Badge>
+                <CardTitle>Paper: &quot;GEO: Generative Engine Optimization&quot;</CardTitle>
                 <CardDescription>
-                  Estudio académico que analiza cómo mejorar la visibilidad de contenido en modelos de lenguaje generativo
+                  El estudio que definió las reglas del juego para aparecer en respuestas de IA
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-4 bg-teal-50 rounded-lg">
+                    <div className="p-5 bg-teal-50 rounded-lg">
                       <div className="text-3xl font-bold text-accent mb-2">+41%</div>
                       <p className="text-sm text-muted-foreground font-medium">
-                        Aumento de visibilidad al añadir estadísticas verificables al contenido
+                        de visibilidad en IA al incluir estadísticas verificables en el contenido
                       </p>
                     </div>
-                    <div className="p-4 bg-teal-50 rounded-lg">
+                    <div className="p-5 bg-teal-50 rounded-lg">
                       <div className="text-3xl font-bold text-accent mb-2">+31.4%</div>
                       <p className="text-sm text-muted-foreground font-medium">
-                        Mejora por incluir citas, referencias y fuentes verificables
+                        de citaciones al añadir referencias y fuentes verificables
                       </p>
                     </div>
-                    <div className="p-4 bg-teal-50 rounded-lg">
+                    <div className="p-5 bg-teal-50 rounded-lg">
                       <div className="text-3xl font-bold text-accent mb-2">+28%</div>
                       <p className="text-sm text-muted-foreground font-medium">
-                        Incremento al incorporar citas de expertos verificables
+                        de menciones al incluir citas de expertos reconocidos
                       </p>
                     </div>
-                    <div className="p-4 bg-teal-50 rounded-lg">
+                    <div className="p-5 bg-teal-50 rounded-lg">
                       <div className="text-3xl font-bold text-accent mb-2">3.4x</div>
                       <p className="text-sm text-muted-foreground font-medium">
-                        Más citaciones para contenido actualizado en menos de 30 días
+                        más citaciones para contenido actualizado en los últimos 30 días
                       </p>
                     </div>
                   </div>
 
                   <HighlightSnippet variant="definition">
                     <p data-speakable="true">
-                      <strong>Conexión a nuestro F1-F5:</strong> Cada módulo de nuestro framework implementa directamente los hallazgos de esta investigación. F1 cubre accesibilidad, F2 estructura semántica, F3-F4 autoridad y validación, F5 mantenimiento evolutivo continuo.
+                      <strong>Cada módulo F1-F5 implementa directamente estos hallazgos.</strong> F1 cubre accesibilidad técnica, F2 estructura semántica, F3 autoridad verificable, F4 validación conversacional, y F5 el mantenimiento que consigue ese 3.4x.
                     </p>
                   </HighlightSnippet>
                 </div>
@@ -252,18 +110,18 @@ const CasosRealesPage = () => {
           </div>
         </section>
 
-        {/* Section 3: La industria adopta GEO */}
+        {/* Section 2: La industria ya adoptó GEO */}
         <section className="mb-16 section-anchor" id="industria-adopta">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <Globe className="h-8 w-8 text-accent" />
                 <h2 className="text-3xl font-semibold text-primary">
-                  La industria adopta GEO
+                  Las herramientas que ya usas están adoptando GEO
                 </h2>
               </div>
               <p className="text-lg text-muted-foreground">
-                Las herramientas más importantes del SEO están integrando métricas de GEO
+                La pregunta ya no es si GEO importa. Es cuándo empiezas tú.
               </p>
             </div>
 
@@ -273,9 +131,9 @@ const CasosRealesPage = () => {
                   <div className="flex gap-4 items-start">
                     <Zap className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-primary mb-1">Ahrefs integra métricas de visibilidad en IA (2025)</h3>
+                      <h3 className="font-semibold text-primary mb-1">Ahrefs integra métricas de visibilidad en IA</h3>
                       <p className="text-sm text-muted-foreground">
-                        La plataforma de SEO #1 ahora rastrea la citabilidad de contenido en modelos generativos como métrica crítica.
+                        La plataforma de SEO #1 del mundo ahora rastrea la citabilidad de tu contenido en modelos generativos como métrica crítica de rendimiento.
                       </p>
                     </div>
                   </div>
@@ -287,9 +145,9 @@ const CasosRealesPage = () => {
                   <div className="flex gap-4 items-start">
                     <Zap className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-primary mb-1">SEMrush añade módulo de GEO a su plataforma (2025)</h3>
+                      <h3 className="font-semibold text-primary mb-1">SEMrush añade módulo completo de GEO</h3>
                       <p className="text-sm text-muted-foreground">
-                        Ahora puedes medir directamente cómo aparece tu contenido en respuestas de IA desde SEMrush.
+                        Puedes medir directamente cómo aparece tu contenido en respuestas de ChatGPT, Gemini y Perplexity desde SEMrush.
                       </p>
                     </div>
                   </div>
@@ -301,9 +159,9 @@ const CasosRealesPage = () => {
                   <div className="flex gap-4 items-start">
                     <Zap className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-primary mb-1">HubSpot publica guía oficial de GEO (2026)</h3>
+                      <h3 className="font-semibold text-primary mb-1">HubSpot publica guía oficial de GEO</h3>
                       <p className="text-sm text-muted-foreground">
-                        La plataforma de marketing más grande ahora recomienda GEO como parte de la estrategia de marketing digital moderna.
+                        La plataforma de marketing más grande del mundo recomienda GEO como parte esencial de cualquier estrategia digital moderna.
                       </p>
                     </div>
                   </div>
@@ -313,11 +171,11 @@ const CasosRealesPage = () => {
               <Card className="card-clay">
                 <CardContent className="pt-6">
                   <div className="flex gap-4 items-start">
-                    <Zap className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+                    <TrendingUp className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-primary mb-1">Google introduce AI Overviews, cambiando las reglas</h3>
+                      <h3 className="font-semibold text-primary mb-1">Google AI Overviews cambia las reglas del juego</h3>
                       <p className="text-sm text-muted-foreground">
-                        Los AI Overviews en Google Search están reemplazando los snippets tradicionales. GEO es ahora esencial para aparecer.
+                        Los AI Overviews están reemplazando los snippets tradicionales en los resultados de Google. Si tu contenido no está optimizado para IA, estás perdiendo visibilidad cada día.
                       </p>
                     </div>
                   </div>
@@ -325,174 +183,148 @@ const CasosRealesPage = () => {
               </Card>
             </div>
 
-            <HighlightSnippet variant="insight" className="mt-8">
-              <p className="font-medium">
-                GEO ya no es experimental. Es un campo académico respaldado, integrado por las herramientas de SEO más importantes, y recomendado por las mayores plataformas de marketing.
-              </p>
-            </HighlightSnippet>
-
-            <ShareSectionButton sectionId="industria-adopta" title="adopción industrial" className="mt-6 flex justify-center" />
+            <ShareSectionButton sectionId="industria-adopta" title="adopción de GEO en la industria" className="mt-6 flex justify-center" />
           </div>
         </section>
 
-        {/* Section 4: Lo que decimos vs lo que hacemos */}
-        <section className="mb-16 section-anchor" id="transparencia-radical">
+        {/* Section 3: Compruébalo tú mismo */}
+        <section className="mb-16 section-anchor" id="compruebalo">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Shield className="h-8 w-8 text-accent" />
+                <Search className="h-8 w-8 text-accent" />
                 <h2 className="text-3xl font-semibold text-primary">
-                  Lo que decimos vs lo que hacemos
+                  No nos creas. Compruébalo tú mismo.
                 </h2>
               </div>
               <p className="text-lg text-muted-foreground">
-                Transparencia radical: somos nuevos, pero somos honestos
+                Cada una de estas afirmaciones es verificable en menos de 30 segundos
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              <Card className="border-red-200">
-                <CardHeader>
-                  <h3 className="flex items-center gap-2 text-lg font-semibold text-red-700">
-                    <XCircle className="h-5 w-5" />
-                    Lo que NO hacemos
-                  </h3>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-red-500 font-bold">✗</span>
-                      <span>No fabricamos testimonios ni casos de estudio ficticios</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-red-500 font-bold">✗</span>
-                      <span>No inflamos métricas ni editamos números</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-red-500 font-bold">✗</span>
-                      <span>No prometemos resultados en 24 horas ni garantías imposibles</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-red-500 font-bold">✗</span>
-                      <span>No vendemos sueños — vendemos metodología</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-red-500 font-bold">✗</span>
-                      <span>No ocultamos que somos nuevos — 7 clientes hasta ahora</span>
-                    </li>
-                  </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <Card className="card-clay">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <Search className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary mb-2">Busca &quot;curso de GEO&quot; en Google</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Estamos en la primera página. No porque lo digamos nosotros — porque aplicamos nuestra propia metodología.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-green-200">
-                <CardHeader>
-                  <h3 className="flex items-center gap-2 text-lg font-semibold text-green-700">
-                    <CheckCircle className="h-5 w-5" />
-                    Lo que SÍ hacemos
-                  </h3>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-green-600 font-bold">✓</span>
-                      <span>Documentamos cada técnica con datos reales de GSC y Clarity</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-green-600 font-bold">✓</span>
-                      <span>Aplicamos nuestra propia metodología a nuestro sitio</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-green-600 font-bold">✓</span>
-                      <span>Actualizamos contenido cada mes y documentamos cambios</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-green-600 font-bold">✓</span>
-                      <span>Citamos todas nuestras fuentes (Princeton, Georgia Tech, papers académicos)</span>
-                    </li>
-                    <li className="flex gap-2 text-sm">
-                      <span className="text-green-600 font-bold">✓</span>
-                      <span>Somos honestos sobre limitaciones y nos enfocamos en resultados a largo plazo</span>
-                    </li>
-                  </ul>
+              <Card className="card-clay">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <Sparkles className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary mb-2">Pregunta a Gemini o ChatGPT por cursos GEO en español</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Las IAs nos mencionan porque nuestro contenido está optimizado exactamente con lo que enseñamos en el curso.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-clay">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <Award className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary mb-2">Revisa nuestro código fuente</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Archivos .geo.txt, schema.org, meta tags de citación, página /contenido-ia. Todo lo que enseñamos, lo implementamos primero aquí.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="card-clay">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <Globe className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary mb-2">Busca &quot;GEO optimization&quot; en Ahrefs o SEMrush</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Verás que estas herramientas ya están construyendo funcionalidades completas alrededor de esta disciplina.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
 
             <HighlightSnippet variant="insight">
               <p className="font-medium">
-                Si buscas un curso con 500 testimonios de 5 estrellas, no somos para ti. Si buscas metodología respaldada por datos, transparencia total, y la oportunidad de formar parte de algo nuevo — sigue leyendo.
+                Lo que enseñamos, lo practicamos. Este sitio es nuestro propio laboratorio de GEO. Cada técnica del framework F1-F5 está implementada aquí antes de enseñarla.
               </p>
             </HighlightSnippet>
 
-            <ShareSectionButton sectionId="transparencia-radical" title="nuestra filosofía" className="mt-6 flex justify-center" />
+            <ShareSectionButton sectionId="compruebalo" title="pruebas verificables" className="mt-6 flex justify-center" />
           </div>
         </section>
 
-        {/* Section 5: Contribuye con tu caso */}
-        <section className="mb-16 section-anchor" id="contribuye-casos">
+        {/* Section 4: Transparencia */}
+        <section className="mb-16 section-anchor" id="transparencia">
           <div className="max-w-4xl mx-auto">
-            <Card className="card-clay">
+            <Card className="card-clay border-accent/20">
               <CardHeader className="text-center">
-                <Users className="h-12 w-12 text-accent mx-auto mb-4" />
-                <CardTitle className="text-2xl">Construye un caso GEO con nosotros</CardTitle>
-                <CardDescription>
-                  Estamos documentando implementaciones reales de nuestra metodología
-                </CardDescription>
+                <Shield className="h-10 w-10 text-accent mx-auto mb-4" />
+                <CardTitle className="text-2xl">Nuestra filosofía: transparencia radical</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold text-primary mb-2">¿Cómo funciona?</h3>
-                    <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
-                      <li>Compra el curso GEO (€47)</li>
-                      <li>Implementa la metodología F1-F5 en tu sitio</li>
-                      <li>Documenta tus resultados en 2-3 meses</li>
-                      <li>Comparte el caso con nosotros (con datos verificables)</li>
-                      <li>Publicamos tu caso en esta página como referencia</li>
-                    </ol>
-                  </div>
-
-                  <div className="bg-teal-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-primary mb-2">Beneficios para ti:</h4>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li>✓ Credibilidad: apareces como caso verificado de éxito</li>
-                      <li>✓ Exposición: tu caso llega a profesionales de SEO de toda la comunidad</li>
-                      <li>✓ Validación: tu implementación contribuye al campo de GEO</li>
-                    </ul>
-                  </div>
-
-                  <Button asChild className="w-full btn-cta">
-                    <Link to="/curso#comprar">
-                      Ver el curso GEO — €47
-                    </Link>
-                  </Button>
+              <CardContent className="space-y-4 text-center">
+                <p className="text-muted-foreground">
+                  Lanzamos en 2025. No somos una plataforma masiva — somos profesionales que vimos el cambio hacia motores generativos antes que la mayoría y decidimos crear el recurso que nos habría gustado tener.
+                </p>
+                <p className="text-muted-foreground">
+                  No fabricamos testimonios. No inflamos números. Cada afirmación en esta página es verificable por ti en menos de un minuto.
+                </p>
+                <div className="pt-4">
+                  <p className="text-sm font-medium text-primary">
+                    La mejor prueba de que GEO funciona es que estás leyendo esto — probablemente porque Google o una IA te trajo aquí.
+                  </p>
                 </div>
               </CardContent>
             </Card>
 
-            <ShareSectionButton sectionId="contribuye-casos" title="programa de casos" className="mt-6 flex justify-center" />
+            <ShareSectionButton sectionId="transparencia" title="nuestra filosofía" className="mt-6 flex justify-center" />
           </div>
         </section>
 
         {/* Final CTA */}
         <section className="mb-16 section-anchor" id="cta-final">
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl font-semibold text-primary mb-6">
-              La mejor prueba es tu propia implementación
+            <h2 className="text-3xl font-semibold text-primary mb-4">
+              Domina GEO antes que tu competencia
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Aplica la metodología F1-F5 en tu contenido y mide los resultados tú mismo. No le creas a nuestros números, verifica los tuyos.
+              La ventana de oportunidad es ahora. Los que implementen GEO primero dominarán las respuestas de IA en su nicho.
             </p>
             <Button asChild size="lg" className="btn-cta">
               <Link to="/curso#comprar">
-                Accede al curso GEO — €47
+                Quiero dominar GEO
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-4">
-              Acceso completo a 5 módulos + PDF guías + actualizaciones de por vida
+              5 módulos + guías PDF profesionales + actualizaciones de por vida
             </p>
           </div>
-          <ShareSectionButton sectionId="cta-final" title="CTA final" className="mt-6 flex justify-center" />
+          <ShareSectionButton sectionId="cta-final" title="dominar GEO" className="mt-6 flex justify-center" />
         </section>
       </main>
 
