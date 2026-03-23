@@ -177,7 +177,7 @@ function buildE5(email: string): string {
     <!-- Pricing box -->
     <div style="background:linear-gradient(135deg,#0d9488,#059669);border-radius:16px;padding:32px 24px;text-align:center;margin:0 0 24px;">
       <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:0 0 4px;text-decoration:line-through;">€197</p>
-      <p style="color:#fff;font-size:40px;font-weight:800;margin:0 0 8px;">€47</p>
+      <p style="color:#fff;font-size:40px;font-weight:800;margin:0 0 8px;">€97</p>
       <p style="color:rgba(255,255,255,0.9);font-size:14px;margin:0 0 20px;">Precio de lanzamiento — 5 módulos, 142 páginas, acceso inmediato</p>
       <a href="https://esgeo.ai/curso#comprar" style="display:inline-block;background:#fff;color:#059669;font-weight:700;font-size:16px;padding:14px 36px;border-radius:10px;text-decoration:none;">
         Quiero el curso completo →
