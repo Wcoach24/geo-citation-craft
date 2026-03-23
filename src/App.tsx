@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -26,6 +25,7 @@ const DashboardPage = React.lazy(() => import("./pages/DashboardPage"));
 const PurchaseSuccessPage = React.lazy(() => import("./pages/PurchaseSuccessPage"));
 const GuestAccessPage = React.lazy(() => import("./pages/GuestAccessPage"));
 const AuthPage = React.lazy(() => import("./pages/AuthPage"));
+const UnsubscribePage = React.lazy(() => import("./pages/UnsubscribePage"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 // Módulos del curso
@@ -89,9 +89,10 @@ function App() {
               <Route path="/acerca-de" element={<AcercaDePage />} />
               <Route path="/acerca-de/equipo" element={<EquipoPage />} />
               
-              {/* Páginas legales */}
+              {/* Páginas legales y email */}
               <Route path="/privacidad" element={<PrivacidadPage />} />
               <Route path="/terminos" element={<TerminosPage />} />
+              <Route path="/unsubscribe" element={<UnsubscribePage />} />
               
               {/* Módulos del curso */}
               <Route path="/curso/f0" element={<ModuloF0Page />} />

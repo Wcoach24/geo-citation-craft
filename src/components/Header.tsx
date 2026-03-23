@@ -58,14 +58,14 @@ const Header = () => {
             ) : (
               <Button asChild size="sm" className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-accent/50 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
                 <Link to="/curso#comprar" className="cursor-pointer">
-                  Curso GEO — €47
+                  Curso GEO — €97
                 </Link>
               </Button>
             )
           ) : (
             <Button asChild size="sm" className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-accent/50 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
               <Link to="/curso#comprar" className="cursor-pointer">
-                Curso GEO — €47
+                Curso GEO — €97
               </Link>
             </Button>
           )}
@@ -96,14 +96,14 @@ const Header = () => {
                 ) : (
                   <Button asChild className="w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
                     <Link to="/curso#comprar" className="cursor-pointer">
-                      Curso GEO — €47
+                      Curso GEO — €97
                     </Link>
                   </Button>
                 )
               ) : (
                 <Button asChild className="w-full bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg shadow-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" onClick={() => setIsMenuOpen(false)}>
                   <Link to="/curso#comprar" className="cursor-pointer">
-                    Curso GEO — €47
+                    Curso GEO — €97
                   </Link>
                 </Button>
               )}
