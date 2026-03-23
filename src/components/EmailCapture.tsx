@@ -26,8 +26,15 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
 
     setStatus('loading');
     try {
-      // Email captured via localStorage (markAsLead below)
-      console.log('Email captured:', email, 'source:', source);
+      // Send to backend — captures lead + sends welcome email
+      const { error } = await supabase.functions.invoke('capture-lead', {
+        body: { email, source },
+      });
+
+      if (error) {
+        console.error('capture-lead error:', error);
+        // Still mark as lead locally even if backend fails
+      }
 
       markAsLead();
       setStatus('success');
@@ -35,7 +42,9 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
       // Track in Clarity
       (window as any).clarity?.('event', 'email_capture', { source });
     } catch {
-      setStatus('error');
+      // Mark as lead locally even on network failure
+      markAsLead();
+      setStatus('success');
     }
   };
 

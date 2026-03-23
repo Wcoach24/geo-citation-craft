@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Download, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface InlineEmailCaptureProps {
   title: string;
@@ -39,18 +40,23 @@ const InlineEmailCapture = ({
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      toast({
-        title: "¡Perfecto!",
-        description: `Te hemos enviado ${leadMagnet} a tu email.`,
+
+    try {
+      await supabase.functions.invoke('capture-lead', {
+        body: { email, source: 'inline_lead_magnet' },
       });
-      
-      console.log("Inline lead captured:", { email, leadMagnet });
-      setEmail("");
-      setIsSubmitting(false);
-    }, 1000);
+    } catch (err) {
+      console.error('capture-lead error:', err);
+    }
+
+    toast({
+      title: "¡Perfecto!",
+      description: `Te hemos enviado ${leadMagnet} a tu email.`,
+    });
+
+    console.log("Inline lead captured:", { email, leadMagnet });
+    setEmail("");
+    setIsSubmitting(false);
   };
 
   return (
