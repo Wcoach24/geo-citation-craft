@@ -41,9 +41,9 @@ const Header = () => {
           </DropdownMenu>
 
           <Link to="/metodologia" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">Metodología</Link>
-          <Link to="/glosario" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">Glosario</Link>
-          <Link to="/radar-ia" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">Radar IA</Link>
-          <Link to="/casos-reales" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">Casos Reales</Link>
+          <Link to="/glosario" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Glosario</Link>
+          <Link to="/radar-ia" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Radar IA</Link>
+          <Link to="/casos-reales" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Casos Reales</Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">

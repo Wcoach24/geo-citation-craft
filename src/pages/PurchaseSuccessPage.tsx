@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Loader2, AlertCircle } from 'lucide-react';
+import { CheckCircle, Mail, AlertCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { SUPPORT_EMAIL } from '@/data/modules';
@@ -11,9 +11,6 @@ import { SUPPORT_EMAIL } from '@/data/modules';
 export default function PurchaseSuccessPage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
-
-  // This page is now READ-ONLY. Payment processing is handled exclusively by the Stripe webhook.
-  // The user lands here after Stripe redirects them back.
 
   if (!sessionId) {
     return (
@@ -32,8 +29,8 @@ export default function PurchaseSuccessPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm">
-                  Si realizaste el pago correctamente, recibirás un email con el acceso a tu contenido.
-                  Contacta con soporte si necesitas ayuda: <strong>{SUPPORT_EMAIL}</strong>
+                  Si realizaste el pago correctamente, recibirás un email con los enlaces de descarga en los próximos minutos.
+                  Revisa también tu carpeta de spam. Si no lo recibes, contacta con <strong>{SUPPORT_EMAIL}</strong>
                 </p>
                 <Button asChild className="w-full">
                   <Link to="/">Volver al inicio</Link>
@@ -71,21 +68,31 @@ export default function PurchaseSuccessPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="bg-muted rounded-lg p-4 text-center">
-                <p className="text-sm text-muted-foreground mb-2">
-                  Si compraste como invitado, recibirás un email con el enlace de acceso (revisa también la carpeta de spam).
-                </p>
+              {/* Primary message: check email */}
+              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
+                <Mail className="h-10 w-10 text-blue-500 mx-auto mb-3" />
+                <h3 className="font-semibold text-lg mb-2">Revisa tu email</h3>
                 <p className="text-sm text-muted-foreground">
-                  Si ya tienes cuenta, tu contenido estará disponible en el Dashboard.
+                  En los próximos minutos recibirás un correo con los <strong>enlaces de descarga directa</strong> de tus PDFs.
+                </p>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Revisa también la carpeta de spam o correo no deseado.
                 </p>
               </div>
 
+              {/* What's next */}
+              <div className="bg-muted rounded-lg p-4">
+                <h4 className="font-medium text-sm mb-2">¿Qué incluye el email?</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  <li>• Enlaces de descarga directa para cada módulo (PDF)</li>
+                  <li>• Los enlaces son válidos durante 7 días</li>
+                  <li>• Descarga y guarda los archivos en tu dispositivo</li>
+                </ul>
+              </div>
+
               <div className="flex flex-col gap-2">
-                <Button asChild className="w-full">
-                  <Link to="/dashboard">Ir al Dashboard</Link>
-                </Button>
                 <Button asChild variant="outline" className="w-full">
-                  <Link to="/curso">Ver todos los módulos</Link>
+                  <Link to="/curso">Explorar más módulos</Link>
                 </Button>
                 <Button asChild variant="ghost" className="w-full">
                   <Link to="/">Volver al inicio</Link>
@@ -93,7 +100,7 @@ export default function PurchaseSuccessPage() {
               </div>
 
               <p className="text-xs text-center text-muted-foreground">
-                ¿Problemas? Contacta con <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary underline">{SUPPORT_EMAIL}</a>
+                ¿No has recibido el email? Contacta con <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary underline">{SUPPORT_EMAIL}</a>
               </p>
             </CardContent>
           </Card>
