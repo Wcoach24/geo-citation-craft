@@ -1,4 +1,3 @@
-
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -212,7 +211,7 @@ const DatosEstructuradosModelosGenerativos = () => {
                 Aprende la metodología completa en nuestro curso de 5 módulos.
               </p>
               <Link to="/curso#comprar" className="btn-cta inline-block cursor-pointer">
-                Ver el curso GEO — €47
+                Ver el curso GEO — €97
               </Link>
             </div>
           </div>
