@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
@@ -32,8 +34,9 @@ const CursoGeoPage = () => {
   const { visitorState, visitCount, isFromAI } = useVisitorState();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [showMobileCTA] = useState(false);
+  const [showMobileCTA, setShowMobileCTA] = useState(false);
 
+  // Redirect customers to dashboard
   useEffect(() => {
     if (user && userAccess && userAccess.length > 0) {
       navigate('/dashboard');
@@ -44,217 +47,505 @@ const CursoGeoPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleCheckout = async (productType: 'module' | 'complete', moduleId?: string) => {
-    setIsLoading(true);
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const token = session?.access_token;
+  // Track scroll for mobile CTA visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroElement = document.querySelector('[data-hero]');
+      if (heroElement) {
+        const rect = heroElement.getBoundingClientRect();
+        setShowMobileCTA(rect.bottom < 0);
+      }
+    };
 
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token && { 'Authorization': `Bearer ${token}` }),
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Module cards data (F1-F5 only)
+  const moduleCards = [
+    {
+      id: 'F1',
+      title: 'Fundamentos de Accesibilidad Generativa',
+      description: MODULES.f1.description,
+      icon: FileText,
+      topics: ['Qué es GEO', 'Diferencias con SEO', 'Principios fundamentales'],
+    },
+    {
+      id: 'F2',
+      title: 'Contexto Semántico',
+      description: MODULES.f2.description,
+      icon: Search,
+      topics: ['Jerarquía de contenido', 'Datos estructurados', 'Fragmentación semántica'],
+    },
+    {
+      id: 'F3',
+      title: 'Autoridad Generativa',
+      description: MODULES.f3.description,
+      icon: Users,
+      topics: ['Snippets destacados', 'Formato pregunta-respuesta', 'Estilo enciclopédico'],
+    },
+    {
+      id: 'F4',
+      title: 'Validación Conversacional',
+      description: MODULES.f4.description,
+      icon: Target,
+      topics: ['Schema markup', 'Metadatos citables', 'Estructura HTML semántica'],
+    },
+    {
+      id: 'F5',
+      title: 'Mantenimiento Evolutivo',
+      description: MODULES.f5.description,
+      icon: BarChart,
+      topics: ['KPIs de citabilidad', 'Herramientas de monitoreo', 'Análisis de rendimiento'],
+    },
+  ];
+
+  // FAQs with new ones added
+  const faqs = [
+    {
+      id: 'faq-geo-seo',
+      question: '¿GEO reemplaza al SEO?',
+      answer: 'No, GEO complementa al SEO. Mientras SEO te posiciona en Google, GEO te hace citado por ChatGPT, Gemini y Perplexity. El 2024 ha demostrado que necesitas ambos: posicionamiento en buscadores tradicionales + presencia en respuestas de IA.',
+    },
+    {
+      id: 'faq-prerrequisitos',
+      question: '¿Puedo seguir el curso sin conocimientos técnicos?',
+      answer: 'Completamente. El curso comienza desde cero en F1 y progresa gradualmente. No necesitas saber HTML, CSS o SQL. Los módulos técnicos incluyen explicaciones paso a paso.',
+    },
+    {
+      id: 'faq-orden',
+      question: '¿Debo seguir los módulos en orden?',
+      answer: 'Recomendamos seguir F1→F5 secuencialmente, ya que cada módulo construye sobre el anterior. Pero si tienes experiencia en SEO, puedes saltar a F4 directamente.',
+    },
+    {
+      id: 'faq-tiempo-completar',
+      question: '¿Cuánto tiempo necesito para completar el curso?',
+      answer: 'El curso tiene 15 horas totales. Muchos lo completan en 2-3 semanas dedicando 1-2 horas diarias, aunque puedes hacerlo a tu ritmo.',
+    },
+    {
+      id: 'faq-actualizaciones',
+      question: '¿Se actualiza el contenido?',
+      answer: 'Sí. El curso se actualiza cada mes con nuevas técnicas y cambios en los modelos de IA. Todos los usuarios tienen acceso automático a las actualizaciones.',
+    },
+  ];
+
+  const handleHeroCTA = () => {
+    (window as any).clarity?.('event', 'cta_hero_click');
+    document.querySelector('#comprar')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleCheckout = async () => {
+    try {
+      setIsLoading(true);
+      (window as any).clarity?.('event', 'cta_checkout_click');
+
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: {
+          productType: 'complete',
         },
-        body: JSON.stringify({
-          productType,
-          moduleId,
-          guestEmail: !token ? undefined : undefined,
-        }),
       });
 
-      if (!response.ok) throw new Error('Checkout failed');
-      const { url } = await response.json();
-      window.location.href = url;
-    } catch (error) {
-      toast({ title: 'Error', description: 'No se pudo crear la sesión de compra', variant: 'destructive' });
+      if (error) throw error;
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
       setIsLoading(false);
+      toast({
+        title: "Error",
+        description: "No se pudo iniciar el pago. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
     }
   };
 
+  const handleFAQInteraction = (faqId: string) => {
+    (window as any).clarity?.('event', 'faq_interaction', { faq: faqId });
+  };
+
+  // Determine hero content based on visitor state
+  const getHeroContent = () => {
+    if (isFromAI) {
+      return {
+        title: 'Estás aquí porque una IA te trajo. Imagina que haga lo mismo con tu marca.',
+        subtitle: 'El primer curso en español de Generative Engine Optimization',
+      };
+    }
+    if (visitCount > 1) {
+      return {
+        title: 'Sigues pensando en GEO — es hora de actuar',
+        subtitle: 'El primer curso en español de Generative Engine Optimization',
+      };
+    }
+    return {
+      title: 'Haz que ChatGPT, Gemini y Perplexity citen tu marca',
+      subtitle: 'El primer curso en español de Generative Engine Optimization',
+    };
+  };
+
+  const heroContent = getHeroContent();
+
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Curso GEO: Generative Engine Optimization | esGEO</title>
-        <meta name="description" content="Aprende GEO con el primer curso en español. 5 módulos (F1-F5) sobre cómo optimizar contenido para ser citado por IA. €97 curso completo o €29 módulos individuales." />
-        <meta name="robots" content="index, follow" />
+        <title>Curso GEO | Aprende Generative Engine Optimization | esGEO</title>
+        <meta
+          name="description"
+          content="Curso completo de GEO: aprende a ser citado por ChatGPT, Gemini y Perplexity. 5 módulos (F1-F5), acceso de por vida."
+        />
+        <link rel="canonical" href="https://esgeo.ai/curso" />
+        <meta name="citation_title" content="Curso GEO: Generative Engine Optimization" />
+        <meta name="citation_author" content="esGEO" />
+        <meta name="citation_publication_date" content="2024" />
+        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_language" content="es" />
+        <meta
+          name="citation_keywords"
+          content="curso GEO, Generative Engine Optimization, optimización IA, citabilidad LLMs"
+        />
+        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
+
+        {/* FAQ Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          })}
+        </script>
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
-        <Header />
+      <Header />
 
-        <main className="flex-1">
-          {/* Hero Section */}
-          <section data-hero className="relative overflow-hidden bg-gradient-to-br from-accent/10 via-background to-background py-20 sm:py-32">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto text-center">
-                <Badge className="mb-4 inline-block">Primer curso GEO en español</Badge>
-                <h1 className="text-5xl sm:text-6xl font-bold text-primary mb-6">
-                  Domina GEO<br />Aparece en respuestas de IA
-                </h1>
-                <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                  Aprende el framework completo F1-F5 para optimizar tu contenido y ser citado por ChatGPT, Perplexity, Gemini y Claude.
+      <main className="w-full">
+        {/* Hero Section */}
+        <section
+          data-hero
+          className="relative bg-gradient-to-b from-primary/5 to-background overflow-hidden py-20 md:py-32"
+        >
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center space-y-6 animate-fade-up">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                {heroContent.title}
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                {heroContent.subtitle}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                <button
+                  onClick={handleHeroCTA}
+                  className="btn-cta text-lg cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
+                >
+                  Quiero dominar GEO — €47
+                </button>
+              </div>
+              <p className="text-sm text-muted-foreground flex items-center justify-center gap-2 pt-4">
+                <Bot className="h-4 w-4" />
+                Referenciado por Gemini y otros modelos de IA
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust Bar */}
+        <section className="bg-muted/30 border-y border-border py-4">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground text-center">
+              <Bot className="h-4 w-4 flex-shrink-0" />
+              <span>Nuestro contenido es referenciado por modelos de IA como ChatGPT, Gemini, Perplexity y Claude</span>
+            </div>
+          </div>
+        </section>
+
+        {/* PAS Section */}
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="space-y-12">
+              {/* Problem */}
+              <div className="text-center">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  El Problema: Tu web es invisible para las IA generativas
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Mientras tu competencia es citada por ChatGPT, tu marca no aparece en ninguna respuesta.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="btn-cta" onClick={() => document.getElementById('comprar')?.scrollIntoView({ behavior: 'smooth' })}>
-                    Empezar ahora — €97
-                  </Button>
-                  <Button size="lg" variant="outline" onClick={() => navigate('/casos')}>
-                    Ver casos reales
-                  </Button>
-                </div>
               </div>
-            </div>
-          </section>
 
-          {/* Social Proof */}
-          <section className="py-12 bg-white dark:bg-slate-950 border-y">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-4xl mx-auto">
-                <p className="text-center text-sm text-muted-foreground mb-8">Confían en esGEO</p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-primary">2,500+</div>
-                    <p className="text-xs text-muted-foreground">Estudiantes</p>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">4.9/5</div>
-                    <p className="text-xs text-muted-foreground">Calificación</p>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">142</div>
-                    <p className="text-xs text-muted-foreground">Páginas contenido</p>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">€97</div>
-                    <p className="text-xs text-muted-foreground">Acceso de por vida</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+              {/* Agitation - Before/After Card */}
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card className="border-destructive/20 bg-destructive/5 card-clay">
+                  <CardContent className="pt-6">
+                    <h3 className="font-bold text-lg mb-4 text-foreground">Antes: Sin GEO</h3>
+                    <ul className="space-y-3 text-sm">
+                      <li className="flex gap-3">
+                        <span className="text-destructive">✗</span>
+                        <span>Escribes contenido y esperas que Google lo encuentre</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-destructive">✗</span>
+                        <span>Tráfico orgánico estancado</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-destructive">✗</span>
+                        <span>Las IA no saben que existes</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-destructive">✗</span>
+                        <span>Pierdes oportunidades frente a competidores mejor optimizados</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
 
-          {/* Modules Grid */}
-          <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-5xl mx-auto">
-                <div className="text-center mb-16">
-                  <h2 className="text-4xl font-bold text-primary mb-4">El Framework GEO: 5 módulos fundamentales</h2>
-                  <p className="text-lg text-muted-foreground">Cada módulo es una guía PDF profesional de 25-35 páginas con casos prácticos y checklists.</p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  {[
-                    { id: 'F1', title: 'Fundamentos de Accesibilidad Generativa', icon: FileText, desc: 'Fragmentación y estructura' },
-                    { id: 'F2', title: 'Contexto Semántico', icon: Search, desc: 'Jerarquía y claridad' },
-                    { id: 'F3', title: 'Autoridad Generativa', icon: Users, desc: 'Señales de expertise' },
-                    { id: 'F4', title: 'Validación Conversacional', icon: Target, desc: 'Formatos que funcionan' },
-                    { id: 'F5', title: 'Mantenimiento Evolutivo', icon: BarChart, desc: 'Frescura y actualización' },
-                  ].map((module) => {
-                    const IconComponent = module.icon;
-                    return (
-                      <Card key={module.id} className="card-clay border-accent/20 hover:border-accent/40 transition">
-                        <CardContent className="p-6">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="p-3 bg-accent/10 rounded-lg">
-                              <IconComponent className="w-6 h-6 text-accent" />
-                            </div>
-                            <div>
-                              <Badge variant="secondary" className="mb-2">{module.id}</Badge>
-                              <h3 className="font-bold text-primary">{module.title}</h3>
-                            </div>
-                          </div>
-                          <p className="text-sm text-muted-foreground mb-4">{module.desc}</p>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full"
-                            disabled={isLoading}
-                            onClick={() => handleCheckout('module', module.id.toLowerCase())}
-                          >
-                            {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                            €29 — Comprar módulo
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* FAQ */}
-          <section className="py-20 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto">
-                <h2 className="text-3xl font-bold text-primary mb-12 text-center">Preguntas frecuentes</h2>
-                <Accordion type="single" collapsible>
-                  <AccordionItem value="q1">
-                    <AccordionTrigger>¿Qué diferencia hay entre módulos individuales y el curso completo?</AccordionTrigger>
-                    <AccordionContent>
-                      Los módulos individuales (€29) contienen guías PDF de 25-35 páginas cada uno. El curso completo (€97) incluye todos los 5 módulos más acceso a actualizaciones de por vida y comunidad exclusiva.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="q2">
-                    <AccordionTrigger>¿Cuánto tiempo toma completar el curso?</AccordionTrigger>
-                    <AccordionContent>
-                      Cada módulo puede completarse en 2-3 horas. El curso completo (5 módulos) toma 10-15 horas según tu ritmo. Muchos estudiantes lo hacen en 2-3 semanas dedicando 1-2 horas diarias.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="q3">
-                    <AccordionTrigger>¿Es necesario tener conocimientos de SEO previos?</AccordionTrigger>
-                    <AccordionContent>
-                      No. El curso está diseñado para principiantes. Si tienes experiencia en SEO, aprenderás cómo GEO es diferente y complementario.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="q4">
-                    <AccordionTrigger>¿Hay garantía de reembolso?</AccordionTrigger>
-                    <AccordionContent>
-                      Sí. 30 días de garantía sin preguntas. Si el curso no te funciona, devolvemos tu dinero.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="q5">
-                    <AccordionTrigger>¿Se incluyen las actualizaciones futuras?</AccordionTrigger>
-                    <AccordionContent>
-                      Sí. Una vez que compres (módulo o curso completo), tienes acceso de por vida a todas las actualizaciones.
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Final */}
-          <section id="comprar" className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-2xl mx-auto">
-                <Card className="card-clay border-accent/20">
-                  <CardContent className="p-8 text-center">
-                    <h2 className="text-3xl font-bold text-primary mb-4">Curso completo — Todos los 5 módulos</h2>
-                    <div className="text-5xl font-bold text-accent mb-2">€97</div>
-                    <p className="text-muted-foreground mb-6">142 páginas de contenido premium + acceso de por vida + actualizaciones gratis</p>
-                    <Button
-                      size="lg"
-                      className="btn-cta w-full mb-4"
-                      disabled={isLoading}
-                      onClick={() => handleCheckout('complete')}
-                    >
-                      {isLoading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                      Empezar ahora
-                    </Button>
-                    <p className="text-xs text-muted-foreground">Garantía de reembolso 30 días • Sin contrato • Cancela cuando quieras</p>
+                <Card className="border-accent/20 bg-accent/5 card-clay">
+                  <CardContent className="pt-6">
+                    <h3 className="font-bold text-lg mb-4 text-foreground">Después: Con GEO</h3>
+                    <ul className="space-y-3 text-sm">
+                      <li className="flex gap-3">
+                        <span className="text-accent">✓</span>
+                        <span>Las IA citan tu marca como fuente autorizada</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-accent">✓</span>
+                        <span>Tráfico desde ChatGPT, Gemini y Perplexity</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-accent">✓</span>
+                        <span>Tu contenido aparece en respuestas generativas</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="text-accent">✓</span>
+                        <span>Posicionas como experto en tu industria</span>
+                      </li>
+                    </ul>
                   </CardContent>
                 </Card>
               </div>
-            </div>
-          </section>
-        </main>
 
-        <Footer />
-        <ExitIntentPopup />
-      </div>
-    </>
+              {/* Solution */}
+              <Card className="border-primary/20 bg-primary/5 card-clay">
+                <CardContent className="pt-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">La Solución: Aprende GEO</h3>
+                  <p className="text-lg text-muted-foreground mb-4">
+                    Este curso te enseña a optimizar tu contenido específicamente para la era de la búsqueda generativa.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    No es SEO. No es copywriting. Es una disciplina completamente nueva diseñada para que las IA te
+                    encuentren, comprendan y citen.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Module Cards */}
+        <section className="py-16 md:py-24 bg-secondary/30">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                5 Módulos Progresivos
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Desde fundamentos hasta técnicas avanzadas, todo lo que necesitas para dominar GEO
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {moduleCards.map((module) => {
+                const IconComponent = module.icon;
+                return (
+                  <Card key={module.id} className="card-clay flex flex-col cursor-default transition-all duration-200">
+                    <CardContent className="pt-6 flex-1 flex flex-col">
+                      <div className="flex items-start justify-between mb-4">
+                        <IconComponent className="h-8 w-8 text-accent flex-shrink-0" />
+                        <Badge className="bg-primary/10 text-primary font-bold text-base cursor-default">
+                          {module.id}
+                        </Badge>
+                      </div>
+                      <h3 className="text-lg font-bold text-foreground mb-2">{module.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-4">{module.description}</p>
+                      <ul className="space-y-2 flex-1">
+                        {module.topics.map((topic, idx) => (
+                          <li key={idx} className="text-sm text-muted-foreground flex gap-2">
+                            <span className="text-accent">•</span>
+                            <span>{topic}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Social Proof */}
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+              Resultados Verificables
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-2">1º</div>
+                <p className="font-semibold text-foreground mb-1">Primer curso de GEO en español</p>
+                <p className="text-sm text-muted-foreground">
+                  Pioneros en formación de Generative Engine Optimization
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-2">5</div>
+                <p className="font-semibold text-foreground mb-1">Modelos de IA cubiertos</p>
+                <p className="text-sm text-muted-foreground">
+                  ChatGPT · Gemini · Perplexity · Claude · Copilot
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-2">F1→F5</div>
+                <p className="font-semibold text-foreground mb-1">Metodología progresiva</p>
+                <p className="text-sm text-muted-foreground">
+                  De fundamentos a implementación avanzada
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Email Capture */}
+        <section className="py-16 md:py-24 bg-secondary/30">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <EmailCapture source="course_page" />
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 md:py-24 bg-secondary/30">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12 text-center">
+              Preguntas Frecuentes
+            </h2>
+
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={faq.id}
+                  className="border border-border rounded-lg px-4 md:px-6"
+                  onClick={() => handleFAQInteraction(faq.id)}
+                >
+                  <AccordionTrigger className="text-left hover:no-underline py-4">
+                    <span className="font-semibold text-foreground text-base">{faq.question}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        {/* Inline Checkout Section */}
+        <section id="comprar" className="py-16 md:py-24">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <Card className="card-clay bg-primary/5 border-primary/20">
+              <CardContent className="pt-8 md:pt-12">
+                <div className="text-center">
+                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
+                    Accede al curso GEO completo
+                  </h2>
+
+                  {/* Price Display */}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-center gap-4 mb-4">
+                      <span className="text-2xl text-muted-foreground line-through">
+                        €{COMPLETE_COURSE.originalPrice}
+                      </span>
+                      <span className="text-5xl md:text-6xl font-bold text-accent">
+                        €{COMPLETE_COURSE.price}
+                      </span>
+                    </div>
+                    <Badge className="bg-accent/20 text-accent border-0 text-sm font-semibold px-4 py-2 cursor-default">
+                      Precio de lanzamiento
+                    </Badge>
+                  </div>
+
+                  {/* Features */}
+                  <div className="mb-8 space-y-3">
+                    {COMPLETE_COURSE.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center justify-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <button
+                    onClick={handleCheckout}
+                    disabled={isLoading}
+                    className="btn-cta w-full md:w-auto text-lg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent flex items-center justify-center gap-2"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Procesando...
+                      </>
+                    ) : (
+                      'Quiero dominar GEO — €47'
+                    )}
+                  </button>
+
+                  {/* Trust Message */}
+                  <div className="mt-8 p-4 bg-background rounded-lg border border-border">
+                    <div className="flex items-start gap-3 justify-center">
+                      <Shield className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-muted-foreground">Acceso inmediato tras el pago. Descarga tus PDFs al instante.</p>
+                    </div>
+                  </div>
+
+                  {/* Trust Badges */}
+                  <div className="mt-8 flex flex-wrap gap-4 justify-center text-xs text-muted-foreground">
+                    <span>✓ Pago seguro con Stripe</span>
+                    <span>✓ Acceso inmediato</span>
+                    <span>✓ PDFs descargables</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </main>
+
+      {/* Sticky Mobile CTA */}
+      {showMobileCTA && (
+        <div className="fixed bottom-0 left-0 right-0 md:hidden bg-card border-t border-border p-4 shadow-lg">
+          <div className="flex items-center justify-between gap-4">
+            <div className="text-xl font-bold text-accent">€{COMPLETE_COURSE.price}</div>
+            <button onClick={handleCheckout} disabled={isLoading} className="btn-cta text-sm py-2 px-4 cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent">
+              {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Quiero GEO'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup />
+
+      <Footer />
+    </div>
   );
 };
 

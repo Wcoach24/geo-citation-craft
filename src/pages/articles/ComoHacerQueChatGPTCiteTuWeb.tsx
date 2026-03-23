@@ -483,7 +483,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                 para todos los modelos de IA.
               </p>
               <Link to="/curso#comprar" className="btn-cta inline-block cursor-pointer">
-                Ver el curso GEO — €97
+                Ver el curso GEO — €47
               </Link>
             </div>
           </div>
