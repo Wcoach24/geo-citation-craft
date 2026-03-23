@@ -352,7 +352,7 @@ const ModuloF0Page = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">Acceso completo a F1-F6 con descuento (€50 vs €60)</p>
+                  <p className="text-sm text-muted-foreground">Acceso completo a F1-F5 — precio de lanzamiento €47</p>
                   <Button variant="outline" asChild className="w-full">
                     <Link to="/checkout?type=complete">
                       Ver Curso Completo

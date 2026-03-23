@@ -99,7 +99,7 @@ export const COMPLETE_COURSE = {
   stripeIds: { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' },
   features: [
     '5 módulos fundamentales (F1-F5) — 142 páginas',
-    'Ahorra €3 vs comprar por separado (5×€10 = €50)',
+    'Acceso a los 5 módulos por menos que un café al día',
     'Metodología práctica paso a paso',
     'Casos de estudio reales incluidos',
     'Actualizaciones de contenido gratuitas',

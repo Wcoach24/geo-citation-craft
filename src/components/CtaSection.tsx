@@ -21,7 +21,7 @@ const CtaSection = () => {
             <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-7 text-lg rounded-xl" asChild>
               <Link to="/checkout?plan=complete">
                 <Zap className="mr-2 h-5 w-5" />
-                Curso Completo — €50
+                Curso Completo — €47
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 px-10 py-7 text-lg rounded-xl" asChild>

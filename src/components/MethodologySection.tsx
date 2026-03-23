@@ -73,7 +73,7 @@ const MethodologySection = () => {
           {/* CTA pack completo */}
           <div className="text-center rounded-2xl bg-muted/40 border border-accent/20 p-8">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <Badge className="bg-accent/15 text-accent border-accent/30 cursor-default">Ahorra €10</Badge>
+              <Badge className="bg-accent/15 text-accent border-accent/30 cursor-default">Precio de lanzamiento</Badge>
             </div>
             <h3 className="text-2xl font-bold text-primary mb-2">
               Pack Completo F1-F5
@@ -82,7 +82,7 @@ const MethodologySection = () => {
               Acceso a los 5 módulos fundamentales + guías PDF + actualizaciones gratuitas.
             </p>
             <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="text-lg text-muted-foreground line-through">€60</span>
+              <span className="text-lg text-muted-foreground line-through">€{COMPLETE_COURSE.originalPrice}</span>
               <span className="text-4xl font-bold text-primary">€{COMPLETE_COURSE.price}</span>
               <span className="text-sm text-muted-foreground">pago único</span>
             </div>
