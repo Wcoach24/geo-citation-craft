@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 const RESEND_API_KEY = () => Deno.env.get("RESEND_API_KEY") ?? "";
-const FROM_EMAIL = "Álvaro de esGEO <hola@esgeo.ai>";
+const FROM_EMAIL = "Eric de esGEO <hola@esgeo.ai>";
 
 // ── E1: Welcome email with GEO Checklist ──
 function getWelcomeEmailHtml(email: string): string {
@@ -32,7 +32,7 @@ function getWelcomeEmailHtml(email: string): string {
       Hola 👋
     </p>
     <p style="font-size:16px;color:#1a202c;line-height:1.6;margin:0 0 20px;">
-      Soy Álvaro, creador de esGEO. Gracias por descargar el checklist.
+      Soy Eric, creador de esGEO. Gracias por descargar el checklist.
     </p>
     <p style="font-size:16px;color:#1a202c;line-height:1.6;margin:0 0 24px;">
       Aquí tienes tu <strong>Checklist GEO — 15 puntos</strong> para hacer tu web citable por ChatGPT, Perplexity, Gemini y Claude:
