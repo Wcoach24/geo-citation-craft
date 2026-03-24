@@ -242,6 +242,17 @@ serve(async (req) => {
           console.log(`Purchase recorded: ${purchase.id}`);
         }
 
+        // 3.5. Update leads table to mark as converted
+        try {
+          await supabaseClient
+            .from("leads")
+            .update({ converted: true })
+            .eq("email", customerEmail.toLowerCase().trim());
+          console.log(`Lead marked as converted: ${customerEmail}`);
+        } catch (e) {
+          console.warn("Error updating leads table:", e);
+        }
+
         // 4. Grant access in user_access table (if user is registered)
         if (user_id) {
           const moduleIds = product_type === "complete"
