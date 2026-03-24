@@ -19,7 +19,7 @@ const CtaSection = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-7 text-lg rounded-xl" asChild>
-              <Link to="/checkout?plan=complete">
+              <Link to="/curso#comprar">
                 <Zap className="mr-2 h-5 w-5" />
                 Curso Completo — €47
               </Link>
