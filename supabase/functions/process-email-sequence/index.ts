@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 const RESEND_API_KEY = () => Deno.env.get("RESEND_API_KEY") ?? "";
-const FROM_EMAIL = "Álvaro de esGEO <hola@esgeo.ai>";
+const FROM_EMAIL = "Eric de esGEO <hola@esgeo.ai>";
 
 // ── Sequence schedule: emails_sent → { days_after_signup, subject, builder } ──
 const SEQUENCE: Record<number, { daysAfter: number; subject: string; html: (email: string) => string }> = {
@@ -188,7 +188,7 @@ function buildE5(email: string): string {
       Si tienes dudas, responde a este email. Leo todos los mensajes.
     </p>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0;">
-      — Álvaro
+      — Eric
     </p>
   `);
 }
@@ -199,8 +199,15 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Auth is handled by Supabase JWT verification (verify_jwt in config.toml)
-  // No additional auth check needed — function is only callable with a valid JWT
+  // Auth: only internal calls (service role) or cron
+  const authHeader = req.headers.get("Authorization");
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  if (!authHeader || authHeader !== `Bearer ${serviceRoleKey}`) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
 
   const apiKey = RESEND_API_KEY();
   if (!apiKey) {
