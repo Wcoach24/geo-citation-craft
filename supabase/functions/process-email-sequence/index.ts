@@ -107,11 +107,11 @@ function buildE3(email: string): string {
       Ejemplo práctico. En vez de:
     </p>
     <div style="background:#fef2f2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 12px;">
-      <p style="margin:0;font-size:14px;color:#7f1d1d;font-style:italic;">&quot;El marketing de contenidos es muy importante hoy en día...&quot;</p>
+      <p style="margin:0;font-size:14px;color:#7f1d1d;font-style:italic;">\"El marketing de contenidos es muy importante hoy en día...\"</p>
     </div>
     <p style="font-size:14px;color:#64748b;margin:0 0 12px;">Escribe:</p>
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 20px;">
-      <p style="margin:0;font-size:14px;color:#14532d;font-style:italic;">&quot;Según el Content Marketing Institute (2025), el 73% de las empresas B2B que implementan marketing de contenidos reportan un ROI positivo en 12 meses...&quot;</p>
+      <p style="margin:0;font-size:14px;color:#14532d;font-style:italic;">\"Según el Content Marketing Institute (2025), el 73% de las empresas B2B que implementan marketing de contenidos reportan un ROI positivo en 12 meses...\"</p>
     </div>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 24px;">
       La segunda versión tiene 3x más probabilidades de ser citada por una IA. ¿La diferencia? Datos, fuente, y especificidad.
@@ -130,7 +130,7 @@ function buildE4(email: string): string {
       Hay un error que veo constantemente en webs que intentan optimizar para IA:
     </p>
     <div style="background:#fef2f2;border-radius:12px;padding:20px;margin:0 0 20px;text-align:center;">
-      <p style="font-size:18px;font-weight:700;color:#dc2626;margin:0;">&quot;Usar IA para escribir contenido genérico<br/>y esperar que la IA lo cite&quot;</p>
+      <p style="font-size:18px;font-weight:700;color:#dc2626;margin:0;">\"Usar IA para escribir contenido genérico<br/>y esperar que la IA lo cite\"</p>
     </div>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
       La ironía: los modelos de IA están entrenados para detectar contenido genérico.
