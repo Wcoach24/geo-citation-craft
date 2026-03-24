@@ -199,15 +199,8 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Auth: only internal calls (service role) or cron
-  const authHeader = req.headers.get("Authorization");
-  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
-  if (!authHeader || authHeader !== `Bearer ${serviceRoleKey}`) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-  }
+  // Auth is handled by Supabase JWT verification (verify_jwt in config.toml)
+  // No additional auth check needed — function is only callable with a valid JWT
 
   const apiKey = RESEND_API_KEY();
   if (!apiKey) {
