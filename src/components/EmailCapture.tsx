@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useVisitorState } from '@/hooks/useVisitorState';
 import { supabase } from '@/integrations/supabase/client';
+import { trackEvent } from '@/lib/analytics';
 
 interface EmailCaptureProps {
   compact?: boolean;
@@ -39,7 +40,8 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
       markAsLead();
       setStatus('success');
 
-      // Track in Clarity
+      // Track conversions
+      trackEvent.leadCapture(source);
       (window as any).clarity?.('event', 'email_capture', { source });
     } catch {
       // Mark as lead locally even on network failure

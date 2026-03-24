@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 
-// Routes to prerender (public only, not authenticated)
+// Routes to prerender (ALL public pages — critical for Google indexing of SPA)
 const routes = [
   '/',
   '/curso',
@@ -26,6 +26,20 @@ const routes = [
   '/casos',
   '/contenido-ia',
   '/acerca-de',
+  '/acerca-de/equipo',
+  '/geo-score',
+  '/privacidad',
+  '/terminos',
+  // Radar IA articles (critical for SEO — these have 0 clicks despite high impressions)
+  '/radar-ia/que-significa-ser-citado-por-ia',
+  '/radar-ia/muerte-seo-tradicional',
+  '/radar-ia/estructura-web-para-lenguaje',
+  '/radar-ia/formato-wikipedia-ia',
+  '/radar-ia/datos-estructurados-modelos-generativos',
+  '/radar-ia/geo-vs-seo-diferencias',
+  '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
+  '/radar-ia/optimizar-web-para-perplexity',
+  '/radar-ia/que-es-geo-guia-completa',
 ];
 
 async function waitForServer(port, timeout = 20000) {

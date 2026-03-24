@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import React, { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 
 // Lazy-loaded pages
@@ -119,6 +121,8 @@ function App() {
             </Routes>
             </Suspense>
           </BrowserRouter>
+            <Analytics />
+            <SpeedInsights />
         </TooltipProvider>
         </AuthProvider>
       </QueryClientProvider>

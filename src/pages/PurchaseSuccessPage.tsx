@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Button } from '@/components/ui/button';
@@ -7,10 +7,17 @@ import { CheckCircle, Mail, AlertCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { SUPPORT_EMAIL } from '@/data/modules';
+import { trackEvent } from '@/lib/analytics';
 
 export default function PurchaseSuccessPage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
+
+  useEffect(() => {
+    if (sessionId) {
+      trackEvent.purchaseComplete('complete', 47);
+    }
+  }, [sessionId]);
 
   if (!sessionId) {
     return (
