@@ -16,10 +16,10 @@ import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const Index = () => {
   const { helmet, structuredData } = useGeoMetadata({
-    title: "esGEO - Optimiza para ser citado por la IA",
-    description: "La primera plataforma en español centrada en enseñar cómo estructurar y redactar webs para que los modelos de lenguaje como ChatGPT, Perplexity o Claude las comprendan, recomienden y citen.",
+    title: "Curso GEO: Aprende Generative Engine Optimization en Español | esGEO",
+    description: "Aprende GEO (Generative Engine Optimization) con el primer curso en español. Metodología F1-F5 para que ChatGPT, Perplexity y Claude citen tu web. Desde €47.",
     canonicalUrl: "https://esgeo.ai/",
-    keywords: ["GEO", "Generative Engine Optimization", "IA", "ChatGPT", "Perplexity", "Claude", "optimización", "contenido"],
+    keywords: ["curso GEO", "Generative Engine Optimization", "qué es GEO", "GEO vs SEO", "optimización IA", "ChatGPT", "Perplexity", "Claude", "curso geo ia"],
     citationTitle: "esGEO - Metodología de Optimización para IA Generativa",
     speakableSelectors: [".snippet-block", "[data-speakable='true']", ".geo-card"],
     geoTxtPath: "/home.geo.txt"

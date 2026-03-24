@@ -27,6 +27,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import EmailCapture from '@/components/EmailCapture';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
+import { trackEvent } from '@/lib/analytics';
 
 const CursoGeoPage = () => {
   const navigate = useNavigate();
@@ -137,6 +138,7 @@ const CursoGeoPage = () => {
   const handleCheckout = async () => {
     try {
       setIsLoading(true);
+      trackEvent.checkoutStart('complete');
       (window as any).clarity?.('event', 'cta_checkout_click');
 
       const { data, error } = await supabase.functions.invoke('create-checkout', {
@@ -190,10 +192,10 @@ const CursoGeoPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Curso GEO | Aprende Generative Engine Optimization | esGEO</title>
+        <title>Curso de GEO: Aprende Generative Engine Optimization desde Cero | esGEO</title>
         <meta
           name="description"
-          content="Curso completo de GEO: aprende a ser citado por ChatGPT, Gemini y Perplexity. 5 módulos (F1-F5), acceso de por vida."
+          content="Curso GEO completo en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 basado en investigación de Princeton. €47."
         />
         <link rel="canonical" href="https://esgeo.ai/curso" />
         <meta name="citation_title" content="Curso GEO: Generative Engine Optimization" />

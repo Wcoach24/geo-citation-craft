@@ -12,11 +12,11 @@ const QueEsGeoGuiaCompleta = () => {
   return (
     <>
       <Helmet>
-        <title>Qué es GEO: Guía completa de Generative Engine Optimization | esGEO</title>
-        <meta name="description" content="Definición, historia, framework F1-F5 y guía paso a paso de GEO (Generative Engine Optimization). Cómo optimizar contenido para ser citado por IA." />
+        <title>¿Qué es GEO? Guía Completa 2026 de Generative Engine Optimization | esGEO</title>
+        <meta name="description" content="GEO (Generative Engine Optimization) es la metodología para que ChatGPT, Perplexity y Claude citen tu web. Guía con framework F1-F5, datos de Princeton y ejemplos prácticos." />
         <link rel="canonical" href="https://esgeo.ai/radar-ia/que-es-geo-guia-completa" />
 
-        <meta name="citation_title" content="Qué es GEO: Guía completa de Generative Engine Optimization" />
+        <meta name="citation_title" content="¿Qué es GEO? Guía Completa 2026 de Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2026-03-20" />
         <meta name="citation_online_date" content="2026-03-20" />
@@ -86,7 +86,7 @@ const QueEsGeoGuiaCompleta = () => {
 
               <HighlightSnippet id="geo-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
-                  <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimizaci····n de contenido
+                  <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimización de contenido
                   para ser comprendido, recuperado y citado por modelos de lenguaje e inteligencia artificial generativa.</strong>
                 </p>
               </HighlightSnippet>
@@ -329,7 +329,7 @@ const QueEsGeoGuiaCompleta = () => {
                 </p>
                 <ul className="space-y-2 text-muted-foreground leading-relaxed mb-6">
                   <li>• ¿Tiene definiciones claras al inicio? (F2)</li>
-                  <li>����� ¿Es fragmentado o tiene párrafos densos? (F1)</li>
+                  <li>• ¿Es fragmentado o tiene párrafos densos? (F1)</li>
                   <li>• ¿Tiene Schema.org? (F3)</li>
                   <li>• ¿Tiene sección FAQ? (F4)</li>
                   <li>• ¿Cuándo fue la última actualización? (F5)</li>

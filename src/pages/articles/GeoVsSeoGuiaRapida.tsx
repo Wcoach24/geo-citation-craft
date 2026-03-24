@@ -10,11 +10,11 @@ const GeoVsSeoGuiaRapida = () => {
   return (
     <>
       <Helmet>
-        <title>GEO no es SEO: guía rápida para entender la diferencia | Radar IA - esGEO</title>
-        <meta name="description" content="Tabla comparativa y estrategia de pivote hacia la optimización generativa. SEO intenta gustar a Google, GEO intenta ser comprendido por modelos de lenguaje." />
+        <title>GEO vs SEO: Diferencias Clave y Por Qué Necesitas Ambos en 2026 | esGEO</title>
+        <meta name="description" content="Comparativa GEO vs SEO: el SEO posiciona en Google, GEO hace que ChatGPT y Perplexity te citen. Tabla de diferencias, datos de impacto y estrategia combinada." />
         <link rel="canonical" href="https://esgeo.ai/radar-ia/geo-vs-seo-diferencias" />
         
-        <meta name="citation_title" content="GEO no es SEO: guía rápida para entender la diferencia" />
+        <meta name="citation_title" content="GEO vs SEO: Diferencias Clave y Por Qué Necesitas Ambos en 2026" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2025-01-03" />
         <meta name="citation_online_date" content="2024-12-15" />

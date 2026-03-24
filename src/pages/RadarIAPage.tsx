@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
@@ -76,8 +75,8 @@ const RadarIAPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Radar IA | Tendencias y Análisis GEO | esGEO</title>
-        <meta name="description" content="Análisis actualizado sobre tendencias en IA generativa, cambios en LLMs y nuevas técnicas de Generative Engine Optimization (GEO)." />
+        <title>GEO e IA Generativa: Guías, Análisis y Tendencias 2026 | esGEO Radar</title>
+        <meta name="description" content="Todo sobre GEO (Generative Engine Optimization) e IA generativa: qué es GEO, GEO vs SEO, cómo ser citado por ChatGPT y Perplexity. Artículos y guías actualizadas." />
         <link rel="canonical" href="https://esgeo.ai/radar-ia" />
         
         <meta name="citation_title" content="Radar IA - Análisis de Tendencias en GEO" />

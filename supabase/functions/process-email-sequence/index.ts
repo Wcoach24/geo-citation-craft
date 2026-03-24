@@ -107,11 +107,11 @@ function buildE3(email: string): string {
       Ejemplo práctico. En vez de:
     </p>
     <div style="background:#fef2f2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 12px;">
-      <p style="margin:0;font-size:14px;color:#7f1d1d;font-style:italic;">\"El marketing de contenidos es muy importante hoy en día...\"</p>
+      <p style="margin:0;font-size:14px;color:#7f1d1d;font-style:italic;">&quot;El marketing de contenidos es muy importante hoy en día...&quot;</p>
     </div>
     <p style="font-size:14px;color:#64748b;margin:0 0 12px;">Escribe:</p>
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 20px;">
-      <p style="margin:0;font-size:14px;color:#14532d;font-style:italic;">\"Según el Content Marketing Institute (2025), el 73% de las empresas B2B que implementan marketing de contenidos reportan un ROI positivo en 12 meses...\"</p>
+      <p style="margin:0;font-size:14px;color:#14532d;font-style:italic;">&quot;Según el Content Marketing Institute (2025), el 73% de las empresas B2B que implementan marketing de contenidos reportan un ROI positivo en 12 meses...&quot;</p>
     </div>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 24px;">
       La segunda versión tiene 3x más probabilidades de ser citada por una IA. ¿La diferencia? Datos, fuente, y especificidad.
@@ -130,7 +130,7 @@ function buildE4(email: string): string {
       Hay un error que veo constantemente en webs que intentan optimizar para IA:
     </p>
     <div style="background:#fef2f2;border-radius:12px;padding:20px;margin:0 0 20px;text-align:center;">
-      <p style="font-size:18px;font-weight:700;color:#dc2626;margin:0;">\"Usar IA para escribir contenido genérico<br/>y esperar que la IA lo cite\"</p>
+      <p style="font-size:18px;font-weight:700;color:#dc2626;margin:0;">&quot;Usar IA para escribir contenido genérico<br/>y esperar que la IA lo cite&quot;</p>
     </div>
     <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
       La ironía: los modelos de IA están entrenados para detectar contenido genérico.
@@ -191,6 +191,99 @@ function buildE5(email: string): string {
       — Eric
     </p>
   `);
+}
+
+// ── Testimonial request email (7 days after purchase) ──
+function buildTestimonialEmail(email: string): string {
+  return emailWrapper(email, `
+    <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
+      Hola de nuevo 👋
+    </p>
+    <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
+      Hace una semana que tienes el curso esGEO. ¿Cómo te está yendo?
+    </p>
+    <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
+      Me encantaría saber si te ha resultado útil. Si puedes dedicar 30 segundos a responder este email con:
+    </p>
+    <div style="background:#f0fdfa;border-radius:12px;padding:20px;margin:0 0 20px;">
+      <p style="margin:0 0 8px;font-size:15px;color:#334155;">1. ¿Qué es lo que más te ha servido del curso?</p>
+      <p style="margin:0;font-size:15px;color:#334155;">2. ¿Se lo recomendarías a alguien? ¿Por qué?</p>
+    </div>
+    <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0 0 16px;">
+      Tu feedback nos ayuda a mejorar y a que otros profesionales descubran GEO.
+    </p>
+    <p style="font-size:16px;color:#1a202c;line-height:1.7;margin:0;">
+      — Eric
+    </p>
+  `);
+}
+
+async function processTestimonialRequests(supabase: any, apiKey: string): Promise<{ sent: number; errors: string[] }> {
+  const now = new Date();
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const eightDaysAgo = new Date(now.getTime() - 8 * 24 * 60 * 60 * 1000);
+
+  // Find purchases from exactly 7 days ago (within a 24h window) that haven't been sent a testimonial request
+  const { data: purchases, error } = await supabase
+    .from("purchases")
+    .select("id, user_id, stripe_payment_intent_id, created_at")
+    .eq("status", "completed")
+    .eq("testimonial_requested", false)
+    .gte("created_at", eightDaysAgo.toISOString())
+    .lte("created_at", sevenDaysAgo.toISOString())
+    .limit(50);
+
+  if (error || !purchases || purchases.length === 0) {
+    return { sent: 0, errors: error ? [error.message] : [] };
+  }
+
+  let sent = 0;
+  const errors: string[] = [];
+
+  for (const purchase of purchases) {
+    // Get customer email from guest_access
+    const { data: access } = await supabase
+      .from("guest_access")
+      .select("email")
+      .eq("purchase_id", purchase.id)
+      .single();
+
+    if (!access?.email) continue;
+
+    try {
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: FROM_EMAIL,
+          to: access.email,
+          subject: "¿Qué tal el curso GEO? Tu opinión importa",
+          html: buildTestimonialEmail(access.email),
+          tags: [{ name: "sequence", value: "testimonial" }],
+        }),
+      });
+
+      if (res.ok) {
+        // Mark as sent (gracefully handle missing column)
+        await supabase
+          .from("purchases")
+          .update({ testimonial_requested: true })
+          .eq("id", purchase.id);
+        sent++;
+      } else {
+        errors.push(`${access.email}: ${await res.text()}`);
+      }
+    } catch (e) {
+      errors.push(`${access.email}: ${e instanceof Error ? e.message : String(e)}`);
+    }
+
+    await new Promise((r) => setTimeout(r, 100));
+  }
+
+  return { sent, errors };
 }
 
 // ── Main handler ──
@@ -308,8 +401,25 @@ serve(async (req) => {
 
     console.log(`Sequence processed: ${sent} sent, ${skipped} skipped, ${errors.length} errors`);
 
+    // Also process testimonial requests for buyers (7 days post-purchase)
+    let testimonialResult = { sent: 0, errors: [] as string[] };
+    try {
+      testimonialResult = await processTestimonialRequests(supabase, apiKey);
+      if (testimonialResult.sent > 0) {
+        console.log(`Testimonial requests sent: ${testimonialResult.sent}`);
+      }
+    } catch (e) {
+      console.warn("Testimonial processing error (non-critical):", e);
+    }
+
     return new Response(
-      JSON.stringify({ processed: leads.length, sent, skipped, errors: errors.slice(0, 5) }),
+      JSON.stringify({
+        processed: leads.length,
+        sent,
+        skipped,
+        errors: errors.slice(0, 5),
+        testimonials_sent: testimonialResult.sent,
+      }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
