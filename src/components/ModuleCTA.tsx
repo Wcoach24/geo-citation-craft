@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MODULES, COMPLETE_COURSE } from "@/data/modules";
-import { supabase } from "@/integrations/supabase/client";
+import { startCheckout } from "@/lib/checkout";
 import { useToast } from "@/hooks/use-toast";
 
 interface ModuleCTAProps {
@@ -44,11 +44,8 @@ const ModuleCTA: React.FC<ModuleCTAProps> = ({ moduleId, className = "" }) => {
   const handleBuyModule = async () => {
     try {
       setIsLoading(true);
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { productType: 'module', moduleId },
-      });
-      if (error) throw error;
-      if (data?.url) window.location.href = data.url;
+      const { url } = await startCheckout({ productType: 'module', moduleId });
+      window.location.href = url;
     } catch (err) {
       console.error('Checkout error:', err);
       toast({

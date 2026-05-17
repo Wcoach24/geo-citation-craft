@@ -141,17 +141,8 @@ const CursoGeoPage = () => {
       trackEvent.checkoutStart('complete');
       (window as any).clarity?.('event', 'cta_checkout_click');
 
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: {
-          productType: 'complete',
-        },
-      });
-
-      if (error) throw error;
-
-      if (data?.url) {
-        window.location.href = data.url;
-      }
+      const { url } = await startCheckout({ productType: 'complete' });
+      window.location.href = url;
     } catch (err) {
       console.error('Checkout error:', err);
       setIsLoading(false);
