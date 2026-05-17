@@ -18,6 +18,29 @@ const ModuleCTA: React.FC<ModuleCTAProps> = ({ moduleId, className = "" }) => {
 
   if (!module) return null;
 
+  // Block purchase UI for coming-soon modules — render a placeholder card instead
+  if (module.comingSoon) {
+    return (
+      <div className={`space-y-4 ${className}`}>
+        <Card className="border-border bg-card opacity-90">
+          <CardContent className="p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h3 className="font-bold text-lg text-primary">{module.shortName}</h3>
+                <p className="text-sm text-muted-foreground">
+                  Este módulo estará disponible próximamente. Suscríbete al boletín para enterarte cuando salga.
+                </p>
+              </div>
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200 whitespace-nowrap">
+                Próximamente
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   const handleBuyModule = async () => {
     try {
       setIsLoading(true);

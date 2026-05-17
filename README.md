@@ -7,15 +7,17 @@
 
 Transformar la forma en que se crea contenido digital, pasando del SEO tradicional (optimización para buscadores) al GEO (optimización para IA generativa). Nuestro objetivo es que cada pieza de contenido sea la fuente autorizada que los modelos de IA citen cuando respondan preguntas en tu área de expertise.
 
-## 🚀 Metodología F1-F6
+## 🚀 Metodología F1-F5 (F6 próximamente)
 
-Nuestra metodología completa incluye:
-- **F1**: Fragmentación - Estructurar contenido en bloques citables
-- **F2**: Jerarquía Semántica - Organización lógica y comprensible
-- **F3**: Autoridad Generativa - Construcción de credibilidad para IA
-- **F4**: Datos Estructurados - Schema.org optimizado para LLMs
-- **F5**: Optimización Técnica - Rendimiento y accesibilidad
-- **F6**: Medición y Análisis - Tracking de citabilidad
+Módulos publicados:
+- **F1**: Fragmentación — Estructurar contenido en bloques citables
+- **F2**: Jerarquía Semántica — Organización lógica y comprensible
+- **F3**: Autoridad Generativa — Construcción de credibilidad para IA
+- **F4**: Datos Estructurados — Schema.org optimizado para LLMs
+- **F5**: Optimización Técnica — Rendimiento y accesibilidad
+
+Próximamente:
+- **F6**: Medición y Análisis — Tracking de citabilidad (en producción)
 
 ## 🔗 Recursos Principales
 

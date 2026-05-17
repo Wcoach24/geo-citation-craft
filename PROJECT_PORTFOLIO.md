@@ -30,7 +30,7 @@
 - **Payment Processor:** Stripe (production integration)
 - **Checkout:** Stripe Checkout Sessions
 - **Webhooks:** Automated payment processing and access granting
-- **Products:** 7 SKUs (6 individual modules + 1 complete bundle)
+- **Products:** 6 SKUs live (5 individual modules F1–F5 + 1 complete bundle); F6 in production
 
 ---
 
@@ -66,13 +66,13 @@
 - **Citation Metadata:** Custom meta tags for AI attribution
 
 ### 5. Content Management
-- **6-Module Course Structure:**
-  - F1: Generative Accessibility Fundamentals
-  - F2: Semantic Hierarchy
-  - F3: Generative Authority
-  - F4: Structured Data (Schema.org)
-  - F5: Technical Optimization
-  - F6: Measurement & Analytics
+- **5-Module Course Structure (F6 in production):**
+  - F1: Generative Accessibility Fundamentals — live
+  - F2: Semantic Hierarchy — live
+  - F3: Generative Authority — live
+  - F4: Structured Data (Schema.org) — live
+  - F5: Technical Optimization — live
+  - F6: Measurement & Analytics — coming soon
 - **Interactive Assessments:** GEO readiness tests
 - **Glossary System:** Technical terminology database
 - **Case Studies:** Real-world implementation examples

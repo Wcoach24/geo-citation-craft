@@ -24,13 +24,19 @@ interface CheckoutRequest {
   guestEmail?: string;
 }
 
-// Mapeo de productos con precios que funcionan en Stripe
+// Mapeo de productos con precios que funcionan en Stripe.
+// IMPORTANT: only include modules that have a corresponding PDF in
+// stripe-webhook/index.ts MODULE_FILES — otherwise webhook will deliver
+// an empty email. Coming-soon modules (e.g. F6) MUST stay out of this map
+// until their PDF is uploaded.
 const PRODUCT_MAPPING: Record<string, { priceId: string; productId: string }> = {
   'f1': { priceId: 'price_1SIElCLYFGrlrWdkg6xDfNK4', productId: 'prod_TEiBWaHzwUlXA5' },
   'f2': { priceId: 'price_1SIEr4LYFGrlrWdkKnenQc0o', productId: 'prod_TEiHYoMQxn8CW4' },
   'f3': { priceId: 'price_1SIEvqLYFGrlrWdkKyiOQhsz', productId: 'prod_TEiMYkaDdZNpHK' },
   'f4': { priceId: 'price_1SIEySLYFGrlrWdkPpmf0HrO', productId: 'prod_TEiPPFHp6tqbVK' },
-  'f6': { priceId: 'price_1SIF4xLYFGrlrWdkDBACLaKe', productId: 'prod_TEiV7zVpP97KSz' },
+  'f5': { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
+  // 'f6' intentionally removed — module is comingSoon, no PDF uploaded yet.
+  // Removing it here prevents new purchases from creating broken checkouts.
 };
 
 serve(async (req) => {
