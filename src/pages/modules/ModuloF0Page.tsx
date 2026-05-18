@@ -159,7 +159,6 @@ const ModuloF0Page = () => {
                 Esto significa que pierden millones de consultas diarias.
               </p>
             </HighlightSnippet>
-            </div>
 
             <HighlightSnippet variant="stat" className="mb-6">
               <p className="text-lg leading-relaxed text-center" data-speakable="true">
