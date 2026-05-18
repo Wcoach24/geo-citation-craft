@@ -50,7 +50,7 @@ const PremiumContentGate = ({
             <CardContent className="p-4 text-center">
               <ChevronRight className="h-5 w-5 text-primary mx-auto mb-2" />
               <div className="text-sm font-medium text-primary">Contenido Completo</div>
-              <div className="text-xs text-muted-foreground">Framework F1-F6</div>
+              <div className="text-xs text-muted-foreground">Framework F1-F5</div>
             </CardContent>
           </Card>
         </div>

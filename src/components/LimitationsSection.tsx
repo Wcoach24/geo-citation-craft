@@ -11,7 +11,7 @@ const LimitationsSection = () => {
   const canDo = [
     { title: "Optimizar estructura", text: "Mejorar la legibilidad y comprensión de tu contenido para LLMs." },
     { title: "Aumentar probabilidades", text: "Aplicar mejores prácticas basadas en el comportamiento observado de LLMs." },
-    { title: "Enseñar metodología", text: "Un framework estructurado y reproducible (F0-F6)." },
+    { title: "Enseñar metodología", text: "Un framework estructurado y reproducible (F0-F5)." },
   ];
 
   return (

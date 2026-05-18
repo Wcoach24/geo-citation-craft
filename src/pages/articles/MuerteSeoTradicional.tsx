@@ -202,7 +202,7 @@ const MuerteSeoTradicional = () => {
                 </Link>
                 <Link to="/metodologia">
                   <Button variant="ghost" size="sm">
-                    Metodología F1-F6
+                    Metodología F1-F5
                   </Button>
                 </Link>
                 <Link to="/glosario#autoridad-generativa">

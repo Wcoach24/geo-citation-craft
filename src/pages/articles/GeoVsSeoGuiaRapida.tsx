@@ -270,7 +270,7 @@ const GeoVsSeoGuiaRapida = () => {
               <div className="flex flex-wrap gap-4">
                 <Link to="/metodologia">
                   <Button variant="ghost" size="sm">
-                    Metodología F1-F6 completa
+                    Metodología F1-F5 completa
                   </Button>
                 </Link>
                 <Link to="/radar-ia/muerte-seo-tradicional">

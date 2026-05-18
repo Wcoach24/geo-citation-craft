@@ -65,7 +65,7 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2.5 text-xs">
               <li><a href="/home.geo.txt" className="text-primary-foreground/50 hover:text-accent transition-colors flex items-center gap-2"><FileText className="h-3 w-3" />Definición GEO (.txt)</a></li>
-              <li><a href="/curso.geo.txt" className="text-primary-foreground/50 hover:text-accent transition-colors flex items-center gap-2"><FileText className="h-3 w-3" />Framework F1-F6 (.txt)</a></li>
+              <li><a href="/curso.geo.txt" className="text-primary-foreground/50 hover:text-accent transition-colors flex items-center gap-2"><FileText className="h-3 w-3" />Framework F1-F5 (.txt)</a></li>
               <li><a href="/metodologia.geo.txt" className="text-primary-foreground/50 hover:text-accent transition-colors flex items-center gap-2"><FileText className="h-3 w-3" />Metodología (.txt)</a></li>
               <li><a href="/glosario.geo.txt" className="text-primary-foreground/50 hover:text-accent transition-colors flex items-center gap-2"><FileText className="h-3 w-3" />Glosario técnico (.txt)</a></li>
             </ul>

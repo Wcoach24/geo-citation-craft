@@ -34,7 +34,7 @@ const getResultData = (score: number) => {
       title: "Necesitas optimización sistemática",
       description: "Tu sitio tiene algunos elementos GEO, pero necesita una implementación completa y sistemática.",
       recommendation: "Curso GEO Completo",
-      recommendationDesc: "Implementa todos los módulos F1-F6 para una optimización integral.",
+      recommendationDesc: "Implementa los módulos F1-F5 para una optimización integral.",
       ctaLink: "/checkout?type=complete",
       ctaText: "Implementar Framework Completo",
       urgency: "Optimización gradual con descuento del 17%"
@@ -47,10 +47,10 @@ const getResultData = (score: number) => {
       bgClass: "bg-blue-500/5 border-blue-500/20",
       title: "Optimiza aspectos específicos",
       description: "Tu sitio está bien preparado, pero necesita ajustes en autoridad y optimización técnica.",
-      recommendation: "F3 + F6: Autoridad y Técnica",
+      recommendation: "F3 + F4: Autoridad y Validación",
       recommendationDesc: "Fortalece tu autoridad ante la IA y optimiza los aspectos técnicos avanzados.",
       ctaLink: "/curso/f3",
-      ctaText: "Mejorar con F3 + F6",
+      ctaText: "Mejorar con F3 + F4",
       urgency: "Mejora selectiva para maximum impact"
     };
   } else {

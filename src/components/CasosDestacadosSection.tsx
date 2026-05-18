@@ -25,7 +25,7 @@ const CasosDestacadosSection = () => {
               Predicamos con el Ejemplo
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Aplicamos nuestra metodología F0-F6 en esgeo.ai y logramos ser citados por los principales LLMs.
+              Aplicamos nuestra metodología F0-F5 en esgeo.ai y logramos ser citados por los principales LLMs.
             </p>
           </div>
 

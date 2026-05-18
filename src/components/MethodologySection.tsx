@@ -15,7 +15,7 @@ const MethodologySection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <Badge variant="outline" className="mb-4 text-accent border-accent cursor-default">
-              Framework F1-F6
+              Framework F1-F5
             </Badge>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
               6 Módulos Progresivos

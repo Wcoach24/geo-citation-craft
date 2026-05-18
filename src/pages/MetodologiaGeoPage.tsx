@@ -90,26 +90,7 @@ const MetodologiaGeoPage = () => {
     topics: ["KPIs GEO", "Herramientas", "Monitoreo"],
     duration: "PT2H",
     difficulty: "Intermediate"
-  }, {
-    id: "F6",
-    title: "Estrategia avanzada",
-    description: "Tácticas avanzadas para dominar en ecosistemas de IA",
-    icon: <Zap className="h-6 w-6" />,
-    color: "bg-indigo-500",
-    topics: ["Link building GEO", "Contenido viral", "Escalabilidad"],
-    duration: "PT5H",
-    difficulty: "Advanced"
-  }];
-
-  return (
-    <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Método GEO: Framework y Metodología de Generative Engine Optimization | esGEO</title>
-        <meta name="description" content="El método GEO explicado paso a paso: framework F1-F6 de Generative Engine Optimization. Metodología probada para que la IA generativa cite tu web como fuente." />
-        <link rel="canonical" href="https://esgeo.ai/metodologia" />
-        
-        {/* Speakable / Citation meta */}
-        <meta name="citation_title" content="Método GEO: Framework y Metodología de Generative Engine Optimization" />
+  },        <meta name="citation_title" content="Método GEO: Framework y Metodología de Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
@@ -184,20 +165,20 @@ const MetodologiaGeoPage = () => {
         </div>
       </section>
       
-      {/* Módulos F1-F6 */}
+      {/* Módulos F1-F5 */}
       <section id="modulos" className="section-anchor py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center justify-between mb-12">
               <h2 className="text-2xl md:text-3xl font-semibold text-primary">
-                Módulos F1-F6
+                Módulos F1-F5
               </h2>
               <ShareSectionButton sectionId="modulos" title="módulos del framework" />
             </div>
             
             <HighlightSnippet id="modulos-descripcion" variant="insight" className="mb-10">
               <p className="text-center" data-speakable="true">
-                <strong>El Framework F1-F6</strong> está diseñado como un sistema progresivo donde cada módulo 
+                <strong>El Framework F1-F5</strong> está diseñado como un sistema progresivo donde cada módulo 
                 construye sobre el anterior. Desde fundamentos básicos hasta estrategias avanzadas, 
                 esta estructura permite una implementación escalonada y adaptable a cualquier tipo de web.
               </p>
@@ -508,7 +489,7 @@ const MetodologiaGeoPage = () => {
                 </h3>
                 <HighlightSnippet variant="insight">
                   <p className="text-muted-foreground" data-speakable="true">
-                    La implementación completa del Framework F1-F6 requiere aproximadamente 19 horas de formación, 
+                    La implementación completa del Framework F1-F5 requiere aproximadamente 19 horas de formación, 
                     más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse 
                     de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones.
                   </p>
@@ -584,7 +565,7 @@ const MetodologiaGeoPage = () => {
                 <CardContent>
                   <p className="text-muted-foreground">
                     Aprende paso a paso a implementar todas las técnicas GEO 
-                    en tu web con nuestro curso completo F1-F6.
+                    en tu web con nuestro curso completo F1-F5.
                   </p>
                 </CardContent>
                 <CardFooter>
@@ -637,8 +618,8 @@ const MetodologiaGeoPage = () => {
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Metodología GEO | Framework F1-F6",
-        "description": "Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F6.",
+        "name": "Metodología GEO | Framework F1-F5",
+        "description": "Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F5.",
         "url": "https://esgeo.ai/metodologia",
         "speakable": {
           "@type": "SpeakableSpecification",
@@ -646,7 +627,7 @@ const MetodologiaGeoPage = () => {
         },
         "mainEntity": {
           "@type": "Course",
-          "name": "Framework F1-F6 de Generative Engine Optimization",
+          "name": "Framework F1-F5 de Generative Engine Optimization",
           "description": "Curso completo de optimización para IA generativa estructurado en seis módulos progresivos para enseñar técnicas de GEO y citabilidad por modelos de lenguaje.",
           "provider": {
             "@type": "EducationalOrganization",
@@ -654,7 +635,7 @@ const MetodologiaGeoPage = () => {
             "url": "https://esgeo.ai",
             "@id": "https://esgeo.ai#organization"
           },
-          "courseCode": "GEO-F1-F6",
+          "courseCode": "GEO-F1-F5",
           "coursePrerequisites": "Conocimientos básicos de marketing digital",
           "educationalLevel": "Intermediate",
           "courseWorkload": "PT19H",
@@ -707,7 +688,7 @@ const MetodologiaGeoPage = () => {
           "name": "¿Cuánto tiempo se tarda en implementar toda la Metodología GEO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "La implementación completa del Framework F1-F6 requiere aproximadamente 19 horas de formación, más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones."
+            "text": "La implementación completa del Framework F1-F5 requiere aproximadamente 19 horas de formación, más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse de forma independiente y progresiva, obteniendo resultados desde las primeras aplicaciones."
           }
         }, {
           "@type": "Question",
@@ -740,7 +721,7 @@ const MetodologiaGeoPage = () => {
         "@context": "https://schema.org",
         "@type": "HowTo",
         "name": "Cómo implementar GEO en tu web",
-        "description": "Guía paso a paso para implementar Generative Engine Optimization en tu web siguiendo el Framework F1-F6.",
+        "description": "Guía paso a paso para implementar Generative Engine Optimization en tu web siguiendo el Framework F1-F5.",
         "totalTime": "PT19H",
         "tool": [{
           "@type": "HowToTool",

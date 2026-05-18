@@ -17,7 +17,7 @@ const SocialProofSection = () => {
       role: "Caso propio verificable",
     },
     {
-      quote: "El framework F1-F6 es increíblemente práctico. Cada módulo tiene pasos concretos que puedes implementar en horas.",
+      quote: "El framework F1-F5 es increíblemente práctico. Cada módulo tiene pasos concretos que puedes implementar en horas.",
       author: "Metodología documentada",
       role: "6 módulos + checklists",
     },

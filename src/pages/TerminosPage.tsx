@@ -68,7 +68,7 @@ const TerminosPage = () => {
                 esGEO es una plataforma educativa especializada en Generative Engine Optimization (GEO) que ofrece:
               </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                <li>Metodología completa F1-F6 para optimización GEO</li>
+                <li>Metodología completa F1-F5 para optimización GEO</li>
                 <li>Contenido educativo sobre optimización para LLMs</li>
                 <li>Herramientas y recursos para mejorar la citabilidad por IA</li>
                 <li>Casos de estudio y análisis del sector</li>

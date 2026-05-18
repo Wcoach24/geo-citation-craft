@@ -194,7 +194,7 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Educación Especializada</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  <p>Ofrecemos el curso más completo de GEO en español, con módulos F1-F6 que cubren desde 
+                  <p>Ofrecemos el curso más completo de GEO en español, con módulos F1-F5 que cubren desde 
                   fundamentos hasta técnicas avanzadas para optimizar contenido para IA generativa.</p>
                   <p className="mt-2 text-sm">
                     <strong>Tiempo de formación:</strong> 20 horas • <strong>Certificación:</strong> Incluida

@@ -77,16 +77,6 @@ export const MODULES: Record<string, ModuleInfo> = {
     image: '/images/modulo-f5.png',
     stripeIds: { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
   },
-  f6: {
-    id: 'f6',
-    name: 'Módulo F6 - Métricas y Análisis',
-    shortName: 'F6 - Métricas y Análisis',
-    description: 'Próximamente - Métricas y análisis avanzado para medir el impacto del GEO.',
-    price: 10,
-    image: '/images/modulo-f6.png',
-    comingSoon: true,
-    stripeIds: { priceId: 'price_1SIF4xLYFGrlrWdkDBACLaKe', productId: 'prod_TEiV7zVpP97KSz' },
-  },
 };
 
 export const COMPLETE_COURSE = {

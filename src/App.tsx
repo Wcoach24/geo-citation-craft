@@ -37,7 +37,6 @@ const ModuloF2Page = React.lazy(() => import("./pages/modules/ModuloF2Page"));
 const ModuloF3Page = React.lazy(() => import("./pages/modules/ModuloF3Page"));
 const ModuloF4Page = React.lazy(() => import("./pages/modules/ModuloF4Page"));
 const ModuloF5Page = React.lazy(() => import("./pages/modules/ModuloF5Page"));
-const ModuloF6Page = React.lazy(() => import("./pages/modules/ModuloF6Page"));
 
 // Artículos del Radar IA
 const QueSIgnificaSerCitadoPorIA = React.lazy(() => import("./pages/articles/QueSIgnificaSerCitadoPorIA"));
@@ -103,7 +102,6 @@ function App() {
               <Route path="/curso/f3" element={<ModuloF3Page />} />
               <Route path="/curso/f4" element={<ModuloF4Page />} />
               <Route path="/curso/f5" element={<ModuloF5Page />} />
-              <Route path="/curso/f6" element={<ModuloF6Page />} />
               
               {/* Artículos del Radar IA */}
               <Route path="/radar-ia/que-significa-ser-citado-por-ia" element={<QueSIgnificaSerCitadoPorIA />} />

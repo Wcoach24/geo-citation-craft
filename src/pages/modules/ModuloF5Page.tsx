@@ -265,10 +265,8 @@ const ModuloF5Page = () => {
               </Link>
             </Button>
             <Button asChild>
-              <Link to="/curso/f6">
-                Módulo F6: Estrategia Avanzada
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
+              <Link to="/curso#comprar">
+                Volver al curso completo
             </Button>
           </div>
 
@@ -301,10 +299,8 @@ const ModuloF5Page = () => {
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/curso/f6">
-                  <ArrowRight className="mr-2 h-4 w-4" />
-                  Continuar con F6
-                </Link>
+                <Link to="/curso#comprar">
+                  Ver curso completo
               </Button>
             </div>
           </div>
