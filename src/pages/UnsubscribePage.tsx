@@ -19,11 +19,8 @@ export default function UnsubscribePage() {
 
     setStatus('loading');
     try {
-      const { error } = await supabase.functions.invoke('capture-lead', {
-        body: { email, source: 'unsubscribe', unsubscribe: true },
-      });
-
-      if (error) {
+      const { ok, error } = await captureLead({ email, source: 'unsubscribe', unsubscribe: true });
+      if (!ok) {
         console.error('Unsubscribe error:', error);
       }
       setStatus('done');

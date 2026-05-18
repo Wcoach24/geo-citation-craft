@@ -28,11 +28,8 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
     setStatus('loading');
     try {
       // Send to backend — captures lead + sends welcome email
-      const { error } = await supabase.functions.invoke('capture-lead', {
-        body: { email, source },
-      });
-
-      if (error) {
+      const { ok, error } = await captureLead({ email, source });
+      if (!ok) {
         console.error('capture-lead error:', error);
         // Still mark as lead locally even if backend fails
       }

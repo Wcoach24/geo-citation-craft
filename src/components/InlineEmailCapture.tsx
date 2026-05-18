@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Download, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { captureLead } from "@/lib/lead";
 
 interface InlineEmailCaptureProps {
   title: string;
@@ -42,9 +42,7 @@ const InlineEmailCapture = ({
     setIsSubmitting(true);
 
     try {
-      await supabase.functions.invoke('capture-lead', {
-        body: { email, source: 'inline_lead_magnet' },
-      });
+      await captureLead({ email, source: 'inline_lead_magnet' });
     } catch (err) {
       console.error('capture-lead error:', err);
     }
