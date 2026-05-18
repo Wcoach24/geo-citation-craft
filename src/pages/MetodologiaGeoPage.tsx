@@ -90,7 +90,17 @@ const MetodologiaGeoPage = () => {
     topics: ["KPIs GEO", "Herramientas", "Monitoreo"],
     duration: "PT2H",
     difficulty: "Intermediate"
-  },        <meta name="citation_title" content="Método GEO: Framework y Metodología de Generative Engine Optimization" />
+  }];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Método GEO: Framework y Metodología de Generative Engine Optimization | esGEO</title>
+        <meta name="description" content="El método GEO explicado paso a paso: framework F1-F5 de Generative Engine Optimization. Metodología probada para que la IA generativa cite tu web como fuente." />
+        <link rel="canonical" href="https://esgeo.ai/metodologia" />
+        
+        {/* Speakable / Citation meta */}
+        <meta name="citation_title" content="Método GEO: Framework y Metodología de Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
