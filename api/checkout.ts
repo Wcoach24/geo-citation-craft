@@ -17,10 +17,10 @@ const PRODUCT_MAPPING: Record<string, { priceId: string; productId: string }> = 
   f2: { priceId: "price_1SIEr4LYFGrlrWdkKnenQc0o", productId: "prod_TEiHYoMQxn8CW4" },
   f3: { priceId: "price_1SIEvqLYFGrlrWdkKyiOQhsz", productId: "prod_TEiMYkaDdZNpHK" },
   f4: { priceId: "price_1SIEySLYFGrlrWdkPpmf0HrO", productId: "prod_TEiPPFHp6tqbVK" },
-  f5: { priceId: "price_1SIF46LVUGCJuFgUOnlch4Dj", productId: "prod_TEiVtvLyYnRoPQ" },
+  f5: { priceId: "price_1TYM7zLYFGrlrWdkJcKfCvga", productId: "prod_UXQz7DLgfdqKbN" },
   // 'f6' intentionally NOT listed — coming soon, no PDF yet.
 };
-const COMPLETE_PRICE_ID = "price_1SISmrLVUGCJuFgUOUi48HYz"; // Curso GEO Completo €47
+const COMPLETE_PRICE_ID = "price_1TYM80LYFGrlrWdkKUIPIa7U"; // Curso GEO Completo €47
 
 const ALLOWED_ORIGINS = [
   "https://esgeo.ai",
