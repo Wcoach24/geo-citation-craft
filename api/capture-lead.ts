@@ -13,7 +13,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const AUDIENCE_ID = "6f09528e-620e-40b5-926b-4caffec4737c"; // "esGEO Leads"
-const SENDER = "Eric · esGEO <curso@esgeo.ai>";
+const SENDER = "Eric de esGEO <curso@esgeo.ai>";
 const REPLY_TO = "hola@esgeo.ai";
 
 const ALLOWED_ORIGINS = [
@@ -47,39 +47,41 @@ async function resendFetch(path: string, init: RequestInit = {}) {
   });
 }
 
-function welcomeEmail(): string {
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;background:#f1f5f9;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;">
-<div style="max-width:600px;margin:0 auto;background:#ffffff;">
-  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:32px;text-align:center;">
-    <h1 style="color:#ffffff;margin:0;font-size:28px;letter-spacing:-0.5px;">esGEO</h1>
-    <p style="color:#a0aec0;margin:8px 0 0;">Bienvenido al curso</p>
-  </div>
-  <div style="padding:32px;color:#1f2937;font-size:16px;line-height:1.6;">
-    <p style="margin:0 0 16px;">Hola,</p>
-    <p style="margin:0 0 16px;">Soy Eric, de esGEO.</p>
-    <p style="margin:0 0 16px;">
-      Bienvenido. Te he apuntado para recibir el contenido gratuito de
-      <strong>Generative Engine Optimization</strong> — el método para que
-      ChatGPT, Perplexity y Claude citen tu web como fuente.
-    </p>
-    <p style="margin:0 0 24px;">
-      Empieza por el módulo gratuito <strong>F0</strong>:<br/>
-      <a href="https://esgeo.ai/curso/f0" style="color:#2563eb;text-decoration:none;font-weight:600;">esgeo.ai/curso/f0 →</a>
-    </p>
-    <p style="margin:0 0 16px;">Si tienes cualquier duda, respóndeme directamente.</p>
-    <p style="margin:24px 0 0;color:#374151;">Eric<br/>
-      <a href="mailto:${REPLY_TO}" style="color:#2563eb;text-decoration:none;">${REPLY_TO}</a>
-    </p>
-  </div>
-  <div style="background:#f8fafc;padding:20px;text-align:center;border-top:1px solid #e2e8f0;">
-    <p style="color:#9ca3af;font-size:12px;margin:0 0 8px;">© esGEO — esgeo.ai</p>
-    <p style="color:#9ca3af;font-size:11px;margin:0;">
-      ¿No quieres recibir más emails? <a href="https://esgeo.ai/unsubscribe" style="color:#9ca3af;">Darse de baja</a>
-    </p>
-  </div>
-</div>
+function welcomeEmail(): { html: string; text: string } {
+  // Plain-text version (critical for Gmail Primary inbox classification)
+  const text = `Hola,
+
+Soy Eric. Has dejado tu email en esgeo.ai — gracias.
+
+Te paso el primer módulo gratuito (F0): un diagnóstico rápido para ver si
+tu sitio web puede ser citado por ChatGPT, Perplexity o Claude:
+
+https://esgeo.ai/curso/f0
+
+Es lectura de 10 minutos. Si te queda alguna duda, contestando a este
+email me llega directamente a mí.
+
+Eric
+hola@esgeo.ai
+
+—
+Si prefieres no recibir más emails: https://esgeo.ai/unsubscribe`;
+
+  // Minimal HTML: looks like a real person wrote it, not a template.
+  // No gradient header, no card design, no big buttons.
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1f2937;line-height:1.55;font-size:15px;max-width:560px;margin:24px auto;padding:0 20px;">
+<p>Hola,</p>
+<p>Soy Eric. Has dejado tu email en <a href="https://esgeo.ai" style="color:#2563eb;text-decoration:underline;">esgeo.ai</a> — gracias.</p>
+<p>Te paso el primer módulo gratuito (F0): un diagnóstico rápido para ver si tu sitio web puede ser citado por ChatGPT, Perplexity o Claude:</p>
+<p><a href="https://esgeo.ai/curso/f0" style="color:#2563eb;">https://esgeo.ai/curso/f0</a></p>
+<p>Es lectura de 10 minutos. Si te queda alguna duda, contestando a este email me llega directamente a mí.</p>
+<p>Eric<br><a href="mailto:hola@esgeo.ai" style="color:#2563eb;">hola@esgeo.ai</a></p>
+<p style="color:#9ca3af;font-size:12px;margin-top:32px;border-top:1px solid #e5e7eb;padding-top:16px;">Si prefieres no recibir más emails, <a href="https://esgeo.ai/unsubscribe" style="color:#9ca3af;">date de baja aquí</a>.</p>
 </body></html>`;
+
+  return { html, text };
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -121,15 +123,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(200).json({ ok: true, unsubscribed: true });
     }
 
-    // 3. Send welcome email
+    // 3. Send welcome email — conversational, minimal HTML, plain-text alt to land in Primary inbox
+    const { html, text } = welcomeEmail();
     const emailRes = await resendFetch("/emails", {
       method: "POST",
       body: JSON.stringify({
         from: SENDER,
         to: [normalizedEmail],
         reply_to: REPLY_TO,
-        subject: "Bienvenido a esGEO — tu primer módulo te espera",
-        html: welcomeEmail(),
+        subject: "Aquí tienes el F0 gratis",
+        html,
+        text,
         tags: [{ name: "kind", value: "welcome" }, { name: "source", value: source || "unknown" }],
       }),
     });

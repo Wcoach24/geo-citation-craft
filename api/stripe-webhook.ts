@@ -21,7 +21,7 @@ export const config = {
   api: { bodyParser: false }, // raw body required for Stripe signature verification
 };
 
-const SENDER = "Eric · esGEO <curso@esgeo.ai>";
+const SENDER = "Eric de esGEO <curso@esgeo.ai>";
 const REPLY_TO = "hola@esgeo.ai";
 
 type ModuleInfo = { name: string; filename: string; hash: string };
@@ -52,47 +52,42 @@ function loadPdf(modId: string) {
 }
 
 // --- Email HTML ---
-function buildEmail(productType: string, attachments: { name: string }[]) {
-  const list = attachments
-    .map(
-      (a) => `
-    <tr><td style="padding:12px 0;border-bottom:1px solid #eaeaea;">
-      <strong style="color:#1a1a2e;font-size:15px;">${a.name}</strong>
-      <div style="color:#6b7280;font-size:13px;margin-top:2px;">adjunto en este email</div>
-    </td></tr>`,
-    )
-    .join("");
-  const intro =
-    productType === "complete"
-      ? "¡Gracias por tu compra del <strong>Curso GEO Completo</strong>!"
-      : "¡Gracias por tu compra!";
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;background:#f1f5f9;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;">
-<div style="max-width:600px;margin:0 auto;background:#ffffff;">
-  <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:32px;text-align:center;">
-    <h1 style="color:#ffffff;margin:0;font-size:28px;letter-spacing:-0.5px;">esGEO</h1>
-    <p style="color:#a0aec0;margin:8px 0 0;">Tu curso está listo</p>
-  </div>
-  <div style="padding:32px;color:#1f2937;font-size:16px;line-height:1.6;">
-    <p style="margin:0 0 16px;">${intro}</p>
-    <p style="margin:0 0 16px;">Aquí tienes tus materiales:</p>
-    <div style="background:#f9fafb;border-left:3px solid #2563eb;padding:16px 20px;border-radius:4px;margin:0 0 24px;">
-      <table width="100%" cellpadding="0" cellspacing="0">${list}</table>
-    </div>
-    <p style="margin:0 0 16px;">Los PDFs vienen <strong>adjuntos</strong> a este email — guárdalos en tu equipo.</p>
-    <p style="margin:0 0 16px;">¿Cualquier duda? Respóndeme directamente y te contesto yo.</p>
-    <p style="margin:24px 0 0;color:#374151;">Eric<br/>
-      <a href="mailto:${REPLY_TO}" style="color:#2563eb;text-decoration:none;">${REPLY_TO}</a>
-    </p>
-  </div>
-  <div style="background:#f8fafc;padding:20px;text-align:center;border-top:1px solid #e2e8f0;">
-    <p style="color:#9ca3af;font-size:12px;margin:0;">© esGEO — esgeo.ai</p>
-  </div>
-</div>
+function buildEmail(productType: string, attachments: { name: string }[]): { html: string; text: string } {
+  const intro = productType === "complete"
+    ? "Acabas de comprar el Curso GEO Completo. Gracias."
+    : "Acabas de comprar uno de los módulos de esGEO. Gracias.";
+
+  const fileList = attachments.map((a) => `• ${a.name}`).join("\n");
+
+  // Plain-text version (boost Primary inbox classification)
+  const text = `${intro}
+
+Tienes los PDFs adjuntos a este email:
+
+${fileList}
+
+Guárdalos en tu equipo cuando puedas. Si algo falla o tienes alguna
+duda, contestando a este email me llega directamente a mí.
+
+Eric
+hola@esgeo.ai`;
+
+  // Minimal HTML, looks like a personal note (not a template/newsletter)
+  const fileListHtml = attachments.map((a) => `<li>${a.name}</li>`).join("");
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1f2937;line-height:1.55;font-size:15px;max-width:560px;margin:24px auto;padding:0 20px;">
+<p>${intro}</p>
+<p>Tienes los PDFs adjuntos a este email:</p>
+<ul style="padding-left:20px;color:#374151;">${fileListHtml}</ul>
+<p>Guárdalos en tu equipo cuando puedas. Si algo falla o tienes alguna duda, contestando a este email me llega directamente a mí.</p>
+<p>Eric<br><a href="mailto:hola@esgeo.ai" style="color:#2563eb;">hola@esgeo.ai</a></p>
 </body></html>`;
+
+  return { html, text };
 }
 
-async function sendEmail(to: string, subject: string, html: string, attachments: any[]) {
+async function sendEmail(to: string, subject: string, html: string, attachments: any[], text?: string) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error("RESEND_API_KEY missing");
   const r = await fetch("https://api.resend.com/emails", {
@@ -108,6 +103,7 @@ async function sendEmail(to: string, subject: string, html: string, attachments:
       reply_to: REPLY_TO,
       subject,
       html,
+      ...(text ? { text } : {}),
       attachments: attachments.map((a) => ({ filename: a.filename, content: a.content })),
     }),
   });
@@ -166,11 +162,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const subject = productType === "complete"
-      ? "📚 Tu Curso GEO Completo está listo para descargar"
-      : `📄 Tu módulo ${attachments[0].name} está listo`;
+      ? "Aquí tienes el Curso GEO completo"
+      : `Aquí tienes ${attachments[0].name}`;
 
-    const html = buildEmail(productType, attachments);
-    const result = await sendEmail(email, subject, html, attachments);
+    const { html, text } = buildEmail(productType, attachments);
+    const result = await sendEmail(email, subject, html, attachments, text);
     console.log(`[webhook] email sent to ${email}, id=${result.id}, attachments=${attachments.length}`);
 
     return res.status(200).json({ received: true, email_id: result.id });
