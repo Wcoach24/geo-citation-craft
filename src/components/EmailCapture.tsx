@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { useVisitorState } from '@/hooks/useVisitorState';
 import { supabase } from '@/integrations/supabase/client';
 import { trackEvent } from '@/lib/analytics';
+import { captureLead } from '@/lib/lead';
 
 interface EmailCaptureProps {
   compact?: boolean;

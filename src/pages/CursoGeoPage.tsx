@@ -28,6 +28,7 @@ import { supabase } from '@/integrations/supabase/client';
 import EmailCapture from '@/components/EmailCapture';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { trackEvent } from '@/lib/analytics';
+import { startCheckout } from '@/lib/checkout';
 
 const CursoGeoPage = () => {
   const navigate = useNavigate();

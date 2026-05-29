@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { captureLead } from '@/lib/lead';
 
 export default function UnsubscribePage() {
   const [searchParams] = useSearchParams();
