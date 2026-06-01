@@ -43,8 +43,8 @@ const EquipoPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Nuestro Equipo | Expertos en GEO | esGEO</title>
-        <meta name="description" content="Conoce al equipo de expertos en Generative Engine Optimization de esGEO. Pioneros en optimización para LLMs y citabilidad por IA en España." />
+        <title>Equipo esGEO: expertos en GEO en España 2026</title>
+        <meta name="description" content="Conoce a los expertos en GEO de esGEO: especialistas en posicionamiento para IA y citabilidad en ChatGPT, Perplexity y Claude. Equipo 2026." />
         <link rel="canonical" href="https://esgeo.ai/acerca-de/equipo" />
         
         <meta name="citation_title" content="Equipo esGEO: Expertos en Generative Engine Optimization" />
@@ -96,7 +96,7 @@ const EquipoPage = () => {
               Nuestro Equipo
             </Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Expertos en GEO
+              Expertos en GEO: especialistas en posicionamiento IA
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Pioneros en Generative Engine Optimization en España
