@@ -11,7 +11,7 @@ const DatosEstructuradosModelosGenerativos = () => {
   return (
     <>
       <Helmet>
-        <title>Los datos estructurados que mejor entienden los modelos generativos | Radar IA - esGEO</title>
+        <title>Datos estructurados para LLMs en 2026 | esGEO</title>
         <meta name="description" content="Microdatos recomendados para maximizar la citabilidad: FAQPage, HowTo, Article y SpeakableSpecification." />
         <script type="application/ld+json">
           {JSON.stringify({
