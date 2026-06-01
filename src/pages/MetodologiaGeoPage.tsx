@@ -95,7 +95,7 @@ const MetodologiaGeoPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Método GEO: Framework y Metodología de Generative Engine Optimization | esGEO</title>
+        <title>Metodología GEO F1-F5 2026: Framework de Citabilidad IA | esGEO</title>
         <meta name="description" content="El método GEO explicado paso a paso: framework F1-F5 de Generative Engine Optimization. Metodología probada para que la IA generativa cite tu web como fuente." />
         <link rel="canonical" href="https://esgeo.ai/metodologia" />
         
