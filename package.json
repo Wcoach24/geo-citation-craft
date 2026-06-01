@@ -5,14 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.js",
+    "build": "vite build && npx playwright install chromium && node scripts/prerender.js",
     "build:no-prerender": "vite build",
-    "build:with-prerender": "vite build && node scripts/prerender.js",
+    "build:with-prerender": "vite build && npx playwright install chromium && node scripts/prerender.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prerender": "node scripts/prerender.js",
-    "postinstall": "playwright install --with-deps chromium || true"
+    "prerender": "npx playwright install chromium && node scripts/prerender.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
