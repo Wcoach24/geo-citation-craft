@@ -95,8 +95,8 @@ const MetodologiaGeoPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Método GEO: Framework y Metodología de Generative Engine Optimization | esGEO</title>
-        <meta name="description" content="El método GEO explicado paso a paso: framework F1-F5 de Generative Engine Optimization. Metodología probada para que la IA generativa cite tu web como fuente." />
+        <title>Método GEO 2026: Framework F1-F5 paso a paso | esGEO</title>
+        <meta name="description" content="Aprende el método GEO con el framework F1-F5: la metodología 2026 para que ChatGPT, Claude y Perplexity citen tu web como fuente fiable." />
         <link rel="canonical" href="https://esgeo.ai/metodologia" />
         
         {/* Speakable / Citation meta */}
@@ -140,7 +140,7 @@ const MetodologiaGeoPage = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">
-              Metodología GEO
+              Método GEO: framework F1-F5 para citabilidad en IA
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
