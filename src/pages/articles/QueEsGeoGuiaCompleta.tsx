@@ -12,7 +12,7 @@ const QueEsGeoGuiaCompleta = () => {
   return (
     <>
       <Helmet>
-        <title>¿Qué es GEO? Guía Completa 2026 de Generative Engine Optimization | esGEO</title>
+        <title>¿Qué es GEO? Guía Completa 2026 de Optimización IA | esGEO</title>
         <meta name="description" content="GEO (Generative Engine Optimization) es la metodología para que ChatGPT, Perplexity y Claude citen tu web. Guía con framework F1-F5, datos de Princeton y ejemplos prácticos." />
         <link rel="canonical" href="https://esgeo.ai/radar-ia/que-es-geo-guia-completa" />
 
