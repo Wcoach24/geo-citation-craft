@@ -11,7 +11,7 @@ const FormatoWikipediaIA = () => {
   return (
     <>
       <Helmet>
-        <title>¿Por qué los modelos prefieren textos con formato Wikipedia? | Radar IA - esGEO</title>
+        <title>Por qué la IA prefiere formato Wikipedia 2026 | esGEO</title>
         <meta name="description" content="El estilo enciclopedico como modelo ideal para la citabilidad por modelos de lenguaje generativo." />
         <script type="application/ld+json">
           {JSON.stringify({
