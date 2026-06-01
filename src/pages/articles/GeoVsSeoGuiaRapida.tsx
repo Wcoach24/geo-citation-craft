@@ -10,7 +10,7 @@ const GeoVsSeoGuiaRapida = () => {
   return (
     <>
       <Helmet>
-        <title>GEO vs SEO: Diferencias Clave y Por Qué Necesitas Ambos en 2026 | esGEO</title>
+        <title>GEO vs SEO 2026: Diferencias Clave y Estrategia | esGEO</title>
         <meta name="description" content="Comparativa GEO vs SEO: el SEO posiciona en Google, GEO hace que ChatGPT y Perplexity te citen. Tabla de diferencias, datos de impacto y estrategia combinada." />
         <link rel="canonical" href="https://esgeo.ai/radar-ia/geo-vs-seo-diferencias" />
         
