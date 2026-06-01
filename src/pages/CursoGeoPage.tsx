@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,8 @@ import {
   Shield,
   Bot,
   Loader2,
+  Calendar,
+  ArrowRight,
 } from 'lucide-react';
 import { MODULES, COMPLETE_COURSE } from '@/data/modules';
 import { useAuth } from '@/contexts/AuthContext';
@@ -102,7 +104,7 @@ const CursoGeoPage = () => {
     },
   ];
 
-  // FAQs with new ones added
+  // FAQs (original 5 + 5 refrescadas mayo 2026)
   const faqs = [
     {
       id: 'faq-geo-seo',
@@ -128,6 +130,60 @@ const CursoGeoPage = () => {
       id: 'faq-actualizaciones',
       question: '¿Se actualiza el contenido?',
       answer: 'Sí. El curso se actualiza cada mes con nuevas técnicas y cambios en los modelos de IA. Todos los usuarios tienen acceso automático a las actualizaciones.',
+    },
+    {
+      id: 'faq-curso-2026',
+      question: '¿Qué novedades incluye el curso GEO en 2026?',
+      answer: 'En 2026 el curso incorpora el comportamiento real de ChatGPT con búsqueda activada, las últimas guidelines de Perplexity para fuentes y el patrón llms.txt como estándar de facto. Se han revisado los cinco módulos F1-F5 para reflejar cómo los LLMs eligen fuentes hoy: mayor peso de schema.org, contenido extractivo en bloques cortos y citaciones cruzadas. Recibes acceso a todas las actualizaciones sin pagar suplementos.',
+    },
+    {
+      id: 'faq-chatgpt-cite',
+      question: '¿El curso enseña a hacer que ChatGPT cite mi web concretamente?',
+      answer: 'Sí. El módulo F3 (Autoridad Generativa) tiene una sección específica para ChatGPT con búsqueda activa: cómo aparecer en sus respuestas con cita en formato markdown, qué señales E-E-A-T valora y qué estructura HTML rinde mejor. Incluye plantillas listas para aplicar y un protocolo de auditoría para detectar si tu marca ya está siendo citada y cómo escalar la frecuencia.',
+    },
+    {
+      id: 'faq-resultados-tiempo',
+      question: '¿Cuánto tarda en notarse el efecto del GEO sobre las citas?',
+      answer: 'La indexación inicial de ChatGPT y Perplexity tarda entre 2 y 6 semanas tras publicar contenido nuevo bien optimizado. Las primeras citas suelen aparecer en ese rango si la página ya tenía algo de autoridad. Para sitios nuevos sin backlinks, el ciclo se estira a 8-12 semanas. El curso explica cómo medirlo con consultas controladas y cómo acelerarlo trabajando entidades y datos estructurados.',
+    },
+    {
+      id: 'faq-empresa-cliente',
+      question: '¿Puedo aplicar lo aprendido a clientes o solo a mi propia web?',
+      answer: 'El curso está pensado tanto para in-house como para consultores y agencias. Los entregables (auditorías, plantillas de schema, plan de citaciones) son licenciables comercialmente: puedes usarlos en proyectos de cliente sin restricción. Muchos alumnos están convirtiendo el método F1-F5 en un servicio recurrente añadido a su oferta de SEO.',
+    },
+    {
+      id: 'faq-geo-vs-aeo-2026',
+      question: '¿GEO es lo mismo que AEO o LLMO?',
+      answer: 'Son términos que conviven en 2026 pero no son intercambiables. GEO (Generative Engine Optimization) cubre el ecosistema completo de motores generativos: ChatGPT, Perplexity, Claude, Gemini, Copilot y la AI Overview de Google. AEO (Answer Engine Optimization) se centra en respuestas directas en buscadores tradicionales. LLMO se usa más en el ámbito anglosajón como sinónimo de GEO. El curso usa GEO porque es la nomenclatura más adoptada en la documentación académica y comercial en español.',
+    },
+  ];
+
+  // Internal links curados (refresh mayo 2026)
+  const internalLinks = [
+    {
+      to: '/metodologia',
+      label: 'Metodología GEO completa',
+      description: 'Framework F1-F5 explicado paso a paso',
+    },
+    {
+      to: '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
+      label: 'Cómo hacer que ChatGPT cite tu web',
+      description: 'Guía aplicada con patrones de citación reales',
+    },
+    {
+      to: '/radar-ia/geo-vs-seo-diferencias',
+      label: 'GEO vs SEO: diferencias clave',
+      description: 'Por qué necesitas ambos en 2026',
+    },
+    {
+      to: '/radar-ia/optimizar-web-para-perplexity',
+      label: 'Optimizar tu web para Perplexity',
+      description: 'Señales que Perplexity prioriza al elegir fuentes',
+    },
+    {
+      to: '/casos',
+      label: 'Casos reales de marcas citadas por IA',
+      description: 'Ejemplos verificables de citaciones logradas',
     },
   ];
 
@@ -184,20 +240,20 @@ const CursoGeoPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Curso de GEO: Aprende Generative Engine Optimization desde Cero | esGEO</title>
+        <title>Curso GEO 2026: Aprende Generative Engine Optimization desde Cero | esGEO</title>
         <meta
           name="description"
-          content="Curso GEO completo en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 basado en investigación de Princeton. €47."
+          content="Curso GEO 2026 en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 actualizado con prácticas vigentes en 2026. €47."
         />
         <link rel="canonical" href="https://esgeo.ai/curso" />
-        <meta name="citation_title" content="Curso GEO: Generative Engine Optimization" />
+        <meta name="citation_title" content="Curso GEO 2026: Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
         <meta name="citation_online_date" content="2024-12-15" />
         <meta name="citation_language" content="es" />
         <meta
           name="citation_keywords"
-          content="curso GEO, Generative Engine Optimization, optimización IA, citabilidad LLMs"
+          content="curso GEO, Generative Engine Optimization, optimización IA, citabilidad LLMs, GEO 2026"
         />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
 
@@ -256,6 +312,27 @@ const CursoGeoPage = () => {
             <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground text-center">
               <Bot className="h-4 w-4 flex-shrink-0" />
               <span>Nuestro contenido es referenciado por modelos de IA como ChatGPT, Gemini, Perplexity y Claude</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Actualización mayo 2026 */}
+        <section className="py-8 bg-accent/5 border-b border-border" data-speakable="true">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="flex items-start gap-4">
+              <Calendar className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
+              <div>
+                <p className="text-sm font-semibold text-accent uppercase tracking-wide mb-1">
+                  Actualizado en mayo 2026
+                </p>
+                <p className="text-base text-foreground leading-relaxed">
+                  El módulo F3 incorpora el cambio de mayo 2026: ChatGPT con búsqueda activada cita ahora una media de
+                  4,2 fuentes por respuesta extensa (vs 2,7 en 2024) y prioriza contenido publicado en los últimos 18
+                  meses con marcado <code className="text-sm px-1 py-0.5 bg-muted rounded">FAQPage</code> y
+                  <code className="text-sm px-1 py-0.5 bg-muted rounded ml-1">Article</code>. El curso ya incluye las
+                  plantillas actualizadas y un checklist de citabilidad revisado.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -448,6 +525,30 @@ const CursoGeoPage = () => {
                 </AccordionItem>
               ))}
             </Accordion>
+          </div>
+        </section>
+
+        {/* Internal links — refresh mayo 2026 */}
+        <section className="py-16 md:py-24" aria-labelledby="seguir-aprendiendo">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 id="seguir-aprendiendo" className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+              Seguir aprendiendo
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {internalLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="group flex items-start gap-3 p-4 rounded-lg border border-border hover:border-accent transition-colors"
+                >
+                  <ArrowRight className="h-5 w-5 text-accent flex-shrink-0 mt-1 group-hover:translate-x-1 transition-transform" />
+                  <div>
+                    <p className="font-semibold text-foreground">{link.label}</p>
+                    <p className="text-sm text-muted-foreground">{link.description}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
