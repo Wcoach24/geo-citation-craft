@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 /**
- * scripts/prerender.js — v3.1 (regex-based, no Chromium)
+ * scripts/prerender.js — v3.2 (regex-based, no Chromium)
  *
  * v2 usaba Playwright/Chromium pero Vercel build env no tiene libnspr4.so y
  * no permite apt-get sin sudo. v3 parsea componentes React con regex/vm y
  * genera HTML estático con metas correctas, SIN runtime de browser.
  *
- * Soporta dos patrones:
- *  - <Helmet>...</Helmet> inline
- *  - useGeoMetadata({ title, description, canonicalUrl, ... }) hook
+ * v3.2 combina useGeoMetadata + Helmet inline (página puede tener ambos).
+ *
+ * Soporta:
+ *  - <Helmet>...</Helmet> inline (la mayoría de páginas)
+ *  - useGeoMetadata({ ... }) hook (Index.tsx)
+ *  - Ambos en el mismo archivo (combinados, no excluyentes)
  */
 
 import fs from 'fs';
@@ -71,17 +74,19 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
-// ── Pattern 1: <Helmet>...</Helmet> ─────────────────────────────────────────
+// ── Pattern 1: <Helmet>...</Helmet> (puede haber varios) ──────────────────
 
-function extractHelmetBlock(tsxSource) {
-  const match = tsxSource.match(/<Helmet[^>]*>([\s\S]*?)<\/Helmet>/);
-  return match ? match[1].trim() : null;
+function extractHelmetBlocks(tsxSource) {
+  const blocks = [];
+  const regex = /<Helmet[^>]*>([\s\S]*?)<\/Helmet>/g;
+  let m;
+  while ((m = regex.exec(tsxSource)) !== null) blocks.push(m[1].trim());
+  return blocks;
 }
 
 function jsxHelmetToHtml(jsx, url) {
   let html = jsx;
 
-  // <script type="application/ld+json">{JSON.stringify({...})}</script>
   html = html.replace(
     /<script\s+type="application\/ld\+json">\s*\{\s*JSON\.stringify\(([\s\S]*?)\)\s*\}\s*<\/script>/g,
     (_full, lit) => {
@@ -90,7 +95,6 @@ function jsxHelmetToHtml(jsx, url) {
     }
   );
 
-  // <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({...})}} />
   html = html.replace(
     /<script\s+type="application\/ld\+json"\s+dangerouslySetInnerHTML=\{\{\s*__html:\s*JSON\.stringify\(([\s\S]*?)\)\s*\}\}\s*\/>/g,
     (_full, lit) => {
@@ -99,9 +103,7 @@ function jsxHelmetToHtml(jsx, url) {
     }
   );
 
-  // JSX comments
   html = html.replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
-  // Remaining { ... } expressions
   html = html.replace(/\{[^{}]*\}/g, '');
   html = html.replace(/\n\s*\n\s*\n/g, '\n\n');
   return html.trim();
@@ -204,7 +206,7 @@ function safeWritePage(route, html) {
 }
 
 async function prerender() {
-  console.log('🚀 Static prerender v3.1 (no browser)\n');
+  console.log('🚀 Static prerender v3.2 (no browser)\n');
 
   const template = readTemplateOnce();
   let success = 0, failed = 0;
@@ -221,15 +223,23 @@ async function prerender() {
 
     const src = fs.readFileSync(tsxPath, 'utf-8');
     const url = `https://esgeo.ai${route === '/' ? '' : route}`;
-    let tagsHtml = null;
+    const tagParts = [];
 
-    const helmet = extractHelmetBlock(src);
-    if (helmet) {
-      tagsHtml = jsxHelmetToHtml(helmet, url);
-    } else {
-      const metaCall = extractGeoMetadataCall(src);
-      if (metaCall) tagsHtml = geoMetadataToHtml(metaCall, url);
+    // 1. Si usa useGeoMetadata, esos son los tags base (incluyen title/meta/canonical)
+    const metaCall = extractGeoMetadataCall(src);
+    if (metaCall) {
+      const part = geoMetadataToHtml(metaCall, url);
+      if (part) tagParts.push(part);
     }
+
+    // 2. CADA <Helmet> inline aporta tags adicionales (schema FAQ extra, etc.)
+    const helmetBlocks = extractHelmetBlocks(src);
+    for (const block of helmetBlocks) {
+      const part = jsxHelmetToHtml(block, url);
+      if (part) tagParts.push(part);
+    }
+
+    const tagsHtml = tagParts.join('\n    ').trim();
 
     if (!tagsHtml) {
       console.log(`⚠ no SEO source found, using base template`);
