@@ -11,7 +11,7 @@ const EstructuraWebParaLenguaje = () => {
   return (
     <>
       <Helmet>
-        <title>Estructura tu web para el lenguaje, no para los algoritmos | Radar IA - esGEO</title>
+        <title>Estructura tu web para LLMs 2026 | esGEO</title>
         <meta name="description" content="Principios de diseño que los LLMs comprenden mejor: fragmentación, bloques lógicos y semántica clara." />
         <script type="application/ld+json">
           {JSON.stringify({
