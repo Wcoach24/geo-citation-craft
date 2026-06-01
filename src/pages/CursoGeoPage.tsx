@@ -240,7 +240,7 @@ const CursoGeoPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Curso GEO 2026: Aprende Generative Engine Optimization desde Cero | esGEO</title>
+        <title>Curso GEO 2026: Aprende Optimización para IA | esGEO</title>
         <meta
           name="description"
           content="Curso GEO 2026 en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 actualizado con prácticas vigentes en 2026. €47."
