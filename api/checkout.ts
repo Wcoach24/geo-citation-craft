@@ -72,7 +72,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       line_items: lineItems,
       customer_email: guestEmail || undefined,
       metadata: productMeta,
-      success_url: "https://esgeo.ai/curso/gracias?session_id={CHECKOUT_SESSION_ID}",
+      success_url: "https://esgeo.ai/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "https://esgeo.ai/curso",
       billing_address_collection: "auto",
       locale: "es",
