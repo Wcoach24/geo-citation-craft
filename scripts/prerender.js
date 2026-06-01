@@ -1,25 +1,38 @@
 #!/usr/bin/env node
+/**
+ * scripts/prerender.js — v2 (Playwright-based, hydrated HTML capture)
+ *
+ * WHY: react-helmet inyecta <title> y <meta> en cliente. El prerender anterior usaba
+ * fetch() sin ejecutar JS, así que TODAS las páginas obtenían el shell con la meta
+ * default del index.html. Resultado: Googlebot ve metas y canonicals duplicados
+ * (uno del shell, otro de Helmet tras hidratar) → SEO penaliza fuerte.
+ *
+ * QUE HACE AHORA:
+ *  1. Lanza vite preview
+ *  2. Para cada ruta, navega con Playwright y espera networkidle
+ *  3. Ejecuta JS in-page que elimina los <meta> y <link rel="canonical"> SIN
+ *     data-react-helmet cuando hay un duplicado CON data-react-helmet (Helmet wins)
+ *  4. Captura document.documentElement.outerHTML → dist/[ruta]/index.html
+ *
+ * REQUIERE: playwright instalado como devDependency. El script `postinstall`
+ * en package.json ejecuta `playwright install --with-deps chromium`.
+ */
 
 import { spawn } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { chromium } from 'playwright';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 
-// Routes to prerender (ALL public pages — critical for Google indexing of SPA)
+// Routes to prerender — todas las páginas públicas.
 const routes = [
   '/',
   '/curso',
-  '/curso/f0',
-  '/curso/f1',
-  '/curso/f2',
-  '/curso/f3',
-  '/curso/f4',
-  '/curso/f5',
-  '/curso/f6',
+  '/curso/f0', '/curso/f1', '/curso/f2', '/curso/f3', '/curso/f4', '/curso/f5', '/curso/f6',
   '/metodologia',
   '/glosario',
   '/radar-ia',
@@ -30,7 +43,6 @@ const routes = [
   '/geo-score',
   '/privacidad',
   '/terminos',
-  // Radar IA articles (critical for SEO — these have 0 clicks despite high impressions)
   '/radar-ia/que-significa-ser-citado-por-ia',
   '/radar-ia/muerte-seo-tradicional',
   '/radar-ia/estructura-web-para-lenguaje',
@@ -42,15 +54,17 @@ const routes = [
   '/radar-ia/que-es-geo-guia-completa',
 ];
 
-async function waitForServer(port, timeout = 20000) {
+const PORT = 5173;
+
+async function waitForServer(port, timeout = 30000) {
   const start = Date.now();
   while (Date.now() - start < timeout) {
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
-      const response = await fetch(`http://localhost:${port}`, { method: 'HEAD', signal: controller.signal });
-      clearTimeout(timeoutId);
-      return true;
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 2000);
+      const r = await fetch(`http://localhost:${port}`, { method: 'HEAD', signal: ctrl.signal });
+      clearTimeout(t);
+      if (r.ok || r.status === 404) return true;
     } catch {
       await new Promise(r => setTimeout(r, 300));
     }
@@ -58,94 +72,101 @@ async function waitForServer(port, timeout = 20000) {
   throw new Error(`Server did not start on port ${port} within ${timeout}ms`);
 }
 
+/**
+ * Script ejecutado in-page tras hidratar. Limpia duplicados que crea Helmet
+ * al añadir su propio elemento sin reemplazar el del shell.
+ */
+const DEDUP_SCRIPT = `
+(() => {
+  function dedupe(selector) {
+    const all = Array.from(document.querySelectorAll(selector));
+    const withRH = all.filter(n => n.hasAttribute('data-react-helmet') || n.hasAttribute('data-rh'));
+    if (withRH.length === 0) return 0;
+    let removed = 0;
+    for (const n of all) {
+      if (!(n.hasAttribute('data-react-helmet') || n.hasAttribute('data-rh'))) {
+        n.remove(); removed++;
+      }
+    }
+    return removed;
+  }
+  return {
+    'meta-description':  dedupe('meta[name="description"]'),
+    'canonical':         dedupe('link[rel="canonical"]'),
+    'og-title':          dedupe('meta[property="og:title"]'),
+    'og-description':    dedupe('meta[property="og:description"]'),
+    'og-url':            dedupe('meta[property="og:url"]'),
+    'twitter-title':     dedupe('meta[name="twitter:title"]'),
+    'twitter-description': dedupe('meta[name="twitter:description"]'),
+  };
+})();
+`;
+
 async function prerender() {
-  console.log('🚀 Starting prerendering...\n');
+  console.log('🚀 Starting prerendering (Playwright, hydrated HTML)…\n');
 
-  // Start a local server
-  console.log('📦 Starting local server on port 5173...');
-  const serverProcess = spawn('npm', ['run', 'preview', '--', '--port', '5173'], {
+  console.log('📦 Starting preview server on port ' + PORT + '…');
+  const server = spawn('npx', ['vite', 'preview', '--port', String(PORT)], {
     cwd: projectRoot,
-    stdio: 'pipe',
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
+  server.on('error', (e) => { console.error('✗ server error:', e.message); process.exit(1); });
 
-  serverProcess.on('error', (error) => {
-    console.error('✗ Failed to start server:', error.message);
-    process.exit(1);
-  });
-
-  // Wait for server to start
   try {
-    await waitForServer(5173);
-    console.log('✓ Server running\n');
-  } catch (error) {
-    serverProcess.kill();
-    console.error('✗ Server startup timeout');
+    await waitForServer(PORT);
+    console.log('✓ Server up\n');
+  } catch (e) {
+    server.kill('SIGTERM');
+    console.error('✗', e.message);
     process.exit(1);
   }
 
+  let browser;
   try {
-    // Prerender each route
+    browser = await chromium.launch({ headless: true });
+    const ctx = await browser.newContext({ userAgent: 'esgeo-prerender/2.0 (+playwright)' });
+    const page = await ctx.newPage();
+
+    let successCount = 0;
+    let dedupTotal = 0;
+
     for (const route of routes) {
+      const url = `http://localhost:${PORT}${route}`;
       try {
-        const url = `http://localhost:5173${route}`;
+        process.stdout.write(`📄 ${route}  …  `);
+        await page.goto(url, { waitUntil: 'networkidle', timeout: 25000 });
+        // Helmet aplica side-effects en useEffect → un microtask extra para curarnos.
+        await page.waitForTimeout(150);
 
-        console.log(`📄 Prerendering: ${route}`);
+        const dedupReport = await page.evaluate(DEDUP_SCRIPT);
+        const removed = Object.values(dedupReport).reduce((a, b) => a + b, 0);
+        dedupTotal += removed;
 
-        // Fetch HTML from server
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
+        const html = '<!DOCTYPE html>\n' + await page.evaluate(() => document.documentElement.outerHTML);
 
-        const html = await response.text();
-
-        // Create directory structure
         let filePath;
-        let fileName;
-
         if (route === '/') {
-          // Root route: write to dist/index.html
           filePath = path.join(distDir, 'index.html');
-          fileName = 'index.html';
         } else {
-          // Other routes: create folder structure dist/route/index.html
           filePath = path.join(distDir, route, 'index.html');
-          fileName = `${route}/index.html`;
+          fs.mkdirSync(path.dirname(filePath), { recursive: true });
         }
-        const fileDir = path.dirname(filePath);
-
-        if (!fs.existsSync(fileDir)) {
-          fs.mkdirSync(fileDir, { recursive: true });
-        }
-
-        // Write HTML file
         fs.writeFileSync(filePath, html, 'utf-8');
-        const size = (html.length / 1024).toFixed(1);
-        console.log(`   ✓ Saved to: ${fileName} (${size} KB)`);
-      } catch (error) {
-        console.error(`   ✗ Failed to prerender ${route}:`, error.message);
+        const kb = (html.length / 1024).toFixed(1);
+        console.log(`✓ ${kb} KB (dedup: ${removed})`);
+        successCount++;
+      } catch (e) {
+        console.log(`✗ ${e.message}`);
       }
-
-      // Add small delay between requests
-      await new Promise(r => setTimeout(r, 100));
     }
 
-    console.log('\n✅ Prerendering complete!');
-    console.log('\nℹ️  Note: For client-side React SPAs, prerendered HTML contains initial');
-    console.log('metadata and structure. Crawlers will see meta tags, canonical URLs, and');
-    console.log('Open Graph data. The page shell hydrates with React on client-side.');
-  } catch (error) {
-    console.error('✗ Error during prerendering:', error);
-    process.exit(1);
+    await ctx.close();
+    console.log(`\n✅ Prerender complete: ${successCount}/${routes.length} routes. Total dedup operations: ${dedupTotal}.`);
   } finally {
-    // Kill server
-    serverProcess.kill();
+    if (browser) await browser.close();
+    server.kill('SIGTERM');
     await new Promise(r => setTimeout(r, 500));
   }
 }
 
-// Run prerender
-prerender().catch(error => {
-  console.error('Fatal error:', error);
-  process.exit(1);
-});
+prerender().catch(e => { console.error('Fatal:', e); process.exit(1); });

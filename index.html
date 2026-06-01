@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curso GEO: Aprende Generative Engine Optimization en Español | esGEO</title>
-    <meta name="description" content="Aprende GEO (Generative Engine Optimization) con el primer curso en español. Metodología F1-F5 para que ChatGPT, Perplexity y Claude citen tu web. Desde €47." />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://esgeo.ai/" />
-    
+    <!--
+      NOTA: title, meta description, canonical, Open Graph y Twitter Cards
+      son inyectados PÁGINA A PÁGINA por react-helmet (ver src/pages/**).
+      No los pongas aquí: si los pones, Helmet añade un duplicado en runtime
+      y Google ve dos meta description / canonicals → SEO penaliza.
+      El script scripts/prerender.js los inyecta correctamente en el HTML
+      estático tras hidratar React. Fallbacks por si una ruta llega sin
+      prerender: el <noscript> abajo y el contenido /llm.txt.
+    -->
+
     <meta name="author" content="esGEO" />
     <meta name="keywords" content="GEO, Generative Engine Optimization, IA, ChatGPT, Perplexity, Claude, optimización, contenido" />
 
@@ -29,50 +33,20 @@
         })(window, document, "clarity", "script", "tjc7zvjx9g");
     </script>
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Curso GEO: Aprende Generative Engine Optimization en Español | esGEO" />
-    <meta property="og:description" content="Aprende GEO (Generative Engine Optimization) con el primer curso en español. Metodología F1-F5 para que ChatGPT, Perplexity y Claude citen tu web." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://esgeo.ai" />
-    <meta property="og:image" content="https://esgeo.ai/og-image.png" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Curso GEO: Aprende Generative Engine Optimization en Español | esGEO" />
-    <meta name="twitter:description" content="Aprende GEO (Generative Engine Optimization) con el primer curso en español. Metodología F1-F5 para que la IA cite tu web." />
-    <meta name="twitter:image" content="https://esgeo.ai/og-image.png" />
-
-    <!-- Additional AI-friendly meta tags -->
+    <!-- Crawler directives — global, NO duplican Helmet -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    
-    <!-- Enhanced AI Citation meta tags -->
-    <meta name="citation_title" content="esGEO - Metodología de Optimización para IA Generativa" />
-    <meta name="citation_author" content="esGEO" />
-    <meta name="citation_publication_date" content="2025" />
-    <meta name="citation_online_date" content="2025-06-12" />
-    <meta name="citation_language" content="es" />
-    <meta name="citation_keywords" content="GEO, Generative Engine Optimization, IA, optimización, citabilidad, modelos de lenguaje, ChatGPT, Perplexity, Claude" />
-    
-    <!-- ESTRATEGIA HÍBRIDA: Enlaces directos a contenido citable -->
+
+    <!-- ESTRATEGIA HÍBRIDA GEO: Enlaces a contenido citable -->
     <meta name="ai-content-files" content="/home.geo.txt, /curso.geo.txt, /metodologia.geo.txt, /glosario.geo.txt" />
     <meta name="citation_fulltext_world_readable" content="https://esgeo.ai/home.geo.txt" />
     <meta name="citation_pdf_url" content="https://esgeo.ai/contenido-ia" />
-    
-    <!-- Additional citation-friendly structured data -->
-    <meta property="article:author" content="esGEO" />
-    <meta property="article:publisher" content="esGEO" />
-    <meta property="article:section" content="Educación Digital" />
-    <meta property="article:tag" content="GEO" />
-    <meta property="article:tag" content="IA" />
-    <meta property="article:tag" content="Optimización" />
-    <meta property="article:modified_time" content="2025-06-12T10:00:00Z" />
 
-    <!-- Speakable content indicators -->
+    <!-- Speakable -->
     <meta name="speakable-selector" content=".snippet-block, [data-speakable='true'], .geo-card" />
 
-    <!-- Structured Data - Consolidated (single @graph block) -->
+    <!-- Structured Data — global Org + Website + Course (las páginas añaden Article/FAQ específicos) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -86,7 +60,7 @@
           "description": "La primera plataforma en español centrada en enseñar cómo estructurar y redactar webs para que los modelos de lenguaje como ChatGPT, Perplexity o Claude las comprendan, recomienden y citen.",
           "inLanguage": "es-ES",
           "datePublished": "2025-01-01",
-          "dateModified": "2025-06-12",
+          "dateModified": "2026-06-01",
           "publisher": { "@id": "https://esgeo.ai#organization" }
         },
         {
@@ -129,44 +103,6 @@
             "courseMode": "online",
             "location": { "@type": "VirtualLocation", "url": "https://esgeo.ai/curso" }
           }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://esgeo.ai" },
-            { "@type": "ListItem", "position": 2, "name": "Curso GEO", "item": "https://esgeo.ai/curso" },
-            { "@type": "ListItem", "position": 3, "name": "Metodología", "item": "https://esgeo.ai/metodologia" },
-            { "@type": "ListItem", "position": 4, "name": "Glosario", "item": "https://esgeo.ai/glosario" }
-          ]
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "¿Qué es GEO (Generative Engine Optimization)?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "GEO es la optimización para motores generativos, una metodología que enseña a estructurar y redactar contenido web para que los modelos de lenguaje como ChatGPT, Perplexity o Claude lo comprendan, valoren y citen como fuente autorizada."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿En qué se diferencia GEO del SEO tradicional?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Mientras el SEO busca posicionarse en motores de búsqueda como Google, GEO busca ser citado por modelos de IA. GEO se enfoca en fragmentación, claridad semántica y autoridad generativa en lugar de keywords y backlinks."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Qué incluye la metodología F1-F6 de esGEO?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "La metodología F1-F6 incluye: F1 (Fundamentos), F2 (Jerarquía Semántica), F3 (Autoridad Generativa), F4 (Datos Estructurados), F5 (Optimización Técnica) y F6 (Medición y Análisis)."
-              }
-            }
-          ]
         }
       ]
     }
@@ -174,9 +110,8 @@
   </head>
 
   <body>
-    <!-- Content available via .geo.txt files for AI crawlers -->
     <noscript>
-      <p>esGEO - Plataforma de Generative Engine Optimization en español. Visita <a href="https://esgeo.ai">esgeo.ai</a> para aprender a optimizar tu contenido para IA.</p>
+      <p>esGEO — Plataforma de Generative Engine Optimization en español. Visita <a href="https://esgeo.ai">esgeo.ai</a> para aprender a optimizar tu contenido para IA.</p>
     </noscript>
 
     <div id="root"></div>

@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.js",
+    "build:no-prerender": "vite build",
     "build:with-prerender": "vite build && node scripts/prerender.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prerender": "node scripts/prerender.js"
+    "prerender": "node scripts/prerender.js",
+    "postinstall": "playwright install --with-deps chromium || true"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -75,6 +77,7 @@
     "globals": "^15.9.0",
     "jsdom": "^29.0.1",
     "lovable-tagger": "^1.1.7",
+    "playwright": "^1.49.0",
     "postcss": "^8.4.47",
     "serve": "^14.2.6",
     "tailwindcss": "^3.4.11",
