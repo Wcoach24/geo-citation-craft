@@ -1,172 +1,254 @@
 #!/usr/bin/env node
 /**
- * scripts/prerender.js — v2 (Playwright-based, hydrated HTML capture)
+ * scripts/prerender.js — v3.1 (regex-based, no Chromium)
  *
- * WHY: react-helmet inyecta <title> y <meta> en cliente. El prerender anterior usaba
- * fetch() sin ejecutar JS, así que TODAS las páginas obtenían el shell con la meta
- * default del index.html. Resultado: Googlebot ve metas y canonicals duplicados
- * (uno del shell, otro de Helmet tras hidratar) → SEO penaliza fuerte.
+ * v2 usaba Playwright/Chromium pero Vercel build env no tiene libnspr4.so y
+ * no permite apt-get sin sudo. v3 parsea componentes React con regex/vm y
+ * genera HTML estático con metas correctas, SIN runtime de browser.
  *
- * QUE HACE AHORA:
- *  1. Lanza vite preview
- *  2. Para cada ruta, navega con Playwright y espera networkidle
- *  3. Ejecuta JS in-page que elimina los <meta> y <link rel="canonical"> SIN
- *     data-react-helmet cuando hay un duplicado CON data-react-helmet (Helmet wins)
- *  4. Captura document.documentElement.outerHTML → dist/[ruta]/index.html
- *
- * REQUIERE: playwright instalado como devDependency. El script `postinstall`
- * en package.json ejecuta `playwright install --with-deps chromium`.
+ * Soporta dos patrones:
+ *  - <Helmet>...</Helmet> inline
+ *  - useGeoMetadata({ title, description, canonicalUrl, ... }) hook
  */
 
-import { spawn } from 'child_process';
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
+import vm from 'vm';
 import { fileURLToPath } from 'url';
-import { chromium } from 'playwright';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
+const srcDir = path.join(projectRoot, 'src');
 
-// Routes to prerender — todas las páginas públicas.
-const routes = [
-  '/',
-  '/curso',
-  '/curso/f0', '/curso/f1', '/curso/f2', '/curso/f3', '/curso/f4', '/curso/f5', '/curso/f6',
-  '/metodologia',
-  '/glosario',
-  '/radar-ia',
-  '/casos',
-  '/contenido-ia',
-  '/acerca-de',
-  '/acerca-de/equipo',
-  '/geo-score',
-  '/privacidad',
-  '/terminos',
-  '/radar-ia/que-significa-ser-citado-por-ia',
-  '/radar-ia/muerte-seo-tradicional',
-  '/radar-ia/estructura-web-para-lenguaje',
-  '/radar-ia/formato-wikipedia-ia',
-  '/radar-ia/datos-estructurados-modelos-generativos',
-  '/radar-ia/geo-vs-seo-diferencias',
-  '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
-  '/radar-ia/optimizar-web-para-perplexity',
-  '/radar-ia/que-es-geo-guia-completa',
-];
+const ROUTE_TO_FILE = {
+  '/': 'pages/Index.tsx',
+  '/curso': 'pages/CursoGeoPage.tsx',
+  '/curso/f0': 'pages/modules/ModuloF0Page.tsx',
+  '/curso/f1': 'pages/modules/ModuloF1Page.tsx',
+  '/curso/f2': 'pages/modules/ModuloF2Page.tsx',
+  '/curso/f3': 'pages/modules/ModuloF3Page.tsx',
+  '/curso/f4': 'pages/modules/ModuloF4Page.tsx',
+  '/curso/f5': 'pages/modules/ModuloF5Page.tsx',
+  '/metodologia': 'pages/MetodologiaGeoPage.tsx',
+  '/casos': 'pages/CasosRealesPage.tsx',
+  '/glosario': 'pages/GlosarioPage.tsx',
+  '/radar-ia': 'pages/RadarIAPage.tsx',
+  '/geo-score': 'pages/GeoScorePage.tsx',
+  '/contenido-ia': 'pages/ContenidoIAPage.tsx',
+  '/acerca-de': 'pages/AcercaDePage.tsx',
+  '/acerca-de/equipo': 'pages/EquipoPage.tsx',
+  '/privacidad': 'pages/PrivacidadPage.tsx',
+  '/terminos': 'pages/TerminosPage.tsx',
+  '/radar-ia/que-significa-ser-citado-por-ia': 'pages/articles/QueSIgnificaSerCitadoPorIA.tsx',
+  '/radar-ia/muerte-seo-tradicional': 'pages/articles/MuerteSeoTradicional.tsx',
+  '/radar-ia/estructura-web-para-lenguaje': 'pages/articles/EstructuraWebParaLenguaje.tsx',
+  '/radar-ia/formato-wikipedia-ia': 'pages/articles/FormatoWikipediaIA.tsx',
+  '/radar-ia/datos-estructurados-modelos-generativos': 'pages/articles/DatosEstructuradosModelosGenerativos.tsx',
+  '/radar-ia/geo-vs-seo-diferencias': 'pages/articles/GeoVsSeoGuiaRapida.tsx',
+  '/radar-ia/como-hacer-que-chatgpt-cite-tu-web': 'pages/articles/ComoHacerQueChatGPTCiteTuWeb.tsx',
+  '/radar-ia/optimizar-web-para-perplexity': 'pages/articles/OptimizarWebParaPerplexity.tsx',
+  '/radar-ia/que-es-geo-guia-completa': 'pages/articles/QueEsGeoGuiaCompleta.tsx',
+};
 
-const PORT = 5173;
+// ── helpers ─────────────────────────────────────────────────────────────────
 
-async function waitForServer(port, timeout = 30000) {
-  const start = Date.now();
-  while (Date.now() - start < timeout) {
-    try {
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 2000);
-      const r = await fetch(`http://localhost:${port}`, { method: 'HEAD', signal: ctrl.signal });
-      clearTimeout(t);
-      if (r.ok || r.status === 404) return true;
-    } catch {
-      await new Promise(r => setTimeout(r, 300));
-    }
+function evalJsLiteral(literal, contextUrl) {
+  try {
+    const sandbox = { window: { location: { href: contextUrl } } };
+    vm.createContext(sandbox);
+    return vm.runInContext(`(${literal})`, sandbox, { timeout: 1000 });
+  } catch (e) {
+    return null;
   }
-  throw new Error(`Server did not start on port ${port} within ${timeout}ms`);
 }
 
-/**
- * Script ejecutado in-page tras hidratar. Limpia duplicados que crea Helmet
- * al añadir su propio elemento sin reemplazar el del shell.
- */
-const DEDUP_SCRIPT = `
-(() => {
-  function dedupe(selector) {
-    const all = Array.from(document.querySelectorAll(selector));
-    const withRH = all.filter(n => n.hasAttribute('data-react-helmet') || n.hasAttribute('data-rh'));
-    if (withRH.length === 0) return 0;
-    let removed = 0;
-    for (const n of all) {
-      if (!(n.hasAttribute('data-react-helmet') || n.hasAttribute('data-rh'))) {
-        n.remove(); removed++;
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ── Pattern 1: <Helmet>...</Helmet> ─────────────────────────────────────────
+
+function extractHelmetBlock(tsxSource) {
+  const match = tsxSource.match(/<Helmet[^>]*>([\s\S]*?)<\/Helmet>/);
+  return match ? match[1].trim() : null;
+}
+
+function jsxHelmetToHtml(jsx, url) {
+  let html = jsx;
+
+  // <script type="application/ld+json">{JSON.stringify({...})}</script>
+  html = html.replace(
+    /<script\s+type="application\/ld\+json">\s*\{\s*JSON\.stringify\(([\s\S]*?)\)\s*\}\s*<\/script>/g,
+    (_full, lit) => {
+      const result = evalJsLiteral(lit, url);
+      return result ? `<script type="application/ld+json">${JSON.stringify(result)}</script>` : '';
+    }
+  );
+
+  // <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({...})}} />
+  html = html.replace(
+    /<script\s+type="application\/ld\+json"\s+dangerouslySetInnerHTML=\{\{\s*__html:\s*JSON\.stringify\(([\s\S]*?)\)\s*\}\}\s*\/>/g,
+    (_full, lit) => {
+      const result = evalJsLiteral(lit, url);
+      return result ? `<script type="application/ld+json">${JSON.stringify(result)}</script>` : '';
+    }
+  );
+
+  // JSX comments
+  html = html.replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+  // Remaining { ... } expressions
+  html = html.replace(/\{[^{}]*\}/g, '');
+  html = html.replace(/\n\s*\n\s*\n/g, '\n\n');
+  return html.trim();
+}
+
+// ── Pattern 2: useGeoMetadata({...}) ───────────────────────────────────────
+
+function extractGeoMetadataCall(tsxSource) {
+  const start = tsxSource.search(/useGeoMetadata\s*\(\s*\{/);
+  if (start === -1) return null;
+  const openIdx = tsxSource.indexOf('{', start);
+  let depth = 0;
+  let inString = false;
+  let stringChar = '';
+  for (let i = openIdx; i < tsxSource.length; i++) {
+    const c = tsxSource[i];
+    if (inString) {
+      if (c === '\\') { i++; continue; }
+      if (c === stringChar) inString = false;
+    } else {
+      if (c === '"' || c === "'" || c === '`') { inString = true; stringChar = c; continue; }
+      if (c === '{') depth++;
+      else if (c === '}') {
+        depth--;
+        if (depth === 0) return tsxSource.slice(openIdx, i + 1);
       }
     }
-    return removed;
   }
-  return {
-    'meta-description':  dedupe('meta[name="description"]'),
-    'canonical':         dedupe('link[rel="canonical"]'),
-    'og-title':          dedupe('meta[property="og:title"]'),
-    'og-description':    dedupe('meta[property="og:description"]'),
-    'og-url':            dedupe('meta[property="og:url"]'),
-    'twitter-title':     dedupe('meta[name="twitter:title"]'),
-    'twitter-description': dedupe('meta[name="twitter:description"]'),
-  };
-})();
-`;
+  return null;
+}
+
+function geoMetadataToHtml(propsLiteral, url) {
+  const props = evalJsLiteral(propsLiteral, url);
+  if (!props) return null;
+
+  const title = props.title || '';
+  const fullTitle = title.includes('esGEO') ? title : `${title} | esGEO`;
+  const description = props.description || '';
+  const canonicalUrl = props.canonicalUrl || url;
+  const keywords = Array.isArray(props.keywords) ? props.keywords : [];
+  const citationTitle = props.citationTitle || title;
+  const author = props.author || 'esGEO';
+  const speakableSelectors = props.speakableSelectors || [".snippet-block", "[data-speakable='true']"];
+  const geoTxtPath = props.geoTxtPath || '';
+  const today = new Date().toISOString().slice(0, 10);
+
+  const tags = [
+    `<title>${escapeHtml(fullTitle)}</title>`,
+    `<meta name="description" content="${escapeHtml(description)}" />`,
+    `<link rel="canonical" href="${escapeHtml(canonicalUrl)}" />`,
+    geoTxtPath ? `<link rel="alternate" type="text/plain" href="${escapeHtml(geoTxtPath)}" title="Versión citable para IA - Formato texto plano optimizado para LLMs" />` : '',
+    `<meta name="citation_title" content="${escapeHtml(citationTitle)}" />`,
+    `<meta name="citation_author" content="${escapeHtml(author)}" />`,
+    `<meta name="citation_publication_date" content="2024" />`,
+    `<meta name="citation_online_date" content="${today}" />`,
+    `<meta name="citation_language" content="es" />`,
+    `<meta name="citation_publisher" content="esGEO" />`,
+    `<meta name="citation_format" content="text/html" />`,
+    geoTxtPath ? `<meta name="citation_fulltext_world_readable" content="https://esgeo.ai${escapeHtml(geoTxtPath)}" />` : '',
+    keywords.length ? `<meta name="citation_keywords" content="${escapeHtml(keywords.join(', '))}" />` : '',
+    `<meta name="speakable-selector" content="${escapeHtml(speakableSelectors.join(', '))}" />`,
+    `<meta property="og:title" content="${escapeHtml(fullTitle)}" />`,
+    `<meta property="og:description" content="${escapeHtml(description)}" />`,
+    `<meta property="og:type" content="article" />`,
+    `<meta property="og:url" content="${escapeHtml(canonicalUrl)}" />`,
+    `<meta property="og:image" content="https://esgeo.ai/og-image.png" />`,
+    `<meta property="og:locale" content="es_ES" />`,
+    `<meta property="og:site_name" content="esGEO" />`,
+    `<meta property="article:author" content="${escapeHtml(author)}" />`,
+    `<meta property="article:publisher" content="esGEO" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${escapeHtml(fullTitle)}" />`,
+    `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
+    `<meta name="twitter:image" content="https://esgeo.ai/og-image.png" />`,
+  ].filter(Boolean);
+  return tags.join('\n    ');
+}
+
+// ── main ───────────────────────────────────────────────────────────────────
+
+function readTemplateOnce() {
+  const indexPath = path.join(distDir, 'index.html');
+  if (!fs.existsSync(indexPath)) throw new Error(`Missing dist/index.html. Run \`vite build\` first.`);
+  return fs.readFileSync(indexPath, 'utf-8');
+}
+
+function injectIntoHead(template, tagsHtml) {
+  return template.replace(/<\/head>/i, `\n    ${tagsHtml}\n  </head>`);
+}
+
+function safeWritePage(route, html) {
+  let filePath;
+  if (route === '/') {
+    filePath = path.join(distDir, 'index.html');
+  } else {
+    filePath = path.join(distDir, route, 'index.html');
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  }
+  fs.writeFileSync(filePath, html, 'utf-8');
+}
 
 async function prerender() {
-  console.log('🚀 Starting prerendering (Playwright, hydrated HTML)…\n');
+  console.log('🚀 Static prerender v3.1 (no browser)\n');
 
-  console.log('📦 Starting preview server on port ' + PORT + '…');
-  const server = spawn('npx', ['vite', 'preview', '--port', String(PORT)], {
-    cwd: projectRoot,
-    stdio: ['ignore', 'pipe', 'pipe'],
-  });
-  server.on('error', (e) => { console.error('✗ server error:', e.message); process.exit(1); });
+  const template = readTemplateOnce();
+  let success = 0, failed = 0;
 
-  try {
-    await waitForServer(PORT);
-    console.log('✓ Server up\n');
-  } catch (e) {
-    server.kill('SIGTERM');
-    console.error('✗', e.message);
-    process.exit(1);
-  }
+  for (const [route, file] of Object.entries(ROUTE_TO_FILE)) {
+    const tsxPath = path.join(srcDir, file);
+    process.stdout.write(`📄 ${route.padEnd(55)}  `);
 
-  let browser;
-  try {
-    browser = await chromium.launch({ headless: true });
-    const ctx = await browser.newContext({ userAgent: 'esgeo-prerender/2.0 (+playwright)' });
-    const page = await ctx.newPage();
-
-    let successCount = 0;
-    let dedupTotal = 0;
-
-    for (const route of routes) {
-      const url = `http://localhost:${PORT}${route}`;
-      try {
-        process.stdout.write(`📄 ${route}  …  `);
-        await page.goto(url, { waitUntil: 'networkidle', timeout: 25000 });
-        // Helmet aplica side-effects en useEffect → un microtask extra para curarnos.
-        await page.waitForTimeout(150);
-
-        const dedupReport = await page.evaluate(DEDUP_SCRIPT);
-        const removed = Object.values(dedupReport).reduce((a, b) => a + b, 0);
-        dedupTotal += removed;
-
-        const html = '<!DOCTYPE html>\n' + await page.evaluate(() => document.documentElement.outerHTML);
-
-        let filePath;
-        if (route === '/') {
-          filePath = path.join(distDir, 'index.html');
-        } else {
-          filePath = path.join(distDir, route, 'index.html');
-          fs.mkdirSync(path.dirname(filePath), { recursive: true });
-        }
-        fs.writeFileSync(filePath, html, 'utf-8');
-        const kb = (html.length / 1024).toFixed(1);
-        console.log(`✓ ${kb} KB (dedup: ${removed})`);
-        successCount++;
-      } catch (e) {
-        console.log(`✗ ${e.message}`);
-      }
+    if (!fs.existsSync(tsxPath)) {
+      console.log(`✗ source missing`);
+      failed++;
+      continue;
     }
 
-    await ctx.close();
-    console.log(`\n✅ Prerender complete: ${successCount}/${routes.length} routes. Total dedup operations: ${dedupTotal}.`);
-  } finally {
-    if (browser) await browser.close();
-    server.kill('SIGTERM');
-    await new Promise(r => setTimeout(r, 500));
+    const src = fs.readFileSync(tsxPath, 'utf-8');
+    const url = `https://esgeo.ai${route === '/' ? '' : route}`;
+    let tagsHtml = null;
+
+    const helmet = extractHelmetBlock(src);
+    if (helmet) {
+      tagsHtml = jsxHelmetToHtml(helmet, url);
+    } else {
+      const metaCall = extractGeoMetadataCall(src);
+      if (metaCall) tagsHtml = geoMetadataToHtml(metaCall, url);
+    }
+
+    if (!tagsHtml) {
+      console.log(`⚠ no SEO source found, using base template`);
+      safeWritePage(route, template);
+      failed++;
+      continue;
+    }
+
+    const html = injectIntoHead(template, tagsHtml);
+    safeWritePage(route, html);
+
+    const kb = (html.length / 1024).toFixed(1);
+    console.log(`✓ ${kb} KB`);
+    success++;
   }
+
+  console.log(`\n✅ Prerender complete: ${success}/${Object.keys(ROUTE_TO_FILE).length} routes`);
+  if (failed > 0) console.log(`⚠️  ${failed} routes had warnings`);
+  if (success === 0) process.exit(1);
 }
 
 prerender().catch(e => { console.error('Fatal:', e); process.exit(1); });
