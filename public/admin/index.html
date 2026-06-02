@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>esGEO Admin Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root { color-scheme: light; --ink:#1a1a1a; --bg:#f5f3ee; --card:#ffffff; --accent:#ff6b35; --green:#16a34a; --red:#c1121f; --amber:#e36414; --muted:#6b7280; }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--ink); padding: 20px; min-height: 100vh; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  h1 { font-size: 22px }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  button { background: var(--ink); color: white; border: 0; padding: 8px 14px; font-size: 13px; cursor: pointer; }
+  button:hover { background: #333 }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .card { background: var(--card); border: 2px solid var(--ink); padding: 16px; }
+  .card h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--muted); }
+  .v { font-size: 28px; font-weight: 700; }
+  .v.green { color: var(--green) }
+  .v.amber { color: var(--amber) }
+  .v.red { color: var(--red) }
+  .sub2 { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .section { background: var(--card); border: 2px solid var(--ink); padding: 18px; margin-bottom: 20px; }
+  .section h2 { font-size: 16px; border-left: 4px solid var(--accent); padding-left: 10px; margin-bottom: 14px; }
+  table { width: 100%; font-size: 13px; border-collapse: collapse; }
+  th { text-align: left; padding: 8px 6px; border-bottom: 2px solid var(--ink); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  td { padding: 8px 6px; border-bottom: 1px dashed #ddd; }
+  td.mono { font-family: monospace; font-size: 12px; color: var(--muted); }
+  td.right { text-align: right; }
+  .empty { color: var(--muted); font-style: italic; padding: 14px; text-align: center; }
+  .badge { display: inline-block; padding: 2px 6px; font-size: 10px; font-weight: 600; border: 1px solid; text-transform: uppercase; letter-spacing: .5px; }
+  .badge.high { background: #fff0ea; color: var(--red); border-color: var(--red); }
+  .badge.draft { background: #e3f2fd; color: #0277bd; border-color: #0277bd; }
+  .badge.ok { background: #e8f5e9; color: var(--green); border-color: var(--green); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .chart-wrap { height: 200px; position: relative; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+  .loading { color: var(--muted); padding: 20px; text-align: center; font-size: 13px; }
+  .error { color: var(--red); padding: 14px; background: #fff0ea; border: 1px solid var(--red); }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>esGEO Admin</h1>
+        <p class="sub" id="meta">cargando…</p>
+      </div>
+      <button onclick="loadAll()">↻ Refrescar</button>
+    </header>
+
+    <div id="error-box"></div>
+
+    <div class="grid" id="kpis">
+      <div class="card"><h2>Hoy</h2><div class="v" id="kpi-today">—</div><div class="sub2" id="kpi-today-count">0 ventas</div></div>
+      <div class="card"><h2>Últimos 7 días</h2><div class="v" id="kpi-week">—</div><div class="sub2" id="kpi-week-count">0 ventas</div></div>
+      <div class="card"><h2>Últimos 30 días</h2><div class="v" id="kpi-month">—</div><div class="sub2" id="kpi-month-count">0 ventas</div></div>
+      <div class="card"><h2>Últimos 90 días</h2><div class="v" id="kpi-all">—</div><div class="sub2" id="kpi-all-count">0 ventas</div></div>
+      <div class="card"><h2>Issues HIGH</h2><div class="v" id="kpi-alerts">—</div><div class="sub2">de los agentes</div></div>
+      <div class="card"><h2>PRs pendientes</h2><div class="v" id="kpi-prs">—</div><div class="sub2">de los agentes</div></div>
+    </div>
+
+    <div class="section">
+      <h2>Revenue diario (últimos 30 días)</h2>
+      <div class="chart-wrap"><canvas id="chart-revenue"></canvas></div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <h2>Revenue por producto</h2>
+        <div id="by-product">cargando…</div>
+      </div>
+      <div class="section">
+        <h2>Últimas 10 ventas</h2>
+        <div id="recent-sales">cargando…</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <h2>Alertas abiertas del Sentinel</h2>
+        <div id="agent-issues">cargando…</div>
+      </div>
+      <div class="section">
+        <h2>PRs pendientes de los agentes</h2>
+        <div id="agent-prs">cargando…</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+let chart = null;
+
+function eur(n) { return "€" + Number(n || 0).toFixed(2); }
+function fmtDateTime(iso) {
+  const d = new Date(iso);
+  return d.toISOString().replace("T", " ").slice(0, 16);
+}
+function fmtAgo(iso) {
+  const diff = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (diff === 0) return "hoy";
+  if (diff === 1) return "ayer";
+  if (diff < 7) return `hace ${diff}d`;
+  return iso.slice(0, 10);
+}
+
+async function loadAll() {
+  document.getElementById("error-box").innerHTML = "";
+  try {
+    const r = await fetch("/api/admin/metrics", { credentials: "include" });
+    if (r.status === 401) {
+      document.getElementById("error-box").innerHTML = `<div class="error">No autenticado. Accede vía <code>/admin?token=...</code>.</div>`;
+      return;
+    }
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    render(data);
+  } catch (e) {
+    document.getElementById("error-box").innerHTML = `<div class="error">Error: ${e.message}</div>`;
+  }
+}
+
+function render(d) {
+  document.getElementById("meta").textContent = `Actualizado ${fmtDateTime(d.generated_at)} UTC`;
+
+  // KPIs
+  document.getElementById("kpi-today").textContent = eur(d.stripe.today.amount);
+  document.getElementById("kpi-today-count").textContent = `${d.stripe.today.count} ventas`;
+  document.getElementById("kpi-week").textContent = eur(d.stripe.week.amount);
+  document.getElementById("kpi-week-count").textContent = `${d.stripe.week.count} ventas`;
+  document.getElementById("kpi-month").textContent = eur(d.stripe.month.amount);
+  document.getElementById("kpi-month-count").textContent = `${d.stripe.month.count} ventas`;
+  document.getElementById("kpi-all").textContent = eur(d.stripe.all90.amount);
+  document.getElementById("kpi-all-count").textContent = `${d.stripe.all90.count} ventas`;
+
+  const highAlerts = d.github.issues.filter(i => i.labels.some(l => l.toLowerCase() === "high")).length;
+  document.getElementById("kpi-alerts").textContent = highAlerts;
+  document.getElementById("kpi-alerts").className = "v " + (highAlerts > 0 ? "red" : "green");
+
+  document.getElementById("kpi-prs").textContent = d.github.prs.length;
+  document.getElementById("kpi-prs").className = "v " + (d.github.prs.length > 0 ? "amber" : "green");
+
+  // Chart
+  const ctx = document.getElementById("chart-revenue").getContext("2d");
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: d.stripe.daily.map(x => x.date.slice(5)),
+      datasets: [{
+        label: "Revenue (€)",
+        data: d.stripe.daily.map(x => x.revenue),
+        backgroundColor: "#ff6b35",
+        borderRadius: 0,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => "€" + v } } },
+    },
+  });
+
+  // By product
+  const products = Object.entries(d.stripe.byProduct).sort((a, b) => b[1].amount - a[1].amount);
+  if (products.length === 0) {
+    document.getElementById("by-product").innerHTML = `<div class="empty">Sin ventas todavía</div>`;
+  } else {
+    let html = `<table><thead><tr><th>Producto</th><th class="right">Ventas</th><th class="right">Revenue</th></tr></thead><tbody>`;
+    for (const [name, info] of products) {
+      html += `<tr><td>${name}</td><td class="right">${info.count}</td><td class="right"><strong>${eur(info.amount)}</strong></td></tr>`;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("by-product").innerHTML = html;
+  }
+
+  // Recent sales
+  if (d.stripe.recent.length === 0) {
+    document.getElementById("recent-sales").innerHTML = `<div class="empty">Sin ventas recientes</div>`;
+  } else {
+    let html = `<table><thead><tr><th>Cuándo</th><th>Cliente</th><th>Producto</th><th class="right">€</th></tr></thead><tbody>`;
+    for (const s of d.stripe.recent) {
+      html += `<tr><td class="mono">${fmtAgo(s.when)}</td><td class="mono">${s.email_masked} <small>(${s.country})</small></td><td>${s.product}</td><td class="right"><strong>${eur(s.amount)}</strong></td></tr>`;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("recent-sales").innerHTML = html;
+  }
+
+  // Issues
+  if (d.github.issues.length === 0) {
+    document.getElementById("agent-issues").innerHTML = `<div class="empty">No hay alertas abiertas 🎉</div>`;
+  } else {
+    let html = `<table><thead><tr><th>Sev</th><th>Issue</th><th>Cuándo</th></tr></thead><tbody>`;
+    for (const i of d.github.issues) {
+      const sev = i.labels.find(l => ["high", "medium", "low"].includes(l.toLowerCase())) || "med";
+      html += `<tr><td><span class="badge ${sev.toLowerCase()}">${sev}</span></td><td><a href="${i.url}" target="_blank">#${i.number}</a> ${i.title}</td><td class="mono">${fmtAgo(i.created_at)}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("agent-issues").innerHTML = html;
+  }
+
+  // PRs
+  if (d.github.prs.length === 0) {
+    document.getElementById("agent-prs").innerHTML = `<div class="empty">No hay PRs pendientes ✓</div>`;
+  } else {
+    let html = `<table><thead><tr><th>Estado</th><th>PR</th><th>Cuándo</th></tr></thead><tbody>`;
+    for (const p of d.github.prs) {
+      const status = p.draft ? "draft" : "ok";
+      const label = p.draft ? "draft" : "listo";
+      html += `<tr><td><span class="badge ${status}">${label}</span></td><td><a href="${p.url}" target="_blank">#${p.number}</a> ${p.title}</td><td class="mono">${fmtAgo(p.created_at)}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("agent-prs").innerHTML = html;
+  }
+}
+
+loadAll();
+// Auto-refresh cada 60s
+setInterval(loadAll, 60000);
+</script>
+</body>
+</html>
