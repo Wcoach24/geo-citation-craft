@@ -3,13 +3,13 @@
  * Receives Stripe events. On `checkout.session.completed`:
  *   1. Reads the PDF(s) from /public/premium/<hash>/ (in the deployment filesystem)
  *   2. Sends the customer an email via Resend with the PDFs attached
- *
- * Replaces the old Supabase Edge Function `stripe-webhook`.
+ *   3. Notifies the owner (azmglg@gmail.com) of the new sale
  *
  * Env vars required:
  *   - STRIPE_SECRET_KEY
  *   - STRIPE_WEBHOOK_SECRET   (whsec_..., set when creating the endpoint)
  *   - RESEND_API_KEY
+ *   - OWNER_EMAIL (defaults to azmglg@gmail.com)
  */
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
@@ -23,11 +23,11 @@ export const config = {
 
 const SENDER = "Eric de esGEO <curso@esgeo.ai>";
 const REPLY_TO = "hola@esgeo.ai";
+const OWNER_NOTIFY_FROM = "esGEO sales <ventas@esgeo.ai>";
 
 type ModuleInfo = { name: string; filename: string; hash: string };
 const MODULES = manifest as Record<string, ModuleInfo>;
 
-// --- Body reader (Vercel + raw body for Stripe sig) ---
 async function readRaw(req: VercelRequest): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
@@ -37,7 +37,6 @@ async function readRaw(req: VercelRequest): Promise<Buffer> {
   });
 }
 
-// --- PDF loading from the deployed filesystem ---
 function loadPdf(modId: string) {
   const info = MODULES[modId];
   if (!info) return null;
@@ -51,15 +50,12 @@ function loadPdf(modId: string) {
   }
 }
 
-// --- Email HTML ---
-function buildEmail(productType: string, attachments: { name: string }[]): { html: string; text: string } {
+function buildCustomerEmail(productType: string, attachments: { name: string }[]): { html: string; text: string } {
   const intro = productType === "complete"
     ? "Acabas de comprar el Curso GEO Completo. Gracias."
     : "Acabas de comprar uno de los módulos de esGEO. Gracias.";
-
   const fileList = attachments.map((a) => `• ${a.name}`).join("\n");
 
-  // Plain-text version (boost Primary inbox classification)
   const text = `${intro}
 
 Tienes los PDFs adjuntos a este email:
@@ -72,7 +68,6 @@ duda, contestando a este email me llega directamente a mí.
 Eric
 hola@esgeo.ai`;
 
-  // Minimal HTML, looks like a personal note (not a template/newsletter)
   const fileListHtml = attachments.map((a) => `<li>${a.name}</li>`).join("");
   const html = `<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
@@ -87,7 +82,50 @@ hola@esgeo.ai`;
   return { html, text };
 }
 
-async function sendEmail(to: string, subject: string, html: string, attachments: any[], text?: string) {
+function buildOwnerNotification(session: Stripe.Checkout.Session, productType: string, customerEmail: string, attachments: { name: string }[]): { subject: string; html: string; text: string } {
+  const amount = (session.amount_total || 0) / 100;
+  const currency = (session.currency || "eur").toUpperCase();
+  const products = attachments.map(a => a.name).join(", ") || (productType === "complete" ? "Curso completo" : productType);
+  const country = session.customer_details?.address?.country || "—";
+  const sessionId = session.id;
+  const when = new Date((session.created || Date.now() / 1000) * 1000).toISOString().replace("T", " ").slice(0, 19);
+
+  const subject = `💰 Venta esGEO: €${amount} — ${products}`;
+
+  const text = `Nueva venta en esgeo.ai
+
+Cliente:   ${customerEmail}
+País:      ${country}
+Producto:  ${products}
+Monto:     ${amount} ${currency}
+Hora UTC:  ${when}
+Stripe:    ${sessionId}
+
+Dashboard: https://esgeo.ai/admin
+Stripe:    https://dashboard.stripe.com/payments/${sessionId}`;
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1f2937;line-height:1.55;font-size:15px;max-width:560px;margin:24px auto;padding:0 20px;">
+<h2 style="margin:0 0 16px 0;color:#16a34a;">💰 Nueva venta — €${amount}</h2>
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<tr><td style="padding:6px 0;color:#6b7280;width:90px;">Cliente</td><td style="padding:6px 0;"><strong>${customerEmail}</strong></td></tr>
+<tr><td style="padding:6px 0;color:#6b7280;">País</td><td style="padding:6px 0;">${country}</td></tr>
+<tr><td style="padding:6px 0;color:#6b7280;">Producto</td><td style="padding:6px 0;">${products}</td></tr>
+<tr><td style="padding:6px 0;color:#6b7280;">Monto</td><td style="padding:6px 0;"><strong>€${amount} ${currency}</strong></td></tr>
+<tr><td style="padding:6px 0;color:#6b7280;">Hora UTC</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${when}</td></tr>
+<tr><td style="padding:6px 0;color:#6b7280;">Session ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${sessionId}</td></tr>
+</table>
+<p style="margin-top:20px;">
+<a href="https://esgeo.ai/admin" style="display:inline-block;padding:8px 16px;background:#1a1a1a;color:#fff;text-decoration:none;font-size:14px;margin-right:8px;">Abrir dashboard</a>
+<a href="https://dashboard.stripe.com/payments/${sessionId}" style="display:inline-block;padding:8px 16px;background:#635bff;color:#fff;text-decoration:none;font-size:14px;">Ver en Stripe</a>
+</p>
+</body></html>`;
+
+  return { subject, html, text };
+}
+
+async function sendEmail(to: string, from: string, subject: string, html: string, attachments: any[], text?: string) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error("RESEND_API_KEY missing");
   const r = await fetch("https://api.resend.com/emails", {
@@ -98,7 +136,7 @@ async function sendEmail(to: string, subject: string, html: string, attachments:
       "User-Agent": "esgeo-webhook/1.0",
     },
     body: JSON.stringify({
-      from: SENDER,
+      from,
       to: [to],
       reply_to: REPLY_TO,
       subject,
@@ -114,7 +152,6 @@ async function sendEmail(to: string, subject: string, html: string, attachments:
   return r.json();
 }
 
-// --- Handler ---
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).end();
 
@@ -161,18 +198,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(200).json({ received: true, error: "no pdfs" });
     }
 
+    // 1. Email al cliente con los PDFs adjuntos
     const subject = productType === "complete"
       ? "Aquí tienes el Curso GEO completo"
       : `Aquí tienes ${attachments[0].name}`;
+    const { html, text } = buildCustomerEmail(productType, attachments);
+    const result = await sendEmail(email, SENDER, subject, html, attachments, text);
+    console.log(`[webhook] customer email sent to ${email}, id=${result.id}`);
 
-    const { html, text } = buildEmail(productType, attachments);
-    const result = await sendEmail(email, subject, html, attachments, text);
-    console.log(`[webhook] email sent to ${email}, id=${result.id}, attachments=${attachments.length}`);
+    // 2. Notificación al owner (no bloquea el response si falla)
+    try {
+      const ownerEmail = process.env.OWNER_EMAIL || "azmglg@gmail.com";
+      const notif = buildOwnerNotification(session, productType, email, attachments);
+      const ownerResult = await sendEmail(ownerEmail, OWNER_NOTIFY_FROM, notif.subject, notif.html, [], notif.text);
+      console.log(`[webhook] owner notified, id=${ownerResult.id}`);
+    } catch (notifErr) {
+      console.error("[webhook] owner notification failed:", (notifErr as Error).message);
+    }
 
     return res.status(200).json({ received: true, email_id: result.id });
   } catch (err) {
     console.error("[webhook] handler error:", err);
-    // Return 200 anyway to prevent Stripe retries that would re-charge nothing
     return res.status(200).json({ received: true, error: (err as Error).message });
   }
 }
