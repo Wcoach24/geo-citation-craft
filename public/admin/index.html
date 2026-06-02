@@ -7,7 +7,7 @@
 <title>esGEO Admin Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  :root { color-scheme: light; --ink:#1a1a1a; --bg:#f5f3ee; --card:#ffffff; --accent:#ff6b35; --green:#16a34a; --red:#c1121f; --amber:#e36414; --muted:#6b7280; }
+  :root { color-scheme: light; --ink:#1a1a1a; --bg:#f5f3ee; --card:#ffffff; --accent:#ff6b35; --green:#16a34a; --red:#c1121f; --amber:#e36414; --muted:#6b7280; --blue:#2563eb; }
   * { box-sizing: border-box; margin: 0; padding: 0 }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--ink); padding: 20px; min-height: 100vh; }
   .container { max-width: 1280px; margin: 0 auto; }
@@ -16,33 +16,43 @@
   .sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
   button { background: var(--ink); color: white; border: 0; padding: 8px 14px; font-size: 13px; cursor: pointer; }
   button:hover { background: #333 }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px; }
-  .card { background: var(--card); border: 2px solid var(--ink); padding: 16px; }
-  .card h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--muted); }
-  .v { font-size: 28px; font-weight: 700; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .card { background: var(--card); border: 2px solid var(--ink); padding: 14px; }
+  .card h2 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; color: var(--muted); }
+  .v { font-size: 26px; font-weight: 700; line-height:1.15 }
   .v.green { color: var(--green) }
   .v.amber { color: var(--amber) }
   .v.red { color: var(--red) }
-  .sub2 { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .v.blue { color: var(--blue) }
+  .sub2 { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .delta { font-size:12px; font-weight:600; margin-left:6px; }
+  .delta.up { color:var(--green) }
+  .delta.down { color:var(--red) }
   .section { background: var(--card); border: 2px solid var(--ink); padding: 18px; margin-bottom: 20px; }
-  .section h2 { font-size: 16px; border-left: 4px solid var(--accent); padding-left: 10px; margin-bottom: 14px; }
+  .section h2 { font-size: 16px; border-left: 4px solid var(--accent); padding-left: 10px; margin-bottom: 14px; display:flex; justify-content:space-between; align-items:center; }
+  .section h2 .badge-cfg { font-size:11px; font-weight:400; color:var(--muted); text-transform:none; letter-spacing:normal; padding:0; border:none; }
   table { width: 100%; font-size: 13px; border-collapse: collapse; }
-  th { text-align: left; padding: 8px 6px; border-bottom: 2px solid var(--ink); font-size: 11px; text-transform: uppercase; color: var(--muted); }
-  td { padding: 8px 6px; border-bottom: 1px dashed #ddd; }
+  th { text-align: left; padding: 8px 6px; border-bottom: 2px solid var(--ink); font-size: 10px; text-transform: uppercase; color: var(--muted); }
+  td { padding: 7px 6px; border-bottom: 1px dashed #ddd; }
   td.mono { font-family: monospace; font-size: 12px; color: var(--muted); }
   td.right { text-align: right; }
-  .empty { color: var(--muted); font-style: italic; padding: 14px; text-align: center; }
+  td.q { max-width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+  .empty { color: var(--muted); font-style: italic; padding: 14px; text-align: center; font-size:13px; }
+  .empty code { background:#f5f3ee; padding:2px 6px; font-family:monospace; }
   .badge { display: inline-block; padding: 2px 6px; font-size: 10px; font-weight: 600; border: 1px solid; text-transform: uppercase; letter-spacing: .5px; }
   .badge.high { background: #fff0ea; color: var(--red); border-color: var(--red); }
+  .badge.medium { background: #fff7e6; color: var(--amber); border-color: var(--amber); }
+  .badge.low { background: #f0f0f0; color: #666; border-color: #999; }
   .badge.draft { background: #e3f2fd; color: #0277bd; border-color: #0277bd; }
   .badge.ok { background: #e8f5e9; color: var(--green); border-color: var(--green); }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .chart-wrap { height: 200px; position: relative; }
+  .chart-wrap.small { height: 140px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
   .loading { color: var(--muted); padding: 20px; text-align: center; font-size: 13px; }
-  .error { color: var(--red); padding: 14px; background: #fff0ea; border: 1px solid var(--red); }
+  .error { color: var(--red); padding: 14px; background: #fff0ea; border: 1px solid var(--red); margin-bottom:14px; }
 </style>
 </head>
 <body>
@@ -57,11 +67,20 @@
 
     <div id="error-box"></div>
 
-    <div class="grid" id="kpis">
+    <h3 style="font-size:11px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;letter-spacing:1px;">Ventas</h3>
+    <div class="grid">
       <div class="card"><h2>Hoy</h2><div class="v" id="kpi-today">—</div><div class="sub2" id="kpi-today-count">0 ventas</div></div>
       <div class="card"><h2>Últimos 7 días</h2><div class="v" id="kpi-week">—</div><div class="sub2" id="kpi-week-count">0 ventas</div></div>
       <div class="card"><h2>Últimos 30 días</h2><div class="v" id="kpi-month">—</div><div class="sub2" id="kpi-month-count">0 ventas</div></div>
       <div class="card"><h2>Últimos 90 días</h2><div class="v" id="kpi-all">—</div><div class="sub2" id="kpi-all-count">0 ventas</div></div>
+    </div>
+
+    <h3 style="font-size:11px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;letter-spacing:1px;">SEO · GEO · Leads</h3>
+    <div class="grid">
+      <div class="card"><h2>Clicks GSC 7d</h2><div class="v blue" id="kpi-gsc-clicks">—</div><div class="sub2" id="kpi-gsc-impressions">— impresiones</div></div>
+      <div class="card"><h2>Posición media</h2><div class="v" id="kpi-gsc-position">—</div><div class="sub2">7 días</div></div>
+      <div class="card"><h2>SoC global</h2><div class="v" id="kpi-soc">—</div><div class="sub2" id="kpi-soc-delta">sin histórico aún</div></div>
+      <div class="card"><h2>Leads totales</h2><div class="v blue" id="kpi-leads">—</div><div class="sub2" id="kpi-leads-new">— nuevos 7d</div></div>
       <div class="card"><h2>Issues HIGH</h2><div class="v" id="kpi-alerts">—</div><div class="sub2">de los agentes</div></div>
       <div class="card"><h2>PRs pendientes</h2><div class="v" id="kpi-prs">—</div><div class="sub2">de los agentes</div></div>
     </div>
@@ -69,6 +88,28 @@
     <div class="section">
       <h2>Revenue diario (últimos 30 días)</h2>
       <div class="chart-wrap"><canvas id="chart-revenue"></canvas></div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <h2>Clicks/Impresiones GSC (30d) <span class="badge-cfg" id="gsc-cfg-tag"></span></h2>
+        <div class="chart-wrap small" id="gsc-chart-wrap"><canvas id="chart-gsc"></canvas></div>
+      </div>
+      <div class="section">
+        <h2>Share of Citation histórica <span class="badge-cfg" id="soc-cfg-tag"></span></h2>
+        <div class="chart-wrap small" id="soc-chart-wrap"><canvas id="chart-soc"></canvas></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <h2>Top páginas GSC (7d)</h2>
+        <div id="gsc-top-pages">cargando…</div>
+      </div>
+      <div class="section">
+        <h2>Top queries GSC (7d)</h2>
+        <div id="gsc-top-queries">cargando…</div>
+      </div>
     </div>
 
     <div class="two-col">
@@ -84,24 +125,23 @@
 
     <div class="two-col">
       <div class="section">
-        <h2>Alertas abiertas del Sentinel</h2>
+        <h2>Alertas Sentinel</h2>
         <div id="agent-issues">cargando…</div>
       </div>
       <div class="section">
-        <h2>PRs pendientes de los agentes</h2>
+        <h2>PRs pendientes</h2>
         <div id="agent-prs">cargando…</div>
       </div>
     </div>
   </div>
 
 <script>
-let chart = null;
+let chartRevenue=null, chartGsc=null, chartSoc=null;
 
 function eur(n) { return "€" + Number(n || 0).toFixed(2); }
-function fmtDateTime(iso) {
-  const d = new Date(iso);
-  return d.toISOString().replace("T", " ").slice(0, 16);
-}
+function num(n) { return Number(n || 0).toLocaleString("es-ES"); }
+function pct(n) { return Number(n || 0).toFixed(1) + "%"; }
+function fmtDateTime(iso) { return new Date(iso).toISOString().replace("T", " ").slice(0, 16); }
 function fmtAgo(iso) {
   const diff = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
   if (diff === 0) return "hoy";
@@ -127,9 +167,9 @@ async function loadAll() {
 }
 
 function render(d) {
-  document.getElementById("meta").textContent = `Actualizado ${fmtDateTime(d.generated_at)} UTC`;
+  document.getElementById("meta").textContent = `Actualizado ${fmtDateTime(d.generated_at)} UTC · auto-refresh cada 60s`;
 
-  // KPIs
+  // === Stripe KPIs ===
   document.getElementById("kpi-today").textContent = eur(d.stripe.today.amount);
   document.getElementById("kpi-today-count").textContent = `${d.stripe.today.count} ventas`;
   document.getElementById("kpi-week").textContent = eur(d.stripe.week.amount);
@@ -139,36 +179,139 @@ function render(d) {
   document.getElementById("kpi-all").textContent = eur(d.stripe.all90.amount);
   document.getElementById("kpi-all-count").textContent = `${d.stripe.all90.count} ventas`;
 
+  // === GitHub KPIs ===
   const highAlerts = d.github.issues.filter(i => i.labels.some(l => l.toLowerCase() === "high")).length;
   document.getElementById("kpi-alerts").textContent = highAlerts;
   document.getElementById("kpi-alerts").className = "v " + (highAlerts > 0 ? "red" : "green");
-
   document.getElementById("kpi-prs").textContent = d.github.prs.length;
   document.getElementById("kpi-prs").className = "v " + (d.github.prs.length > 0 ? "amber" : "green");
 
-  // Chart
-  const ctx = document.getElementById("chart-revenue").getContext("2d");
-  if (chart) chart.destroy();
-  chart = new Chart(ctx, {
+  // === GSC KPIs ===
+  if (d.gsc && !d.gsc.error) {
+    document.getElementById("gsc-cfg-tag").textContent = "";
+    document.getElementById("kpi-gsc-clicks").textContent = num(d.gsc.window_7d.clicks);
+    document.getElementById("kpi-gsc-impressions").textContent = num(d.gsc.window_7d.impressions) + " impresiones";
+    document.getElementById("kpi-gsc-position").textContent = d.gsc.window_7d.position.toFixed(1);
+  } else {
+    const msg = d.gsc?.error ? `error: ${d.gsc.error}` : "no configurado";
+    document.getElementById("gsc-cfg-tag").textContent = msg;
+    document.getElementById("kpi-gsc-clicks").textContent = "—";
+    document.getElementById("kpi-gsc-position").textContent = "—";
+  }
+
+  // === SoC KPI ===
+  if (d.soc) {
+    document.getElementById("soc-cfg-tag").textContent = "";
+    document.getElementById("kpi-soc").textContent = pct(d.soc.current_soc);
+    if (d.soc.previous_soc !== undefined) {
+      const delta = d.soc.current_soc - d.soc.previous_soc;
+      const sign = delta > 0 ? "+" : "";
+      document.getElementById("kpi-soc-delta").textContent = `${sign}${delta.toFixed(1)}pp vs semana pasada`;
+      document.getElementById("kpi-soc-delta").className = "sub2 " + (delta >= 0 ? "" : "");
+    }
+  } else {
+    document.getElementById("soc-cfg-tag").textContent = "primer run viernes";
+    document.getElementById("kpi-soc").textContent = "—";
+    document.getElementById("kpi-soc-delta").textContent = "el Citation Tracker aún no ha corrido";
+  }
+
+  // === Leads KPI ===
+  if (d.leads && !d.leads.error) {
+    document.getElementById("kpi-leads").textContent = num(d.leads.subscribed);
+    document.getElementById("kpi-leads-new").textContent = `+${d.leads.last7} nuevos 7d · +${d.leads.last30} 30d`;
+  } else {
+    document.getElementById("kpi-leads").textContent = "—";
+    document.getElementById("kpi-leads-new").textContent = d.leads?.error || "no disponible";
+  }
+
+  // === Revenue chart ===
+  const ctxR = document.getElementById("chart-revenue").getContext("2d");
+  if (chartRevenue) chartRevenue.destroy();
+  chartRevenue = new Chart(ctxR, {
     type: "bar",
     data: {
       labels: d.stripe.daily.map(x => x.date.slice(5)),
-      datasets: [{
-        label: "Revenue (€)",
-        data: d.stripe.daily.map(x => x.revenue),
-        backgroundColor: "#ff6b35",
-        borderRadius: 0,
-      }],
+      datasets: [{ label: "Revenue (€)", data: d.stripe.daily.map(x => x.revenue), backgroundColor: "#ff6b35", borderRadius: 0 }],
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: { y: { beginAtZero: true, ticks: { callback: v => "€" + v } } },
     },
   });
 
-  // By product
+  // === GSC chart ===
+  if (d.gsc && d.gsc.daily) {
+    const ctxG = document.getElementById("chart-gsc").getContext("2d");
+    if (chartGsc) chartGsc.destroy();
+    chartGsc = new Chart(ctxG, {
+      type: "line",
+      data: {
+        labels: d.gsc.daily.map(x => x.date.slice(5)),
+        datasets: [
+          { label: "Clicks", data: d.gsc.daily.map(x => x.clicks), borderColor: "#2563eb", backgroundColor: "#2563eb20", tension: 0.3, yAxisID: "y" },
+          { label: "Impresiones", data: d.gsc.daily.map(x => x.impressions), borderColor: "#94a3b8", backgroundColor: "transparent", tension: 0.3, yAxisID: "y1" },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } } },
+        scales: {
+          y: { position: "left", beginAtZero: true, ticks: { font: { size: 10 } } },
+          y1: { position: "right", beginAtZero: true, ticks: { font: { size: 10 } }, grid: { drawOnChartArea: false } },
+        },
+      },
+    });
+  } else {
+    document.getElementById("gsc-chart-wrap").innerHTML = `<div class="empty">Añade <code>GSC_SERVICE_ACCOUNT_JSON</code> en Vercel env vars para activar.</div>`;
+  }
+
+  // === SoC chart ===
+  if (d.soc && d.soc.history) {
+    const ctxS = document.getElementById("chart-soc").getContext("2d");
+    if (chartSoc) chartSoc.destroy();
+    chartSoc = new Chart(ctxS, {
+      type: "line",
+      data: {
+        labels: d.soc.history.map(x => x.week),
+        datasets: [{ label: "SoC %", data: d.soc.history.map(x => x.soc_pct), borderColor: "#16a34a", backgroundColor: "#16a34a20", tension: 0.3, fill: true }],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { callback: v => v + "%", font: { size: 10 } } } },
+      },
+    });
+  } else {
+    document.getElementById("soc-chart-wrap").innerHTML = `<div class="empty">El Citation Tracker corre los viernes 09:00. Datos disponibles desde el primer run.</div>`;
+  }
+
+  // === GSC top pages ===
+  if (d.gsc && d.gsc.top_pages && d.gsc.top_pages.length > 0) {
+    let html = `<table><thead><tr><th>Página</th><th class="right">Clk</th><th class="right">Impr</th><th class="right">Pos</th></tr></thead><tbody>`;
+    for (const p of d.gsc.top_pages) {
+      const path = p.page.replace(/^https?:\/\/[^/]+/, "") || "/";
+      html += `<tr><td class="q mono">${path}</td><td class="right">${num(p.clicks)}</td><td class="right">${num(p.impressions)}</td><td class="right">${p.position.toFixed(1)}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("gsc-top-pages").innerHTML = html;
+  } else {
+    document.getElementById("gsc-top-pages").innerHTML = `<div class="empty">${d.gsc?.error ? d.gsc.error : "GSC no configurado todavía"}</div>`;
+  }
+
+  // === GSC top queries ===
+  if (d.gsc && d.gsc.top_queries && d.gsc.top_queries.length > 0) {
+    let html = `<table><thead><tr><th>Query</th><th class="right">Clk</th><th class="right">Impr</th><th class="right">Pos</th></tr></thead><tbody>`;
+    for (const q of d.gsc.top_queries) {
+      html += `<tr><td class="q">${q.query}</td><td class="right">${num(q.clicks)}</td><td class="right">${num(q.impressions)}</td><td class="right">${q.position.toFixed(1)}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("gsc-top-queries").innerHTML = html;
+  } else {
+    document.getElementById("gsc-top-queries").innerHTML = `<div class="empty">${d.gsc?.error ? d.gsc.error : "GSC no configurado todavía"}</div>`;
+  }
+
+  // === By product ===
   const products = Object.entries(d.stripe.byProduct).sort((a, b) => b[1].amount - a[1].amount);
   if (products.length === 0) {
     document.getElementById("by-product").innerHTML = `<div class="empty">Sin ventas todavía</div>`;
@@ -181,32 +324,32 @@ function render(d) {
     document.getElementById("by-product").innerHTML = html;
   }
 
-  // Recent sales
+  // === Recent sales ===
   if (d.stripe.recent.length === 0) {
     document.getElementById("recent-sales").innerHTML = `<div class="empty">Sin ventas recientes</div>`;
   } else {
     let html = `<table><thead><tr><th>Cuándo</th><th>Cliente</th><th>Producto</th><th class="right">€</th></tr></thead><tbody>`;
     for (const s of d.stripe.recent) {
-      html += `<tr><td class="mono">${fmtAgo(s.when)}</td><td class="mono">${s.email_masked} <small>(${s.country})</small></td><td>${s.product}</td><td class="right"><strong>${eur(s.amount)}</strong></td></tr>`;
+      html += `<tr><td class="mono">${fmtAgo(s.when)}</td><td class="mono">${s.email_masked}</td><td>${s.product}</td><td class="right"><strong>${eur(s.amount)}</strong></td></tr>`;
     }
     html += `</tbody></table>`;
     document.getElementById("recent-sales").innerHTML = html;
   }
 
-  // Issues
+  // === Issues ===
   if (d.github.issues.length === 0) {
     document.getElementById("agent-issues").innerHTML = `<div class="empty">No hay alertas abiertas 🎉</div>`;
   } else {
     let html = `<table><thead><tr><th>Sev</th><th>Issue</th><th>Cuándo</th></tr></thead><tbody>`;
     for (const i of d.github.issues) {
-      const sev = i.labels.find(l => ["high", "medium", "low"].includes(l.toLowerCase())) || "med";
-      html += `<tr><td><span class="badge ${sev.toLowerCase()}">${sev}</span></td><td><a href="${i.url}" target="_blank">#${i.number}</a> ${i.title}</td><td class="mono">${fmtAgo(i.created_at)}</td></tr>`;
+      const sev = (i.labels.find(l => ["high", "medium", "low"].includes(l.toLowerCase())) || "med").toLowerCase();
+      html += `<tr><td><span class="badge ${sev}">${sev}</span></td><td><a href="${i.url}" target="_blank">#${i.number}</a> ${i.title}</td><td class="mono">${fmtAgo(i.created_at)}</td></tr>`;
     }
     html += `</tbody></table>`;
     document.getElementById("agent-issues").innerHTML = html;
   }
 
-  // PRs
+  // === PRs ===
   if (d.github.prs.length === 0) {
     document.getElementById("agent-prs").innerHTML = `<div class="empty">No hay PRs pendientes ✓</div>`;
   } else {
@@ -222,7 +365,6 @@ function render(d) {
 }
 
 loadAll();
-// Auto-refresh cada 60s
 setInterval(loadAll, 60000);
 </script>
 </body>
