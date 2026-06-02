@@ -1,12 +1,17 @@
 {
+  "redirects": [
+    { "source": "/admin", "destination": "/api/admin/auth", "permanent": false }
+  ],
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|admin/|admin$).*)",
       "destination": "/"
     }
   ],
   "functions": {
     "api/checkout.ts": { "maxDuration": 10 },
-    "api/stripe-webhook.ts": { "maxDuration": 30 }
+    "api/stripe-webhook.ts": { "maxDuration": 30 },
+    "api/admin/auth.ts": { "maxDuration": 5 },
+    "api/admin/metrics.ts": { "maxDuration": 15 }
   }
 }
