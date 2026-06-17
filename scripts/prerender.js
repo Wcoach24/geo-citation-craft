@@ -39,6 +39,7 @@ const ROUTE_TO_FILE = {
   '/radar-ia': 'pages/RadarIAPage.tsx',
   '/geo-score': 'pages/GeoScorePage.tsx',
   '/contenido-ia': 'pages/ContenidoIAPage.tsx',
+  '/experto-geo': 'pages/ExpertoGeoPage.tsx',
   '/acerca-de': 'pages/AcercaDePage.tsx',
   '/acerca-de/equipo': 'pages/EquipoPage.tsx',
   '/privacidad': 'pages/PrivacidadPage.tsx',

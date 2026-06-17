@@ -19,6 +19,7 @@ const RadarIAPage = React.lazy(() => import("./pages/RadarIAPage"));
 const GeoScorePage = React.lazy(() => import("./pages/GeoScorePage"));
 const AcercaDePage = React.lazy(() => import("./pages/AcercaDePage"));
 const EquipoPage = React.lazy(() => import("./pages/EquipoPage"));
+const ExpertoGeoPage = React.lazy(() => import("./pages/ExpertoGeoPage"));
 const PrivacidadPage = React.lazy(() => import("./pages/PrivacidadPage"));
 const TerminosPage = React.lazy(() => import("./pages/TerminosPage"));
 const ContenidoIAPage = React.lazy(() => import("./pages/ContenidoIAPage"));
@@ -80,6 +81,9 @@ function App() {
               <Route path="/radar-ia" element={<RadarIAPage />} />
               <Route path="/geo-score" element={<GeoScorePage />} />
               <Route path="/contenido-ia" element={<ContenidoIAPage />} />
+              <Route path="/experto-geo" element={<ExpertoGeoPage />} />
+              <Route path="/consultor-geo" element={<Navigate to="/experto-geo" replace />} />
+              <Route path="/especialista-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/success" element={<PurchaseSuccessPage />} />
