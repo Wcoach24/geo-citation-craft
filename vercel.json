@@ -1,6 +1,21 @@
 {
   "redirects": [
-    { "source": "/admin", "destination": "/api/admin/auth", "permanent": false }
+    {
+      "source": "/admin",
+      "destination": "/api/admin/auth",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.esgeo.ai"
+        }
+      ],
+      "destination": "https://esgeo.ai/$1",
+      "permanent": true
+    }
   ],
   "rewrites": [
     {
