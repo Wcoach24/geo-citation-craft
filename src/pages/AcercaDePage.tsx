@@ -17,10 +17,10 @@ const AcercaDePage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Acerca de esGEO | Quiénes Somos | esGEO</title>
-        <meta name="description" content="Conoce al equipo de esGEO, pioneros en Generative Engine Optimization en español. Nuestra misión: enseñar a crear contenido citeable por IA." />
+        <title>esGEO: Formación en GEO para Citar tu Web en IA (2026)</title>
+        <meta name="description" content="Descubre qué es esGEO, la primera plataforma en español de Generative Engine Optimization. Aprende a crear contenido citado por ChatGPT, Perplexity y Claude." />
         <link rel="canonical" href="https://esgeo.ai/acerca-de" />
-        
+
         <meta name="citation_title" content="Acerca de esGEO - Equipo y Misión" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024-01-01" />
@@ -28,7 +28,7 @@ const AcercaDePage = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="esGEO, equipo, misión, GEO, Generative Engine Optimization, fundadores, historia" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
-        
+
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -74,7 +74,7 @@ const AcercaDePage = () => {
                 "email": "hola@esgeo.ai"
               },
               "areaServed": {
-                "@type": "Country", 
+                "@type": "Country",
                 "name": "España"
               },
               "founder": [
@@ -130,7 +130,7 @@ const AcercaDePage = () => {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-4xl mx-auto">
-          
+
           {/* Breadcrumbs */}
           <Breadcrumb className="mb-8">
             <BreadcrumbList>
@@ -158,7 +158,7 @@ const AcercaDePage = () => {
               ACERCA DE ESGEO
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
-              Quiénes Somos
+              Qué es esGEO y por qué optimizamos para la IA generativa
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-6">
               Pioneros en Generative Engine Optimization en español
@@ -174,9 +174,9 @@ const AcercaDePage = () => {
             </div>
             <HighlightSnippet variant="definition" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
-                <strong>En esGEO, creemos que el futuro de la búsqueda está en los modelos de lenguaje generativo.</strong> 
-                Nuestra misión es enseñar a crear contenido web que sea comprensible, útil y citado por IA como ChatGPT, 
-                Perplexity, Claude y Gemini. Somos la primera plataforma en español dedicada exclusivamente a 
+                <strong>En esGEO, creemos que el futuro de la búsqueda está en los modelos de lenguaje generativo.</strong>
+                Nuestra misión es enseñar a crear contenido web que sea comprensible, útil y citado por IA como ChatGPT,
+                Perplexity, Claude y Gemini. Somos la primera plataforma en español dedicada exclusivamente a
                 Generative Engine Optimization (GEO).
               </p>
             </HighlightSnippet>
@@ -194,7 +194,7 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Educación Especializada</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  <p>Ofrecemos el curso más completo de GEO en español, con módulos F1-F5 que cubren desde 
+                  <p>Ofrecemos el curso más completo de GEO en español, con módulos F1-F5 que cubren desde
                   fundamentos hasta técnicas avanzadas para optimizar contenido para IA generativa.</p>
                   <p className="mt-2 text-sm">
                     <strong>Tiempo de formación:</strong> 20 horas • <strong>Certificación:</strong> Incluida
@@ -206,7 +206,7 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Soporte Especializado</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  <p>Ofrecemos soporte directo por email para guiar la implementación práctica 
+                  <p>Ofrecemos soporte directo por email para guiar la implementación práctica
                   de técnicas GEO adaptadas a cada proyecto específico.</p>
                   <p className="mt-2 text-sm">
                     <strong>Contacto:</strong> hola@esgeo.ai • <strong>Idioma:</strong> Español nativo
@@ -218,7 +218,7 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Investigación Continua</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  <p>Mantenemos el Radar IA con análisis actualizados sobre tendencias, cambios en 
+                  <p>Mantenemos el Radar IA con análisis actualizados sobre tendencias, cambios en
                   modelos generativos y nuevas técnicas de optimización.</p>
                   <p className="mt-2 text-sm">
                     <strong>Actualizaciones:</strong> Semanales • <strong>Cobertura:</strong> +15 LLMs
@@ -230,7 +230,7 @@ const AcercaDePage = () => {
                   <CardTitle className="text-xl">Casos Reales</CardTitle>
                 </CardHeader>
                 <CardContent className="text-muted-foreground" data-speakable="true">
-                  <p>Documentamos y compartimos casos de éxito reales donde la aplicación de GEO 
+                  <p>Documentamos y compartimos casos de éxito reales donde la aplicación de GEO
                   ha resultado en mayor citabilidad y visibilidad en respuestas de IA.</p>
                   <p className="mt-2 text-sm">
                     <strong>Casos documentados:</strong> +50 • <strong>Mejora promedio:</strong> 340%
