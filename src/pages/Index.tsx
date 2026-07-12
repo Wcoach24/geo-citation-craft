@@ -15,6 +15,7 @@ import LimitationsSection from "@/components/LimitationsSection";
 import CtaSection from "@/components/CtaSection";
 import TableOfContents from "@/components/TableOfContents";
 import HablaWidget from "@/components/HablaWidget";
+import PanelAuditoria from "@/components/PanelAuditoria";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 // FAQs refrescadas mayo 2026 — pensadas para queries con impresiones en GSC
@@ -127,6 +128,8 @@ const Index = () => {
           </section>
 
           <SocialProofSection />
+
+          <PanelAuditoria />
 
           {/* Metodología con módulos */}
           <MethodologySection />

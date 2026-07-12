@@ -125,10 +125,37 @@ export default function HablaWidget({
             {/* Dato duro: lo que ve el crawler */}
             <p className="text-sm text-muted-foreground mt-4">
               El crawler encuentra{" "}
-              <strong className="text-foreground">{result.checks.text_chars} caracteres</strong> de texto
-              en tu HTML inicial y <strong className="text-foreground">{result.checks.h1}</strong> etiqueta
-              h1. {result.checks.llms_txt ? "Tienes llms.txt." : "No tienes llms.txt."}
+              <strong className="text-foreground">
+                {result.checks.content_chars ?? result.checks.text_chars} caracteres
+              </strong>{" "}
+              de contenido en tu HTML inicial y{" "}
+              <strong className="text-foreground">{result.checks.h1}</strong> etiqueta h1.
             </p>
+
+            {/* Los 5 hechos del primer bloque: el eje donde casi todo el mundo suspende */}
+            {result.checks.answerability_facts && (
+              <div className="mt-4 rounded-xl border border-border bg-background p-4">
+                <p className="text-sm font-semibold text-foreground mb-2">
+                  Tu primer bloque, ¿responde?
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                  {[
+                    ["what", "Qué eres"],
+                    ["who", "Para quién"],
+                    ["howMuch", "Una cifra con unidad"],
+                    ["dated", "Fechado (mes y año)"],
+                    ["selfContained", "Se sostiene solo"],
+                  ].map(([k, label]) => {
+                    const ok = (result.checks.answerability_facts as Record<string, boolean>)[k];
+                    return (
+                      <li key={k} className={ok ? "text-foreground" : "text-muted-foreground"}>
+                        {ok ? "✓" : "✗"} {label}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
 
             {/* Quick wins */}
             {result.wins.length > 0 && (
@@ -169,6 +196,14 @@ export default function HablaWidget({
             <div className="mt-6">
               <EmailCapture source={`habla-${result.grade}`} />
             </div>
+
+            {/* Lo que la nota NO significa. Va aquí, no en la letra pequeña. */}
+            {result.caveat && (
+              <p className="mt-6 text-xs text-muted-foreground leading-relaxed border-t border-border pt-4">
+                {result.caveat}
+                {result.rubric && <span className="opacity-70"> (rubric {result.rubric})</span>}
+              </p>
+            )}
           </div>
         )}
       </div>

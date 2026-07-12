@@ -23,6 +23,10 @@ export const HABLA_API =
 export interface HablaResult {
   url: string;
   http: number;
+  /** Versión del rubric. Una nota sin rubric no es una nota, es una opinión. */
+  rubric?: string;
+  /** Lo que la nota NO significa. Se enseña, no se esconde. */
+  caveat?: string;
   total: number;
   grade: "MUDA" | "TARTAMUDA" | "BILINGÜE" | "NATIVA" | string;
   gateH: boolean;
@@ -37,7 +41,12 @@ export interface HablaResult {
     jsonld: number;
     llms_txt: boolean;
     robots_ai_bots: string[];
+    /** rubric 2.0: 0-5 hechos, no un recuento de palabras. */
     answerability: number;
+    answerability_facts?: {
+      what: boolean; who: boolean; howMuch: boolean; dated: boolean; selfContained: boolean;
+    };
+    content_chars?: number;
     [k: string]: unknown;
   };
   wins: string[];
