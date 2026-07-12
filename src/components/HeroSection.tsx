@@ -27,20 +27,23 @@ const HeroSection = () => {
           
           {/*
             Bloque de respuesta directa (answerability). Es el primer párrafo que ve una
-            máquina: responde qué es, para quién y cuánto cuesta, en una sola unidad
-            autocontenida y fechada. No es relleno de marca: es el fragmento que un motor
-            generativo puede extraer y citar tal cual.
+            máquina, y el que un motor generativo puede extraer y citar tal cual.
+
+            Tiene que responder tres cosas sin rodeos: QUÉ es, PARA QUIÉN es y CUÁNTO cuesta
+            — más cómo empezar sin pagar. Antes solo decía el precio, y el auditor lo
+            marcaba (answerability 1 de 10). No es relleno de marca: es la unidad citable.
           */}
           <p
             className="snippet-block text-lg md:text-xl text-primary-foreground/75 mb-10 leading-relaxed max-w-2xl mx-auto animate-fade-up-delay-2"
             data-speakable="true"
           >
-            <strong>esGEO es la plataforma en español de Generative Engine Optimization (GEO)</strong>,
+            <strong>esGEO es la plataforma en español de Generative Engine Optimization (GEO)</strong>:
             la disciplina que estructura una web para que ChatGPT, Perplexity, Claude y Gemini la
-            citen como fuente. Ofrece un curso completo de 5 módulos (F1 a F5) por{" "}
-            <strong>47 € de pago único</strong>, con guías PDF y plantillas, dirigido a fundadores,
-            responsables de marketing y SEO que ya tienen web y no aparecen en las respuestas de la
-            IA. Contenido actualizado en julio de 2026.
+            citen como fuente. <strong>Precio del curso: 47 € de pago único</strong>, sin
+            suscripción — 5 módulos y 142 páginas en PDF, tuyas desde el momento de la compra.
+            Antes de pagar puedes auditar tu web <strong>gratis</strong>, aquí mismo, y leer el
+            módulo F0 entero. Es para fundadores, responsables de marketing y SEO que ya tienen web
+            y no aparecen en las respuestas de la IA. Actualizado en julio de 2026.
           </p>
 
           {/* Dual CTA */}

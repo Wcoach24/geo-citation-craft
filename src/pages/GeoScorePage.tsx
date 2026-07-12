@@ -31,7 +31,7 @@ const GeoScorePage = () => {
     },
     {
       q: "¿Y si mi puntuación es mala?",
-      a: "Es lo normal: la mayoría de las webs modernas fallan el gate de accesibilidad. El auditor te dice qué arreglar primero; el curso F1–F5 te enseña a arreglarlo todo. La propia esgeo.ai puntuaba 35 sobre 100 en julio de 2026 antes de aplicarse su propio método.",
+      a: "Es lo normal: la mayoría de las webs modernas fallan el gate de accesibilidad. El auditor te dice qué arreglar primero; el curso F1–F5 te enseña a arreglarlo todo. La propia esgeo.ai puntuaba 35 sobre 100 antes de aplicarse su propio método.",
     },
   ];
 
@@ -144,11 +144,12 @@ const GeoScorePage = () => {
               Empezamos por nuestra propia web
             </h2>
             <p className="text-muted-foreground">
-              En julio de 2026 pasamos este mismo auditor por <strong>esgeo.ai</strong>. Resultado:{" "}
-              <strong>35 sobre 100</strong>, gate de accesibilidad suspendido, 237 caracteres de
-              texto en el HTML inicial. La web que vende un curso sobre cómo ser citado por las IAs
-              era invisible para las IAs. Lo arreglamos aplicando el método F1–F5 y publicamos el
-              antes y el después. Puedes auditarnos tú mismo con el formulario de arriba.
+              <strong>esgeo.ai</strong> fue invisible para las IAs desde el día en que se publicó:
+              un HTML vacío de 237 caracteres, gate de accesibilidad suspendido. Cuando pasamos este
+              mismo auditor por nuestra propia web, sacó un <strong>35 sobre 100</strong>. La web que
+              vende un curso sobre cómo ser citado por las IAs era, para las IAs, una página en
+              blanco. Lo arreglamos aplicando el método F1–F5 y publicamos el antes y el después.
+              Puedes auditarnos tú mismo con el formulario de arriba.
             </p>
           </div>
         </section>

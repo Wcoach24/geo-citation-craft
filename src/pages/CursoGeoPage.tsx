@@ -354,13 +354,14 @@ const CursoGeoPage = () => {
               <Calendar className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
               <div>
                 <p className="text-sm font-semibold text-accent uppercase tracking-wide mb-1">
-                  Actualizado el 12 de julio de 2026
+                  Actualizado en julio de 2026
                 </p>
                 <p className="text-base text-foreground leading-relaxed">
-                  El curso incluye el caso de nuestra propia web: el 12 de julio de 2026 esgeo.ai sacó un
-                  <strong> 35 sobre 100</strong> en nuestro auditor, con 237 caracteres de texto en el HTML
-                  inicial. Lo arreglamos aplicando F1 a F5 y subimos a <strong>92</strong>. El antes, el
-                  después y los comandos exactos para comprobarlo están dentro.
+                  El curso incluye el caso de nuestra propia web. esgeo.ai fue invisible para las IAs
+                  desde el día en que se publicó: servía un HTML vacío de 237 caracteres. Cuando nos
+                  auditamos, sacamos un <strong>35 sobre 100</strong>. Aplicamos F1 a F5 sobre
+                  nosotros mismos y subimos a <strong>92</strong>. El antes, el después y los
+                  comandos exactos para comprobarlo están dentro.
                 </p>
               </div>
             </div>

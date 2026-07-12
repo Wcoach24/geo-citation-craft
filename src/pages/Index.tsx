@@ -111,14 +111,15 @@ const Index = () => {
                 <Calendar className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                 <div>
                   <p className="text-sm font-semibold text-accent uppercase tracking-wide mb-1">
-                    Actualizado el 12 de julio de 2026
+                    Actualizado en julio de 2026
                   </p>
                   <p className="text-base text-foreground leading-relaxed">
-                    Ese día auditamos nuestra propia web y sacamos un <strong>35 sobre 100</strong>: el
-                    HTML que servía nuestro servidor tenía 237 caracteres de texto. Los rastreadores de
-                    IA no ejecutan JavaScript, así que veían una página en blanco. Lo arreglamos con el
-                    método que enseñamos y subimos a <strong>92</strong>. Todo lo que hicimos está en los
-                    módulos F1 a F5, y puedes comprobar la nota tú mismo con el auditor de arriba.
+                    Durante todo el tiempo que llevamos publicando, esta web fue invisible para las
+                    IAs: servía un HTML vacío, de 237 caracteres. Los rastreadores de IA no ejecutan
+                    JavaScript, así que nunca leyeron nada de lo que escribimos. Cuando por fin nos
+                    auditamos, sacamos un <strong>35 sobre 100</strong>. Lo arreglamos con el método
+                    que enseñamos y hoy estamos en <strong>92</strong>. Todo lo que hicimos está en
+                    los módulos F1 a F5, y puedes comprobar la nota tú mismo aquí arriba.
                   </p>
                 </div>
               </div>

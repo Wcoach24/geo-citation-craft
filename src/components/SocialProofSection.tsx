@@ -37,28 +37,30 @@ const SocialProofSection = () => {
 
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-4">
-            La prueba: nos auditamos y suspendimos
+            La prueba: nuestra web nació invisible
           </h2>
           <p className="text-center text-muted-foreground mb-8">
-            No tenemos testimonios de clientes que enseñarte todavía. Tenemos algo más incómodo y
-            más útil: el caso de nuestra propia web, con fecha y comprobable por ti.
+            No tenemos testimonios de clientes que enseñarte. Tenemos algo más incómodo y más útil:
+            nuestro propio fracaso, medido y comprobable por ti.
           </p>
 
           <Card className="border-none card-elevated bg-background">
             <CardContent className="p-6 md:p-8">
               <p className="text-muted-foreground leading-relaxed mb-6">
-                El <strong className="text-foreground">12 de julio de 2026</strong> pasamos nuestro
-                auditor por <strong className="text-foreground">esgeo.ai</strong>. Sacó un{" "}
-                <strong className="text-foreground">35 sobre 100</strong>. El HTML que servía nuestro
-                servidor tenía <strong className="text-foreground">237 caracteres</strong> de texto:
-                un contenedor vacío. La web que vende un curso sobre cómo ser citado por las IAs era
-                invisible para las IAs.
+                esgeo.ai estuvo <strong className="text-foreground">invisible para las IAs desde el
+                día en que se publicó</strong>. No fue un despiste puntual: la web está hecha con
+                React y, como cualquier SPA, servía un HTML vacío. Escribimos artículos, publicamos
+                un glosario, lanzamos un curso — y durante todo ese tiempo ningún modelo pudo leer
+                una sola palabra. El HTML que salía de nuestro servidor tenía{" "}
+                <strong className="text-foreground">237 caracteres</strong> de texto.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Aplicamos el método F1–F5 sobre nosotros mismos. Ese mismo día la nota subió a{" "}
-                <strong className="text-foreground">92 sobre 100</strong> y el texto legible pasó a{" "}
-                <strong className="text-foreground">8.705 caracteres</strong>. Eso es lo que enseña
-                el curso, y ese es el caso de estudio: el nuestro.
+                No lo supimos hasta que construimos el auditor y nos lo pasamos a nosotros mismos.
+                Sacamos un <strong className="text-foreground">35 sobre 100</strong>. La web que
+                vende un curso sobre cómo ser citado por las IAs era, para las IAs, una página en
+                blanco. Aplicamos el método F1–F5 sobre nuestro propio dominio y subimos a{" "}
+                <strong className="text-foreground">92</strong>, con 8.700 caracteres legibles. Ese
+                es el caso de estudio del curso: no uno inventado, el nuestro.
               </p>
 
               <dl className="grid grid-cols-3 gap-3 text-center mb-6">

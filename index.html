@@ -8,9 +8,8 @@
       son inyectados PÁGINA A PÁGINA por react-helmet (ver src/pages/**).
       No los pongas aquí: si los pones, Helmet añade un duplicado en runtime
       y Google ve dos meta description / canonicals → SEO penaliza.
-      El script scripts/prerender.js los inyecta correctamente en el HTML
-      estático tras hidratar React. Fallbacks por si una ruta llega sin
-      prerender: el <noscript> abajo y el contenido /llm.txt.
+      scripts/prerender.js renderiza cada ruta en Node y escribe el HTML con
+      el body completo. Fallback si una ruta llega sin prerender: el noscript.
     -->
 
     <meta name="author" content="esGEO" />
