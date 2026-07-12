@@ -1,56 +1,73 @@
-# Verification — Phase 1: Fix the Funnel
+# Verification — FASES 0, 1 y 2 · 2026-07-12
 
-**Date:** 2026-03-20
-**Build Status:** ✅ Compiles (0 TS errors, build in 3.18s)
-**Pass Rate:** 26/26 (100% after gap closure)
+Verificado contra **producción** (https://www.esgeo.ai) tras el merge de `fase-0-1-2-web-habla`
+(commit 739832b). Evidencia literal, no afirmaciones.
 
-## Results
+## Veredicto del auditor (HABLA)
 
-### PRICING
-- ✅ PRICE-01: Individual module purchase removed from PricingSection UI
-- ✅ PRICE-02: COMPLETE_COURSE.price = 47, displayed in CTA
-- ✅ PRICE-03: €197 tachado → €47 in inline checkout + PricingSection
-- ✅ PRICE-04: "14 días de garantía" visible in checkout section
+`curl "https://machineready.vercel.app/api/analyze?url=www.esgeo.ai"`
 
-### LANDING
-- ✅ LAND-01: Personalized hero with "Haz que ChatGPT, Gemini y Perplexity citen tu marca"
-- ✅ LAND-02: Trust bar with Bot icon + 4 AI model names
-- ✅ LAND-03: PAS section (Problema/Agitación/Solución)
-- ✅ LAND-04: Module cards with card-clay Claymorphism shadows
-- ✅ LAND-06: Social proof with verified metrics (Gemini referrals, GSC data)
-- ✅ LAND-07: FAQ Accordion + Schema.org FAQPage JSON-LD
-- ✅ LAND-08: Inline checkout (#comprar) with Stripe integration
+| | Antes (12/07 mañana) | Después |
+|---|---|---|
+| **Total** | **35 — MUDA** | **92 — BILINGÜE** |
+| gate A | ❌ FALLIDO | ✅ PASA |
+| H · Higiene | 85 | 100 |
+| A · Accesible | 15 | 100 |
+| B · Bloques | 45 | 100 |
+| L · Lenguaje | 21 | 78 |
+| X · eXtras | 0 | 75 |
+| texto en HTML inicial | 237 chars | 8705 chars |
+| shell vacío | true | false |
+| h1 / headings | 0 / 0 | 1 / 29 |
+| llms.txt | false | true |
+| bots IA en robots | 0 | 6 |
 
-### CHECKOUT
-- ✅ CHKT-01: CTA calls supabase.functions.invoke('create-checkout') directly
-- ✅ CHKT-02: /checkout redirects to /curso#comprar (Navigate with replace)
+El objetivo de la FASE 5 del plan (≥80) queda cubierto ya en la 0-2.
 
-### DESIGN
-- ✅ DSGN-01: Teal/Orange palette in :root CSS variables (HSL format for shadcn)
-- ✅ DSGN-02: Plus Jakarta Sans + Inter loaded via Google Fonts
-- ✅ DSGN-03: card-clay and shadow-clay tokens defined and used
-- ✅ DSGN-04: All icons Lucide React, zero emoji as UI icons
-- ✅ DSGN-06: Dead clicks audited — cursor-default on non-interactive elements
+## FASE 0 — DoD
 
-### PERSONALIZATION
-- ✅ PERS-01: useVisitorState hook with localStorage key esgeo_visitor
-- ✅ PERS-02: Hero headline changes based on new/returning/fromAI/customer state
+`curl -s -A GPTBot https://www.esgeo.ai<ruta>` → caracteres de texto (sin tags ni scripts):
 
-### EMAIL
-- ✅ EMAIL-01: EmailCapture component inline in /curso
-- ✅ EMAIL-02: ExitIntentPopup with mouseleave detection (desktop only)
-- ✅ EMAIL-04: Single email field, CTA "Envíame el checklist"
+| Ruta | Chars | h1 | Umbral 3000 |
+|---|---|---|---|
+| / | 8650 | 1 | ✅ |
+| /curso | 8633 | 1 | ✅ |
+| /metodologia | 5436 | 1 | ✅ |
+| /glosario | 5564 | 1 | ✅ |
+| /radar-ia/que-es-geo-guia-completa | 10164 | 1 | ✅ |
+| /radar-ia/como-hacer-que-chatgpt-cite-tu-web | 9790 | 1 | ✅ |
+| /radar-ia/optimizar-web-para-perplexity | 11025 | 1 | ✅ |
 
-### TRACKING
-- ✅ TRACK-01: Clarity events on cta_hero_click, cta_checkout_click, faq_interaction, email_capture
+28/28 rutas públicas prerenderizadas con body completo. `checks.shell: false`, `gateA: true`.
 
-## Gap Closure
-- Fix 1: Removed individual module card from PricingSection.tsx
-- Fix 2: Replaced hardcoded €50 with COMPLETE_COURSE.price in HeroSection.tsx
-- Re-built successfully after fixes
+**Regresión (SPA intacto)**: `/dashboard`, `/checkout` y una ruta inexistente → HTTP 200.
+Widget probado en navegador sobre el preview: `holded.com` → 86/BILINGÜE. Cero errores de consola.
 
-## Code Quality
-- ✅ No TODO/FIXME comments
-- ✅ Pricing uses modules.ts as single source of truth
-- ✅ Error handling in checkout and email capture
-- ✅ Accessibility: focus-visible rings, aria-labels on icon buttons
+## FASE 1 — DoD
+
+- `/llms.txt` → HTTP 200, `text/plain; charset=utf-8`, contenido real (no shell HTML).
+- `/llm.txt` → HTTP 308 → `/llms.txt`.
+- `robots.txt` → 9 líneas de bots de IA declarados; HABLA detecta 6 (GPTBot, ClaudeBot,
+  PerplexityBot, OAI-SearchBot, Google-Extended, CCBot).
+- Canonicals: 0 ocurrencias de `https://esgeo.es` o `https://esgeo.ai` en src/ y public/.
+
+## FASE 2 — DoD
+
+- `grep 'habla-widget'` → 1 en `/`, 1 en `/curso`, 1 en `/geo-score`.
+- `curl https://machineready.vercel.app/api/analyze?url=holded.com` → JSON, total 86.
+- **Pendiente (manual)**: `habla.esgeo.ai` → proyecto Vercel `machineready`. Requiere añadir el
+  dominio en el dashboard de Vercel y el CNAME en GoDaddy. El widget funciona ya contra
+  `machineready.vercel.app`; en cuanto el subdominio exista, basta con poner
+  `VITE_HABLA_API=https://habla.esgeo.ai` en Vercel — sin tocar código.
+
+## Gaps conocidos
+
+- **L = 78, no 100.** HABLA sigue emitiendo "tu primer bloque no responde qué/para quién/cuánto"
+  pese al bloque nuevo. Su heurística mira el primer bloque de texto del body, y ahí está el
+  header de navegación. Vale la pena mirar el checker de HABLA antes de tocar más la home:
+  puede que el falso negativo esté en el auditor, no en la web.
+- **X = 75.** Faltan señales de citación externas. Es trabajo de FASE 5, no de código.
+- `/radar-ia/geo-vs-seo-diferencias` (2828 chars) y `/radar-ia` (1842) están por debajo de 3000.
+  No son rutas del DoD, pero son contenido fino. Candidatas a la FASE 4.
+- `src/integrations/supabase/client.ts` lleva la marca "automatically generated" de Lovable. Si
+  Lovable lo regenera, se pierde el guard de `localStorage` y **el build SSR se cae**.
