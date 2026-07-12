@@ -92,7 +92,7 @@ export const COMPLETE_COURSE = {
   // (prefijo LVUGCJuFgU, no LYFGrlrWdk). Código muerto y peligroso: la fuente de
   // verdad es api/checkout.ts, que es donde se crea la sesión de pago.
   features: [
-    '5 módulos (F1 a F5) en PDF, tuyos para siempre',
+    '5 módulos (F1 a F5) en PDF — 142 páginas, verificadas',
     'El método aplicado paso a paso, con checklists',
     'El caso real de esgeo.ai: de 35 a 92 sobre 100',
     'Actualizaciones incluidas',
