@@ -14,7 +14,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
       <Helmet>
         <title>Cómo hacer que ChatGPT cite tu web | Guía de GEO | esGEO</title>
         <meta name="description" content="Técnicas prácticas para estructurar contenido que ChatGPT reconozca, entienda y cite como fuente. Datos estructurados, fragmentación y autoridad generativa." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web" />
 
         <meta name="citation_title" content="Cómo hacer que ChatGPT cite tu web" />
         <meta name="citation_author" content="esGEO" />
@@ -29,18 +29,18 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
             "@type": ["Article", "WebPage"],
             "headline": "Cómo hacer que ChatGPT cite tu web",
             "description": "Técnicas prácticas para estructurar contenido que ChatGPT reconozca y cite",
-            "url": "https://esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web",
+            "url": "https://www.esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web",
             "datePublished": "2026-03-20",
             "dateModified": "2026-03-20",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -49,19 +49,19 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Cómo hacer que ChatGPT cite tu web",
-                  "item": "https://esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web"
+                  "item": "https://www.esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web"
                 }
               ]
             }

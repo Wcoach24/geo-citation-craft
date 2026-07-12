@@ -63,6 +63,120 @@ const GlosarioPage = () => {
       term: "Estructura Semántica",
       definition: "Organización del contenido usando HTML semántico, datos estructurados y jerarquías claras para facilitar la comprensión por IA.",
       category: "Técnico"
+    },
+    {
+      id: "renderizado-cliente",
+      term: "Renderizado en cliente (CSR)",
+      definition: "Técnica en la que el navegador construye la página ejecutando JavaScript. Es el patrón por defecto de React, Vue o Angular sin SSR. Importa porque los rastreadores de IA no ejecutan JavaScript: si el HTML que sirve tu servidor solo contiene un contenedor vacío, para ellos la página está en blanco, por muy completa que se vea en el navegador.",
+      category: "Técnico"
+    },
+    {
+      id: "ssr-prerender",
+      term: "SSR / Prerenderizado",
+      definition: "Generar el HTML de la página en el servidor (o durante el build) para que llegue ya con el contenido dentro. Es el requisito de entrada de cualquier estrategia GEO sobre una web hecha con JavaScript: sin HTML, no hay texto que citar.",
+      category: "Técnico"
+    },
+    {
+      id: "gptbot",
+      term: "GPTBot",
+      definition: "Rastreador de OpenAI que recopila contenido web público para el entrenamiento de sus modelos. Se controla desde robots.txt con el user-agent GPTBot. Bloquearlo no afecta a que ChatGPT te cite en búsqueda: de eso se encarga OAI-SearchBot.",
+      category: "Bots"
+    },
+    {
+      id: "oai-searchbot",
+      term: "OAI-SearchBot",
+      definition: "Rastreador de OpenAI que alimenta el índice de búsqueda de ChatGPT. Es el que determina si tu web puede aparecer como fuente citada en una respuesta con búsqueda activada. Distinto de GPTBot (entrenamiento) y de ChatGPT-User (visita puntual).",
+      category: "Bots"
+    },
+    {
+      id: "chatgpt-user",
+      term: "ChatGPT-User",
+      definition: "User-agent con el que ChatGPT descarga una URL concreta a petición de un usuario en tiempo real. No rastrea el sitio entero: visita la página pedida. Si lo bloqueas, un usuario no puede pedirle a ChatGPT que lea tu página.",
+      category: "Bots"
+    },
+    {
+      id: "claudebot",
+      term: "ClaudeBot",
+      definition: "Rastreador de Anthropic para Claude. Se declara en robots.txt con el user-agent ClaudeBot.",
+      category: "Bots"
+    },
+    {
+      id: "perplexitybot",
+      term: "PerplexityBot",
+      definition: "Rastreador de Perplexity, que indexa páginas para poder citarlas en sus respuestas. Perplexity-User es su equivalente para visitas puntuales lanzadas por un usuario.",
+      category: "Bots"
+    },
+    {
+      id: "google-extended",
+      term: "Google-Extended",
+      definition: "Token de robots.txt con el que un sitio decide si Google puede usar su contenido para mejorar Gemini y las APIs generativas de Vertex AI. No es un rastreador independiente y no afecta al posicionamiento en la Búsqueda de Google.",
+      category: "Bots"
+    },
+    {
+      id: "ccbot",
+      term: "CCBot",
+      definition: "Rastreador de Common Crawl, el corpus abierto que ha alimentado el preentrenamiento de buena parte de los modelos de lenguaje. Bloquearlo te saca de un dataset usado por muchos actores, no solo por uno.",
+      category: "Bots"
+    },
+    {
+      id: "llms-txt",
+      term: "llms.txt",
+      definition: "Fichero markdown propuesto en 2024 para colocar en la raíz del dominio con una descripción del sitio y enlaces curados, pensado para orientar a los modelos de lenguaje. Es una propuesta de la comunidad, no un estándar: ningún gran proveedor ha confirmado públicamente que lo consuma. Cuesta diez minutos y no hace daño; no esperes magia.",
+      category: "Técnico"
+    },
+    {
+      id: "robots-txt",
+      term: "robots.txt",
+      definition: "Fichero en la raíz del dominio que declara qué rastreadores pueden acceder a qué rutas. Es voluntario, pero los bots de las grandes plataformas de IA lo respetan y lo documentan. En GEO se usa al revés que en SEO defensivo: el objetivo es dar permiso explícito, no restringir.",
+      category: "Técnico"
+    },
+    {
+      id: "rag",
+      term: "RAG (Retrieval-Augmented Generation)",
+      definition: "Arquitectura en la que el modelo, antes de responder, recupera fragmentos de documentos externos y los usa como contexto. Es el mecanismo detrás de las respuestas con fuentes: la cita que buscas se decide en la fase de recuperación, no en la de generación.",
+      category: "Técnico"
+    },
+    {
+      id: "chunking",
+      term: "Chunking (fragmentación)",
+      definition: "División de un documento en fragmentos que el sistema de recuperación indexa por separado. Explica por qué un bloque autocontenido —que responde entero a una pregunta sin depender del párrafo anterior— se cita mucho más que un texto que exige leerlo todo.",
+      category: "Redacción"
+    },
+    {
+      id: "embedding",
+      term: "Embedding",
+      definition: "Representación numérica de un texto que captura su significado. Dos textos con embeddings próximos se consideran semánticamente parecidos. Es lo que permite que te recuperen por una pregunta que no contiene tus palabras exactas.",
+      category: "Técnico"
+    },
+    {
+      id: "ai-overviews",
+      term: "AI Overviews",
+      definition: "Resúmenes generados por IA que Google muestra encima de los resultados clásicos, con enlaces a las fuentes usadas. Aparecer en ellos depende de estar indexado en la Búsqueda y de tener bloques extraíbles, no de un canal aparte.",
+      category: "Estratégico"
+    },
+    {
+      id: "datos-estructurados",
+      term: "Datos estructurados (schema.org)",
+      definition: "Marcado JSON-LD que declara de forma explícita qué es cada cosa de la página: artículo, curso, FAQ, organización, autor. Le ahorra al modelo tener que inferirlo y reduce el riesgo de que te describa mal.",
+      category: "Técnico"
+    },
+    {
+      id: "answerability",
+      term: "Answerability",
+      definition: "Grado en que un contenido responde de forma directa y autocontenida a la pregunta que lo motiva. Un primer párrafo que dice qué es, para quién y cuánto cuesta es citable; una introducción de marca que tarda tres párrafos en llegar al grano, no.",
+      category: "Redacción"
+    },
+    {
+      id: "share-of-citations",
+      term: "Share of Citations (SoC)",
+      definition: "Porcentaje de respuestas de IA sobre un tema en las que aparece tu marca como fuente, frente al total de fuentes citadas. Es la métrica de cuota de mercado del GEO: sustituye a la posición media del SEO clásico.",
+      category: "Estratégico"
+    },
+    {
+      id: "alucinacion",
+      term: "Alucinación",
+      definition: "Afirmación que el modelo presenta como cierta sin respaldo en sus fuentes. En GEO importa por un motivo práctico: si tu web no es legible por máquinas, el modelo hablará de ti igualmente, pero improvisando.",
+      category: "Fundamental"
     }
   ];
 
@@ -71,7 +185,7 @@ const GlosarioPage = () => {
       <Helmet>
         <title>Glosario GEO | Términos y Definiciones | esGEO</title>
         <meta name="description" content="Glosario completo de términos de Generative Engine Optimization (GEO). Definiciones autoritativas para optimización de contenido para IA generativa." />
-        <link rel="canonical" href="https://esgeo.es/glosario" />
+        <link rel="canonical" href="https://www.esgeo.ai/glosario" />
         
         <meta name="citation_title" content="Glosario de Generative Engine Optimization (GEO)" />
         <meta name="citation_author" content="esGEO" />
@@ -87,27 +201,27 @@ const GlosarioPage = () => {
             "@type": ["DefinedTermSet", "WebPage"],
             "name": "Glosario de Generative Engine Optimization (GEO)",
             "description": "Conjunto completo de definiciones autoritativas sobre GEO y optimización para modelos de lenguaje generativo",
-            "url": "https://esgeo.es/glosario",
+            "url": "https://www.esgeo.ai/glosario",
             "datePublished": "2024-06-10",
             "dateModified": "2024-06-10",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
             "inLanguage": "es-ES",
             "hasDefinedTerm": glosarioTerms.map(term => ({
               "@type": "DefinedTerm",
-              "@id": `https://esgeo.es/glosario#${term.id}`,
+              "@id": `https://www.esgeo.ai/glosario#${term.id}`,
               "name": term.term,
               "description": term.definition,
               "termCode": term.id,
-              "inDefinedTermSet": "https://esgeo.es/glosario"
+              "inDefinedTermSet": "https://www.esgeo.ai/glosario"
             })),
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -116,13 +230,13 @@ const GlosarioPage = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Glosario GEO",
-                  "item": "https://esgeo.es/glosario"
+                  "item": "https://www.esgeo.ai/glosario"
                 }
               ]
             },

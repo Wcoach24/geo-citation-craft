@@ -1,6 +1,6 @@
 
 TÍTULO: Curso Completo de GEO - Framework F1-F6
-URL: https://esgeo.ai/curso
+URL: https://www.esgeo.ai/curso
 FECHA: 2025-06-12
 AUTOR: esGEO team
 IDIOMA: Español
@@ -156,12 +156,12 @@ RUTAS DE APRENDIZAJE:
 • Especialista: F6 → Optimización continua
 
 RECURSOS DEL CURSO:
-- Módulo F1: https://esgeo.ai/curso/f1
-- Módulo F2: https://esgeo.ai/curso/f2
-- Módulo F3: https://esgeo.ai/curso/f3
-- Módulo F4: https://esgeo.ai/curso/f4
-- Módulo F5: https://esgeo.ai/curso/f5
-- Módulo F6: https://esgeo.ai/curso/f6
+- Módulo F1: https://www.esgeo.ai/curso/f1
+- Módulo F2: https://www.esgeo.ai/curso/f2
+- Módulo F3: https://www.esgeo.ai/curso/f3
+- Módulo F4: https://www.esgeo.ai/curso/f4
+- Módulo F5: https://www.esgeo.ai/curso/f5
+- Módulo F6: https://www.esgeo.ai/curso/f6
 
 CASOS DE ESTUDIO:
 Implementaciones exitosas del framework F1-F6 en diferentes sectores, con métricas de citabilidad antes y después de aplicar la metodología GEO.

@@ -14,6 +14,7 @@ import LimitationsSection from "@/components/LimitationsSection";
 
 import CtaSection from "@/components/CtaSection";
 import TableOfContents from "@/components/TableOfContents";
+import HablaWidget from "@/components/HablaWidget";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 // FAQs refrescadas mayo 2026 — pensadas para queries con impresiones en GSC
@@ -62,7 +63,7 @@ const Index = () => {
   const { helmet, structuredData } = useGeoMetadata({
     title: "Curso GEO 2026: Aprende Generative Engine Optimization en Español | esGEO",
     description: "Aprende GEO (Generative Engine Optimization) con el primer curso 2026 en español. Metodología F1-F5 para que ChatGPT, Perplexity y Claude citen tu web. Desde €47.",
-    canonicalUrl: "https://esgeo.ai/",
+    canonicalUrl: "https://www.esgeo.ai/",
     keywords: ["curso GEO 2026", "Generative Engine Optimization", "qué es GEO", "GEO vs SEO 2026", "optimización IA", "ChatGPT", "Perplexity", "Claude", "curso geo ia"],
     citationTitle: "esGEO - Metodología de Optimización para IA Generativa",
     speakableSelectors: [".snippet-block", "[data-speakable='true']", ".geo-card"],
@@ -95,6 +96,13 @@ const Index = () => {
 
         <main role="main">
           <HeroSection />
+
+          {/* HABLA — el auditor propio como lead magnet, justo bajo el hero. */}
+          <section className="py-12 bg-muted/30 border-y border-border">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <HablaWidget />
+            </div>
+          </section>
 
           {/* Bloque actualización mayo 2026 */}
           <section className="py-8 bg-accent/5 border-y border-border" data-speakable="true">

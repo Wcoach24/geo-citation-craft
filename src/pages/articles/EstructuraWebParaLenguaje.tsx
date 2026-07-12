@@ -4,10 +4,13 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCanonicalHref } from "@/lib/canonical";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
 
 const EstructuraWebParaLenguaje = () => {
+  const canonicalHref = useCanonicalHref();
+
   return (
     <>
       <Helmet>
@@ -30,7 +33,7 @@ const EstructuraWebParaLenguaje = () => {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": window.location.href
+              "@id": canonicalHref
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",

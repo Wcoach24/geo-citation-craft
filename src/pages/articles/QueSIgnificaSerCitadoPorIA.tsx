@@ -12,7 +12,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
       <Helmet>
         <title>¿Qué significa ser citado por una IA? | Radar IA - esGEO</title>
         <meta name="description" content="Entendiendo la citabilidad en modelos de lenguaje generativo y cómo optimizar tu contenido para ser citado por IA." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia" />
         
         <meta name="citation_title" content="¿Qué significa ser citado por una IA?" />
         <meta name="citation_author" content="esGEO" />
@@ -27,23 +27,23 @@ const QueSIgnificaSerCitadoPorIA = () => {
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "¿Qué significa ser citado por una IA?",
             "description": "Entendiendo la citabilidad en modelos de lenguaje generativo",
-            "url": "https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia",
+            "url": "https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia",
             "datePublished": "2025-01-15",
             "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.ai/images/radar-ia/que-significa-ser-citado-por-ia.png",
+            "image": "https://www.esgeo.ai/images/radar-ia/que-significa-ser-citado-por-ia.png",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia"
+              "@id": "https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia"
             },
             "mainEntity": [
               {
@@ -86,19 +86,19 @@ const QueSIgnificaSerCitadoPorIA = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "¿Qué significa ser citado por una IA?",
-                  "item": "https://esgeo.ai/radar-ia/que-significa-ser-citado-por-ia"
+                  "item": "https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia"
                 }
               ]
             },

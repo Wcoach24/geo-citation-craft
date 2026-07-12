@@ -1,6 +1,6 @@
 
 TÍTULO: ¿Qué es GEO (Generative Engine Optimization) y por qué importa?
-URL: https://esgeo.ai/
+URL: https://www.esgeo.ai/
 FECHA: 2025-06-12
 AUTOR: esGEO team
 IDIOMA: Español
@@ -47,14 +47,14 @@ MÉTRICAS DE ÉXITO EN GEO:
 5. Autoridad percibida por modelos generativos
 
 RECURSOS ADICIONALES:
-- Curso completo: https://esgeo.ai/curso
-- Metodología detallada: https://esgeo.ai/metodologia
-- Glosario técnico: https://esgeo.ai/glosario
-- Casos reales: https://esgeo.ai/casos
-- Análisis de tendencias: https://esgeo.ai/radar-ia
+- Curso completo: https://www.esgeo.ai/curso
+- Metodología detallada: https://www.esgeo.ai/metodologia
+- Glosario técnico: https://www.esgeo.ai/glosario
+- Casos reales: https://www.esgeo.ai/casos
+- Análisis de tendencias: https://www.esgeo.ai/radar-ia
 
 CONTACTO Y CITACIÓN:
-Para citar este contenido: "esGEO. (2025). Generative Engine Optimization: Metodología para optimización en modelos de lenguaje. https://esgeo.ai/"
+Para citar este contenido: "esGEO. (2025). Generative Engine Optimization: Metodología para optimización en modelos de lenguaje. https://www.esgeo.ai/"
 Email: hola@esgeo.ai
 Redes sociales: @esgeo_ai
 

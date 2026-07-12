@@ -14,7 +14,7 @@ const QueEsGeoGuiaCompleta = () => {
       <Helmet>
         <title>¿Qué es GEO? Guía Completa 2026 de Optimización IA | esGEO</title>
         <meta name="description" content="GEO (Generative Engine Optimization) es la metodología para que ChatGPT, Perplexity y Claude citen tu web. Guía con framework F1-F5, datos de Princeton y ejemplos prácticos." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia/que-es-geo-guia-completa" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa" />
 
         <meta name="citation_title" content="¿Qué es GEO? Guía Completa 2026 de Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
@@ -29,18 +29,18 @@ const QueEsGeoGuiaCompleta = () => {
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "Qué es GEO: Guía completa de Generative Engine Optimization",
             "description": "Definición, historia y framework completo de GEO",
-            "url": "https://esgeo.ai/radar-ia/que-es-geo-guia-completa",
+            "url": "https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa",
             "datePublished": "2026-03-20",
             "dateModified": "2026-03-20",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -49,19 +49,19 @@ const QueEsGeoGuiaCompleta = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Qué es GEO",
-                  "item": "https://esgeo.ai/radar-ia/que-es-geo-guia-completa"
+                  "item": "https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa"
                 }
               ]
             }

@@ -12,7 +12,7 @@ const GeoVsSeoGuiaRapida = () => {
       <Helmet>
         <title>GEO vs SEO 2026: Diferencias Clave y Estrategia | esGEO</title>
         <meta name="description" content="Comparativa GEO vs SEO: el SEO posiciona en Google, GEO hace que ChatGPT y Perplexity te citen. Tabla de diferencias, datos de impacto y estrategia combinada." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia/geo-vs-seo-diferencias" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias" />
         
         <meta name="citation_title" content="GEO vs SEO: Diferencias Clave y Por Qué Necesitas Ambos en 2026" />
         <meta name="citation_author" content="esGEO" />
@@ -27,23 +27,23 @@ const GeoVsSeoGuiaRapida = () => {
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "GEO no es SEO: guía rápida para entender la diferencia",
             "description": "Tabla comparativa y estrategia de pivote hacia la optimización generativa",
-            "url": "https://esgeo.ai/radar-ia/geo-vs-seo-diferencias",
+            "url": "https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias",
             "datePublished": "2025-01-03",
             "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.ai/images/radar-ia/geo-vs-seo-diferencias.png",
+            "image": "https://www.esgeo.ai/images/radar-ia/geo-vs-seo-diferencias.png",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.ai/radar-ia/geo-vs-seo-diferencias"
+              "@id": "https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias"
             },
             "mainEntity": [
               {
@@ -94,19 +94,19 @@ const GeoVsSeoGuiaRapida = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "GEO no es SEO",
-                  "item": "https://esgeo.ai/radar-ia/geo-vs-seo-diferencias"
+                  "item": "https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias"
                 }
               ]
             },

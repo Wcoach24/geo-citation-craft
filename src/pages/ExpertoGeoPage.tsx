@@ -87,11 +87,11 @@ const ExpertoGeoPage = () => {
     "@type": "Article",
     "headline": "Experto GEO 2026: qué hace y cómo contratar a un especialista",
     "description": "Qué hace un experto GEO, en qué se diferencia de un consultor SEO, qué pedir en una propuesta, cuánto cobra y cómo evaluar a un consultor en posicionamiento para IA generativa en España y LATAM.",
-    "author": { "@type": "Organization", "name": "esGEO", "@id": "https://esgeo.ai#organization" },
-    "publisher": { "@type": "Organization", "name": "esGEO", "@id": "https://esgeo.ai#organization", "logo": { "@type": "ImageObject", "url": "https://esgeo.ai/og-image.png" } },
+    "author": { "@type": "Organization", "name": "esGEO", "@id": "https://www.esgeo.ai#organization" },
+    "publisher": { "@type": "Organization", "name": "esGEO", "@id": "https://www.esgeo.ai#organization", "logo": { "@type": "ImageObject", "url": "https://www.esgeo.ai/og-image.png" } },
     "datePublished": "2026-06-17",
     "dateModified": "2026-06-17",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://esgeo.ai/experto-geo" }
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.esgeo.ai/experto-geo" }
   };
 
   const serviceSchema = {
@@ -100,7 +100,7 @@ const ExpertoGeoPage = () => {
     "serviceType": "GEO Consulting",
     "name": "Consultoría experto GEO",
     "description": "Auditoría, contenido citable, arquitectura para LLMs y tracking de citaciones en ChatGPT, Perplexity, Claude y Gemini.",
-    "provider": { "@type": "Organization", "@id": "https://esgeo.ai#organization", "name": "esGEO", "url": "https://esgeo.ai" },
+    "provider": { "@type": "Organization", "@id": "https://www.esgeo.ai#organization", "name": "esGEO", "url": "https://www.esgeo.ai" },
     "areaServed": [
       { "@type": "Country", "name": "España" },
       { "@type": "Country", "name": "México" },
@@ -126,7 +126,7 @@ const ExpertoGeoPage = () => {
       <Helmet>
         <title>Experto GEO 2026: qué hace y cómo contratar | esGEO</title>
         <meta name="description" content="Qué hace un experto GEO, en qué se diferencia del SEO, cuánto cobra en España 2026 y 7 señales para distinguir un consultor real. Sin promesas infalsificables." />
-        <link rel="canonical" href="https://esgeo.ai/experto-geo" />
+        <link rel="canonical" href="https://www.esgeo.ai/experto-geo" />
 
         <meta name="citation_title" content="Experto GEO 2026: qué hace y cómo contratar a un especialista" />
         <meta name="citation_author" content="esGEO" />
@@ -139,15 +139,15 @@ const ExpertoGeoPage = () => {
         <meta property="og:title" content="Experto GEO 2026: qué hace y cómo contratar | esGEO" />
         <meta property="og:description" content="Qué hace un experto GEO, en qué se diferencia del SEO y 7 señales para distinguir un consultor real. España y LATAM 2026." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://esgeo.ai/experto-geo" />
-        <meta property="og:image" content="https://esgeo.ai/og-image.png" />
+        <meta property="og:url" content="https://www.esgeo.ai/experto-geo" />
+        <meta property="og:image" content="https://www.esgeo.ai/og-image.png" />
         <meta property="og:locale" content="es_ES" />
         <meta property="og:site_name" content="esGEO" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Experto GEO 2026: qué hace y cómo contratar" />
         <meta name="twitter:description" content="Qué hace un experto GEO, en qué se diferencia del SEO y 7 señales para distinguir un consultor real." />
-        <meta name="twitter:image" content="https://esgeo.ai/og-image.png" />
+        <meta name="twitter:image" content="https://www.esgeo.ai/og-image.png" />
 
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>

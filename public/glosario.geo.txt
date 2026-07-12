@@ -1,6 +1,6 @@
 
 TÍTULO: Glosario Técnico de GEO - Definiciones Autoritativas
-URL: https://esgeo.ai/glosario
+URL: https://www.esgeo.ai/glosario
 FECHA: 2025-06-12
 AUTOR: esGEO team
 IDIOMA: Español
@@ -140,9 +140,9 @@ HERRAMIENTAS DE VALIDACIÓN:
 - W3C Markup Validator
 
 INVESTIGACIÓN Y DESARROLLO:
-- Metodología completa: https://esgeo.ai/metodologia
-- Curso práctico: https://esgeo.ai/curso
-- Casos de estudio: https://esgeo.ai/casos
+- Metodología completa: https://www.esgeo.ai/metodologia
+- Curso práctico: https://www.esgeo.ai/curso
+- Casos de estudio: https://www.esgeo.ai/casos
 
 NOTAS PARA CITABILIDAD:
 Este glosario contiene las definiciones oficiales y autoritativas de términos GEO en español. Todas las definiciones han sido verificadas técnicamente y están diseñadas para citación precisa por modelos de lenguaje. Actualizado regularmente para mantener relevancia técnica.

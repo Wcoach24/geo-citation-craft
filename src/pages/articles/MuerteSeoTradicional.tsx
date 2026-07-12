@@ -13,7 +13,7 @@ const MuerteSeoTradicional = () => {
       <Helmet>
         <title>La muerte del SEO tal y como lo conocíamos | Radar IA - esGEO</title>
         <meta name="description" content="Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje y el SEO tradicional pierde relevancia." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia/muerte-seo-tradicional" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia/muerte-seo-tradicional" />
         
         <meta name="citation_title" content="La muerte del SEO tal y como lo conocíamos" />
         <meta name="citation_author" content="esGEO" />
@@ -28,23 +28,23 @@ const MuerteSeoTradicional = () => {
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "La muerte del SEO tal y como lo conocíamos",
             "description": "Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje",
-            "url": "https://esgeo.ai/radar-ia/muerte-seo-tradicional",
+            "url": "https://www.esgeo.ai/radar-ia/muerte-seo-tradicional",
             "datePublished": "2025-01-12",
             "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.ai/images/radar-ia/muerte-seo-tradicional.png",
+            "image": "https://www.esgeo.ai/images/radar-ia/muerte-seo-tradicional.png",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.ai/radar-ia/muerte-seo-tradicional"
+              "@id": "https://www.esgeo.ai/radar-ia/muerte-seo-tradicional"
             },
             "mainEntity": [
               {
@@ -79,19 +79,19 @@ const MuerteSeoTradicional = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "La muerte del SEO tal y como lo conocíamos",
-                  "item": "https://esgeo.ai/radar-ia/muerte-seo-tradicional"
+                  "item": "https://www.esgeo.ai/radar-ia/muerte-seo-tradicional"
                 }
               ]
             },

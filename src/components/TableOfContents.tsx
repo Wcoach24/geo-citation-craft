@@ -1,4 +1,5 @@
 
+import { useCanonicalHref } from "@/lib/canonical";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { List, ChevronRight } from "lucide-react";
@@ -14,6 +15,7 @@ interface TableOfContentsProps {
 }
 
 const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
+  const canonicalHref = useCanonicalHref();
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
 
@@ -106,7 +108,7 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
             "item": {
               "@type": "WebPageElement",
               "name": item.title,
-              "url": `${window.location.href}#${item.id}`
+              "url": `${canonicalHref}#${item.id}`
             }
           }))
         })}

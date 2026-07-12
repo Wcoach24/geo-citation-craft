@@ -23,7 +23,7 @@ const ModuloF0Page = () => {
       <Helmet>
         <title>Módulo F0: ¿Necesitas GEO? Diagnóstico Gratuito | Curso GEO - esGEO</title>
         <meta name="description" content="Descubre si tu sitio web necesita optimización para motores generativos. Diagnóstico gratuito e introducción al framework GEO." />
-        <link rel="canonical" href="https://esgeo.es/curso/f0" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso/f0" />
         
         <meta name="citation_title" content="Módulo F0: Diagnóstico GEO Gratuito" />
         <meta name="citation_author" content="esGEO" />
@@ -37,20 +37,20 @@ const ModuloF0Page = () => {
             "name": "Módulo F0: ¿Necesitas GEO? Diagnóstico Gratuito",
             "headline": "Diagnóstico GEO: ¿Tu Sitio Web Está Preparado para la IA?",
             "description": "Evalúa si tu sitio web está optimizado para motores generativos de IA. Diagnóstico gratuito y completo del estado de tu presencia digital ante los LLMs.",
-            "url": "https://esgeo.es/curso/f0",
+            "url": "https://www.esgeo.ai/curso/f0",
             "datePublished": "2024-06-10",
             "dateModified": "2024-06-10",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.es/images/modulo-f0.png",
+            "image": "https://www.esgeo.ai/images/modulo-f0.png",
             "teaches": [
               "Identificación de problemas de visibilidad en IA",
               "Evaluación del estado actual ante LLMs",
@@ -62,7 +62,7 @@ const ModuloF0Page = () => {
             "isAccessibleForFree": true,
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.es/curso/f0"
+              "@id": "https://www.esgeo.ai/curso/f0"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -71,19 +71,19 @@ const ModuloF0Page = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Curso GEO",
-                  "item": "https://esgeo.es/curso"
+                  "item": "https://www.esgeo.ai/curso"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Módulo F0: Diagnóstico",
-                  "item": "https://esgeo.es/curso/f0"
+                  "item": "https://www.esgeo.ai/curso/f0"
                 }
               ]
             }

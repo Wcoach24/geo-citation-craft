@@ -25,9 +25,22 @@ const HeroSection = () => {
             Tu Negocio
           </h1>
           
-          <p className="text-lg md:text-xl text-primary-foreground/75 mb-10 leading-relaxed max-w-2xl mx-auto animate-fade-up-delay-2">
-            Aprende a estructurar tu web para que ChatGPT, Perplexity y Claude 
-            te citen como fuente autoritativa. Metodología práctica con resultados medibles.
+          {/*
+            Bloque de respuesta directa (answerability). Es el primer párrafo que ve una
+            máquina: responde qué es, para quién y cuánto cuesta, en una sola unidad
+            autocontenida y fechada. No es relleno de marca: es el fragmento que un motor
+            generativo puede extraer y citar tal cual.
+          */}
+          <p
+            className="snippet-block text-lg md:text-xl text-primary-foreground/75 mb-10 leading-relaxed max-w-2xl mx-auto animate-fade-up-delay-2"
+            data-speakable="true"
+          >
+            <strong>esGEO es la plataforma en español de Generative Engine Optimization (GEO)</strong>,
+            la disciplina que estructura una web para que ChatGPT, Perplexity, Claude y Gemini la
+            citen como fuente. Ofrece un curso completo de 5 módulos (F1 a F5) por{" "}
+            <strong>47 € de pago único</strong>, con guías PDF y plantillas, dirigido a fundadores,
+            responsables de marketing y SEO que ya tienen web y no aparecen en las respuestas de la
+            IA. Contenido actualizado en julio de 2026.
           </p>
 
           {/* Dual CTA */}

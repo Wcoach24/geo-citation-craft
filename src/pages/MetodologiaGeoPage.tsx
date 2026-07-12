@@ -97,7 +97,7 @@ const MetodologiaGeoPage = () => {
       <Helmet>
         <title>Método GEO 2026: Framework F1-F5 paso a paso | esGEO</title>
         <meta name="description" content="Aprende el método GEO con el framework F1-F5: la metodología 2026 para que ChatGPT, Claude y Perplexity citen tu web como fuente fiable." />
-        <link rel="canonical" href="https://esgeo.ai/metodologia" />
+        <link rel="canonical" href="https://www.esgeo.ai/metodologia" />
         
         {/* Speakable / Citation meta */}
         <meta name="citation_title" content="Método GEO: Framework y Metodología de Generative Engine Optimization" />
@@ -630,7 +630,7 @@ const MetodologiaGeoPage = () => {
         "@type": "WebPage",
         "name": "Metodología GEO | Framework F1-F5",
         "description": "Metodología completa GEO (Generative Engine Optimization) - Aprende a optimizar tu web para ser citado por IA con nuestro Framework F1-F5.",
-        "url": "https://esgeo.ai/metodologia",
+        "url": "https://www.esgeo.ai/metodologia",
         "speakable": {
           "@type": "SpeakableSpecification",
           "cssSelector": [".snippet-block", "[data-speakable='true']"]
@@ -642,8 +642,8 @@ const MetodologiaGeoPage = () => {
           "provider": {
             "@type": "EducationalOrganization",
             "name": "esGEO Academy",
-            "url": "https://esgeo.ai",
-            "@id": "https://esgeo.ai#organization"
+            "url": "https://www.esgeo.ai",
+            "@id": "https://www.esgeo.ai#organization"
           },
           "courseCode": "GEO-F1-F5",
           "coursePrerequisites": "Conocimientos básicos de marketing digital",
@@ -655,7 +655,7 @@ const MetodologiaGeoPage = () => {
             "price": "0",
             "priceCurrency": "EUR", 
             "availability": "https://schema.org/InStock",
-            "url": "https://esgeo.ai/metodologia"
+            "url": "https://www.esgeo.ai/metodologia"
           },
           "hasCourseInstance": {
             "@type": "CourseInstance",
@@ -663,11 +663,11 @@ const MetodologiaGeoPage = () => {
             "startDate": "2024-01-01",
             "location": {
               "@type": "VirtualLocation",
-              "url": "https://esgeo.ai/metodologia"
+              "url": "https://www.esgeo.ai/metodologia"
             },
             "instructor": {
               "@type": "Organization",
-              "@id": "https://esgeo.ai#organization"
+              "@id": "https://www.esgeo.ai#organization"
             }
           }
         },
@@ -677,12 +677,12 @@ const MetodologiaGeoPage = () => {
             "@type": "ListItem",
             "position": 1,
             "name": "Inicio",
-            "item": "https://esgeo.ai/"
+            "item": "https://www.esgeo.ai/"
           }, {
             "@type": "ListItem",
             "position": 2,
             "name": "Metodología GEO",
-            "item": "https://esgeo.ai/metodologia"
+            "item": "https://www.esgeo.ai/metodologia"
           }]
         }
       })
@@ -747,10 +747,10 @@ const MetodologiaGeoPage = () => {
           "@type": "HowToStep",
           "name": `${module.id}: ${module.title}`,
           "text": module.description,
-          "url": `https://esgeo.ai/metodologia#modulo-${module.id.toLowerCase()}`,
+          "url": `https://www.esgeo.ai/metodologia#modulo-${module.id.toLowerCase()}`,
           "image": {
             "@type": "ImageObject",
-            "url": `https://esgeo.ai/images/modulo-${module.id.toLowerCase()}.png`
+            "url": `https://www.esgeo.ai/images/modulo-${module.id.toLowerCase()}.png`
           },
           "itemListElement": module.topics.map(topic => ({
             "@type": "HowToDirection",

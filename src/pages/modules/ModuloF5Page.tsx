@@ -24,7 +24,7 @@ const ModuloF5Page = () => {
       <Helmet>
         <title>Módulo F5: Mantenimiento Evolutivo | Curso GEO - esGEO</title>
         <meta name="description" content="Diseña un sistema recurrente de revisión, actualización y expansión de contenido adaptado a la evolución constante de los LLMs. Mantén tu visibilidad generativa." />
-        <link rel="canonical" href="https://esgeo.es/curso/f5" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso/f5" />
         
         <meta name="citation_title" content="Módulo F5: Mantenimiento Evolutivo" />
         <meta name="citation_author" content="esGEO" />
@@ -38,7 +38,7 @@ const ModuloF5Page = () => {
             "name": "Módulo F5: Mantenimiento Evolutivo",
             "headline": "Módulo F5: Mantenimiento Evolutivo",
             "description": "Diseña un sistema recurrente de revisión, actualización y expansión del contenido, adaptado al ritmo de evolución de los LLMs y de sus métodos de búsqueda y generación. Evita la obsolescencia de tus activos digitales y mejora su valor generativo con el tiempo.",
-            "url": "https://esgeo.es/curso/f5",
+            "url": "https://www.esgeo.ai/curso/f5",
             "datePublished": "2024-06-12",
             "author": {
               "@type": "Organization",
@@ -47,9 +47,9 @@ const ModuloF5Page = () => {
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.es/images/modulo-f5.png",
+            "image": "https://www.esgeo.ai/images/modulo-f5.png",
             "teaches": [
               "Principios clave del mantenimiento evolutivo para GEO",
               "Ciclo de actualización GEO vs. SEO tradicional",
@@ -67,7 +67,7 @@ const ModuloF5Page = () => {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.es/curso/f5"
+              "@id": "https://www.esgeo.ai/curso/f5"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -76,19 +76,19 @@ const ModuloF5Page = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Curso GEO",
-                  "item": "https://esgeo.es/curso"
+                  "item": "https://www.esgeo.ai/curso"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Módulo F5: Mantenimiento Evolutivo",
-                  "item": "https://esgeo.es/curso/f5"
+                  "item": "https://www.esgeo.ai/curso/f5"
                 }
               ]
             },
@@ -319,7 +319,7 @@ const ModuloF5Page = () => {
               "provider": {
                 "@type": "Organization",
                 "name": "esGEO",
-                "url": "https://esgeo.es"
+                "url": "https://www.esgeo.ai"
               },
               "courseCode": "GEO-F5",
               "educationalLevel": "Intermediate",
@@ -335,7 +335,7 @@ const ModuloF5Page = () => {
               "isPartOf": {
                 "@type": "Course",
                 "name": "Curso GEO Completo",
-                "url": "https://esgeo.es/curso"
+                "url": "https://www.esgeo.ai/curso"
               }
             })}
           </script>

@@ -24,7 +24,7 @@ const ModuloF3Page = () => {
       <Helmet>
         <title>Módulo F3: Autoridad Generativa | Curso GEO - esGEO</title>
         <meta name="description" content="Aprende a construir señales de credibilidad y reputación para que los LLMs reconozcan tu contenido como fuente fiable y te citen como referencia autorizada." />
-        <link rel="canonical" href="https://esgeo.es/curso/f3" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso/f3" />
         
         <meta name="citation_title" content="Módulo F3: Autoridad Generativa" />
         <meta name="citation_author" content="esGEO" />
@@ -38,7 +38,7 @@ const ModuloF3Page = () => {
             "name": "Módulo F3: Autoridad Generativa",
             "headline": "Módulo F3: Autoridad Generativa",
             "description": "Construye señales de credibilidad, reputación y valor experto que los LLMs reconozcan al decidir qué fuentes citar, sintetizar o priorizar en sus respuestas. Demuestra que tu contenido proviene de una fuente fiable, experimentada y reconocida en su campo.",
-            "url": "https://esgeo.es/curso/f3",
+            "url": "https://www.esgeo.ai/curso/f3",
             "datePublished": "2025-06-12",
             "author": {
               "@type": "Organization",
@@ -47,9 +47,9 @@ const ModuloF3Page = () => {
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.es/images/modulo-f3.png",
+            "image": "https://www.esgeo.ai/images/modulo-f3.png",
             "teaches": [
               "Cómo los LLMs evalúan la autoridad (Experiencia, Pericia, Autoridad, Confianza, Aplicabilidad)",
               "Señales de identidad confiable (página 'Sobre nosotros', perfiles de autor, dominio)",
@@ -67,7 +67,7 @@ const ModuloF3Page = () => {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.es/curso/f3"
+              "@id": "https://www.esgeo.ai/curso/f3"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -76,19 +76,19 @@ const ModuloF3Page = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Curso GEO",
-                  "item": "https://esgeo.es/curso"
+                  "item": "https://www.esgeo.ai/curso"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Módulo F3: Autoridad Generativa",
-                  "item": "https://esgeo.es/curso/f3"
+                  "item": "https://www.esgeo.ai/curso/f3"
                 }
               ]
             },
@@ -102,7 +102,7 @@ const ModuloF3Page = () => {
             "isPartOf": {
               "@type": "Course",
               "name": "Curso GEO Completo",
-              "url": "https://esgeo.es/curso"
+              "url": "https://www.esgeo.ai/curso"
             }
           })}
         </script>

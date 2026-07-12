@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.js",
+    "build": "vite build && npm run build:ssr && node scripts/prerender.js",
     "build:no-prerender": "vite build",
-    "build:with-prerender": "vite build && node scripts/prerender.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prerender": "node scripts/prerender.js"
+    "prerender": "node scripts/prerender.js",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

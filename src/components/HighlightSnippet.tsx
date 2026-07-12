@@ -56,11 +56,11 @@ const HighlightSnippet = ({
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CreativeWork",
-            "@id": `https://esgeo.ai#${id}`,
+            "@id": `https://www.esgeo.ai#${id}`,
             "name": `Fragmento GEO: ${id}`,
             "author": {
               "@type": "Organization",
-              "@id": "https://esgeo.ai#organization",
+              "@id": "https://www.esgeo.ai#organization",
               "name": author
             },
             "dateModified": lastModified || currentDate,
@@ -68,11 +68,11 @@ const HighlightSnippet = ({
             "isAccessibleForFree": true,
             "publisher": {
               "@type": "Organization",
-              "@id": "https://esgeo.ai#organization"
+              "@id": "https://www.esgeo.ai#organization"
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "url": `https://esgeo.ai#${id}`
+              "url": `https://www.esgeo.ai#${id}`
             }
           })}
         </script>

@@ -4,18 +4,31 @@
       "source": "/admin",
       "destination": "/api/admin/auth",
       "permanent": false
+    },
+    {
+      "source": "/llm.txt",
+      "destination": "/llms.txt",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/((?!api/|admin/|admin$).*)",
-      "destination": "/"
+      "destination": "/spa.html"
     }
   ],
   "functions": {
-    "api/checkout.ts": { "maxDuration": 10 },
-    "api/stripe-webhook.ts": { "maxDuration": 30 },
-    "api/admin/auth.ts": { "maxDuration": 5 },
-    "api/admin/metrics.ts": { "maxDuration": 15 }
+    "api/checkout.ts": {
+      "maxDuration": 10
+    },
+    "api/stripe-webhook.ts": {
+      "maxDuration": 30
+    },
+    "api/admin/auth.ts": {
+      "maxDuration": 5
+    },
+    "api/admin/metrics.ts": {
+      "maxDuration": 15
+    }
   }
 }

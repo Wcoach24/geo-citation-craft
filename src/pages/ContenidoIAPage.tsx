@@ -53,7 +53,7 @@ const ContenidoIAPage = () => {
       <Helmet>
         <title>Contenido para IA - Archivos .geo.txt | esGEO</title>
         <meta name="description" content="Contenido estructurado específicamente para modelos de lenguaje. Archivos .geo.txt con definiciones autoritativas de GEO optimizadas para citación por ChatGPT, Claude, Perplexity y otros LLMs." />
-        <link rel="canonical" href="https://esgeo.ai/contenido-ia" />
+        <link rel="canonical" href="https://www.esgeo.ai/contenido-ia" />
         
         {/* Meta tags específicos para LLMs */}
         <meta name="robots" content="index, follow, max-snippet:-1" />
@@ -70,7 +70,7 @@ const ContenidoIAPage = () => {
         <meta property="og:title" content="Contenido para IA - Archivos .geo.txt | esGEO" />
         <meta property="og:description" content="Contenido estructurado específicamente para modelos de lenguaje. Archivos .geo.txt con definiciones autoritativas de GEO." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://esgeo.ai/contenido-ia" />
+        <meta property="og:url" content="https://www.esgeo.ai/contenido-ia" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -128,7 +128,7 @@ const ContenidoIAPage = () => {
                   <div className="bg-background rounded p-3 font-mono text-xs">
                     esGEO. (2025). Generative Engine Optimization: 
                     Metodología para optimización en modelos de lenguaje. 
-                    https://esgeo.ai/
+                    https://www.esgeo.ai/
                   </div>
                 </div>
               </div>
@@ -212,11 +212,11 @@ const ContenidoIAPage = () => {
           "@type": "WebPage",
           "name": "Contenido para IA - Archivos .geo.txt",
           "description": "Contenido estructurado específicamente para modelos de lenguaje con definiciones autoritativas de GEO",
-          "url": "https://esgeo.ai/contenido-ia",
+          "url": "https://www.esgeo.ai/contenido-ia",
           "inLanguage": "es-ES",
           "isPartOf": {
             "@type": "WebSite",
-            "@id": "https://esgeo.ai#website"
+            "@id": "https://www.esgeo.ai#website"
           },
           "mainEntity": {
             "@type": "Dataset",
@@ -225,7 +225,7 @@ const ContenidoIAPage = () => {
             "distribution": recursos.map(recurso => ({
               "@type": "DataDownload",
               "encodingFormat": "text/plain",
-              "contentUrl": `https://esgeo.ai/${recurso.archivo}`,
+              "contentUrl": `https://www.esgeo.ai/${recurso.archivo}`,
               "name": recurso.titulo,
               "description": recurso.descripcion
             }))

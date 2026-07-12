@@ -23,7 +23,7 @@ const ModuloF1Page = () => {
       <Helmet>
         <title>Módulo F1: Fundamentos de Accesibilidad Generativa | Curso GEO - esGEO</title>
         <meta name="description" content="Asegura que tu contenido web es rastreable, comprendido e indexado por LLMs. El primer paso crítico para ser citado por IA." />
-        <link rel="canonical" href="https://esgeo.es/curso/f1" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso/f1" />
         
         <meta name="citation_title" content="Módulo F1: Fundamentos de Accesibilidad Generativa" />
         <meta name="citation_author" content="esGEO" />
@@ -37,20 +37,20 @@ const ModuloF1Page = () => {
             "name": "Módulo F1: Fundamentos de Accesibilidad Generativa",
             "headline": "Módulo F1: Fundamentos de Accesibilidad Generativa",
             "description": "Asegurar que el contenido web está preparado técnica y estructuralmente para ser rastreado, comprendido e indexado por motores de generación de texto. Es el primer filtro y el más crítico en GEO.",
-            "url": "https://esgeo.es/curso/f1",
+            "url": "https://www.esgeo.ai/curso/f1",
             "datePublished": "2024-06-10",
             "dateModified": "2024-06-10",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.es/images/modulo-f1.png",
+            "image": "https://www.esgeo.ai/images/modulo-f1.png",
             "teaches": [
               "Configuración de robots.txt para bots de IA",
               "HTML semántico para comprensión de LLMs",
@@ -67,7 +67,7 @@ const ModuloF1Page = () => {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.es/curso/f1"
+              "@id": "https://www.esgeo.ai/curso/f1"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -76,19 +76,19 @@ const ModuloF1Page = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Curso GEO",
-                  "item": "https://esgeo.es/curso"
+                  "item": "https://www.esgeo.ai/curso"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Módulo F1: Accesibilidad Generativa",
-                  "item": "https://esgeo.es/curso/f1"
+                  "item": "https://www.esgeo.ai/curso/f1"
                 }
               ]
             },
@@ -99,7 +99,7 @@ const ModuloF1Page = () => {
             "isPartOf": {
               "@type": "Course",
               "name": "Curso GEO Completo",
-              "url": "https://esgeo.es/curso"
+              "url": "https://www.esgeo.ai/curso"
             }
           })}
         </script>

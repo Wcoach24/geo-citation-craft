@@ -17,7 +17,7 @@ const PrivacidadPage = () => {
       <Helmet>
         <title>Política de Privacidad | esGEO</title>
         <meta name="description" content="Política de privacidad de esGEO. Cómo protegemos y utilizamos tu información personal en nuestra plataforma de Generative Engine Optimization." />
-        <link rel="canonical" href="https://esgeo.ai/privacidad" />
+        <link rel="canonical" href="https://www.esgeo.ai/privacidad" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 

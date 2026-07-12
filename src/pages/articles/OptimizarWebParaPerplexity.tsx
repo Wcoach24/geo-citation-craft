@@ -14,7 +14,7 @@ const OptimizarWebParaPerplexity = () => {
       <Helmet>
         <title>Cómo optimizar tu web para Perplexity | Guía GEO | esGEO</title>
         <meta name="description" content="Estrategia completa para aparecer en respuestas de Perplexity AI. Descubre cómo Perplexity cita diferente a ChatGPT y optimiza para máxima visibilidad." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia/optimizar-web-para-perplexity" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity" />
 
         <meta name="citation_title" content="Cómo optimizar tu web para Perplexity" />
         <meta name="citation_author" content="esGEO" />
@@ -29,18 +29,18 @@ const OptimizarWebParaPerplexity = () => {
             "@type": ["Article", "WebPage"],
             "headline": "Cómo optimizar tu web para Perplexity",
             "description": "Estrategia completa para aparecer en respuestas de Perplexity AI",
-            "url": "https://esgeo.ai/radar-ia/optimizar-web-para-perplexity",
+            "url": "https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity",
             "datePublished": "2026-03-20",
             "dateModified": "2026-03-20",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -49,19 +49,19 @@ const OptimizarWebParaPerplexity = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Optimizar para Perplexity",
-                  "item": "https://esgeo.ai/radar-ia/optimizar-web-para-perplexity"
+                  "item": "https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity"
                 }
               ]
             }

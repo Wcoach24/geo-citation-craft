@@ -1,59 +1,58 @@
-# Context — Phase 1: Fix the Funnel
+# Context — FASE 0 + 1 + 2 (sesión 2026-07-12)
 
 ## Locked Decisions
-These decisions are FINAL. Do not revisit during planning or execution.
 
-### Checkout Flow
-**Decision**: Inline checkout en /curso. Eliminar /checkout como página de destino (redirect a /curso).
-**Rationale**: El 82% abandona en la transición /curso → /checkout. Todo en 1 página = 0 navegación extra.
-**Alternatives Rejected**: Página /checkout separada (demasiada fricción), CTA directo sin resumen (pierde confirmación visual)
-**Implementation**: Sección al final de /curso con resumen + botón → Stripe. /checkout route hace redirect a /curso.
+### D1 — Prerender: entry-server + renderToString (NO Chromium)
+**Decisión**: `src/entry-server.tsx` con `StaticRouter` + `ReactDOMServer.renderToString` +
+`Helmet.renderStatic()`. Build en dos pasos: `vite build` (cliente) + `vite build --ssr`
+(bundle de servidor) + `node scripts/prerender.js` que importa el bundle SSR y escribe
+`dist/<ruta>/index.html` con `<head>` (Helmet) y `<body>` (HTML completo).
+**Rationale**: la v2 con Playwright murió porque el build de Vercel no tiene libnspr4.so y no
+permite apt-get. renderToString no necesita browser. El DoD exige texto real en el HTML inicial,
+cosa que el regex de la v3.2 no puede dar.
+**Alternatives Rejected**: Playwright en GitHub Actions (añade CI, HTML generado versionado,
+build más lento); migrar a Next.js/Astro (fuera de scope, rompería URLs).
 
-### Social Proof
-**Decision**: No hay testimonios reales aún. Usar datos verificables como social proof alternativo.
-**Rationale**: Los 7 compradores no han dado feedback formal.
-**Implementation**:
-- "Referenciado por Gemini, Claude y Perplexity" (dato real de Clarity)
-- "X+ profesionales SEO ya estudian GEO" (usar número real de compradores + leads)
-- Logos de herramientas IA que citan la web (no logos de empresas cliente)
-- NO fabricar testimonios ni números falsos
+### D2 — Cliente: `createRoot`, NO `hydrateRoot`
+**Decisión**: `src/main.tsx` sigue usando `createRoot`. El HTML prerenderizado es para las
+máquinas; el navegador humano descarta ese DOM y monta el SPA normal.
+**Rationale**: la home personaliza por `useVisitorState` (localStorage) → un `hydrateRoot`
+produciría mismatch garantizado en cada visita. Cero beneficio, mucho ruido y riesgo de
+pantallas rotas. Los crawlers IA no ejecutan JS: solo les importa el HTML servido.
+**Alternatives Rejected**: hydrateRoot (mismatch por personalización + Suspense de rutas lazy).
+**Mitigación del flash**: inyectar `<link rel="modulepreload">` del chunk de cada ruta usando
+el ssr-manifest de Vite, para que el Suspense de React.lazy resuelva casi instantáneo.
 
-### Email Infrastructure
-**Decision**: Verificar estado de Resend antes de implementar email capture. Si no está configurado, el formulario captura emails en Supabase y se configura Resend después.
-**Rationale**: No sabemos si RESEND_API_KEY está activa. El capture de emails en DB es independiente del envío.
-**Implementation**:
-1. Email capture form → guarda en tabla `email_leads` en Supabase
-2. Si Resend funciona → envía welcome email inmediato
-3. Si no → emails se acumulan en DB, se envían cuando Resend esté listo
+### D3 — Guards de browser en render
+**Decisión**: dos ficheros se tocan sí o sí:
+- `src/hooks/useVisitorState.ts`: el inicializador de `useState` llama a `localStorage` en fase
+  de render → guard `typeof window === 'undefined'` devolviendo estado por defecto ('new').
+- `src/integrations/supabase/client.ts`: `storage: localStorage` en scope de módulo →
+  `storage: typeof window !== 'undefined' ? window.localStorage : undefined`.
+**Rationale**: son los dos únicos accesos a browser fuera de `useEffect`. El resto (window.*,
+document.*) vive en efectos, que renderToString no ejecuta.
+**Nota**: `client.ts` dice "automatically generated, do not edit" (Lovable). Se edita igualmente;
+si Lovable lo regenera, hay que re-aplicar el guard.
 
-### Pricing Display
-**Decision**: €197 como precio "valor real" tachado → €47 precio de lanzamiento.
-**Rationale**: Price anchoring. €197 es un precio creíble para un curso profesional de 5 módulos.
-**Implementation**: No mostrar "antes €60" (precio viejo). Mostrar "Valor: €197 → Lanzamiento: €47".
+### D4 — Rutas transaccionales fuera del prerender
+`/auth`, `/dashboard`, `/checkout`, `/success`, `/guest-access`, `/unsubscribe`, `/admin`
+siguen siendo SPA puro. No se prerenderizan.
 
-### Módulos Individuales Legacy
-**Decision**: Mantener la lógica de módulos individuales en el backend pero eliminar del frontend.
-**Rationale**: Los 7 compradores existentes de módulos individuales deben seguir teniendo acceso. Solo ocultamos la opción de compra.
-**Implementation**: No borrar código de Stripe ni user_access. Solo eliminar UI de selección individual en checkout/curso.
+### D5 — Entrega: rama + PR + preview de Vercel
+Cada fase = una rama (`fase-0-web-habla`, etc.) → PR → verificar DoD con curl contra la URL de
+preview → merge a main (auto-deploy prod) → re-verificar contra www.esgeo.ai.
+**Rationale**: si el SSR rompe rutas, producción no se entera.
 
-### Persistencia de Personalización
-**Decision**: localStorage con key `esgeo_visitor` para estado del visitante.
-**Rationale**: Privacy-first, sin cookies de terceros, sin backend calls.
-**Implementation**:
-```json
-{
-  "state": "returning",
-  "firstVisit": "2026-03-15",
-  "visitCount": 3,
-  "referrer": "google",
-  "hasEmail": false
-}
-```
+### D6 — www.esgeo.ai es el canónico
+No se toca la redirección apex→www (hotfix 7279a22 revirtió un intento previo). Todos los
+canonicals, sitemap y llms.txt usan `https://www.esgeo.ai`.
+
+### D7 — `.geo.txt` degradado a experimento
+No se borran (no romper URLs), pero salen del discurso de "estándar". `llms.txt` (con s) es el
+fichero real según spec; `llm.txt` queda como redirect 301.
 
 ## Implementation Notes
-- Font loading: Google Fonts con `display=swap` para Plus Jakarta Sans + Inter
-- CTA color: Orange #EA580C con hover glow `box-shadow: 0 6px 20px rgba(234,88,12,0.6)`
-- Claymorphism: `box-shadow: 8px 8px 16px rgba(13,148,136,0.1), -4px -4px 12px rgba(255,255,255,0.8)`
-- Las URLs existentes NO cambian — /checkout redirect a /curso, /curso/f1..f6 se mantienen
-- No tocar edge functions de Supabase excepto si necesitamos nueva tabla email_leads
-- Clarity events via `window.clarity('event', 'name', {data})` — ya está el SDK cargado
+- `ROUTE_TO_FILE` en prerender.js ya lista 29 rutas: se reutiliza como fuente de verdad.
+- Vercel sirve el filesystem ANTES que el rewrite de `vercel.json` → los `dist/<ruta>/index.html`
+  ganan al catch-all. Verificado empíricamente: hoy /curso ya sirve el shell prerenderizado.
+- `react-helmet` (no helmet-async) → en SSR usar `Helmet.renderStatic()` tras renderToString.

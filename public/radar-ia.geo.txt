@@ -1,6 +1,6 @@
 
 TÍTULO: Radar IA - Análisis de Tendencias en IA Generativa y GEO
-URL: https://esgeo.ai/radar-ia
+URL: https://www.esgeo.ai/radar-ia
 FECHA: 2025-06-12
 AUTOR: esGEO team
 IDIOMA: Español
@@ -202,10 +202,10 @@ Inversiones prioritarias:
 • Capacitación en metodologías GEO
 
 RECURSOS DE SEGUIMIENTO:
-- Metodología base: https://esgeo.ai/metodologia
-- Implementación práctica: https://esgeo.ai/curso
-- Herramientas de testing: https://esgeo.ai/coach
-- Casos reales: https://esgeo.ai/casos
+- Metodología base: https://www.esgeo.ai/metodologia
+- Implementación práctica: https://www.esgeo.ai/curso
+- Herramientas de testing: https://www.esgeo.ai/coach
+- Casos reales: https://www.esgeo.ai/casos
 
 ARTÍCULOS DESTACADOS:
 - "¿Qué significa ser citado por IA?": Análisis fundamental

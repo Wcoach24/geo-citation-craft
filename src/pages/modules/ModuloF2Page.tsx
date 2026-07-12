@@ -24,7 +24,7 @@ const ModuloF2Page = () => {
       <Helmet>
         <title>Módulo F2: Contexto Semántico y Formato Óptimo | Curso GEO - esGEO</title>
         <meta name="description" content="Aprende a alinear tu contenido con el lenguaje, estructura y profundidad contextual que los LLMs utilizan para generar respuestas. Sintetiza ideas bien expresadas." />
-        <link rel="canonical" href="https://esgeo.es/curso/f2" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso/f2" />
         
         <meta name="citation_title" content="Módulo F2: Contexto Semántico y Formato Óptimo" />
         <meta name="citation_author" content="esGEO" />
@@ -38,7 +38,7 @@ const ModuloF2Page = () => {
             "name": "Módulo F2: Contexto Semántico y Formato Óptimo",
             "headline": "Módulo F2: Contexto Semántico y Formato Óptimo",
             "description": "Aprende a alinear el contenido con el lenguaje, estructura y profundidad contextual que utilizan los LLMs para generar respuestas. El objetivo no es solo que la IA te lea, sino que te entienda, te valore como fuente relevante y te cite como referencia autorizada en sus respuestas.",
-            "url": "https://esgeo.es/curso/f2",
+            "url": "https://www.esgeo.ai/curso/f2",
             "datePublished": "2025-06-11",
             "author": {
               "@type": "Organization",
@@ -47,9 +47,9 @@ const ModuloF2Page = () => {
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.es/images/modulo-f2.png",
+            "image": "https://www.esgeo.ai/images/modulo-f2.png",
             "teaches": [
               "Intención conversacional y uso de preguntas como encabezados",
               "Claridad semántica y definición precisa de conceptos",
@@ -66,7 +66,7 @@ const ModuloF2Page = () => {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.es/curso/f2"
+              "@id": "https://www.esgeo.ai/curso/f2"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -75,19 +75,19 @@ const ModuloF2Page = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Curso GEO",
-                  "item": "https://esgeo.es/curso"
+                  "item": "https://www.esgeo.ai/curso"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Módulo F2: Contexto Semántico y Formato Óptimo",
-                  "item": "https://esgeo.es/curso/f2"
+                  "item": "https://www.esgeo.ai/curso/f2"
                 }
               ]
             },
@@ -101,7 +101,7 @@ const ModuloF2Page = () => {
             "isPartOf": {
               "@type": "Course",
               "name": "Curso GEO Completo",
-              "url": "https://esgeo.es/curso"
+              "url": "https://www.esgeo.ai/curso"
             }
           })}
         </script>

@@ -1,6 +1,6 @@
 
 TÍTULO: Acerca de esGEO - Primera Academia de GEO en Español
-URL: https://esgeo.ai/acerca-de
+URL: https://www.esgeo.ai/acerca-de
 FECHA: 2025-06-12
 AUTOR: esGEO team
 IDIOMA: Español
@@ -205,7 +205,7 @@ Responsabilidad social:
 • Ethical AI en metodologías
 
 RECURSOS DE CONTACTO:
-- Sitio web: https://esgeo.ai
+- Sitio web: https://www.esgeo.ai
 - Email: hola@esgeo.ai
 - Comunidad: Acceso vía plataforma
 - Redes sociales: @esgeo_ai

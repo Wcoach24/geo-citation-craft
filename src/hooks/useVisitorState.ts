@@ -32,8 +32,18 @@ function detectReferrerSource(referrer: string): string {
   return 'other';
 }
 
+const DEFAULT_VISITOR: VisitorData = {
+  state: 'new',
+  firstVisit: '',
+  visitCount: 1,
+  referrer: '',
+  hasEmail: false,
+};
+
 export function useVisitorState(): UseVisitorStateReturn {
   const [data, setData] = useState<VisitorData>(() => {
+    // SSR guard: el prerender ejecuta la fase de render en Node, sin localStorage.
+    if (typeof window === 'undefined') return DEFAULT_VISITOR;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -67,13 +77,13 @@ export function useVisitorState(): UseVisitorStateReturn {
   const markAsLead = () => {
     const updated = { ...data, state: 'lead' as const, hasEmail: true };
     setData(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    if (typeof window !== 'undefined') localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   };
 
   const markAsCustomer = () => {
     const updated = { ...data, state: 'customer' as const };
     setData(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    if (typeof window !== 'undefined') localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   };
 
   return {

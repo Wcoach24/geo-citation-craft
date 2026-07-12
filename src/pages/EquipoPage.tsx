@@ -23,7 +23,7 @@ const EquipoPage = () => {
       role: "CEO & GEO Strategist",
       description: "Pionero en Generative Engine Optimization en España. Experto en optimización para LLMs con más de 15 años de experiencia en SEO y marketing digital.",
       knowsAbout: ["Generative Engine Optimization", "SEO Técnico", "Datos Estructurados", "Optimización para LLMs", "Marketing Digital"],
-      image: "https://esgeo.ai/images/equipo/fundador.jpg",
+      image: "https://www.esgeo.ai/images/equipo/fundador.jpg",
       email: "fundador@esgeo.ai",
       twitter: "https://twitter.com/esgeo_founder",
       linkedin: "https://linkedin.com/in/esgeo-founder"
@@ -34,7 +34,7 @@ const EquipoPage = () => {
       role: "Content Strategy Director",
       description: "Especialista en redacción citeable y estructura semántica. Lidera la creación de contenido optimizado para ser comprendido por modelos de lenguaje generativos.",
       knowsAbout: ["Redacción Citeable", "Estructura Semántica", "Content Strategy", "Copywriting GEO", "Schema.org"],
-      image: "https://esgeo.ai/images/equipo/directora-contenido.jpg",
+      image: "https://www.esgeo.ai/images/equipo/directora-contenido.jpg",
       email: "contenido@esgeo.ai",
       linkedin: "https://linkedin.com/in/directora-contenido-esgeo"
     }
@@ -45,7 +45,7 @@ const EquipoPage = () => {
       <Helmet>
         <title>Equipo esGEO: expertos en GEO en España 2026</title>
         <meta name="description" content="Conoce a los expertos en GEO de esGEO: especialistas en posicionamiento para IA y citabilidad en ChatGPT, Perplexity y Claude. Equipo 2026." />
-        <link rel="canonical" href="https://esgeo.ai/acerca-de/equipo" />
+        <link rel="canonical" href="https://www.esgeo.ai/acerca-de/equipo" />
         
         <meta name="citation_title" content="Equipo esGEO: Expertos en Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
@@ -176,15 +176,15 @@ const EquipoPage = () => {
               {JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Person",
-                "@id": `https://esgeo.ai/acerca-de/equipo#${member.id}`,
+                "@id": `https://www.esgeo.ai/acerca-de/equipo#${member.id}`,
                 "name": member.name,
-                "url": `https://esgeo.ai/acerca-de/equipo#${member.id}`,
+                "url": `https://www.esgeo.ai/acerca-de/equipo#${member.id}`,
                 "image": member.image,
                 "jobTitle": member.role,
                 "description": member.description,
                 "worksFor": {
                   "@type": "Organization",
-                  "@id": "https://esgeo.ai#organization",
+                  "@id": "https://www.esgeo.ai#organization",
                   "name": "esGEO"
                 },
                 "hasOccupation": {
@@ -206,10 +206,10 @@ const EquipoPage = () => {
               "@type": "AboutPage",
               "name": "Nuestro Equipo - esGEO",
               "description": "Conoce al equipo de expertos en Generative Engine Optimization de esGEO",
-              "url": "https://esgeo.ai/acerca-de/equipo",
+              "url": "https://www.esgeo.ai/acerca-de/equipo",
               "mainEntity": {
                 "@type": "Organization",
-                "@id": "https://esgeo.ai#organization"
+                "@id": "https://www.esgeo.ai#organization"
               },
               "breadcrumb": {
                 "@type": "BreadcrumbList",
@@ -218,19 +218,19 @@ const EquipoPage = () => {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Inicio",
-                    "item": "https://esgeo.ai"
+                    "item": "https://www.esgeo.ai"
                   },
                   {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Acerca de",
-                    "item": "https://esgeo.ai/acerca-de"
+                    "item": "https://www.esgeo.ai/acerca-de"
                   },
                   {
                     "@type": "ListItem",
                     "position": 3,
                     "name": "Nuestro Equipo",
-                    "item": "https://esgeo.ai/acerca-de/equipo"
+                    "item": "https://www.esgeo.ai/acerca-de/equipo"
                   }
                 ]
               }

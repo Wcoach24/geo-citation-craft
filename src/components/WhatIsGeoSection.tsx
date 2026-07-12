@@ -76,16 +76,16 @@ const WhatIsGeoSection = () => {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "DefinedTerm",
-          "@id": "https://esgeo.ai#geo-definition",
+          "@id": "https://www.esgeo.ai#geo-definition",
           "name": "Generative Engine Optimization (GEO)",
           "description": "Metodología de optimización de contenido web diseñada específicamente para que los modelos de lenguaje generativo puedan comprender, procesar y citar la información de manera efectiva",
           "inDefinedTermSet": {
             "@type": "DefinedTermSet",
             "name": "Glosario GEO",
-            "url": "https://esgeo.ai/glosario"
+            "url": "https://www.esgeo.ai/glosario"
           },
           "termCode": "GEO",
-          "url": "https://esgeo.ai/glosario#geo"
+          "url": "https://www.esgeo.ai/glosario#geo"
         })}
       </script>
 

@@ -77,7 +77,7 @@ const RadarIAPage = () => {
       <Helmet>
         <title>GEO e IA Generativa: Guías, Análisis y Tendencias 2026 | esGEO Radar</title>
         <meta name="description" content="Todo sobre GEO (Generative Engine Optimization) e IA generativa: qué es GEO, GEO vs SEO, cómo ser citado por ChatGPT y Perplexity. Artículos y guías actualizadas." />
-        <link rel="canonical" href="https://esgeo.ai/radar-ia" />
+        <link rel="canonical" href="https://www.esgeo.ai/radar-ia" />
         
         <meta name="citation_title" content="Radar IA - Análisis de Tendencias en GEO" />
         <meta name="citation_author" content="esGEO" />
@@ -93,25 +93,25 @@ const RadarIAPage = () => {
             "@type": ["Blog", "WebPage"],
             "name": "Radar IA - Análisis de Tendencias en GEO",
             "description": "Análisis actualizado sobre tendencias en IA generativa, cambios en LLMs y nuevas técnicas de Generative Engine Optimization",
-            "url": "https://esgeo.ai/radar-ia",
+            "url": "https://www.esgeo.ai/radar-ia",
             "datePublished": "2024-01-01",
             "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "inLanguage": "es-ES",
             "blogPost": articles.map(article => ({
               "@type": "BlogPosting",
               "headline": article.title,
               "description": article.description,
-              "url": `https://esgeo.ai/radar-ia/${article.id}`,
+              "url": `https://www.esgeo.ai/radar-ia/${article.id}`,
               "datePublished": article.date,
               "dateModified": "2024-12-15",
               "author": {
@@ -124,7 +124,7 @@ const RadarIAPage = () => {
               },
               "articleSection": article.category,
               "wordCount": parseInt(article.readTime) * 200,
-              "image": `https://esgeo.ai/images/radar-ia/${article.id}.png`
+              "image": `https://www.esgeo.ai/images/radar-ia/${article.id}.png`
             })),
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -133,13 +133,13 @@ const RadarIAPage = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Radar IA",
-                  "item": "https://esgeo.ai/radar-ia"
+                  "item": "https://www.esgeo.ai/radar-ia"
                 }
               ]
             },

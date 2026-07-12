@@ -19,7 +19,7 @@ const AcercaDePage = () => {
       <Helmet>
         <title>Acerca de esGEO | Quiénes Somos | esGEO</title>
         <meta name="description" content="Conoce al equipo de esGEO, pioneros en Generative Engine Optimization en español. Nuestra misión: enseñar a crear contenido citeable por IA." />
-        <link rel="canonical" href="https://esgeo.ai/acerca-de" />
+        <link rel="canonical" href="https://www.esgeo.ai/acerca-de" />
         
         <meta name="citation_title" content="Acerca de esGEO - Equipo y Misión" />
         <meta name="citation_author" content="esGEO" />
@@ -35,24 +35,24 @@ const AcercaDePage = () => {
             "@type": ["AboutPage", "WebPage"],
             "name": "Acerca de esGEO",
             "description": "Información sobre el equipo y la misión de esGEO, pioneros en Generative Engine Optimization en español",
-            "url": "https://esgeo.ai/acerca-de",
+            "url": "https://www.esgeo.ai/acerca-de",
             "datePublished": "2024-01-01",
             "dateModified": "2024-12-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai"
+              "url": "https://www.esgeo.ai"
             },
             "mainEntity": {
               "@type": "Organization",
-              "@id": "https://esgeo.ai#organization",
+              "@id": "https://www.esgeo.ai#organization",
               "name": "esGEO",
-              "url": "https://esgeo.ai",
+              "url": "https://www.esgeo.ai",
               "description": "Plataforma líder en Generative Engine Optimization en español. Enseñamos a crear contenido web que sea comprensible, útil y citado por modelos de lenguaje generativo.",
               "foundingDate": "2024-01-01",
               "slogan": "Optimiza para ser citado por la IA",
@@ -80,13 +80,13 @@ const AcercaDePage = () => {
               "founder": [
                 {
                   "@type": "Person",
-                  "@id": "https://esgeo.ai/equipo/director-geo",
+                  "@id": "https://www.esgeo.ai/equipo/director-geo",
                   "name": "Director GEO de esGEO",
                   "jobTitle": "Director de Investigación GEO",
                   "description": "Especialista en Generative Engine Optimization con experiencia en IA y optimización web",
                   "worksFor": {
                     "@type": "Organization",
-                    "@id": "https://esgeo.ai#organization"
+                    "@id": "https://www.esgeo.ai#organization"
                   },
                   "knowsAbout": [
                     "Generative Engine Optimization",
@@ -108,13 +108,13 @@ const AcercaDePage = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.ai/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Acerca de",
-                  "item": "https://esgeo.ai/acerca-de"
+                  "item": "https://www.esgeo.ai/acerca-de"
                 }
               ]
             },

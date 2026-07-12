@@ -34,7 +34,7 @@ const GeoTerm = ({
       {/* Metadatos invisibles */}
       <meta itemProp="name" content={term} />
       {definition && <meta itemProp="description" content={definition} />}
-      <meta itemProp="inDefinedTermSet" content="https://esgeo.ai/glosario" />
+      <meta itemProp="inDefinedTermSet" content="https://www.esgeo.ai/glosario" />
       
       <Link
         to={termHref}
@@ -70,16 +70,16 @@ const GeoTerm = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "DefinedTerm",
-          "@id": `https://esgeo.ai/glosario#${term.toLowerCase().replace(/\s+/g, '-')}`,
+          "@id": `https://www.esgeo.ai/glosario#${term.toLowerCase().replace(/\s+/g, '-')}`,
           "name": term,
           "description": definition || `Término relacionado con ${category}`,
           "inDefinedTermSet": {
             "@type": "DefinedTermSet",
             "name": "Glosario GEO",
-            "url": "https://esgeo.ai/glosario"
+            "url": "https://www.esgeo.ai/glosario"
           },
           "termCode": term.toUpperCase().replace(/\s+/g, '_'),
-          "url": `https://esgeo.ai${termHref}`
+          "url": `https://www.esgeo.ai${termHref}`
         })}
       </script>
     </span>

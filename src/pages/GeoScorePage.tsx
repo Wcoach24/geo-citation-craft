@@ -1,569 +1,207 @@
-import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
-import {
-  CheckCircle2,
-  ArrowRight,
-  BarChart3,
-  TrendingUp,
-  Copy,
-  ChevronRight,
-  AlertCircle,
-} from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import EmailCapture from '@/components/EmailCapture';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import { ArrowRight, Bot, FileSearch, ShieldCheck } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import HablaWidget from "@/components/HablaWidget";
+import { Button } from "@/components/ui/button";
+import { HABLA_API } from "@/lib/habla";
 
-interface QuizQuestion {
-  id: number;
-  question: string;
-  category: string;
-  options: {
-    text: string;
-    points: number;
-  }[];
-}
-
-interface ScoreCategory {
-  name: string;
-  score: number;
-  maxScore: number;
-  icon: React.ReactNode;
-}
-
-const QUIZ_QUESTIONS: QuizQuestion[] = [
-  {
-    id: 1,
-    question: '¿Tu web tiene datos estructurados (Schema.org)?',
-    category: 'Technical',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'No sé', points: 6 },
-      { text: 'Sí', points: 12 },
-    ],
-  },
-  {
-    id: 2,
-    question: '¿Usas formato pregunta-respuesta en tu contenido?',
-    category: 'Content Format',
-    options: [
-      { text: 'Nunca', points: 0 },
-      { text: 'A veces', points: 6 },
-      { text: 'Siempre', points: 12 },
-    ],
-  },
-  {
-    id: 3,
-    question:
-      '¿Tu contenido está fragmentado en secciones claras con encabezados H2-H3?',
-    category: 'Structure',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'Parcialmente', points: 6 },
-      { text: 'Sí', points: 12 },
-    ],
-  },
-  {
-    id: 4,
-    question:
-      '¿Tienes un archivo robots.txt que permite el acceso a crawlers de IA?',
-    category: 'Technical',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'No sé', points: 6 },
-      { text: 'Sí', points: 12 },
-    ],
-  },
-  {
-    id: 5,
-    question:
-      '¿Tu contenido incluye definiciones claras y citables de conceptos clave?',
-    category: 'Content Quality',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'Algo', points: 6 },
-      { text: 'Sí', points: 12 },
-    ],
-  },
-  {
-    id: 6,
-    question: '¿Actualizas tu contenido regularmente (al menos mensualmente)?',
-    category: 'Maintenance',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'Trimestral', points: 6 },
-      { text: 'Mensual+', points: 12 },
-    ],
-  },
-  {
-    id: 7,
-    question:
-      '¿Tu web tiene enlaces desde fuentes autoritativas (universidades, medios, instituciones)?',
-    category: 'Authority',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'Pocos', points: 6 },
-      { text: 'Varios', points: 12 },
-    ],
-  },
-  {
-    id: 8,
-    question:
-      '¿Has verificado si algún modelo de IA (ChatGPT, Gemini, etc.) cita tu marca?',
-    category: 'AI Citation',
-    options: [
-      { text: 'No', points: 0 },
-      { text: 'No sé', points: 6 },
-      { text: 'Sí', points: 12 },
-    ],
-  },
-];
-
-const GeoScorePage: React.FC = () => {
-  const [step, setStep] = useState<'input' | 'quiz' | 'results'>('input');
-  const [url, setUrl] = useState('');
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [totalScore, setTotalScore] = useState(0);
-  const [showEmailGate, setShowEmailGate] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  const handleUrlSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!url.trim()) return;
-    setAnswers([]);
-    setCurrentQuestion(0);
-    setStep('quiz');
-  };
-
-  const handleAnswerSelect = (points: number) => {
-    const newAnswers = [...answers, points];
-    setAnswers(newAnswers);
-
-    if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      // Quiz complete
-      const score = newAnswers.reduce((sum, p) => sum + p, 0);
-      setTotalScore(score);
-      setShowEmailGate(false);
-      setStep('results');
-
-      // Track completion
-      const clarityWindow = window as unknown as { clarity?: (event: string, name: string, data: unknown) => void };
-      clarityWindow.clarity?.('event', 'geo_score_complete', {
-        score,
-        url: url || 'not-provided',
-      });
-    }
-  };
-
-  const categoryScores = calculateCategoryScores();
-
-  const scoreColor = totalScore < 31 ? 'text-red-600' : totalScore < 61 ? 'text-amber-600' : 'text-emerald-600';
-  const scoreBg = totalScore < 31 ? 'bg-red-50' : totalScore < 61 ? 'bg-amber-50' : 'bg-emerald-50';
-  const scoreRing = totalScore < 31 ? 'border-red-200' : totalScore < 61 ? 'border-amber-200' : 'border-emerald-200';
-
-  function calculateCategoryScores(): ScoreCategory[] {
-    const categoryMap: Record<string, { total: number; count: number }> = {};
-
-    QUIZ_QUESTIONS.forEach((q, idx) => {
-      if (!categoryMap[q.category]) {
-        categoryMap[q.category] = { total: 0, count: 0 };
-      }
-      categoryMap[q.category].total += answers[idx] || 0;
-      categoryMap[q.category].count += 1;
-    });
-
-    return Object.entries(categoryMap).map(([name, data]) => ({
-      name,
-      score: data.total,
-      maxScore: data.count * 12,
-      icon: <TrendingUp className="h-4 w-4" />,
-    }));
-  }
-
-  const handleCopyResults = () => {
-    const text = `Mi GEO Score: ${totalScore}/100
-
-${categoryScores.map((c) => `${c.name}: ${c.score}/${c.maxScore}`).join('\n')}
-
-Descubre cómo mejorar tu score en esgeo.ai/geo-score`;
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+/**
+ * /geo-score — antes era un quiz de autoevaluación: el visitante contestaba preguntas y el
+ * front calculaba una nota. Era una nota inventada sobre respuestas subjetivas.
+ *
+ * Ahora la página sirve el auditor real (HABLA): lee el HTML que tu servidor entrega, sin
+ * ejecutar JavaScript, exactamente como haría GPTBot, y devuelve una puntuación medible.
+ * La URL se mantiene (no romper SEO: recibe tráfico y enlaces).
+ */
+const GeoScorePage = () => {
+  const faqs = [
+    {
+      q: "¿Qué mide exactamente el auditor?",
+      a: "Descarga el HTML que tu servidor entrega —sin ejecutar JavaScript, igual que un crawler de IA— y lo puntúa de 0 a 100 sobre cinco dimensiones: Higiene (robots.txt, sitemap, HTTPS), Accesible (¿hay texto real en el HTML inicial?), Bloques (h1, encabezados, HTML semántico, datos estructurados), Lenguaje (¿el primer bloque responde qué, para quién y cuánto?) y eXtras (llms.txt, señales de citación).",
+    },
+    {
+      q: "¿Por qué mi web puntúa bajo si se ve perfecta en el navegador?",
+      a: "Porque tú ejecutas JavaScript y los rastreadores de IA no. Si tu web está hecha con React, Vue o Angular sin renderizado en servidor, el HTML que sale de tu servidor es un contenedor vacío: el navegador lo rellena, el crawler no. Es el fallo más común y el más caro, porque anula todo lo demás.",
+    },
+    {
+      q: "¿Es gratis? ¿Guardáis mi web?",
+      a: "El análisis es gratuito y no requiere registro. Solo se analiza HTML público, el mismo que cualquiera puede ver con 'ver código fuente'. Guardamos la URL y la puntuación para medir el estado del parque web en español.",
+    },
+    {
+      q: "¿Y si mi puntuación es mala?",
+      a: "Es lo normal: la mayoría de las webs modernas fallan el gate de accesibilidad. El auditor te dice qué arreglar primero; el curso F1–F5 te enseña a arreglarlo todo. La propia esgeo.ai puntuaba 35 sobre 100 en julio de 2026 antes de aplicarse su propio método.",
+    },
+  ];
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <Helmet>
-        <title>GEO Score Checker - ¿Qué tan preparada está tu web para la IA?</title>
+        <title>Auditor GEO gratuito — ¿tu web habla con las IAs? | esGEO</title>
         <meta
           name="description"
-          content="Descubre tu GEO Score en 2 minutos. Analiza qué tan bien está optimizada tu web para ser citada por modelos de IA como ChatGPT, Gemini y Perplexity."
+          content="Analiza gratis si ChatGPT, Perplexity, Claude y Gemini pueden leer tu web. Puntuación 0-100 sobre el HTML real que sirve tu servidor, sin ejecutar JavaScript. Sin registro."
         />
-        <meta name="og:title" content="GEO Score Checker - Optimización para IA" />
+        <link rel="canonical" href="https://www.esgeo.ai/geo-score" />
+        <meta property="og:title" content="Auditor GEO gratuito — ¿tu web habla con las IAs?" />
         <meta
-          name="og:description"
-          content="Evalúa tu web con nuestro GEO Score Checker gratuito. Recibe recomendaciones personalizadas."
+          property="og:description"
+          content="Puntuación 0-100 de la legibilidad de tu web para los modelos de IA. Gratis y sin registro."
         />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            name: "HABLA — auditor de legibilidad máquina",
+            url: "https://www.esgeo.ai/geo-score",
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Web",
+            inLanguage: "es-ES",
+            description:
+              "Auditor gratuito que puntúa de 0 a 100 la legibilidad de una web para los modelos de lenguaje generativo, analizando el HTML servido sin ejecutar JavaScript.",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+            publisher: { "@type": "Organization", name: "esGEO", url: "https://www.esgeo.ai" },
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          })}
+        </script>
       </Helmet>
 
       <Header />
 
-      <main className="min-h-screen bg-background">
-        {step === 'input' && (
-          <>
-            {/* Hero */}
-            <section className="hero-gradient py-16 md:py-24">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-2xl mx-auto text-center animate-fade-up">
-                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    ¿Tu web está preparada para la era de la IA?
-                  </h1>
-                  <p className="text-xl text-white/90 mb-8">
-                    Descubre tu GEO Score en 2 minutos y recibe un informe
-                    personalizado
-                  </p>
-                </div>
+      <main role="main">
+        <section className="py-14 md:py-20">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 bg-accent/10 text-accent border border-accent/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Bot className="h-4 w-4" />
+                AUDITOR GRATUITO
               </div>
-            </section>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-5">
+                ¿Tu web habla con las IAs?
+              </h1>
+              <p
+                className="snippet-block text-lg text-muted-foreground max-w-2xl mx-auto"
+                data-speakable="true"
+              >
+                Este auditor descarga el HTML que tu servidor entrega de verdad —{" "}
+                <strong>sin ejecutar JavaScript, igual que GPTBot, ClaudeBot o PerplexityBot</strong>{" "}
+                — y lo puntúa de 0 a 100 sobre cinco dimensiones: Higiene, Accesible, Bloques,
+                Lenguaje y eXtras. Es gratuito, no pide registro y tarda unos diez segundos. Si tu
+                web está hecha con React, Vue o Angular sin renderizado en servidor, es probable que
+                suspenda: el HTML que sale de tu servidor está vacío y el crawler no ve nada.
+              </p>
+            </div>
 
-            {/* Input Form */}
-            <section className="py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-md mx-auto mb-12">
-                  <form onSubmit={handleUrlSubmit} className="space-y-4">
-                    <div>
-                      <label
-                        htmlFor="url-input"
-                        className="block text-sm font-medium text-foreground mb-2"
-                      >
-                        URL de tu sitio web
-                      </label>
-                      <Input
-                        id="url-input"
-                        type="url"
-                        placeholder="https://tuwebsite.com"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        className="w-full cursor-pointer"
-                      />
-                      <p className="text-xs text-muted-foreground mt-2">
-                        (Opcional — usaremos esto para personalizar tu informe)
-                      </p>
-                    </div>
-                    <Button
-                      type="submit"
-                      className="btn-cta w-full cursor-pointer"
-                      onClick={() => {
-                        const clarityWindow = window as unknown as { clarity?: (event: string, name: string, data: unknown) => void };
-                        clarityWindow.clarity?.('event', 'geo_score_start', {
-                          url: url || 'empty',
-                        });
-                      }}
-                    >
-                      Analizar mi web
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </form>
+            <HablaWidget
+              title="Analiza tu dominio"
+              subtitle="Escribe la dirección y te digo qué encuentra un crawler de IA cuando entra."
+            />
+
+            {/* Cómo funciona */}
+            <div className="grid md:grid-cols-3 gap-4 mt-12">
+              {[
+                {
+                  icon: FileSearch,
+                  title: "Lee lo que lee la máquina",
+                  body: "Descarga el HTML crudo. No abre un navegador ni ejecuta scripts: ve exactamente lo que ve un rastreador de IA.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Puntúa cinco dimensiones",
+                  body: "H-A-B-L-A: Higiene, Accesible, Bloques, Lenguaje y eXtras. Accesible es un gate: si no hay texto en el HTML, el resto no cuenta.",
+                },
+                {
+                  icon: ArrowRight,
+                  title: "Te dice qué arreglar",
+                  body: "Devuelve las mejoras ordenadas por impacto, con el tiempo estimado de cada una. Empieza por la primera.",
+                },
+              ].map((c) => (
+                <div key={c.title} className="rounded-xl border border-border bg-card p-5">
+                  <c.icon className="h-5 w-5 text-accent mb-3" />
+                  <h3 className="font-semibold text-foreground mb-2">{c.title}</h3>
+                  <p className="text-sm text-muted-foreground">{c.body}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                {/* Features Preview */}
-                <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                  <div className="text-center">
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                      <BarChart3 className="h-6 w-6 text-accent" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-1">
-                      Score 0-100
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Tu nivel de preparación para IA
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                      <TrendingUp className="h-6 w-6 text-accent" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-1">
-                      Desglose
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Por categoría técnica
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                      <CheckCircle2 className="h-6 w-6 text-accent" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-1">
-                      Recomendaciones
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Personalizadas para tu web
-                    </p>
-                  </div>
+        {/* Caso propio */}
+        <section className="py-12 bg-muted/30 border-y border-border" data-speakable="true">
+          <div className="container mx-auto px-4 max-w-3xl text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              Empezamos por nuestra propia web
+            </h2>
+            <p className="text-muted-foreground">
+              En julio de 2026 pasamos este mismo auditor por <strong>esgeo.ai</strong>. Resultado:{" "}
+              <strong>35 sobre 100</strong>, gate de accesibilidad suspendido, 237 caracteres de
+              texto en el HTML inicial. La web que vende un curso sobre cómo ser citado por las IAs
+              era invisible para las IAs. Lo arreglamos aplicando el método F1–F5 y publicamos el
+              antes y el después. Puedes auditarnos tú mismo con el formulario de arriba.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-14">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+              Preguntas frecuentes
+            </h2>
+            <dl className="space-y-6">
+              {faqs.map((f) => (
+                <div key={f.q} className="border-b border-border pb-6">
+                  <dt className="font-semibold text-foreground mb-2">{f.q}</dt>
+                  <dd className="text-muted-foreground">{f.a}</dd>
                 </div>
-              </div>
-            </section>
-          </>
-        )}
+              ))}
+            </dl>
+          </div>
+        </section>
 
-        {step === 'quiz' && (
-          <>
-            {/* Progress */}
-            <section className="border-b bg-card sticky top-16 z-40 py-4">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Pregunta {currentQuestion + 1} de {QUIZ_QUESTIONS.length}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {Math.round(((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100)}%
-                  </span>
-                </div>
-                <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-accent transition-all duration-300"
-                    style={{
-                      width: `${((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100}%`,
-                    }}
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Question */}
-            <section className="py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-2xl mx-auto">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
-                    {QUIZ_QUESTIONS[currentQuestion].question}
-                  </h2>
-
-                  {/* Options */}
-                  <div className="space-y-3">
-                    {QUIZ_QUESTIONS[currentQuestion].options.map(
-                      (option, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => handleAnswerSelect(option.points)}
-                          className="card-clay w-full bg-card border border-border rounded-xl p-4 text-left cursor-pointer transition-all duration-200 hover:border-accent"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="font-medium text-foreground">
-                              {option.text}
-                            </span>
-                            <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                          </div>
-                        </button>
-                      )
-                    )}
-                  </div>
-
-                  {/* Help text */}
-                  <p className="text-sm text-muted-foreground mt-8 text-center">
-                    Responde según tu situación actual. Puedes cambiar tus respuestas más tarde.
-                  </p>
-                </div>
-              </div>
-            </section>
-          </>
-        )}
-
-        {step === 'results' && (
-          <>
-            {/* Score Display */}
-            <section className="py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Main Score */}
-                <div className="max-w-lg mx-auto mb-12">
-                  <div
-                    className={`${scoreBg} ${scoreRing} border-4 rounded-full aspect-square flex flex-col items-center justify-center animate-fade-up`}
-                  >
-                    <span className={`text-6xl md:text-7xl font-bold ${scoreColor}`}>
-                      {totalScore}
-                    </span>
-                    <span className="text-sm text-muted-foreground mt-2">
-                      / 100
-                    </span>
-                  </div>
-                </div>
-
-                {/* Interpretation */}
-                <div className="max-w-lg mx-auto mb-12 text-center animate-fade-up-delay-1">
-                  {totalScore < 31 && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                      <p className="font-semibold text-red-900 mb-2">
-                        Tu web necesita optimización
-                      </p>
-                      <p className="text-sm text-red-800">
-                        Hay bastante trabajo por hacer. Nuestro curso te guiará
-                        paso a paso.
-                      </p>
-                    </div>
-                  )}
-                  {totalScore >= 31 && totalScore < 61 && (
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                      <p className="font-semibold text-amber-900 mb-2">
-                        Buen punto de partida
-                      </p>
-                      <p className="text-sm text-amber-800">
-                        Tienes una base sólida. Potencia tu GEO Score
-                        optimizando áreas específicas.
-                      </p>
-                    </div>
-                  )}
-                  {totalScore >= 61 && (
-                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
-                      <p className="font-semibold text-emerald-900 mb-2">
-                        Excelente preparación
-                      </p>
-                      <p className="text-sm text-emerald-800">
-                        Tu web está bien optimizada. Mantén el ritmo y sigue
-                        mejorando.
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Category Breakdown */}
-                <div className="max-w-2xl mx-auto mb-12 animate-fade-up-delay-2">
-                  <h3 className="text-lg font-semibold text-foreground mb-4">
-                    Desglose por categoría
-                  </h3>
-                  <div className="space-y-4">
-                    {categoryScores.map((cat, idx) => (
-                      <div key={idx} className="bg-card border border-border rounded-lg p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-medium text-foreground">
-                            {cat.name}
-                          </span>
-                          <span className="text-sm font-semibold text-accent">
-                            {cat.score}/{cat.maxScore}
-                          </span>
-                        </div>
-                        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-accent transition-all duration-500"
-                            style={{
-                              width: `${(cat.score / cat.maxScore) * 100}%`,
-                            }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Share Button */}
-                <div className="max-w-lg mx-auto mb-12 animate-fade-up-delay-3">
-                  <button
-                    onClick={handleCopyResults}
-                    className="card-clay w-full bg-card border border-border rounded-lg p-4 flex items-center justify-between cursor-pointer transition-all hover:border-accent"
-                  >
-                    <span className="font-medium text-foreground">
-                      {copied
-                        ? 'Copiado a portapapeles'
-                        : 'Compartir tu GEO Score'}
-                    </span>
-                    <Copy className="h-4 w-4 text-muted-foreground" />
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* Email Gate */}
-            {!showEmailGate ? (
-              <section className="py-12 md:py-16 bg-card border-t">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="max-w-lg mx-auto text-center mb-8">
-                    <h2 className="text-2xl font-bold text-foreground mb-3">
-                      Recibe tu informe completo
-                    </h2>
-                    <p className="text-muted-foreground mb-6">
-                      Análisis detallado con recomendaciones paso a paso para
-                      mejorar tu GEO Score
-                    </p>
-                    <button
-                      onClick={() => setShowEmailGate(true)}
-                      className="btn-cta cursor-pointer inline-flex items-center"
-                    >
-                      Descargar informe
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </button>
-                  </div>
-                </div>
-              </section>
-            ) : (
-              <section className="py-12 md:py-16 bg-card border-t">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                  <EmailCapture
-                    source="geo_score"
-                  />
-                </div>
-              </section>
-            )}
-
-            {/* CTA Section */}
-            <section className="py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-2xl mx-auto bg-gradient-to-r from-primary to-primary/80 rounded-xl p-8 md:p-12 text-white">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                    Mejora tu GEO Score
-                  </h2>
-                  <p className="mb-6 text-white/90">
-                    El Curso GEO te enseña la metodología completa para
-                    optimizar tu web y aumentar tu visibilidad en respuestas de
-                    IA.
-                  </p>
-                  <Button
-                    asChild
-                    className="bg-white text-primary hover:bg-white/90 font-bold cursor-pointer"
-                  >
-                    <Link to="/curso#comprar" className="cursor-pointer">
-                      Ver el curso — €47
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </section>
-
-            {/* FAQ Schema */}
-            <script type="application/ld+json">
-              {JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'FAQPage',
-                mainEntity: [
-                  {
-                    '@type': 'Question',
-                    name: '¿Qué es el GEO Score?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'El GEO Score es una métrica de 0-100 que evalúa qué tan preparada está tu web para ser citada por modelos de IA como ChatGPT, Gemini y Perplexity.',
-                    },
-                  },
-                  {
-                    '@type': 'Question',
-                    name: '¿Es gratuito el GEO Score Checker?',
-                    acceptedAnswer: {
-                      '@type': 'Answer',
-                      text: 'Sí, el GEO Score Checker es completamente gratuito. Solo responde 8 preguntas rápidas para obtener tu score.',
-                    },
-                  },
-                ],
-              })}
-            </script>
-          </>
-        )}
+        {/* CTA */}
+        <section className="py-14 bg-primary text-primary-foreground">
+          <div className="container mx-auto px-4 max-w-3xl text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              El auditor te dice qué falla. El curso te enseña a arreglarlo.
+            </h2>
+            <p className="text-primary-foreground/75 mb-7">
+              5 módulos, guías PDF y plantillas. 47 € de pago único, 14 días de garantía.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button asChild size="lg" variant="secondary">
+                <Link to="/curso">
+                  Ver el curso — 47 € <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                <a href={HABLA_API} target="_blank" rel="noopener">
+                  Abrir HABLA
+                </a>
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

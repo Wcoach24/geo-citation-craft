@@ -1,265 +1,193 @@
 #!/usr/bin/env node
 /**
- * scripts/prerender.js — v3.2 (regex-based, no Chromium)
+ * scripts/prerender.js — v4 (SSR real, sin Chromium)
  *
- * v2 usaba Playwright/Chromium pero Vercel build env no tiene libnspr4.so y
- * no permite apt-get sin sudo. v3 parsea componentes React con regex/vm y
- * genera HTML estático con metas correctas, SIN runtime de browser.
+ * v3.x sólo inyectaba <title>, metas y JSON-LD con regex: el <body> seguía vacío y
+ * www.esgeo.ai puntuaba 35/100 (MUDA) en HABLA con el gate A fallido (237 chars de texto).
  *
- * v3.2 combina useGeoMetadata + Helmet inline (página puede tener ambos).
+ * v4 importa el bundle SSR (dist-ssr/entry-server.js), renderiza cada ruta con
+ * renderToPipeableStream y escribe dist/<ruta>/index.html con el body completo.
  *
- * Soporta:
- *  - <Helmet>...</Helmet> inline (la mayoría de páginas)
- *  - useGeoMetadata({ ... }) hook (Index.tsx)
- *  - Ambos en el mismo archivo (combinados, no excluyentes)
+ * Vercel sirve el filesystem ANTES que el rewrite catch-all de vercel.json,
+ * así que estos ficheros ganan al SPA para las rutas prerenderizadas.
  */
-
 import fs from 'fs';
 import path from 'path';
-import vm from 'vm';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
-const srcDir = path.join(projectRoot, 'src');
+const ssrEntry = path.join(projectRoot, 'dist-ssr', 'entry-server.js');
 
-const ROUTE_TO_FILE = {
-  '/': 'pages/Index.tsx',
-  '/curso': 'pages/CursoGeoPage.tsx',
-  '/curso/f0': 'pages/modules/ModuloF0Page.tsx',
-  '/curso/f1': 'pages/modules/ModuloF1Page.tsx',
-  '/curso/f2': 'pages/modules/ModuloF2Page.tsx',
-  '/curso/f3': 'pages/modules/ModuloF3Page.tsx',
-  '/curso/f4': 'pages/modules/ModuloF4Page.tsx',
-  '/curso/f5': 'pages/modules/ModuloF5Page.tsx',
-  '/metodologia': 'pages/MetodologiaGeoPage.tsx',
-  '/casos': 'pages/CasosRealesPage.tsx',
-  '/glosario': 'pages/GlosarioPage.tsx',
-  '/radar-ia': 'pages/RadarIAPage.tsx',
-  '/geo-score': 'pages/GeoScorePage.tsx',
-  '/contenido-ia': 'pages/ContenidoIAPage.tsx',
-  '/experto-geo': 'pages/ExpertoGeoPage.tsx',
-  '/acerca-de': 'pages/AcercaDePage.tsx',
-  '/acerca-de/equipo': 'pages/EquipoPage.tsx',
-  '/privacidad': 'pages/PrivacidadPage.tsx',
-  '/terminos': 'pages/TerminosPage.tsx',
-  '/radar-ia/que-significa-ser-citado-por-ia': 'pages/articles/QueSIgnificaSerCitadoPorIA.tsx',
-  '/radar-ia/muerte-seo-tradicional': 'pages/articles/MuerteSeoTradicional.tsx',
-  '/radar-ia/estructura-web-para-lenguaje': 'pages/articles/EstructuraWebParaLenguaje.tsx',
-  '/radar-ia/formato-wikipedia-ia': 'pages/articles/FormatoWikipediaIA.tsx',
-  '/radar-ia/datos-estructurados-modelos-generativos': 'pages/articles/DatosEstructuradosModelosGenerativos.tsx',
-  '/radar-ia/geo-vs-seo-diferencias': 'pages/articles/GeoVsSeoGuiaRapida.tsx',
-  '/radar-ia/como-hacer-que-chatgpt-cite-tu-web': 'pages/articles/ComoHacerQueChatGPTCiteTuWeb.tsx',
-  '/radar-ia/optimizar-web-para-perplexity': 'pages/articles/OptimizarWebParaPerplexity.tsx',
-  '/radar-ia/que-es-geo-guia-completa': 'pages/articles/QueEsGeoGuiaCompleta.tsx',
-};
+/** Rutas públicas. Las transaccionales (auth, dashboard, checkout, success,
+ *  guest-access, unsubscribe, admin) quedan fuera a propósito: son SPA. */
+const ROUTES = [
+  '/',
+  '/curso',
+  '/curso/f0',
+  '/curso/f1',
+  '/curso/f2',
+  '/curso/f3',
+  '/curso/f4',
+  '/curso/f5',
+  '/metodologia',
+  '/casos',
+  '/glosario',
+  '/radar-ia',
+  '/geo-score',
+  '/contenido-ia',
+  '/experto-geo',
+  '/acerca-de',
+  '/acerca-de/equipo',
+  '/privacidad',
+  '/terminos',
+  '/radar-ia/que-significa-ser-citado-por-ia',
+  '/radar-ia/muerte-seo-tradicional',
+  '/radar-ia/estructura-web-para-lenguaje',
+  '/radar-ia/formato-wikipedia-ia',
+  '/radar-ia/datos-estructurados-modelos-generativos',
+  '/radar-ia/geo-vs-seo-diferencias',
+  '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
+  '/radar-ia/optimizar-web-para-perplexity',
+  '/radar-ia/que-es-geo-guia-completa',
+];
 
-// ── helpers ─────────────────────────────────────────────────────────────────
+/** Umbral del DoD: caracteres de texto (sin tags) mínimos por ruta clave. */
+const MIN_TEXT_CHARS = 3000;
+const CRITICAL_ROUTES = [
+  '/', '/curso', '/metodologia', '/glosario',
+  '/radar-ia/que-es-geo-guia-completa',
+  '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
+  '/radar-ia/optimizar-web-para-perplexity',
+];
 
-function evalJsLiteral(literal, contextUrl) {
-  try {
-    const sandbox = { window: { location: { href: contextUrl } } };
-    vm.createContext(sandbox);
-    return vm.runInContext(`(${literal})`, sandbox, { timeout: 1000 });
-  } catch (e) {
-    return null;
+function textLength(html) {
+  const body = (html.match(/<body[^>]*>([\s\S]*)<\/body>/i) || [, html])[1];
+  return body
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim().length;
+}
+
+/**
+ * La plantilla es el shell limpio que emite Vite. OJO: `/` se escribe encima de
+ * dist/index.html, así que si este script se ejecuta dos veces sobre el mismo dist,
+ * la "plantilla" pasaría a ser la home ya renderizada y contaminaría las 28 rutas.
+ * Por eso aborta si detecta un dist ya prerenderizado.
+ */
+function readTemplate() {
+  const p = path.join(distDir, 'index.html');
+  if (!fs.existsSync(p)) throw new Error('Falta dist/index.html. Ejecuta `vite build` primero.');
+  const tpl = fs.readFileSync(p, 'utf-8');
+  if (!/<div id="root">\s*<\/div>/i.test(tpl)) {
+    throw new Error(
+      'dist/index.html ya está prerenderizado. Ejecuta `vite build` para regenerar el shell antes de prerenderizar.'
+    );
   }
+  return tpl;
 }
 
-function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+/**
+ * spa.html = shell limpio al que apunta el rewrite catch-all de vercel.json.
+ * Sin esto, las rutas NO prerenderizadas (/dashboard, /auth, /checkout, 404...) caerían
+ * en dist/index.html, que ahora contiene la home renderizada: servirían el HTML de la home.
+ */
+function writeSpaFallback(template) {
+  fs.writeFileSync(path.join(distDir, 'spa.html'), template, 'utf-8');
 }
 
-// ── Pattern 1: <Helmet>...</Helmet> (puede haber varios) ──────────────────
-
-function extractHelmetBlocks(tsxSource) {
-  const blocks = [];
-  const regex = /<Helmet[^>]*>([\s\S]*?)<\/Helmet>/g;
-  let m;
-  while ((m = regex.exec(tsxSource)) !== null) blocks.push(m[1].trim());
-  return blocks;
+/** Quita del template los tags de <head> que Helmet va a re-emitir, para no duplicar. */
+function stripStaticHead(template) {
+  return template
+    .replace(/<title>[\s\S]*?<\/title>/i, '')
+    .replace(/<meta\s+name="description"[^>]*>/i, '')
+    .replace(/<link\s+rel="canonical"[^>]*>/i, '');
 }
 
-function jsxHelmetToHtml(jsx, url) {
-  let html = jsx;
-
-  html = html.replace(
-    /<script\s+type="application\/ld\+json">\s*\{\s*JSON\.stringify\(([\s\S]*?)\)\s*\}\s*<\/script>/g,
-    (_full, lit) => {
-      const result = evalJsLiteral(lit, url);
-      return result ? `<script type="application/ld+json">${JSON.stringify(result)}</script>` : '';
-    }
+function buildPage(template, head, html) {
+  let out = stripStaticHead(template);
+  out = out.replace(/<\/head>/i, `    ${head}\n  </head>`);
+  out = out.replace(
+    /<div id="root">\s*<\/div>/i,
+    `<div id="root">${html}</div>`
   );
-
-  html = html.replace(
-    /<script\s+type="application\/ld\+json"\s+dangerouslySetInnerHTML=\{\{\s*__html:\s*JSON\.stringify\(([\s\S]*?)\)\s*\}\}\s*\/>/g,
-    (_full, lit) => {
-      const result = evalJsLiteral(lit, url);
-      return result ? `<script type="application/ld+json">${JSON.stringify(result)}</script>` : '';
-    }
-  );
-
-  html = html.replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
-  html = html.replace(/\{[^{}]*\}/g, '');
-  html = html.replace(/\n\s*\n\s*\n/g, '\n\n');
-  return html.trim();
+  return out;
 }
 
-// ── Pattern 2: useGeoMetadata({...}) ───────────────────────────────────────
-
-function extractGeoMetadataCall(tsxSource) {
-  const start = tsxSource.search(/useGeoMetadata\s*\(\s*\{/);
-  if (start === -1) return null;
-  const openIdx = tsxSource.indexOf('{', start);
-  let depth = 0;
-  let inString = false;
-  let stringChar = '';
-  for (let i = openIdx; i < tsxSource.length; i++) {
-    const c = tsxSource[i];
-    if (inString) {
-      if (c === '\\') { i++; continue; }
-      if (c === stringChar) inString = false;
-    } else {
-      if (c === '"' || c === "'" || c === '`') { inString = true; stringChar = c; continue; }
-      if (c === '{') depth++;
-      else if (c === '}') {
-        depth--;
-        if (depth === 0) return tsxSource.slice(openIdx, i + 1);
-      }
-    }
-  }
-  return null;
-}
-
-function geoMetadataToHtml(propsLiteral, url) {
-  const props = evalJsLiteral(propsLiteral, url);
-  if (!props) return null;
-
-  const title = props.title || '';
-  const fullTitle = title.includes('esGEO') ? title : `${title} | esGEO`;
-  const description = props.description || '';
-  const canonicalUrl = props.canonicalUrl || url;
-  const keywords = Array.isArray(props.keywords) ? props.keywords : [];
-  const citationTitle = props.citationTitle || title;
-  const author = props.author || 'esGEO';
-  const speakableSelectors = props.speakableSelectors || [".snippet-block", "[data-speakable='true']"];
-  const geoTxtPath = props.geoTxtPath || '';
-  const today = new Date().toISOString().slice(0, 10);
-
-  const tags = [
-    `<title>${escapeHtml(fullTitle)}</title>`,
-    `<meta name="description" content="${escapeHtml(description)}" />`,
-    `<link rel="canonical" href="${escapeHtml(canonicalUrl)}" />`,
-    geoTxtPath ? `<link rel="alternate" type="text/plain" href="${escapeHtml(geoTxtPath)}" title="Versión citable para IA - Formato texto plano optimizado para LLMs" />` : '',
-    `<meta name="citation_title" content="${escapeHtml(citationTitle)}" />`,
-    `<meta name="citation_author" content="${escapeHtml(author)}" />`,
-    `<meta name="citation_publication_date" content="2024" />`,
-    `<meta name="citation_online_date" content="${today}" />`,
-    `<meta name="citation_language" content="es" />`,
-    `<meta name="citation_publisher" content="esGEO" />`,
-    `<meta name="citation_format" content="text/html" />`,
-    geoTxtPath ? `<meta name="citation_fulltext_world_readable" content="https://esgeo.ai${escapeHtml(geoTxtPath)}" />` : '',
-    keywords.length ? `<meta name="citation_keywords" content="${escapeHtml(keywords.join(', '))}" />` : '',
-    `<meta name="speakable-selector" content="${escapeHtml(speakableSelectors.join(', '))}" />`,
-    `<meta property="og:title" content="${escapeHtml(fullTitle)}" />`,
-    `<meta property="og:description" content="${escapeHtml(description)}" />`,
-    `<meta property="og:type" content="article" />`,
-    `<meta property="og:url" content="${escapeHtml(canonicalUrl)}" />`,
-    `<meta property="og:image" content="https://esgeo.ai/og-image.png" />`,
-    `<meta property="og:locale" content="es_ES" />`,
-    `<meta property="og:site_name" content="esGEO" />`,
-    `<meta property="article:author" content="${escapeHtml(author)}" />`,
-    `<meta property="article:publisher" content="esGEO" />`,
-    `<meta name="twitter:card" content="summary_large_image" />`,
-    `<meta name="twitter:title" content="${escapeHtml(fullTitle)}" />`,
-    `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
-    `<meta name="twitter:image" content="https://esgeo.ai/og-image.png" />`,
-  ].filter(Boolean);
-  return tags.join('\n    ');
-}
-
-// ── main ───────────────────────────────────────────────────────────────────
-
-function readTemplateOnce() {
-  const indexPath = path.join(distDir, 'index.html');
-  if (!fs.existsSync(indexPath)) throw new Error(`Missing dist/index.html. Run \`vite build\` first.`);
-  return fs.readFileSync(indexPath, 'utf-8');
-}
-
-function injectIntoHead(template, tagsHtml) {
-  return template.replace(/<\/head>/i, `\n    ${tagsHtml}\n  </head>`);
-}
-
-function safeWritePage(route, html) {
-  let filePath;
-  if (route === '/') {
-    filePath = path.join(distDir, 'index.html');
-  } else {
-    filePath = path.join(distDir, route, 'index.html');
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  }
+function writePage(route, html) {
+  const filePath = route === '/'
+    ? path.join(distDir, 'index.html')
+    : path.join(distDir, route, 'index.html');
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, html, 'utf-8');
 }
 
-async function prerender() {
-  console.log('🚀 Static prerender v3.2 (no browser)\n');
+async function main() {
+  console.log('🚀 Prerender v4 — SSR real (renderToPipeableStream, sin browser)\n');
 
-  const template = readTemplateOnce();
-  let success = 0, failed = 0;
-
-  for (const [route, file] of Object.entries(ROUTE_TO_FILE)) {
-    const tsxPath = path.join(srcDir, file);
-    process.stdout.write(`📄 ${route.padEnd(55)}  `);
-
-    if (!fs.existsSync(tsxPath)) {
-      console.log(`✗ source missing`);
-      failed++;
-      continue;
-    }
-
-    const src = fs.readFileSync(tsxPath, 'utf-8');
-    const url = `https://esgeo.ai${route === '/' ? '' : route}`;
-    const tagParts = [];
-
-    // 1. Si usa useGeoMetadata, esos son los tags base (incluyen title/meta/canonical)
-    const metaCall = extractGeoMetadataCall(src);
-    if (metaCall) {
-      const part = geoMetadataToHtml(metaCall, url);
-      if (part) tagParts.push(part);
-    }
-
-    // 2. CADA <Helmet> inline aporta tags adicionales (schema FAQ extra, etc.)
-    const helmetBlocks = extractHelmetBlocks(src);
-    for (const block of helmetBlocks) {
-      const part = jsxHelmetToHtml(block, url);
-      if (part) tagParts.push(part);
-    }
-
-    const tagsHtml = tagParts.join('\n    ').trim();
-
-    if (!tagsHtml) {
-      console.log(`⚠ no SEO source found, using base template`);
-      safeWritePage(route, template);
-      failed++;
-      continue;
-    }
-
-    const html = injectIntoHead(template, tagsHtml);
-    safeWritePage(route, html);
-
-    const kb = (html.length / 1024).toFixed(1);
-    console.log(`✓ ${kb} KB`);
-    success++;
+  if (!fs.existsSync(ssrEntry)) {
+    throw new Error(`Falta ${ssrEntry}. Ejecuta \`vite build --ssr src/entry-server.tsx --outDir dist-ssr\` primero.`);
   }
 
-  console.log(`\n✅ Prerender complete: ${success}/${Object.keys(ROUTE_TO_FILE).length} routes`);
-  if (failed > 0) console.log(`⚠️  ${failed} routes had warnings`);
-  if (success === 0) process.exit(1);
+  const { render } = await import(pathToFileURL(ssrEntry).href);
+  const template = readTemplate();
+  writeSpaFallback(template);
+
+  let ok = 0;
+  const failures = [];
+  const thin = [];
+
+  for (const route of ROUTES) {
+    process.stdout.write(`📄 ${route.padEnd(52)} `);
+    try {
+      const { html, head } = await render(route);
+      const page = buildPage(template, head, html);
+      const chars = textLength(page);
+      const hasH1 = /<h1[\s>]/i.test(page);
+
+      if (page.includes('<div id="root"></div>')) {
+        throw new Error('el body quedó vacío (root sin contenido)');
+      }
+      // Un ErrorBoundary que salta durante el SSR deja una página de ~130 chars:
+      // eso es un fallo, no una página fina.
+      if (chars < 300 || !hasH1) {
+        throw new Error(`render degradado (${chars} chars, h1:${hasH1}) — probablemente un ErrorBoundary`);
+      }
+
+      writePage(route, page);
+      ok++;
+
+      const isCritical = CRITICAL_ROUTES.includes(route);
+      const thinPage = isCritical && chars < MIN_TEXT_CHARS;
+      if (thinPage) thin.push(`${route} (${chars} chars < ${MIN_TEXT_CHARS})`);
+
+      console.log(
+        `${thinPage ? '⚠' : '✓'} ${(page.length / 1024).toFixed(1)} KB · ${chars} chars texto · h1:${hasH1 ? 'sí' : 'NO'}`
+      );
+    } catch (e) {
+      failures.push(`${route}: ${e.message}`);
+      console.log(`✗ ${e.message}`);
+    }
+  }
+
+  console.log(`\n✅ ${ok}/${ROUTES.length} rutas prerenderizadas con body completo`);
+
+  if (thin.length) {
+    console.log('\n⚠️  Rutas críticas por debajo del umbral del DoD:');
+    thin.forEach((t) => console.log(`   - ${t}`));
+  }
+  if (failures.length) {
+    console.log('\n❌ Fallos:');
+    failures.forEach((f) => console.log(`   - ${f}`));
+    process.exit(1);
+  }
+  if (thin.length) process.exit(1);
 }
 
-prerender().catch(e => { console.error('Fatal:', e); process.exit(1); });
+main().catch((e) => {
+  console.error('Fatal:', e);
+  process.exit(1);
+});

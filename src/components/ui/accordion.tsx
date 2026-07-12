@@ -38,12 +38,23 @@ const AccordionTrigger = React.forwardRef<
 ))
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
+/**
+ * AccordionContent — `forceMount` a propósito.
+ *
+ * Por defecto Radix desmonta el contenido cerrado: el HTML servido tenía las preguntas
+ * de las FAQ pero NO las respuestas (21 bloques cerrados solo en la home). Los crawlers
+ * de IA no ejecutan JS ni hacen clic: para ellos ese contenido no existía.
+ *
+ * Con forceMount el contenido vive siempre en el DOM; Radix le pone `hidden` cuando está
+ * cerrado, así que la UX humana no cambia y la máquina sí lo lee.
+ */
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
+    forceMount
     className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >

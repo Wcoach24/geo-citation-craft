@@ -58,15 +58,28 @@ const PageLoader = () => (
   </div>
 );
 
-function App() {
+/**
+ * AppProviders — providers agnósticos de router. Los usa tanto el cliente
+ * (BrowserRouter) como el prerender SSR (StaticRouter, ver src/entry-server.tsx).
+ */
+export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
+          <TooltipProvider>{children}</TooltipProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  );
+}
+
+/**
+ * AppRoutes — tabla de rutas única. Fuente de verdad compartida cliente/servidor:
+ * si se añade una ruta aquí, el prerender la ve.
+ */
+export function AppRoutes() {
+  return (
             <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -122,13 +135,20 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             </Suspense>
-          </BrowserRouter>
-            <Analytics />
-            <SpeedInsights />
-        </TooltipProvider>
-        </AuthProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
+  );
+}
+
+function App() {
+  return (
+    <AppProviders>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+      <Analytics />
+      <SpeedInsights />
+    </AppProviders>
   );
 }
 

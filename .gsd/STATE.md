@@ -1,33 +1,29 @@
 # State
 
 ## Current Phase
-Phase 1: Fix the Funnel — ✅ COMPLETED
+FASE 0 (La web habla) — en ejecución. Sesión 2026-07-12.
+Alcance de esta sesión: F0 + F1 + F2.
 
 ## Completed
-- Project analysis and architecture review
-- GSC + Clarity data analysis
-- Design doc approved (2026-03-20)
-- GSD Document Stack generated
-- Phase 1 executed: 3 waves, 8 tasks, all verified 26/26 requirements
-- Gap closure: 2 fixes applied, build clean
-
-## Next Up
-- Commit changes to git + create PR
-- Phase 2: SEO Técnico + Prerendering
+- 2026-03-20: Fase "Fix the Funnel" ejecutada y verificada (26/26 reqs). Ver VERIFICATION.md.
+- 2026-07-12: diagnóstico HABLA → www.esgeo.ai = 35/100 (MUDA), gate A FALLIDO.
+- 2026-07-12: roadmap reescrito con el Plan Definitivo (F0–F5).
 
 ## Decisions Log
-- 2026-03-20: Eliminar módulos individuales, solo curso completo €47
-- 2026-03-20: No migrar a SSR, solo prerendering con vite-plugin-prerender
-- 2026-03-20: Design tokens tipo #43 E-learning (Teal + Orange + Claymorphism)
-- 2026-03-20: CTA directo a Stripe sin /checkout intermedia
-- 2026-03-20: Personalización client-side con localStorage (privacy-first)
-- 2026-03-20: Plus Jakarta Sans (headings) + Inter (body)
-- 2026-03-20: Inline checkout en /curso, /checkout redirect
-- 2026-03-20: Social proof con datos reales, no testimonios fabricados
-- 2026-03-20: Email capture guarda en localStorage + intenta Supabase
+- 2026-03-20: solo curso completo €47, sin módulos sueltos.
+- 2026-03-20: CTA directo a Stripe sin /checkout intermedia.
+- 2026-03-20: tokens E-learning (Teal #0D9488 + Orange #EA580C), Plus Jakarta Sans + Inter.
+- 2026-07-12 (D1): prerender = entry-server + renderToString, sin Chromium.
+- 2026-07-12 (D2): cliente sigue con createRoot (no hydrateRoot) — la personalización por
+  localStorage haría mismatch garantizado.
+- 2026-07-12 (D3): guards de browser en useVisitorState y supabase/client.
+- 2026-07-12 (D5): rama + PR + preview; merge solo con DoD verde.
+- 2026-07-12 (D6): www.esgeo.ai canónico. No tocar la redirección apex→www.
+- 2026-07-12 (D7): .geo.txt degradado a experimento; llms.txt es el fichero real.
 
 ## Known Issues
-- Supabase tabla email_leads no existe aún (capture falla silenciosamente)
-- Resend API key status desconocido
-- Vercel project marcado live: false
-- www.esgeo.ai y esgeo.ai duplicación en GSC (pendiente Phase 2)
+- Supabase tabla email_leads: estado desconocido (capture puede fallar en silencio).
+- Resend API key: estado desconocido.
+- `src/integrations/supabase/client.ts` está marcado como autogenerado por Lovable: si Lovable
+  lo regenera, se pierde el guard de localStorage y el build SSR rompe.
+- El PAT de geo-citation-craft se pegó en un chat → comprometido. Revocar tras esta sesión.

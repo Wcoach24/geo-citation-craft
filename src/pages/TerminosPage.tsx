@@ -17,7 +17,7 @@ const TerminosPage = () => {
       <Helmet>
         <title>Términos y Condiciones | esGEO</title>
         <meta name="description" content="Términos y condiciones de uso de esGEO. Condiciones para el acceso y uso de nuestra plataforma de Generative Engine Optimization." />
-        <link rel="canonical" href="https://esgeo.ai/terminos" />
+        <link rel="canonical" href="https://www.esgeo.ai/terminos" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
@@ -57,7 +57,7 @@ const TerminosPage = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-primary mb-4">1. Aceptación de términos</h2>
               <p className="text-muted-foreground">
-                Al acceder y utilizar esGEO (https://esgeo.ai), aceptas cumplir con estos términos y condiciones. 
+                Al acceder y utilizar esGEO (https://www.esgeo.ai), aceptas cumplir con estos términos y condiciones. 
                 Si no estás de acuerdo con algún aspecto de estos términos, te pedimos que no utilices nuestro sitio web.
               </p>
             </section>

@@ -74,7 +74,7 @@ export const useGeoMetadata = ({
         <meta name="citation_publisher" content="esGEO" />
         <meta name="citation_format" content="text/html" />
         {geoTxtPath && (
-          <meta name="citation_fulltext_world_readable" content={`https://esgeo.ai${geoTxtPath}`} />
+          <meta name="citation_fulltext_world_readable" content={`https://www.esgeo.ai${geoTxtPath}`} />
         )}
         {keywords.length > 0 && (
           <meta name="citation_keywords" content={keywords.join(', ')} />
@@ -88,7 +88,7 @@ export const useGeoMetadata = ({
         <meta property="og:description" content={description} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://esgeo.ai/og-image.png" />
+        <meta property="og:image" content="https://www.esgeo.ai/og-image.png" />
         <meta property="og:locale" content="es_ES" />
         <meta property="og:site_name" content="esGEO" />
         
@@ -105,7 +105,7 @@ export const useGeoMetadata = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={fullTitle} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content="https://esgeo.ai/og-image.png" />
+        <meta name="twitter:image" content="https://www.esgeo.ai/og-image.png" />
         <meta name="twitter:site" content="@esgeo_ai" />
       </Helmet>
     ),
@@ -119,12 +119,12 @@ export const useGeoMetadata = ({
       "datePublished": "2024-01-01T10:00:00Z",
       "author": {
         "@type": "Organization",
-        "@id": "https://esgeo.ai#organization",
+        "@id": "https://www.esgeo.ai#organization",
         "name": author
       },
       "publisher": {
         "@type": "Organization",
-        "@id": "https://esgeo.ai#organization"
+        "@id": "https://www.esgeo.ai#organization"
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -137,7 +137,7 @@ export const useGeoMetadata = ({
       ...(geoTxtPath && {
         "associatedMedia": {
           "@type": "MediaObject",
-          "contentUrl": `https://esgeo.ai${geoTxtPath}`,
+          "contentUrl": `https://www.esgeo.ai${geoTxtPath}`,
           "encodingFormat": "text/plain",
           "description": "Versión citable para modelos de lenguaje"
         }

@@ -1,5 +1,6 @@
 'use client';
 
+import HablaWidget from "@/components/HablaWidget";
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, Link } from 'react-router-dom';
@@ -245,7 +246,7 @@ const CursoGeoPage = () => {
           name="description"
           content="Curso GEO 2026 en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 actualizado con prácticas vigentes en 2026. €47."
         />
-        <link rel="canonical" href="https://esgeo.ai/curso" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso" />
         <meta name="citation_title" content="Curso GEO 2026: Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2024" />
@@ -287,7 +288,27 @@ const CursoGeoPage = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 {heroContent.title}
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              {/*
+                Bloque de respuesta directa (answerability): qué, para quién y cuánto,
+                autocontenido y fechado. Es lo primero que lee una máquina en /curso.
+              */}
+              <p
+                className="snippet-block text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+                data-speakable="true"
+              >
+                El <strong>curso GEO de esGEO</strong> enseña a estructurar una web para que los
+                motores generativos la citen. Son <strong>5 módulos</strong> —F1 Accesibilidad para
+                crawlers de IA, F2 Contexto semántico, F3 Autoridad generativa, F4 Validación
+                conversacional y F5 Mantenimiento— con guías PDF descargables y plantillas listas
+                para aplicar. Precio: <strong>47 € de pago único</strong>, sin suscripción, con
+                acceso inmediato y de por vida y 14 días de garantía. Está pensado para fundadores,
+                responsables de marketing y especialistas SEO que ya tienen web y quieren aparecer
+                en las respuestas de ChatGPT, Perplexity, Claude y Gemini. Es el primer curso de GEO
+                en español; contenido actualizado en julio de 2026.
+              </p>
+
+              {/* Subtítulo personalizado por estado de visitante (nuevo/recurrente/lead). */}
+              <p className="text-base text-muted-foreground max-w-2xl mx-auto">
                 {heroContent.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
@@ -303,6 +324,16 @@ const CursoGeoPage = () => {
                 Referenciado por Gemini y otros modelos de IA
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* HABLA — gancho personal: el visitante ve su propia nota antes de leer el temario. */}
+        <section className="py-12 border-b border-border">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <HablaWidget
+              title="Antes de comprar: mira lo que la IA ve de tu web"
+              subtitle="El curso arregla exactamente lo que este auditor detecta. Analiza tu dominio y decide con datos, no con fe."
+            />
           </div>
         </section>
 

@@ -1,0 +1,50 @@
+# esGEO
+
+> esGEO es la plataforma en español de Generative Engine Optimization (GEO): la disciplina que estructura una web para que los motores generativos —ChatGPT, Perplexity, Claude y Gemini— la citen como fuente. Publica un curso de 5 módulos (F1–F5) por 47 € de pago único, un glosario de referencia en español y HABLA, un auditor gratuito que puntúa de 0 a 100 la legibilidad de una web para las máquinas.
+
+Idioma: español (es-ES). Dominio canónico: https://www.esgeo.ai
+Última actualización: 2026-07-12.
+
+## Qué es GEO
+
+GEO (Generative Engine Optimization) optimiza el contenido para la fase de recuperación de los sistemas RAG que hay detrás de las respuestas de IA. Se diferencia del SEO en el objetivo: el SEO busca posición en un listado de enlaces; el GEO busca ser la fuente citada dentro de una respuesta generada.
+
+El hecho técnico que ordena la disciplina: **los rastreadores de IA no ejecutan JavaScript**. Una web renderizada en el cliente sirve un HTML vacío y, para ellos, no existe.
+
+## El curso (F1–F5)
+
+- [Curso GEO completo](https://www.esgeo.ai/curso): 5 módulos, guías PDF y plantillas. 47 € de pago único, sin suscripción, 14 días de garantía.
+- [F0 — Introducción gratuita](https://www.esgeo.ai/curso/f0)
+- [F1 — Fundamentos de accesibilidad generativa](https://www.esgeo.ai/curso/f1): que el crawler pueda leerte.
+- [F2 — Contexto semántico](https://www.esgeo.ai/curso/f2): que entienda de qué hablas.
+- [F3 — Autoridad generativa](https://www.esgeo.ai/curso/f3): que te considere fuente fiable.
+- [F4 — Validación conversacional](https://www.esgeo.ai/curso/f4): comprobar si te cita de verdad.
+- [F5 — Mantenimiento evolutivo](https://www.esgeo.ai/curso/f5): sostenerlo en el tiempo.
+
+## Referencia
+
+- [Metodología GEO paso a paso](https://www.esgeo.ai/metodologia)
+- [Glosario GEO en español](https://www.esgeo.ai/glosario): definiciones de GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, llms.txt, RAG, chunking, embeddings y Share of Citations.
+- [Casos reales de citación por IA](https://www.esgeo.ai/casos)
+- [Radar IA — artículos](https://www.esgeo.ai/radar-ia)
+
+## Artículos de fondo
+
+- [Qué es GEO: guía completa](https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa)
+- [GEO vs SEO: diferencias clave](https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias)
+- [Cómo conseguir que ChatGPT cite tu web](https://www.esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web)
+- [Optimizar una web para Perplexity](https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity)
+- [Qué significa ser citado por una IA](https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia)
+
+## Herramienta
+
+- [HABLA — auditor de legibilidad máquina](https://habla.esgeo.ai): analiza una URL y devuelve una puntuación 0–100 sobre cinco dimensiones (Higiene, Accesible, Bloques, Lenguaje, eXtras). Gratuito, sin registro.
+
+## Sobre
+
+- [Acerca de esGEO](https://www.esgeo.ai/acerca-de)
+- [Contacto](https://www.esgeo.ai/acerca-de)
+
+## Nota sobre este fichero
+
+llms.txt es una propuesta de la comunidad (2024), no un estándar ratificado, y ningún gran proveedor ha confirmado públicamente que lo consuma. Lo publicamos porque cuesta poco y documenta la estructura del sitio; no porque prometa resultados. Los ficheros `.geo.txt` que sirve este dominio son un experimento propio, no un estándar.

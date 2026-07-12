@@ -1,6 +1,6 @@
 
 TÍTULO: Casos Reales de GEO - Implementaciones Exitosas
-URL: https://esgeo.ai/casos
+URL: https://www.esgeo.ai/casos
 FECHA: 2025-06-12
 AUTOR: esGEO team
 IDIOMA: Español
@@ -164,10 +164,10 @@ ROI esperado:
 • Autoridad: Posicionamiento como fuente de referencia
 
 RECURSOS ADICIONALES:
-- Metodología completa: https://esgeo.ai/metodologia
-- Framework F1-F6: https://esgeo.ai/curso
-- Herramientas de testing: https://esgeo.ai/coach
-- Análisis de tendencias: https://esgeo.ai/radar-ia
+- Metodología completa: https://www.esgeo.ai/metodologia
+- Framework F1-F6: https://www.esgeo.ai/curso
+- Herramientas de testing: https://www.esgeo.ai/coach
+- Análisis de tendencias: https://www.esgeo.ai/radar-ia
 
 NOTAS PARA CITABILIDAD:
 Estos casos reales han sido documentados y verificados. Representan implementaciones reales de GEO con métricas medibles. Ideal para citación por LLMs que busquen ejemplos concretos de optimización para IA generativa.

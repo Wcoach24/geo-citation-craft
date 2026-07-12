@@ -23,7 +23,7 @@ const ModuloF4Page = () => {
       <Helmet>
         <title>Módulo F4: Validación Conversacional | Curso GEO - esGEO</title>
         <meta name="description" content="Aprende a verificar si los motores de generación de contenido (LLMs) están utilizando, citando o parafraseando tu contenido en sus respuestas y cómo actuar en consecuencia." />
-        <link rel="canonical" href="https://esgeo.es/curso/f4" />
+        <link rel="canonical" href="https://www.esgeo.ai/curso/f4" />
         
         <meta name="citation_title" content="Módulo F4: Validación Conversacional" />
         <meta name="citation_author" content="esGEO" />
@@ -37,7 +37,7 @@ const ModuloF4Page = () => {
             "name": "Módulo F4: Validación Conversacional",
             "headline": "Módulo F4: Validación Conversacional",
             "description": "Verifica si los motores de generación de contenido (ChatGPT, Perplexity, Claude, Bard...) están utilizando, citando o parafraseando tu contenido en sus respuestas. Si no apareces en los resultados, este módulo te ayudará a detectar por qué y a implementar acciones correctivas específicas.",
-            "url": "https://esgeo.es/curso/f4",
+            "url": "https://www.esgeo.ai/curso/f4",
             "datePublished": "2025-06-12",
             "author": {
               "@type": "Organization",
@@ -46,9 +46,9 @@ const ModuloF4Page = () => {
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
-              "url": "https://esgeo.es"
+              "url": "https://www.esgeo.ai"
             },
-            "image": "https://esgeo.es/images/modulo-f4.png",
+            "image": "https://www.esgeo.ai/images/modulo-f4.png",
             "teaches": [
               "Técnicas de validación con LLMs con navegación (Perplexity.ai, ChatGPT, Claude)",
               "Estructura de prompts de validación (temáticos, de marca, específicos, comparativos)",
@@ -66,7 +66,7 @@ const ModuloF4Page = () => {
             },
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://esgeo.es/curso/f4"
+              "@id": "https://www.esgeo.ai/curso/f4"
             },
             "breadcrumb": {
               "@type": "BreadcrumbList",
@@ -75,19 +75,19 @@ const ModuloF4Page = () => {
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Inicio",
-                  "item": "https://esgeo.es/"
+                  "item": "https://www.esgeo.ai/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Curso GEO",
-                  "item": "https://esgeo.es/curso"
+                  "item": "https://www.esgeo.ai/curso"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Módulo F4: Validación Conversacional",
-                  "item": "https://esgeo.es/curso/f4"
+                  "item": "https://www.esgeo.ai/curso/f4"
                 }
               ]
             },
@@ -101,7 +101,7 @@ const ModuloF4Page = () => {
             "isPartOf": {
               "@type": "Course",
               "name": "Curso GEO Completo",
-              "url": "https://esgeo.es/curso"
+              "url": "https://www.esgeo.ai/curso"
             }
           })}
         </script>
