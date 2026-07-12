@@ -90,7 +90,7 @@ const InlineEmailCapture = ({
           </form>
           
           <p className="text-xs text-muted-foreground">
-            📧 Sin spam • Recursos exclusivos • Cancela cuando quieras
+            Solo para enviarte el recurso. Sin spam. Te das de baja con un clic.
           </p>
         </div>
       </CardContent>

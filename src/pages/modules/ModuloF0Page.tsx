@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, FileText, ArrowRight, AlertTriangle, Target, Zap, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 import Footer from "@/components/Footer";
 
 const ModuloF0Page = () => {
@@ -184,7 +185,7 @@ const ModuloF0Page = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">Empieza con F1 (€10) y avanza módulo a módulo según tus resultados</p>
+                  <p className="text-sm text-muted-foreground">Lee F1 gratis y aplica lo que puedas por tu cuenta. Sin pagar nada.</p>
                   <Button asChild className="w-full">
                     <Link to="/curso/f1">
                       Empezar con F1: Accesibilidad
@@ -202,13 +203,10 @@ const ModuloF0Page = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">Acceso completo a F1-F5 — precio de lanzamiento €47</p>
-                  <Button variant="outline" asChild className="w-full">
-                    <Link to="/checkout?type=complete">
-                      Ver Curso Completo
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </Button>
+                  <p className="text-sm text-muted-foreground">Los 5 módulos (F1 a F5) en PDF. 47 € de pago único.</p>
+                  <BuyButton source="modulo-f0" className="btn-cta w-full text-sm">
+                    Comprar el curso — 47 €
+                  </BuyButton>
                 </CardContent>
               </Card>
             </div>

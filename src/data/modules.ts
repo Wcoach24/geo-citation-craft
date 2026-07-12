@@ -84,15 +84,18 @@ export const COMPLETE_COURSE = {
   name: 'Curso GEO Completo',
   description: 'Acceso completo a todos los módulos del curso GEO con metodología integral.',
   price: 47,
-  originalPrice: 97,
-  launchPrice: true,
-  stripeIds: { priceId: 'price_1SISmrLVUGCJuFgUOUi48HYz', productId: 'prod_TEwgtqUMZscsp8' },
+  // Sin `originalPrice`: el €97 tachado nunca se cobró. En la UE (Directiva Omnibus) el
+  // precio anterior tiene que haberse aplicado de verdad. El anclaje ahora es comparativo
+  // y honesto: lo que cuesta una auditoría GEO frente a lo que cuesta el curso.
+  launchPrice: false,
+  // Los stripeIds vivían aquí duplicados y apuntaban a OTRA cuenta de Stripe
+  // (prefijo LVUGCJuFgU, no LYFGrlrWdk). Código muerto y peligroso: la fuente de
+  // verdad es api/checkout.ts, que es donde se crea la sesión de pago.
   features: [
-    '5 módulos fundamentales (F1-F5) — 142 páginas',
-    'Acceso a los 5 módulos por menos que un café al día',
-    'Metodología práctica paso a paso',
-    'Casos de estudio reales incluidos',
-    'Actualizaciones de contenido gratuitas',
+    '5 módulos (F1 a F5) en PDF, tuyos para siempre',
+    'El método aplicado paso a paso, con checklists',
+    'El caso real de esgeo.ai: de 35 a 92 sobre 100',
+    'Actualizaciones incluidas',
   ],
 };
 
@@ -110,7 +113,7 @@ export const getModuleName = (id: string): string =>
 
 /** Get Stripe price/product mapping */
 export const getStripeIds = (key: string) => {
-  if (key === 'complete') return COMPLETE_COURSE.stripeIds;
+  if (key === 'complete') return null; // los IDs de Stripe viven en api/checkout.ts
   return MODULES[key]?.stripeIds ?? null;
 };
 

@@ -177,7 +177,7 @@ const GeoScorePage = () => {
               El auditor te dice qué falla. El curso te enseña a arreglarlo.
             </h2>
             <p className="text-primary-foreground/75 mb-7">
-              5 módulos, guías PDF y plantillas. 47 € de pago único, 14 días de garantía.
+              5 módulos, guías PDF y plantillas. 47 € de pago único, sin suscripción.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild size="lg" variant="secondary">

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Search, Users, Target, BarChart, Zap, ArrowRight, Lock, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 import { MODULES, COMPLETE_COURSE } from "@/data/modules";
 
 const MODULE_ICONS = [FileText, Search, Users, Target, BarChart, Zap];
@@ -18,7 +19,7 @@ const MethodologySection = () => {
               Framework F1-F5
             </Badge>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
-              6 Módulos Progresivos
+              5 módulos, en orden
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Cada módulo se construye sobre el anterior. Empieza por F0 gratis y avanza a tu ritmo.
@@ -72,27 +73,22 @@ const MethodologySection = () => {
 
           {/* CTA pack completo */}
           <div className="text-center rounded-2xl bg-muted/40 border border-accent/20 p-8">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Badge className="bg-accent/15 text-accent border-accent/30 cursor-default">Precio de lanzamiento</Badge>
-            </div>
             <h3 className="text-2xl font-bold text-primary mb-2">
-              Pack Completo F1-F5
+              Los 5 módulos, en un pago
             </h3>
             <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-              Acceso a los 5 módulos fundamentales + guías PDF + actualizaciones gratuitas.
+              F1 a F5 en PDF, con las checklists y el caso real de esgeo.ai. Tuyos para siempre.
             </p>
             <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="text-lg text-muted-foreground line-through">€{COMPLETE_COURSE.originalPrice}</span>
               <span className="text-4xl font-bold text-primary">€{COMPLETE_COURSE.price}</span>
-              <span className="text-sm text-muted-foreground">pago único</span>
+              <span className="text-sm text-muted-foreground">pago único, sin suscripción</span>
             </div>
-            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-6 text-lg rounded-xl cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent" asChild>
-              <Link to="/checkout?plan=complete">
-                <Zap className="mr-2 h-5 w-5" />
-                Comprar Curso Completo
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+            <BuyButton
+              source="metodologia-home"
+              className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-6 text-lg rounded-xl"
+            >
+              Comprar el curso — 47 €
+            </BuyButton>
             <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs text-muted-foreground">
               {COMPLETE_COURSE.features.slice(0, 3).map((f, i) => (
                 <span key={i} className="flex items-center gap-1 cursor-default">

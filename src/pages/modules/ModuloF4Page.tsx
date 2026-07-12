@@ -12,6 +12,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Target, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 
 const ModuloF4Page = () => {
   useEffect(() => {
@@ -188,12 +189,9 @@ const ModuloF4Page = () => {
                 Módulo Anterior: F3
               </Link>
             </Button>
-            <Button asChild>
-              <Link to="/checkout">
-                Desbloquear F4 Completo
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
+            <BuyButton source="modulo-f4" className="btn-cta text-sm">
+              Desbloquear los 5 módulos — 47 €
+            </BuyButton>
           </div>
 
           {/* Contenido Relacionado - Preview */}
@@ -204,9 +202,9 @@ const ModuloF4Page = () => {
               <p>✓ Herramientas de análisis de consultas</p>
               <p>✓ Estrategias de optimización de contenido</p>
               <p>✓ Casos prácticos de implementación</p>
-              <Button variant="outline" size="sm" asChild className="mt-4">
-                <Link to="/checkout">Acceder al Contenido Completo</Link>
-              </Button>
+              <BuyButton source="modulo-f4-gate" className="btn-cta text-sm mt-4" showArrow={false}>
+                Acceder al contenido completo — 47 €
+              </BuyButton>
             </div>
           </div>
         </div>

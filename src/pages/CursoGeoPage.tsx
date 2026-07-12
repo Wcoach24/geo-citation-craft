@@ -125,12 +125,12 @@ const CursoGeoPage = () => {
     {
       id: 'faq-tiempo-completar',
       question: '¿Cuánto tiempo necesito para completar el curso?',
-      answer: 'El curso tiene 15 horas totales. Muchos lo completan en 2-3 semanas dedicando 1-2 horas diarias, aunque puedes hacerlo a tu ritmo.',
+      answer: 'Son 5 guías en PDF que se leen en una tarde. Aplicarlas es lo que lleva tiempo: cuenta con una o dos sesiones de trabajo por módulo sobre tu propia web. No hay clases en directo ni plazos; lo haces a tu ritmo y los PDFs son tuyos para siempre.',
     },
     {
       id: 'faq-actualizaciones',
       question: '¿Se actualiza el contenido?',
-      answer: 'Sí. El curso se actualiza cada mes con nuevas técnicas y cambios en los modelos de IA. Todos los usuarios tienen acceso automático a las actualizaciones.',
+      answer: 'Sí, y las actualizaciones van incluidas: si compras hoy, recibes las versiones nuevas sin pagar otra vez. No prometemos una cadencia fija. Actualizamos cuando cambia algo que de verdad afecta a la citabilidad, no para poder decir que actualizamos cada mes.',
     },
     {
       id: 'faq-curso-2026',
@@ -301,7 +301,7 @@ const CursoGeoPage = () => {
                 crawlers de IA, F2 Contexto semántico, F3 Autoridad generativa, F4 Validación
                 conversacional y F5 Mantenimiento— con guías PDF descargables y plantillas listas
                 para aplicar. Precio: <strong>47 € de pago único</strong>, sin suscripción, con
-                acceso inmediato y de por vida y 14 días de garantía. Está pensado para fundadores,
+                acceso inmediato y los PDFs tuyos para siempre. Está pensado para fundadores,
                 responsables de marketing y especialistas SEO que ya tienen web y quieren aparecer
                 en las respuestas de ChatGPT, Perplexity, Claude y Gemini. Es el primer curso de GEO
                 en español; contenido actualizado en julio de 2026.
@@ -354,14 +354,13 @@ const CursoGeoPage = () => {
               <Calendar className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
               <div>
                 <p className="text-sm font-semibold text-accent uppercase tracking-wide mb-1">
-                  Actualizado en mayo 2026
+                  Actualizado el 12 de julio de 2026
                 </p>
                 <p className="text-base text-foreground leading-relaxed">
-                  El módulo F3 incorpora el cambio de mayo 2026: ChatGPT con búsqueda activada cita ahora una media de
-                  4,2 fuentes por respuesta extensa (vs 2,7 en 2024) y prioriza contenido publicado en los últimos 18
-                  meses con marcado <code className="text-sm px-1 py-0.5 bg-muted rounded">FAQPage</code> y
-                  <code className="text-sm px-1 py-0.5 bg-muted rounded ml-1">Article</code>. El curso ya incluye las
-                  plantillas actualizadas y un checklist de citabilidad revisado.
+                  El curso incluye el caso de nuestra propia web: el 12 de julio de 2026 esgeo.ai sacó un
+                  <strong> 35 sobre 100</strong> en nuestro auditor, con 237 caracteres de texto en el HTML
+                  inicial. Lo arreglamos aplicando F1 a F5 y subimos a <strong>92</strong>. El antes, el
+                  después y los comandos exactos para comprobarlo están dentro.
                 </p>
               </div>
             </div>
@@ -596,15 +595,12 @@ const CursoGeoPage = () => {
                   {/* Price Display */}
                   <div className="mb-8">
                     <div className="flex items-center justify-center gap-4 mb-4">
-                      <span className="text-2xl text-muted-foreground line-through">
-                        €{COMPLETE_COURSE.originalPrice}
-                      </span>
                       <span className="text-5xl md:text-6xl font-bold text-accent">
                         €{COMPLETE_COURSE.price}
                       </span>
                     </div>
                     <Badge className="bg-accent/20 text-accent border-0 text-sm font-semibold px-4 py-2 cursor-default">
-                      Precio de lanzamiento
+                      Pago único, sin suscripción
                     </Badge>
                   </div>
 

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Zap, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 
 interface PremiumContentGateProps {
   moduleNumber: string;
@@ -56,28 +57,20 @@ const PremiumContentGate = ({
         </div>
 
         <div className="space-y-3">
-          <Button asChild size="lg" className="w-full max-w-xs">
-            <Link to="/checkout">
-              Desbloquear {moduleNumber} Completo
-              <Lock className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-          
+          <BuyButton source={`gate-${moduleNumber}`} className="btn-cta w-full max-w-xs">
+            Desbloquear los 5 módulos — 47 €
+          </BuyButton>
+
           <Button variant="outline" size="sm" asChild className="w-full max-w-xs">
-            <Link to="/#precios">
-              Ver Todos los Planes
+            <Link to="/curso">
+              Ver qué incluye el curso
             </Link>
           </Button>
         </div>
 
         <p className="text-xs text-muted-foreground mt-4">
-          ✓ Garantía de 30 días • ✓ Cancela cuando quieras
+          Pago único · Sin suscripción · Los PDFs son tuyos para siempre
         </p>
-      </div>
-
-      {/* Hidden content for SEO - visible to crawlers but not to users */}
-      <div className="sr-only" aria-hidden="true">
-        <p>Contenido premium completo del {moduleNumber}: {moduleName}. Incluye implementación detallada, checklists avanzados, prompts especializados, casos de estudio, herramientas adicionales y técnicas avanzadas de GEO para optimización en motores generativos.</p>
       </div>
     </div>
   );

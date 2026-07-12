@@ -27,13 +27,18 @@
       "maxDuration": 10
     },
     "api/stripe-webhook.ts": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "premium/**"
     },
     "api/admin/auth.ts": {
       "maxDuration": 5
     },
     "api/admin/metrics.ts": {
       "maxDuration": 15
+    },
+    "api/premium-health.ts": {
+      "maxDuration": 10,
+      "includeFiles": "premium/**"
     }
   },
   "headers": [

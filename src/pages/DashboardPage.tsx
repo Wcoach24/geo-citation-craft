@@ -314,12 +314,12 @@ const DashboardPage = () => {
                 <div className="p-4 bg-muted/50 rounded-lg">
                   <h4 className="font-semibold mb-2">📚 Módulos Individuales</h4>
                   <p className="text-sm text-muted-foreground">Compra solo lo que necesites</p>
-                  <p className="text-lg font-bold mt-2">€10 / módulo</p>
+                  <p className="text-lg font-bold mt-2">47 € · pago único</p>
                 </div>
               </div>
-              <Link to="/checkout">
+              <Link to="/curso">
                 <Button size="lg" className="w-full">
-                  Ver Planes y Precios
+                  Ver el curso
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </Link>

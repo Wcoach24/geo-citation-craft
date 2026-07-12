@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 import { MODULES, COMPLETE_COURSE } from "@/data/modules";
 import { startCheckout } from "@/lib/checkout";
 import { useToast } from "@/hooks/use-toast";
@@ -113,14 +114,12 @@ const ModuleCTA: React.FC<ModuleCTAProps> = ({ moduleId, className = "" }) => {
 
             <div className="flex flex-col items-center gap-3 flex-shrink-0">
               <div className="text-center">
-                <span className="text-lg text-muted-foreground line-through block">
-                  €{COMPLETE_COURSE.originalPrice}
-                </span>
                 <span className="text-3xl font-bold text-accent">€{COMPLETE_COURSE.price}</span>
+                <span className="block text-xs text-muted-foreground">pago único</span>
               </div>
-              <Link to="/curso#comprar" className="btn-cta text-sm px-6 no-underline">
-                Curso completo — €{COMPLETE_COURSE.price}
-              </Link>
+              <BuyButton source="module-cta" className="btn-cta text-sm px-6">
+                Comprar el curso — €{COMPLETE_COURSE.price}
+              </BuyButton>
             </div>
           </div>
         </CardContent>

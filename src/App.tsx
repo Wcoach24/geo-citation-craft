@@ -9,6 +9,7 @@ import React, { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
+import ScrollToHash from "@/components/ScrollToHash";
 
 // Lazy-loaded pages
 const CursoGeoPage = React.lazy(() => import("./pages/CursoGeoPage"));
@@ -144,6 +145,7 @@ function App() {
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToHash />
         <AppRoutes />
       </BrowserRouter>
       <Analytics />

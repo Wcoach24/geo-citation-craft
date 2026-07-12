@@ -4,19 +4,20 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Star, Crown, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { COMPLETE_COURSE } from "@/data/modules";
+import BuyButton from "@/components/BuyButton";
 
 const PricingSection = () => {
   const plans = [
     {
-      name: "F0 Diagnóstico",
+      name: "F0 — Empieza gratis",
       price: "0",
-      description: "¿Necesitas GEO? Averígualo gratis.",
+      description: "Audita tu web y lee el primer módulo. Sin pagar.",
       icon: Users,
       features: [
-        "Diagnóstico completo de tu sitio",
-        "Identificación de problemas con IA",
-        "Introducción al framework GEO",
-        "Sin registro necesario",
+        "Auditoría real de tu web (0-100)",
+        "Las 2 cosas que arreglar primero",
+        "Módulo F0 completo",
+        "Sin registro, sin tarjeta",
       ],
       cta: "Empezar Gratis",
       variant: "outline" as const,
@@ -26,16 +27,12 @@ const PricingSection = () => {
     {
       name: "Curso Completo",
       price: String(COMPLETE_COURSE.price),
-      originalPrice: String(COMPLETE_COURSE.originalPrice),
+
       description: "Todo el framework GEO en un pack.",
       icon: Crown,
-      features: [
-        ...COMPLETE_COURSE.features,
-        `Ahorra €${(COMPLETE_COURSE.originalPrice ?? 0) - COMPLETE_COURSE.price} vs individual`,
-      ],
-      cta: "Comprar Curso Completo",
+      features: COMPLETE_COURSE.features,
+      cta: "Comprar el curso — 47 €",
       variant: "default" as const,
-      link: "/checkout?plan=complete",
       highlight: true,
     },
   ];
@@ -79,12 +76,9 @@ const PricingSection = () => {
                 <h3 className="text-xl font-bold text-primary">{plan.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
                 <div className="mt-4 flex items-baseline justify-center gap-2">
-                  {plan.originalPrice && (
-                    <span className="text-lg text-muted-foreground line-through">€{plan.originalPrice}</span>
-                  )}
                   <span className="text-4xl font-bold text-primary">€{plan.price}</span>
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">Pago único</p>
+                <p className="text-xs text-muted-foreground mt-1">Pago único, sin suscripción</p>
               </div>
 
               <ul className="space-y-3 mb-6">
@@ -96,22 +90,30 @@ const PricingSection = () => {
                 ))}
               </ul>
 
-              <Button
-                variant={plan.variant}
-                className={`w-full rounded-xl py-5 font-semibold cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent ${
-                  plan.highlight ? 'btn-glow bg-accent hover:bg-accent/90 text-primary' : ''
-                }`}
-                size="lg"
-                asChild
-              >
-                <Link to={plan.link}>{plan.cta}</Link>
-              </Button>
+              {plan.highlight ? (
+                <BuyButton
+                  source="pricing-home"
+                  className="btn-glow w-full rounded-xl py-3.5 font-semibold bg-accent hover:bg-accent/90 text-primary"
+                >
+                  {plan.cta}
+                </BuyButton>
+              ) : (
+                <Button
+                  variant={plan.variant}
+                  className="w-full rounded-xl py-5 font-semibold cursor-pointer transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
+                  size="lg"
+                  asChild
+                >
+                  <Link to={plan.link}>{plan.cta}</Link>
+                </Button>
+              )}
             </div>
           ))}
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-10">
-          Aprende paso a paso · Implementa a tu ritmo · Acceso inmediato
+        <p className="text-center text-sm text-muted-foreground mt-10 max-w-2xl mx-auto">
+          Una auditoría GEO de agencia cuesta entre 800 y 2.000 €, y te entrega un PDF con lo que
+          hay que arreglar. Esto cuesta 47 € y te enseña a arreglarlo tú, esta vez y las siguientes.
         </p>
       </div>
     </section>

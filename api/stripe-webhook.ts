@@ -1,7 +1,7 @@
 /**
  * POST /api/stripe-webhook
  * Receives Stripe events. On `checkout.session.completed`:
- *   1. Reads the PDF(s) from /public/premium/<hash>/ (in the deployment filesystem)
+ *   1. Reads the PDF(s) from /premium/<hash>/ (fuera de public/ — ver includeFiles en vercel.json)
  *   2. Sends the customer an email via Resend with the PDFs attached
  *   3. Notifies the owner (azmglg@gmail.com) of the new sale
  *
@@ -40,7 +40,10 @@ async function readRaw(req: VercelRequest): Promise<Buffer> {
 function loadPdf(modId: string) {
   const info = MODULES[modId];
   if (!info) return null;
-  const path = join(process.cwd(), "public", "premium", info.hash, info.filename);
+  // Los PDFs viven en /premium (raíz del repo), NO en /public: en public/ eran
+  // descargables por cualquiera sin pagar. Vercel los empaqueta en esta función
+  // vía `includeFiles` en vercel.json.
+  const path = join(process.cwd(), "premium", info.hash, info.filename);
   try {
     const buf = readFileSync(path);
     return { filename: info.filename, content: buf.toString("base64"), name: info.name };

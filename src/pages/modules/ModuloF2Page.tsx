@@ -13,6 +13,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Search, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 
 const ModuloF2Page = () => {
   useEffect(() => {
@@ -248,12 +249,9 @@ const ModuloF2Page = () => {
                 Módulo Anterior: F1 Accesibilidad Generativa
               </Link>
             </Button>
-            <Button asChild>
-              <Link to="/checkout">
-                Desbloquear Contenido Completo
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
+            <BuyButton source="modulo-f2" className="btn-cta text-sm">
+              Desbloquear los 5 módulos — 47 €
+            </BuyButton>
           </div>
 
           {/* Contenido Relacionado - Preview */}
@@ -264,9 +262,9 @@ const ModuloF2Page = () => {
               <p>✓ Prompts avanzados para LLMs</p>
               <p>✓ Herramientas especializadas de análisis</p>
               <p>✓ Casos prácticos paso a paso</p>
-              <Button variant="outline" size="sm" asChild className="mt-4">
-                <Link to="/checkout">Ver Todo el Contenido</Link>
-              </Button>
+              <BuyButton source="modulo-f2-gate" className="btn-cta text-sm mt-4" showArrow={false}>
+                Ver todo el contenido — 47 €
+              </BuyButton>
             </div>
           </div>
         </div>

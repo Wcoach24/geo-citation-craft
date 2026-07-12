@@ -13,6 +13,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Users, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import BuyButton from "@/components/BuyButton";
 
 const ModuloF3Page = () => {
   useEffect(() => {
@@ -374,12 +375,11 @@ const ModuloF3Page = () => {
               prompt optimizado para LLMs y herramientas especializadas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700" asChild>
-                <Link to="/checkout">
-                  Desbloquear F3 por €10
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              {/* Antes: "Desbloquear F3 por €10". Los módulos sueltos ya no se venden:
+                  ese botón llevaba a un producto que no existe. */}
+              <BuyButton source="modulo-f3" className="btn-cta">
+                Desbloquear los 5 módulos — 47 €
+              </BuyButton>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/curso">Ver Todos los Módulos</Link>
               </Button>

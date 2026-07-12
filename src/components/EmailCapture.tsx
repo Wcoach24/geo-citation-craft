@@ -31,8 +31,11 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
       // Send to backend — captures lead + sends welcome email
       const { ok, error } = await captureLead({ email, source });
       if (!ok) {
+        // Antes se marcaba 'success' igualmente: el usuario veía el check verde y el
+        // lead se perdía en silencio. Si el backend falla, hay que decirlo.
         console.error('capture-lead error:', error);
-        // Still mark as lead locally even if backend fails
+        setStatus('error');
+        return;
       }
 
       markAsLead();
@@ -42,9 +45,7 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
       trackEvent.leadCapture(source);
       (window as any).clarity?.('event', 'email_capture', { source });
     } catch {
-      // Mark as lead locally even on network failure
-      markAsLead();
-      setStatus('success');
+      setStatus('error');
     }
   };
 

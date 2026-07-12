@@ -29,7 +29,7 @@ const homeFaqs = [
     id: "faq-home-geo-vs-seo-2026",
     question: "¿GEO sustituye al SEO en 2026?",
     answer:
-      "No lo sustituye, lo complementa. El tráfico desde Google sigue siendo dominante, pero entre 2024 y 2026 el porcentaje de búsquedas que terminan en una respuesta generativa (AI Overview, ChatGPT Search, Perplexity) ha pasado del 8% al 38% en consultas informacionales. Una estrategia 2026 sólida invierte en ambos: técnicas SEO para indexación clásica y técnicas GEO para citabilidad por LLMs.",
+      "No lo sustituye, lo complementa. El SEO te posiciona en un listado de enlaces; el GEO decide si te citan dentro de la respuesta que genera la IA. Son dos capas distintas del mismo trabajo, y comparten cimientos: si tu HTML no es legible por una máquina, fracasas en las dos. Una estrategia sólida invierte en ambas.",
   },
   {
     id: "faq-home-como-empezar",
@@ -111,13 +111,14 @@ const Index = () => {
                 <Calendar className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
                 <div>
                   <p className="text-sm font-semibold text-accent uppercase tracking-wide mb-1">
-                    Actualizado en mayo 2026
+                    Actualizado el 12 de julio de 2026
                   </p>
                   <p className="text-base text-foreground leading-relaxed">
-                    En mayo de 2026 las búsquedas generativas (ChatGPT Search, Perplexity, AI Overview de Google) ya
-                    suponen el 38% de las consultas informacionales en español, según el observatorio interno de esGEO.
-                    Hemos actualizado los cinco módulos F1-F5 para reflejar los patrones de citación vigentes este mes:
-                    mayor peso de schema FAQPage, fechado visible y entidad de autor consolidada.
+                    Ese día auditamos nuestra propia web y sacamos un <strong>35 sobre 100</strong>: el
+                    HTML que servía nuestro servidor tenía 237 caracteres de texto. Los rastreadores de
+                    IA no ejecutan JavaScript, así que veían una página en blanco. Lo arreglamos con el
+                    método que enseñamos y subimos a <strong>92</strong>. Todo lo que hicimos está en los
+                    módulos F1 a F5, y puedes comprobar la nota tú mismo con el auditor de arriba.
                   </p>
                 </div>
               </div>
