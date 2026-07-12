@@ -73,9 +73,16 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# ─── Contenido de pago: nadie, ni humanos ni bots ──────────────────────
+# Los PDFs premium viven en /premium/<hash>/. El redirect de vercel.json ya corta
+# el acceso público; esto es el cinturón además de los tirantes.
+User-agent: *
+Disallow: /premium/
+
 # ─── Resto ─────────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
+Disallow: /premium/
 Disallow: /dashboard
 Disallow: /auth
 Disallow: /checkout

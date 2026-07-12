@@ -9,6 +9,11 @@
       "source": "/llm.txt",
       "destination": "/llms.txt",
       "permanent": true
+    },
+    {
+      "source": "/premium/:path*",
+      "destination": "/curso",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -30,5 +35,16 @@
     "api/admin/metrics.ts": {
       "maxDuration": 15
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/premium/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    }
+  ]
 }
