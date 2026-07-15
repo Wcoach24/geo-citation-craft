@@ -287,3 +287,192 @@ Desviaciones:
   3000 chars de texto (la primera versión se quedaba en 2901).
 - `/checkout` añadida a ROUTES del prerender, quitada de EXCLUDED_PATHS de check-routes
   y del rewrite SPA de vercel.json (el fichero prerenderizado gana por filesystem).
+
+## FASE 2 — 2026-07-15
+
+### F2-1 · Garantía medible — DONE (commit 1edd1ee)
+
+Verificación:
+
+```
+$ grep -rln 'Garantía medible' src/ | wc -l
+4   (GuaranteeNote.tsx, CheckoutPage.tsx, CursoGeoPage.tsx, TerminosPage.tsx)
+$ npm run build → ✅ 29/29 rutas prerenderizadas (exit 0)
+```
+
+Desviaciones:
+- El texto canónico vive en un componente único `src/components/GuaranteeNote.tsx`
+  (export `GUARANTEE_TEXT`) y se renderiza bajo TODOS los BuyButton: PricingSection,
+  MethodologySection, PremiumContentGate (cubre los gates de F1-F4), ModuleCTA,
+  CursoGeoPage `#comprar`, ModuloF0/F2/F3/F4 y /checkout (F1-9 ya la tenía; se alineó
+  al literal canónico y se añadió el plazo de 30 días).
+- /terminos: nueva cláusula 7 "Garantía medible y reembolsos" (30 días naturales, cómo
+  reclamar con el antes/después del auditor, reembolso íntegro en ≤14 días); la antigua
+  cláusula 7 (Contacto) pasa a 8 y la limitación de responsabilidad (6) referencia la
+  garantía. "Última actualización" → 15 de julio de 2026.
+- FAQ de /curso: nueva entrada `faq-garantia` (entra también en el FAQPage schema, que
+  se genera del mismo array).
+- De paso: en ModuloF3Page se sustituyó el claim inventado "97% de usuarios implementan
+  estas señales en la primera semana" (dato sin fuente, prohibido por regla 6) por la
+  garantía medible.
+
+### F2-2 · Matar el "AHORRA €3" y módulos sueltos — DONE (commit 57eb0ac)
+
+Verificación:
+
+```
+$ grep -rn 'AHORRA' src/
+(sin resultados, exit=1) → 0
+api/checkout.ts (por lectura de código):
+  l.51: if (productType === "module" || moduleId) → 400 "Los módulos sueltos ya no se venden…"
+  l.102: else → 400 "Invalid product type" (cualquier producto no reconocido, f1..f5 incluidos)
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- `ModuleCTA` reescrito: promociona SOLO el bundle (sin card "Solo este módulo", sin
+  cálculo de ahorro); conserva el placeholder de módulos "próximamente".
+- `api/checkout.ts`: eliminado `PRODUCT_MAPPING` completo (f1..f5 con sus priceIds).
+  El rechazo es doble: `productType: "module"` O cualquier `moduleId` en el body → 400.
+- `src/lib/checkout.ts`: tipo `CheckoutBody.productType` ya no admite "module" ni
+  `moduleId` (los clientes TS no pueden ni construir la petición).
+- `src/data/modules.ts`: eliminados `price: 10` y `stripeIds` por módulo, el helper
+  `getStripeIds` y los campos muertos de `CompleteCourseInfo` (originalPrice/stripeIds).
+  El precio del bundle (47) se conserva en `COMPLETE_COURSE.price`.
+- La verificación por POST real a /api/checkout no es posible en local (Vercel
+  serverless, regla 8): verificado por lectura del código, como prevé el encargo.
+
+### F2-3 · Checkout Stripe: factura + métodos de pago — DONE (commit 332af64)
+
+Verificación:
+
+```
+$ grep -n 'invoice_creation\|tax_id_collection' api/checkout.ts
+118:      invoice_creation: { enabled: true },
+119:      tax_id_collection: { enabled: true },
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- `payment_method_types: ["card", "paypal", "link"]`. **(H)** Si la cuenta Stripe no
+  tiene PayPal activado, Stripe rechazará la CREACIÓN de la sesión (error 400 del API,
+  no un fallo silencioso): en ese caso quitar "paypal" del array y redeploy. Verificar
+  en la primera compra/preview post-deploy.
+- Añadido `customer_creation: "always"`: Stripe exige un Customer para
+  `tax_id_collection` en `mode: "payment"` (sin esto la sesión no se crea).
+- Trust badge "Factura para tu empresa (NIF/CIF)" añadido junto al BuyButton en
+  /checkout (bullet + nota bajo el botón) y en los trust badges de /curso#comprar.
+  La FAQ de pago de /checkout ahora explica el NIF/CIF en la propia pasarela (antes
+  decía "pídela por email", que sigue como fallback).
+
+### F2-4 · /success honesto + onboarding — DONE (commit ba816eb)
+
+Verificación:
+
+```
+$ grep -n '7 días' src/pages/PurchaseSuccessPage.tsx
+(sin resultados, exit=1) → 0
+```
+
+Desviaciones:
+- Mensaje principal: "Los 5 PDFs van adjuntos al email que acabas de recibir" (coincide
+  con lo que hace el webhook). Onboarding: "Empieza por F1, capítulo 1 (30 min)" + hito
+  "vuelve a auditar tu web tras aplicar F1-F2 y compara tu nota" + CTA primario a
+  /geo-score ("Auditar mi web ahora"). El CTA "Explorar más módulos" (ya sin sentido
+  post-F2-2) se eliminó.
+- También el estado de error (sesión no encontrada) decía "enlaces de descarga" → "PDFs
+  adjuntos".
+
+### F2-5 · Tercer tier ancla 197 € — DONE (commit 200fd8f)
+
+Verificación:
+
+```
+$ grep -o 'Curso + Auditoría personalizada|>197<|Comprar curso + auditoría — 197 €' dist/index.html
+→ los 3 tiers renderizan en dist/index.html (0 €, 47 €, 197 €)
+api/checkout.ts (por lectura de código): productType "curso-auditoria" →
+  line_items con price_data inline { currency: "eur", unit_amount: 19700 } (l.84-99)
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- **H-9 pendiente: aprobar o retirar el tier.** Está implementado y VISIBLE (el plan lo
+  pide así); si Álvaro no lo aprueba, retirar el objeto del array `plans` de
+  PricingSection y el branch "curso-auditoria" de api/checkout.ts.
+- `BuyButton` ganó prop opcional `productType` ("complete" por defecto) — el tracking
+  `checkoutStart` recibe el tipo real.
+- `api/stripe-webhook.ts`: para "curso-auditoria" adjunta los mismos 5 PDFs al cliente
+  (el curso está incluido) y el email añade el siguiente paso de la auditoría manual.
+  La notificación al owner SIEMPRE muestra el product type (fila "Tipo"); para
+  curso-auditoria el subject grita "ENTREGA MANUAL: auditoría pendiente" y el cuerpo
+  lleva bloque "⚠️ ACCIÓN REQUERIDA" (vídeo/PDF + plan de acción).
+- Copy sin SLA inventado: "Entrega personal por email, con seguimiento directo" (no se
+  promete plazo que nadie ha aprobado).
+- La creación de sesión real no es testeable en local (regla 8): verificado por lectura.
+
+### F2-6 · Lead magnet alineado — DONE (commit 35615a4)
+
+Verificación:
+
+```
+$ grep -rn 'checklist' src/components/EmailCapture.tsx
+(sin resultados, exit=1) → 0
+```
+
+Desviaciones:
+- Copy de captura, botón y mensaje de éxito → "Te envío el módulo F0 completo
+  (diagnóstico en 15 min)" (lo que el welcome entrega de verdad).
+- `ExitIntentPopup` también prometía "el checklist GEO": alineado al mismo mensaje
+  (mismo motivo, aunque la verificación solo acota EmailCapture).
+
+### F2-7 · Exit intent global + captura en artículos — DONE (commit 9b99e3b)
+
+Verificación:
+
+```
+$ ls src/components/LeadMagnetModal.tsx
+ls: cannot access '…': No such file or directory ✓
+$ grep -rln InlineEmailCapture src/pages/articles/ | wc -l
+9   (los 9 artículos de radar-ia)
+$ npm run build → ✅ 29/29 (exit 0); el bloque de captura aparece en el HTML prerenderizado
+  de los artículos ("Antes de irte: el módulo F0 gratis").
+```
+
+Desviaciones:
+- `ExitIntentPopup` montado en App.tsx dentro de BrowserRouter (solo cliente: el
+  prerender renderiza AppRoutes vía entry-server y no pasa por App()). Se quitó el
+  montaje duplicado de CursoGeoPage. La supresión existente se conserva: visitorState
+  lead/customer + una vez por sesión (sessionStorage) + solo desktop (mouseleave).
+- `InlineEmailCapture` reescrito: éxito SOLO si `captureLead` devuelve ok (antes
+  mostraba éxito aunque fallara y el lead se perdía en silencio); error → toast
+  destructivo y el formulario se conserva; al éxito marca lead (`markAsLead`), trackea
+  `leadCapture` y muestra estado de confirmación persistente (no solo toast). Se ocultó
+  para visitantes que ya son lead/customer (mismo criterio que EmailCapture).
+- `LeadMagnetModal.tsx` borrado; no tenía ningún uso (grep confirmó 0 imports).
+
+### F2-8 · CTAs con verbo+beneficio — DONE (commit ed275e5)
+
+Verificación:
+
+```
+$ grep -rn 'Elige tu Plan' src/
+(sin resultados, exit=1) → 0
+HeroSection.tsx: cta-pulse está en el botón "Curso Completo — €47" (l.58); el CTA
+gratuito ya no lo lleva.
+```
+
+Desviaciones:
+- PricingSection: h2 → "Empieza gratis. Paga una vez si te convence."; subhead ajustada
+  para no duplicar; CTA del plan gratuito → "Leer F0 gratis" (aplicado en F2-5 al tocar
+  el mismo array).
+- "Ver módulo" (MethodologySection, home) y "Explorar módulo" (MetodologiaGeoPage ×3)
+  → "Qué aprenderás en F1/F2/…" generado por módulo (no hardcodeado por copia).
+
+### Estado de la fase
+
+- `npm run build` en verde tras cada tarea (29/29 rutas prerenderizadas).
+- `npx tsc --noEmit`: solo el error preexistente de ExpertoGeoPage.tsx:482 (documentado
+  en F0-3); esta fase no añade errores de tipos.
+- Pendientes humanos generados/afectados por la fase: **H-9** (aprobar/retirar tier
+  197 €), **(H)** verificar que la cuenta Stripe acepta PayPal en la primera sesión
+  post-deploy (si no, quitar "paypal" de payment_method_types).
