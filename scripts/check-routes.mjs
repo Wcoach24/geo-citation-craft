@@ -22,12 +22,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 
 /** Rutas SPA a propósito — editar aquí cuando una pase a ser prerenderizada. */
+// F3-4: /dashboard, /auth y /guest-access eliminadas de App.tsx (rutas muertas
+// que leian user_access; el post-compra es email-only).
 const EXCLUDED_PATHS = [
   '*',
-  '/dashboard',
-  '/auth',
   '/success',
-  '/guest-access',
   '/unsubscribe',
 ];
 

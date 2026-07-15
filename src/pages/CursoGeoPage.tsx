@@ -3,7 +3,7 @@
 import HablaWidget from "@/components/HablaWidget";
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -24,10 +24,8 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { MODULES, COMPLETE_COURSE } from '@/data/modules';
-import { useAuth } from '@/contexts/AuthContext';
 import { useVisitorState } from '@/hooks/useVisitorState';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
 import EmailCapture from '@/components/EmailCapture';
 import GuaranteeNote from '@/components/GuaranteeNote';
 import { trackEvent } from '@/lib/analytics';
@@ -43,19 +41,10 @@ const CursoGeoPage = () => {
     canonicalUrl: "https://www.esgeo.ai/curso",
   });
 
-  const navigate = useNavigate();
-  const { user, userAccess } = useAuth();
   const { visitorState, visitCount, isFromAI } = useVisitorState();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [showMobileCTA, setShowMobileCTA] = useState(false);
-
-  // Redirect customers to dashboard
-  useEffect(() => {
-    if (user && userAccess && userAccess.length > 0) {
-      navigate('/dashboard');
-    }
-  }, [user, userAccess, navigate]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

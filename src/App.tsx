@@ -3,7 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "@/contexts/AuthContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import React, { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
@@ -26,10 +25,7 @@ const PrivacidadPage = React.lazy(() => import("./pages/PrivacidadPage"));
 const TerminosPage = React.lazy(() => import("./pages/TerminosPage"));
 const ContenidoIAPage = React.lazy(() => import("./pages/ContenidoIAPage"));
 const CheckoutPage = React.lazy(() => import("./pages/CheckoutPage"));
-const DashboardPage = React.lazy(() => import("./pages/DashboardPage"));
 const PurchaseSuccessPage = React.lazy(() => import("./pages/PurchaseSuccessPage"));
-const GuestAccessPage = React.lazy(() => import("./pages/GuestAccessPage"));
-const AuthPage = React.lazy(() => import("./pages/AuthPage"));
 const UnsubscribePage = React.lazy(() => import("./pages/UnsubscribePage"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
@@ -68,9 +64,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-        </AuthProvider>
+        <TooltipProvider>{children}</TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   );
@@ -100,10 +94,7 @@ export function AppRoutes() {
               <Route path="/consultor-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/especialista-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/success" element={<PurchaseSuccessPage />} />
-              <Route path="/guest-access" element={<GuestAccessPage />} />
-              <Route path="/auth" element={<AuthPage />} />
               
               {/* Información corporativa */}
               <Route path="/acerca-de" element={<AcercaDePage />} />
