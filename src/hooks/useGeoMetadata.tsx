@@ -106,7 +106,6 @@ export const useGeoMetadata = ({
         <meta name="twitter:title" content={fullTitle} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content="https://www.esgeo.ai/og-image.png" />
-        <meta name="twitter:site" content="@esgeo_ai" />
       </Helmet>
     ),
     structuredData: {

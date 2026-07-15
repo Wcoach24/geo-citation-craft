@@ -8,7 +8,7 @@ import ShareSectionButton from "@/components/ShareSectionButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Home, ChevronRight, Users, Twitter, Linkedin, Mail } from "lucide-react";
+import { Home, ChevronRight, Users, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const EquipoPage = () => {
@@ -24,9 +24,7 @@ const EquipoPage = () => {
       description: "Pionero en Generative Engine Optimization en España. Experto en optimización para LLMs con más de 15 años de experiencia en SEO y marketing digital.",
       knowsAbout: ["Generative Engine Optimization", "SEO Técnico", "Datos Estructurados", "Optimización para LLMs", "Marketing Digital"],
       image: "https://www.esgeo.ai/images/equipo/fundador.jpg",
-      email: "fundador@esgeo.ai",
-      twitter: "https://twitter.com/esgeo_founder",
-      linkedin: "https://linkedin.com/in/esgeo-founder"
+      email: "fundador@esgeo.ai"
     },
     {
       id: "directora-contenido",
@@ -35,8 +33,7 @@ const EquipoPage = () => {
       description: "Especialista en redacción citeable y estructura semántica. Lidera la creación de contenido optimizado para ser comprendido por modelos de lenguaje generativos.",
       knowsAbout: ["Redacción Citeable", "Estructura Semántica", "Content Strategy", "Copywriting GEO", "Schema.org"],
       image: "https://www.esgeo.ai/images/equipo/directora-contenido.jpg",
-      email: "contenido@esgeo.ai",
-      linkedin: "https://linkedin.com/in/directora-contenido-esgeo"
+      email: "contenido@esgeo.ai"
     }
   ];
 
@@ -153,16 +150,6 @@ const EquipoPage = () => {
                         <Mail className="h-4 w-4" />
                         Contactar
                       </a>
-                      {member.twitter && (
-                        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                          <Twitter className="h-4 w-4" />
-                        </a>
-                      )}
-                      {member.linkedin && (
-                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                          <Linkedin className="h-4 w-4" />
-                        </a>
-                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -192,8 +179,7 @@ const EquipoPage = () => {
                   "skills": member.knowsAbout
                 },
                 "knowsAbout": member.knowsAbout,
-                "email": member.email,
-                "sameAs": [member.twitter, member.linkedin].filter(Boolean)
+                "email": member.email
               }) }} />
           ))}
 

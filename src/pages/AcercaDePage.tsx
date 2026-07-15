@@ -6,7 +6,7 @@ import ShareSectionButton from "@/components/ShareSectionButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Home, ChevronRight, Users, Mail, ExternalLink, Linkedin, Twitter } from "lucide-react";
+import { Home, ChevronRight, Users, Mail, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AcercaDePage = () => {
@@ -92,10 +92,6 @@ const AcercaDePage = () => {
                     "Análisis de LLMs",
                     "Datos Estructurados",
                     "Citabilidad por IA"
-                  ],
-                  "sameAs": [
-                    "https://linkedin.com/in/director-esgeo",
-                    "https://twitter.com/director_esgeo"
                   ]
                 }
               ]
@@ -266,14 +262,6 @@ const AcercaDePage = () => {
                   <div className="flex items-center gap-3">
                     <Mail className="h-5 w-5 text-primary" />
                     <span>hola@esgeo.ai</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Twitter className="h-5 w-5 text-primary" />
-                    <span>@esgeo_ai</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="h-5 w-5 text-primary" />
-                    <span>linkedin.com/company/esgeo</span>
                   </div>
                 </div>
               </CardContent>

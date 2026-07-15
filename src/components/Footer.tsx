@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Twitter, Linkedin, Github, FileText, Bot } from "lucide-react";
+import { Mail, FileText, Bot } from "lucide-react";
 import EmailCapture from "./EmailCapture";
 
 const Footer = () => {
@@ -26,17 +26,6 @@ const Footer = () => {
               La primera plataforma en español para Generative Engine Optimization. 
               Optimiza tu contenido para ser citado por IA.
             </p>
-            <div className="flex space-x-3">
-              <a href="https://twitter.com/esgeo_ai" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/40 hover:text-accent transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="https://linkedin.com/company/esgeo" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/40 hover:text-accent transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="https://github.com/esgeo" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/40 hover:text-accent transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
           </div>
 
           <div>
