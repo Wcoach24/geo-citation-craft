@@ -52,9 +52,18 @@
       "destination": "/spa.html"
     }
   ],
+  "crons": [
+    {
+      "path": "/api/email-sequence",
+      "schedule": "0 9 * * *"
+    }
+  ],
   "functions": {
     "api/checkout.ts": {
       "maxDuration": 10
+    },
+    "api/email-sequence.ts": {
+      "maxDuration": 60
     },
     "api/stripe-webhook.ts": {
       "maxDuration": 30,

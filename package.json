@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prerender": "node scripts/prerender.js",
+    "test:sequence": "node scripts/test-email-sequence.mjs",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr"
   },
   "dependencies": {

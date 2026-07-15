@@ -9,8 +9,12 @@
  * Returns: { ok: true } | { error: string }
  *
  * Env vars required: RESEND_API_KEY
+ * F3-1: además del Audience de Resend, el lead se upserta en public.leads
+ * (Supabase, service role) para que el cron /api/email-sequence envíe E2-E5.
+ * Env vars: SUPABASE_URL (o VITE_SUPABASE_URL) + SUPABASE_SERVICE_ROLE_KEY.
  */
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { createClient } from "@supabase/supabase-js";
 
 const AUDIENCE_ID = "6f09528e-620e-40b5-926b-4caffec4737c"; // "esGEO Leads"
 const SENDER = "Eric de esGEO <curso@esgeo.ai>";
@@ -32,6 +36,42 @@ function setCors(req: VercelRequest, res: VercelResponse) {
 }
 
 const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+
+/**
+ * F3-1: registra el lead en public.leads para la secuencia E2-E5.
+ * - Alta: upsert por email con ON CONFLICT DO NOTHING (un lead existente
+ *   conserva su progreso emails_sent/created_at). emails_sent=1 porque E1
+ *   (welcome) lo envía esta misma función.
+ * - Baja: marca unsubscribed=true (el cron deja de enviarle).
+ * Nunca lanza: si Supabase falla, la captura en Resend sigue valiendo.
+ */
+async function storeLeadInSupabase(email: string, source: string | undefined, unsubscribe: boolean) {
+  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    console.error("[capture-lead] Supabase env vars missing — lead NOT stored in public.leads");
+    return;
+  }
+  try {
+    const supabase = createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+    if (unsubscribe) {
+      const { error } = await supabase.from("leads").update({ unsubscribed: true }).eq("email", email);
+      if (error) console.error(`[capture-lead] leads unsubscribe error: ${error.message}`);
+    } else {
+      const { error } = await supabase
+        .from("leads")
+        .upsert(
+          { email, source: source || "unknown", emails_sent: 1, last_email_sent_at: new Date().toISOString() },
+          { onConflict: "email", ignoreDuplicates: true }
+        );
+      if (error) console.error(`[capture-lead] leads upsert error: ${error.message}`);
+    }
+  } catch (e) {
+    console.error("[capture-lead] supabase error:", (e as Error).message);
+  }
+}
 
 async function resendFetch(path: string, init: RequestInit = {}) {
   const key = process.env.RESEND_API_KEY;
@@ -116,6 +156,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const t = await contactRes.text();
       console.error(`[capture-lead] Resend audience error ${contactRes.status}: ${t}`);
     }
+
+    // 1b. F3-1: registrar también en public.leads (fuente del cron E2-E5)
+    await storeLeadInSupabase(normalizedEmail, source, !!unsubscribe);
 
     // 2. If unsubscribe → don't send a welcome email
     if (unsubscribe) {
