@@ -776,3 +776,190 @@ Desviaciones y fuentes:
 - `npx tsc --noEmit` → 0 errores. eslint limpio en los ficheros tocados.
 - Playwright 390px: scrollWidth = 390 en /, /curso, /metodologia y /radar-ia.
 - Sin nuevos pendientes humanos; los citation_* meta que F4-7 tocó los elimina F5-6.
+
+## FASE 5 — 2026-07-15
+
+### F5-1 · Snippets y fechas honestas — DONE (commit 9934423)
+
+Verificación:
+
+```
+$ grep -n 'new Date().toISOString()' src/components/HighlightSnippet.tsx
+(sin resultados, exit=1) → 0
+$ npx tsc --noEmit → 0 errores
+$ npm run build → ✅ 29/29 rutas prerenderizadas (exit 0)
+```
+
+Desviaciones:
+- `lastModified` pasó a prop obligatoria (sin `?`) y los 56 usos en 23 ficheros se
+  rellenaron por codemod con la fecha real de `git log -1 --format=%as` de cada
+  fichero. Todas resultaron ser 2026-07-15: es la fecha REAL (las fases 1-4 tocaron
+  hoy todos esos ficheros: JSON-LD F1-1, paleta F4-3, cifras F4-7) y, a diferencia
+  del fallback anterior, es estable entre builds hasta que el contenido cambie.
+- Además de `mainEntityOfPage` (ahora la URL canónica de la página vía
+  `useCanonicalHref`), el `@id` del fragmento pasó de `https://www.esgeo.ai#<id>`
+  a `<canonical>#<id>`: dos snippets con el mismo id en páginas distintas ya no
+  colisionan.
+
+### F5-2 · GeoTerm sin ruido — DONE (commit b16e6b7)
+
+Verificación:
+
+```
+$ grep -c "Término relacionado con GEO" dist/radar-ia/que-es-geo-guia-completa/index.html
+0
+DefinedTerm @ids en ese HTML: {'https://www.esgeo.ai/glosario#geo': 1} → sin duplicados
+(antes: 3 bloques idénticos, uno por cada uso de term="geo")
+```
+
+Desviaciones:
+- Los 27 términos del glosario se extrajeron de GlosarioPage.tsx a
+  `src/data/glossary.ts` (fuente única; GlosarioPage la importa). GeoTerm resuelve:
+  prop `definition` explícita > entrada del glosario > NADA (sin definición real no
+  se emite JSON-LD; mejor silencio que definición circular).
+- Alias de slugs usados en artículos → id canónico (solo sinónimos reales):
+  `fragmentacion→chunking`, `autoridad-generativa→autoridad-ia`,
+  `snippet-citable→snippet-citeable`. Términos sin entrada (seo, llm, ia, chatgpt,
+  claude, perplexity, modelo-de-lenguaje, faq-conversacional) siguen enlazando pero
+  no emiten schema.
+- Dedup vía `GeoTermRegistryProvider` (montado en AppRoutes, compartido
+  cliente/SSR): un `Set` nuevo por pathname vía useMemo — nada module-level que
+  persista entre las 29 rutas del prerender, y en cliente se resetea al navegar.
+  La decisión de emitir se congela por instancia con useRef para que los
+  re-renders (tooltip) no retiren un script ya emitido.
+
+### F5-3 · ShareSectionButton con URL completa — DONE (sin commit: ya lo arregló F4-6)
+
+Verificación:
+
+```
+$ grep -n 'pathname' src/components/ShareSectionButton.tsx
+23:    const url = `${window.location.origin}${window.location.pathname}#${sectionId}`;
+```
+
+F4-6 (commit ced5d15) ya incluía el pathname como bonus documentado. Solo se verificó.
+
+### F5-4 · ToC en SSR con anchors reales — DONE (commit a492161)
+
+Verificación:
+
+```
+$ grep -c 'ItemList' dist/index.html
+1   (antes 0: el índice se construía en useEffect y era null en el HTML servido)
+```
+
+Desviaciones:
+- `items` es prop obligatoria (`TocItem[]`); la home (único consumidor) pasa
+  `homeTocItems` con los 8 anchors reales de sus secciones (habla-widget,
+  que-es-geo, metodologia, precios, casos-destacados, limitaciones, home-faq,
+  home-seguir-aprendiendo) y sus títulos literales.
+- `<button onClick>` → `<a href="#id">` navegable sin JavaScript.
+- El JSON-LD ItemList se emite SIEMPRE en el HTML; solo la tarjeta visual espera
+  al IntersectionObserver post-hero de F4-5 (si el gate hubiera envuelto también
+  el script, el crawler habría seguido sin verlo).
+
+### F5-5 · Course schema y FAQPage del artículo estrella — DONE (commit 550a4f6)
+
+Verificación (python3 sobre los JSON-LD built):
+
+```
+dist/curso/index.html → CourseInstance: {"courseMode": "online", "courseWorkload": "PT14H", …}
+dist/radar-ia/que-es-geo-guia-completa/index.html →
+  FAQPage con mainEntity = 5 (≥3 ✓) · image = https://www.esgeo.ai/og-image.png
+  · author = Organization (@id #organization) · dateModified = 2026-07-15
+Todos los bloques JSON-LD de dist (148) parsean sin error.
+$ file public/logo.png → PNG 512 x 512 (antes 590 bytes; ahora 16,7 KB, ≥112×112 ✓)
+```
+
+Desviaciones:
+- courseWorkload PT14H = suma real de las duraciones de modules.ts
+  (PT2H+PT3H+PT4H+PT3H+PT2H), no un número inventado.
+- Logo generado con Pillow: gradiente teal de marca (mismo que la og-image de
+  F1-7), "esGEO" + "citado por la IA". El schema global lo referencia ahora como
+  ImageObject con width/height 512.
+- Las 5 Q&A del FAQPage viven en un array `articleFaqs` que alimenta a la vez el
+  JSX de la sección #faq-geo y el mainEntity (no pueden divergir).
+- **Regresión de F1-1 detectada y corregida (mismo commit):** react-helmet
+  DESCARTA los `<script>` con `dangerouslySetInnerHTML` (verificado con un
+  experimento aislado: emite cadena vacía). Desde F1-1, los 25 JSON-LD dentro de
+  `<Helmet>` (FAQPage de la home, WebApplication de /geo-score, Article de los 9
+  artículos, DefinedTermSet del glosario, Course de /metodologia…) NO llegaban al
+  head servido; solo sobrevivían los renderizados en el body. Codemod inverso SOLO
+  en regiones `<Helmet>…</Helmet>` (22 ficheros): vuelta a children-string, que
+  react-helmet emite sin escapar (el escape de renderToPipeableStream que motivó
+  F1-1 no aplica a Helmet, que renderiza por su propio toString()). Los scripts en
+  body conservan `dangerouslySetInnerHTML`. dist pasa de ~123 a 148 bloques
+  JSON-LD válidos.
+
+### F5-6 · Higiene de metas — DONE (commit 609dc20)
+
+Verificación:
+
+```
+$ grep -rn 'citation_\|speakable-selector' src/ index.html
+(sin resultados, exit=1) → 0
+$ grep -rn 'name="keywords"' src/ index.html
+(sin resultados, exit=1) → 0
+```
+
+Desviaciones:
+- Eliminados de 19 páginas + index.html + useGeoMetadata: todas las metas
+  `citation_*` (Highwire Press, solo para papers académicos), `speakable-selector`
+  y `ai-content-files` (names inventados) y `meta keywords`. El hook perdió las
+  props `citationTitle` y `speakableSelectors` (solo la home las pasaba).
+- No se añadió SpeakableSpecification nuevo: el glosario ya lo tenía en su JSON-LD
+  (la vía correcta), y con el fix de F5-5 ahora además SE SIRVE de verdad.
+- Se conservan `meta author`, robots/googlebot/bingbot, og:/twitter: y article:tag.
+
+### F5-7 · RSS — DONE (commit 487ae79)
+
+Verificación:
+
+```
+$ python3 -c "import xml.etree.ElementTree as ET; ET.parse('dist/feed.xml')" → exit 0
+dist/feed.xml → 9 <item> (título, link, description y pubDate reales, extraídos del
+JSON-LD Article de cada artículo built; ordenados por fecha desc, 2025-01-03 → 2026-03-20)
+$ grep -c 'application/rss+xml' dist/index.html → 1
+```
+
+Desviaciones:
+- El feed se genera en scripts/prerender.js DESPUÉS de prerenderizar, parseando los
+  JSON-LD Article de las páginas built (cero duplicación de datos; si un artículo
+  cambia su schema, el feed lo refleja). Si aparecen <9 artículos con Article
+  schema el build FALLA (gate anti-regresión).
+- lastBuildDate = pubDate más reciente de los items, no la fecha del build
+  (coherente con F5-1).
+
+### F5-8 · Geo-score compartible — DONE (commit 8fde5ef)
+
+Verificación:
+
+```
+$ npm run build → ✅ 29/29 (exit 0)
+$ grep -c 'navigator.share' src/pages/GeoScorePage.tsx → 2 (≥1 ✓)
+Flujo del informe verificado en código (HablaWidget.tsx):
+  "Ver informe completo" ya NO es un <a> directo a machineready.vercel.app.
+  handleReportClick → si visitorState es lead/customer, window.open(informe);
+  si no, muestra el gate (EmailCapture con source habla-informe-<grade>) y SOLO
+  su onSuccess (captura OK en backend) hace setReportUnlocked + window.open.
+  Tras desbloquear queda visible un enlace directo por si el popup fue bloqueado.
+```
+
+Desviaciones:
+- `?url=dominio` se lee con useSearchParams (router, SSR-safe) y se pasa a
+  HablaWidget como `initialUrl`, que auto-lanza el análisis SOLO en useEffect
+  (guard autoRanRef para no relanzar).
+- "Compartir mi nota" aparece bajo el widget tras el resultado: navigator.share
+  con la URL parametrizada /geo-score?url=<dominio> y fallback
+  navigator.clipboard + toast. Todo en handlers.
+- EmailCapture ganó la prop opcional `onSuccess` (se dispara solo si captureLead
+  devuelve ok). El CTA "Abrir HABLA" del pie de /geo-score (que abre la home del
+  auditor, no un informe) queda fuera del alcance de la tarea.
+
+### Estado de la fase
+
+- `npm run build` en verde tras cada tarea (29/29 rutas + feed.xml con 9 items).
+- `npx tsc --noEmit` → 0 errores. Los 148 bloques JSON-LD servidos parsean.
+- Hallazgo mayor de la fase: la regresión F1-1/react-helmet (JSON-LD de head
+  ausente en todo el sitio desde el 15/07) quedó corregida en F5-5.
+- Sin nuevos pendientes humanos.
