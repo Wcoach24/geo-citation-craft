@@ -72,6 +72,41 @@ function textLength(html) {
     .trim().length;
 }
 
+/** Decodifica las entidades HTML habituales para emitir texto plano legible. */
+function decodeEntities(text) {
+  return text
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;|&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+}
+
+/**
+ * F1-6: texto plano de una página prerenderizada, con saltos de línea en los
+ * límites de bloque, para concatenarlo en dist/llms-full.txt.
+ */
+function extractPlainText(html) {
+  const body = (html.match(/<body[^>]*>([\s\S]*)<\/body>/i) || [, html])[1];
+  const text = body
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<\/(p|h1|h2|h3|h4|h5|h6|li|tr|blockquote|section|article|div)>/gi, '\n')
+    .replace(/<(br|hr)\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
+    .split('\n')
+    .map((line) => line.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .join('\n');
+  return decodeEntities(text);
+}
+
+function pageTitle(html) {
+  const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  return m ? decodeEntities(m[1].replace(/\s+/g, ' ').trim()) : '';
+}
+
 /**
  * La plantilla es el shell limpio que emite Vite. OJO: `/` se escribe encima de
  * dist/index.html, así que si este script se ejecuta dos veces sobre el mismo dist,
@@ -139,6 +174,8 @@ async function main() {
   let ok = 0;
   const failures = [];
   const thin = [];
+  /** F1-6: acumulador { route, title, text } para dist/llms-full.txt */
+  const fullText = [];
 
   for (const route of ROUTES) {
     process.stdout.write(`📄 ${route.padEnd(52)} `);
@@ -159,6 +196,7 @@ async function main() {
 
       writePage(route, page);
       ok++;
+      fullText.push({ route, title: pageTitle(page), text: extractPlainText(page) });
 
       const isCritical = CRITICAL_ROUTES.includes(route);
       const thinPage = isCritical && chars < MIN_TEXT_CHARS;
@@ -172,6 +210,42 @@ async function main() {
       console.log(`✗ ${e.message}`);
     }
   }
+
+  // F1-6a: página 404 real. Se renderiza una ruta inexistente (cae en el <Route path="*">
+  // de App.tsx) y se escribe dist/404.html: Vercel la sirve con status 404 para toda
+  // petición que no case ni con el filesystem ni con los rewrites de vercel.json.
+  try {
+    process.stdout.write(`📄 ${'404.html (ruta inexistente)'.padEnd(52)} `);
+    const { html, head } = await render('/pagina-inexistente-404');
+    const page = buildPage(template, head, html);
+    fs.writeFileSync(path.join(distDir, '404.html'), page, 'utf-8');
+    console.log(`✓ ${(page.length / 1024).toFixed(1)} KB`);
+  } catch (e) {
+    failures.push(`404.html: ${e.message}`);
+    console.log(`✗ ${e.message}`);
+  }
+
+  // F1-6b: dist/llms-full.txt — texto plano de todas las rutas prerenderizadas,
+  // concatenado con separadores de ruta, para consumo directo por LLMs.
+  const llmsFull = [
+    '# esGEO — contenido completo en texto plano (llms-full.txt)',
+    '# Generado automáticamente en el build a partir de las rutas prerenderizadas.',
+    `# Fuente: https://www.esgeo.ai · Rutas: ${fullText.length} · Generado: ${new Date().toISOString().slice(0, 10)}`,
+    '',
+    ...fullText.map(({ route, title, text }) =>
+      [
+        '='.repeat(72),
+        `RUTA: https://www.esgeo.ai${route}`,
+        title ? `TÍTULO: ${title}` : null,
+        '='.repeat(72),
+        '',
+        text,
+        '',
+      ].filter((l) => l !== null).join('\n')
+    ),
+  ].join('\n');
+  fs.writeFileSync(path.join(distDir, 'llms-full.txt'), llmsFull, 'utf-8');
+  console.log(`📝 dist/llms-full.txt — ${(llmsFull.length / 1024).toFixed(1)} KB de texto plano (${fullText.length} rutas)`);
 
   console.log(`\n✅ ${ok}/${ROUTES.length} rutas prerenderizadas con body completo`);
 

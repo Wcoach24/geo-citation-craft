@@ -14,11 +14,35 @@
       "source": "/premium/:path*",
       "destination": "/curso",
       "permanent": false
+    },
+    {
+      "source": "/coach",
+      "destination": "/metodologia",
+      "permanent": true
+    },
+    {
+      "source": "/casos-reales",
+      "destination": "/casos",
+      "permanent": true
+    },
+    {
+      "source": "/consultor-geo",
+      "destination": "/experto-geo",
+      "permanent": true
+    },
+    {
+      "source": "/especialista-geo",
+      "destination": "/experto-geo",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|admin/|admin$).*)",
+      "source": "/:spa(dashboard|auth|success|guest-access|unsubscribe|checkout)",
+      "destination": "/spa.html"
+    },
+    {
+      "source": "/:spa(dashboard|auth|success|guest-access|unsubscribe|checkout)/:rest*",
       "destination": "/spa.html"
     }
   ],
