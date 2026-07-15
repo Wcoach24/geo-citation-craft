@@ -90,7 +90,7 @@ export function AppRoutes() {
               <Route path="/coach" element={<Navigate to="/metodologia" replace />} />
               <Route path="/metodologia" element={<MetodologiaGeoPage />} />
               <Route path="/casos" element={<CasosRealesPage />} />
-              <Route path="/casos-reales" element={<CasosRealesPage />} />
+              <Route path="/casos-reales" element={<Navigate to="/casos" replace />} />
               <Route path="/glosario" element={<GlosarioPage />} />
               <Route path="/radar-ia" element={<RadarIAPage />} />
               <Route path="/geo-score" element={<GeoScorePage />} />
