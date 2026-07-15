@@ -176,7 +176,7 @@ const AcercaDePage = () => {
               <h2 className="text-3xl font-semibold text-primary">Nuestra Misión</h2>
               <ShareSectionButton sectionId="nuestra-mision" title="nuestra misión" />
             </div>
-            <HighlightSnippet variant="definition" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="definition" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
                 <strong>En esGEO, creemos que el futuro de la búsqueda está en los modelos de lenguaje generativo.</strong> 
                 Nuestra misión es enseñar a crear contenido web que sea comprensible, útil y citado por IA como ChatGPT, 
@@ -250,7 +250,7 @@ const AcercaDePage = () => {
               <h2 className="text-3xl font-semibold text-primary">Nuestros Valores</h2>
               <ShareSectionButton sectionId="nuestros-valores" title="nuestros valores" />
             </div>
-            <HighlightSnippet variant="insight" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="insight" className="mb-6">
               <ul className="list-disc list-inside space-y-3 text-lg leading-relaxed" data-speakable="true">
                 <li><strong>Transparencia:</strong> Compartimos nuestra metodología abiertamente y basamos nuestras enseñanzas en evidencia práctica.</li>
                 <li><strong>Innovación:</strong> Estamos en la vanguardia de las técnicas de optimización para IA generativa.</li>

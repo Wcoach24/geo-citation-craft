@@ -94,7 +94,7 @@ const QueEsGeoGuiaCompleta = () => {
                 Qué es GEO: Guía completa de Generative Engine Optimization
               </h1>
 
-              <HighlightSnippet id="geo-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="geo-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong><GeoTerm term="geo">GEO (Generative Engine Optimization)</GeoTerm> es la optimización de contenido
                   para ser comprendido, recuperado y citado por modelos de lenguaje e inteligencia artificial generativa.</strong>
@@ -120,7 +120,7 @@ const QueEsGeoGuiaCompleta = () => {
                   nada. <strong>GEO es el arte de hacer que modelos como ChatGPT, Perplexity y Gemini te citen.</strong>
                 </p>
 
-                <HighlightSnippet id="geo-analogia" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="geo-analogia" variant="insight" className="mb-6">
                   <h4 className="font-semibold mb-3">Analogía rápida:</h4>
                   <ul className="space-y-2 text-muted-foreground">
                     <li><strong>SEO:</strong> Optimizar para que Google te ponga en la posición 1 de su lista de búsqueda</li>
@@ -176,7 +176,7 @@ const QueEsGeoGuiaCompleta = () => {
               <section id="por-que-geo-importa" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">¿Por qué GEO importa ahora?</h2>
 
-                <HighlightSnippet id="estadisticas-geo" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="estadisticas-geo" variant="stat" className="mb-6">
                   <h4 className="font-semibold mb-3">Datos clave de 2025-2026:</h4>
                   <ul className="space-y-2">
                     <li><strong>ChatGPT:</strong> 900 millones de usuarios activos semanales (OpenAI, febrero de 2026, vía TechCrunch)</li>
@@ -212,7 +212,7 @@ const QueEsGeoGuiaCompleta = () => {
               <section id="geo-vs-seo" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">GEO vs SEO: La comparativa definitiva</h2>
 
-                <HighlightSnippet id="tabla-geo-seo" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="tabla-geo-seo" variant="insight" className="mb-6">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
@@ -466,7 +466,7 @@ const QueEsGeoGuiaCompleta = () => {
                   Google revolucionó la búsqueda hace 25 años. Y empieza ahora.
                 </p>
 
-                <HighlightSnippet id="geo-cta" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="geo-cta" variant="stat" className="mb-6">
                   <p className="font-semibold text-lg mb-2">Tu siguiente paso:</p>
                   <p className="text-muted-foreground">
                     Elige tu mejor artículo. Aplica hoy los 5 pilares del framework (F1-F5).

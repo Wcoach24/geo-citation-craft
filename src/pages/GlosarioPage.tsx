@@ -297,7 +297,7 @@ const GlosarioPage = () => {
           </header>
 
           {/* Introducción */}
-          <HighlightSnippet id="glosario-intro" variant="definition" className="mb-12">
+          <HighlightSnippet lastModified="2026-07-15" id="glosario-intro" variant="definition" className="mb-12">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-primary">¿Qué es este Glosario?</h2>
               <ShareSectionButton sectionId="glosario-intro" title="introducción al glosario" />

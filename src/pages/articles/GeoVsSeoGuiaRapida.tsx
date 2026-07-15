@@ -142,7 +142,7 @@ const GeoVsSeoGuiaRapida = () => {
                 GEO no es SEO: guía rápida para entender la diferencia
               </h1>
               
-              <HighlightSnippet id="geo-vs-seo-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="geo-vs-seo-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong>SEO intenta gustar a Google.</strong> <GeoTerm term="geo">GEO</GeoTerm> intenta ser comprendido por modelos de lenguaje y citado por IA.
                 </p>
@@ -166,7 +166,7 @@ const GeoVsSeoGuiaRapida = () => {
               <section id="tabla-comparativa" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Tabla comparativa clara (SEO vs GEO)</h2>
                 
-                <HighlightSnippet id="tabla-comparativa" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="tabla-comparativa" variant="insight" className="mb-6">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
@@ -231,7 +231,7 @@ const GeoVsSeoGuiaRapida = () => {
               <section id="estrategia-pivote" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Conclusión estratégica: por qué pivotar ya</h2>
                 
-                <HighlightSnippet id="estrategia-pivote" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="estrategia-pivote" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">La transición está ocurriendo ahora:</h3>
                   <ul className="space-y-2">
                     <li><strong>2024:</strong> Google integra Gemini en búsqueda con AI Overviews</li>

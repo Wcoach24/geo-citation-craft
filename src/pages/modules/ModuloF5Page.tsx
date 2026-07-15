@@ -161,7 +161,7 @@ const ModuloF5Page = () => {
           </div>
 
           {/* Objective */}
-          <HighlightSnippet id="f5-objetivo" variant="definition" className="mb-16">
+          <HighlightSnippet lastModified="2026-07-15" id="f5-objetivo" variant="definition" className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-primary">Objetivo del Módulo</h2>
               <ShareSectionButton sectionId="f5-objetivo" title="objetivo del módulo" />

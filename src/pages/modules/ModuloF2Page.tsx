@@ -171,7 +171,7 @@ const ModuloF2Page = () => {
               <h2 className="text-3xl font-semibold text-primary">Objetivo del Módulo</h2>
               <ShareSectionButton sectionId="f2-objetivo" title="objetivo del módulo" />
             </div>
-            <HighlightSnippet variant="definition" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="definition" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
                 Este módulo te enseña a alinear tu contenido con el lenguaje, estructura y profundidad contextual que utilizan los <GeoTerm term="llm">LLMs</GeoTerm> para generar respuestas. El objetivo no es solo que la <GeoTerm term="ia">IA</GeoTerm> te lea, sino que te entienda, te valore como fuente relevante y te cite como referencia autorizada en sus respuestas.
               </p>

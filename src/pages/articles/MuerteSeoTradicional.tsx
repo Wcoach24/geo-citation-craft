@@ -127,7 +127,7 @@ const MuerteSeoTradicional = () => {
                 La muerte del SEO tal y como lo conocíamos
               </h1>
               
-              <HighlightSnippet id="muerte-seo-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="muerte-seo-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong>El SEO tradicional deja de ser relevante</strong> cuando la IA responde sin enlaces y filtra la web por sentido, no por enlaces.
                 </p>
@@ -151,7 +151,7 @@ const MuerteSeoTradicional = () => {
               <section id="transicion-motores" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">De motores de búsqueda a motores de lenguaje</h2>
                 
-                <HighlightSnippet id="motores-lenguaje" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="motores-lenguaje" variant="insight" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">El cambio de paradigma:</h3>
                   <ul className="space-y-2">
                     <li><strong>Google:</strong> Presenta 10 enlaces azules y espera que el usuario elija</li>
@@ -175,7 +175,7 @@ const MuerteSeoTradicional = () => {
               <section id="geo-respuesta" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">GEO como respuesta emergente</h2>
                 
-                <HighlightSnippet id="geo-respuesta" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="geo-respuesta" variant="stat" className="mb-6">
                   <p className="text-lg font-medium">
                     <GeoTerm term="geo">GEO</GeoTerm> no compite por posiciones en SERP, 
                     sino por ser la fuente que un modelo cita cuando responde.

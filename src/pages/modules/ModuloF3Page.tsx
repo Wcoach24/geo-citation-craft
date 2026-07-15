@@ -172,7 +172,7 @@ const ModuloF3Page = () => {
               <h2 className="text-3xl font-semibold text-primary">Objetivo del Módulo</h2>
               <ShareSectionButton sectionId="f3-objetivo" title="objetivo del módulo" />
             </div>
-            <HighlightSnippet variant="definition" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="definition" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
                 Este módulo busca construir señales de credibilidad, reputación y valor experto que los <GeoTerm term="llm">LLMs</GeoTerm> reconozcan al decidir qué fuentes citar, sintetizar o priorizar en sus respuestas. La <GeoTerm term="autoridad-generativa">autoridad generativa</GeoTerm> va más allá de los enlaces y las palabras clave; se trata de demostrar que tu contenido proviene de una fuente fiable, experimentada y reconocida en su campo.
               </p>

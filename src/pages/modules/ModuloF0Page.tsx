@@ -162,7 +162,7 @@ const ModuloF0Page = () => {
               <h2 className="text-3xl font-semibold text-primary">Diagnóstico Rápido: ¿Tu Web Es Visible para la IA?</h2>
               <ShareSectionButton sectionId="f0-diagnostico" title="diagnóstico F0" />
             </div>
-            <HighlightSnippet variant="insight" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="insight" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
                 La mayoría de sitios web están optimizados para <GeoTerm term="seo">SEO tradicional</GeoTerm>, pero son completamente invisibles para 
                 <GeoTerm term="motores-generativos">modelos generativos de IA</GeoTerm> como ChatGPT, Claude o Perplexity. 
@@ -170,7 +170,7 @@ const ModuloF0Page = () => {
               </p>
             </HighlightSnippet>
 
-            <HighlightSnippet variant="stat" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="stat" className="mb-6">
               <p className="text-lg leading-relaxed text-center" data-speakable="true">
                 <strong>Resultado esperado:</strong> Incremento del 300-500% en menciones y citas por IA en los primeros 90 días.
               </p>

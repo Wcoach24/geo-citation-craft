@@ -171,7 +171,7 @@ const ModuloF4Page = () => {
               <h2 className="text-3xl font-semibold text-primary">Objetivo del Módulo</h2>
               <ShareSectionButton sectionId="f4-objetivo" title="objetivo del módulo" />
             </div>
-            <HighlightSnippet variant="definition" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="definition" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
                 Verificar si los <GeoTerm term="motores-generativos">motores de generación de contenido</GeoTerm> (<GeoTerm term="chatgpt">ChatGPT</GeoTerm>, <GeoTerm term="perplexity">Perplexity</GeoTerm>, <GeoTerm term="claude">Claude</GeoTerm>, Bard...) están utilizando, citando o parafraseando tu contenido en sus respuestas. Si no apareces en los resultados, este módulo te ayudará a detectar por qué y a implementar acciones correctivas específicas.
               </p>

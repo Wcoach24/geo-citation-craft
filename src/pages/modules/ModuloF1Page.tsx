@@ -167,7 +167,7 @@ const ModuloF1Page = () => {
               <h2 className="text-3xl font-semibold text-primary">Objetivo del Módulo</h2>
               <ShareSectionButton sectionId="f1-objetivo" title="objetivo F1" />
             </div>
-            <HighlightSnippet variant="definition" className="mb-6">
+            <HighlightSnippet lastModified="2026-07-15" variant="definition" className="mb-6">
               <p className="text-lg leading-relaxed" data-speakable="true">
                 Este módulo asegura que el contenido web está preparado técnica y estructuralmente para ser
                 <GeoTerm term="rastreo"> rastreado</GeoTerm>, <GeoTerm term="comprension-semantica">comprendido</GeoTerm> e indexado por <GeoTerm term="motores-generativos">motores de generación de texto</GeoTerm>.

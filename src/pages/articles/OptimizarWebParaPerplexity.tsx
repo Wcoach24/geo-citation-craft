@@ -93,7 +93,7 @@ const OptimizarWebParaPerplexity = () => {
                 Cómo optimizar tu web para Perplexity
               </h1>
 
-              <HighlightSnippet id="perplexity-optimization-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="perplexity-optimization-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   Perplexity cita fuentes en tiempo real y prioriza frescura. A diferencia de ChatGPT,
                   Perplexity busca web constantemente y elige fuentes que responden preguntas con precisión.
@@ -126,7 +126,7 @@ const OptimizarWebParaPerplexity = () => {
               <section id="perplexity-vs-chatgpt" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Perplexity vs ChatGPT: Las diferencias críticas</h2>
 
-                <HighlightSnippet id="comparativa-perplexity" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="comparativa-perplexity" variant="insight" className="mb-6">
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
@@ -218,7 +218,7 @@ Disallow: /admin/
                   priorizará respuestas actualizadas recientemente.
                 </p>
 
-                <HighlightSnippet id="recency-estrategia" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="recency-estrategia" variant="stat" className="mb-6">
                   <h4 className="font-semibold mb-3">Estrategia de recency para máxima aparición:</h4>
                   <ul className="space-y-2">
                     <li>• <strong>Artículos sobre trends/noticias:</strong> Publica en menos de 2 horas de que sea relevante</li>
@@ -504,7 +504,7 @@ Disallow: /admin/
                   actualizado, publique regularmente y fragmenta tus respuestas. Perplexity te encontrará.
                 </p>
 
-                <HighlightSnippet id="conclusión-perplexity-cta" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="conclusión-perplexity-cta" variant="stat" className="mb-6">
                   <p className="font-semibold text-lg mb-2">Comienza hoy:</p>
                   <p className="text-muted-foreground">
                     Abre Perplexity.ai, busca tu palabra clave principal, y nota si apareces.

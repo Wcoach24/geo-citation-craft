@@ -111,7 +111,7 @@ const EquipoPage = () => {
           </div>
 
           {/* Introduction */}
-          <HighlightSnippet id="introduccion-equipo" variant="definition" className="mb-16">
+          <HighlightSnippet lastModified="2026-07-15" id="introduccion-equipo" variant="definition" className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-primary">¿Quiénes somos?</h2>
               <ShareSectionButton sectionId="introduccion-equipo" title="introducción del equipo" />

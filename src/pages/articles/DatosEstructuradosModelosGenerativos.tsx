@@ -90,7 +90,7 @@ const DatosEstructuradosModelosGenerativos = () => {
                 Los datos estructurados que mejor entienden los modelos generativos
               </h1>
               
-              <HighlightSnippet id="datos-estructurados-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="datos-estructurados-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong>Los modelos comprenden mejor</strong> contenido etiquetado como FAQPage, HowTo, Article o SpeakableSpecification.
                 </p>
@@ -114,7 +114,7 @@ const DatosEstructuradosModelosGenerativos = () => {
               <section id="microdatos-recomendados" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Microdatos recomendados para citabilidad</h2>
                 
-                <HighlightSnippet id="microdatos-recomendados" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="microdatos-recomendados" variant="insight" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Top 5 Schema.org para GEO:</h3>
                   <ul className="space-y-2">
                     <li><strong>Article:</strong> Para contenido editorial y posts</li>
@@ -144,7 +144,7 @@ const DatosEstructuradosModelosGenerativos = () => {
               <section id="implementacion-visual" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Implementación práctica</h2>
                 
-                <HighlightSnippet id="implementacion-practica" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="implementacion-practica" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Código esencial para cada tipo:</h3>
                   <div className="space-y-3 text-sm">
                     <div>

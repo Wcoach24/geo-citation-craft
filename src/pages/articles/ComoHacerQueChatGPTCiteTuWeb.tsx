@@ -93,7 +93,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                 Cómo hacer que ChatGPT cite tu web
               </h1>
 
-              <HighlightSnippet id="chatgpt-citacion-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="chatgpt-citacion-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   ChatGPT cita fuentes cuando el contenido es claro, específico, bien delimitado y el modelo reconoce autoridad.
                   No es magia: es <GeoTerm term="geo">GEO</GeoTerm>.
@@ -159,7 +159,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                   <GeoTerm term="fragmentacion">Fragmentación</GeoTerm> significa dividir tu contenido en bloques independientes, citables y reutilizables.
                 </p>
 
-                <HighlightSnippet id="fragmentacion-ejemplo" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="fragmentacion-ejemplo" variant="insight" className="mb-6">
                   <h4 className="font-semibold mb-3">Mal (párrafo denso):</h4>
                   <p className="text-sm text-muted-foreground mb-4 italic">
                     "La optimización para motores de búsqueda generativos es un conjunto de prácticas que intenta
@@ -203,7 +203,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                   tiene más probabilidades de ser citada cuando un usuario pregunta "¿Qué es...?"
                 </p>
 
-                <HighlightSnippet id="definicion-estructura" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="definicion-estructura" variant="stat" className="mb-6">
                   <h4 className="font-semibold mb-3">Estructura ganadora para definiciones:</h4>
                   <div className="bg-card rounded p-4 space-y-3 text-sm">
                     <div>
@@ -268,7 +268,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                   Los datos estructurados son señales explícitas al modelo que dicen: "Este contenido es de este tipo y contiene esta información."
                 </p>
 
-                <HighlightSnippet id="schema-tipos" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="schema-tipos" variant="insight" className="mb-6">
                   <h4 className="font-semibold mb-3">Schemas más citables:</h4>
                   <ul className="space-y-2 text-muted-foreground">
                     <li><strong>Article:</strong> Aumenta probabilidad de citación por 35%</li>
@@ -452,7 +452,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                   Es estructura. Es <GeoTerm term="geo">GEO</GeoTerm>.
                 </p>
 
-                <HighlightSnippet id="conclusión-cta" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="conclusión-cta" variant="stat" className="mb-6">
                   <p className="font-semibold text-lg mb-2">Tu siguiente paso:</p>
                   <p className="text-muted-foreground">
                     Elige tu artículo más importante. Aplica hoy la técnica 2 (definiciones claras) y la técnica 4

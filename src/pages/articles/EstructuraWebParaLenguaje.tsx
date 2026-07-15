@@ -90,7 +90,7 @@ const EstructuraWebParaLenguaje = () => {
                 Estructura tu web para el lenguaje, no para los algoritmos
               </h1>
               
-              <HighlightSnippet id="estructura-lenguaje-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="estructura-lenguaje-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong>Los modelos generativos entienden mejor</strong> las páginas bien fragmentadas, con bloques lógicos, semántica clara y datos estructurados.
                 </p>
@@ -113,7 +113,7 @@ const EstructuraWebParaLenguaje = () => {
               <section id="principios-diseno-llm" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Principios de diseño para LLMs</h2>
                 
-                <HighlightSnippet id="principios-llm" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="principios-llm" variant="insight" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Los 4 pilares de la comprensión LLM:</h3>
                   <ul className="space-y-2">
                     <li><strong>Fragmentación:</strong> Bloques temáticos independientes con IDs únicos</li>
@@ -151,7 +151,7 @@ const EstructuraWebParaLenguaje = () => {
               <section id="caso-comparativo" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Caso comparado: Web GEO vs SEO</h2>
                 
-                <HighlightSnippet id="caso-comparativo" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="caso-comparativo" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Ejemplo práctico:</h3>
                   <p><strong>Pregunta a ChatGPT:</strong> "¿Cómo funciona el marketing de contenidos?"</p>
                   <p className="mt-2"><strong>Web SEO:</strong> No citada (contenido disperso, keywords forzadas)</p>

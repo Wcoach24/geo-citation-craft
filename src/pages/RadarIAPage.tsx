@@ -200,7 +200,7 @@ const RadarIAPage = () => {
           </header>
 
           {/* Introducción */}
-          <HighlightSnippet id="radar-intro" variant="definition" className="mb-12">
+          <HighlightSnippet lastModified="2026-07-15" id="radar-intro" variant="definition" className="mb-12">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-primary">¿Qué es el Radar IA?</h2>
               <ShareSectionButton sectionId="radar-intro" title="introducción al radar" />

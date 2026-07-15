@@ -90,7 +90,7 @@ const FormatoWikipediaIA = () => {
                 ¿Por qué los modelos prefieren textos con formato Wikipedia?
               </h1>
               
-              <HighlightSnippet id="formato-wikipedia-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="formato-wikipedia-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong>Las IA priorizan textos que imitan el estilo de Wikipedia:</strong> breves, neutrales, bien titulados y estructurados.
                 </p>
@@ -114,7 +114,7 @@ const FormatoWikipediaIA = () => {
               <section id="entrenamiento-datos" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Explicación: cómo fue entrenado GPT</h2>
                 
-                <HighlightSnippet id="entrenamiento-gpt" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="entrenamiento-gpt" variant="insight" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Fuentes de entrenamiento de GPT-3/4:</h3>
                   <ul className="space-y-2">
                     <li><strong>Wikipedia:</strong> ~3% del dataset, pero máxima calidad</li>
@@ -139,7 +139,7 @@ const FormatoWikipediaIA = () => {
               <section id="estilo-enciclopedico" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Estilo enciclopedico como modelo ideal</h2>
                 
-                <HighlightSnippet id="estilo-enciclopedico" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="estilo-enciclopedico" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Características del formato Wikipedia:</h3>
                   <ul className="space-y-2">
                     <li><strong>Definición clara:</strong> Primera frase explica qué es el concepto</li>

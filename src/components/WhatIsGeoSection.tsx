@@ -15,7 +15,7 @@ const WhatIsGeoSection = () => {
           
           <section className="mb-8">
             <h3 className="sr-only">Definición principal de GEO</h3>
-            <HighlightSnippet id="definicion-geo" variant="definition" className="mb-8">
+            <HighlightSnippet lastModified="2026-07-15" id="definicion-geo" variant="definition" className="mb-8">
               <p className="text-lg" data-speakable="true">
                 <strong>Generative Engine Optimization (GEO)</strong> es la metodología de optimización 
                 de contenido web diseñada específicamente para que los{" "}
@@ -32,7 +32,7 @@ const WhatIsGeoSection = () => {
 
           <section className="mb-8">
             <h3 className="sr-only">Diferencia entre GEO y SEO</h3>
-            <HighlightSnippet id="diferencia-seo-geo" variant="insight" className="mb-8">
+            <HighlightSnippet lastModified="2026-07-15" id="diferencia-seo-geo" variant="insight" className="mb-8">
               <p className="text-lg" data-speakable="true">
                 <strong>Diferencia clave:</strong> Mientras que el SEO tradicional se enfoca en optimizar para motores de búsqueda como Google, 
                 GEO se centra en optimizar para{" "}

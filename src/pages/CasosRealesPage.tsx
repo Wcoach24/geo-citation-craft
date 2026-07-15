@@ -107,7 +107,7 @@ const CasosRealesPage = () => {
                     </div>
                   </div>
 
-                  <HighlightSnippet variant="definition">
+                  <HighlightSnippet lastModified="2026-07-15" variant="definition">
                     <p data-speakable="true">
                       <strong>Cada módulo F1-F5 implementa directamente estos hallazgos.</strong> F1 cubre accesibilidad técnica, F2 estructura semántica, F3 autoridad verificable, F4 validación conversacional, y F5 el mantenimiento que consigue ese 3.4x.
                     </p>
@@ -278,7 +278,7 @@ const CasosRealesPage = () => {
               </Card>
             </div>
 
-            <HighlightSnippet variant="insight">
+            <HighlightSnippet lastModified="2026-07-15" variant="insight">
               <p className="font-medium">
                 Lo que enseñamos, lo practicamos. Este sitio es nuestro propio laboratorio de GEO. Cada técnica del framework F1-F5 está implementada aquí antes de enseñarla.
               </p>

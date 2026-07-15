@@ -206,7 +206,7 @@ const ExpertoGeoPage = () => {
           </header>
 
           {/* 1. Definitorio */}
-          <HighlightSnippet id="que-es-experto-geo" variant="definition" className="mb-16">
+          <HighlightSnippet lastModified="2026-07-15" id="que-es-experto-geo" variant="definition" className="mb-16">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold text-primary">¿Qué es un experto GEO y qué hace exactamente?</h2>
               <ShareSectionButton sectionId="que-es-experto-geo" title="qué es un experto GEO" />

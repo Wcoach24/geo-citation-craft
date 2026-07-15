@@ -131,7 +131,7 @@ const MetodologiaGeoPage = () => {
               Entiende los fundamentos que hacen que tu web sea citada por IA.
             </p>
             
-            <HighlightSnippet id="metodologia-definicion" variant="definition" className="text-left">
+            <HighlightSnippet lastModified="2026-07-15" id="metodologia-definicion" variant="definition" className="text-left">
               <p className="text-lg" data-speakable="true">
                 <strong>La Metodología GEO</strong> es un framework estructurado en cinco módulos progresivos (F1-F5) 
                 que permite a una web ser entendida por LLMs como una fuente fiable y estructurada. 
@@ -154,7 +154,7 @@ const MetodologiaGeoPage = () => {
               <ShareSectionButton sectionId="modulos" title="módulos del framework" />
             </div>
             
-            <HighlightSnippet id="modulos-descripcion" variant="insight" className="mb-10">
+            <HighlightSnippet lastModified="2026-07-15" id="modulos-descripcion" variant="insight" className="mb-10">
               <p className="text-center" data-speakable="true">
                 <strong>El Framework F1-F5</strong> está diseñado como un sistema progresivo donde cada módulo 
                 construye sobre el anterior. Desde fundamentos básicos hasta estrategias avanzadas, 
@@ -336,7 +336,7 @@ const MetodologiaGeoPage = () => {
               <ShareSectionButton sectionId="comparativa" title="comparativa SEO vs GEO" />
             </div>
             
-            <HighlightSnippet id="no-es-seo-es-geo" variant="definition" className="mb-10">
+            <HighlightSnippet lastModified="2026-07-15" id="no-es-seo-es-geo" variant="definition" className="mb-10">
               <p className="text-center text-lg" data-speakable="true">
                 <strong>No es SEO, es GEO.</strong> Mientras que el SEO tradicional optimiza para buscadores, 
                 GEO optimiza para modelos de lenguaje. No son opuestos, sino complementarios - 
@@ -418,7 +418,7 @@ const MetodologiaGeoPage = () => {
                   <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                   ¿Cuánto tiempo se tarda en implementar toda la Metodología GEO?
                 </h3>
-                <HighlightSnippet variant="insight">
+                <HighlightSnippet lastModified="2026-07-15" variant="insight">
                   <p className="text-muted-foreground" data-speakable="true">
                     La implementación completa del Framework F1-F5 requiere aproximadamente 19 horas de formación, 
                     más el tiempo de implementación práctica en tu web. Sin embargo, cada módulo puede implementarse 
@@ -432,7 +432,7 @@ const MetodologiaGeoPage = () => {
                   <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                   ¿Cuál es la diferencia entre GEO y el SEO tradicional?
                 </h3>
-                <HighlightSnippet variant="insight">
+                <HighlightSnippet lastModified="2026-07-15" variant="insight">
                   <p className="text-muted-foreground" data-speakable="true">
                     Mientras que el SEO optimiza para algoritmos de búsqueda tradicionales y usuarios humanos, 
                     GEO se centra específicamente en optimizar para modelos de lenguaje e IAs generativas. 
@@ -447,7 +447,7 @@ const MetodologiaGeoPage = () => {
                   <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                   ¿Cómo se mide el éxito en GEO?
                 </h3>
-                <HighlightSnippet variant="insight">
+                <HighlightSnippet lastModified="2026-07-15" variant="insight">
                   <p className="text-muted-foreground" data-speakable="true">
                     El éxito en GEO se mide principalmente por la frecuencia de citación en respuestas de IA, 
                     la precisión de las citas (si reflejan correctamente tu contenido), y la autoridad percibida 
@@ -462,7 +462,7 @@ const MetodologiaGeoPage = () => {
                   <div className="w-2 h-2 bg-accent rounded-full mr-2"></div>
                   ¿Por qué necesito implementar GEO en mi web?
                 </h3>
-                <HighlightSnippet variant="insight">
+                <HighlightSnippet lastModified="2026-07-15" variant="insight">
                   <p className="text-muted-foreground" data-speakable="true">
                     Con el crecimiento exponencial del uso de asistentes IA como ChatGPT, Perplexity y Claude, 
                     cada vez más usuarios buscan información a través de estos sistemas en lugar de motores 

@@ -136,7 +136,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
                 ¿Qué significa ser citado por una IA?
               </h1>
               
-              <HighlightSnippet id="citabilidad-ia-definition" variant="definition" className="mb-6">
+              <HighlightSnippet lastModified="2026-07-15" id="citabilidad-ia-definition" variant="definition" className="mb-6">
                 <p className="text-xl leading-relaxed">
                   <strong>Ser citado por una IA</strong> implica que tu contenido ha sido integrado en su memoria contextual o recuperado en tiempo real como fuente de autoridad.
                 </p>
@@ -161,7 +161,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
               <section id="tipos-citacion" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Tipos de citación por IA</h2>
                 
-                <HighlightSnippet id="tipos-citacion-ia" variant="insight" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="tipos-citacion-ia" variant="insight" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Existen tres formas principales de citación:</h3>
                   <ul className="space-y-2">
                     <li><strong>Citación directa:</strong> El modelo menciona explícitamente tu contenido como fuente</li>
@@ -180,7 +180,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
               <section id="verificar-citacion" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Cómo comprobar si un modelo te cita</h2>
                 
-                <HighlightSnippet id="verificar-citacion" variant="stat" className="mb-6">
+                <HighlightSnippet lastModified="2026-07-15" id="verificar-citacion" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">Metodología de verificación:</h3>
                   <ol className="space-y-2 list-decimal list-inside">
                     <li>Realiza preguntas específicas sobre tu expertise en diferentes modelos</li>
