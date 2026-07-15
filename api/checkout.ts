@@ -2,7 +2,7 @@
  * POST /api/checkout
  * Creates a Stripe Checkout Session.
  *
- * Body: { productType: 'complete', guestEmail?: string }
+ * Body: { productType: 'complete' | 'curso-auditoria', guestEmail?: string }
  * Returns: { url: string } | { error: string }
  *
  * F2-2: los módulos sueltos (f1..f5, 10 € cada uno) YA NO se venden: 5×10 € hacía
@@ -15,6 +15,9 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
 
 const COMPLETE_PRICE_ID = "price_1TYM80LYFGrlrWdkKUIPIa7U"; // Curso GEO Completo €47
+// F2-5: tier "Curso + Auditoría personalizada" — 197 €, con price_data inline
+// (sin Price en el dashboard de Stripe). H-9: pendiente de aprobación de Álvaro.
+const CURSO_AUDITORIA_AMOUNT = 19700; // céntimos EUR
 
 const ALLOWED_ORIGINS = [
   "https://esgeo.ai",
@@ -57,26 +60,46 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[];
     let productMeta: Record<string, string>;
-    let priceId: string;
     let product: string;
+    let amount = "";
 
     if (productType === "complete") {
-      priceId = COMPLETE_PRICE_ID;
       product = "complete";
-      lineItems = [{ price: priceId, quantity: 1 }];
+      lineItems = [{ price: COMPLETE_PRICE_ID, quantity: 1 }];
       productMeta = { product_type: "complete" };
+
+      // Importe real desde Stripe (no hardcodeado): lo lee /success para el tracking
+      // de purchase_complete. Si Stripe no lo devuelve, se omite (mejor sin dato que inventado).
+      try {
+        const price = await stripe.prices.retrieve(COMPLETE_PRICE_ID);
+        if (price.unit_amount != null) amount = String(price.unit_amount / 100);
+      } catch (e) {
+        console.error("[checkout] no se pudo leer el precio para el tracking:", e);
+      }
+    } else if (productType === "curso-auditoria") {
+      // F2-5: tier ancla "Curso + Auditoría personalizada" — 197 €.
+      // price_data inline para no depender de crear un Price en el dashboard de Stripe.
+      // Entrega: los 5 PDFs los adjunta el webhook; la auditoría es manual (el webhook
+      // notifica al owner con el product type visible).
+      product = "curso-auditoria";
+      lineItems = [
+        {
+          price_data: {
+            currency: "eur",
+            unit_amount: CURSO_AUDITORIA_AMOUNT,
+            product_data: {
+              name: "Curso GEO completo + Auditoría personalizada",
+              description:
+                "5 módulos F1-F5 en PDF + auditoría HABLA comentada de tu dominio (vídeo/PDF) + plan de acción priorizado",
+            },
+          },
+          quantity: 1,
+        },
+      ];
+      productMeta = { product_type: "curso-auditoria" };
+      amount = String(CURSO_AUDITORIA_AMOUNT / 100);
     } else {
       return res.status(400).json({ error: "Invalid product type" });
-    }
-
-    // Importe real desde Stripe (no hardcodeado): lo lee /success para el tracking
-    // de purchase_complete. Si Stripe no lo devuelve, se omite (mejor sin dato que inventado).
-    let amount = "";
-    try {
-      const price = await stripe.prices.retrieve(priceId);
-      if (price.unit_amount != null) amount = String(price.unit_amount / 100);
-    } catch (e) {
-      console.error("[checkout] no se pudo leer el precio para el tracking:", e);
     }
 
     // OJO: {CHECKOUT_SESSION_ID} debe quedar literal (lo sustituye Stripe).

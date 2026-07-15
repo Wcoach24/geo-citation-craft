@@ -1,14 +1,29 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Star, Crown, Users } from "lucide-react";
+import { Check, Star, Crown, Users, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { COMPLETE_COURSE } from "@/data/modules";
 import BuyButton from "@/components/BuyButton";
 import GuaranteeNote from "@/components/GuaranteeNote";
 
+type Plan = {
+  name: string;
+  price: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  features: string[];
+  cta: string;
+  variant: "outline" | "default";
+  link?: string;
+  highlight: boolean;
+  productType?: "curso-auditoria";
+};
+
 const PricingSection = () => {
-  const plans = [
+  // F2-5: tercer tier ancla (197 €) — entrega manual de la auditoría.
+  // H-9: pendiente de aprobación de Álvaro (aprobar o retirar).
+  const plans: Plan[] = [
     {
       name: "F0 — Empieza gratis",
       price: "0",
@@ -20,7 +35,7 @@ const PricingSection = () => {
         "Módulo F0 completo",
         "Sin registro, sin tarjeta",
       ],
-      cta: "Empezar Gratis",
+      cta: "Leer F0 gratis",
       variant: "outline" as const,
       link: "/curso/f0",
       highlight: false,
@@ -35,6 +50,22 @@ const PricingSection = () => {
       cta: "Comprar el curso — 47 €",
       variant: "default" as const,
       highlight: true,
+    },
+    {
+      name: "Curso + Auditoría personalizada",
+      price: "197",
+      description: "El curso completo más nuestra auditoría de tu dominio.",
+      icon: Search,
+      features: [
+        "Todo lo del Curso Completo (F1-F5, 142 páginas)",
+        "Auditoría HABLA de tu dominio, comentada en vídeo/PDF",
+        "Plan de acción priorizado: qué arreglar y en qué orden",
+        "Entrega personal por email, con seguimiento directo",
+      ],
+      cta: "Comprar curso + auditoría — 197 €",
+      variant: "default" as const,
+      highlight: false,
+      productType: "curso-auditoria" as const,
     },
   ];
 
@@ -101,6 +132,15 @@ const PricingSection = () => {
                   </BuyButton>
                   <GuaranteeNote compact className="mt-3" />
                 </>
+              ) : plan.productType ? (
+                <BuyButton
+                  source="pricing-home-auditoria"
+                  productType={plan.productType}
+                  className="w-full rounded-xl py-3.5 font-semibold border border-accent/50 text-accent hover:bg-accent/10 bg-background"
+                  showArrow={false}
+                >
+                  {plan.cta}
+                </BuyButton>
               ) : (
                 <Button
                   variant={plan.variant}
@@ -108,7 +148,7 @@ const PricingSection = () => {
                   size="lg"
                   asChild
                 >
-                  <Link to={plan.link}>{plan.cta}</Link>
+                  <Link to={plan.link ?? "/curso"}>{plan.cta}</Link>
                 </Button>
               )}
             </div>

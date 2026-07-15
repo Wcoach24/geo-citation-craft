@@ -10,6 +10,8 @@ interface BuyButtonProps {
   /** De dónde salió el clic. Va a Clarity para saber qué CTA vende. */
   source: string;
   showArrow?: boolean;
+  /** F2-5: producto a comprar. Por defecto el curso completo (47 €). */
+  productType?: "complete" | "curso-auditoria";
 }
 
 /**
@@ -25,6 +27,7 @@ export default function BuyButton({
   className = "btn-cta",
   source,
   showArrow = true,
+  productType = "complete",
 }: BuyButtonProps) {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
@@ -32,9 +35,9 @@ export default function BuyButton({
   const buy = async () => {
     try {
       setLoading(true);
-      trackEvent.checkoutStart("complete");
+      trackEvent.checkoutStart(productType);
       (window as unknown as { clarity?: (...a: unknown[]) => void }).clarity?.("event", "cta_checkout_click", { source });
-      const { url } = await startCheckout({ productType: "complete" });
+      const { url } = await startCheckout({ productType });
       window.location.href = url;
     } catch (err) {
       console.error("Checkout error:", err);

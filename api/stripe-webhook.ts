@@ -54,16 +54,30 @@ function loadPdf(modId: string) {
 }
 
 function buildCustomerEmail(productType: string, attachments: { name: string }[]): { html: string; text: string } {
-  const intro = productType === "complete"
-    ? "Acabas de comprar el Curso GEO Completo. Gracias."
-    : "Acabas de comprar uno de los módulos de esGEO. Gracias.";
+  const intro = productType === "curso-auditoria"
+    ? "Acabas de comprar el Curso GEO Completo + Auditoría personalizada. Gracias."
+    : productType === "complete"
+      ? "Acabas de comprar el Curso GEO Completo. Gracias."
+      : "Acabas de comprar uno de los módulos de esGEO. Gracias.";
   const fileList = attachments.map((a) => `• ${a.name}`).join("\n");
+
+  // F2-5: la auditoría se entrega manualmente — se anuncia el siguiente paso al cliente.
+  const auditNote = productType === "curso-auditoria"
+    ? `
+
+Sobre tu auditoría personalizada: te escribo en persona a este mismo
+email para confirmar el dominio que quieres auditar. Recibirás la
+auditoría HABLA comentada (vídeo/PDF) y un plan de acción priorizado.`
+    : "";
+  const auditNoteHtml = productType === "curso-auditoria"
+    ? `<p><strong>Sobre tu auditoría personalizada:</strong> te escribo en persona a este mismo email para confirmar el dominio que quieres auditar. Recibirás la auditoría HABLA comentada (vídeo/PDF) y un plan de acción priorizado.</p>`
+    : "";
 
   const text = `${intro}
 
 Tienes los PDFs adjuntos a este email:
 
-${fileList}
+${fileList}${auditNote}
 
 Guárdalos en tu equipo cuando puedas. Si algo falla o tienes alguna
 duda, contestando a este email me llega directamente a mí.
@@ -78,6 +92,7 @@ hola@esgeo.ai`;
 <p>${intro}</p>
 <p>Tienes los PDFs adjuntos a este email:</p>
 <ul style="padding-left:20px;color:#374151;">${fileListHtml}</ul>
+${auditNoteHtml}
 <p>Guárdalos en tu equipo cuando puedas. Si algo falla o tienes alguna duda, contestando a este email me llega directamente a mí.</p>
 <p>Eric<br><a href="mailto:hola@esgeo.ai" style="color:#2563eb;">hola@esgeo.ai</a></p>
 </body></html>`;
@@ -93,16 +108,29 @@ function buildOwnerNotification(session: Stripe.Checkout.Session, productType: s
   const sessionId = session.id;
   const when = new Date((session.created || Date.now() / 1000) * 1000).toISOString().replace("T", " ").slice(0, 19);
 
-  const subject = `💰 Venta esGEO: €${amount} — ${products}`;
+  // F2-5: el product type SIEMPRE visible en la notificación. Para curso-auditoria hay
+  // trabajo manual pendiente (auditoría HABLA + plan de acción): el subject lo grita.
+  const subject = productType === "curso-auditoria"
+    ? `💰⚠️ Venta esGEO [curso-auditoria]: €${amount} — ENTREGA MANUAL: auditoría pendiente`
+    : `💰 Venta esGEO [${productType}]: €${amount} — ${products}`;
+
+  const manualDeliveryNote = productType === "curso-auditoria"
+    ? `
+
+⚠️ ACCIÓN REQUERIDA: este tier incluye auditoría HABLA comentada
+(vídeo/PDF) + plan de acción priorizado. Escribe al cliente para
+confirmar el dominio y entrégala manualmente.`
+    : "";
 
   const text = `Nueva venta en esgeo.ai
 
 Cliente:   ${customerEmail}
 País:      ${country}
+Tipo:      ${productType}
 Producto:  ${products}
 Monto:     ${amount} ${currency}
 Hora UTC:  ${when}
-Stripe:    ${sessionId}
+Stripe:    ${sessionId}${manualDeliveryNote}
 
 Dashboard: https://esgeo.ai/admin
 Stripe:    https://dashboard.stripe.com/payments/${sessionId}`;
@@ -111,9 +139,11 @@ Stripe:    https://dashboard.stripe.com/payments/${sessionId}`;
 <html><head><meta charset="utf-8"></head>
 <body style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#1f2937;line-height:1.55;font-size:15px;max-width:560px;margin:24px auto;padding:0 20px;">
 <h2 style="margin:0 0 16px 0;color:#16a34a;">💰 Nueva venta — €${amount}</h2>
+${productType === "curso-auditoria" ? `<p style="background:#fef3c7;border:1px solid #f59e0b;padding:10px 14px;border-radius:6px;"><strong>⚠️ ACCIÓN REQUERIDA:</strong> este tier incluye auditoría HABLA comentada (vídeo/PDF) + plan de acción priorizado. Escribe al cliente para confirmar el dominio y entrégala manualmente.</p>` : ""}
 <table style="width:100%;border-collapse:collapse;font-size:14px;">
 <tr><td style="padding:6px 0;color:#6b7280;width:90px;">Cliente</td><td style="padding:6px 0;"><strong>${customerEmail}</strong></td></tr>
 <tr><td style="padding:6px 0;color:#6b7280;">País</td><td style="padding:6px 0;">${country}</td></tr>
+<tr><td style="padding:6px 0;color:#6b7280;">Tipo</td><td style="padding:6px 0;"><strong>${productType}</strong></td></tr>
 <tr><td style="padding:6px 0;color:#6b7280;">Producto</td><td style="padding:6px 0;">${products}</td></tr>
 <tr><td style="padding:6px 0;color:#6b7280;">Monto</td><td style="padding:6px 0;"><strong>€${amount} ${currency}</strong></td></tr>
 <tr><td style="padding:6px 0;color:#6b7280;">Hora UTC</td><td style="padding:6px 0;font-family:monospace;font-size:12px;">${when}</td></tr>
@@ -191,7 +221,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(200).json({ received: true, error: "no email" });
     }
 
-    const moduleIds = productType === "complete"
+    // F2-5: curso-auditoria incluye el curso completo (los mismos 5 PDFs); la parte de
+    // auditoría es entrega manual y se avisa al owner en la notificación.
+    const moduleIds = productType === "complete" || productType === "curso-auditoria"
       ? ["f1", "f2", "f3", "f4", "f5"]
       : moduleId ? [moduleId] : [];
 
@@ -202,9 +234,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // 1. Email al cliente con los PDFs adjuntos
-    const subject = productType === "complete"
-      ? "Aquí tienes el Curso GEO completo"
-      : `Aquí tienes ${attachments[0].name}`;
+    const subject = productType === "curso-auditoria"
+      ? "Aquí tienes el Curso GEO completo (tu auditoría, en camino)"
+      : productType === "complete"
+        ? "Aquí tienes el Curso GEO completo"
+        : `Aquí tienes ${attachments[0].name}`;
     const { html, text } = buildCustomerEmail(productType, attachments);
     const result = await sendEmail(email, SENDER, subject, html, attachments, text);
     console.log(`[webhook] customer email sent to ${email}, id=${result.id}`);

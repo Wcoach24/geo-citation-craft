@@ -4,7 +4,8 @@
  */
 export type CheckoutBody = {
   // F2-2: los módulos sueltos ya no se venden — 'module' eliminado del tipo.
-  productType: "complete";
+  // F2-5: 'curso-auditoria' = curso completo + auditoría personalizada (197 €).
+  productType: "complete" | "curso-auditoria";
   guestEmail?: string;
 };
 
