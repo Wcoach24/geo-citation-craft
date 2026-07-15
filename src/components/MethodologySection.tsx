@@ -63,7 +63,7 @@ const MethodologySection = () => {
                       to={`/curso/${key}`}
                       className="inline-flex items-center text-sm font-medium text-accent hover:underline transition-all duration-200 focus-visible:ring-2 focus-visible:ring-accent rounded px-1 py-0.5"
                     >
-                      Ver módulo
+                      Qué aprenderás en {key.toUpperCase()}
                       <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   )}

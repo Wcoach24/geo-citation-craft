@@ -224,7 +224,7 @@ const MetodologiaGeoPage = () => {
                       <CardFooter>
                         <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                           <Link to={`/curso/${module.id.toLowerCase()}`}>
-                            Explorar módulo
+                            Qué aprenderás en {module.id}
                             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </Link>
                         </Button>
@@ -271,7 +271,7 @@ const MetodologiaGeoPage = () => {
                         <CardFooter>
                           <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                             <Link to={`/curso/${module.id.toLowerCase()}`}>
-                              Explorar módulo
+                              Qué aprenderás en {module.id}
                               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                             </Link>
                           </Button>
@@ -318,7 +318,7 @@ const MetodologiaGeoPage = () => {
                         <CardFooter>
                           <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
                             <Link to={`/curso/${module.id.toLowerCase()}`}>
-                              Explorar módulo
+                              Qué aprenderás en {module.id}
                               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                             </Link>
                           </Button>

@@ -78,10 +78,10 @@ const PricingSection = () => {
             Precios transparentes
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Elige tu Plan GEO
+            Empieza gratis. Paga una vez si te convence.
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Empieza gratis. Sin suscripciones. Pago único.
+            Audita tu web y lee F0 sin pagar. Sin suscripciones: pago único.
           </p>
         </div>
 
