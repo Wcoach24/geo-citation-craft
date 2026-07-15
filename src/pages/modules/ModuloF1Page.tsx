@@ -40,7 +40,7 @@ const ModuloF1Page = () => {
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content="#f1-objetivo, #f1-componentes, #f1-checklist, #f1-prompt" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Course", "WebPage", "Article"],
             "name": "Módulo F1: Fundamentos de Accesibilidad Generativa",
@@ -110,7 +110,7 @@ const ModuloF1Page = () => {
               "name": "Curso GEO Completo",
               "url": "https://www.esgeo.ai/curso"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />

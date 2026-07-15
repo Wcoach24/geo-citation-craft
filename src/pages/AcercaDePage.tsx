@@ -39,7 +39,7 @@ const AcercaDePage = () => {
         <meta name="citation_keywords" content="esGEO, equipo, misión, GEO, Generative Engine Optimization, fundadores, historia" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["AboutPage", "WebPage"],
             "name": "Acerca de esGEO",
@@ -127,7 +127,7 @@ const AcercaDePage = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": ".snippet-block, [data-speakable='true']"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />

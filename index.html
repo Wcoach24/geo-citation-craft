@@ -67,7 +67,12 @@
           "@id": "https://www.esgeo.ai#organization",
           "name": "esGEO",
           "url": "https://www.esgeo.ai",
-          "logo": "https://www.esgeo.ai/logo.png",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.esgeo.ai/logo.png",
+            "width": 512,
+            "height": 512
+          },
           "description": "Plataforma líder en Generative Engine Optimization en español.",
           "foundingDate": "2025-01-01",
           "slogan": "Optimiza para ser citado por la IA",
@@ -99,6 +104,7 @@
           "hasCourseInstance": {
             "@type": "CourseInstance",
             "courseMode": "online",
+            "courseWorkload": "PT14H",
             "location": { "@type": "VirtualLocation", "url": "https://www.esgeo.ai/curso" }
           }
         }

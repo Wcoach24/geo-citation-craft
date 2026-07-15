@@ -33,7 +33,7 @@ const MuerteSeoTradicional = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="SEO, muerte SEO, GEO, motores generativos, IA, búsqueda, futuro" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "La muerte del SEO tal y como lo conocíamos",
@@ -109,7 +109,7 @@ const MuerteSeoTradicional = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#muerte-seo-definition, #motores-lenguaje, #geo-respuesta"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

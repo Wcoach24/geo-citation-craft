@@ -27,7 +27,7 @@ const FormatoWikipediaIA = () => {
       <Helmet>
         <title>Por qué la IA prefiere formato Wikipedia 2026 | esGEO</title>
         <meta name="description" content="El estilo enciclopedico como modelo ideal para la citabilidad por modelos de lenguaje generativo." />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage"],
             "headline": "¿Por qué los modelos prefieren textos con formato Wikipedia?",
@@ -72,7 +72,7 @@ const FormatoWikipediaIA = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#formato-wikipedia-definition, #entrenamiento-gpt, #estilo-enciclopedico"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

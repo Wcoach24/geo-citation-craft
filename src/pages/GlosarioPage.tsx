@@ -44,7 +44,7 @@ const GlosarioPage = () => {
         <meta name="citation_keywords" content="GEO, Generative Engine Optimization, glosario, definiciones, IA, LLMs" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true'], .definition-card" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["DefinedTermSet", "WebPage"],
             "name": "Glosario de Generative Engine Optimization (GEO)",
@@ -92,7 +92,7 @@ const GlosarioPage = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": ".snippet-block, [data-speakable='true'], .definition-card"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />

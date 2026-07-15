@@ -32,7 +32,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="citabilidad, IA, citación, modelos de lenguaje, ChatGPT, Perplexity, Claude, GEO" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "¿Qué significa ser citado por una IA?",
@@ -116,7 +116,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#citabilidad-ia-definition, #tipos-citacion-ia, #verificar-citacion"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

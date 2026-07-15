@@ -42,7 +42,7 @@ const ModuloF0Page = () => {
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content="#f0-diagnostico, #f0-framework, #f0-problemas" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Course", "WebPage", "Article"],
             "name": "Módulo F0: ¿Necesitas GEO? Diagnóstico Gratuito",
@@ -98,7 +98,7 @@ const ModuloF0Page = () => {
                 }
               ]
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />

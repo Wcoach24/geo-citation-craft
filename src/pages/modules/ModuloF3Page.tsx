@@ -43,7 +43,7 @@ const ModuloF3Page = () => {
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content="#f3-objetivo, #f3-entendimiento-llm, #f3-componentes, #f3-checklist, .snippet-block, [data-speakable='true']" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Course", "WebPage", "Article"],
             "name": "Módulo F3: Autoridad Generativa",
@@ -115,7 +115,7 @@ const ModuloF3Page = () => {
               "name": "Curso GEO Completo",
               "url": "https://www.esgeo.ai/curso"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />

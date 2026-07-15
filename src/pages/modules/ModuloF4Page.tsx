@@ -42,7 +42,7 @@ const ModuloF4Page = () => {
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content="#f4-objetivo, #f4-tecnicas-validacion, #f4-acciones-post-validacion, #f4-checklist, .snippet-block, [data-speakable='true']" />
         
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Course", "WebPage", "Article"],
             "name": "Módulo F4: Validación Conversacional",
@@ -114,7 +114,7 @@ const ModuloF4Page = () => {
               "name": "Curso GEO Completo",
               "url": "https://www.esgeo.ai/curso"
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />

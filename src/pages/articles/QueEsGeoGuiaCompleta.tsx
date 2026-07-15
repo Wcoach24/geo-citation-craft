@@ -11,6 +11,36 @@ import { MODULES } from "@/data/modules";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 import InlineEmailCapture from "@/components/InlineEmailCapture";
 
+// F5-5b: las Q&A reales del articulo - una sola fuente para el JSX y el mainEntity
+// del FAQPage (antes el schema declaraba FAQPage sin mainEntity: invalido).
+const articleFaqs = [
+  {
+    question: "¿GEO es SEO con otro nombre?",
+    answer:
+      "No. SEO optimiza para rangos en Google. GEO optimiza para comprensión por IA. Se solapan (ambos valoran contenido de calidad), pero tienen reglas diferentes.",
+  },
+  {
+    question: "¿Reemplazará GEO a SEO?",
+    answer:
+      "Por ahora, son complementarios. En 5 años, probablemente 60-70% del esfuerzo sea GEO y 30-40% SEO. Pero SEO no morirá; evolucionará.",
+  },
+  {
+    question: "¿Cuánto cuesta empezar con GEO?",
+    answer:
+      "Gratis en implementación. Es reorganización de contenido existente. Sí tienes presupuesto: formación (cursos), herramientas de monitoreo, especialistas.",
+  },
+  {
+    question: "¿GEO funciona para e-commerce?",
+    answer:
+      "Sí, pero diferente. E-commerce usa GEO más para reputación (reviews, guías de compra) que para tráfico directo. Todavía necesitas SEO fuerte en e-commerce.",
+  },
+  {
+    question: "¿Afecta GEO al tráfico de Google actualmente?",
+    answer:
+      "No negativamente. Contenido GEO-optimizado suele ser contenido de alta calidad, que Google favorece. El riesgo es no invertir en GEO y quedar atrás.",
+  },
+];
+
 const QueEsGeoGuiaCompleta = () => {
   // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
   // para que los valores especificos de la pagina ganen en los tags duplicados.
@@ -35,19 +65,29 @@ const QueEsGeoGuiaCompleta = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="GEO, Generative Engine Optimization, optimización IA, SEO generativo, ChatGPT, Perplexity, autoridad generativa" />
 
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "Qué es GEO: Guía completa de Generative Engine Optimization",
             "description": "Definición, historia y framework completo de GEO",
             "url": "https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa",
+            "image": "https://www.esgeo.ai/og-image.png",
             "datePublished": "2026-03-20",
             "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
+              "@id": "https://www.esgeo.ai#organization",
               "name": "esGEO",
               "url": "https://www.esgeo.ai"
             },
+            "mainEntity": articleFaqs.map((faq) => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer,
+              },
+            })),
             "publisher": {
               "@type": "Organization",
               "name": "esGEO",
@@ -76,7 +116,7 @@ const QueEsGeoGuiaCompleta = () => {
                 }
               ]
             }
-          }) }} />
+          })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -410,46 +450,14 @@ const QueEsGeoGuiaCompleta = () => {
               <section id="faq-geo" className="mb-12">
                 <h2 className="text-2xl font-semibold text-primary mb-4">Preguntas frecuentes sobre GEO</h2>
 
+                {/* F5-5b: mismas Q&A que el mainEntity del FAQPage (articleFaqs) */}
                 <div className="space-y-6">
-                  <div className="border-l-4 border-accent pl-4">
-                    <h3 className="text-lg font-medium text-primary mb-2">¿GEO es SEO con otro nombre?</h3>
-                    <p className="text-muted-foreground">
-                      No. SEO optimiza para rangos en Google. GEO optimiza para comprensión por IA.
-                      Se solapan (ambos valoran contenido de calidad), pero tienen reglas diferentes.
-                    </p>
-                  </div>
-
-                  <div className="border-l-4 border-accent pl-4">
-                    <h3 className="text-lg font-medium text-primary mb-2">¿Reemplazará GEO a SEO?</h3>
-                    <p className="text-muted-foreground">
-                      Por ahora, son complementarios. En 5 años, probablemente 60-70% del esfuerzo
-                      sea GEO y 30-40% SEO. Pero SEO no morirá; evolucionará.
-                    </p>
-                  </div>
-
-                  <div className="border-l-4 border-accent pl-4">
-                    <h3 className="text-lg font-medium text-primary mb-2">¿Cuánto cuesta empezar con GEO?</h3>
-                    <p className="text-muted-foreground">
-                      Gratis en implementación. Es reorganización de contenido existente.
-                      Sí tienes presupuesto: formación (cursos), herramientas de monitoreo, especialistas.
-                    </p>
-                  </div>
-
-                  <div className="border-l-4 border-accent pl-4">
-                    <h3 className="text-lg font-medium text-primary mb-2">¿GEO funciona para e-commerce?</h3>
-                    <p className="text-muted-foreground">
-                      Sí, pero diferente. E-commerce usa GEO más para reputación (reviews, guías de compra)
-                      que para tráfico directo. Todavía necesitas SEO fuerte en e-commerce.
-                    </p>
-                  </div>
-
-                  <div className="border-l-4 border-accent pl-4">
-                    <h3 className="text-lg font-medium text-primary mb-2">¿Afecta GEO al tráfico de Google actualmente?</h3>
-                    <p className="text-muted-foreground">
-                      No negativamente. Contenido GEO-optimizado suele ser contenido de alta calidad,
-                      que Google favorece. El riesgo es no invertir en GEO y quedar atrás.
-                    </p>
-                  </div>
+                  {articleFaqs.map((faq) => (
+                    <div key={faq.question} className="border-l-4 border-accent pl-4">
+                      <h3 className="text-lg font-medium text-primary mb-2">{faq.question}</h3>
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
 

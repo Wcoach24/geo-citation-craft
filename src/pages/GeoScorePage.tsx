@@ -50,7 +50,7 @@ const GeoScorePage = () => {
           property="og:description"
           content="Puntuación 0-100 de la legibilidad de tu web para los modelos de IA. Gratis y sin registro."
         />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
             name: "HABLA — auditor de legibilidad máquina",
@@ -62,8 +62,8 @@ const GeoScorePage = () => {
               "Auditor gratuito que puntúa de 0 a 100 la legibilidad de una web para los modelos de lenguaje generativo, analizando el HTML servido sin ejecutar JavaScript.",
             offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
             publisher: { "@type": "Organization", name: "esGEO", url: "https://www.esgeo.ai" },
-          }) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          })}</script>
+        <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: faqs.map((f) => ({
@@ -71,7 +71,7 @@ const GeoScorePage = () => {
               name: f.q,
               acceptedAnswer: { "@type": "Answer", text: f.a },
             })),
-          }) }} />
+          })}</script>
       </Helmet>
 
       <Header />
