@@ -2,24 +2,18 @@
  * POST /api/checkout
  * Creates a Stripe Checkout Session.
  *
- * Body: { productType: 'module' | 'complete', moduleId?: string, guestEmail?: string }
+ * Body: { productType: 'complete', guestEmail?: string }
  * Returns: { url: string } | { error: string }
+ *
+ * F2-2: los módulos sueltos (f1..f5, 10 € cada uno) YA NO se venden: 5×10 € hacía
+ * ridículo el bundle de 47 €. Cualquier petición con productType 'module' o un
+ * moduleId f1..f5 se rechaza con 400. Solo se vende el curso completo.
  *
  * Replaces the old Supabase Edge Function `create-checkout`.
  */
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
 
-// --- Module → Stripe price mapping. Only modules with a PDF in /public/premium are listed.
-// Add a new module by adding the priceId+productId here AND the manifest entry in api/_lib/manifest.json.
-const PRODUCT_MAPPING: Record<string, { priceId: string; productId: string }> = {
-  f1: { priceId: "price_1SIElCLYFGrlrWdkg6xDfNK4", productId: "prod_TEiBWaHzwUlXA5" },
-  f2: { priceId: "price_1SIEr4LYFGrlrWdkKnenQc0o", productId: "prod_TEiHYoMQxn8CW4" },
-  f3: { priceId: "price_1SIEvqLYFGrlrWdkKyiOQhsz", productId: "prod_TEiMYkaDdZNpHK" },
-  f4: { priceId: "price_1SIEySLYFGrlrWdkPpmf0HrO", productId: "prod_TEiPPFHp6tqbVK" },
-  f5: { priceId: "price_1TYM7zLYFGrlrWdkJcKfCvga", productId: "prod_UXQz7DLgfdqKbN" },
-  // 'f6' intentionally NOT listed — coming soon, no PDF yet.
-};
 const COMPLETE_PRICE_ID = "price_1TYM80LYFGrlrWdkKUIPIa7U"; // Curso GEO Completo €47
 
 const ALLOWED_ORIGINS = [
@@ -44,10 +38,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const { productType, moduleId, guestEmail } = (req.body || {}) as {
-      productType?: "module" | "complete";
+      productType?: string;
       moduleId?: string;
       guestEmail?: string;
     };
+
+    // F2-2: la venta por módulos está retirada. Rechazo explícito (400) de
+    // productType 'module' y de cualquier moduleId f1..f5 que llegue de clientes viejos.
+    if (productType === "module" || moduleId) {
+      return res.status(400).json({
+        error: "Los módulos sueltos ya no se venden. Compra el curso completo (productType: 'complete').",
+      });
+    }
 
     const stripeKey = process.env.STRIPE_SECRET_KEY;
     if (!stripeKey) return res.status(500).json({ error: "Server misconfigured" });
@@ -63,13 +65,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       product = "complete";
       lineItems = [{ price: priceId, quantity: 1 }];
       productMeta = { product_type: "complete" };
-    } else if (productType === "module" && moduleId && PRODUCT_MAPPING[moduleId]) {
-      priceId = PRODUCT_MAPPING[moduleId].priceId;
-      product = `module_${moduleId}`;
-      lineItems = [{ price: priceId, quantity: 1 }];
-      productMeta = { product_type: "module", module_id: moduleId };
     } else {
-      return res.status(400).json({ error: "Invalid product type or module ID" });
+      return res.status(400).json({ error: "Invalid product type" });
     }
 
     // Importe real desde Stripe (no hardcodeado): lo lee /success para el tracking

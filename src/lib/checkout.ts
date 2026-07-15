@@ -3,8 +3,8 @@
  * Replaces the old supabase.functions.invoke('create-checkout', ...).
  */
 export type CheckoutBody = {
-  productType: "module" | "complete";
-  moduleId?: string;
+  // F2-2: los módulos sueltos ya no se venden — 'module' eliminado del tipo.
+  productType: "complete";
   guestEmail?: string;
 };
 

@@ -17,13 +17,8 @@ export interface ModuleInfo {
   duration: string;
   /** Nivel en español: 'Inicial' | 'Intermedio'. */
   level: string;
-  price: number;
   image: string;
   comingSoon?: boolean;
-  stripeIds: {
-    priceId: string;
-    productId: string;
-  };
 }
 
 export interface CompleteCourseInfo {
@@ -31,12 +26,7 @@ export interface CompleteCourseInfo {
   name: string;
   description: string;
   price: number;
-  originalPrice: number;
   launchPrice?: boolean;
-  stripeIds: {
-    priceId: string;
-    productId: string;
-  };
   features: string[];
 }
 
@@ -50,9 +40,7 @@ export const MODULES: Record<string, ModuleInfo> = {
     name: 'Módulo F1 - Fundamentos de Accesibilidad Generativa',
     shortName: 'F1 - Fundamentos',
     description: 'Aprende los fundamentos técnicos para hacer tu contenido accesible y comprensible para modelos de lenguaje AI.',
-    price: 10,
     image: '/images/modulo-f1.png',
-    stripeIds: { priceId: 'price_1SIElCLYFGrlrWdkg6xDfNK4', productId: 'prod_TEiBWaHzwUlXA5' },
   },
   f2: {
     id: 'f2',
@@ -63,9 +51,7 @@ export const MODULES: Record<string, ModuleInfo> = {
     name: 'Módulo F2 - Contexto Semántico',
     shortName: 'F2 - Contexto Semántico',
     description: 'Domina la estructura semántica y el contexto óptimo para modelos generativos.',
-    price: 10,
     image: '/images/modulo-f2.png',
-    stripeIds: { priceId: 'price_1SIEr4LYFGrlrWdkKnenQc0o', productId: 'prod_TEiHYoMQxn8CW4' },
   },
   f3: {
     id: 'f3',
@@ -76,9 +62,7 @@ export const MODULES: Record<string, ModuleInfo> = {
     name: 'Módulo F3 - Autoridad Generativa',
     shortName: 'F3 - Autoridad Generativa',
     description: 'Construye autoridad y credibilidad para ser citado por modelos de AI.',
-    price: 10,
     image: '/images/modulo-f3.png',
-    stripeIds: { priceId: 'price_1SIEvqLYFGrlrWdkKyiOQhsz', productId: 'prod_TEiMYkaDdZNpHK' },
   },
   f4: {
     id: 'f4',
@@ -89,9 +73,7 @@ export const MODULES: Record<string, ModuleInfo> = {
     name: 'Módulo F4 - Validación Conversacional',
     shortName: 'F4 - Validación Conversacional',
     description: 'Aprende validación conversacional y optimización de interacciones.',
-    price: 10,
     image: '/images/modulo-f4.png',
-    stripeIds: { priceId: 'price_1SIEySLYFGrlrWdkPpmf0HrO', productId: 'prod_TEiPPFHp6tqbVK' },
   },
   f5: {
     id: 'f5',
@@ -102,9 +84,7 @@ export const MODULES: Record<string, ModuleInfo> = {
     name: 'Módulo F5 - Mantenimiento Evolutivo',
     shortName: 'F5 - Mantenimiento Evolutivo',
     description: 'Diseña sistemas de mantenimiento evolutivo para la era de la AI.',
-    price: 10,
     image: '/images/modulo-f5.png',
-    stripeIds: { priceId: 'price_1SIF46LVUGCJuFgUOnlch4Dj', productId: 'prod_TEiVtvLyYnRoPQ' },
   },
 };
 
@@ -139,12 +119,6 @@ export const ALL_MODULE_IDS = Object.keys(MODULES);
 /** Get module name by ID, with fallback */
 export const getModuleName = (id: string): string =>
   MODULES[id]?.name ?? `Módulo ${id.toUpperCase()}`;
-
-/** Get Stripe price/product mapping */
-export const getStripeIds = (key: string) => {
-  if (key === 'complete') return null; // los IDs de Stripe viven en api/checkout.ts
-  return MODULES[key]?.stripeIds ?? null;
-};
 
 /** Support email - single source of truth */
 export const SUPPORT_EMAIL = 'hola@esgeo.ai';
