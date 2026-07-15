@@ -36,10 +36,6 @@ const ModuloF5Page = () => {
         <meta name="description" content="Diseña un sistema recurrente de revisión, actualización y expansión de contenido adaptado a la evolución constante de los LLMs. Mantén tu visibilidad generativa." />
         <link rel="canonical" href="https://www.esgeo.ai/curso/f5" />
         
-        <meta name="citation_title" content="Módulo F5: Mantenimiento Evolutivo" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

@@ -31,13 +31,6 @@ const AcercaDePage = () => {
         <meta name="description" content="Conoce al equipo de esGEO, pioneros en Generative Engine Optimization en español. Nuestra misión: enseñar a crear contenido citeable por IA." />
         <link rel="canonical" href="https://www.esgeo.ai/acerca-de" />
         
-        <meta name="citation_title" content="Acerca de esGEO - Equipo y Misión" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024-01-01" />
-        <meta name="citation_online_date" content="2024-12-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="esGEO, equipo, misión, GEO, Generative Engine Optimization, fundadores, historia" />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

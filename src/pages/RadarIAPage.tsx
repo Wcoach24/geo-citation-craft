@@ -89,13 +89,6 @@ const RadarIAPage = () => {
         <meta name="description" content="Todo sobre GEO (Generative Engine Optimization) e IA generativa: qué es GEO, GEO vs SEO, cómo ser citado por ChatGPT y Perplexity. Artículos y guías actualizadas." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia" />
         
-        <meta name="citation_title" content="Radar IA - Análisis de Tendencias en GEO" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2025-01-03" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="Radar IA, tendencias, GEO, LLMs, inteligencia artificial, análisis, ChatGPT, Perplexity, Claude" />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

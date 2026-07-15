@@ -26,12 +26,6 @@ const MuerteSeoTradicional = () => {
         <meta name="description" content="Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje y el SEO tradicional pierde relevancia." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia/muerte-seo-tradicional" />
         
-        <meta name="citation_title" content="La muerte del SEO tal y como lo conocíamos" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2025-01-12" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="SEO, muerte SEO, GEO, motores generativos, IA, búsqueda, futuro" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

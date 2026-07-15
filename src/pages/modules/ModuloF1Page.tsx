@@ -35,10 +35,6 @@ const ModuloF1Page = () => {
         <meta name="description" content="Asegura que tu contenido web es rastreable, comprendido e indexado por LLMs. El primer paso crítico para ser citado por IA." />
         <link rel="canonical" href="https://www.esgeo.ai/curso/f1" />
         
-        <meta name="citation_title" content="Módulo F1: Fundamentos de Accesibilidad Generativa" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content="#f1-objetivo, #f1-componentes, #f1-checklist, #f1-prompt" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

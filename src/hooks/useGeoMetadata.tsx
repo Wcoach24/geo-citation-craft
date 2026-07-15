@@ -9,8 +9,6 @@ interface GeoMetadataProps {
   lastModified?: string;
   author?: string;
   keywords?: string[];
-  citationTitle?: string;
-  speakableSelectors?: string[];
   geoTxtPath?: string; // Nueva prop para enlazar archivo .geo.txt
   /** og:type — 'website' para la home/landings, 'article' (default) para contenido. */
   ogType?: 'website' | 'article';
@@ -23,8 +21,6 @@ export const useGeoMetadata = ({
   lastModified,
   author = "esGEO",
   keywords = [],
-  citationTitle,
-  speakableSelectors = [".snippet-block", "[data-speakable='true']"],
   geoTxtPath,
   ogType = 'article'
 }: GeoMetadataProps) => {
@@ -66,26 +62,9 @@ export const useGeoMetadata = ({
         <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         
-        {/* Standard crawling directives - non-standard tags removed */}
-        
-        {/* Citation-friendly meta tags */}
-        <meta name="citation_title" content={citationTitle || title} />
-        <meta name="citation_author" content={author} />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="citation_online_date" content={currentDate} />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_publisher" content="esGEO" />
-        <meta name="citation_format" content="text/html" />
-        {geoTxtPath && (
-          <meta name="citation_fulltext_world_readable" content={`https://www.esgeo.ai${geoTxtPath}`} />
-        )}
-        {keywords.length > 0 && (
-          <meta name="citation_keywords" content={keywords.join(', ')} />
-        )}
-        
-        {/* Speakable content indicators */}
-        <meta name="speakable-selector" content={speakableSelectors.join(', ')} />
-        
+        {/* F5-6: fuera las metas Highwire Press (solo aplican a papers académicos)
+            y el selector "speakable" como meta name inventado (va en JSON-LD). */}
+
         {/* Open Graph enhanced */}
         <meta property="og:title" content={fullTitle} />
         <meta property="og:description" content={description} />

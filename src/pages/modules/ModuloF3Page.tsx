@@ -38,10 +38,6 @@ const ModuloF3Page = () => {
         <meta name="description" content="Aprende a construir señales de credibilidad y reputación para que los LLMs reconozcan tu contenido como fuente fiable y te citen como referencia autorizada." />
         <link rel="canonical" href="https://www.esgeo.ai/curso/f3" />
         
-        <meta name="citation_title" content="Módulo F3: Autoridad Generativa" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content="#f3-objetivo, #f3-entendimiento-llm, #f3-componentes, #f3-checklist, .snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

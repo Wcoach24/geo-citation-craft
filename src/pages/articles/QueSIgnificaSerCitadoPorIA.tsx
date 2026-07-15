@@ -25,12 +25,6 @@ const QueSIgnificaSerCitadoPorIA = () => {
         <meta name="description" content="Entendiendo la citabilidad en modelos de lenguaje generativo y cómo optimizar tu contenido para ser citado por IA." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia" />
         
-        <meta name="citation_title" content="¿Qué significa ser citado por una IA?" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2025-01-15" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="citabilidad, IA, citación, modelos de lenguaje, ChatGPT, Perplexity, Claude, GEO" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

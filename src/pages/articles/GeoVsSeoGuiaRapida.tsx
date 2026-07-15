@@ -25,12 +25,6 @@ const GeoVsSeoGuiaRapida = () => {
         <meta name="description" content="Comparativa GEO vs SEO: el SEO posiciona en Google, GEO hace que ChatGPT y Perplexity te citen. Tabla de diferencias, datos de impacto y estrategia combinada." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias" />
         
-        <meta name="citation_title" content="GEO vs SEO: Diferencias Clave y Por Qué Necesitas Ambos en 2026" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2025-01-03" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="GEO vs SEO, diferencias, comparativa, optimización, IA, generativa, pivote, estrategia" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

@@ -223,17 +223,6 @@ const CursoGeoPage = () => {
           content="Curso GEO 2026 en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 actualizado con prácticas vigentes en 2026. €47."
         />
         <link rel="canonical" href="https://www.esgeo.ai/curso" />
-        <meta name="citation_title" content="Curso GEO 2026: Generative Engine Optimization" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="citation_online_date" content="2024-12-15" />
-        <meta name="citation_language" content="es" />
-        <meta
-          name="citation_keywords"
-          content="curso GEO, Generative Engine Optimization, optimización IA, citabilidad LLMs, GEO 2026"
-        />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
-
         {/* FAQ Schema */}
         <script type="application/ld+json">{JSON.stringify({
             '@context': 'https://schema.org',

@@ -84,10 +84,6 @@ const MetodologiaGeoPage = () => {
         <link rel="canonical" href="https://www.esgeo.ai/metodologia" />
         
         {/* Speakable / Citation meta */}
-        <meta name="citation_title" content="Método GEO: Framework y Metodología de Generative Engine Optimization" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
       </Helmet>
       
       <Header />

@@ -27,12 +27,6 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
         <meta name="description" content="Técnicas prácticas para estructurar contenido que ChatGPT reconozca, entienda y cite como fuente. Datos estructurados, fragmentación y autoridad generativa." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web" />
 
-        <meta name="citation_title" content="Cómo hacer que ChatGPT cite tu web" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2026-03-20" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="ChatGPT, citación, GEO, contenido citable, autoridad generativa, fragmentación, datos estructurados" />
 
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

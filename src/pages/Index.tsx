@@ -80,8 +80,6 @@ const Index = () => {
     description: "Aprende GEO (Generative Engine Optimization) con el primer curso 2026 en español. Metodología F1-F5 para que ChatGPT, Perplexity y Claude citen tu web. Desde €47.",
     canonicalUrl: "https://www.esgeo.ai/",
     keywords: ["curso GEO 2026", "Generative Engine Optimization", "qué es GEO", "GEO vs SEO 2026", "optimización IA", "ChatGPT", "Perplexity", "Claude", "curso geo ia"],
-    citationTitle: "esGEO - Metodología de Optimización para IA Generativa",
-    speakableSelectors: [".snippet-block", "[data-speakable='true']", ".geo-card"],
     geoTxtPath: "/home.geo.txt",
     ogType: "website"
   });

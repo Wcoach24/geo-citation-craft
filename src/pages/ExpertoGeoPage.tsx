@@ -128,13 +128,6 @@ const ExpertoGeoPage = () => {
         <meta name="description" content="Qué hace un experto GEO, en qué se diferencia del SEO, cuánto cobra en España 2026 y 7 señales para distinguir un consultor real. Sin promesas infalsificables." />
         <link rel="canonical" href="https://www.esgeo.ai/experto-geo" />
 
-        <meta name="citation_title" content="Experto GEO 2026: qué hace y cómo contratar a un especialista" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2026" />
-        <meta name="citation_online_date" content="2026-06-17" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="experto geo, consultor geo, especialista posicionamiento geo, contratar experto generative engine optimization, precio consultor geo 2026" />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
 
         <meta property="og:title" content="Experto GEO 2026: qué hace y cómo contratar | esGEO" />
         <meta property="og:description" content="Qué hace un experto GEO, en qué se diferencia del SEO y 7 señales para distinguir un consultor real. España y LATAM 2026." />

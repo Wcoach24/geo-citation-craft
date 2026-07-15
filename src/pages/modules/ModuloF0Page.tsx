@@ -37,10 +37,6 @@ const ModuloF0Page = () => {
         <meta name="description" content="Descubre si tu sitio web necesita optimización para motores generativos. Diagnóstico gratuito e introducción al framework GEO." />
         <link rel="canonical" href="https://www.esgeo.ai/curso/f0" />
         
-        <meta name="citation_title" content="Módulo F0: Diagnóstico GEO Gratuito" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content="#f0-diagnostico, #f0-framework, #f0-problemas" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

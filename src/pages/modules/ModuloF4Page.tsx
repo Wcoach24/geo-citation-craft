@@ -37,10 +37,6 @@ const ModuloF4Page = () => {
         <meta name="description" content="Aprende a verificar si los motores de generación de contenido (LLMs) están utilizando, citando o parafraseando tu contenido en sus respuestas y cómo actuar en consecuencia." />
         <link rel="canonical" href="https://www.esgeo.ai/curso/f4" />
         
-        <meta name="citation_title" content="Módulo F4: Validación Conversacional" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content="#f4-objetivo, #f4-tecnicas-validacion, #f4-acciones-post-validacion, #f4-checklist, .snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

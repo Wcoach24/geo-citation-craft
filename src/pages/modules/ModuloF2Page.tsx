@@ -38,10 +38,6 @@ const ModuloF2Page = () => {
         <meta name="description" content="Aprende a alinear tu contenido con el lenguaje, estructura y profundidad contextual que los LLMs utilizan para generar respuestas. Sintetiza ideas bien expresadas." />
         <link rel="canonical" href="https://www.esgeo.ai/curso/f2" />
         
-        <meta name="citation_title" content="Módulo F2: Contexto Semántico y Formato Óptimo" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="speakable-selector" content="#f2-objetivo, #f2-principios, #f2-checklist, .snippet-block, [data-speakable='true']" />
         
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

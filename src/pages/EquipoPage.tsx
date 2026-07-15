@@ -54,13 +54,6 @@ const EquipoPage = () => {
         <meta name="description" content="Conoce a los expertos en GEO de esGEO: especialistas en posicionamiento para IA y citabilidad en ChatGPT, Perplexity y Claude. Equipo 2026." />
         <link rel="canonical" href="https://www.esgeo.ai/acerca-de/equipo" />
         
-        <meta name="citation_title" content="Equipo esGEO: Expertos en Generative Engine Optimization" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024" />
-        <meta name="citation_online_date" content="2024-12-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="equipo GEO, expertos optimización IA, especialistas LLMs, fundadores esGEO" />
-        <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
       </Helmet>
 
       <Header />

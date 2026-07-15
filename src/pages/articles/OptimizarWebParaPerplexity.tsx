@@ -27,12 +27,6 @@ const OptimizarWebParaPerplexity = () => {
         <meta name="description" content="Estrategia completa para aparecer en respuestas de Perplexity AI. Descubre cómo Perplexity cita diferente a ChatGPT y optimiza para máxima visibilidad." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity" />
 
-        <meta name="citation_title" content="Cómo optimizar tu web para Perplexity" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2026-03-20" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="Perplexity, GEO, optimización, SEO IA, modelos generativos, citación" />
 
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

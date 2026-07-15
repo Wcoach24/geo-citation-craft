@@ -58,12 +58,6 @@ const QueEsGeoGuiaCompleta = () => {
         <meta name="description" content="GEO (Generative Engine Optimization) es la metodología para que ChatGPT, Perplexity y Claude citen tu web. Guía con framework F1-F5, datos de Princeton y ejemplos prácticos." />
         <link rel="canonical" href="https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa" />
 
-        <meta name="citation_title" content="¿Qué es GEO? Guía Completa 2026 de Generative Engine Optimization" />
-        <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2026-03-20" />
-        <meta name="citation_online_date" content="2026-07-15" />
-        <meta name="citation_language" content="es" />
-        <meta name="citation_keywords" content="GEO, Generative Engine Optimization, optimización IA, SEO generativo, ChatGPT, Perplexity, autoridad generativa" />
 
         <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
