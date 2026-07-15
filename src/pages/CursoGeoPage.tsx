@@ -122,7 +122,7 @@ const CursoGeoPage = () => {
     {
       id: 'faq-empresa-cliente',
       question: '¿Puedo aplicar lo aprendido a clientes o solo a mi propia web?',
-      answer: 'El curso está pensado tanto para in-house como para consultores y agencias. Los entregables (auditorías, plantillas de schema, plan de citaciones) son licenciables comercialmente: puedes usarlos en proyectos de cliente sin restricción. Muchos alumnos están convirtiendo el método F1-F5 en un servicio recurrente añadido a su oferta de SEO.',
+      answer: 'El curso está pensado tanto para in-house como para consultores: los entregables son licenciables comercialmente y puedes usarlos con clientes sin restricción.',
     },
     {
       id: 'faq-geo-vs-aeo-2026',

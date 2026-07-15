@@ -67,8 +67,8 @@ const ExpertoGeoPage = () => {
       a: "Depende. Si tu equipo SEO ya entiende answer-first writing, JSON-LD y mide menciones cross-fuente, no. Si trabaja solo con ranking y backlinks, es probable que necesites complementar con alguien que conozca el método específico de medición de citaciones."
     },
     {
-      q: "¿Hay expertos GEO en Alicante?",
-      a: "esGEO opera desde España con clientes en Alicante, Madrid, Barcelona, Valencia y LATAM. El trabajo de GEO es remoto en su mayoría (auditoría técnica, redacción citable, tracking) — el código postal del consultor no afecta al resultado salvo para reuniones presenciales puntuales."
+      q: "¿Desde dónde trabaja esGEO y a qué mercados atiende?",
+      a: "esGEO opera en remoto desde España para cualquier mercado hispanohablante. El trabajo de GEO es remoto (auditoría técnica, redacción citable, tracking): el código postal del consultor no afecta al resultado."
     }
   ];
 
