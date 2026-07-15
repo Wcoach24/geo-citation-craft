@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "esgeo.ai" }],
+      "destination": "https://www.esgeo.ai/:path*",
+      "permanent": true
+    },
+    {
       "source": "/admin",
       "destination": "/api/admin/auth",
       "permanent": false
