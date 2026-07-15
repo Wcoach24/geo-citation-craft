@@ -1,6 +1,5 @@
 
 import HighlightSnippet from "./HighlightSnippet";
-import ShareSectionButton from "./ShareSectionButton";
 import GeoTerm from "./GeoTerm";
 
 const WhatIsGeoSection = () => {
@@ -45,29 +44,6 @@ const WhatIsGeoSection = () => {
             </HighlightSnippet>
           </section>
 
-          <section className="prose prose-lg max-w-none text-muted-foreground mb-8">
-            <h3 className="sr-only">Contexto y objetivos de GEO</h3>
-            
-            <HighlightSnippet id="nueva-economia-atencion" variant="stat" className="mb-6">
-              <h4 className="text-lg font-semibold mb-2">Nueva economía de la atención</h4>
-              <p data-speakable="true">
-                En la nueva economía de la atención, los usuarios consultan directamente a la IA 
-                en lugar de navegar por múltiples sitios web. Ser citado por un modelo generativo 
-                equivale a estar en la primera posición de búsqueda tradicional.
-              </p>
-            </HighlightSnippet>
-            
-            <HighlightSnippet id="objetivo-geo" variant="insight" className="mb-6">
-              <h4 className="text-lg font-semibold mb-2">Objetivo principal</h4>
-              <p data-speakable="true">
-                El objetivo de GEO es que cuando un usuario pregunte a una IA sobre tu área de expertise, 
-                tu contenido sea la fuente principal que el modelo cite y recomiende, estableciendo tu autoridad digital 
-                en la era de la IA generativa.
-              </p>
-            </HighlightSnippet>
-          </section>
-
-          <ShareSectionButton sectionId="que-es-geo" title="definición de GEO" className="mt-8" />
         </article>
       </div>
 
@@ -87,28 +63,8 @@ const WhatIsGeoSection = () => {
           "url": "https://www.esgeo.ai/glosario#geo"
         }) }} />
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "¿Qué es GEO (Generative Engine Optimization)?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "GEO es la metodología de optimización de contenido web diseñada específicamente para que los modelos de lenguaje generativo como ChatGPT, Claude o Perplexity puedan comprender, procesar y citar la información de manera efectiva."
-              }
-            },
-            {
-              "@type": "Question", 
-              "name": "¿En qué se diferencia GEO del SEO tradicional?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Mientras que el SEO tradicional se enfoca en optimizar para motores de búsqueda como Google, GEO se centra en optimizar para la citabilidad por parte de ChatGPT, Perplexity, Claude y otros modelos generativos."
-              }
-            }
-          ]
-        }) }} />
+      {/* El FAQPage que vivía aquí se eliminó: la home ya emite su propio FAQPage
+          (Index.tsx) y dos bloques FAQPage en la misma página compiten entre sí. */}
     </section>
   );
 };

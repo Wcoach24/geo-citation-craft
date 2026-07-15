@@ -104,6 +104,9 @@ const Index = () => {
             </div>
           </section>
 
+          {/* Qué es GEO — definición citable (recortada en F4-4) */}
+          <WhatIsGeoSection />
+
           {/* Bloque actualización mayo 2026 */}
           <section className="py-8 bg-accent/5 border-y border-border" data-speakable="true">
             <div className="container mx-auto px-4 max-w-4xl">
