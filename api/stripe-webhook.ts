@@ -4,15 +4,21 @@
  *   1. Reads the PDF(s) from /premium/<hash>/ (fuera de public/ — ver includeFiles en vercel.json)
  *   2. Sends the customer an email via Resend with the PDFs attached
  *   3. Notifies the owner (azmglg@gmail.com) of the new sale
+ *   4. F3-2: inserta la compra en public.purchases (para el email de testimonio
+ *      a +7 días vía /api/email-sequence) y marca el lead como converted en
+ *      public.leads (deja de recibir la secuencia de venta E2-E5).
  *
  * Env vars required:
  *   - STRIPE_SECRET_KEY
  *   - STRIPE_WEBHOOK_SECRET   (whsec_..., set when creating the endpoint)
  *   - RESEND_API_KEY
  *   - OWNER_EMAIL (defaults to azmglg@gmail.com)
+ *   - SUPABASE_URL (o VITE_SUPABASE_URL) + SUPABASE_SERVICE_ROLE_KEY (F3-2;
+ *     si faltan, la compra se entrega igualmente y solo se pierde el registro)
  */
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import manifest from "./_lib/manifest.json" with { type: "json" };
@@ -158,6 +164,51 @@ ${productType === "curso-auditoria" ? `<p style="background:#fef3c7;border:1px s
   return { subject, html, text };
 }
 
+/**
+ * F3-2: registra la compra en public.purchases y marca el lead como converted.
+ * Nunca lanza — la entrega de los PDFs (paso 1) no depende de esto.
+ */
+async function recordPurchase(session: Stripe.Checkout.Session, productType: string, moduleId: string | undefined, customerEmail: string) {
+  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    console.error("[webhook] Supabase env vars missing — purchase NOT stored in public.purchases");
+    return;
+  }
+  try {
+    const supabase = createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+
+    // Idempotente frente a reintentos del webhook: ON CONFLICT (stripe_session_id) DO NOTHING.
+    const { error: insertError } = await supabase.from("purchases").upsert(
+      {
+        stripe_session_id: session.id,
+        stripe_payment_intent_id:
+          typeof session.payment_intent === "string" ? session.payment_intent : session.payment_intent?.id ?? null,
+        customer_email: customerEmail,
+        product_type: productType,
+        module_id: moduleId ?? null,
+        amount: session.amount_total ?? 0,
+        currency: session.currency || "eur",
+        status: "completed",
+      },
+      { onConflict: "stripe_session_id", ignoreDuplicates: true }
+    );
+    if (insertError) {
+      console.error(`[webhook] purchases insert error: ${insertError.message}`);
+    }
+
+    // El comprador sale de la secuencia de venta E2-E5.
+    const { error: leadError } = await supabase.from("leads").update({ converted: true }).eq("email", customerEmail);
+    if (leadError) {
+      console.error(`[webhook] leads converted update error: ${leadError.message}`);
+    }
+  } catch (e) {
+    console.error("[webhook] recordPurchase error:", (e as Error).message);
+  }
+}
+
 async function sendEmail(to: string, from: string, subject: string, html: string, attachments: any[], text?: string) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error("RESEND_API_KEY missing");
@@ -243,7 +294,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const result = await sendEmail(email, SENDER, subject, html, attachments, text);
     console.log(`[webhook] customer email sent to ${email}, id=${result.id}`);
 
-    // 2. Notificación al owner (no bloquea el response si falla)
+    // 2. F3-2: registrar la compra en public.purchases + lead converted (no bloquea)
+    await recordPurchase(session, productType, moduleId, email);
+
+    // 3. Notificación al owner (no bloquea el response si falla)
     try {
       const ownerEmail = process.env.OWNER_EMAIL || "azmglg@gmail.com";
       const notif = buildOwnerNotification(session, productType, email, attachments);
