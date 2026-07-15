@@ -963,3 +963,72 @@ Desviaciones:
 - Hallazgo mayor de la fase: la regresión F1-1/react-helmet (JSON-LD de head
   ausente en todo el sitio desde el 15/07) quedó corregida en F5-5.
 - Sin nuevos pendientes humanos.
+
+---
+
+## FASE 6 — Contenido: los huecos (mínimo para DONE global) — 15/07/2026
+
+Ejecutados los 3 artículos mínimos que cierran el DONE global (F6-1, F6-2, F6-3).
+Los 7 restantes (F6-4..F6-10) quedan para una tanda posterior.
+
+### F6-1. "Cómo aparecer en los AI Overviews de Google (y en Gemini)"
+Ruta `/radar-ia/como-aparecer-en-ai-overviews-google-gemini`
+(`src/pages/articles/AparecerEnAiOverviews.tsx`). H1-pregunta, HighlightSnippet
+con lastModified, FAQPage (5 Q&A), GeoTerm solo con términos reales del glosario
+(ai-overviews, geo, rag, google-extended, datos-estructurados, chunking,
+autoridad-ia, share-of-citations, estructura-semantica, ssr-prerender),
+InlineEmailCapture (source=article_ai-overviews), CTA al curso.
+Datos verificados con fuente y fecha:
+- AI Overviews: lanzados en Google I/O (mayo 2024); expansión a +200 países y
+  +40 idiomas el 20/05/2025 (blog.google, ai-overview-expansion-may-2025-update).
+- 2.000 M usuarios mensuales (TechCrunch, 23/07/2025).
+- En EE. UU. los mueve una versión personalizada de Gemini 2.5 (blog.google).
+- AI Mode: 100 M usuarios en EE. UU. e India (TechCrunch, 23/07/2025).
+✅ dist: 43.9 KB · 5413 chars texto · h1:sí · 15 bloques JSON-LD parsean · FAQPage=1 · 0 escapados.
+
+### F6-2. "Qué es llms.txt y cómo crearlo paso a paso" (+ plantilla)
+Ruta `/radar-ia/que-es-llms-txt` (`src/pages/articles/QueEsLlmsTxt.tsx`).
+Plantilla descargable real en `public/plantilla-llms.txt` (llega a
+`dist/plantilla-llms.txt`), enlazada con `<a href="/plantilla-llms.txt" download="llms.txt">`.
+Datos verificados:
+- Propuesto por Jeremy Howard (Answer.AI) el 03/09/2024 (answer.ai post).
+- Estructura oficial (llmstxt.org): H1 obligatorio + blockquote + secciones
+  opcionales + listas H2 de enlaces `[nombre](url): nota`; ubicación raíz `/llms.txt`.
+- Diferencia llms.txt (índice) vs llms-full.txt/llms-ctx-full.txt (contenido concatenado).
+- Lectura HONESTA de adopción: propuesta de comunidad, no estándar oficial; Google
+  dice no usarlo para clasificar; sí adoptado por plataformas de docs. Se recomienda
+  como higiene, no como palanca. (Coherente con el tono "sin humo" del sitio.)
+✅ dist: 35.4 KB · 4939 chars texto · h1:sí · 9 bloques JSON-LD parsean · FAQPage=1 · 0 escapados.
+
+### F6-3. "GEO vs AEO vs LLMO vs SEO para IA: qué término usar"
+Ruta `/radar-ia/geo-aeo-llmo-seo-que-termino-usar` (`src/pages/articles/GeoAeoLlmoSeo.tsx`).
+Tabla comparativa de las 4 siglas + recomendación (usar GEO). Datos verificados:
+- GEO acuñado en "GEO: Generative Engine Optimization" (Aggarwal, Murahari,
+  Rajpurohit, Kalyan, Narasimhan, Deshpande), arXiv 2311.09735, enviado el
+  16/11/2023, presentado en KDD 2024; sube visibilidad hasta un 40%.
+- AEO (motores de respuesta, previo a los LLM), LLMO (foco en el modelo), SEO para
+  IA (base técnica reorientada). Desambiguación honesta: son sinónimos con matices.
+✅ dist: 36.9 KB · 4720 chars texto · h1:sí · 11 bloques JSON-LD parsean · FAQPage=1 · 0 escapados.
+
+### Cableado
+- App.tsx: 3 lazy imports + 3 <Route>.
+- scripts/prerender.js: 3 rutas en ROUTES; umbral del feed subido de <9 a <12.
+- public/sitemap.xml: 3 <url> (lastmod 2026-07-15).
+- src/pages/RadarIAPage.tsx: índice COMPLETADO — se añadieron los 6 artículos que
+  faltaban en el array (los 3 F5 previos que nunca se enlazaron + los 3 nuevos F6);
+  ahora lista los 12. que-es-geo-guia-completa y AI Overviews marcados featured.
+
+### Apuntes de Álvaro aplicados en la misma sesión (home, PanelAuditoria.tsx)
+- Quitada la fila `machineready.vercel.app` (89) del ranking: tener DOS propiedades
+  propias en el top olía a amañado. esgeo.ai (92) se mantiene con su marco honesto.
+- Copy del intro ajustado ("incluida la nuestra", sin "y la de nuestra propia herramienta").
+- Enlace "El código, entero → github.com/Wcoach24/Machineready" ELIMINADO. Se deja
+  un único enlace al framework: "Cómo puntúa el rubric y qué mide el framework → /metodologia".
+  Import `ExternalLink` retirado (quedaba huérfano).
+✅ dist/index.html: 0 apariciones de machineready, 0 del enlace a GitHub, esgeo.ai 92 intacto.
+
+### Estado de la fase
+- `npm run build` en verde: ✅ 32/32 rutas (antes 29) + feed.xml con 12 items.
+- `node scripts/check-routes.mjs` → paridad OK (32 = 32).
+- JSON-LD de las 3 rutas nuevas: 35/35 bloques parsean, 0 escapados, FAQPage en las 3.
+- DONE global alcanzado: F0-F5 + ≥3 artículos F6 publicados. Pendientes humanos H-1..H-9 sin cambios.

@@ -1,0 +1,31 @@
+# Nombre de tu proyecto o web
+
+> Una frase (blockquote) que resuma qué es este sitio, para quién es y qué problema resuelve. Es la información mínima que un modelo necesita para entenderte. Sé concreto: qué ofreces, a quién y en qué idioma.
+
+Aquí puedes añadir uno o varios párrafos de contexto en Markdown normal: notas importantes,
+cómo está organizado el sitio, convenciones, o qué NO cubre. Es opcional pero ayuda al modelo
+a situarse antes de leer los enlaces.
+
+## Documentación
+
+- [Guía de inicio](https://tudominio.com/guia): cómo empezar en 5 minutos
+- [Preguntas frecuentes](https://tudominio.com/faq): las 20 dudas más habituales
+- [Glosario](https://tudominio.com/glosario): definiciones de los términos clave
+
+## Producto
+
+- [Qué hacemos](https://tudominio.com/producto): descripción y casos de uso
+- [Precios](https://tudominio.com/precios): planes y qué incluye cada uno
+
+## Opcional
+
+- [Blog](https://tudominio.com/blog): artículos y novedades
+- [Sobre nosotros](https://tudominio.com/acerca-de): quién hay detrás y credenciales
+
+# Notas de uso
+# 1. Guarda este archivo como llms.txt en la RAÍZ de tu dominio: https://tudominio.com/llms.txt
+# 2. El único bloque obligatorio es el H1 (#). Todo lo demás es recomendable pero opcional.
+# 3. El blockquote (>) es la parte más leída: inviértele tiempo.
+# 4. Usa enlaces a versiones en Markdown de tus páginas cuando puedas (mejor extracción).
+# 5. Mantenlo corto y actualizado. Un llms.txt desfasado es peor que no tenerlo.
+# Especificación completa: https://llmstxt.org

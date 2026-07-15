@@ -48,6 +48,9 @@ const GeoVsSeoGuiaRapida = React.lazy(() => import("./pages/articles/GeoVsSeoGui
 const ComoHacerQueChatGPTCiteTuWeb = React.lazy(() => import("./pages/articles/ComoHacerQueChatGPTCiteTuWeb"));
 const OptimizarWebParaPerplexity = React.lazy(() => import("./pages/articles/OptimizarWebParaPerplexity"));
 const QueEsGeoGuiaCompleta = React.lazy(() => import("./pages/articles/QueEsGeoGuiaCompleta"));
+const AparecerEnAiOverviews = React.lazy(() => import("./pages/articles/AparecerEnAiOverviews"));
+const QueEsLlmsTxt = React.lazy(() => import("./pages/articles/QueEsLlmsTxt"));
+const GeoAeoLlmoSeo = React.lazy(() => import("./pages/articles/GeoAeoLlmoSeo"));
 
 const queryClient = new QueryClient();
 
@@ -125,7 +128,10 @@ export function AppRoutes() {
               <Route path="/radar-ia/como-hacer-que-chatgpt-cite-tu-web" element={<ComoHacerQueChatGPTCiteTuWeb />} />
               <Route path="/radar-ia/optimizar-web-para-perplexity" element={<OptimizarWebParaPerplexity />} />
               <Route path="/radar-ia/que-es-geo-guia-completa" element={<QueEsGeoGuiaCompleta />} />
-              
+              <Route path="/radar-ia/como-aparecer-en-ai-overviews-google-gemini" element={<AparecerEnAiOverviews />} />
+              <Route path="/radar-ia/que-es-llms-txt" element={<QueEsLlmsTxt />} />
+              <Route path="/radar-ia/geo-aeo-llmo-seo-que-termino-usar" element={<GeoAeoLlmoSeo />} />
+
               {/* 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>

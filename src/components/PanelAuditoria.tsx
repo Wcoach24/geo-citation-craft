@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
 
 /**
  * El panel público.
@@ -24,7 +23,6 @@ interface Row {
 
 const PANEL: Row[] = [
   { site: "esgeo.ai", score: 92, note: "Nuestra web, auditada el 12 de julio de 2026. Empezó en 35.", self: true },
-  { site: "machineready.vercel.app", score: 89, note: "La landing del propio auditor. Cuatro saltos de encabezado y sin canonical.", self: true },
   { site: "holded.com", score: 82, note: "Impecable de estructura. Su primer bloque no dice qué es ni para quién." },
   { site: "factorial.es", score: 81, note: "Casi la mitad de sus imágenes no tiene alt." },
   { site: "stripe.com", score: 74, note: "Solo el 13% de sus imágenes tiene alt." },
@@ -51,7 +49,7 @@ export default function PanelAuditoria() {
         </h2>
         <p className="text-center text-muted-foreground mb-10">
           El rubric es público y va versionado. Estas son las notas auditadas el 12 de julio de 2026,
-          incluida la nuestra y la de nuestra propia herramienta.
+          incluida la nuestra.
         </p>
 
         <Card className="border-none card-elevated">
@@ -93,17 +91,8 @@ export default function PanelAuditoria() {
 
         <p className="text-center text-sm text-muted-foreground mt-8">
           <Link to="/metodologia" className="text-accent font-medium underline underline-offset-4">
-            Cómo puntúa el rubric
+            Cómo puntúa el rubric y qué mide el framework
           </Link>
-          {" · "}
-          <a
-            href="https://github.com/Wcoach24/Machineready/blob/main/api/analyze.js"
-            target="_blank"
-            rel="noopener"
-            className="text-accent font-medium underline underline-offset-4 inline-flex items-center gap-1"
-          >
-            El código, entero <ExternalLink className="h-3 w-3" />
-          </a>
         </p>
       </div>
     </section>

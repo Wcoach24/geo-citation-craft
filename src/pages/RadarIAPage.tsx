@@ -78,6 +78,60 @@ const RadarIAPage = () => {
       category: "Fundamentos",
       readTime: "3 min",
       featured: false
+    },
+    {
+      id: "que-es-geo-guia-completa",
+      title: "Qué es GEO: guía completa",
+      description: "Todo sobre Generative Engine Optimization: definición, origen y cómo aplicarlo",
+      date: "2026-03-20",
+      category: "Fundamentos",
+      readTime: "12 min",
+      featured: true
+    },
+    {
+      id: "como-hacer-que-chatgpt-cite-tu-web",
+      title: "Cómo hacer que ChatGPT cite tu web",
+      description: "Pasos concretos para convertirte en fuente citable por ChatGPT",
+      date: "2026-03-20",
+      category: "Técnico",
+      readTime: "8 min",
+      featured: false
+    },
+    {
+      id: "optimizar-web-para-perplexity",
+      title: "Cómo optimizar tu web para Perplexity",
+      description: "Qué prioriza Perplexity al citar fuentes y cómo aprovecharlo",
+      date: "2026-03-20",
+      category: "Técnico",
+      readTime: "8 min",
+      featured: false
+    },
+    {
+      id: "como-aparecer-en-ai-overviews-google-gemini",
+      title: "Cómo aparecer en los AI Overviews de Google (y en Gemini)",
+      description: "Qué son, cómo eligen fuentes y los 7 pasos para que te citen. Datos 2026",
+      date: "2026-07-15",
+      category: "Técnico",
+      readTime: "9 min",
+      featured: true
+    },
+    {
+      id: "que-es-llms-txt",
+      title: "Qué es llms.txt y cómo crearlo paso a paso",
+      description: "Definición, estructura y plantilla descargable. Con lectura honesta de su adopción real",
+      date: "2026-07-15",
+      category: "Técnico",
+      readTime: "8 min",
+      featured: false
+    },
+    {
+      id: "geo-aeo-llmo-seo-que-termino-usar",
+      title: "GEO vs AEO vs LLMO vs SEO para IA: qué término usar",
+      description: "Cuatro siglas para el mismo cambio: qué significa cada una y cuál conviene usar",
+      date: "2026-07-15",
+      category: "Fundamentos",
+      readTime: "7 min",
+      featured: false
     }
   ];
 

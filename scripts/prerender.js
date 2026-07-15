@@ -53,6 +53,9 @@ const ROUTES = [
   '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
   '/radar-ia/optimizar-web-para-perplexity',
   '/radar-ia/que-es-geo-guia-completa',
+  '/radar-ia/como-aparecer-en-ai-overviews-google-gemini',
+  '/radar-ia/que-es-llms-txt',
+  '/radar-ia/geo-aeo-llmo-seo-que-termino-usar',
 ];
 
 /** Umbral del DoD: caracteres de texto (sin tags) mínimos por ruta clave. */
@@ -342,8 +345,8 @@ async function main() {
   // F5-7: RSS con los artículos del Radar IA (datos reales de sus JSON-LD Article).
   const feedItems = writeRssFeed(articlePages);
   console.log(`📡 dist/feed.xml — ${feedItems} artículos`);
-  if (feedItems < 9) {
-    failures.push(`feed.xml: solo ${feedItems} artículos con Article schema (se esperaban ≥9)`);
+  if (feedItems < 12) {
+    failures.push(`feed.xml: solo ${feedItems} artículos con Article schema (se esperaban ≥12)`);
   }
 
   console.log(`\n✅ ${ok}/${ROUTES.length} rutas prerenderizadas con body completo`);
