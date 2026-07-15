@@ -5,6 +5,7 @@ import { Check, Star, Crown, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { COMPLETE_COURSE } from "@/data/modules";
 import BuyButton from "@/components/BuyButton";
+import GuaranteeNote from "@/components/GuaranteeNote";
 
 const PricingSection = () => {
   const plans = [
@@ -91,12 +92,15 @@ const PricingSection = () => {
               </ul>
 
               {plan.highlight ? (
-                <BuyButton
-                  source="pricing-home"
-                  className="btn-glow w-full rounded-xl py-3.5 font-semibold bg-accent hover:bg-accent/90 text-primary"
-                >
-                  {plan.cta}
-                </BuyButton>
+                <>
+                  <BuyButton
+                    source="pricing-home"
+                    className="btn-glow w-full rounded-xl py-3.5 font-semibold bg-accent hover:bg-accent/90 text-primary"
+                  >
+                    {plan.cta}
+                  </BuyButton>
+                  <GuaranteeNote compact className="mt-3" />
+                </>
               ) : (
                 <Button
                   variant={plan.variant}

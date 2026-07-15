@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Zap, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import GuaranteeNote from "@/components/GuaranteeNote";
 
 interface PremiumContentGateProps {
   moduleNumber: string;
@@ -60,6 +61,8 @@ const PremiumContentGate = ({
           <BuyButton source={`gate-${moduleNumber}`} className="btn-cta w-full max-w-xs">
             Desbloquear los 5 módulos — 47 €
           </BuyButton>
+
+          <GuaranteeNote compact />
 
           <Button variant="outline" size="sm" asChild className="w-full max-w-xs">
             <Link to="/curso">

@@ -14,6 +14,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, Search, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import GuaranteeNote from "@/components/GuaranteeNote";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF2Page = () => {
@@ -273,6 +274,7 @@ const ModuloF2Page = () => {
               <BuyButton source="modulo-f2-gate" className="btn-cta text-sm mt-4" showArrow={false}>
                 Ver todo el contenido — 47 €
               </BuyButton>
+              <GuaranteeNote compact className="mt-4" />
             </div>
           </div>
         </div>

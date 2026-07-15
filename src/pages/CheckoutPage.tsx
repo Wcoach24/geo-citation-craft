@@ -137,9 +137,10 @@ const CheckoutPage = () => {
               <div>
                 <h2 className="text-lg font-bold text-foreground mb-2">Garantía medible</h2>
                 <p className="text-muted-foreground leading-relaxed" data-speakable="true">
-                  Garantía medible: si tu nota en el auditor no sube al menos 20 puntos tras
-                  aplicar F1 y F2, te devolvemos los 47 €. Escríbenos a {SUPPORT_EMAIL} con tu
-                  informe del antes y el después y gestionamos la devolución.
+                  Garantía medible: aplica F1 y F2 sobre tu web. Si tu nota en el auditor no sube
+                  al menos 20 puntos, escríbenos con el antes y el después y te devolvemos los
+                  47 €. Tienes 30 días desde la compra; escribe a {SUPPORT_EMAIL} con tu informe
+                  del antes y el después y gestionamos la devolución.
                 </p>
               </div>
             </div>

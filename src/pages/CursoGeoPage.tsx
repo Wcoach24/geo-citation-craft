@@ -30,6 +30,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import EmailCapture from '@/components/EmailCapture';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
+import GuaranteeNote from '@/components/GuaranteeNote';
 import { trackEvent } from '@/lib/analytics';
 import { startCheckout } from '@/lib/checkout';
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
@@ -132,6 +133,11 @@ const CursoGeoPage = () => {
       id: 'faq-empresa-cliente',
       question: '¿Puedo aplicar lo aprendido a clientes o solo a mi propia web?',
       answer: 'El curso está pensado tanto para in-house como para consultores: los entregables son licenciables comercialmente y puedes usarlos con clientes sin restricción.',
+    },
+    {
+      id: 'faq-garantia',
+      question: '¿Hay garantía de devolución?',
+      answer: 'Sí, y es medible. Garantía medible: aplica F1 y F2 sobre tu web. Si tu nota en el auditor no sube al menos 20 puntos, escríbenos con el antes y el después y te devolvemos los 47 €. Tienes 30 días desde la compra para reclamarla; el auditor gratuito de esgeo.ai/geo-score te da la nota del antes y del después.',
     },
     {
       id: 'faq-geo-vs-aeo-2026',
@@ -611,8 +617,11 @@ const CursoGeoPage = () => {
                     )}
                   </button>
 
+                  {/* Garantía medible (F2-1) */}
+                  <GuaranteeNote className="mt-6" />
+
                   {/* Trust Message */}
-                  <div className="mt-8 p-4 bg-background rounded-lg border border-border">
+                  <div className="mt-4 p-4 bg-background rounded-lg border border-border">
                     <div className="flex items-start gap-3 justify-center">
                       <Shield className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                       <p className="text-sm text-muted-foreground">Acceso inmediato tras el pago. Descarga tus PDFs al instante.</p>

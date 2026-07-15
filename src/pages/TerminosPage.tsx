@@ -60,7 +60,7 @@ const TerminosPage = () => {
               <FileText className="h-8 w-8 text-accent" />
               <h1 className="text-4xl font-bold text-primary">Términos y Condiciones</h1>
             </div>
-            <p className="text-muted-foreground">Última actualización: 15 de diciembre de 2024</p>
+            <p className="text-muted-foreground">Última actualización: 15 de julio de 2026</p>
           </div>
 
           <div className="prose prose-lg max-w-none">
@@ -121,13 +121,42 @@ const TerminosPage = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-primary mb-4">6. Limitación de responsabilidad</h2>
               <p className="text-muted-foreground">
-                El contenido de esGEO se proporciona "tal como está" con fines educativos. No garantizamos 
-                resultados específicos de la implementación de nuestras metodologías GEO.
+                El contenido de esGEO se proporciona "tal como está" con fines educativos. Salvo lo
+                previsto en la cláusula 7 (garantía medible), no garantizamos resultados específicos
+                de la implementación de nuestras metodologías GEO.
               </p>
             </section>
 
+            <section className="mb-8">
+              <h2 className="text-2xl font-bold text-primary mb-4">7. Garantía medible y reembolsos</h2>
+              <p className="text-muted-foreground mb-4">
+                La compra del curso GEO completo (47 €, pago único) incluye la siguiente garantía:
+              </p>
+              <p className="text-muted-foreground mb-4">
+                <strong>Garantía medible:</strong> aplica F1 y F2 sobre tu web. Si tu nota en el
+                auditor no sube al menos 20 puntos, escríbenos con el antes y el después y te
+                devolvemos los 47 €.
+              </p>
+              <ul className="list-disc pl-6 text-muted-foreground space-y-2">
+                <li>
+                  <strong>Plazo:</strong> la garantía puede reclamarse durante los <strong>30 días
+                  naturales</strong> siguientes a la fecha de compra.
+                </li>
+                <li>
+                  <strong>Cómo reclamarla:</strong> envía un email a hola@esgeo.ai con la nota del
+                  auditor (esgeo.ai/geo-score) de tu dominio <em>antes</em> de aplicar los módulos
+                  F1 y F2 y la nota <em>después</em> de aplicarlos.
+                </li>
+                <li>
+                  <strong>Reembolso:</strong> si la mejora es inferior a 20 puntos, devolvemos el
+                  importe íntegro (47 €) por el mismo medio de pago, en un plazo máximo de 14 días
+                  desde la aceptación de la reclamación.
+                </li>
+              </ul>
+            </section>
+
             <section>
-              <h2 className="text-2xl font-bold text-primary mb-4">7. Contacto</h2>
+              <h2 className="text-2xl font-bold text-primary mb-4">8. Contacto</h2>
               <p className="text-muted-foreground">
                 Para consultas sobre estos términos, contacta con nosotros en:{" "}
                 <a href="mailto:hola@esgeo.ai" className="text-accent hover:underline">hola@esgeo.ai</a>

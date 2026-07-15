@@ -14,6 +14,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, Users, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import GuaranteeNote from "@/components/GuaranteeNote";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF3Page = () => {
@@ -392,9 +393,7 @@ const ModuloF3Page = () => {
                 <Link to="/curso">Ver Todos los Módulos</Link>
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground mt-4">
-              ⭐ 97% de usuarios implementan estas señales en la primera semana
-            </p>
+            <GuaranteeNote compact className="mt-4" />
           </div>
         </div>
       </main>

@@ -12,6 +12,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, FileText, ArrowRight, AlertTriangle, Target, Zap, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import GuaranteeNote from "@/components/GuaranteeNote";
 import Footer from "@/components/Footer";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
@@ -215,6 +216,7 @@ const ModuloF0Page = () => {
                   <BuyButton source="modulo-f0" className="btn-cta w-full text-sm">
                     Comprar el curso — 47 €
                   </BuyButton>
+                  <GuaranteeNote compact />
                 </CardContent>
               </Card>
             </div>

@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { FileText, Search, Users, Target, BarChart, Zap, ArrowRight, Lock, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import GuaranteeNote from "@/components/GuaranteeNote";
 import { MODULES, COMPLETE_COURSE } from "@/data/modules";
 
 const MODULE_ICONS = [FileText, Search, Users, Target, BarChart, Zap];
@@ -89,6 +90,7 @@ const MethodologySection = () => {
             >
               Comprar el curso — 47 €
             </BuyButton>
+            <GuaranteeNote compact className="mt-4" />
             <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs text-muted-foreground">
               {COMPLETE_COURSE.features.slice(0, 3).map((f, i) => (
                 <span key={i} className="flex items-center gap-1 cursor-default">
