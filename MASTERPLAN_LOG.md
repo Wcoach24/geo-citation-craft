@@ -476,3 +476,133 @@ Desviaciones:
 - Pendientes humanos generados/afectados por la fase: **H-9** (aprobar/retirar tier
   197 €), **(H)** verificar que la cuenta Stripe acepta PayPal en la primera sesión
   post-deploy (si no, quitar "paypal" de payment_method_types).
+
+## FASE 3 — 2026-07-15
+
+### F3-1 · Reconectar la secuencia E2-E5 — DONE (commit 87449a2)
+
+Verificación:
+
+```
+$ node scripts/test-email-sequence.mjs
+✓ test-email-sequence: 21/21 tests OK.   (exit 0; selector E2-E5 con fechas
+  sintéticas día 3/7/12/18, leads atrasados, unsubscribed/converted, emails_sent=0/5)
+
+$ grep -A3 '"crons"' vercel.json
+"crons": [ { "path": "/api/email-sequence", "schedule": "0 9 * * *" } ]
+
+$ npm run build → ✅ 29/29 rutas prerenderizadas (exit 0)
+```
+
+Desviaciones:
+- El plan decía "usa los mismos nombres de env var que use api/stripe-webhook.ts",
+  pero NINGUNA función de /api usaba Supabase (el webhook solo usa Stripe/Resend).
+  Se usan los nombres estándar `SUPABASE_URL` (con fallback a `VITE_SUPABASE_URL`,
+  que sí existe en Vercel para el build del front) + `SUPABASE_SERVICE_ROLE_KEY`.
+  **[HUMANO] H-6b:** verificar/crear en Vercel `SUPABASE_URL`,
+  `SUPABASE_SERVICE_ROLE_KEY` y `CRON_SECRET` (sin CRON_SECRET el endpoint
+  responde 500 a propósito: fail-closed).
+- La lógica pura vive en `api/_lib/sequence-logic.mjs` (.mjs plano, no .ts, a
+  propósito: lo importa la función Vercel Y el test con `node` a secas en
+  cualquier versión — el CI usa Node 20 sin type-stripping). Test añadido a
+  package.json (`npm run test:sequence`) y como paso del CI.
+- capture-lead upserta con ON CONFLICT DO NOTHING (un lead re-capturado conserva
+  progreso y created_at) y `emails_sent=1` (E1 = welcome lo envía la propia
+  función); `unsubscribe:true` marca también `leads.unsubscribed`.
+- Copy de los emails portados: links al host canónico www.esgeo.ai (F1-8);
+  remitente `curso@esgeo.ai` con reply-to hola@ (el mismo que el welcome, en vez
+  del hola@ del legacy); en E5 se eliminó el ancla falsa "€97 tachado" (dato
+  inventado, regla 6 / coherencia F1-3), el recap "checklist de 15 puntos" pasó
+  a "módulo F0" (el lead magnet real desde F2-6) y se añadió la garantía medible
+  (F2-1). El resto del HTML es idéntico al legacy.
+- El MCP de Supabase disponible en esta sesión apunta a OTRO proyecto (Carche,
+  sin tablas de esGEO): no se pudo verificar que `public.leads` exista en el
+  proyecto real (la migración 20260323_create_leads_table.sql está en el repo).
+  **[HUMANO] H-6:** tras el deploy, alta de un lead de prueba y comprobar
+  (a) fila en public.leads con emails_sent=1, (b) el cron de las 09:00 UTC
+  la procesa al día 3.
+
+### F3-2 · Email de testimonio a compradores (+7 días) — DONE (commit 32cd30c)
+
+Verificación:
+
+```
+$ grep -n 'from("purchases")' api/stripe-webhook.ts
+184:    const { error: insertError } = await supabase.from("purchases").upsert(
+Selector de compradores testeado con fecha sintética (mismo harness que F3-1):
+  ✓ 7 y 7.5 días → toca · 6.5 días → no · 9 días → no · ya pedido → no
+  ✓ pending/refunded → no · sin customer_email → no
+```
+
+Desviaciones:
+- La tabla purchases original (flujo auth de Lovable) no encajaba con el flujo
+  vivo: nueva migración `20260715103000_f3_purchases_email_pipeline.sql`
+  (customer_email, testimonial_requested, stripe_session_id único parcial para
+  idempotencia ante reintentos de Stripe, product_type admite curso-auditoria,
+  stripe_product_id/price_id nullable, índice parcial del selector).
+  **[HUMANO] H-7b:** aplicar la migración en el proyecto Supabase real
+  (`supabase db push`) — sin ella el insert falla (no bloquea la entrega de
+  PDFs: recordPurchase captura y loguea).
+- El selector lee `customer_email` directamente de purchases (el legacy pasaba
+  por guest_access, que el flujo vivo no escribe).
+- Extra coherente con el plan: el webhook marca `leads.converted=true` al
+  comprar → el comprador sale de la secuencia de venta E2-E5 (evita vender el
+  curso a quien ya lo compró; el legacy tenía el mismo flag).
+- El envío del testimonio quedó implementado dentro del mismo cron
+  /api/email-sequence (F3-1), ventana 7-8 días (una pasada diaria cae una vez).
+
+### F3-3 · Borrar el backend fantasma — DONE (commit 8647026)
+
+Verificación:
+
+```
+$ ls supabase/functions/
+download-premium-content  generate-download-url  generate-guest-access
+(sin create-checkout, stripe-webhook, capture-lead, send-purchase-email)
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- **process-email-sequence también borrada** (desviación razonada prevista por
+  el encargo): su lógica quedó portada íntegra (E2-E5 + testimonio) a
+  api/email-sequence.ts + api/_lib/sequence-logic.mjs con tests; conservarla
+  habría dejado dos fuentes de verdad de los emails. Recuperable en git.
+- config.toml limpiado (solo quedan las 3 funciones no listadas en el plan).
+  Nota: tras F3-4, generate-download-url y download-premium-content ya no
+  tienen ningún caller en src/ — candidatas a borrado en una fase futura.
+- **[HUMANO] H-7:** `supabase functions delete` de las 5 en el proyecto real
+  (create-checkout, stripe-webhook, capture-lead, send-purchase-email,
+  process-email-sequence) y revisar claves de la segunda cuenta Stripe.
+
+### F3-4 · Rutas muertas fuera del bundle — DONE (commit 9b30923)
+
+Verificación:
+
+```
+$ grep -c 'path="/dashboard"' src/App.tsx
+0
+$ npm run build → ✅ 29/29 rutas prerenderizadas (exit 0)
+Bundle principal: 601.314 → 464.976 bytes (−22,7%)
+dist/assets total: 1.157.915 → 944.131 bytes (−18,5%); desaparece el chunk
+AuthPage (61.965 bytes)
+$ npx tsc --noEmit → sin errores (de paso desapareció el error preexistente
+  de ExpertoGeoPage documentado en F0-3: la prop venía de código ya retirado)
+```
+
+Desviaciones:
+- Borrados también AuthContext (solo lo usaban Header, CursoGeoPage y las
+  páginas muertas), el redirect a /dashboard de CursoGeoPage y las ramas
+  user/dashboard del Header (CTA único al curso).
+- vercel.json: el rewrite SPA queda acotado a success|unsubscribe — /dashboard,
+  /auth y /guest-access pasan a 404 real en producción.
+- EXCLUDED_PATHS de check-routes.mjs actualizado (regla 7 del encargo).
+
+### Estado de la fase
+
+- `npm run build` en verde tras cada tarea (29/29 rutas) y `npm run
+  test:sequence` 21/21; ambos en CI.
+- Pendientes humanos de la fase: **H-6** (lead de prueba post-deploy),
+  **H-6b** (env vars SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY / CRON_SECRET en
+  Vercel), **H-7** (supabase functions delete ×5), **H-7b** (aplicar la
+  migración 20260715103000 y confirmar que public.leads existe en el proyecto
+  real).
