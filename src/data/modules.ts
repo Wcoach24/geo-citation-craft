@@ -123,7 +123,7 @@ export const COMPLETE_COURSE = {
   features: [
     '5 módulos (F1 a F5) en PDF — 142 páginas, verificadas',
     'El método aplicado paso a paso, con checklists',
-    'El caso real de esgeo.ai: de 35 a 92 sobre 100',
+    'El caso real de esgeo.ai: de 35 a 92 (auditado el 12 de julio de 2026)',
     'Actualizaciones incluidas',
   ],
 };

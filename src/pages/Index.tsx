@@ -117,7 +117,7 @@ const Index = () => {
                     IAs: servía un HTML vacío, de 237 caracteres. Los rastreadores de IA no ejecutan
                     JavaScript, así que nunca leyeron nada de lo que escribimos. Cuando por fin nos
                     auditamos, sacamos un <strong>35 sobre 100</strong>. Lo arreglamos con el método
-                    que enseñamos y hoy estamos en <strong>92</strong>. Todo lo que hicimos está en
+                    que enseñamos y hoy estamos en <strong>92</strong> (auditado el 12 de julio de 2026). Todo lo que hicimos está en
                     los módulos F1 a F5, y puedes comprobar la nota tú mismo aquí arriba.
                   </p>
                 </div>

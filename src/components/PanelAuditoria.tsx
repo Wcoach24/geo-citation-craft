@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 /**
  * El panel público.
  *
- * Podríamos poner un "100/100" gigante y callarnos. Sería cierto y sería una trampa:
+ * Podríamos poner la nota gigante y callarnos. Sería una trampa:
  * un auditor cuyo autor saca la nota máxima huele a amañado, aunque no lo esté. Así que
  * publicamos el panel entero, con el rubric abierto y con el dato que no nos favorece:
  * Wikipedia saca 67 y la citan todos los modelos cada día.
@@ -23,7 +23,7 @@ interface Row {
 }
 
 const PANEL: Row[] = [
-  { site: "esgeo.ai", score: 100, note: "Nuestra web. Empezó en 35.", self: true },
+  { site: "esgeo.ai", score: 92, note: "Nuestra web, auditada el 12 de julio de 2026. Empezó en 35.", self: true },
   { site: "machineready.vercel.app", score: 89, note: "La landing del propio auditor. Cuatro saltos de encabezado y sin canonical.", self: true },
   { site: "holded.com", score: 82, note: "Impecable de estructura. Su primer bloque no dice qué es ni para quién." },
   { site: "factorial.es", score: 81, note: "Casi la mitad de sus imágenes no tiene alt." },
@@ -50,8 +50,8 @@ export default function PanelAuditoria() {
           Auditamos a Wikipedia, la BBC y Stripe con el mismo rubric
         </h2>
         <p className="text-center text-muted-foreground mb-10">
-          El rubric es público y va versionado. Estas son las notas de julio de 2026, incluida la
-          nuestra y la de nuestra propia herramienta.
+          El rubric es público y va versionado. Estas son las notas auditadas el 12 de julio de 2026,
+          incluida la nuestra y la de nuestra propia herramienta.
         </p>
 
         <Card className="border-none card-elevated">
@@ -75,12 +75,12 @@ export default function PanelAuditoria() {
 
         <div className="mt-10 rounded-2xl border border-accent/30 bg-accent/5 p-6 md:p-8">
           <h3 className="font-bold text-foreground mb-3">
-            Un 100 no nos hace mejores que Wikipedia
+            Un 92 no nos hace mejores que Wikipedia
           </h3>
           <p className="text-muted-foreground leading-relaxed mb-4">
             Wikipedia saca un 67 en nuestro auditor y los modelos la citan cada día. Stripe saca un
             74 y factura miles de millones. La nota <strong>no mide autoridad</strong>: la autoridad
-            no se marca, se gana. Y sacar 100 en una web de 28 páginas recién construida es mucho
+            no se marca, se gana. Y sacar un 92 en una web de 28 páginas recién construida es mucho
             más fácil que sacarlo en un sitio con veinte años de historia encima.
           </p>
           <p className="text-muted-foreground leading-relaxed">

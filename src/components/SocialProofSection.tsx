@@ -15,7 +15,7 @@ import { Bot, BookOpen, FileText, Gauge, ArrowRight } from "lucide-react";
  */
 const SocialProofSection = () => {
   const stats = [
-    { icon: Gauge, number: "92", label: "Nota de esgeo.ai", sub: "Sobre 100 en nuestro propio auditor. Era 35." },
+    { icon: Gauge, number: "92", label: "Nota de esgeo.ai", sub: "En nuestro propio auditor, auditado el 12 de julio de 2026. Era 35." },
     { icon: Bot, number: "5", label: "Modelos cubiertos", sub: "ChatGPT · Claude · Perplexity · Gemini · Copilot" },
     { icon: BookOpen, number: "5", label: "Módulos", sub: "F1 a F5, más un F0 gratuito" },
     { icon: FileText, number: "5", label: "Guías PDF", sub: "Descargables, tuyas para siempre" },
@@ -59,7 +59,7 @@ const SocialProofSection = () => {
                 Sacamos un <strong className="text-foreground">35 sobre 100</strong>. La web que
                 vende un curso sobre cómo ser citado por las IAs era, para las IAs, una página en
                 blanco. Aplicamos el método F1–F5 sobre nuestro propio dominio y subimos a{" "}
-                <strong className="text-foreground">92</strong>, con 8.700 caracteres legibles. Ese
+                <strong className="text-foreground">92</strong> (auditado el 12 de julio de 2026), con 8.700 caracteres legibles. Ese
                 es el caso de estudio del curso: no uno inventado, el nuestro.
               </p>
 

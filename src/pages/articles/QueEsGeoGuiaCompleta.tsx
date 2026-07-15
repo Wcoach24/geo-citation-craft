@@ -271,7 +271,7 @@ const QueEsGeoGuiaCompleta = () => {
                     <h4 className="font-semibold text-lg mb-2">{`F1: ${MODULES.f1.title}`}</h4>
                     <p className="text-muted-foreground mb-2">
                       Dividir contenido en bloques independientes, citables e significativos.
-                      No párrafos de 500 palabras, sino fragmentos de 100-300 caracteres con significado propio.
+                      No párrafos de 500 palabras, sino fragmentos de entre cien y trescientos caracteres con significado propio.
                     </p>
                     <p className="text-sm text-accent">Resultado: Los modelos pueden extraer y citar tus fragmentos específicos.</p>
                   </div>
