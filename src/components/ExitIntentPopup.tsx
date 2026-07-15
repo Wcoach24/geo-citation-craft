@@ -50,7 +50,8 @@ export default function ExitIntentPopup() {
           Antes de irte...
         </h3>
         <p className="text-muted-foreground mb-6">
-          Llévate el checklist GEO gratis. Paso a paso para que las IAs citen tu marca.
+          Te envío el módulo F0 completo (diagnóstico en 15 min): mide si la IA puede leer tu web
+          y qué arreglar primero. Gratis.
         </p>
 
         <EmailCapture source="exit_intent" />

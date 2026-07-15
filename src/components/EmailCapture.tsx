@@ -53,7 +53,7 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
     return (
       <div className={`flex items-center gap-2 ${compact ? 'py-2' : 'py-6'} text-primary`}>
         <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
-        <span className="font-medium">¡Listo! Revisa tu email para el checklist GEO.</span>
+        <span className="font-medium">¡Listo! Revisa tu email: te he enviado el módulo F0 completo (diagnóstico en 15 min).</span>
       </div>
     );
   }
@@ -82,10 +82,11 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
         <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
           <Mail className="h-5 w-5 text-accent" />
         </div>
-        <h3 className="font-heading font-bold text-lg">Recibe el checklist GEO gratis</h3>
+        <h3 className="font-heading font-bold text-lg">Te envío el módulo F0 completo gratis</h3>
       </div>
       <p className="text-muted-foreground text-sm mb-4">
-        Checklist paso a paso para hacer tu web citable por modelos de IA.
+        El módulo F0 completo (diagnóstico en 15 min): mide si la IA puede leer tu web y qué
+        arreglar primero.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
         <Input
@@ -100,7 +101,7 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
           {status === 'loading' ? (
             <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Enviando...</>
           ) : (
-            'Envíame el checklist'
+            'Envíame el módulo F0'
           )}
         </Button>
       </form>
