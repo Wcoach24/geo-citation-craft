@@ -109,6 +109,93 @@ function pageTitle(html) {
   return m ? decodeEntities(m[1].replace(/\s+/g, ' ').trim()) : '';
 }
 
+/** F5-7: bloques JSON-LD parseados de una página built. */
+function extractJsonLdBlocks(html) {
+  const blocks = [];
+  const re = /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi;
+  let m;
+  while ((m = re.exec(html))) {
+    try {
+      blocks.push(JSON.parse(m[1]));
+    } catch {
+      /* un bloque no parseable no debe tumbar el feed */
+    }
+  }
+  return blocks;
+}
+
+function metaDescription(html) {
+  const m =
+    html.match(/<meta[^>]*name="description"[^>]*content="([^"]*)"/i) ||
+    html.match(/<meta[^>]*content="([^"]*)"[^>]*name="description"/i);
+  return m ? decodeEntities(m[1]) : '';
+}
+
+function xmlEscape(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * F5-7: dist/feed.xml con los artículos de /radar-ia/. Título, descripción y
+ * pubDate salen del JSON-LD Article que cada artículo ya declara (datos reales,
+ * no fechas de build).
+ */
+function writeRssFeed(articles) {
+  const items = articles
+    .map(({ route, html }) => {
+      const article = extractJsonLdBlocks(html).find((b) => {
+        const t = b && b['@type'];
+        return t === 'Article' || (Array.isArray(t) && t.includes('Article'));
+      });
+      const title = (article && article.headline) || pageTitle(html);
+      const description = metaDescription(html) || (article && article.description) || '';
+      const datePublished = article && article.datePublished;
+      if (!datePublished) return null;
+      return {
+        route,
+        title,
+        description,
+        pubDate: new Date(datePublished),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.pubDate - a.pubDate);
+
+  const lastBuildDate = items.length ? items[0].pubDate : null;
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+    '  <channel>',
+    '    <title>esGEO — Radar IA</title>',
+    '    <link>https://www.esgeo.ai/radar-ia</link>',
+    '    <description>Artículos sobre Generative Engine Optimization en español: cómo hacer que ChatGPT, Perplexity, Claude y Gemini citen tu web.</description>',
+    '    <language>es-ES</language>',
+    lastBuildDate ? `    <lastBuildDate>${lastBuildDate.toUTCString()}</lastBuildDate>` : null,
+    '    <atom:link href="https://www.esgeo.ai/feed.xml" rel="self" type="application/rss+xml"/>',
+    ...items.map(({ route, title, description, pubDate }) =>
+      [
+        '    <item>',
+        `      <title>${xmlEscape(title)}</title>`,
+        `      <link>https://www.esgeo.ai${route}</link>`,
+        `      <guid isPermaLink="true">https://www.esgeo.ai${route}</guid>`,
+        `      <description>${xmlEscape(description)}</description>`,
+        `      <pubDate>${pubDate.toUTCString()}</pubDate>`,
+        '    </item>',
+      ].join('\n')
+    ),
+    '  </channel>',
+    '</rss>',
+    '',
+  ].filter((l) => l !== null).join('\n');
+
+  fs.writeFileSync(path.join(distDir, 'feed.xml'), xml, 'utf-8');
+  return items.length;
+}
+
 /**
  * La plantilla es el shell limpio que emite Vite. OJO: `/` se escribe encima de
  * dist/index.html, así que si este script se ejecuta dos veces sobre el mismo dist,
@@ -178,6 +265,8 @@ async function main() {
   const thin = [];
   /** F1-6: acumulador { route, title, text } para dist/llms-full.txt */
   const fullText = [];
+  /** F5-7: acumulador { route, html } de artículos para dist/feed.xml */
+  const articlePages = [];
 
   for (const route of ROUTES) {
     process.stdout.write(`📄 ${route.padEnd(52)} `);
@@ -199,6 +288,7 @@ async function main() {
       writePage(route, page);
       ok++;
       fullText.push({ route, title: pageTitle(page), text: extractPlainText(page) });
+      if (route.startsWith('/radar-ia/')) articlePages.push({ route, html: page });
 
       const isCritical = CRITICAL_ROUTES.includes(route);
       const thinPage = isCritical && chars < MIN_TEXT_CHARS;
@@ -248,6 +338,13 @@ async function main() {
   ].join('\n');
   fs.writeFileSync(path.join(distDir, 'llms-full.txt'), llmsFull, 'utf-8');
   console.log(`📝 dist/llms-full.txt — ${(llmsFull.length / 1024).toFixed(1)} KB de texto plano (${fullText.length} rutas)`);
+
+  // F5-7: RSS con los artículos del Radar IA (datos reales de sus JSON-LD Article).
+  const feedItems = writeRssFeed(articlePages);
+  console.log(`📡 dist/feed.xml — ${feedItems} artículos`);
+  if (feedItems < 9) {
+    failures.push(`feed.xml: solo ${feedItems} artículos con Article schema (se esperaban ≥9)`);
+  }
 
   console.log(`\n✅ ${ok}/${ROUTES.length} rutas prerenderizadas con body completo`);
 
