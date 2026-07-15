@@ -120,7 +120,7 @@ const CheckoutPage = () => {
                 </div>
                 <BuyButton
                   source="checkout-page"
-                  className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-6 text-lg rounded-xl"
+                  className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-accent-foreground font-bold px-10 py-6 text-lg rounded-xl"
                 >
                   Comprar el curso — 47 €
                 </BuyButton>

@@ -96,7 +96,7 @@ const PricingSection = () => {
               }`}
             >
               {plan.highlight && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-primary font-bold px-4 cursor-default">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground font-bold px-4 cursor-default">
                   Más popular
                 </Badge>
               )}
@@ -126,7 +126,7 @@ const PricingSection = () => {
                 <>
                   <BuyButton
                     source="pricing-home"
-                    className="btn-glow w-full rounded-xl py-3.5 font-semibold bg-accent hover:bg-accent/90 text-primary"
+                    className="btn-glow w-full rounded-xl py-3.5 font-semibold bg-accent hover:bg-accent/90 text-accent-foreground"
                   >
                     {plan.cta}
                   </BuyButton>

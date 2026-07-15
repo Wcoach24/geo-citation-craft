@@ -222,7 +222,7 @@ const MetodologiaGeoPage = () => {
                         </div>
                       </CardContent>
                       <CardFooter>
-                        <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
+                        <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all" asChild>
                           <Link to={`/curso/${module.id.toLowerCase()}`}>
                             Qué aprenderás en {module.id}
                             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -269,7 +269,7 @@ const MetodologiaGeoPage = () => {
                           </div>
                         </CardContent>
                         <CardFooter>
-                          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
+                          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all" asChild>
                             <Link to={`/curso/${module.id.toLowerCase()}`}>
                               Qué aprenderás en {module.id}
                               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -316,7 +316,7 @@ const MetodologiaGeoPage = () => {
                           </div>
                         </CardContent>
                         <CardFooter>
-                          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
+                          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-all" asChild>
                             <Link to={`/curso/${module.id.toLowerCase()}`}>
                               Qué aprenderás en {module.id}
                               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -330,7 +330,7 @@ const MetodologiaGeoPage = () => {
             </Tabs>
             
             <div className="text-center mt-10">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-primary" asChild>
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
                 <Link to="/curso">
                   Acceder al curso completo
                   <ArrowRight className="ml-2 h-4 w-4" />

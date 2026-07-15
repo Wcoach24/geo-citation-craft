@@ -18,13 +18,13 @@ const CtaSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-primary font-bold px-10 py-7 text-lg rounded-xl" asChild>
+            <Button size="lg" className="btn-glow cta-pulse bg-accent hover:bg-accent/90 text-accent-foreground font-bold px-10 py-7 text-lg rounded-xl" asChild>
               <Link to="/curso#comprar">
                 <Zap className="mr-2 h-5 w-5" />
                 Curso Completo — €47
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 px-10 py-7 text-lg rounded-xl" asChild>
+            <Button size="lg" variant="outline" className="bg-transparent border-white/40 text-primary-foreground hover:bg-primary-foreground/10 px-10 py-7 text-lg rounded-xl" asChild>
               <Link to="/curso/f0">
                 Probar Gratis
                 <ArrowRight className="ml-2 h-5 w-5" />
