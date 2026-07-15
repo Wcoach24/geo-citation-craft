@@ -51,7 +51,7 @@ export default function PurchaseSuccessPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm">
-                  Si realizaste el pago correctamente, recibirás un email con los enlaces de descarga en los próximos minutos.
+                  Si realizaste el pago correctamente, recibirás un email con los PDFs adjuntos en los próximos minutos.
                   Revisa también tu carpeta de spam. Si no lo recibes, contacta con <strong>{SUPPORT_EMAIL}</strong>
                 </p>
                 <Button asChild className="w-full">
@@ -90,31 +90,35 @@ export default function PurchaseSuccessPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Primary message: check email */}
+              {/* Primary message: check email (honesto: los PDFs van ADJUNTOS, no hay enlaces que caduquen) */}
               <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
                 <Mail className="h-10 w-10 text-blue-500 mx-auto mb-3" />
                 <h3 className="font-semibold text-lg mb-2">Revisa tu email</h3>
                 <p className="text-sm text-muted-foreground">
-                  En los próximos minutos recibirás un correo con los <strong>enlaces de descarga directa</strong> de tus PDFs.
+                  Los <strong>5 PDFs van adjuntos al email</strong> que acabas de recibir.
+                  Son tuyos para siempre: guárdalos en tu equipo cuando puedas.
                 </p>
                 <p className="text-xs text-muted-foreground mt-2">
                   Revisa también la carpeta de spam o correo no deseado.
                 </p>
               </div>
 
-              {/* What's next */}
+              {/* Onboarding: por dónde empezar y primer hito medible */}
               <div className="bg-muted rounded-lg p-4">
-                <h4 className="font-medium text-sm mb-2">¿Qué incluye el email?</h4>
+                <h4 className="font-medium text-sm mb-2">Por dónde empezar</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Enlaces de descarga directa para cada módulo (PDF)</li>
-                  <li>• Los enlaces son válidos durante 7 días</li>
-                  <li>• Descarga y guarda los archivos en tu dispositivo</li>
+                  <li>• Empieza por <strong>F1, capítulo 1</strong> (30 min).</li>
+                  <li>
+                    • Tu primer hito: vuelve a auditar tu web tras aplicar F1-F2 y compara tu
+                    nota.
+                  </li>
+                  <li>• Cualquier duda, responde al email de compra y llega directamente.</li>
                 </ul>
               </div>
 
               <div className="flex flex-col gap-2">
-                <Button asChild variant="outline" className="w-full">
-                  <Link to="/curso">Explorar más módulos</Link>
+                <Button asChild className="w-full">
+                  <Link to="/geo-score">Auditar mi web ahora (nota de partida)</Link>
                 </Button>
                 <Button asChild variant="ghost" className="w-full">
                   <Link to="/">Volver al inicio</Link>
