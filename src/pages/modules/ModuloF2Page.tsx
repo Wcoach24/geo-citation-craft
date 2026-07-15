@@ -58,7 +58,7 @@ const ModuloF2Page = () => {
               "Pruebas y ajustes de contenido con LLMs"
             ],
             "timeRequired": "PT3H",
-            "educationalLevel": "Beginner",
+            "educationalLevel": "Inicial",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.8",

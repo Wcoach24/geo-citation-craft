@@ -58,7 +58,7 @@ const ModuloF5Page = () => {
               "Estrategias de refrescado y reindexación de contenido"
             ],
             "timeRequired": "PT2H",
-            "educationalLevel": "Intermediate",
+            "educationalLevel": "Intermedio",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.8",
@@ -319,7 +319,7 @@ const ModuloF5Page = () => {
                 "url": "https://www.esgeo.ai"
               },
               "courseCode": "GEO-F5",
-              "educationalLevel": "Intermediate",
+              "educationalLevel": "Intermedio",
               "inLanguage": "es-ES",
               "teaches": [
                 "Principios del mantenimiento evolutivo",

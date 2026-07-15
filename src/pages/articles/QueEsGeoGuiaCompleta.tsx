@@ -7,6 +7,7 @@ import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
+import { MODULES } from "@/data/modules";
 
 const QueEsGeoGuiaCompleta = () => {
   return (
@@ -258,16 +259,16 @@ const QueEsGeoGuiaCompleta = () => {
               </section>
 
               <section id="framework-geo" className="mb-12">
-                <h2 className="text-2xl font-semibold text-primary mb-4">El Framework GEO: Los 5 pilares (F1-F5)</h2>
+                <h2 className="text-2xl font-semibold text-primary mb-4">El Framework GEO: Los 5 módulos (F1-F5)</h2>
 
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   GEO no es una lista de trucos, es un sistema. El framework F1-F5 de esGEO define
-                  los 5 pilares fundamentales que hacen que AI te cite.
+                  los 5 módulos secuenciales que hacen que la IA te cite.
                 </p>
 
                 <div className="space-y-6">
                   <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold text-lg mb-2">F1: Fundamentos de fragmentación</h4>
+                    <h4 className="font-semibold text-lg mb-2">{`F1: ${MODULES.f1.title}`}</h4>
                     <p className="text-muted-foreground mb-2">
                       Dividir contenido en bloques independientes, citables e significativos.
                       No párrafos de 500 palabras, sino fragmentos de 100-300 caracteres con significado propio.
@@ -276,7 +277,7 @@ const QueEsGeoGuiaCompleta = () => {
                   </div>
 
                   <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold text-lg mb-2">F2: Contexto semántico</h4>
+                    <h4 className="font-semibold text-lg mb-2">{`F2: ${MODULES.f2.title}`}</h4>
                     <p className="text-muted-foreground mb-2">
                       Proporcionar contexto claro de qué trata cada sección. Encabezados, definiciones,
                       estructura jerárquica clara. El modelo debe entender sin ambigüedad.
@@ -285,7 +286,7 @@ const QueEsGeoGuiaCompleta = () => {
                   </div>
 
                   <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold text-lg mb-2">F3: Autoridad generativa</h4>
+                    <h4 className="font-semibold text-lg mb-2">{`F3: ${MODULES.f3.title}`}</h4>
                     <p className="text-muted-foreground mb-2">
                       Señales que comunican expertise. Datos estructurados (Schema.org),
                       credenciales de autor, referencias cruzadas, consistencia temática.
@@ -294,7 +295,7 @@ const QueEsGeoGuiaCompleta = () => {
                   </div>
 
                   <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold text-lg mb-2">F4: Validación conversacional</h4>
+                    <h4 className="font-semibold text-lg mb-2">{`F4: ${MODULES.f4.title}`}</h4>
                     <p className="text-muted-foreground mb-2">
                       Contenido que resuelve preguntas específicas de usuarios finales.
                       FAQs, Q&A, formatos conversacionales que el modelo reconoce como respuestas.
@@ -303,7 +304,7 @@ const QueEsGeoGuiaCompleta = () => {
                   </div>
 
                   <div className="border-l-4 border-primary pl-4 py-2">
-                    <h4 className="font-semibold text-lg mb-2">F5: Mantenimiento evolutivo</h4>
+                    <h4 className="font-semibold text-lg mb-2">{`F5: ${MODULES.f5.title}`}</h4>
                     <p className="text-muted-foreground mb-2">
                       Actualización frecuente, frescura de contenido, señales de evolución.
                       Los modelos favorecen contenido que se adapta al cambio y se mantiene relevante.
@@ -313,8 +314,8 @@ const QueEsGeoGuiaCompleta = () => {
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed mt-6">
-                  Estos 5 pilares no son secuenciales. Se aplican simultáneamente a cada artículo, página y fragmento.
-                  Un contenido GEO óptimo implementa los 5 al mismo tiempo.
+                  Estos 5 módulos son secuenciales: cada uno construye sobre el anterior. Empieza por F1 y avanza
+                  en orden hasta F5. Un contenido GEO óptimo acaba implementando los 5.
                 </p>
               </section>
 

@@ -58,7 +58,7 @@ const ModuloF4Page = () => {
               "Acciones de iteración post-validación (refuerzo, mejora de autoridad, revisión de fundamentos, cambio de enfoque)"
             ],
             "timeRequired": "PT3H",
-            "educationalLevel": "Intermediate",
+            "educationalLevel": "Intermedio",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.7",

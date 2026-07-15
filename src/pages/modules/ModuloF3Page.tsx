@@ -59,7 +59,7 @@ const ModuloF3Page = () => {
               "Interlinking estratégico y consolidación de autoridad interna"
             ],
             "timeRequired": "PT4H",
-            "educationalLevel": "Intermediate",
+            "educationalLevel": "Intermedio",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.9",

@@ -12,6 +12,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, BookOpen, FileText, Search, Users, Target, BarChart, Zap, ArrowRight, Link as LinkIcon, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { MODULES } from "@/data/modules";
 
 const MetodologiaGeoPage = () => {
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
@@ -45,52 +46,25 @@ const MetodologiaGeoPage = () => {
     };
   }, []);
 
-  const modules = [{
-    id: "F1",
-    title: "Fundamentos GEO",
-    description: "Comprende los principios básicos de optimización para IA generativa",
-    icon: <FileText className="h-6 w-6" />,
-    color: "bg-blue-500",
-    topics: ["Qué es GEO", "Diferencias con SEO", "Casos de uso"],
-    duration: "PT2H",
-    difficulty: "Beginner"
-  }, {
-    id: "F2",
-    title: "Estructura semántica",
-    description: "Aprende a organizar contenido para máxima comprensión por IA",
-    icon: <Search className="h-6 w-6" />,
-    color: "bg-green-500",
-    topics: ["Jerarquía de contenido", "Datos estructurados", "Fragmentación"],
-    duration: "PT3H",
-    difficulty: "Beginner"
-  }, {
-    id: "F3",
-    title: "Redacción citeable",
-    description: "Técnicas de escritura que favorecen la citación por modelos de lenguaje",
-    icon: <Users className="h-6 w-6" />,
-    color: "bg-purple-500",
-    topics: ["Snippets destacados", "Formato Q&A", "Estilo Wikipedia"],
-    duration: "PT4H",
-    difficulty: "Intermediate"
-  }, {
-    id: "F4",
-    title: "Optimización técnica",
-    description: "Implementación de elementos técnicos para máxima accesibilidad IA",
-    icon: <Target className="h-6 w-6" />,
-    color: "bg-orange-500",
-    topics: ["Schema markup", "Metadatos", "Estructura HTML"],
-    duration: "PT3H",
-    difficulty: "Intermediate"
-  }, {
-    id: "F5",
-    title: "Medición y análisis",
-    description: "Métricas específicas para evaluar el rendimiento GEO",
-    icon: <BarChart className="h-6 w-6" />,
-    color: "bg-red-500",
-    topics: ["KPIs GEO", "Herramientas", "Monitoreo"],
-    duration: "PT2H",
-    difficulty: "Intermediate"
-  }];
+  // Taxonomía única F1-F5: los títulos, bullets, duraciones y niveles salen de
+  // src/data/modules.ts (fuente de verdad). Aquí solo se añade el icono de cada card.
+  const MODULE_ICONS: Record<string, React.ReactNode> = {
+    f1: <FileText className="h-6 w-6" />,
+    f2: <Search className="h-6 w-6" />,
+    f3: <Users className="h-6 w-6" />,
+    f4: <Target className="h-6 w-6" />,
+    f5: <BarChart className="h-6 w-6" />,
+  };
+
+  const modules = Object.values(MODULES).map((m) => ({
+    id: m.id.toUpperCase(),
+    title: m.title,
+    description: m.description,
+    icon: MODULE_ICONS[m.id],
+    topics: m.topics,
+    duration: m.duration,
+    level: m.level,
+  }));
 
   return (
     <div className="min-h-screen bg-background">
@@ -149,7 +123,7 @@ const MetodologiaGeoPage = () => {
             
             <HighlightSnippet id="metodologia-definicion" variant="definition" className="text-left">
               <p className="text-lg" data-speakable="true">
-                <strong>La Metodología GEO</strong> es un framework estructurado en seis módulos progresivos 
+                <strong>La Metodología GEO</strong> es un framework estructurado en cinco módulos progresivos (F1-F5) 
                 que permite a una web ser entendida por LLMs como una fuente fiable y estructurada. 
                 Está diseñada para optimizar contenido web específicamente para modelos de lenguaje como 
                 ChatGPT, Claude y Perplexity, maximizando la probabilidad de ser citado como referencia autoritativa.
@@ -200,7 +174,6 @@ const MetodologiaGeoPage = () => {
                 <TabsTrigger value="all">Todos los módulos</TabsTrigger>
                 <TabsTrigger value="beginner">Principiante</TabsTrigger>
                 <TabsTrigger value="intermediate">Intermedio</TabsTrigger>
-                <TabsTrigger value="advanced">Avanzado</TabsTrigger>
               </TabsList>
               
               {/* All Modules */}
@@ -209,7 +182,7 @@ const MetodologiaGeoPage = () => {
                   {modules.map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                       <CardHeader className="pb-4">
                         <div className="flex items-center justify-between mb-3">
-                          <div className={`p-3 rounded-lg ${module.color} text-white`}>
+                          <div className={`p-3 rounded-lg bg-accent/10 text-accent`}>
                             {module.icon}
                           </div>
                           <div className="flex items-center gap-2">
@@ -234,7 +207,7 @@ const MetodologiaGeoPage = () => {
                             </li>)}
                         </ul>
                         <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                          <span>Nivel: {module.difficulty}</span>
+                          <span>Nivel: {module.level}</span>
                           <span>Duración: {module.duration.replace('PT', '').replace('H', 'h')}</span>
                         </div>
                       </CardContent>
@@ -250,13 +223,13 @@ const MetodologiaGeoPage = () => {
                 </div>
               </TabsContent>
               
-              {/* Beginner Modules */}
+              {/* Módulos de nivel Inicial */}
               <TabsContent value="beginner">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {modules.filter(module => module.difficulty === "Beginner").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
+                  {modules.filter(module => module.level === "Inicial").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                         <CardHeader className="pb-4">
                           <div className="flex items-center justify-between mb-3">
-                            <div className={`p-3 rounded-lg ${module.color} text-white`}>
+                            <div className={`p-3 rounded-lg bg-accent/10 text-accent`}>
                               {module.icon}
                             </div>
                             <div className="flex items-center gap-2">
@@ -281,7 +254,7 @@ const MetodologiaGeoPage = () => {
                               </li>)}
                           </ul>
                           <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                            <span>Nivel: {module.difficulty}</span>
+                            <span>Nivel: {module.level}</span>
                             <span>Duración: {module.duration.replace('PT', '').replace('H', 'h')}</span>
                           </div>
                         </CardContent>
@@ -297,13 +270,13 @@ const MetodologiaGeoPage = () => {
                 </div>
               </TabsContent>
               
-              {/* Intermediate Modules */}
+              {/* Módulos de nivel Intermedio */}
               <TabsContent value="intermediate">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {modules.filter(module => module.difficulty === "Intermediate").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
+                  {modules.filter(module => module.level === "Intermedio").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                         <CardHeader className="pb-4">
                           <div className="flex items-center justify-between mb-3">
-                            <div className={`p-3 rounded-lg ${module.color} text-white`}>
+                            <div className={`p-3 rounded-lg bg-accent/10 text-accent`}>
                               {module.icon}
                             </div>
                             <div className="flex items-center gap-2">
@@ -328,7 +301,7 @@ const MetodologiaGeoPage = () => {
                               </li>)}
                           </ul>
                           <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                            <span>Nivel: {module.difficulty}</span>
+                            <span>Nivel: {module.level}</span>
                             <span>Duración: {module.duration.replace('PT', '').replace('H', 'h')}</span>
                           </div>
                         </CardContent>
@@ -344,52 +317,6 @@ const MetodologiaGeoPage = () => {
                 </div>
               </TabsContent>
               
-              {/* Advanced Modules */}
-              <TabsContent value="advanced">
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {modules.filter(module => module.difficulty === "Advanced").map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
-                        <CardHeader className="pb-4">
-                          <div className="flex items-center justify-between mb-3">
-                            <div className={`p-3 rounded-lg ${module.color} text-white`}>
-                              {module.icon}
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Badge variant="secondary" className="font-mono font-bold">
-                                {module.id}
-                              </Badge>
-                              <ShareSectionButton sectionId={`modulo-${module.id.toLowerCase()}`} title={`módulo ${module.id}`} />
-                            </div>
-                          </div>
-                          <CardTitle className="text-xl text-primary group-hover:text-accent transition-colors">
-                            {module.title}
-                          </CardTitle>
-                          <CardDescription className="text-base">
-                            {module.description}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent className="pt-0">
-                          <ul className="space-y-2 mb-4">
-                            {module.topics.map((topic, topicIndex) => <li key={topicIndex} className="text-sm text-muted-foreground flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
-                                {topic}
-                              </li>)}
-                          </ul>
-                          <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                            <span>Nivel: {module.difficulty}</span>
-                            <span>Duración: {module.duration.replace('PT', '').replace('H', 'h')}</span>
-                          </div>
-                        </CardContent>
-                        <CardFooter>
-                          <Button variant="outline" className="w-full group-hover:bg-accent group-hover:text-primary group-hover:border-accent transition-all" asChild>
-                            <Link to={`/curso/${module.id.toLowerCase()}`}>
-                              Explorar módulo
-                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                          </Button>
-                        </CardFooter>
-                      </Card>)}
-                </div>
-              </TabsContent>
             </Tabs>
             
             <div className="text-center mt-10">
@@ -638,7 +565,7 @@ const MetodologiaGeoPage = () => {
         "mainEntity": {
           "@type": "Course",
           "name": "Framework F1-F5 de Generative Engine Optimization",
-          "description": "Curso completo de optimización para IA generativa estructurado en seis módulos progresivos para enseñar técnicas de GEO y citabilidad por modelos de lenguaje.",
+          "description": "Curso completo de optimización para IA generativa estructurado en cinco módulos progresivos (F1-F5) para enseñar técnicas de GEO y citabilidad por modelos de lenguaje.",
           "provider": {
             "@type": "EducationalOrganization",
             "name": "esGEO Academy",
@@ -647,9 +574,9 @@ const MetodologiaGeoPage = () => {
           },
           "courseCode": "GEO-F1-F5",
           "coursePrerequisites": "Conocimientos básicos de marketing digital",
-          "educationalLevel": "Intermediate",
+          "educationalLevel": "Intermedio",
           "courseWorkload": "PT19H",
-          "teaches": ["Optimización para IA generativa", "Estructura semántica para LLMs", "Redacción citeable", "Técnicas de fragmentación", "Métricas GEO"],
+          "teaches": modules.map((m) => `${m.id}: ${m.title}`),
           "offers": {
             "@type": "Offer",
             "price": "0",

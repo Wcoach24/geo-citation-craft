@@ -58,7 +58,7 @@ const ModuloF1Page = () => {
               "Establecimiento de autoría y autoridad de contenido"
             ],
             "timeRequired": "PT2H",
-            "educationalLevel": "Beginner",
+            "educationalLevel": "Inicial",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.9",

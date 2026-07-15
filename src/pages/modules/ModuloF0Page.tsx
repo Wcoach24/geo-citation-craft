@@ -58,7 +58,7 @@ const ModuloF0Page = () => {
               "Priorización de optimizaciones necesarias"
             ],
             "timeRequired": "PT30M",
-            "educationalLevel": "Beginner",
+            "educationalLevel": "Inicial",
             "isAccessibleForFree": true,
             "mainEntityOfPage": {
               "@type": "WebPage",

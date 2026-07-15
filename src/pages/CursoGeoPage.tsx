@@ -66,44 +66,16 @@ const CursoGeoPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Module cards data (F1-F5 only)
-  const moduleCards = [
-    {
-      id: 'F1',
-      title: 'Fundamentos de Accesibilidad Generativa',
-      description: MODULES.f1.description,
-      icon: FileText,
-      topics: ['Qué es GEO', 'Diferencias con SEO', 'Principios fundamentales'],
-    },
-    {
-      id: 'F2',
-      title: 'Contexto Semántico',
-      description: MODULES.f2.description,
-      icon: Search,
-      topics: ['Jerarquía de contenido', 'Datos estructurados', 'Fragmentación semántica'],
-    },
-    {
-      id: 'F3',
-      title: 'Autoridad Generativa',
-      description: MODULES.f3.description,
-      icon: Users,
-      topics: ['Snippets destacados', 'Formato pregunta-respuesta', 'Estilo enciclopedico'],
-    },
-    {
-      id: 'F4',
-      title: 'Validación Conversacional',
-      description: MODULES.f4.description,
-      icon: Target,
-      topics: ['Schema markup', 'Metadatos citables', 'Estructura HTML semántica'],
-    },
-    {
-      id: 'F5',
-      title: 'Mantenimiento Evolutivo',
-      description: MODULES.f5.description,
-      icon: BarChart,
-      topics: ['KPIs de citabilidad', 'Herramientas de monitoreo', 'Análisis de rendimiento'],
-    },
-  ];
+  // Module cards data (F1-F5): títulos, bullets y descripciones desde src/data/modules.ts
+  // (taxonomía única del framework). Aquí solo se asigna el icono.
+  const MODULE_CARD_ICONS = { f1: FileText, f2: Search, f3: Users, f4: Target, f5: BarChart } as const;
+  const moduleCards = Object.values(MODULES).map((m) => ({
+    id: m.id.toUpperCase(),
+    title: m.title,
+    description: m.description,
+    icon: MODULE_CARD_ICONS[m.id as keyof typeof MODULE_CARD_ICONS],
+    topics: m.topics,
+  }));
 
   // FAQs (original 5 + 5 refrescadas mayo 2026)
   const faqs = [

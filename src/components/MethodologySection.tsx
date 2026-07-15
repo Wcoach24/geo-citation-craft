@@ -46,7 +46,7 @@ const MethodologySection = () => {
                   </div>
 
                   <h3 className="font-bold text-primary mb-2 group-hover:text-accent transition-colors">
-                    {module.shortName.split(' - ')[1] || module.shortName}
+                    {module.title}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                     {module.description}

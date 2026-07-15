@@ -7,7 +7,16 @@ export interface ModuleInfo {
   id: string;
   name: string;
   shortName: string;
+  /** Título canónico del módulo (sin el prefijo "Módulo Fx - "). ÚNICA identidad F1-F5:
+   *  home, /curso, /metodologia y artículos deben renderizar exactamente este título. */
+  title: string;
   description: string;
+  /** Bullets canónicos del temario del módulo. */
+  topics: string[];
+  /** Duración estimada en formato ISO 8601 (para schema.org y UI). */
+  duration: string;
+  /** Nivel en español: 'Inicial' | 'Intermedio'. */
+  level: string;
   price: number;
   image: string;
   comingSoon?: boolean;
@@ -34,6 +43,10 @@ export interface CompleteCourseInfo {
 export const MODULES: Record<string, ModuleInfo> = {
   f1: {
     id: 'f1',
+    title: 'Fundamentos de Accesibilidad Generativa',
+    topics: ['Qué es GEO', 'Diferencias con SEO', 'Principios fundamentales'],
+    duration: 'PT2H',
+    level: 'Inicial',
     name: 'Módulo F1 - Fundamentos de Accesibilidad Generativa',
     shortName: 'F1 - Fundamentos',
     description: 'Aprende los fundamentos técnicos para hacer tu contenido accesible y comprensible para modelos de lenguaje AI.',
@@ -43,6 +56,10 @@ export const MODULES: Record<string, ModuleInfo> = {
   },
   f2: {
     id: 'f2',
+    title: 'Contexto Semántico',
+    topics: ['Jerarquía de contenido', 'Datos estructurados', 'Fragmentación semántica'],
+    duration: 'PT3H',
+    level: 'Inicial',
     name: 'Módulo F2 - Contexto Semántico',
     shortName: 'F2 - Contexto Semántico',
     description: 'Domina la estructura semántica y el contexto óptimo para modelos generativos.',
@@ -52,6 +69,10 @@ export const MODULES: Record<string, ModuleInfo> = {
   },
   f3: {
     id: 'f3',
+    title: 'Autoridad Generativa',
+    topics: ['Snippets destacados', 'Formato pregunta-respuesta', 'Estilo enciclopédico'],
+    duration: 'PT4H',
+    level: 'Intermedio',
     name: 'Módulo F3 - Autoridad Generativa',
     shortName: 'F3 - Autoridad Generativa',
     description: 'Construye autoridad y credibilidad para ser citado por modelos de AI.',
@@ -61,6 +82,10 @@ export const MODULES: Record<string, ModuleInfo> = {
   },
   f4: {
     id: 'f4',
+    title: 'Validación Conversacional',
+    topics: ['Schema markup', 'Metadatos citables', 'Estructura HTML semántica'],
+    duration: 'PT3H',
+    level: 'Intermedio',
     name: 'Módulo F4 - Validación Conversacional',
     shortName: 'F4 - Validación Conversacional',
     description: 'Aprende validación conversacional y optimización de interacciones.',
@@ -70,6 +95,10 @@ export const MODULES: Record<string, ModuleInfo> = {
   },
   f5: {
     id: 'f5',
+    title: 'Mantenimiento Evolutivo',
+    topics: ['KPIs de citabilidad', 'Herramientas de monitoreo', 'Análisis de rendimiento'],
+    duration: 'PT2H',
+    level: 'Intermedio',
     name: 'Módulo F5 - Mantenimiento Evolutivo',
     shortName: 'F5 - Mantenimiento Evolutivo',
     description: 'Diseña sistemas de mantenimiento evolutivo para la era de la AI.',
