@@ -606,3 +606,173 @@ Desviaciones:
   Vercel), **H-7** (supabase functions delete ×5), **H-7b** (aplicar la
   migración 20260715103000 y confirmar que public.leads existe en el proyecto
   real).
+
+## FASE 4 — 2026-07-15
+
+### F4-1 · Font de headings — DONE (commit 754610c)
+
+Verificación:
+
+```
+$ grep -n "'\"Plus" src/index.css
+(sin resultados, exit=1) → 0
+$ npm run build → ✅ 29/29 rutas prerenderizadas (exit 0)
+```
+
+Desviaciones:
+- La font SÍ estaba enlazada en index.html (Google Fonts, pesos 600/700/800): el único
+  bug eran las comillas anidadas del CSS. Fix a `"Plus Jakarta Sans", Inter, sans-serif`.
+- `font-mono` se usa en 6 sitios (badges F1-F5, PanelAuditoria, ContenidoIAPage) →
+  se AÑADIÓ Roboto Mono (400/700) al link de Google Fonts en vez de quitarla del config.
+
+### F4-2 · CTAs de compra legibles — DONE (commit 5f30bac)
+
+Verificación:
+
+```
+$ grep -rn 'bg-accent.*text-primary\|text-primary.*bg-accent' src/components/
+(sin resultados, exit=1) → 0
+```
+
+Desviaciones:
+- El patrón vivía en 9 puntos, no 4 (los números de línea del plan eran pre-F2):
+  CtaSection, MethodologySection, PricingSection (botón + badge "Más popular"),
+  CheckoutPage, MetodologiaGeoPage (CTA final + 3 group-hover de cards). Todos →
+  `text-accent-foreground`.
+- CtaSection "Probar Gratis": `bg-transparent border-white/40` aplicado (antes
+  border-primary-foreground/20 sin bg explícito).
+
+### F4-3 · Paleta unificada — DONE (commits 62e3949 + f82eeb3)
+
+Verificación:
+
+```
+$ grep -rEn '(bg|text|border)-(blue|green|purple|orange|red|yellow|pink|indigo)-[0-9]{3}' src/ | wc -l
+0
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- El grep destapó ~120 usos en ~25 ficheros (artículos, módulos F0-F5, TestimonialCard,
+  toast.tsx…), no solo los 5 del plan. Mapeo por codemod sed: verde→success,
+  rojo→danger (toast destructivo→tokens destructive), naranja/amarillo→warning,
+  azul→primary, morado→accent.
+- Tokens nuevos en index.css (light+dark) y tailwind.config: `--success` (160 96% 26%),
+  `--warning` (32 90% 36%), `--danger` (0 72% 42%) con sus foregrounds — semáforo
+  derivado de la paleta teal como preveía el plan.
+- **Bug propio detectado y corregido (f82eeb3):** el orden de reglas del sed convirtió
+  `bg-green-500/10` en `bg-*/50/10` (clase inválida, sin fondo) en 10 ficheros
+  (badges de módulos, PurchaseSuccessPage, ResultsCard, LimitationsSection, RadarIAPage,
+  GlosarioPage, AcercaDePage). Cazado con grep de `/50/` y corregido; build verde.
+
+### F4-4 · Hero reescrito — DONE (commit 6da7605)
+
+Verificación:
+
+```
+$ python3 (extrae el <p> snippet-block del hero en dist/index.html y cuenta
+  palabras antes del primer CTA)
+palabras del párrafo del hero antes del primer CTA: 44   (< 60 ✓)
+$ npx eslint HeroSection WhatIsGeoSection Index → 0 errores (sin imports muertos)
+```
+
+Desviaciones:
+- Texto del subhead: el literal del plan, con el precio (47 €) dentro. Los 3 bullets
+  (Para quién / Qué obtienes / Empieza gratis con F0 + auditor) van DESPUÉS de los CTAs
+  (fila que sustituye a los antiguos value props) para que el conteo pre-CTA quede <60.
+- Nuevo token `--accent-light: 160 70% 55%` (tailwind `accent-light`) para badge,
+  span del H1, subrayado SVG e iconos de bullets sobre el gradiente oscuro (el accent
+  a 30% de luminosidad no contrastaba).
+- `WhatIsGeoSection` se renderiza recortada tras el bloque del auditor HABLA (que ya
+  ocupaba el hueco inmediato post-hero desde F2): se quitaron 2 snippets redundantes,
+  su ShareSectionButton y su FAQPage (la home ya emite FAQPage propio; dos bloques
+  FAQPage en la misma URL compiten). Conserva la definición citable + DefinedTerm.
+
+### F4-5 · Layout móvil y grids — DONE (commit fa30608)
+
+Verificación:
+
+```
+Playwright móvil 390px sobre dist (python3 + chromium de /opt/pw-browsers,
+servidor estático http.server):
+/metodologia scrollWidth: 390 · / : 390 · /curso : 390 · /radar-ia : 390
+(document.documentElement.scrollWidth === 390, sin overflow horizontal)
+Screenshot /tmp/metodologia-390.png revisado: sin desbordes.
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- (a) El TabsList tenía 3 triggers (F1-2 eliminó "Avanzado"), no 4; se aplicó igualmente
+  `flex-wrap h-auto w-full`.
+- (b) Grids 3+2 vía `lg:grid-cols-6` + `col-span-2` + `col-start-2` en el 4º hijo
+  (MethodologySection home, CursoGeoPage, tab "todos" de MetodologiaGeoPage); los 4
+  artículos no destacados de /radar-ia → grid-2 (2×2). Las tabs filtradas (2-3 items)
+  se quedan en grid-3: no generan hueco.
+- (c) Sección "Framework Completo" (h2 + botón compartir sin contenido) eliminada.
+- (d) TOC de la home: empieza oculto (SSR-safe) y un IntersectionObserver sobre
+  `#inicio` — SOLO en useEffect — lo muestra al salir el hero del viewport; en páginas
+  sin `#inicio` se muestra siempre.
+- `vite preview` no arranca en este contenedor (EAFNOSUPPORT en ::); se usó
+  `python3 -m http.server` sobre dist como servidor estático equivalente.
+
+### F4-6 · Detalles de marca y motion — DONE (commit ced5d15)
+
+Verificación:
+
+```
+$ ls src/App.css → No such file or directory ✓
+$ grep -rn 'teal-600' src/ | wc -l → 0
+$ grep -c 'prefers-reduced-motion' src/index.css → 1
+$ npm run build → exit 0
+```
+
+Desviaciones:
+- (d) App.css no tenía ningún import (grep = 0): borrado directo.
+- (e) ShareSectionButton → icon-only ghost (h-8 w-8, aria-label + title, icono Check
+  al copiar) con hover suave `hover:bg-secondary` (el ghost global mantiene su hover
+  accent, no estaba en el encargo). Los ~35 usos existentes quedan como iconos
+  discretos junto al heading sin tocar cada página.
+- Bonus (adelanta F5-3): la URL copiada incluye ahora `window.location.pathname`
+  (antes compartir desde /metodologia llevaba a la home).
+
+### F4-7 · Radar IA: frescura visible — DONE (commit 6eb4558)
+
+Verificación:
+
+```
+$ grep -rn '200M' src/
+(sin resultados, exit=1) → 0
+$ grep -rn '2024' src/pages/RadarIAPage.tsx src/pages/articles/ | grep -v datePublished
+→ 2 restos, ambos legítimos (hitos históricos, no claims de frescura):
+  - QueEsGeoGuiaCompleta.tsx:159 "2024: Perplexity y otros competidores" (cronología de GEO)
+  - GeoVsSeoGuiaRapida.tsx:237 "2024: Google integra Gemini en búsqueda con AI Overviews"
+$ npm run build → exit 0
+```
+
+Desviaciones y fuentes:
+- Cifra ChatGPT: **900 millones de usuarios activos semanales** — anuncio de OpenAI
+  recogido por TechCrunch el 27/02/2026 ("ChatGPT reaches 900M weekly active users",
+  techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users/). Aplicada en
+  QueEsGeoGuiaCompleta (×2, con fuente y fecha), GeoVsSeoGuiaRapida (hito 2026 que
+  sustituye al "200M mensuales" de 2024) y OptimizarWebParaPerplexity (tabla de alcance,
+  antes "100M+").
+- Cifras SIN fuente primaria verificable → eliminadas (regla 4): "Perplexity 15M+
+  usuarios / crecimiento 400% anual" (solo agregadores de stats, ninguna fuente oficial)
+  y las proyecciones "40-50% de consultas sin clic en 2026" (×2, proyección de 2024
+  presentada como dato). Sustituidas por afirmaciones cualitativas sin número.
+- Fechas: dateModified/citation_online_date → 2026-07-15 en los 9 artículos con fecha
+  vieja y en RadarIAPage (última revisión REAL según git log: hoy — JSON-LD F1-1,
+  captura F2-7, paleta F4-3 y cifras F4-7). Líneas visibles "Actualizado el 15 de
+  diciembre de 2024" → "15 de julio de 2026" (MuerteSeoTradicional,
+  QueSIgnificaSerCitadoPorIA). Las tarjetas de /radar-ia (date: 2024-06-xx, inventadas)
+  → el datePublished que cada artículo declara en su propio schema (2025-01-03 …
+  2025-01-15); el Blog schema pasa de datePublished 2024-01-01 a 2025-01-03.
+- FAQ de /curso: "El 2024 ha demostrado que necesitas ambos" → "Necesitas ambos".
+- Ejemplo envejecido en OptimizarWebParaPerplexity ("algo de 2024") → "algo reciente".
+
+### Estado de la fase
+
+- `npm run build` en verde tras cada tarea (29/29 rutas prerenderizadas).
+- `npx tsc --noEmit` → 0 errores. eslint limpio en los ficheros tocados.
+- Playwright 390px: scrollWidth = 390 en /, /curso, /metodologia y /radar-ia.
+- Sin nuevos pendientes humanos; los citation_* meta que F4-7 tocó los elimina F5-6.
