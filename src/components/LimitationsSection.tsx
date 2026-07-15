@@ -60,7 +60,7 @@ const LimitationsSection = () => {
               <div className="space-y-4">
                 {canDo.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 bg-success/50 rounded-full mt-2 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 bg-success rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-medium text-foreground">{item.title}</p>
                       <p className="text-xs text-muted-foreground">{item.text}</p>

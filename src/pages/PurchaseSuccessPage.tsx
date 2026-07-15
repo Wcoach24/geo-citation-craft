@@ -80,7 +80,7 @@ export default function PurchaseSuccessPage() {
           <Card className="border-success">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="rounded-full bg-success/50/10 p-3">
+                <div className="rounded-full bg-success/10 p-3">
                   <CheckCircle className="h-16 w-16 text-success" />
                 </div>
               </div>

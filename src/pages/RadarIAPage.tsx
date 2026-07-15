@@ -186,7 +186,7 @@ const RadarIAPage = () => {
 
           {/* Header */}
           <header className="mb-12 text-center" id="radar-header">
-            <div className="inline-flex items-center gap-2 bg-success/50/10 text-success border border-success/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 bg-success/10 text-success border border-success/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Radar className="h-4 w-4" />
               RADAR IA
             </div>
