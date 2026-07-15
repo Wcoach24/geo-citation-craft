@@ -1,10 +1,9 @@
 project_id = "hadnvvkflpjucqkwewto"
 
-[functions.create-checkout]
-verify_jwt = false
-
-[functions.stripe-webhook]
-verify_jwt = false
+# F3-3: eliminadas del repo las edge functions legacy create-checkout,
+# stripe-webhook, capture-lead, send-purchase-email y process-email-sequence
+# (todas portadas o sustituidas por funciones Vercel en /api). Pendiente
+# [HUMANO] H-7: `supabase functions delete` en el proyecto Supabase real.
 
 [functions.generate-download-url]
 verify_jwt = false
@@ -13,13 +12,4 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.generate-guest-access]
-verify_jwt = false
-
-[functions.send-purchase-email]
-verify_jwt = false
-
-[functions.capture-lead]
-verify_jwt = false
-
-[functions.process-email-sequence]
 verify_jwt = false
