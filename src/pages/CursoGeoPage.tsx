@@ -80,7 +80,7 @@ const CursoGeoPage = () => {
     {
       id: 'faq-geo-seo',
       question: '¿GEO reemplaza al SEO?',
-      answer: 'No, GEO complementa al SEO. Mientras SEO te posiciona en Google, GEO te hace citado por ChatGPT, Gemini y Perplexity. El 2024 ha demostrado que necesitas ambos: posicionamiento en buscadores tradicionales + presencia en respuestas de IA.',
+      answer: 'No, GEO complementa al SEO. Mientras SEO te posiciona en Google, GEO te hace citado por ChatGPT, Gemini y Perplexity. Necesitas ambos: posicionamiento en buscadores tradicionales + presencia en respuestas de IA.',
     },
     {
       id: 'faq-prerrequisitos',

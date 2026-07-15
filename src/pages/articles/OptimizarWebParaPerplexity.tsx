@@ -30,7 +30,7 @@ const OptimizarWebParaPerplexity = () => {
         <meta name="citation_title" content="Cómo optimizar tu web para Perplexity" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2026-03-20" />
-        <meta name="citation_online_date" content="2026-03-20" />
+        <meta name="citation_online_date" content="2026-07-15" />
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="Perplexity, GEO, optimización, SEO IA, modelos generativos, citación" />
 
@@ -41,7 +41,7 @@ const OptimizarWebParaPerplexity = () => {
             "description": "Estrategia completa para aparecer en respuestas de Perplexity AI",
             "url": "https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity",
             "datePublished": "2026-03-20",
-            "dateModified": "2026-03-20",
+            "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
@@ -159,7 +159,7 @@ const OptimizarWebParaPerplexity = () => {
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Alcance</td>
-                          <td className="p-2 text-primary">100M+ usuarios (pero limitada por entrenamiento)</td>
+                          <td className="p-2 text-primary">900M usuarios semanales (feb. 2026), pero citación limitada por su corte de entrenamiento</td>
                           <td className="p-2 text-accent">Crecimiento rápido (búsqueda abierta a todo)</td>
                         </tr>
                       </tbody>
@@ -214,7 +214,7 @@ Disallow: /admin/
                 <h2 className="text-2xl font-semibold text-primary mb-4">Técnica 2: Domina la variable "recency"</h2>
 
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Perplexity <strong>ama</strong> contenido fresco. Si una pregunta es sobre algo de 2024, Perplexity
+                  Perplexity <strong>ama</strong> contenido fresco. Si una pregunta es sobre algo reciente, Perplexity
                   priorizará respuestas actualizadas recientemente.
                 </p>
 

@@ -29,7 +29,7 @@ const MuerteSeoTradicional = () => {
         <meta name="citation_title" content="La muerte del SEO tal y como lo conocíamos" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2025-01-12" />
-        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_online_date" content="2026-07-15" />
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="SEO, muerte SEO, GEO, motores generativos, IA, búsqueda, futuro" />
         
@@ -40,7 +40,7 @@ const MuerteSeoTradicional = () => {
             "description": "Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje",
             "url": "https://www.esgeo.ai/radar-ia/muerte-seo-tradicional",
             "datePublished": "2025-01-12",
-            "dateModified": "2024-12-15",
+            "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
@@ -134,7 +134,7 @@ const MuerteSeoTradicional = () => {
               </HighlightSnippet>
 
               <div className="text-sm text-muted-foreground">
-                Publicado el 12 de enero de 2025 • Actualizado el 15 de diciembre de 2024 • Categoría: Tendencias
+                Publicado el 12 de enero de 2025 • Actualizado el 15 de julio de 2026 • Categoría: Tendencias
               </div>
             </header>
 

@@ -28,7 +28,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
         <meta name="citation_title" content="¿Qué significa ser citado por una IA?" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2025-01-15" />
-        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_online_date" content="2026-07-15" />
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="citabilidad, IA, citación, modelos de lenguaje, ChatGPT, Perplexity, Claude, GEO" />
         
@@ -39,7 +39,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
             "description": "Entendiendo la citabilidad en modelos de lenguaje generativo",
             "url": "https://www.esgeo.ai/radar-ia/que-significa-ser-citado-por-ia",
             "datePublished": "2025-01-15",
-            "dateModified": "2024-12-15",
+            "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
@@ -143,7 +143,7 @@ const QueSIgnificaSerCitadoPorIA = () => {
               </HighlightSnippet>
 
               <div className="text-sm text-muted-foreground">
-                Publicado el 15 de enero de 2025 • Actualizado el 15 de diciembre de 2024 • Categoría: Fundamentos
+                Publicado el 15 de enero de 2025 • Actualizado el 15 de julio de 2026 • Categoría: Fundamentos
               </div>
             </header>
 

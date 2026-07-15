@@ -31,7 +31,7 @@ const QueEsGeoGuiaCompleta = () => {
         <meta name="citation_title" content="¿Qué es GEO? Guía Completa 2026 de Generative Engine Optimization" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2026-03-20" />
-        <meta name="citation_online_date" content="2026-03-20" />
+        <meta name="citation_online_date" content="2026-07-15" />
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="GEO, Generative Engine Optimization, optimización IA, SEO generativo, ChatGPT, Perplexity, autoridad generativa" />
 
@@ -42,7 +42,7 @@ const QueEsGeoGuiaCompleta = () => {
             "description": "Definición, historia y framework completo de GEO",
             "url": "https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa",
             "datePublished": "2026-03-20",
-            "dateModified": "2026-03-20",
+            "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
@@ -179,10 +179,10 @@ const QueEsGeoGuiaCompleta = () => {
                 <HighlightSnippet id="estadisticas-geo" variant="stat" className="mb-6">
                   <h4 className="font-semibold mb-3">Datos clave de 2025-2026:</h4>
                   <ul className="space-y-2">
-                    <li><strong>ChatGPT:</strong> 200M+ usuarios activos mensuales</li>
-                    <li><strong>Perplexity:</strong> 15M+ usuarios mensuales, crecimiento 400% anual</li>
+                    <li><strong>ChatGPT:</strong> 900 millones de usuarios activos semanales (OpenAI, febrero de 2026, vía TechCrunch)</li>
+                    <li><strong>Perplexity:</strong> el buscador conversacional de referencia, con índice propio en tiempo real</li>
                     <li><strong>Google:</strong> Integra Gemini en búsqueda (AI Overviews) — respuestas IA en SERP</li>
-                    <li><strong>Proyección:</strong> 40-50% de consultas en 2026 sin clic directo a sitios web</li>
+                    <li><strong>Tendencia:</strong> una parte creciente de las consultas se resuelve dentro de la respuesta de la IA, sin clic al sitio web</li>
                   </ul>
                 </HighlightSnippet>
 
@@ -369,7 +369,7 @@ const QueEsGeoGuiaCompleta = () => {
 
                 <div className="space-y-3 mb-6">
                   <div className="border-l-4 border-accent pl-4 py-2">
-                    <h4 className="font-semibold text-lg mb-1">ChatGPT (OpenAI) — 200M+ usuarios</h4>
+                    <h4 className="font-semibold text-lg mb-1">ChatGPT (OpenAI) — 900 millones de usuarios semanales</h4>
                     <p className="text-muted-foreground text-sm">
                       El estándar. Si quieres aparecer en IA, ChatGPT es la prioridad 1.
                       Datos de entrenamiento congelados; tardía en indexación pero larga vida.

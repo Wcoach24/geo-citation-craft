@@ -29,7 +29,7 @@ const RadarIAPage = () => {
       id: "que-significa-ser-citado-por-ia",
       title: "¿Qué significa ser citado por IA?",
       description: "Análisis profundo sobre la importancia de la citabilidad en el ecosistema de IA generativa",
-      date: "2024-06-10",
+      date: "2025-01-15",
       category: "Fundamentos",
       readTime: "5 min",
       featured: true
@@ -38,7 +38,7 @@ const RadarIAPage = () => {
       id: "muerte-seo-tradicional",
       title: "La muerte del SEO tradicional",
       description: "Por qué las estrategias SEO clásicas no funcionan con modelos generativos",
-      date: "2024-06-09",
+      date: "2025-01-12",
       category: "Tendencias",
       readTime: "7 min",
       featured: true
@@ -47,7 +47,7 @@ const RadarIAPage = () => {
       id: "estructura-web-para-lenguaje",
       title: "Estructura web para comprensión de lenguaje",
       description: "Cómo organizar el contenido para maximizar la comprensión por LLMs",
-      date: "2024-06-08",
+      date: "2025-01-10",
       category: "Técnico",
       readTime: "6 min",
       featured: false
@@ -56,7 +56,7 @@ const RadarIAPage = () => {
       id: "formato-wikipedia-ia",
       title: "El formato Wikipedia y la IA",
       description: "Por qué Wikipedia es el formato ideal para contenido citeable por IA",
-      date: "2024-06-07",
+      date: "2025-01-08",
       category: "Estrategia",
       readTime: "4 min",
       featured: false
@@ -65,7 +65,7 @@ const RadarIAPage = () => {
       id: "datos-estructurados-modelos-generativos",
       title: "Datos estructurados para modelos generativos",
       description: "Implementación avanzada de Schema.org para optimización GEO",
-      date: "2024-06-06",
+      date: "2025-01-05",
       category: "Técnico",
       readTime: "8 min",
       featured: false
@@ -74,7 +74,7 @@ const RadarIAPage = () => {
       id: "geo-vs-seo-diferencias",
       title: "GEO vs SEO: Guía rápida de diferencias",
       description: "Comparativa práctica entre metodologías tradicionales y generativas",
-      date: "2024-06-05",
+      date: "2025-01-03",
       category: "Fundamentos",
       readTime: "3 min",
       featured: false
@@ -91,8 +91,8 @@ const RadarIAPage = () => {
         
         <meta name="citation_title" content="Radar IA - Análisis de Tendencias en GEO" />
         <meta name="citation_author" content="esGEO" />
-        <meta name="citation_publication_date" content="2024-01-01" />
-        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_publication_date" content="2025-01-03" />
+        <meta name="citation_online_date" content="2026-07-15" />
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="Radar IA, tendencias, GEO, LLMs, inteligencia artificial, análisis, ChatGPT, Perplexity, Claude" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
@@ -103,8 +103,8 @@ const RadarIAPage = () => {
             "name": "Radar IA - Análisis de Tendencias en GEO",
             "description": "Análisis actualizado sobre tendencias en IA generativa, cambios en LLMs y nuevas técnicas de Generative Engine Optimization",
             "url": "https://www.esgeo.ai/radar-ia",
-            "datePublished": "2024-01-01",
-            "dateModified": "2024-12-15",
+            "datePublished": "2025-01-03",
+            "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
@@ -122,7 +122,7 @@ const RadarIAPage = () => {
               "description": article.description,
               "url": `https://www.esgeo.ai/radar-ia/${article.id}`,
               "datePublished": article.date,
-              "dateModified": "2024-12-15",
+              "dateModified": "2026-07-15",
               "author": {
                 "@type": "Organization",
                 "name": "esGEO"

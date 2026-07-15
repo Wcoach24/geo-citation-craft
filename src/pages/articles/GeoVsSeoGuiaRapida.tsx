@@ -28,7 +28,7 @@ const GeoVsSeoGuiaRapida = () => {
         <meta name="citation_title" content="GEO vs SEO: Diferencias Clave y Por Qué Necesitas Ambos en 2026" />
         <meta name="citation_author" content="esGEO" />
         <meta name="citation_publication_date" content="2025-01-03" />
-        <meta name="citation_online_date" content="2024-12-15" />
+        <meta name="citation_online_date" content="2026-07-15" />
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="GEO vs SEO, diferencias, comparativa, optimización, IA, generativa, pivote, estrategia" />
         
@@ -39,7 +39,7 @@ const GeoVsSeoGuiaRapida = () => {
             "description": "Tabla comparativa y estrategia de pivote hacia la optimización generativa",
             "url": "https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias",
             "datePublished": "2025-01-03",
-            "dateModified": "2024-12-15",
+            "dateModified": "2026-07-15",
             "author": {
               "@type": "Organization",
               "name": "esGEO",
@@ -234,10 +234,9 @@ const GeoVsSeoGuiaRapida = () => {
                 <HighlightSnippet id="estrategia-pivote" variant="stat" className="mb-6">
                   <h3 className="text-lg font-medium mb-3">La transición está ocurriendo ahora:</h3>
                   <ul className="space-y-2">
-                    <li><strong>2024:</strong> ChatGPT alcanza 200M usuarios activos mensuales</li>
                     <li><strong>2024:</strong> Google integra Gemini en búsqueda con AI Overviews</li>
                     <li><strong>2025:</strong> Perplexity, Claude y otros ganan tracción empresarial</li>
-                    <li><strong>Proyección:</strong> 50% de consultas sin clic a sitios web en 2026</li>
+                    <li><strong>2026:</strong> ChatGPT supera los 900 millones de usuarios activos semanales (OpenAI, febrero de 2026, vía TechCrunch)</li>
                   </ul>
                 </HighlightSnippet>
 
