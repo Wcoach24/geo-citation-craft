@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import HablaWidget from "@/components/HablaWidget";
 import { Button } from "@/components/ui/button";
 import { HABLA_API } from "@/lib/habla";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * /geo-score — antes era un quiz de autoevaluación: el visitante contestaba preguntas y el
@@ -106,6 +107,10 @@ const GeoScorePage = () => {
             <HablaWidget
               title="Analiza tu dominio"
               subtitle="Escribe la dirección y te digo qué encuentra un crawler de IA cuando entra."
+              onAnalyzeStart={(url) => trackEvent.geoScoreStarted(url)}
+              onAnalyzeComplete={(r) => trackEvent.geoScoreCompleted(r.total, r.grade)}
+              onAnalyzeError={(message) => trackEvent.geoScoreError(message)}
+              onResultCtaClick={(target, grade) => trackEvent.geoScoreCta(target, grade)}
             />
 
             {/* Cómo funciona */}

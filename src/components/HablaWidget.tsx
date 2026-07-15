@@ -12,6 +12,12 @@ interface HablaWidgetProps {
   /** Texto bajo el titular. */
   subtitle?: string;
   className?: string;
+  /** Hooks de analítica — solo se disparan en handlers de evento (SSR-safe). */
+  onAnalyzeStart?: (url: string) => void;
+  onAnalyzeComplete?: (result: HablaResult) => void;
+  onAnalyzeError?: (message: string) => void;
+  /** Click en los CTAs que aparecen tras el resultado. `target`: 'curso' | 'informe'. */
+  onResultCtaClick?: (target: string, grade: string) => void;
 }
 
 /**
@@ -28,6 +34,10 @@ export default function HablaWidget({
   title = "¿Tu web habla con las IAs?",
   subtitle = "Escribe tu dominio. En 10 segundos sabrás qué ve ChatGPT cuando entra en tu web — que casi nunca es lo que ves tú.",
   className = "",
+  onAnalyzeStart,
+  onAnalyzeComplete,
+  onAnalyzeError,
+  onResultCtaClick,
 }: HablaWidgetProps) {
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
@@ -38,13 +48,17 @@ export default function HablaWidget({
     e.preventDefault();
     setStatus("loading");
     setError("");
+    onAnalyzeStart?.(url);
     try {
       const r = await analyze(url);
       setResult(r);
       setStatus("done");
+      onAnalyzeComplete?.(r);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Algo falló al analizar esa web.");
+      const msg = err instanceof Error ? err.message : "Algo falló al analizar esa web.";
+      setError(msg);
       setStatus("error");
+      onAnalyzeError?.(msg);
     }
   };
 
@@ -180,13 +194,18 @@ export default function HablaWidget({
             {/* CTA */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <Button asChild size="lg" className="flex-1">
-                <Link to="/curso">
+                <Link to="/curso" onClick={() => onResultCtaClick?.("curso", result.grade)}>
                   Arreglarlo con el curso — 47 €
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="flex-1">
-                <a href={`${HABLA_API}/?url=${encodeURIComponent(result.url)}`} target="_blank" rel="noopener">
+                <a
+                  href={`${HABLA_API}/?url=${encodeURIComponent(result.url)}`}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => onResultCtaClick?.("informe", result.grade)}
+                >
                   Ver informe completo
                 </a>
               </Button>
