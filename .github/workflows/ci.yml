@@ -1,0 +1,37 @@
+# CI — MASTERPLAN F0-1
+# En cada push/PR a main: instala, linta y construye (vite build + SSR + prerender).
+# El build incluye scripts/check-routes.mjs (F0-2): si App.tsx y prerender.js divergen, falla.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      # continue-on-error: el lint tiene 31 errores preexistentes (no-explicit-any en
+      # páginas y supabase/functions, no-require-imports en tailwind.config.ts).
+      # Documentado en MASTERPLAN_LOG.md (F0-1). Quitar este flag cuando se limpien.
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Paridad de rutas (App.tsx vs prerender.js)
+        run: node scripts/check-routes.mjs
+
+      - name: Build (vite + SSR + prerender)
+        run: npm run build
