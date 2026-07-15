@@ -12,12 +12,27 @@ import { trackEvent } from '@/lib/analytics';
 export default function PurchaseSuccessPage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
+  // product/amount reales, puestos por api/checkout.ts en la success_url
+  const product = searchParams.get('product');
+  const amountParam = searchParams.get('amount');
 
   useEffect(() => {
-    if (sessionId) {
-      trackEvent.purchaseComplete('complete', 47);
+    if (!sessionId) return;
+    // Dedupe: un solo purchase_complete por sesión de Stripe, aunque recarguen la página.
+    // localStorage solo dentro del useEffect (no corre en SSR); try/catch por modo privado.
+    const dedupeKey = `purchase_tracked_${sessionId}`;
+    try {
+      if (localStorage.getItem(dedupeKey)) return;
+      localStorage.setItem(dedupeKey, new Date().toISOString());
+    } catch {
+      // localStorage no disponible: trackea igualmente (peor duplicar que perder el evento)
     }
-  }, [sessionId]);
+    const amount = Number(amountParam);
+    trackEvent.purchaseComplete(
+      product || 'unknown',
+      Number.isFinite(amount) && amountParam !== null ? amount : 0
+    );
+  }, [sessionId, product, amountParam]);
 
   if (!sessionId) {
     return (

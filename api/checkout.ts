@@ -55,16 +55,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[];
     let productMeta: Record<string, string>;
+    let priceId: string;
+    let product: string;
 
     if (productType === "complete") {
-      lineItems = [{ price: COMPLETE_PRICE_ID, quantity: 1 }];
+      priceId = COMPLETE_PRICE_ID;
+      product = "complete";
+      lineItems = [{ price: priceId, quantity: 1 }];
       productMeta = { product_type: "complete" };
     } else if (productType === "module" && moduleId && PRODUCT_MAPPING[moduleId]) {
-      lineItems = [{ price: PRODUCT_MAPPING[moduleId].priceId, quantity: 1 }];
+      priceId = PRODUCT_MAPPING[moduleId].priceId;
+      product = `module_${moduleId}`;
+      lineItems = [{ price: priceId, quantity: 1 }];
       productMeta = { product_type: "module", module_id: moduleId };
     } else {
       return res.status(400).json({ error: "Invalid product type or module ID" });
     }
+
+    // Importe real desde Stripe (no hardcodeado): lo lee /success para el tracking
+    // de purchase_complete. Si Stripe no lo devuelve, se omite (mejor sin dato que inventado).
+    let amount = "";
+    try {
+      const price = await stripe.prices.retrieve(priceId);
+      if (price.unit_amount != null) amount = String(price.unit_amount / 100);
+    } catch (e) {
+      console.error("[checkout] no se pudo leer el precio para el tracking:", e);
+    }
+
+    // OJO: {CHECKOUT_SESSION_ID} debe quedar literal (lo sustituye Stripe).
+    const successUrl =
+      `https://esgeo.ai/success?session_id={CHECKOUT_SESSION_ID}` +
+      `&product=${encodeURIComponent(product)}` +
+      (amount ? `&amount=${encodeURIComponent(amount)}` : "");
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -72,7 +94,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       line_items: lineItems,
       customer_email: guestEmail || undefined,
       metadata: productMeta,
-      success_url: "https://esgeo.ai/success?session_id={CHECKOUT_SESSION_ID}",
+      success_url: successUrl,
       cancel_url: "https://esgeo.ai/curso",
       billing_address_collection: "auto",
       locale: "es",
