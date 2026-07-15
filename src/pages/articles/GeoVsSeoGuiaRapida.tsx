@@ -21,8 +21,7 @@ const GeoVsSeoGuiaRapida = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="GEO vs SEO, diferencias, comparativa, optimización, IA, generativa, pivote, estrategia" />
         
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "GEO no es SEO: guía rápida para entender la diferencia",
@@ -114,8 +113,7 @@ const GeoVsSeoGuiaRapida = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#geo-vs-seo-definition, #tabla-comparativa, #estrategia-pivote"
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

@@ -31,8 +31,7 @@ const ModuloF5Page = () => {
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Course", "WebPage", "Article"],
             "name": "Módulo F5: Mantenimiento Evolutivo",
@@ -96,8 +95,7 @@ const ModuloF5Page = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#f5-objetivo, #f5-principios, #f5-fases, #f5-checklist"
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <Header />
@@ -310,8 +308,7 @@ const ModuloF5Page = () => {
           </div>
 
           {/* Structured Data */}
-          <script type="application/ld+json">
-            {JSON.stringify({
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Course",
               "name": "Módulo F5: Mantenimiento Evolutivo",
@@ -337,8 +334,7 @@ const ModuloF5Page = () => {
                 "name": "Curso GEO Completo",
                 "url": "https://www.esgeo.ai/curso"
               }
-            })}
-          </script>
+            }) }} />
         </div>
       </main>
     </div>

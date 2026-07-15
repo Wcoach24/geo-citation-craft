@@ -16,8 +16,7 @@ const DatosEstructuradosModelosGenerativos = () => {
       <Helmet>
         <title>Datos estructurados para LLMs en 2026 | esGEO</title>
         <meta name="description" content="Microdatos recomendados para maximizar la citabilidad: FAQPage, HowTo, Article y SpeakableSpecification." />
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage"],
             "headline": "Los datos estructurados que mejor entienden los modelos generativos",
@@ -62,8 +61,7 @@ const DatosEstructuradosModelosGenerativos = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#datos-estructurados-definition, #microdatos-recomendados, #implementacion-practica"
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

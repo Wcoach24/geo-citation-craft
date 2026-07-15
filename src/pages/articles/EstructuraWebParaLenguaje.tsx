@@ -16,8 +16,7 @@ const EstructuraWebParaLenguaje = () => {
       <Helmet>
         <title>Estructura tu web para LLMs 2026 | esGEO</title>
         <meta name="description" content="Principios de diseño que los LLMs comprenden mejor: fragmentación, bloques lógicos y semántica clara." />
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage"],
             "headline": "Estructura tu web para el lenguaje, no para los algoritmos",
@@ -62,8 +61,7 @@ const EstructuraWebParaLenguaje = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": "#estructura-lenguaje-definition, #principios-llm, #caso-comparativo"
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

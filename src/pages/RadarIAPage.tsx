@@ -87,8 +87,7 @@ const RadarIAPage = () => {
         <meta name="citation_keywords" content="Radar IA, tendencias, GEO, LLMs, inteligencia artificial, análisis, ChatGPT, Perplexity, Claude" />
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
         
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Blog", "WebPage"],
             "name": "Radar IA - Análisis de Tendencias en GEO",
@@ -147,8 +146,7 @@ const RadarIAPage = () => {
               "@type": "SpeakableSpecification",
               "cssSelector": ".snippet-block, [data-speakable='true']"
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <Header />

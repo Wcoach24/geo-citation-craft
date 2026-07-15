@@ -52,8 +52,7 @@ const HighlightSnippet = ({
       
       {/* Datos estructurados para el fragmento */}
       {id && (
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CreativeWork",
             "@id": `https://www.esgeo.ai#${id}`,
@@ -74,8 +73,7 @@ const HighlightSnippet = ({
               "@type": "WebPage",
               "url": `https://www.esgeo.ai#${id}`
             }
-          })}
-        </script>
+          }) }} />
       )}
     </div>
   );

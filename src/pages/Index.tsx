@@ -76,8 +76,7 @@ const Index = () => {
       {helmet}
 
       <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: homeFaqs.map((faq) => ({
@@ -88,8 +87,7 @@ const Index = () => {
                 text: faq.answer,
               },
             })),
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

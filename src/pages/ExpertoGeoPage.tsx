@@ -149,9 +149,9 @@ const ExpertoGeoPage = () => {
         <meta name="twitter:description" content="Qué hace un experto GEO, en qué se diferencia del SEO y 7 señales para distinguir un consultor real." />
         <meta name="twitter:image" content="https://www.esgeo.ai/og-image.png" />
 
-        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       </Helmet>
 
       <Header />

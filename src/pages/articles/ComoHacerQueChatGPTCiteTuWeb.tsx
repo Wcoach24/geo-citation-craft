@@ -23,8 +23,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="ChatGPT, citación, GEO, contenido citable, autoridad generativa, fragmentación, datos estructurados" />
 
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage"],
             "headline": "Cómo hacer que ChatGPT cite tu web",
@@ -65,8 +64,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                 }
               ]
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

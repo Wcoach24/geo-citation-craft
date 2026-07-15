@@ -206,8 +206,7 @@ const ContenidoIAPage = () => {
       </div>
 
       {/* Schema.org para la página */}
-      <script type="application/ld+json">
-        {JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Contenido para IA - Archivos .geo.txt",
@@ -234,8 +233,7 @@ const ContenidoIAPage = () => {
             "@type": "SpeakableSpecification",
             "cssSelector": [".prose", "[data-speakable='true']"]
           }
-        })}
-      </script>
+        }) }} />
     </>
   );
 };

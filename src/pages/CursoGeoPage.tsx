@@ -259,8 +259,7 @@ const CursoGeoPage = () => {
         <meta name="speakable-selector" content=".snippet-block, [data-speakable='true']" />
 
         {/* FAQ Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: faqs.map((faq) => ({
@@ -271,8 +270,7 @@ const CursoGeoPage = () => {
                 text: faq.answer,
               },
             })),
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <Header />

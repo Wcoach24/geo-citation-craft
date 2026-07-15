@@ -23,8 +23,7 @@ const OptimizarWebParaPerplexity = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="Perplexity, GEO, optimización, SEO IA, modelos generativos, citación" />
 
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage"],
             "headline": "Cómo optimizar tu web para Perplexity",
@@ -65,8 +64,7 @@ const OptimizarWebParaPerplexity = () => {
                 }
               ]
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">

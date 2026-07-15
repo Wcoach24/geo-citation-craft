@@ -72,8 +72,7 @@ const WhatIsGeoSection = () => {
       </div>
 
       {/* Datos estructurados específicos para esta sección */}
-      <script type="application/ld+json">
-        {JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "DefinedTerm",
           "@id": "https://www.esgeo.ai#geo-definition",
@@ -86,11 +85,9 @@ const WhatIsGeoSection = () => {
           },
           "termCode": "GEO",
           "url": "https://www.esgeo.ai/glosario#geo"
-        })}
-      </script>
+        }) }} />
 
-      <script type="application/ld+json">
-        {JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
           "mainEntity": [
@@ -111,8 +108,7 @@ const WhatIsGeoSection = () => {
               }
             }
           ]
-        })}
-      </script>
+        }) }} />
     </section>
   );
 };

@@ -32,8 +32,7 @@ const ModuloF2Page = () => {
         <meta name="citation_publication_date" content="2024" />
         <meta name="speakable-selector" content="#f2-objetivo, #f2-principios, #f2-checklist, .snippet-block, [data-speakable='true']" />
         
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Course", "WebPage", "Article"],
             "name": "Módulo F2: Contexto Semántico y Formato Óptimo",
@@ -104,8 +103,7 @@ const ModuloF2Page = () => {
               "name": "Curso GEO Completo",
               "url": "https://www.esgeo.ai/curso"
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <Header />

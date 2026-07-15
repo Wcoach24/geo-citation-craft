@@ -172,8 +172,7 @@ const EquipoPage = () => {
 
           {/* Structured Data for Team */}
           {teamMembers.map((member) => (
-            <script key={`schema-${member.id}`} type="application/ld+json">
-              {JSON.stringify({
+            <script key={`schema-${member.id}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Person",
                 "@id": `https://www.esgeo.ai/acerca-de/equipo#${member.id}`,
@@ -195,13 +194,11 @@ const EquipoPage = () => {
                 "knowsAbout": member.knowsAbout,
                 "email": member.email,
                 "sameAs": [member.twitter, member.linkedin].filter(Boolean)
-              })}
-            </script>
+              }) }} />
           ))}
 
           {/* Page Schema */}
-          <script type="application/ld+json">
-            {JSON.stringify({
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "AboutPage",
               "name": "Nuestro Equipo - esGEO",
@@ -234,8 +231,7 @@ const EquipoPage = () => {
                   }
                 ]
               }
-            })}
-          </script>
+            }) }} />
         </div>
       </main>
 

@@ -96,8 +96,7 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
       </CardContent>
 
       {/* Datos estructurados para TOC */}
-      <script type="application/ld+json">
-        {JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ItemList",
           "name": "Índice de Contenidos",
@@ -111,8 +110,7 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
               "url": `${canonicalHref}#${item.id}`
             }
           }))
-        })}
-      </script>
+        }) }} />
     </Card>
   );
 };

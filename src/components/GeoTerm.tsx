@@ -66,8 +66,7 @@ const GeoTerm = ({
       )}
 
       {/* Datos estructurados para el término */}
-      <script type="application/ld+json">
-        {JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "DefinedTerm",
           "@id": `https://www.esgeo.ai/glosario#${term.toLowerCase().replace(/\s+/g, '-')}`,
@@ -80,8 +79,7 @@ const GeoTerm = ({
           },
           "termCode": term.toUpperCase().replace(/\s+/g, '_'),
           "url": `https://www.esgeo.ai${termHref}`
-        })}
-      </script>
+        }) }} />
     </span>
   );
 };

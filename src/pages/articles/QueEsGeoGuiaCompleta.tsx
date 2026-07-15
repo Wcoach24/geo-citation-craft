@@ -23,8 +23,7 @@ const QueEsGeoGuiaCompleta = () => {
         <meta name="citation_language" content="es" />
         <meta name="citation_keywords" content="GEO, Generative Engine Optimization, optimización IA, SEO generativo, ChatGPT, Perplexity, autoridad generativa" />
 
-        <script type="application/ld+json">
-          {JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": ["Article", "WebPage", "FAQPage"],
             "headline": "Qué es GEO: Guía completa de Generative Engine Optimization",
@@ -65,8 +64,7 @@ const QueEsGeoGuiaCompleta = () => {
                 }
               ]
             }
-          })}
-        </script>
+          }) }} />
       </Helmet>
 
       <div className="min-h-screen bg-background">
