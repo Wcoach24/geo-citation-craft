@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import ScrollToHash from "@/components/ScrollToHash";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import { GeoTermRegistryProvider } from "@/components/GeoTerm";
 
 // Lazy-loaded pages
 const CursoGeoPage = React.lazy(() => import("./pages/CursoGeoPage"));
@@ -76,6 +77,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
  */
 export function AppRoutes() {
   return (
+            <GeoTermRegistryProvider>
             <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -128,6 +130,7 @@ export function AppRoutes() {
               <Route path="*" element={<NotFound />} />
             </Routes>
             </Suspense>
+            </GeoTermRegistryProvider>
   );
 }
 
