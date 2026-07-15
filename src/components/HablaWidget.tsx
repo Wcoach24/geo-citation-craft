@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Loader2, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ExternalLink, Loader2, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import EmailCapture from "@/components/EmailCapture";
+import { useVisitorState } from "@/hooks/useVisitorState";
 import { analyze, gradeCopy, HABLA_API, type HablaResult } from "@/lib/habla";
 
 interface HablaWidgetProps {
@@ -12,6 +13,9 @@ interface HablaWidgetProps {
   /** Texto bajo el titular. */
   subtitle?: string;
   className?: string;
+  /** F5-8: dominio con el que pre-lanzar el análisis (p. ej. de ?url= en /geo-score).
+   *  Solo se consume en useEffect: SSR-safe. */
+  initialUrl?: string;
   /** Hooks de analítica — solo se disparan en handlers de evento (SSR-safe). */
   onAnalyzeStart?: (url: string) => void;
   onAnalyzeComplete?: (result: HablaResult) => void;
@@ -34,6 +38,7 @@ export default function HablaWidget({
   title = "¿Tu web habla con las IAs?",
   subtitle = "Escribe tu dominio. En 10 segundos sabrás qué ve ChatGPT cuando entra en tu web — que casi nunca es lo que ves tú.",
   className = "",
+  initialUrl,
   onAnalyzeStart,
   onAnalyzeComplete,
   onAnalyzeError,
@@ -43,14 +48,20 @@ export default function HablaWidget({
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [result, setResult] = useState<HablaResult | null>(null);
   const [error, setError] = useState("");
+  // F5-8: el informe completo vive en un dominio externo sin captura. Antes de
+  // abrirlo pedimos el email; leads/customers existentes pasan directos.
+  const { visitorState } = useVisitorState();
+  const isKnownVisitor = visitorState === "lead" || visitorState === "customer";
+  const [showReportGate, setShowReportGate] = useState(false);
+  const [reportUnlocked, setReportUnlocked] = useState(false);
+  const autoRanRef = useRef(false);
 
-  const run = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const runAnalysis = async (target: string) => {
     setStatus("loading");
     setError("");
-    onAnalyzeStart?.(url);
+    onAnalyzeStart?.(target);
     try {
-      const r = await analyze(url);
+      const r = await analyze(target);
       setResult(r);
       setStatus("done");
       onAnalyzeComplete?.(r);
@@ -59,6 +70,36 @@ export default function HablaWidget({
       setError(msg);
       setStatus("error");
       onAnalyzeError?.(msg);
+    }
+  };
+
+  const run = (e: React.FormEvent) => {
+    e.preventDefault();
+    void runAnalysis(url);
+  };
+
+  // F5-8: pre-lanzar el análisis con ?url= — SOLO en useEffect (SSR-safe).
+  useEffect(() => {
+    if (!initialUrl || autoRanRef.current) return;
+    autoRanRef.current = true;
+    setUrl(initialUrl);
+    void runAnalysis(initialUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialUrl]);
+
+  const reportUrl = result ? `${HABLA_API}/?url=${encodeURIComponent(result.url)}` : "";
+
+  const openReport = () => {
+    window.open(reportUrl, "_blank", "noopener");
+  };
+
+  const handleReportClick = () => {
+    if (!result) return;
+    onResultCtaClick?.("informe", result.grade);
+    if (isKnownVisitor || reportUnlocked) {
+      openReport();
+    } else {
+      setShowReportGate(true);
     }
   };
 
@@ -199,22 +240,45 @@ export default function HablaWidget({
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="flex-1">
-                <a
-                  href={`${HABLA_API}/?url=${encodeURIComponent(result.url)}`}
-                  target="_blank"
-                  rel="noopener"
-                  onClick={() => onResultCtaClick?.("informe", result.grade)}
-                >
-                  Ver informe completo
-                </a>
+              {/* F5-8: el informe se abre desde un handler, tras el gate de email */}
+              <Button variant="outline" size="lg" className="flex-1" onClick={handleReportClick}>
+                Ver informe completo
               </Button>
             </div>
 
-            {/* Captura de email */}
-            <div className="mt-6">
-              <EmailCapture source={`habla-${result.grade}`} />
-            </div>
+            {/* Captura de email — si el visitante pidió el informe, es el gate que lo abre */}
+            {showReportGate && !reportUnlocked && !isKnownVisitor ? (
+              <div className="mt-6 rounded-xl border border-accent/30 bg-accent/5 p-4">
+                <p className="text-sm font-semibold text-foreground mb-3">
+                  Dime a qué email te mando también el resultado y te abro el informe completo:
+                </p>
+                <EmailCapture
+                  source={`habla-informe-${result.grade}`}
+                  onSuccess={() => {
+                    setReportUnlocked(true);
+                    openReport();
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="mt-6">
+                <EmailCapture source={`habla-${result.grade}`} />
+              </div>
+            )}
+
+            {/* Si el popup del informe fue bloqueado, el enlace directo queda visible */}
+            {reportUnlocked && (
+              <p className="mt-3 text-sm">
+                <a
+                  href={reportUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1 text-accent underline underline-offset-2"
+                >
+                  Abrir informe completo <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </p>
+            )}
 
             {/* Lo que la nota NO significa. Va aquí, no en la letra pequeña. */}
             {result.caveat && (

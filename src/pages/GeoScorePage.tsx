@@ -1,12 +1,14 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import { ArrowRight, Bot, FileSearch, ShieldCheck } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { ArrowRight, Bot, FileSearch, Share2, ShieldCheck } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HablaWidget from "@/components/HablaWidget";
 import { Button } from "@/components/ui/button";
-import { HABLA_API } from "@/lib/habla";
+import { HABLA_API, type HablaResult } from "@/lib/habla";
 import { trackEvent } from "@/lib/analytics";
+import { useToast } from "@/hooks/use-toast";
 
 /**
  * /geo-score — antes era un quiz de autoevaluación: el visitante contestaba preguntas y el
@@ -17,6 +19,33 @@ import { trackEvent } from "@/lib/analytics";
  * La URL se mantiene (no romper SEO: recibe tráfico y enlaces).
  */
 const GeoScorePage = () => {
+  // F5-8: /geo-score?url=dominio pre-lanza el análisis (leer search params en
+  // render es SSR-safe: vienen del router, no de window).
+  const [searchParams] = useSearchParams();
+  const initialUrl = searchParams.get("url") ?? undefined;
+  const [lastResult, setLastResult] = useState<HablaResult | null>(null);
+  const { toast } = useToast();
+
+  // F5-8: compartir la nota con URL parametrizada — navigator.share con fallback
+  // a portapapeles. SOLO en handler de evento (SSR-safe).
+  const shareScore = () => {
+    if (!lastResult) return;
+    const shareUrl = `https://www.esgeo.ai/geo-score?url=${encodeURIComponent(lastResult.url)}`;
+    const text = `Mi web puntúa ${lastResult.total}/100 (${lastResult.grade}) en el auditor GEO de esGEO. Audita la tuya:`;
+    if (navigator.share) {
+      navigator
+        .share({ title: "Mi nota GEO", text, url: shareUrl })
+        .catch(() => {/* usuario canceló el share sheet: no es un error */});
+    } else {
+      navigator.clipboard.writeText(`${text} ${shareUrl}`).then(() => {
+        toast({
+          title: "Enlace copiado",
+          description: "Pega el enlace donde quieras compartir tu nota.",
+        });
+      });
+    }
+  };
+
   const faqs = [
     {
       q: "¿Qué mide exactamente el auditor?",
@@ -103,11 +132,25 @@ const GeoScorePage = () => {
             <HablaWidget
               title="Analiza tu dominio"
               subtitle="Escribe la dirección y te digo qué encuentra un crawler de IA cuando entra."
+              initialUrl={initialUrl}
               onAnalyzeStart={(url) => trackEvent.geoScoreStarted(url)}
-              onAnalyzeComplete={(r) => trackEvent.geoScoreCompleted(r.total, r.grade)}
+              onAnalyzeComplete={(r) => {
+                setLastResult(r);
+                trackEvent.geoScoreCompleted(r.total, r.grade);
+              }}
               onAnalyzeError={(message) => trackEvent.geoScoreError(message)}
               onResultCtaClick={(target, grade) => trackEvent.geoScoreCta(target, grade)}
             />
+
+            {/* F5-8: compartir la nota con URL parametrizada (?url=) */}
+            {lastResult && (
+              <div className="mt-4 text-center">
+                <Button variant="outline" onClick={shareScore}>
+                  <Share2 className="h-4 w-4 mr-2" />
+                  Compartir mi nota — {lastResult.total}/100
+                </Button>
+              </div>
+            )}
 
             {/* Cómo funciona */}
             <div className="grid md:grid-cols-3 gap-4 mt-12">

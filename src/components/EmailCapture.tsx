@@ -10,9 +10,11 @@ import { captureLead } from '@/lib/lead';
 interface EmailCaptureProps {
   compact?: boolean;
   source?: string;
+  /** F5-8: callback tras captura correcta (p. ej. desbloquear el informe HABLA). */
+  onSuccess?: () => void;
 }
 
-export default function EmailCapture({ compact = false, source = 'inline' }: EmailCaptureProps) {
+export default function EmailCapture({ compact = false, source = 'inline', onSuccess }: EmailCaptureProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const { markAsLead, visitorState } = useVisitorState();
@@ -44,6 +46,7 @@ export default function EmailCapture({ compact = false, source = 'inline' }: Ema
       // Track conversions
       trackEvent.leadCapture(source);
       (window as any).clarity?.('event', 'email_capture', { source });
+      onSuccess?.();
     } catch {
       setStatus('error');
     }
