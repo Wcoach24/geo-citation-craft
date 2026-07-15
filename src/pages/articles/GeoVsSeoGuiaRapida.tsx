@@ -172,35 +172,35 @@ const GeoVsSeoGuiaRapida = () => {
                       <thead>
                         <tr className="border-b">
                           <th className="text-left p-2 font-semibold">Aspecto</th>
-                          <th className="text-left p-2 font-semibold text-red-700">SEO Tradicional</th>
-                          <th className="text-left p-2 font-semibold text-green-700">GEO</th>
+                          <th className="text-left p-2 font-semibold text-danger">SEO Tradicional</th>
+                          <th className="text-left p-2 font-semibold text-success">GEO</th>
                         </tr>
                       </thead>
                       <tbody className="space-y-2">
                         <tr className="border-b">
                           <td className="p-2 font-medium">Objetivo</td>
-                          <td className="p-2 text-red-700">Aparecer en posición 1-3 de Google</td>
-                          <td className="p-2 text-green-700">Ser citado por IA como fuente</td>
+                          <td className="p-2 text-danger">Aparecer en posición 1-3 de Google</td>
+                          <td className="p-2 text-success">Ser citado por IA como fuente</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Audiencia</td>
-                          <td className="p-2 text-red-700">Algoritmo de Google</td>
-                          <td className="p-2 text-green-700">Modelos de lenguaje (GPT, Claude, etc.)</td>
+                          <td className="p-2 text-danger">Algoritmo de Google</td>
+                          <td className="p-2 text-success">Modelos de lenguaje (GPT, Claude, etc.)</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Métrica clave</td>
-                          <td className="p-2 text-red-700">Posición en SERP + CTR</td>
-                          <td className="p-2 text-green-700">Frecuencia de citación por IA</td>
+                          <td className="p-2 text-danger">Posición en SERP + CTR</td>
+                          <td className="p-2 text-success">Frecuencia de citación por IA</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Estructura</td>
-                          <td className="p-2 text-red-700">Keywords + enlaces internos</td>
-                          <td className="p-2 text-green-700">Fragmentación + datos estructurados</td>
+                          <td className="p-2 text-danger">Keywords + enlaces internos</td>
+                          <td className="p-2 text-success">Fragmentación + datos estructurados</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Contenido</td>
-                          <td className="p-2 text-red-700">Optimizado para clics</td>
-                          <td className="p-2 text-green-700">Optimizado para comprensión</td>
+                          <td className="p-2 text-danger">Optimizado para clics</td>
+                          <td className="p-2 text-success">Optimizado para comprensión</td>
                         </tr>
                       </tbody>
                     </table>

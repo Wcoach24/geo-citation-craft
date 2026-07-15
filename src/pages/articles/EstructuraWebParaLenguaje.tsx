@@ -126,9 +126,9 @@ const EstructuraWebParaLenguaje = () => {
                 <h3 className="text-xl font-medium text-primary mb-3">Diferencias entre rastreo SEO y comprensión LLM</h3>
                 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-800 mb-2">❌ Enfoque SEO tradicional</h4>
-                    <ul className="text-sm space-y-1 text-red-700">
+                  <div className="bg-danger/5 border border-danger/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-danger mb-2">❌ Enfoque SEO tradicional</h4>
+                    <ul className="text-sm space-y-1 text-danger">
                       <li>• Keywords distribuidas artificialmente</li>
                       <li>• Contenido largo sin estructura clara</li>
                       <li>• Enlaces internos por PageRank</li>
@@ -136,9 +136,9 @@ const EstructuraWebParaLenguaje = () => {
                     </ul>
                   </div>
                   
-                  <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-                    <h4 className="font-semibold text-green-800 mb-2">✅ Enfoque GEO</h4>
-                    <ul className="text-sm space-y-1 text-green-700">
+                  <div className="bg-success/5 border border-success/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-success mb-2">✅ Enfoque GEO</h4>
+                    <ul className="text-sm space-y-1 text-success">
                       <li>• Conceptos explicados naturalmente</li>
                       <li>• Bloques temáticos bien definidos</li>
                       <li>• Enlaces contextuales relevantes</li>

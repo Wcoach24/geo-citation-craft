@@ -19,7 +19,7 @@ const LimitationsSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-4 text-orange-600 border-orange-500/30">
+            <Badge variant="outline" className="mb-4 text-warning border-warning/30">
               <Shield className="mr-2 h-4 w-4" />
               Transparencia Total
             </Badge>
@@ -33,15 +33,15 @@ const LimitationsSection = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Can't */}
-            <div className="rounded-2xl border border-orange-200 bg-orange-50/50 p-6">
-              <h3 className="font-bold text-orange-700 flex items-center gap-2 mb-4">
+            <div className="rounded-2xl border border-warning/20 bg-warning/5 p-6">
+              <h3 className="font-bold text-warning flex items-center gap-2 mb-4">
                 <AlertTriangle className="h-5 w-5" />
                 Qué NO podemos garantizar
               </h3>
               <div className="space-y-4">
                 {cantDo.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 bg-warning rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-medium text-foreground">{item.title}</p>
                       <p className="text-xs text-muted-foreground">{item.text}</p>
@@ -52,15 +52,15 @@ const LimitationsSection = () => {
             </div>
 
             {/* Can */}
-            <div className="rounded-2xl border border-green-200 bg-green-50/50 p-6">
-              <h3 className="font-bold text-green-700 flex items-center gap-2 mb-4">
+            <div className="rounded-2xl border border-success/20 bg-success/5 p-6">
+              <h3 className="font-bold text-success flex items-center gap-2 mb-4">
                 <CheckCircle className="h-5 w-5" />
                 Qué SÍ podemos hacer
               </h3>
               <div className="space-y-4">
                 {canDo.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 bg-success/50 rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-medium text-foreground">{item.title}</p>
                       <p className="text-xs text-muted-foreground">{item.text}</p>

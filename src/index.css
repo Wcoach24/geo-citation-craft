@@ -36,6 +36,14 @@
 
     --radius: 0.5rem;
 
+    /* Semáforo semántico (derivado de la paleta teal de marca) */
+    --success: 160 96% 26%;
+    --success-foreground: 0 0% 100%;
+    --warning: 32 90% 36%;
+    --warning-foreground: 0 0% 100%;
+    --danger: 0 72% 42%;
+    --danger-foreground: 0 0% 100%;
+
     /* Custom GEO colors */
     --geo-blue: 174 43% 31%;
     --geo-green: 174 43% 31%;
@@ -90,6 +98,13 @@
 
     --muted: 174 43% 25%;
     --muted-foreground: 166 76% 85%;
+
+    --success: 160 70% 45%;
+    --success-foreground: 0 0% 10%;
+    --warning: 35 90% 55%;
+    --warning-foreground: 0 0% 10%;
+    --danger: 0 70% 55%;
+    --danger-foreground: 0 0% 10%;
 
     --border: 174 43% 28%;
     --input: 174 43% 28%;

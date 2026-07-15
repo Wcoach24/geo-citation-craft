@@ -73,10 +73,10 @@ const CaseStudyCard = ({
           </div>
         </div>
         
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+        <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
           <div className="flex items-center gap-2 mb-2">
-            <Target className="h-4 w-4 text-blue-600" />
-            <span className="font-medium text-blue-800 text-sm">Resultados</span>
+            <Target className="h-4 w-4 text-primary" />
+            <span className="font-medium text-primary text-sm">Resultados</span>
           </div>
           <div className="space-y-2">
             {metrics.map((metric, index) => (
@@ -86,7 +86,7 @@ const CaseStudyCard = ({
                   <span className="text-gray-500">{metric.before}</span>
                   <span>→</span>
                   <span className="font-semibold">{metric.after}</span>
-                  <span className={`font-bold ${metric.isPositive ? 'text-green-600' : 'text-red-600'}`}>
+                  <span className={`font-bold ${metric.isPositive ? 'text-success' : 'text-danger'}`}>
                     {metric.change}
                   </span>
                 </div>

@@ -132,35 +132,35 @@ const OptimizarWebParaPerplexity = () => {
                       <thead>
                         <tr className="border-b">
                           <th className="text-left p-2 font-semibold">Aspecto</th>
-                          <th className="text-left p-2 font-semibold text-blue-700">ChatGPT</th>
-                          <th className="text-left p-2 font-semibold text-purple-700">Perplexity</th>
+                          <th className="text-left p-2 font-semibold text-primary">ChatGPT</th>
+                          <th className="text-left p-2 font-semibold text-accent">Perplexity</th>
                         </tr>
                       </thead>
                       <tbody className="space-y-2">
                         <tr className="border-b">
                           <td className="p-2 font-medium">Indexación</td>
-                          <td className="p-2 text-blue-700">Datos de entrenamiento (congelados)</td>
-                          <td className="p-2 text-purple-700">Búsqueda real-time del internet</td>
+                          <td className="p-2 text-primary">Datos de entrenamiento (congelados)</td>
+                          <td className="p-2 text-accent">Búsqueda real-time del internet</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Velocidad de aparición</td>
-                          <td className="p-2 text-blue-700">1-3 meses</td>
-                          <td className="p-2 text-purple-700">1-2 semanas</td>
+                          <td className="p-2 text-primary">1-3 meses</td>
+                          <td className="p-2 text-accent">1-2 semanas</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Citación</td>
-                          <td className="p-2 text-blue-700">Selectiva, basada en autoridad histórica</td>
-                          <td className="p-2 text-purple-700">Agresiva, basada en relevancia actual</td>
+                          <td className="p-2 text-primary">Selectiva, basada en autoridad histórica</td>
+                          <td className="p-2 text-accent">Agresiva, basada en relevancia actual</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Factor: Recency</td>
-                          <td className="p-2 text-blue-700">Bajo impacto</td>
-                          <td className="p-2 text-purple-700">Crítico (favorece contenido nuevo/actualizado)</td>
+                          <td className="p-2 text-primary">Bajo impacto</td>
+                          <td className="p-2 text-accent">Crítico (favorece contenido nuevo/actualizado)</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Alcance</td>
-                          <td className="p-2 text-blue-700">100M+ usuarios (pero limitada por entrenamiento)</td>
-                          <td className="p-2 text-purple-700">Crecimiento rápido (búsqueda abierta a todo)</td>
+                          <td className="p-2 text-primary">100M+ usuarios (pero limitada por entrenamiento)</td>
+                          <td className="p-2 text-accent">Crecimiento rápido (búsqueda abierta a todo)</td>
                         </tr>
                       </tbody>
                     </table>
@@ -254,7 +254,7 @@ Disallow: /admin/
                 <h3 className="text-xl font-medium text-primary mb-3">Tipos de fragmentos que Perplexity prioriza:</h3>
 
                 <div className="space-y-3 mb-6">
-                  <div className="border-l-4 border-purple-600 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Listas numeradas</h4>
                     <p className="text-muted-foreground text-sm">
                       "Los 5 pasos de GEO: 1) Fragmentación... 2) Autoridad..."
@@ -262,7 +262,7 @@ Disallow: /admin/
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-purple-600 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Tablas comparativas</h4>
                     <p className="text-muted-foreground text-sm">
                       Perplexity entiende tablas mejor que párrafos densos. Una tabla "GEO vs SEO"
@@ -270,14 +270,14 @@ Disallow: /admin/
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-purple-600 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Datos estructurados (números, estadísticas)</h4>
                     <p className="text-muted-foreground text-sm">
                       "Perplexity alcanzó 1M usuarios en 2023" es más citable que "Perplexity creció significativamente".
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-purple-600 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Q&A formateado</h4>
                     <p className="text-muted-foreground text-sm">
                       FAQs están diseñadas para ser extraídas por Perplexity. Cada Q&A es un fragmento.
@@ -365,7 +365,7 @@ Disallow: /admin/
                 <h2 className="text-2xl font-semibold text-primary mb-4">Plan de acción: Domina Perplexity en 4 semanas</h2>
 
                 <div className="space-y-4">
-                  <div className="border-l-4 border-purple-700 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Semana 1: Auditoría y preparación</h4>
                     <p className="text-muted-foreground text-sm">
                       Revisa robots.txt, sitemap.xml y velocidad de carga. Asegúrate que Perplexity pueda acceder.
@@ -373,7 +373,7 @@ Disallow: /admin/
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-purple-700 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Semana 2: Optimiza para recency</h4>
                     <p className="text-muted-foreground text-sm">
                       Crea 2 artículos nuevos sobre trends actuales de tu industria. Asegúrate de que incluyan
@@ -381,7 +381,7 @@ Disallow: /admin/
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-purple-700 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Semana 3: Fragmentación y estructura</h4>
                     <p className="text-muted-foreground text-sm">
                       Toma tus 3 artículos más importantes. Refactoriza con listas, tablas y fragmentos citables.
@@ -389,7 +389,7 @@ Disallow: /admin/
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-purple-700 pl-4 py-2">
+                  <div className="border-l-4 border-accent pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Semana 4: Prueba y medición</h4>
                     <p className="text-muted-foreground text-sm">
                       Busca en Perplexity preguntas de tu nicho. ¿Apareces? ¿Eres citado? Toma notas

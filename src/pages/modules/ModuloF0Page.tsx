@@ -136,7 +136,7 @@ const ModuloF0Page = () => {
 
           {/* Header del Módulo */}
           <header className="mb-12 text-center" id="modulo-f0">
-            <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-700 border border-green-500/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 bg-success/50/10 text-success border border-success/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <FileText className="h-4 w-4" />
               MÓDULO F0 - GRATIS
             </div>

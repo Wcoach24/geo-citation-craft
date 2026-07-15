@@ -153,17 +153,17 @@ const FormatoWikipediaIA = () => {
                 <h3 className="text-xl font-medium text-primary mb-3">Comparación práctica</h3>
                 
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-800 mb-2">❌ Contenido comercial típico</h4>
-                    <p className="text-sm text-red-700 italic">
+                  <div className="bg-danger/5 border border-danger/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-danger mb-2">❌ Contenido comercial típico</h4>
+                    <p className="text-sm text-danger italic">
                       "¡Descubre el INCREÍBLE secreto del marketing que REVOLUCIONARÁ tu negocio! 
                       Esta PODEROSA estrategia que usan los expertos..."
                     </p>
                   </div>
                   
-                  <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-                    <h4 className="font-semibold text-green-800 mb-2">✅ Estilo Wikipedia</h4>
-                    <p className="text-sm text-green-700 italic">
+                  <div className="bg-success/5 border border-success/20 p-4 rounded-lg">
+                    <h4 className="font-semibold text-success mb-2">✅ Estilo Wikipedia</h4>
+                    <p className="text-sm text-success italic">
                       "El marketing de contenidos es una estrategia que consiste en crear y distribuir 
                       contenido valioso para atraer y retener una audiencia específica."
                     </p>
@@ -183,9 +183,9 @@ const FormatoWikipediaIA = () => {
                   <li><strong>5. Datos verificables:</strong> Incluye estadísticas, fechas, fuentes cuando sea posible</li>
                 </ol>
 
-                <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">💡 Tip práctico</h4>
-                  <p className="text-sm text-blue-700">
+                <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg">
+                  <h4 className="font-semibold text-primary mb-2">💡 Tip práctico</h4>
+                  <p className="text-sm text-primary">
                     Antes de publicar, pregúntate: "¿Estaría este contenido en Wikipedia?" 
                     Si la respuesta es no, necesitas más neutralidad y estructura.
                   </p>

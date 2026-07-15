@@ -77,11 +77,11 @@ export default function PurchaseSuccessPage() {
 
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto">
-          <Card className="border-green-500">
+          <Card className="border-success">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="rounded-full bg-green-500/10 p-3">
-                  <CheckCircle className="h-16 w-16 text-green-500" />
+                <div className="rounded-full bg-success/50/10 p-3">
+                  <CheckCircle className="h-16 w-16 text-success" />
                 </div>
               </div>
               <CardTitle className="text-3xl">¡Pago completado!</CardTitle>
@@ -91,8 +91,8 @@ export default function PurchaseSuccessPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Primary message: check email (honesto: los PDFs van ADJUNTOS, no hay enlaces que caduquen) */}
-              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
-                <Mail className="h-10 w-10 text-blue-500 mx-auto mb-3" />
+              <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 text-center">
+                <Mail className="h-10 w-10 text-primary mx-auto mb-3" />
                 <h3 className="font-semibold text-lg mb-2">Revisa tu email</h3>
                 <p className="text-sm text-muted-foreground">
                   Los <strong>5 PDFs van adjuntos al email</strong> que acabas de recibir.

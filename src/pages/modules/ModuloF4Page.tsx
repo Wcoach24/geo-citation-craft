@@ -152,7 +152,7 @@ const ModuloF4Page = () => {
 
           {/* Header del Módulo */}
           <header className="mb-12 text-center" id="f4-header">
-            <div className="inline-flex items-center gap-2 bg-orange-500/10 text-orange-700 border border-orange-500/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 bg-warning/10 text-warning border border-warning/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Target className="h-4 w-4" />
               MÓDULO F4
             </div>

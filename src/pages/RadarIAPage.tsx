@@ -186,7 +186,7 @@ const RadarIAPage = () => {
 
           {/* Header */}
           <header className="mb-12 text-center" id="radar-header">
-            <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-700 border border-green-500/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 bg-success/50/10 text-success border border-success/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Radar className="h-4 w-4" />
               RADAR IA
             </div>
@@ -299,22 +299,22 @@ const RadarIAPage = () => {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               <Card className="text-center p-6">
-                <Brain className="h-8 w-8 text-blue-500 mx-auto mb-3" />
+                <Brain className="h-8 w-8 text-primary mx-auto mb-3" />
                 <h3 className="font-semibold mb-2">Fundamentos</h3>
                 <p className="text-sm text-muted-foreground">Conceptos básicos de GEO</p>
               </Card>
               <Card className="text-center p-6">
-                <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-3" />
+                <TrendingUp className="h-8 w-8 text-success mx-auto mb-3" />
                 <h3 className="font-semibold mb-2">Tendencias</h3>
                 <p className="text-sm text-muted-foreground">Cambios en el ecosistema</p>
               </Card>
               <Card className="text-center p-6">
-                <Zap className="h-8 w-8 text-purple-500 mx-auto mb-3" />
+                <Zap className="h-8 w-8 text-accent mx-auto mb-3" />
                 <h3 className="font-semibold mb-2">Técnico</h3>
                 <p className="text-sm text-muted-foreground">Implementación práctica</p>
               </Card>
               <Card className="text-center p-6">
-                <Radar className="h-8 w-8 text-orange-500 mx-auto mb-3" />
+                <Radar className="h-8 w-8 text-warning mx-auto mb-3" />
                 <h3 className="font-semibold mb-2">Estrategia</h3>
                 <p className="text-sm text-muted-foreground">Planificación y tácticas</p>
               </Card>

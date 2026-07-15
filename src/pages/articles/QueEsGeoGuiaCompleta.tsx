@@ -218,45 +218,45 @@ const QueEsGeoGuiaCompleta = () => {
                       <thead>
                         <tr className="border-b">
                           <th className="text-left p-2 font-semibold">Dimensión</th>
-                          <th className="text-left p-2 font-semibold text-red-700">SEO</th>
-                          <th className="text-left p-2 font-semibold text-green-700">GEO</th>
+                          <th className="text-left p-2 font-semibold text-danger">SEO</th>
+                          <th className="text-left p-2 font-semibold text-success">GEO</th>
                         </tr>
                       </thead>
                       <tbody className="space-y-2">
                         <tr className="border-b">
                           <td className="p-2 font-medium">Objetivo final</td>
-                          <td className="p-2 text-red-700">Ranking en SERP (posición 1-3)</td>
-                          <td className="p-2 text-green-700">Citación en respuesta IA</td>
+                          <td className="p-2 text-danger">Ranking en SERP (posición 1-3)</td>
+                          <td className="p-2 text-success">Citación en respuesta IA</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Motor a optimizar</td>
-                          <td className="p-2 text-red-700">Google (algoritmo de ranking)</td>
-                          <td className="p-2 text-green-700">Modelos de lenguaje (comprensión semántica)</td>
+                          <td className="p-2 text-danger">Google (algoritmo de ranking)</td>
+                          <td className="p-2 text-success">Modelos de lenguaje (comprensión semántica)</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Métrica principal</td>
-                          <td className="p-2 text-red-700">CTR desde búsqueda</td>
-                          <td className="p-2 text-green-700">Frecuencia de citación</td>
+                          <td className="p-2 text-danger">CTR desde búsqueda</td>
+                          <td className="p-2 text-success">Frecuencia de citación</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Competencia</td>
-                          <td className="p-2 text-red-700">Vs otros 10 sitios por keyword</td>
-                          <td className="p-2 text-green-700">Colaborativa (múltiples fuentes citadas)</td>
+                          <td className="p-2 text-danger">Vs otros 10 sitios por keyword</td>
+                          <td className="p-2 text-success">Colaborativa (múltiples fuentes citadas)</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Tiempo resultados</td>
-                          <td className="p-2 text-red-700">3-6 meses</td>
-                          <td className="p-2 text-green-700">1-4 semanas (especialmente Perplexity)</td>
+                          <td className="p-2 text-danger">3-6 meses</td>
+                          <td className="p-2 text-success">1-4 semanas (especialmente Perplexity)</td>
                         </tr>
                         <tr className="border-b">
                           <td className="p-2 font-medium">Factor: Keywords</td>
-                          <td className="p-2 text-red-700">Crítico (densidad, posición)</td>
-                          <td className="p-2 text-green-700">Importante pero menos que claridad semántica</td>
+                          <td className="p-2 text-danger">Crítico (densidad, posición)</td>
+                          <td className="p-2 text-success">Importante pero menos que claridad semántica</td>
                         </tr>
                         <tr>
                           <td className="p-2 font-medium">Factor: Estructura</td>
-                          <td className="p-2 text-red-700">Importante (Core Web Vitals)</td>
-                          <td className="p-2 text-green-700">Crítico (fragmentación, datos estructurados)</td>
+                          <td className="p-2 text-danger">Importante (Core Web Vitals)</td>
+                          <td className="p-2 text-success">Crítico (fragmentación, datos estructurados)</td>
                         </tr>
                       </tbody>
                     </table>

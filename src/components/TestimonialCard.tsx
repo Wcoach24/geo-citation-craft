@@ -42,7 +42,7 @@ const TestimonialCard = ({
         </div>
         <div className="flex items-center gap-1">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <Star key={i} className="h-4 w-4 fill-warning text-warning" />
           ))}
         </div>
       </CardHeader>
@@ -52,23 +52,23 @@ const TestimonialCard = ({
           <p className="text-muted-foreground italic">"{quote}"</p>
         </div>
         
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+        <div className="bg-success/5 border border-success/20 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="h-4 w-4 text-green-600" />
-            <span className="font-medium text-green-800">Resultados medibles</span>
+            <TrendingUp className="h-4 w-4 text-success" />
+            <span className="font-medium text-success">Resultados medibles</span>
           </div>
           <div className="grid grid-cols-3 gap-4 text-sm">
             <div>
               <p className="text-gray-600">Antes</p>
-              <p className="font-semibold text-red-600">{metric.before}</p>
+              <p className="font-semibold text-danger">{metric.before}</p>
             </div>
             <div>
               <p className="text-gray-600">Después</p>
-              <p className="font-semibold text-green-600">{metric.after}</p>
+              <p className="font-semibold text-success">{metric.after}</p>
             </div>
             <div>
               <p className="text-gray-600">Mejora</p>
-              <p className="font-bold text-green-700">{metric.improvement}</p>
+              <p className="font-bold text-success">{metric.improvement}</p>
             </div>
           </div>
         </div>

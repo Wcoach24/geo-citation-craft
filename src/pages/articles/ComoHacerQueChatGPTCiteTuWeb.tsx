@@ -335,7 +335,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                 <h2 className="text-2xl font-semibold text-primary mb-4">Plan de acción: Los 5 pasos para ser citado por ChatGPT</h2>
 
                 <div className="space-y-4">
-                  <div className="border-l-4 border-green-700 pl-4 py-2">
+                  <div className="border-l-4 border-success pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Paso 1: Audita tu contenido existente</h4>
                     <p className="text-muted-foreground text-sm">
                       Identifica 5 artículos o páginas con más autoridad. ¿Tienen definiciones claras?
@@ -343,21 +343,21 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-green-700 pl-4 py-2">
+                  <div className="border-l-4 border-success pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Paso 2: Implementa Schema.org Article en esas 5 páginas</h4>
                     <p className="text-muted-foreground text-sm">
                       No es complicado. Toma 15 minutos por página. Este solo cambio incrementa citabilidad 30-40%.
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-green-700 pl-4 py-2">
+                  <div className="border-l-4 border-success pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Paso 3: Crea/refactoriza una sección de FAQ</h4>
                     <p className="text-muted-foreground text-sm">
                       Elige 8-10 preguntas que usuarios realmente buscan. Responde en 2-3 frases. Usa Schema.org FAQPage.
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-green-700 pl-4 py-2">
+                  <div className="border-l-4 border-success pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Paso 4: Prueba en ChatGPT</h4>
                     <p className="text-muted-foreground text-sm">
                       Haz preguntas relevantes a tu nicho en ChatGPT (sin usar web-browse si es posible para medir
@@ -365,7 +365,7 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                     </p>
                   </div>
 
-                  <div className="border-l-4 border-green-700 pl-4 py-2">
+                  <div className="border-l-4 border-success pl-4 py-2">
                     <h4 className="font-semibold text-lg mb-1">Paso 5: Repite en nuevo contenido desde cero</h4>
                     <p className="text-muted-foreground text-sm">
                       Todo artículo nuevo debe nacer con fragmentación, definiciones claras y Schema.org.

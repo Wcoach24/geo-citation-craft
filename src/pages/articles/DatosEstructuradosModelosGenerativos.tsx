@@ -168,9 +168,9 @@ const DatosEstructuradosModelosGenerativos = () => {
                   <li>• <strong>description:</strong> Resumen conciso del contenido</li>
                 </ul>
 
-                <div className="bg-green-50 border border-green-200 p-4 rounded-lg mb-4">
-                  <h4 className="font-semibold text-green-800 mb-2">✅ Implementación en este artículo</h4>
-                  <p className="text-sm text-green-700">
+                <div className="bg-success/5 border border-success/20 p-4 rounded-lg mb-4">
+                  <h4 className="font-semibold text-success mb-2">✅ Implementación en este artículo</h4>
+                  <p className="text-sm text-success">
                     Esta página usa Article + SpeakableSpecification para los snippets destacados. 
                     Cada <code>HighlightSnippet</code> tiene un ID único que puede ser citado individualmente.
                   </p>

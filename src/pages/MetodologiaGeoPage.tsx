@@ -365,7 +365,7 @@ const MetodologiaGeoPage = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-1/3">Aspecto</TableHead>
-                    <TableHead className="w-1/3 text-red-600">SEO Tradicional</TableHead>
+                    <TableHead className="w-1/3 text-danger">SEO Tradicional</TableHead>
                     <TableHead className="w-1/3 text-accent">GEO</TableHead>
                   </TableRow>
                 </TableHeader>

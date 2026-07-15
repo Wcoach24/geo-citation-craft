@@ -153,7 +153,7 @@ const ModuloF3Page = () => {
 
           {/* Header del Módulo */}
           <header className="mb-12 text-center" id="f3-header">
-            <div className="inline-flex items-center gap-2 bg-purple-500/10 text-purple-700 border border-purple-500/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 bg-accent/50/10 text-accent border border-accent/20 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Users className="h-4 w-4" />
               MÓDULO F3
             </div>
@@ -377,7 +377,7 @@ const ModuloF3Page = () => {
           </div>
 
           {/* Call to Action para desbloquear contenido */}
-          <div className="mt-16 p-8 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl text-center">
+          <div className="mt-16 p-8 bg-gradient-to-r from-accent/10 to-primary/10 border border-accent/20 rounded-xl text-center">
             <h3 className="text-2xl font-bold text-primary mb-4">🔓 Desbloquea el Módulo F3 Completo</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Accede a la tabla completa con 15+ señales de autoridad, checklist detallado, 

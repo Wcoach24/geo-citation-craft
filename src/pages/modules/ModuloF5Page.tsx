@@ -144,7 +144,7 @@ const ModuloF5Page = () => {
           {/* Module Header */}
           <div className="text-center mb-16" id="f5-header">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="p-4 rounded-lg bg-red-500 text-white">
+              <div className="p-4 rounded-lg bg-danger/50 text-white">
                 <BarChart className="h-8 w-8" />
               </div>
               <Badge variant="outline" className="text-accent border-accent text-lg px-4 py-2">

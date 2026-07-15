@@ -88,14 +88,14 @@ const ContenidoIAPage = () => {
               modelos de lenguaje como ChatGPT, Claude, Perplexity y Gemini.
             </p>
             <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
+              <Badge variant="secondary" className="bg-success/10 text-success">
                 <FileText className="h-3 w-3 mr-1" />
                 Formato .txt optimizado
               </Badge>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+              <Badge variant="secondary" className="bg-primary/10 text-primary">
                 Licencia CC BY-NC-SA 4.0
               </Badge>
-              <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+              <Badge variant="secondary" className="bg-accent/10 text-accent">
                 Actualizado 2025-06-12
               </Badge>
             </div>

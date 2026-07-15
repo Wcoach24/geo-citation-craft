@@ -20,9 +20,9 @@ const HighlightSnippet = ({
 }: HighlightSnippetProps) => {
   const variantStyles = {
     default: "bg-accent/10 border-l-4 border-accent p-4 rounded-lg",
-    definition: "bg-blue-50 border border-blue-200 p-4 rounded-lg",
-    insight: "bg-green-50 border border-green-200 p-4 rounded-lg",
-    stat: "bg-purple-50 border border-purple-200 p-4 rounded-lg"
+    definition: "bg-primary/5 border border-primary/20 p-4 rounded-lg",
+    insight: "bg-success/5 border border-success/20 p-4 rounded-lg",
+    stat: "bg-accent/5 border border-accent/20 p-4 rounded-lg"
   };
 
   const currentDate = new Date().toISOString();
