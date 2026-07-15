@@ -52,6 +52,20 @@ const homeFaqs = [
   },
 ];
 
+// F5-4: índice estático de la home — anchors REALES (ids de las secciones renderizadas).
+// Al ser prop estática, el ItemList del ToC llega al HTML servido (antes se construía
+// en useEffect y el crawler nunca lo veía).
+const homeTocItems = [
+  { id: "habla-widget", title: "Analiza tu dominio" },
+  { id: "que-es-geo", title: "¿Qué es GEO?" },
+  { id: "metodologia", title: "5 módulos, en orden" },
+  { id: "precios", title: "Empieza gratis. Paga una vez si te convence." },
+  { id: "casos-destacados", title: "Predicamos con el Ejemplo" },
+  { id: "limitaciones", title: "Lo que Podemos y lo que No" },
+  { id: "home-faq", title: "Preguntas frecuentes sobre GEO en 2026" },
+  { id: "home-seguir-aprendiendo", title: "Seguir aprendiendo" },
+];
+
 const internalLinks = [
   { to: "/curso", label: "Curso GEO completo (F1-F5)", description: "Domina la optimización para IA generativa en español" },
   { to: "/metodologia", label: "Metodología GEO paso a paso", description: "El framework F1-F5 explicado en profundidad" },
@@ -199,7 +213,7 @@ const Index = () => {
 
         {/* Tabla de contenidos flotante para páginas largas */}
         <aside className="hidden xl:block fixed right-8 top-1/2 transform -translate-y-1/2 w-64 z-10">
-          <TableOfContents />
+          <TableOfContents items={homeTocItems} />
         </aside>
 
         <Footer />

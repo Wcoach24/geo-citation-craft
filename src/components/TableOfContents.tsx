@@ -4,22 +4,28 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { List, ChevronRight } from "lucide-react";
 
-interface TocItem {
+export interface TocItem {
   id: string;
   title: string;
-  level: number;
+  level?: number;
 }
 
 interface TableOfContentsProps {
+  /**
+   * F5-4: el índice llega como prop estática por página (antes se construía en
+   * useEffect leyendo el DOM → en el HTML servido el componente era null y su
+   * ItemList nunca llegaba al crawler).
+   */
+  items: TocItem[];
   className?: string;
 }
 
-const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
+const TableOfContents = ({ items, className = "" }: TableOfContentsProps) => {
   const canonicalHref = useCanonicalHref();
-  const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   // F4-5d: el TOC no se muestra mientras el hero esté en viewport (flotaba encima).
   // Empieza oculto (SSR-safe) y un IntersectionObserver — SOLO en useEffect — lo activa.
+  // El JSON-LD de abajo NO depende de esto: se emite siempre en el HTML servido.
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
@@ -38,23 +44,11 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
   }, []);
 
   useEffect(() => {
-    // Extraer headings de la página
-    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    const items: TocItem[] = [];
+    // Resaltar la sección activa (mejora de cliente; no afecta al SSR).
+    const targets = items
+      .map((item) => document.getElementById(item.id))
+      .filter((el): el is HTMLElement => Boolean(el));
 
-    headings.forEach((heading) => {
-      if (heading.id) {
-        items.push({
-          id: heading.id,
-          title: heading.textContent || "",
-          level: parseInt(heading.tagName.charAt(1))
-        });
-      }
-    });
-
-    setTocItems(items);
-
-    // Observer para detectar sección activa
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -63,63 +57,25 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2 }
     );
 
-    headings.forEach((heading) => {
-      if (heading.id) observer.observe(heading);
-    });
-
+    targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [items]);
 
-  if (tocItems.length === 0 || !pastHero) return null;
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  if (items.length === 0) return null;
 
   return (
-    <Card className={`sticky top-8 ${className}`}>
-      <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-lg">
-          <List className="h-5 w-5" />
-          Índice de Contenidos
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <nav aria-label="Tabla de contenidos" role="navigation">
-          <ol className="space-y-2">
-            {tocItems.map((item) => (
-              <li 
-                key={item.id}
-                className={`text-sm ${item.level > 2 ? 'ml-4' : ''}`}
-              >
-                <button
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center gap-2 text-left hover:text-primary transition-colors w-full ${
-                    activeId === item.id ? 'text-primary font-medium' : 'text-muted-foreground'
-                  }`}
-                >
-                  <ChevronRight className="h-3 w-3 flex-shrink-0" />
-                  <span className="line-clamp-2">{item.title}</span>
-                </button>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      </CardContent>
-
-      {/* Datos estructurados para TOC */}
+    <>
+      {/* Datos estructurados del índice: SIEMPRE en el HTML servido, aunque la
+          tarjeta visual espere a que el hero salga del viewport. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ItemList",
           "name": "Índice de Contenidos",
-          "numberOfItems": tocItems.length,
-          "itemListElement": tocItems.map((item, index) => ({
+          "numberOfItems": items.length,
+          "itemListElement": items.map((item, index) => ({
             "@type": "ListItem",
             "position": index + 1,
             "item": {
@@ -129,7 +85,42 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
             }
           }))
         }) }} />
-    </Card>
+
+      {pastHero && (
+        <Card className={`sticky top-8 ${className}`}>
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <List className="h-5 w-5" />
+              Índice de Contenidos
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <nav aria-label="Tabla de contenidos">
+              <ol className="space-y-2">
+                {items.map((item) => (
+                  <li
+                    key={item.id}
+                    className={`text-sm ${(item.level ?? 2) > 2 ? 'ml-4' : ''}`}
+                  >
+                    {/* F5-4: anchor real <a href="#id"> (antes <button onClick>):
+                        navegable por crawlers y sin JavaScript. */}
+                    <a
+                      href={`#${item.id}`}
+                      className={`flex items-center gap-2 text-left hover:text-primary transition-colors w-full ${
+                        activeId === item.id ? 'text-primary font-medium' : 'text-muted-foreground'
+                      }`}
+                    >
+                      <ChevronRight className="h-3 w-3 flex-shrink-0" />
+                      <span className="line-clamp-2">{item.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </CardContent>
+        </Card>
+      )}
+    </>
   );
 };
 
