@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import ScrollToHash from "@/components/ScrollToHash";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 // Lazy-loaded pages
 const CursoGeoPage = React.lazy(() => import("./pages/CursoGeoPage"));
@@ -147,6 +148,10 @@ function App() {
       <BrowserRouter>
         <ScrollToHash />
         <AppRoutes />
+        {/* F2-7: exit intent global (antes solo en /curso). Solo cliente: el prerender
+            SSR renderiza AppRoutes vía entry-server y no pasa por aquí. La supresión
+            por visitorState (lead/customer) y por sesión vive dentro del componente. */}
+        <ExitIntentPopup />
       </BrowserRouter>
       <Analytics />
       <SpeedInsights />

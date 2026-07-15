@@ -8,6 +8,7 @@ import GeoTerm from "@/components/GeoTerm";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
+import InlineEmailCapture from "@/components/InlineEmailCapture";
 
 const ComoHacerQueChatGPTCiteTuWeb = () => {
   // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
@@ -494,6 +495,14 @@ const ComoHacerQueChatGPTCiteTuWeb = () => {
                 Ver el curso GEO — €47
               </Link>
             </div>
+            {/* F2-7: captura de email al final del artículo */}
+            <InlineEmailCapture
+              className="mt-8"
+              source="article_chatgpt-cite-tu-web"
+              title="Antes de irte: el módulo F0 gratis"
+              description="Te envío el módulo F0 completo (diagnóstico en 15 min): mide si la IA puede leer tu web y qué arreglar primero."
+              leadMagnet="el módulo F0 completo"
+            />
           </div>
         </main>
 

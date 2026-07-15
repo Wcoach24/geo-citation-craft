@@ -8,6 +8,7 @@ import { useCanonicalHref } from "@/lib/canonical";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
+import InlineEmailCapture from "@/components/InlineEmailCapture";
 
 const EstructuraWebParaLenguaje = () => {
   // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
@@ -216,6 +217,14 @@ const EstructuraWebParaLenguaje = () => {
                 Ver el curso GEO — €47
               </Link>
             </div>
+            {/* F2-7: captura de email al final del artículo */}
+            <InlineEmailCapture
+              className="mt-8"
+              source="article_estructura-web"
+              title="Antes de irte: el módulo F0 gratis"
+              description="Te envío el módulo F0 completo (diagnóstico en 15 min): mide si la IA puede leer tu web y qué arreglar primero."
+              leadMagnet="el módulo F0 completo"
+            />
           </div>
         </main>
       </div>

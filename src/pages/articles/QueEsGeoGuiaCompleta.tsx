@@ -9,6 +9,7 @@ import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
 import { MODULES } from "@/data/modules";
 import { useGeoMetadata } from "@/hooks/useGeoMetadata";
+import InlineEmailCapture from "@/components/InlineEmailCapture";
 
 const QueEsGeoGuiaCompleta = () => {
   // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
@@ -512,6 +513,14 @@ const QueEsGeoGuiaCompleta = () => {
                 Ver el curso GEO — €47
               </Link>
             </div>
+            {/* F2-7: captura de email al final del artículo */}
+            <InlineEmailCapture
+              className="mt-8"
+              source="article_que-es-geo"
+              title="Antes de irte: el módulo F0 gratis"
+              description="Te envío el módulo F0 completo (diagnóstico en 15 min): mide si la IA puede leer tu web y qué arreglar primero."
+              leadMagnet="el módulo F0 completo"
+            />
           </div>
         </main>
 

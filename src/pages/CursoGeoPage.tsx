@@ -29,7 +29,6 @@ import { useVisitorState } from '@/hooks/useVisitorState';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import EmailCapture from '@/components/EmailCapture';
-import ExitIntentPopup from '@/components/ExitIntentPopup';
 import GuaranteeNote from '@/components/GuaranteeNote';
 import { trackEvent } from '@/lib/analytics';
 import { startCheckout } from '@/lib/checkout';
@@ -654,8 +653,7 @@ const CursoGeoPage = () => {
         </div>
       )}
 
-      {/* Exit Intent Popup */}
-      <ExitIntentPopup />
+      {/* Exit intent: montado globalmente en App.tsx (F2-7) */}
 
       <Footer />
     </div>
