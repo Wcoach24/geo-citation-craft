@@ -8,14 +8,24 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Users, Mail, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const AcercaDePage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Acerca de esGEO | Quiénes Somos | esGEO",
+    description: "Conoce al equipo de esGEO, pioneros en Generative Engine Optimization en español. Nuestra misión: enseñar a crear contenido citeable por IA.",
+    canonicalUrl: "https://www.esgeo.ai/acerca-de",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Acerca de esGEO | Quiénes Somos | esGEO</title>
         <meta name="description" content="Conoce al equipo de esGEO, pioneros en Generative Engine Optimization en español. Nuestra misión: enseñar a crear contenido citeable por IA." />

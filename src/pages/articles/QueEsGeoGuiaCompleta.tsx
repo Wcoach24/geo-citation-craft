@@ -8,10 +8,20 @@ import GeoTerm from "@/components/GeoTerm";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
 import { MODULES } from "@/data/modules";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const QueEsGeoGuiaCompleta = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "¿Qué es GEO? Guía Completa 2026 de Optimización IA | esGEO",
+    description: "GEO (Generative Engine Optimization) es la metodología para que ChatGPT, Perplexity y Claude citen tu web. Guía con framework F1-F5, datos de Princeton y ejemplos prácticos.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia/que-es-geo-guia-completa",
+  });
+
   return (
     <>
+      {socialHelmet}
       <Helmet>
         <title>¿Qué es GEO? Guía Completa 2026 de Optimización IA | esGEO</title>
         <meta name="description" content="GEO (Generative Engine Optimization) es la metodología para que ChatGPT, Perplexity y Claude citen tu web. Guía con framework F1-F5, datos de Princeton y ejemplos prácticos." />

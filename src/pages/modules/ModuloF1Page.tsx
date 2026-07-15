@@ -12,14 +12,24 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, FileText, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF1Page = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Módulo F1: Fundamentos de Accesibilidad Generativa | Curso GEO - esGEO",
+    description: "Asegura que tu contenido web es rastreable, comprendido e indexado por LLMs. El primer paso crítico para ser citado por IA.",
+    canonicalUrl: "https://www.esgeo.ai/curso/f1",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Módulo F1: Fundamentos de Accesibilidad Generativa | Curso GEO - esGEO</title>
         <meta name="description" content="Asegura que tu contenido web es rastreable, comprendido e indexado por LLMs. El primer paso crítico para ser citado por IA." />

@@ -13,14 +13,24 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, Target, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF4Page = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Módulo F4: Validación Conversacional | Curso GEO - esGEO",
+    description: "Aprende a verificar si los motores de generación de contenido (LLMs) están utilizando, citando o parafraseando tu contenido en sus respuestas y cómo actuar en consecuencia.",
+    canonicalUrl: "https://www.esgeo.ai/curso/f4",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Módulo F4: Validación Conversacional | Curso GEO - esGEO</title>
         <meta name="description" content="Aprende a verificar si los motores de generación de contenido (LLMs) están utilizando, citando o parafraseando tu contenido en sus respuestas y cómo actuar en consecuencia." />

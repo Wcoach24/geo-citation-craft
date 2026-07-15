@@ -68,7 +68,8 @@ const Index = () => {
     keywords: ["curso GEO 2026", "Generative Engine Optimization", "qué es GEO", "GEO vs SEO 2026", "optimización IA", "ChatGPT", "Perplexity", "Claude", "curso geo ia"],
     citationTitle: "esGEO - Metodología de Optimización para IA Generativa",
     speakableSelectors: [".snippet-block", "[data-speakable='true']", ".geo-card"],
-    geoTxtPath: "/home.geo.txt"
+    geoTxtPath: "/home.geo.txt",
+    ogType: "website"
   });
 
   return (

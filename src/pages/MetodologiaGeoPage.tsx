@@ -13,8 +13,17 @@ import { Home, ChevronRight, BookOpen, FileText, Search, Users, Target, BarChart
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { MODULES } from "@/data/modules";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const MetodologiaGeoPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Método GEO 2026: Framework F1-F5 paso a paso | esGEO",
+    description: "Aprende el método GEO con el framework F1-F5: la metodología 2026 para que ChatGPT, Claude y Perplexity citen tu web como fuente fiable.",
+    canonicalUrl: "https://www.esgeo.ai/metodologia",
+  });
+
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
   
   useEffect(() => {
@@ -68,6 +77,7 @@ const MetodologiaGeoPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Método GEO 2026: Framework F1-F5 paso a paso | esGEO</title>
         <meta name="description" content="Aprende el método GEO con el framework F1-F5: la metodología 2026 para que ChatGPT, Claude y Perplexity citen tu web como fuente fiable." />

@@ -7,12 +7,22 @@ import { Link } from "react-router-dom";
 import { useCanonicalHref } from "@/lib/canonical";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const EstructuraWebParaLenguaje = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Estructura tu web para LLMs 2026 | esGEO",
+    description: "Principios de diseño que los LLMs comprenden mejor: fragmentación, bloques lógicos y semántica clara.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia/estructura-web-para-lenguaje",
+  });
+
   const canonicalHref = useCanonicalHref();
 
   return (
     <>
+      {socialHelmet}
       <Helmet>
         <title>Estructura tu web para LLMs 2026 | esGEO</title>
         <meta name="description" content="Principios de diseño que los LLMs comprenden mejor: fragmentación, bloques lógicos y semántica clara." />

@@ -6,10 +6,20 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const MuerteSeoTradicional = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "La muerte del SEO tal y como lo conocíamos | Radar IA - esGEO",
+    description: "Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje y el SEO tradicional pierde relevancia.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia/muerte-seo-tradicional",
+  });
+
   return (
     <>
+      {socialHelmet}
       <Helmet>
         <title>La muerte del SEO tal y como lo conocíamos | Radar IA - esGEO</title>
         <meta name="description" content="Por qué los motores de búsqueda están siendo reemplazados por motores de lenguaje y el SEO tradicional pierde relevancia." />

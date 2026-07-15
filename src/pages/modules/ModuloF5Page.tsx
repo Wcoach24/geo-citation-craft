@@ -13,14 +13,24 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Home, ChevronRight, BarChart, ArrowRight, ArrowLeft, Bot, ExternalLink, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF5Page = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Módulo F5: Mantenimiento Evolutivo | Curso GEO - esGEO",
+    description: "Diseña un sistema recurrente de revisión, actualización y expansión de contenido adaptado a la evolución constante de los LLMs. Mantén tu visibilidad generativa.",
+    canonicalUrl: "https://www.esgeo.ai/curso/f5",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Módulo F5: Mantenimiento Evolutivo | Curso GEO - esGEO</title>
         <meta name="description" content="Diseña un sistema recurrente de revisión, actualización y expansión de contenido adaptado a la evolución constante de los LLMs. Mantén tu visibilidad generativa." />

@@ -14,14 +14,24 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, Search, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF2Page = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Módulo F2: Contexto Semántico y Formato Óptimo | Curso GEO - esGEO",
+    description: "Aprende a alinear tu contenido con el lenguaje, estructura y profundidad contextual que los LLMs utilizan para generar respuestas. Sintetiza ideas bien expresadas.",
+    canonicalUrl: "https://www.esgeo.ai/curso/f2",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Módulo F2: Contexto Semántico y Formato Óptimo | Curso GEO - esGEO</title>
         <meta name="description" content="Aprende a alinear tu contenido con el lenguaje, estructura y profundidad contextual que los LLMs utilizan para generar respuestas. Sintetiza ideas bien expresadas." />

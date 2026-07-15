@@ -14,14 +14,24 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Home, ChevronRight, Users, ArrowRight, ArrowLeft, Bot, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF3Page = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Módulo F3: Autoridad Generativa | Curso GEO - esGEO",
+    description: "Aprende a construir señales de credibilidad y reputación para que los LLMs reconozcan tu contenido como fuente fiable y te citen como referencia autorizada.",
+    canonicalUrl: "https://www.esgeo.ai/curso/f3",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Módulo F3: Autoridad Generativa | Curso GEO - esGEO</title>
         <meta name="description" content="Aprende a construir señales de credibilidad y reputación para que los LLMs reconozcan tu contenido como fuente fiable y te citen como referencia autorizada." />

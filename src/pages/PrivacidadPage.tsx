@@ -6,14 +6,24 @@ import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const PrivacidadPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Política de Privacidad | esGEO",
+    description: "Política de privacidad de esGEO. Cómo protegemos y utilizamos tu información personal en nuestra plataforma de Generative Engine Optimization.",
+    canonicalUrl: "https://www.esgeo.ai/privacidad",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Política de Privacidad | esGEO</title>
         <meta name="description" content="Política de privacidad de esGEO. Cómo protegemos y utilizamos tu información personal en nuestra plataforma de Generative Engine Optimization." />

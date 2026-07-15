@@ -10,8 +10,17 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Users, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const EquipoPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Equipo esGEO: expertos en GEO en España 2026",
+    description: "Conoce a los expertos en GEO de esGEO: especialistas en posicionamiento para IA y citabilidad en ChatGPT, Perplexity y Claude. Equipo 2026.",
+    canonicalUrl: "https://www.esgeo.ai/acerca-de/equipo",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -39,6 +48,7 @@ const EquipoPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Equipo esGEO: expertos en GEO en España 2026</title>
         <meta name="description" content="Conoce a los expertos en GEO de esGEO: especialistas en posicionamiento para IA y citabilidad en ChatGPT, Perplexity y Claude. Equipo 2026." />

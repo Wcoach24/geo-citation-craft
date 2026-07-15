@@ -12,6 +12,8 @@ interface GeoMetadataProps {
   citationTitle?: string;
   speakableSelectors?: string[];
   geoTxtPath?: string; // Nueva prop para enlazar archivo .geo.txt
+  /** og:type — 'website' para la home/landings, 'article' (default) para contenido. */
+  ogType?: 'website' | 'article';
 }
 
 export const useGeoMetadata = ({
@@ -23,7 +25,8 @@ export const useGeoMetadata = ({
   keywords = [],
   citationTitle,
   speakableSelectors = [".snippet-block", "[data-speakable='true']"],
-  geoTxtPath
+  geoTxtPath,
+  ogType = 'article'
 }: GeoMetadataProps) => {
   
   const currentDate = lastModified || new Date().toISOString().split('T')[0];
@@ -86,7 +89,7 @@ export const useGeoMetadata = ({
         {/* Open Graph enhanced */}
         <meta property="og:title" content={fullTitle} />
         <meta property="og:description" content={description} />
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content={ogType} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://www.esgeo.ai/og-image.png" />
         <meta property="og:locale" content="es_ES" />

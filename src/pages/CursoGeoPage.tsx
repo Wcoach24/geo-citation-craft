@@ -32,8 +32,17 @@ import EmailCapture from '@/components/EmailCapture';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { trackEvent } from '@/lib/analytics';
 import { startCheckout } from '@/lib/checkout';
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const CursoGeoPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Curso GEO 2026: Aprende Optimización para IA | esGEO",
+    description: "Curso GEO 2026 en español: 5 módulos para optimizar tu web y ser citado por ChatGPT, Perplexity y Claude. Framework F1-F5 actualizado con prácticas vigentes en 2026. €47.",
+    canonicalUrl: "https://www.esgeo.ai/curso",
+  });
+
   const navigate = useNavigate();
   const { user, userAccess } = useAuth();
   const { visitorState, visitCount, isFromAI } = useVisitorState();
@@ -212,6 +221,7 @@ const CursoGeoPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Curso GEO 2026: Aprende Optimización para IA | esGEO</title>
         <meta

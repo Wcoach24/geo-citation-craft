@@ -9,8 +9,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, BookOpen, Search, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const GlosarioPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Glosario GEO | Términos y Definiciones | esGEO",
+    description: "Glosario completo de términos de Generative Engine Optimization (GEO). Definiciones autoritativas para optimización de contenido para IA generativa.",
+    canonicalUrl: "https://www.esgeo.ai/glosario",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -182,6 +191,7 @@ const GlosarioPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Glosario GEO | Términos y Definiciones | esGEO</title>
         <meta name="description" content="Glosario completo de términos de Generative Engine Optimization (GEO). Definiciones autoritativas para optimización de contenido para IA generativa." />

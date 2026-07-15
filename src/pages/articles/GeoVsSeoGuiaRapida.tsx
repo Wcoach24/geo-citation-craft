@@ -5,10 +5,20 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const GeoVsSeoGuiaRapida = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "GEO vs SEO 2026: Diferencias Clave y Estrategia | esGEO",
+    description: "Comparativa GEO vs SEO: el SEO posiciona en Google, GEO hace que ChatGPT y Perplexity te citen. Tabla de diferencias, datos de impacto y estrategia combinada.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia/geo-vs-seo-diferencias",
+  });
+
   return (
     <>
+      {socialHelmet}
       <Helmet>
         <title>GEO vs SEO 2026: Diferencias Clave y Estrategia | esGEO</title>
         <meta name="description" content="Comparativa GEO vs SEO: el SEO posiciona en Google, GEO hace que ChatGPT y Perplexity te citen. Tabla de diferencias, datos de impacto y estrategia combinada." />

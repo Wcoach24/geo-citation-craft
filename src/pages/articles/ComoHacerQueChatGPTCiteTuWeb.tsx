@@ -7,10 +7,20 @@ import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ComoHacerQueChatGPTCiteTuWeb = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Cómo hacer que ChatGPT cite tu web | Guía de GEO | esGEO",
+    description: "Técnicas prácticas para estructurar contenido que ChatGPT reconozca, entienda y cite como fuente. Datos estructurados, fragmentación y autoridad generativa.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia/como-hacer-que-chatgpt-cite-tu-web",
+  });
+
   return (
     <>
+      {socialHelmet}
       <Helmet>
         <title>Cómo hacer que ChatGPT cite tu web | Guía de GEO | esGEO</title>
         <meta name="description" content="Técnicas prácticas para estructurar contenido que ChatGPT reconozca, entienda y cite como fuente. Datos estructurados, fragmentación y autoridad generativa." />

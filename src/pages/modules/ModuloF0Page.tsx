@@ -13,14 +13,24 @@ import { Home, ChevronRight, FileText, ArrowRight, AlertTriangle, Target, Zap, S
 import { Link } from "react-router-dom";
 import BuyButton from "@/components/BuyButton";
 import Footer from "@/components/Footer";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const ModuloF0Page = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Módulo F0: ¿Necesitas GEO? Diagnóstico Gratuito | Curso GEO - esGEO",
+    description: "Descubre si tu sitio web necesita optimización para motores generativos. Diagnóstico gratuito e introducción al framework GEO.",
+    canonicalUrl: "https://www.esgeo.ai/curso/f0",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Módulo F0: ¿Necesitas GEO? Diagnóstico Gratuito | Curso GEO - esGEO</title>
         <meta name="description" content="Descubre si tu sitio web necesita optimización para motores generativos. Diagnóstico gratuito e introducción al framework GEO." />

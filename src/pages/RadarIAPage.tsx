@@ -9,8 +9,17 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, Radar, Calendar, ArrowRight, TrendingUp, Brain, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const RadarIAPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "GEO e IA Generativa: Guías, Análisis y Tendencias 2026 | esGEO Radar",
+    description: "Todo sobre GEO (Generative Engine Optimization) e IA generativa: qué es GEO, GEO vs SEO, cómo ser citado por ChatGPT y Perplexity. Artículos y guías actualizadas.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -74,6 +83,7 @@ const RadarIAPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>GEO e IA Generativa: Guías, Análisis y Tendencias 2026 | esGEO Radar</title>
         <meta name="description" content="Todo sobre GEO (Generative Engine Optimization) e IA generativa: qué es GEO, GEO vs SEO, cómo ser citado por ChatGPT y Perplexity. Artículos y guías actualizadas." />

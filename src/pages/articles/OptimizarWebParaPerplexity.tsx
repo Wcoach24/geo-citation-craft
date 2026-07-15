@@ -7,10 +7,20 @@ import HighlightSnippet from "@/components/HighlightSnippet";
 import GeoTerm from "@/components/GeoTerm";
 import EmailCapture from "@/components/EmailCapture";
 import Footer from "@/components/Footer";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const OptimizarWebParaPerplexity = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Cómo optimizar tu web para Perplexity | Guía GEO | esGEO",
+    description: "Estrategia completa para aparecer en respuestas de Perplexity AI. Descubre cómo Perplexity cita diferente a ChatGPT y optimiza para máxima visibilidad.",
+    canonicalUrl: "https://www.esgeo.ai/radar-ia/optimizar-web-para-perplexity",
+  });
+
   return (
     <>
+      {socialHelmet}
       <Helmet>
         <title>Cómo optimizar tu web para Perplexity | Guía GEO | esGEO</title>
         <meta name="description" content="Estrategia completa para aparecer en respuestas de Perplexity AI. Descubre cómo Perplexity cita diferente a ChatGPT y optimiza para máxima visibilidad." />

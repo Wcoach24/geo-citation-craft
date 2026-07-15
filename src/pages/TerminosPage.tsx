@@ -6,14 +6,24 @@ import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Home, ChevronRight, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const TerminosPage = () => {
+  // F1-7: metas sociales (og:/twitter:) — se renderiza ANTES del <Helmet> propio
+  // para que los valores especificos de la pagina ganen en los tags duplicados.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Términos y Condiciones | esGEO",
+    description: "Términos y condiciones de uso de esGEO. Condiciones para el acceso y uso de nuestra plataforma de Generative Engine Optimization.",
+    canonicalUrl: "https://www.esgeo.ai/terminos",
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      {socialHelmet}
       <Helmet>
         <title>Términos y Condiciones | esGEO</title>
         <meta name="description" content="Términos y condiciones de uso de esGEO. Condiciones para el acceso y uso de nuestra plataforma de Generative Engine Optimization." />

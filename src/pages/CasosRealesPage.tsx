@@ -8,10 +8,20 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BookOpen, Shield, Globe, Zap, Search, ArrowRight, Sparkles, TrendingUp, Award } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGeoMetadata } from "@/hooks/useGeoMetadata";
 
 const CasosRealesPage = () => {
+  // F1-7: esta página no tenía <Helmet> — título, description, canonical y metas
+  // sociales salen del hook.
+  const { helmet: socialHelmet } = useGeoMetadata({
+    title: "Por qué funciona GEO: evidencia y casos verificables | esGEO",
+    description: "La evidencia detrás del GEO: investigación académica, adopción en la industria y el caso real de esgeo.ai (de 35 a 92 en el auditor). Compruébalo tú mismo.",
+    canonicalUrl: "https://www.esgeo.ai/casos",
+  });
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {socialHelmet}
       <Header />
 
       <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
