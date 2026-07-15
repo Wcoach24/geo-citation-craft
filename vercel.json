@@ -44,11 +44,11 @@
   ],
   "rewrites": [
     {
-      "source": "/:spa(dashboard|auth|success|guest-access|unsubscribe|checkout)",
+      "source": "/:spa(dashboard|auth|success|guest-access|unsubscribe)",
       "destination": "/spa.html"
     },
     {
-      "source": "/:spa(dashboard|auth|success|guest-access|unsubscribe|checkout)/:rest*",
+      "source": "/:spa(dashboard|auth|success|guest-access|unsubscribe)/:rest*",
       "destination": "/spa.html"
     }
   ],

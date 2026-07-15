@@ -20,8 +20,9 @@ const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 const ssrEntry = path.join(projectRoot, 'dist-ssr', 'entry-server.js');
 
-/** Rutas públicas. Las transaccionales (auth, dashboard, checkout, success,
- *  guest-access, unsubscribe, admin) quedan fuera a propósito: son SPA. */
+/** Rutas públicas. Las transaccionales (auth, dashboard, success,
+ *  guest-access, unsubscribe, admin) quedan fuera a propósito: son SPA.
+ *  /checkout se prerenderiza desde F1-9: es una página de pre-pago real. */
 const ROUTES = [
   '/',
   '/curso',
@@ -31,6 +32,7 @@ const ROUTES = [
   '/curso/f3',
   '/curso/f4',
   '/curso/f5',
+  '/checkout',
   '/metodologia',
   '/casos',
   '/glosario',
@@ -127,7 +129,7 @@ function readTemplate() {
 
 /**
  * spa.html = shell limpio al que apunta el rewrite catch-all de vercel.json.
- * Sin esto, las rutas NO prerenderizadas (/dashboard, /auth, /checkout, 404...) caerían
+ * Sin esto, las rutas NO prerenderizadas (/dashboard, /auth, 404...) caerían
  * en dist/index.html, que ahora contiene la home renderizada: servirían el HTML de la home.
  */
 function writeSpaFallback(template) {

@@ -29,7 +29,6 @@ const EXCLUDED_PATHS = [
   '/success',
   '/guest-access',
   '/unsubscribe',
-  '/checkout', // ← F1-9: pasará a prerenderizada; quitar de aquí en esa tarea
 ];
 
 function extractAppRoutes() {
