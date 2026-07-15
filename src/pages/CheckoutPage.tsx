@@ -95,8 +95,9 @@ const CheckoutPage = () => {
                 <li className="flex items-start gap-3">
                   <Receipt className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>Factura disponible</strong> — pídela respondiendo al email de compra
-                    o escribiendo a {SUPPORT_EMAIL}.
+                    <strong>Factura para tu empresa (NIF/CIF)</strong> — introduce tu NIF/CIF en
+                    el propio pago y la factura te llega automáticamente. También puedes pedirla
+                    escribiendo a {SUPPORT_EMAIL}.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
@@ -124,7 +125,8 @@ const CheckoutPage = () => {
                   Comprar el curso — 47 €
                 </BuyButton>
                 <p className="text-xs text-muted-foreground mt-3">
-                  Pago seguro con tarjeta a través de Stripe · ¿Dudas? {SUPPORT_EMAIL}
+                  Pago seguro con tarjeta, PayPal o Link a través de Stripe · Factura para tu
+                  empresa (NIF/CIF) · ¿Dudas? {SUPPORT_EMAIL}
                 </p>
               </div>
             </CardContent>
@@ -173,8 +175,9 @@ const CheckoutPage = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-1">¿Cómo se paga?</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Con tarjeta, a través de Stripe. Al pulsar el botón se abre la pasarela segura de
-                  Stripe; nosotros nunca vemos ni guardamos los datos de tu tarjeta.
+                  Con tarjeta, PayPal o Link, a través de Stripe. Al pulsar el botón se abre la
+                  pasarela segura de Stripe; nosotros nunca vemos ni guardamos los datos de tu
+                  tarjeta.
                 </p>
               </div>
               <div>
@@ -188,8 +191,9 @@ const CheckoutPage = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-1">¿Puedo pedir factura?</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Sí. Responde al email de compra con tus datos fiscales o escribe a{' '}
-                  {SUPPORT_EMAIL} y te la enviamos.
+                  Sí. En la pasarela de pago puedes marcar "Compro como empresa" e introducir tu
+                  NIF/CIF: la factura se genera y te llega automáticamente. Si se te olvidó,
+                  escribe a {SUPPORT_EMAIL} y te la enviamos.
                 </p>
               </div>
               <div>

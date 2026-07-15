@@ -85,9 +85,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `&product=${encodeURIComponent(product)}` +
       (amount ? `&amount=${encodeURIComponent(amount)}` : "");
 
+    // F2-3: factura automática + NIF/CIF + más métodos de pago.
+    // - invoice_creation solo aplica en mode:"payment" (correcto aquí).
+    // - "paypal" requiere el método activado en la cuenta Stripe: si Stripe rechaza
+    //   la creación de la sesión por PayPal, quitarlo del array (ver MASTERPLAN_LOG, H).
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "paypal", "link"],
+      invoice_creation: { enabled: true },
+      tax_id_collection: { enabled: true },
+      // Requerido por Stripe: en mode "payment", tax_id_collection necesita un Customer.
+      customer_creation: "always",
       line_items: lineItems,
       customer_email: guestEmail || undefined,
       metadata: productMeta,

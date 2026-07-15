@@ -631,6 +631,7 @@ const CursoGeoPage = () => {
                   {/* Trust Badges */}
                   <div className="mt-8 flex flex-wrap gap-4 justify-center text-xs text-muted-foreground">
                     <span>✓ Pago seguro con Stripe</span>
+                    <span>✓ Factura para tu empresa (NIF/CIF)</span>
                     <span>✓ Acceso inmediato</span>
                     <span>✓ PDFs descargables</span>
                   </div>
