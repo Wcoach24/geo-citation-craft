@@ -27,7 +27,8 @@ const MethodologySection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+          {/* 5 cards: 3+2 en desktop, sin hueco */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-6 lg:[&>*]:col-span-2 lg:[&>*:nth-child(4)]:col-start-2 gap-5 mb-12">
             {moduleEntries.map(([key, module], index) => {
               const Icon = MODULE_ICONS[index];
               return (

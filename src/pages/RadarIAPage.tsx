@@ -258,7 +258,8 @@ const RadarIAPage = () => {
               <h2 className="text-3xl font-semibold text-primary">Todos los Artículos</h2>
               <ShareSectionButton sectionId="todos-articulos" title="todos los artículos" />
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* 4 artículos no destacados: grid-2 (2×2, sin hueco) */}
+            <div className="grid md:grid-cols-2 gap-6">
               {articles.filter(article => !article.featured).map((article) => (
                 <Card key={article.id} className="group hover:shadow-lg transition-all duration-300">
                   <CardHeader className="pb-4">

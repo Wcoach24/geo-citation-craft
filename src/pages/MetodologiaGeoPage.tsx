@@ -143,22 +143,6 @@ const MetodologiaGeoPage = () => {
         </div>
       </section>
       
-      {/* Framework Visual - Diagrama Interactivo */}
-      <section id="framework-visual" className="section-anchor py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl md:text-3xl font-semibold text-primary">
-                Framework Completo
-              </h2>
-              <ShareSectionButton sectionId="framework-visual" title="diagrama del framework" />
-            </div>
-            
-            
-          </div>
-        </div>
-      </section>
-      
       {/* Módulos F1-F5 */}
       <section id="modulos" className="section-anchor py-16 bg-accent/5">
         <div className="container mx-auto px-4">
@@ -180,15 +164,15 @@ const MetodologiaGeoPage = () => {
             
             {/* Tabs para filtrar por dificultad */}
             <Tabs defaultValue="all" className="mb-8">
-              <TabsList className="justify-center mb-6">
+              <TabsList className="flex-wrap h-auto w-full justify-center mb-6">
                 <TabsTrigger value="all">Todos los módulos</TabsTrigger>
                 <TabsTrigger value="beginner">Principiante</TabsTrigger>
                 <TabsTrigger value="intermediate">Intermedio</TabsTrigger>
               </TabsList>
               
-              {/* All Modules */}
+              {/* All Modules — 5 cards: 3+2 en desktop (grid-6 con span-2 y offset en la 4ª) */}
               <TabsContent value="all">
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-6 lg:[&>*]:col-span-2 lg:[&>*:nth-child(4)]:col-start-2 gap-6">
                   {modules.map(module => <Card key={module.id} id={`modulo-${module.id.toLowerCase()}`} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 section-anchor">
                       <CardHeader className="pb-4">
                         <div className="flex items-center justify-between mb-3">

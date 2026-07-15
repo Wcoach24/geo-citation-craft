@@ -18,6 +18,24 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
   const canonicalHref = useCanonicalHref();
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
+  // F4-5d: el TOC no se muestra mientras el hero esté en viewport (flotaba encima).
+  // Empieza oculto (SSR-safe) y un IntersectionObserver — SOLO en useEffect — lo activa.
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById("inicio");
+    if (!hero) {
+      // Página sin hero: mostrar siempre.
+      setPastHero(true);
+      return;
+    }
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    heroObserver.observe(hero);
+    return () => heroObserver.disconnect();
+  }, []);
 
   useEffect(() => {
     // Extraer headings de la página
@@ -55,7 +73,7 @@ const TableOfContents = ({ className = "" }: TableOfContentsProps) => {
     return () => observer.disconnect();
   }, []);
 
-  if (tocItems.length === 0) return null;
+  if (tocItems.length === 0 || !pastHero) return null;
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
