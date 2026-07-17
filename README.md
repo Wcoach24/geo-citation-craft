@@ -31,7 +31,7 @@ React · TypeScript · Vite · Tailwind CSS · shadcn/ui · React Helmet · Sche
 ## Run locally
 
 ```bash
-git clone https://github.com/Wcoach24/geo-citation-craft.git
+git clone https://github.com/alvaro-zamorano/geo-citation-craft.git
 cd geo-citation-craft
 npm install
 npm run dev
