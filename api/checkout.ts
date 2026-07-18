@@ -110,11 +110,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // F2-3: factura automática + NIF/CIF + más métodos de pago.
     // - invoice_creation solo aplica en mode:"payment" (correcto aquí).
-    // - "paypal" requiere el método activado en la cuenta Stripe: si Stripe rechaza
-    //   la creación de la sesión por PayPal, quitarlo del array (ver MASTERPLAN_LOG, H).
+    // - "paypal" retirado 18/07/2026: no está activado en la cuenta Stripe y su sola
+    //   presencia hacía fallar la creación de TODA sesión (500 en ambos productos,
+    //   verificado en producción). Re-añadir solo tras activarlo en el dashboard de
+    //   Stripe → Settings → Payments → Payment methods.
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card", "paypal", "link"],
+      payment_method_types: ["card", "link"],
       invoice_creation: { enabled: true },
       tax_id_collection: { enabled: true },
       // Requerido por Stripe: en mode "payment", tax_id_collection necesita un Customer.
