@@ -1032,3 +1032,27 @@ Tabla comparativa de las 4 siglas + recomendación (usar GEO). Datos verificados
 - `node scripts/check-routes.mjs` → paridad OK (32 = 32).
 - JSON-LD de las 3 rutas nuevas: 35/35 bloques parsean, 0 escapados, FAQPage en las 3.
 - DONE global alcanzado: F0-F5 + ≥3 artículos F6 publicados. Pendientes humanos H-1..H-9 sin cambios.
+
+---
+
+## 2026-07-18 — Caja reabierta: fix del checkout (paypal fuera)
+
+**Hallazgo (auditoría en producción):** POST /api/checkout devolvía 500 en ambos
+productos. Stripe rechaza la creación de TODA sesión si `payment_method_types`
+incluye un método no activado en la cuenta ("The payment method type provided:
+paypal is invalid"). Es decir: desde F2-3 nadie podía comprar. Era el pendiente
+H "PayPal en Stripe".
+
+**Fix (`e31a01f`):** `payment_method_types: ["card", "link"]`. PayPal se re-añade
+solo tras activarlo en dashboard → Settings → Payments → Payment methods.
+
+**Verificación en producción (post-deploy):**
+- ✅ POST /api/checkout {productType:"complete"} → 200, url `checkout.stripe.com/c/pay/cs_live_…`
+- ✅ POST /api/checkout {productType:"curso-auditoria"} → 200, url `cs_live_…`
+- ✅ GET /api/premium-health → ok:true, 5/5 PDFs legibles
+- Ningún pago completado: solo creación de sesión.
+
+**Sigue pendiente (humano):** CRON_SECRET en Vercel (email-sequence falla a diario
+desde el 16/07), SUPABASE_URL + SERVICE_ROLE_KEY en Vercel, y aplicar
+`supabase/migrations/20260715103000_f3_purchases_email_pipeline.sql` en el
+Supabase de producción — sin eso la venta cobra pero no se registra en purchases.
