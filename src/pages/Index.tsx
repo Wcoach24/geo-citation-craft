@@ -209,6 +209,28 @@ const Index = () => {
           <CtaSection />
         </main>
 
+        {/* Barra de oferta directa — oculta por defecto; la revela el motor de
+            hiperpersonalización cuando el score de intención supera 65 (regla
+            "caliente"). El HTML servido a los crawlers la incluye pero hidden,
+            así que el default no cambia. Ver /hiperpersonalizacion. */}
+        <div
+          id="hp-hot-strip"
+          hidden
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-accent/40 bg-primary text-primary-foreground shadow-2xl"
+        >
+          <div className="container mx-auto flex flex-wrap items-center justify-center gap-3 px-4 py-3 text-sm md:justify-between">
+            <span className="font-semibold">
+              Has visto de qué va. El método F1-F5 completo son 47&nbsp;€, pago único.
+            </span>
+            <Link
+              to="/curso#comprar"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2 font-bold text-accent-foreground transition-colors hover:bg-accent/90"
+            >
+              Ver el curso <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+
         {/* Tabla de contenidos flotante para páginas largas */}
         <aside className="hidden xl:block fixed right-8 top-1/2 transform -translate-y-1/2 w-64 z-10">
           <TableOfContents items={homeTocItems} />

@@ -13,6 +13,9 @@
   <!-- Experto GEO - landing comercial nueva -->
   <url><loc>https://www.esgeo.ai/experto-geo</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.92</priority></url>
 
+  <!-- Hiperpersonalización - sección metodología aplicada sobre la propia web -->
+  <url><loc>https://www.esgeo.ai/hiperpersonalizacion</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
   <!-- Módulos F0-F5 -->
   <url><loc>https://www.esgeo.ai/curso/f0</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.esgeo.ai/curso/f1</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>

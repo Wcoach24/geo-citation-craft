@@ -62,6 +62,14 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/10 mt-10 pt-8 text-center">
+          <p className="text-primary-foreground/40 text-xs mb-3">
+            Esta web adapta parte de su contenido a tu sesión, en tu navegador y sin enviar tus
+            datos a ningún servidor.{" "}
+            <Link to="/hiperpersonalizacion" className="underline hover:text-accent transition-colors">
+              Cómo funciona
+            </Link>
+            .
+          </p>
           <p className="text-primary-foreground/40 text-sm">
             © 2024–{currentYear} esGEO. Todos los derechos reservados.
           </p>

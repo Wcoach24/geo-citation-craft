@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import ScrollToHash from "@/components/ScrollToHash";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import HyperPersonalizacion from "@/components/HyperPersonalizacion";
 import { GeoTermRegistryProvider } from "@/components/GeoTerm";
 
 // Lazy-loaded pages
@@ -25,6 +26,7 @@ const ExpertoGeoPage = React.lazy(() => import("./pages/ExpertoGeoPage"));
 const PrivacidadPage = React.lazy(() => import("./pages/PrivacidadPage"));
 const TerminosPage = React.lazy(() => import("./pages/TerminosPage"));
 const ContenidoIAPage = React.lazy(() => import("./pages/ContenidoIAPage"));
+const HiperpersonalizacionPage = React.lazy(() => import("./pages/HiperpersonalizacionPage"));
 const CheckoutPage = React.lazy(() => import("./pages/CheckoutPage"));
 const PurchaseSuccessPage = React.lazy(() => import("./pages/PurchaseSuccessPage"));
 const UnsubscribePage = React.lazy(() => import("./pages/UnsubscribePage"));
@@ -96,6 +98,7 @@ export function AppRoutes() {
               <Route path="/geo-score" element={<GeoScorePage />} />
               <Route path="/contenido-ia" element={<ContenidoIAPage />} />
               <Route path="/experto-geo" element={<ExpertoGeoPage />} />
+              <Route path="/hiperpersonalizacion" element={<HiperpersonalizacionPage />} />
               <Route path="/consultor-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/especialista-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/checkout" element={<CheckoutPage />} />
@@ -152,6 +155,10 @@ function App() {
             SSR renderiza AppRoutes vía entry-server y no pasa por aquí. La supresión
             por visitorState (lead/customer) y por sesión vive dentro del componente. */}
         <ExitIntentPopup />
+        {/* Motor de hiperpersonalización client-side (público/hyperpersonal.js).
+            Solo cliente: init corre en useEffect, nunca en el prerender SSR.
+            Ver /hiperpersonalizacion. */}
+        <HyperPersonalizacion />
       </BrowserRouter>
       <Analytics />
       <SpeedInsights />

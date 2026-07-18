@@ -40,6 +40,7 @@ const ROUTES = [
   '/geo-score',
   '/contenido-ia',
   '/experto-geo',
+  '/hiperpersonalizacion',
   '/acerca-de',
   '/acerca-de/equipo',
   '/privacidad',
@@ -61,7 +62,7 @@ const ROUTES = [
 /** Umbral del DoD: caracteres de texto (sin tags) mínimos por ruta clave. */
 const MIN_TEXT_CHARS = 3000;
 const CRITICAL_ROUTES = [
-  '/', '/curso', '/metodologia', '/glosario',
+  '/', '/curso', '/metodologia', '/glosario', '/hiperpersonalizacion',
   '/radar-ia/que-es-geo-guia-completa',
   '/radar-ia/como-hacer-que-chatgpt-cite-tu-web',
   '/radar-ia/optimizar-web-para-perplexity',

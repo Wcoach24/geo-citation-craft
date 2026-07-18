@@ -14,7 +14,7 @@ const HeroSection = () => {
             Primera metodología GEO en español
           </Badge>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight animate-fade-up-delay-1">
+          <h1 id="hp-headline" className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight animate-fade-up-delay-1">
             Haz que la IA{" "}
             <span className="text-accent-light relative">
               Recomiende
@@ -37,6 +37,17 @@ const HeroSection = () => {
             es la tuya — y probablemente ni siquiera puede leerte. <strong>esGEO te enseña a
             arreglarlo con el método F1-F5: 5 módulos en PDF, 47&nbsp;€ de pago único, sin
             suscripción.</strong>
+          </p>
+
+          {/* TL;DR para lectores rápidos — oculto por defecto; lo revela el motor
+              de hiperpersonalización (regla "skimmer"). El default renderiza sin él. */}
+          <p
+            id="hp-tldr"
+            hidden
+            className="mb-8 mx-auto max-w-2xl rounded-xl border border-accent-light/30 bg-accent-light/10 px-5 py-3 text-sm text-primary-foreground/90"
+          >
+            <strong>En corto:</strong> las IAs no leen tu web si sirve HTML vacío. esGEO te
+            enseña a arreglarlo (método F1-F5, 47&nbsp;€, pago único). Empieza gratis con F0.
           </p>
 
           {/* Dual CTA */}
