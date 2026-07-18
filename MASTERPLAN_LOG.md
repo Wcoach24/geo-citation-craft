@@ -1056,3 +1056,40 @@ solo tras activarlo en dashboard → Settings → Payments → Payment methods.
 desde el 16/07), SUPABASE_URL + SERVICE_ROLE_KEY en Vercel, y aplicar
 `supabase/migrations/20260715103000_f3_purchases_email_pipeline.sql` en el
 Supabase de producción — sin eso la venta cobra pero no se registra en purchases.
+
+---
+
+## 2026-07-18 — FASE 4: Hiperpersonalización (sección + motor sobre la propia web)
+
+Aplica la skill `hiperpersonalizacion-web` (nacida de esta landing) sobre esgeo.ai
+y le dedica una sección que la explica con la web como demo en vivo. Commit `19670ea`.
+
+**Motor (public/hyperpersonal.js, servido fuera del bundle):**
+- `HyperPersonalizacion.tsx`: arranque SOLO cliente (useEffect → inyecta el script y
+  llama a init). Nunca corre en el prerender SSR. 5 reglas señal→regla→adaptación
+  (precedencia recurrencia > origen > intención): headline por recurrente / LinkedIn /
+  búsqueda, barra de oferta `#hp-hot-strip` al superar score 65, TL;DR `#hp-tldr` para
+  skimmers. Features: idle 30s (toast suave), copyToast. A/B 50/50 con `HP.split`.
+  onEvent → Clarity + Vercel Analytics.
+- Default primero: `#hp-tldr` y `#hp-hot-strip` van `hidden` en el HTML servido; el motor
+  los revela en cliente. Sin JS, la home es la genérica completa.
+
+**Sección /hiperpersonalizacion** (Article+FAQPage, prerender 5990 chars, h1):
+señal→regla→adaptación, matriz de adaptaciones, límites éticos, y demo en vivo
+(`HpLiveSignals`, lee las señales de tu sesión en tu navegador; la deducción empresa→copy
+se calcula en React). Aviso de transparencia en el footer enlazando a la sección.
+
+**Verificación en PRODUCCIÓN (Chrome, deploy 19670ea):**
+- ✅ `npm run build` verde: 33/33 rutas. check-routes OK.
+- ✅ HTML servido de `/` NO referencia hyperpersonal.js; headline servido = default
+  ("Haz que la IA Recomiende Tu Negocio"); elementos hp `hidden`.
+- ✅ `/hiperpersonalizacion` prerender 5990 chars, h1 presente, FAQPage en el JSON-LD,
+  en sitemap.xml.
+- ✅ A/B: bucket genérico (hp_split=0) mantiene el default con ?utm_source=linkedin;
+  bucket personalizado (=1) aplica la regla LinkedIn ("Que la IA recomiende tu empresa…").
+- ✅ Demo en vivo: botón revela el panel con señales reales (score/tiempo/scroll/visita);
+  email corporativo → "¿Lo aplicamos en Telefonica?"; email gratuito → marca personal.
+
+**Pendiente del plan:** Fases 1-3 (parche v2 Machineready, hub Machine Readability con
+F6-4..10, sección /habla con auditor embebido) — requieren PAT de Wcoach24/Machineready
+para las partes que tocan ese repo.
