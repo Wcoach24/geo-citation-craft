@@ -14,8 +14,8 @@ const Footer = () => {
           <EmailCapture compact source="footer" />
         </div>
 
-        <div className="grid md:grid-cols-4 gap-10">
-          <div className="md:col-span-1">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
                 <span className="text-primary font-bold text-lg">G</span>
@@ -23,18 +23,28 @@ const Footer = () => {
               <span className="font-bold text-xl">esGEO</span>
             </Link>
             <p className="text-primary-foreground/60 text-sm mb-4 leading-relaxed">
-              La primera plataforma en español para Generative Engine Optimization. 
+              La primera plataforma en español para Generative Engine Optimization.
               Optimiza tu contenido para ser citado por IA.
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-primary-foreground/50">Plataforma</h3>
+            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-primary-foreground/50">Producto</h3>
             <ul className="space-y-2.5 text-sm">
+              <li><Link to="/geo-score" className="text-primary-foreground/70 hover:text-accent transition-colors">Audita tu web (gratis)</Link></li>
+              <li><Link to="/habla" className="text-primary-foreground/70 hover:text-accent transition-colors">El framework HABLA</Link></li>
+              <li><Link to="/curso" className="text-primary-foreground/70 hover:text-accent transition-colors">Curso Completo — €47</Link></li>
+              <li><Link to="/casos-reales" className="text-primary-foreground/70 hover:text-accent transition-colors">Casos reales</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-primary-foreground/50">Aprende</h3>
+            <ul className="space-y-2.5 text-sm">
+              <li><Link to="/machine-readability" className="text-primary-foreground/70 hover:text-accent transition-colors">Machine Readability</Link></li>
               <li><Link to="/metodologia" className="text-primary-foreground/70 hover:text-accent transition-colors">Metodología GEO</Link></li>
-              <li><Link to="/curso" className="text-primary-foreground/70 hover:text-accent transition-colors">Curso Completo</Link></li>
-              <li><Link to="/glosario" className="text-primary-foreground/70 hover:text-accent transition-colors">Glosario</Link></li>
               <li><Link to="/radar-ia" className="text-primary-foreground/70 hover:text-accent transition-colors">Radar IA</Link></li>
+              <li><Link to="/glosario" className="text-primary-foreground/70 hover:text-accent transition-colors">Glosario</Link></li>
             </ul>
           </div>
 

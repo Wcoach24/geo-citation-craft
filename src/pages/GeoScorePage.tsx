@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HablaWidget from "@/components/HablaWidget";
 import { Button } from "@/components/ui/button";
-import { HABLA_API, type HablaResult } from "@/lib/habla";
+import { type HablaResult } from "@/lib/habla";
 import { trackEvent } from "@/lib/analytics";
 import { useToast } from "@/hooks/use-toast";
 
@@ -236,9 +236,9 @@ const GeoScorePage = () => {
                 variant="outline"
                 className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
               >
-                <a href={HABLA_API} target="_blank" rel="noopener">
-                  Abrir HABLA
-                </a>
+                <Link to="/habla">
+                  Cómo funciona: el framework HABLA
+                </Link>
               </Button>
             </div>
           </div>

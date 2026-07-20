@@ -322,6 +322,25 @@ const RadarIAPage = () => {
             </p>
           </HighlightSnippet>
 
+          {/* Puente al funnel: del contenido al auditor (lead) */}
+          <div className="mb-12 rounded-2xl border border-accent/20 bg-accent/5 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5">
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-primary mb-1">Antes de leer: mira qué ve la IA de tu web</h2>
+              <p className="text-muted-foreground text-sm">
+                El auditor descarga tu HTML como lo hace un crawler de IA y lo puntúa de 0 a 100 en las 5 dimensiones del{" "}
+                <Link to="/habla" className="underline hover:text-accent">framework HABLA</Link>. Gratis y sin registro.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <Link to="/geo-score" className="btn-cta inline-flex items-center justify-center whitespace-nowrap">
+                Auditar mi web
+              </Link>
+              <Link to="/machine-readability" className="inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-border px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                La guía completa
+              </Link>
+            </div>
+          </div>
+
           {/* Artículos Destacados */}
           <section id="articulos-destacados" className="mb-12">
             <div className="flex items-center justify-between mb-6">

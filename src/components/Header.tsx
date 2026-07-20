@@ -22,7 +22,23 @@ const Header = () => {
           <span className="font-bold text-xl text-primary">esGEO</span>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-5">
+          <Link to="/geo-score" className="text-sm font-semibold text-primary hover:text-accent transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">Audita tu web</Link>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center space-x-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">
+              <span>Aprende</span>
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild><Link to="/machine-readability" className="cursor-pointer">Machine Readability — guía completa</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/habla" className="cursor-pointer">El framework HABLA</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/metodologia" className="cursor-pointer">Metodología</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/radar-ia" className="cursor-pointer">Radar IA (artículos)</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/glosario" className="cursor-pointer">Glosario</Link></DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center space-x-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">
               <span>Curso</span>
@@ -38,10 +54,7 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link to="/metodologia" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent rounded px-2 py-1">Metodología</Link>
-          <Link to="/glosario" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Glosario</Link>
-          <Link to="/radar-ia" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Radar IA</Link>
-          <Link to="/casos-reales" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Casos Reales</Link>
+          <Link to="/casos-reales" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1">Casos</Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -72,11 +85,16 @@ const Header = () => {
                 </Link>
               </Button>
             </div>
-            <Link to="/curso" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Curso Completo</Link>
+            <Link to="/geo-score" className="block text-sm font-semibold text-primary hover:text-accent transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Audita tu web</Link>
+            <div className="pt-2 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 px-2">Aprende</div>
+            <Link to="/machine-readability" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Machine Readability — guía</Link>
+            <Link to="/habla" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>El framework HABLA</Link>
             <Link to="/metodologia" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Metodología</Link>
-            <Link to="/glosario" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Glosario</Link>
             <Link to="/radar-ia" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Radar IA</Link>
-            <Link to="/casos-reales" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Casos Reales</Link>
+            <Link to="/glosario" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Glosario</Link>
+            <div className="pt-2 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 px-2">Más</div>
+            <Link to="/curso" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Curso Completo</Link>
+            <Link to="/casos-reales" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Casos</Link>
           </nav>
         </div>
       )}
