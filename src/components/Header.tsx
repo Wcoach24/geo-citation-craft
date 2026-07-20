@@ -34,6 +34,7 @@ const Header = () => {
               <DropdownMenuItem asChild><Link to="/machine-readability" className="cursor-pointer">Machine Readability — guía completa</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/habla" className="cursor-pointer">El framework HABLA</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/metodologia" className="cursor-pointer">Metodología</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/hiperpersonalizacion" className="cursor-pointer">Hiperpersonalización</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/radar-ia" className="cursor-pointer">Radar IA (artículos)</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/glosario" className="cursor-pointer">Glosario</Link></DropdownMenuItem>
             </DropdownMenuContent>
@@ -90,6 +91,7 @@ const Header = () => {
             <Link to="/machine-readability" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Machine Readability — guía</Link>
             <Link to="/habla" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>El framework HABLA</Link>
             <Link to="/metodologia" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Metodología</Link>
+            <Link to="/hiperpersonalizacion" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Hiperpersonalización</Link>
             <Link to="/radar-ia" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Radar IA</Link>
             <Link to="/glosario" className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1" onClick={() => setIsMenuOpen(false)}>Glosario</Link>
             <div className="pt-2 pb-1 text-xs uppercase tracking-wider text-muted-foreground/60 px-2">Más</div>

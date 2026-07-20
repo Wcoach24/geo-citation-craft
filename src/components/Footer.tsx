@@ -43,6 +43,7 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm">
               <li><Link to="/machine-readability" className="text-primary-foreground/70 hover:text-accent transition-colors">Machine Readability</Link></li>
               <li><Link to="/metodologia" className="text-primary-foreground/70 hover:text-accent transition-colors">Metodología GEO</Link></li>
+              <li><Link to="/hiperpersonalizacion" className="text-primary-foreground/70 hover:text-accent transition-colors">Hiperpersonalización</Link></li>
               <li><Link to="/radar-ia" className="text-primary-foreground/70 hover:text-accent transition-colors">Radar IA</Link></li>
               <li><Link to="/glosario" className="text-primary-foreground/70 hover:text-accent transition-colors">Glosario</Link></li>
             </ul>
