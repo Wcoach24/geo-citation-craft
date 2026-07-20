@@ -1093,3 +1093,58 @@ se calcula en React). Aviso de transparencia en el footer enlazando a la secció
 **Pendiente del plan:** Fases 1-3 (parche v2 Machineready, hub Machine Readability con
 F6-4..10, sección /habla con auditor embebido) — requieren PAT de Wcoach24/Machineready
 para las partes que tocan ese repo.
+
+## FASE 1 — 2026-07-20 — DONE (repo Machineready, commit b69c427)
+
+Rubric HABLA v2 aplicado a `alvaro-zamorano/Machineready` (antes Wcoach24, migró el 19/07).
+El `git am` de los .patch falló por drift del HEAD; se copió el `analyze.js` final ya
+parcheado (299 líneas, `machine Ready/parche-habla/`), verificado con `node --check` + test
+funcional. El v2 mide HECHOS no vocabulario: answerability sobre bloque de contenido real,
+JSON-LD parseado con @type array, jerarquía de encabezados, alt, lang, canonical, cifras
+distintas; el check de contacto ya no exige teléfono (email/mailto/ContactPoint). `rubric`,
+`caveat` y `scope` viajan en cada respuesta.
+
+**Verificación EN VIVO (deploy Vercel machineready):**
+- ✅ `GET https://machineready.vercel.app/api/analyze?url=www.esgeo.ai` → 200, JSON de 5
+  dimensiones, `rubric:"2.0"`, `total:95` (BILINGÜE), `contact_via:"schema ContactPoint"`.
+- ✅ Fichero desplegado ≥15 KB (analyze.js v2, 18,8 KB). CORS abierto (`Access-Control-
+  Allow-Origin: *`) → paso 3.2 de F3 pre-resuelto.
+- Nota de desviación honesta: el 92 de la landing con v1 pasa a 95 con v2 (no maquillado;
+  el fix de contacto beneficia a cualquier negocio digital sin centralita, no solo a esgeo).
+
+## FASES 2 y 3 — 2026-07-20 — DONE (un commit combinado; desviación documentada)
+
+Desviación respecto al plan ("un commit por fase"): F2 y F3 se ejecutan y commitean juntas
+porque comparten los mismos ficheros de cableado (App.tsx, prerender.js, sitemap.xml) y F3
+resultó estar en gran parte pre-construida (el auditor + lead magnet ya viven en /geo-score
+vía HablaWidget, y el CORS se resolvió en F1).
+
+**F2 — Hub Machine Readability:**
+- 7 artículos nuevos (F6-4..F6-10) en `src/pages/articles/`, todos >8000 chars de texto,
+  JSON-LD Article+WebPage+FAQPage, h1, breadcrumb, speakable, InlineEmailCapture:
+  geo-en-wordpress, paper-geo-princeton-estudio (arXiv:2311.09735, KDD 2024, hasta 40%),
+  checklist-geo-25-puntos (por dimensión HABLA), geo-local-negocios, geo-para-ecommerce,
+  optimizar-web-para-claude, herramientas-geo-2026 (SIN ranking que corone a esGEO: se
+  organiza por categorías + nota de transparencia).
+- Página pilar `/machine-readability` (`MachineReadabilityPage.tsx`): framework HABLA,
+  auditor embebido (HablaWidget), biblioteca del Radar IA (13 artículos enlazados),
+  metodología, y sección de dataset SIN cifras inventadas (RLS insert-only en el Supabase
+  de HABLA impide leer agregados; se publica el mecanismo, no números falsos).
+- Cableado: App.tsx (lazy+Route), prerender ROUTES, sitemap.xml, índice RadarIAPage.
+
+**F3 — Framework HABLA con auditor embebido:**
+- Página `/habla` (`HablaPage.tsx`): las 5 dimensiones H-A-B-L-A (Higiene/Accesible-gate/
+  Bloques/Lenguaje/eXtras) tal como las nombra el auditor real, cada una con "cómo se
+  comprueba con máquina", + rubric/caveat, + HablaWidget embebido (que ya trae el gate de
+  email como lead magnet, se reutiliza `capture-lead`). Sin enlace al repo.
+- Enlaces a /habla y /machine-readability añadidos desde /metodologia (bloque "Contenido
+  relacionado").
+
+**Verificación (build + DoD de máquina):**
+- ✅ `npm run build` verde: 42/42 rutas (33 previas + 7 artículos + 2 páginas). check-routes OK.
+- ✅ Script de validación sobre dist: las 9 rutas nuevas con h1:1, >8000 chars texto, y
+  TODOS los bloques JSON-LD parsean (0 bad). Tipos correctos por página.
+- ✅ sitemap.xml: 41 URLs (contiene las 9 nuevas).
+- ✅ Sin fugas: grep confirma que ninguna página nueva menciona "machineready" ni "github".
+- ⚠ Pendiente para agregados reales del dataset en el pilar: acceso SELECT al Supabase de
+  HABLA (bcicjjkgjgajxbrwmeyf, hoy RLS insert-only). Hasta entonces, sección cualitativa.

@@ -527,8 +527,54 @@ const MetodologiaGeoPage = () => {
                   </Button>
                 </CardFooter>
               </Card>
+
+              <Card className="hover:shadow-md transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <ExternalLink className="h-5 w-5 text-accent" />
+                    El framework HABLA
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">
+                    Las 5 dimensiones que miden si una máquina puede leer y citar
+                    tu web, cada una comprobable con código. Audita tu dominio gratis.
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link to="/habla">
+                      Ver el framework HABLA
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+
+              <Card className="hover:shadow-md transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BookOpen className="h-5 w-5 text-accent" />
+                    Machine Readability
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">
+                    La guía pilar: framework, auditor, biblioteca del Radar IA y
+                    metodología, en una sola página de referencia.
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link to="/machine-readability">
+                      Ver la guía completa
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
             </div>
-            
+
             <div className="mt-10 text-center">
               <Button asChild>
                 <Link to="/">

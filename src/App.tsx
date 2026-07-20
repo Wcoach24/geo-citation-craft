@@ -27,6 +27,8 @@ const PrivacidadPage = React.lazy(() => import("./pages/PrivacidadPage"));
 const TerminosPage = React.lazy(() => import("./pages/TerminosPage"));
 const ContenidoIAPage = React.lazy(() => import("./pages/ContenidoIAPage"));
 const HiperpersonalizacionPage = React.lazy(() => import("./pages/HiperpersonalizacionPage"));
+const MachineReadabilityPage = React.lazy(() => import("./pages/MachineReadabilityPage"));
+const HablaPage = React.lazy(() => import("./pages/HablaPage"));
 const CheckoutPage = React.lazy(() => import("./pages/CheckoutPage"));
 const PurchaseSuccessPage = React.lazy(() => import("./pages/PurchaseSuccessPage"));
 const UnsubscribePage = React.lazy(() => import("./pages/UnsubscribePage"));
@@ -53,6 +55,13 @@ const QueEsGeoGuiaCompleta = React.lazy(() => import("./pages/articles/QueEsGeoG
 const AparecerEnAiOverviews = React.lazy(() => import("./pages/articles/AparecerEnAiOverviews"));
 const QueEsLlmsTxt = React.lazy(() => import("./pages/articles/QueEsLlmsTxt"));
 const GeoAeoLlmoSeo = React.lazy(() => import("./pages/articles/GeoAeoLlmoSeo"));
+const GeoEnWordpress = React.lazy(() => import("./pages/articles/GeoEnWordpress"));
+const PaperGeoPrinceton = React.lazy(() => import("./pages/articles/PaperGeoPrinceton"));
+const ChecklistGeo25Puntos = React.lazy(() => import("./pages/articles/ChecklistGeo25Puntos"));
+const GeoLocalNegocios = React.lazy(() => import("./pages/articles/GeoLocalNegocios"));
+const GeoParaEcommerce = React.lazy(() => import("./pages/articles/GeoParaEcommerce"));
+const OptimizarWebParaClaude = React.lazy(() => import("./pages/articles/OptimizarWebParaClaude"));
+const HerramientasGeo2026 = React.lazy(() => import("./pages/articles/HerramientasGeo2026"));
 
 const queryClient = new QueryClient();
 
@@ -99,6 +108,8 @@ export function AppRoutes() {
               <Route path="/contenido-ia" element={<ContenidoIAPage />} />
               <Route path="/experto-geo" element={<ExpertoGeoPage />} />
               <Route path="/hiperpersonalizacion" element={<HiperpersonalizacionPage />} />
+              <Route path="/machine-readability" element={<MachineReadabilityPage />} />
+              <Route path="/habla" element={<HablaPage />} />
               <Route path="/consultor-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/especialista-geo" element={<Navigate to="/experto-geo" replace />} />
               <Route path="/checkout" element={<CheckoutPage />} />
@@ -134,6 +145,13 @@ export function AppRoutes() {
               <Route path="/radar-ia/como-aparecer-en-ai-overviews-google-gemini" element={<AparecerEnAiOverviews />} />
               <Route path="/radar-ia/que-es-llms-txt" element={<QueEsLlmsTxt />} />
               <Route path="/radar-ia/geo-aeo-llmo-seo-que-termino-usar" element={<GeoAeoLlmoSeo />} />
+              <Route path="/radar-ia/geo-en-wordpress" element={<GeoEnWordpress />} />
+              <Route path="/radar-ia/paper-geo-princeton-estudio" element={<PaperGeoPrinceton />} />
+              <Route path="/radar-ia/checklist-geo-25-puntos" element={<ChecklistGeo25Puntos />} />
+              <Route path="/radar-ia/geo-local-negocios" element={<GeoLocalNegocios />} />
+              <Route path="/radar-ia/geo-para-ecommerce" element={<GeoParaEcommerce />} />
+              <Route path="/radar-ia/optimizar-web-para-claude" element={<OptimizarWebParaClaude />} />
+              <Route path="/radar-ia/herramientas-geo-2026" element={<HerramientasGeo2026 />} />
 
               {/* 404 */}
               <Route path="*" element={<NotFound />} />

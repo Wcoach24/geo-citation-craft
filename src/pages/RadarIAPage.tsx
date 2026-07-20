@@ -132,6 +132,69 @@ const RadarIAPage = () => {
       category: "Fundamentos",
       readTime: "7 min",
       featured: false
+    },
+    {
+      id: "paper-geo-princeton-estudio",
+      title: "El estudio que fundó el GEO: qué demostró el paper de Princeton",
+      description: "El paper de Princeton (arXiv 2023, KDD 2024) acuñó el GEO y midió hasta un 40% más de visibilidad con citas, datos y fuentes",
+      date: "2026-07-20",
+      category: "Fundamentos",
+      readTime: "8 min",
+      featured: true
+    },
+    {
+      id: "checklist-geo-25-puntos",
+      title: "Checklist GEO de 25 puntos para auditar tu web (2026)",
+      description: "Checklist accionable agrupada por las 5 dimensiones del framework HABLA, con el porqué y cómo verificar cada punto",
+      date: "2026-07-20",
+      category: "Técnico",
+      readTime: "11 min",
+      featured: true
+    },
+    {
+      id: "geo-en-wordpress",
+      title: "GEO en WordPress: cómo hacer que la IA cite tu web",
+      description: "Schema con Yoast o Rank Math, HTML semántico, primer párrafo respondible, llms.txt y robots.txt para bots de IA",
+      date: "2026-07-20",
+      category: "Técnico",
+      readTime: "9 min",
+      featured: false
+    },
+    {
+      id: "optimizar-web-para-claude",
+      title: "Cómo optimizar tu web para que Claude te cite",
+      description: "Claude puede consultar la web y su rastreador se identifica como ClaudeBot: qué valora al citar y cómo preparar tu web",
+      date: "2026-07-20",
+      category: "Técnico",
+      readTime: "9 min",
+      featured: false
+    },
+    {
+      id: "geo-local-negocios",
+      title: "GEO local: cómo hacer que la IA recomiende tu negocio en tu ciudad",
+      description: "Aplica GEO a negocios locales para que ChatGPT, Perplexity, Gemini y AI Overviews te recomienden en tu zona",
+      date: "2026-07-20",
+      category: "Estrategia",
+      readTime: "8 min",
+      featured: false
+    },
+    {
+      id: "geo-para-ecommerce",
+      title: "GEO para ecommerce: que la IA recomiende tus productos",
+      description: "Schema Product, fichas con texto real, comparativas y FAQ para que la IA cite tus productos",
+      date: "2026-07-20",
+      category: "Estrategia",
+      readTime: "8 min",
+      featured: false
+    },
+    {
+      id: "herramientas-geo-2026",
+      title: "Herramientas GEO en 2026: qué tipo de herramienta hace qué",
+      description: "No hay una herramienta que lo haga todo: categorías de herramienta GEO y qué problema resuelve cada una",
+      date: "2026-07-20",
+      category: "Recursos",
+      readTime: "9 min",
+      featured: false
     }
   ];
 

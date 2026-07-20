@@ -41,6 +41,8 @@ const ROUTES = [
   '/contenido-ia',
   '/experto-geo',
   '/hiperpersonalizacion',
+  '/machine-readability',
+  '/habla',
   '/acerca-de',
   '/acerca-de/equipo',
   '/privacidad',
@@ -57,6 +59,13 @@ const ROUTES = [
   '/radar-ia/como-aparecer-en-ai-overviews-google-gemini',
   '/radar-ia/que-es-llms-txt',
   '/radar-ia/geo-aeo-llmo-seo-que-termino-usar',
+  '/radar-ia/geo-en-wordpress',
+  '/radar-ia/paper-geo-princeton-estudio',
+  '/radar-ia/checklist-geo-25-puntos',
+  '/radar-ia/geo-local-negocios',
+  '/radar-ia/geo-para-ecommerce',
+  '/radar-ia/optimizar-web-para-claude',
+  '/radar-ia/herramientas-geo-2026',
 ];
 
 /** Umbral del DoD: caracteres de texto (sin tags) mínimos por ruta clave. */

@@ -16,6 +16,10 @@
   <!-- Hiperpersonalización - sección metodología aplicada sobre la propia web -->
   <url><loc>https://www.esgeo.ai/hiperpersonalizacion</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
 
+  <!-- Machine Readability (pilar) + framework HABLA -->
+  <url><loc>https://www.esgeo.ai/machine-readability</loc><lastmod>2026-07-20</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.esgeo.ai/habla</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.88</priority></url>
+
   <!-- Módulos F0-F5 -->
   <url><loc>https://www.esgeo.ai/curso/f0</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.esgeo.ai/curso/f1</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -44,6 +48,13 @@
   <url><loc>https://www.esgeo.ai/radar-ia/como-aparecer-en-ai-overviews-google-gemini</loc><lastmod>2026-07-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.esgeo.ai/radar-ia/que-es-llms-txt</loc><lastmod>2026-07-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.esgeo.ai/radar-ia/geo-aeo-llmo-seo-que-termino-usar</loc><lastmod>2026-07-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/geo-en-wordpress</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/paper-geo-princeton-estudio</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/checklist-geo-25-puntos</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/geo-local-negocios</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/geo-para-ecommerce</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/optimizar-web-para-claude</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.esgeo.ai/radar-ia/herramientas-geo-2026</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
   <!-- GEO Score -->
   <url><loc>https://www.esgeo.ai/geo-score</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
